@@ -99,8 +99,18 @@ Capture : `viewer/screenshots/render-final.png`.
 Harnais de vérification (réutilisable) :
 
 ```bash
-node tools/export/verify_final.js   # rendu + mesures + verdict des contrôles
+# Prérequis : servir le viewer en HTTP, puis exécuter DANS le conteneur
+# de navigateur (le script référence son Chromium et son playwright-core).
+python3 -m http.server 8931 --bind 0.0.0.0 &      # depuis viewer/
+docker cp tools/export/verify_final.js mcp-playwright:/tmp/vf.js
+docker exec mcp-playwright node /tmp/vf.js        # rendu + mesures + verdict
 ```
+
+Le script `verify_final.js` contient des chemins absolus propres au conteneur
+(`/ms-playwright/chromium-1200/...`). Il n'est donc **pas** exécutable
+directement depuis l'hôte — c'est une contrainte de l'environnement, pas un
+choix. La cible HTTP est le gateway de l'hôte vu du conteneur
+(`http://172.16.1.1:8931`).
 
 ### Un piège de vérification, à retenir
 

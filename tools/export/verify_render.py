@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
 """
-Pilote du serveur MCP Playwright (conteneur mcp-playwright, headless)
-pour verifier le RENDU reel de viewer/index.html.
+OBSOLETE — remplace par tools/export/verify_final.js. NE PAS UTILISER.
 
-Aucune installation : on parle JSON-RPC/HTTP au serveur deja en place.
+Pourquoi ce script ne fonctionne plus :
+  Le serveur MCP Playwright du conteneur lance le canal navigateur 'chrome',
+  absent de l'image (seul 'chromium' est installe). L'appel echoue sur :
+      Chromium distribution 'chrome' is not found at /opt/google/chrome/chrome
 
-Sequence :
+Contournement retenu : verifier le rendu en pilotant playwright-core
+directement, sans passer par le serveur MCP.
+  -> voir tools/export/verify_final.js et docs/viewer-3d.md
+  -> ou relancer 4 fois `npx playwright install chrome` en connaissance de cause
+
+Ce fichier est conserve comme trace du diagnostic, pas comme outil.
+
+Sequence d'origine (pour memoire) :
   1. initialize + notifications/initialized
   2. tools/list  -> verifier que navigate n'est pas deja occupe
   3. browser_navigate vers la page servie
