@@ -1,0 +1,1630 @@
+/**
+ * =============================================================================
+ *  SwarmDrones — Architecture logicielle de reference
+ *  Essaim heterogene de 30 plateformes (UAV-R / UAV-F / USV)
+ *  Version 1.0 — 2026-09-14 — source : document d'architecture logicielle v1.0
+ *
+ *  Principe directeur : "le contrat de mission est embarque ;
+ *                        le lien est un bonus, pas une dependance."
+ *
+ *  Organisation du workspace :
+ *    architecture.c4  -> specification + modele logique + modele de deploiement
+ *    views.c4         -> toutes les vues (projctions du meme modele unique)
+ *
+ *  Les identifiants de composants sont STABLES et suivent la section 13
+ *  du document d'entree (ex : onboard.safety).
+ * =============================================================================
+ */
+
+specification {
+
+  // ---------------------------------------------------------------------------
+  // COULEURS PERSONNALISEES (les noms sont ensuite utilisables partout)
+  // ---------------------------------------------------------------------------
+  color criticalRed   #C62828
+  color warningAmber  #F9A825
+  color effortGray    #546E7A
+  color cloudCyan     #00838F
+  color zoneOnboard   #0277BD
+  color zoneEdge      #EF6C00
+  color zoneC2        #3F51B5
+  color zoneCloud     #00838F
+  color extBrown      #6D4C41
+  color hypothesePurple #8E24AA
+  color decisionGreen   #2E7D32
+  color sourceGray      #616161
+
+  // --- Couleurs du lot (3) : produits du marche, algorithmes, risques, angles morts ---
+  color softwareTeal    #00695C   // brique logicielle du marche
+  color algoIndigo      #283593   // famille algorithmique
+  color riskRed         #B71C1C   // risque (criticite elevee)
+  color riskOrange      #EF6C00   // risque (criticite moyenne)
+  color blindspotBrown   #4E342E  // angle mort
+
+  // ---------------------------------------------------------------------------
+  // ACTEURS ET EXTERNES
+  // ---------------------------------------------------------------------------
+  element operator {
+    title 'Operateur humain'
+    notation 'Acteur'
+    description '''
+      Autorite humaine. Detient l'autorite sur les actions critiques
+      (armement, largage, changement de zone). N'agit jamais dans la boucle
+      de controle temps reel embarque.
+    '''
+    style { shape person; color warningAmber }
+  }
+
+  element external {
+    title 'Systeme externe'
+    notation 'Externe'
+    style { color extBrown; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // KINDS DE FRONTIERES / ZONES DE DEPLOIEMENT
+  // ---------------------------------------------------------------------------
+  element platform {
+    title 'Plateforme'
+    notation 'Onboard (x30)'
+    description 'Une des 30 plateformes de l\'essaim (18 UAV-R, 8 UAV-F, 4 USV).'
+    style { color zoneOnboard; border solid }
+  }
+
+  element edgeStation {
+    title 'Station Edge'
+    notation 'Edge (1..N)'
+    description 'Relais / station de proximite. Absorbe fusion tactique et coordination locale.'
+    style { color zoneEdge }
+  }
+
+  element c2System {
+    title 'C2 / GCS'
+    notation 'C2 (supervision)'
+    description 'Poste de commandement et de (re)planification. Autorite humaine.'
+    style { color zoneC2 }
+  }
+
+  element cloudSystem {
+    title 'Cloud'
+    notation 'Cloud (hors boucle)'
+    description 'Hors boucle de controle. Strictement differe et non temps reel.'
+    style { color cloudCyan }
+  }
+
+  // ---------------------------------------------------------------------------
+  // COMPOSANT LOGICIEL — seule granularite autorisee dans les vues de zone
+  // ---------------------------------------------------------------------------
+  element component {
+    title 'Composant logiciel'
+    notation 'Composant'
+    style { shape component }
+  }
+
+  // ---------------------------------------------------------------------------
+  // ENRICHISSEMENT (lot 1) — HYPOTHESES ET DECISIONS
+  // Une hypothese (H*) est une affirmation non demontree dont l'architecture
+  // depend. Une decision (ADR-*) est un choix motive, avec alternatives rejetees.
+  // Ces kinds ne sont PAS des composants : ils ne doivent apparaitre que dans
+  // les vues dediees (hypotheses / decisions), jamais dans une vue de zone.
+  // ---------------------------------------------------------------------------
+  element hypothesis {
+    title 'Hypothese'
+    notation 'Hypothese (H*)'
+    description 'Affirmation non demontree dont depend l architecture. Si fausse, une partie du design s effondre.'
+    style { shape rectangle; color hypothesePurple; border dashed }
+  }
+
+  element decision {
+    title 'Decision d architecture'
+    notation 'ADR'
+    description 'Choix motive, avec alternatives rejetees et consequences assumees.'
+    style { shape rectangle; color decisionGreen }
+  }
+
+  // ---------------------------------------------------------------------------
+  // ENRICHISSEMENT (lot 3 / point 4) — PRODUITS, ALGORITHMES, RISQUES, ANGLES MORTS
+  // Ces kinds ne sont PAS des composants de l'architecture logique : ils
+  // qualifient l'architecture (par quoi est-elle implementee ?) et l'exposent
+  // (a quoi est-elle exposee ? qu'est-ce qui n'est pas couvert ?).
+  // Regle : ils n'apparaissent JAMAIS dans les vues de zone, uniquement dans
+  // les vues dediees techChoices / riskMatrix / blindspotBySeverity.
+  // ---------------------------------------------------------------------------
+  element software {
+    title 'Brique logicielle du marche'
+    notation 'COTS / OSS'
+    description 'Produit logiciel existant (mature ou emergent) retenu ou candidat pour implementer un composant du modele. Porte son role (PRIMARY / SECONDARY) et sa licence.'
+    style { shape rectangle; color softwareTeal }
+  }
+
+  element algorithm {
+    title 'Famille algorithmique'
+    notation 'Algorithme'
+    description 'Famille d algorithmes candidate pour couvrir une fonction (perception, allocation, surete). Toute performance a 30 agents heterogenes non mesuree est une extrapolation.'
+    style { shape rectangle; color algoIndigo; border dashed }
+  }
+
+  element risk {
+    title 'Risque'
+    notation 'Risque (R*)'
+    description 'Risque identifie, avec probabilite, impact, criticite, mitigation et signal d alerte precoce. Criticite = probabilite x impact.'
+    style { shape rectangle; color riskRed }
+  }
+
+  element blindspot {
+    title 'Angle mort'
+    notation 'Angle mort (AM*)'
+    description 'Zone que l architecture actuelle ne couvre pas ou couvre mal. Un angle mort n est pas un risque : c est un trou de specification reconnu.'
+    style { shape rectangle; color blindspotBrown; border dashed }
+  }
+
+  // ===========================================================================
+  // TAGS DE CRITICITE — coeur de la semantique visuelle
+  // Syntaxe LikeC4 1.59.2 : un tag n'accepte QUE `color <hex|rgb|rgba>`.
+  // Les libelles lisibles sont donc portes par les NOTES DE VUE et l'ADR.
+  // ===========================================================================
+
+  /** Safety-Critical : touche a la securite du vol/navigation (#C62828 = rouge).
+   *  Ne doit JAMAIS dependre d'un element Mission/Best-Effort pour sa fonction. */
+  tag safety-critical { color #C62828 }
+
+  /** Mission-Critical : sans lui la mission echoue, la securite reste assuree
+   *  (#F9A825 = ambre). */
+  tag mission-critical { color #F9A825 }
+
+  /** Best-Effort : degradable, opportuniste, jamais bloquant (#546E7A = gris-bleu). */
+  tag best-effort { color #546E7A }
+
+  /** cloudOnly : hors boucle de controle (#00838F = cyan). */
+  tag cloudOnly { color #00838F }
+
+  // ===========================================================================
+  // TAGS DE ZONE — filtrage par zone et coloration des boundaries
+  // ===========================================================================
+  tag zone-onboard { color #0277BD }
+  tag zone-edge    { color #EF6C00 }
+  tag zone-c2      { color #3F51B5 }
+  tag zone-cloud   { color #00838F }
+  tag external-src { color #6D4C41 }
+
+  // --- Tags d'enrichissement (lot 1) ---
+  tag hypothese      { color #8E24AA }
+  tag decision       { color #2E7D32 }
+  tag validee        { color #2E7D32 }   // hypothese confirmee
+  tag a-valider      { color #F9A825 }   // hypothese non confirmee (risque ouvert)
+  tag source-doc     { color #616161 }
+
+  // --- Tags du lot 3 (point 4) : role et criticite des nouveaux elements ---
+  tag software-primary   { color #00695C }   // brique retenue par defaut
+  tag software-secondary { color #4DB6AC }   // brique alternative / repli
+  tag licence-permissive { color #2E7D32 }   // BSD/MIT/Apache : pas de copyleft
+  tag licence-copyleft   { color #F9A825 }   // GPL : contrainte de distribution
+  tag source-available   { color #EF6C00 }   // non OSI (ex. Confluent Community)
+  tag evidence-high      { color #2E7D32 }
+  tag evidence-medium    { color #F9A825 }
+  tag evidence-low       { color #C62828 }
+  tag non-verifie        { color #616161 }   // existence/licence non etablie
+
+  // ===========================================================================
+  // KINDS DE RELATIONS — la criticite du flux se lit sur le diagramme
+  // ===========================================================================
+  relationship sync    { title 'Appel synchrone (bus interne)' }
+  relationship flow    { title 'Flux de donnees' }
+  relationship radio   { title 'Lien radio (intermittent)' }
+  relationship command { title 'Ordre / commande' }
+  relationship store   { title 'Persistance / stockage' }
+  relationship async   { title 'Differe / store-and-forward' }
+  relationship safety  { title 'Voie de surete (independante du lien)' }
+
+  // --- Relations d'enrichissement (lot 1) ---
+  /** Le composant s'appuie sur une hypothese : si l'hypothese est fausse,
+   *  le composant ou la relation est a revoir. */
+  relationship depend-on {
+    title 'Depend de l hypothese'
+    line dotted
+    color hypothesePurple
+  }
+
+  /** Une decision justifie un choix de conception present dans le modele. */
+  relationship justifie {
+    title 'Justifie'
+    line dashed
+    color decisionGreen
+  }
+
+  /** Decoule de : le document source est l'origine d'une affirmation du modele. */
+  relationship derives-from {
+    title 'Decoule du document source'
+    line dotted
+    color sourceGray
+  }
+
+  // --- Relations du lot 3 (point 4) ---
+  /** Le composant est implemente par une brique logicielle du marche
+   *  (role = PRIMARY ou SECONDARY porte par le tag de la cible). */
+  relationship implemented-by {
+    title 'Est implemente par'
+    line dotted
+    color softwareTeal
+  }
+
+  /** Trace de substitution : la brique cible peut remplacer la brique source
+   *  (usage principal : secondaire -> primaire, et reciproquement). */
+  relationship alternative-to {
+    title 'Alternative a'
+    line dashed
+    color softwareTeal
+  }
+
+  /** Le composant ou la brique est expose a un risque identifie. */
+  relationship exposed-to {
+    title 'Est expose a'
+    line dotted
+    color riskRed
+  }
+
+  /** La famille algorithmique ne couvre pas cet angle mort : c est un trou
+   *  de couverture assume, pas un defaut d implementation. */
+  relationship does-not-cover {
+    title 'Ne couvre pas'
+    line dotted
+    color blindspotBrown
+  }
+
+  // ===========================================================================
+  // KINDS DE NOEUDS DE DEPLOIEMENT
+  // ===========================================================================
+  deploymentNode host {
+    title 'Noeud'
+    notation 'Noeud de deploiement'
+  }
+}
+
+// =============================================================================
+//  MODELE LOGIQUE — UNIQUE SOURCE DE VERITE
+//  Regle : la hierarchie reflete les zones de deploiement, pas la structure
+//  organisationnelle. Toutes les relations sont declarees a plat APRES les
+//  declarations de frontieres (LikeC4 interdit parent <-> enfant).
+// =============================================================================
+model {
+
+  // ===========================================================================
+  // LOT 1 — TRAÇABILITE VERS LE DOCUMENT SOURCE
+  // Les ids de composants suivent la §13 de swarm30_arch.md. Chaque composant
+  // porte metadata { source '<section>' } et un link vers le document.
+  // ===========================================================================
+
+  // ===========================================================================
+  // LOT 1 — HYPOTHESES EXPLICITES (H1..H5, cf. §1.2 du document source)
+  // Chaque hypothese est une ENTITE, pas une phrase dans une description :
+  // elle peut donc etre requetee, et son impact analyse (vue `hypotheses`).
+  // ===========================================================================
+  h1 = hypothesis 'H1 — Autopilote avec mode mission embarquee' {
+    #hypothese #validee
+    description '''
+      **Enonce.** Chaque plateforme possede un autopilote avec controle
+      d'attitude/position et un mode "mission embarquee" (waypoints, geofence, RTL).
+      **Evidence : HIGH** (pratique standard ArduPilot/PX4, capacites publiques).
+
+      **Si faux** : le principe directeur "le lien est un bonus" s'effondre ;
+      la mission depend alors du lien C2 -> rearchitecture complete du onboard.
+    '''
+    metadata { niveau_preuve 'HIGH'; section '§1.2'; impact_si_faux 'principe directeur invalide' }
+  }
+
+  h2 = hypothesis 'H2 — Liens intermittents par defaut' {
+    #hypothese #validee
+    description '''
+      **Enonce.** Les liens sont intermittents par defaut : aucune connectivite
+      permanente air-sol garantie.
+      **Evidence : HIGH** comme hypothese de conception (contrainte donnee),
+      **MEDIUM** sur les taux de coupure reels.
+
+      **Si faux** (lien permanent disponible) : la complexite store-and-forward
+      et l'allocation decentralisee deviennent sur-dimensionnees (cout, pas risque).
+    '''
+    metadata { niveau_preuve 'HIGH (conception) / MEDIUM (taux)'; section '§1.2'; impact_si_faux 'sur-dimensionnement' }
+  }
+
+  h3 = hypothesis 'H3 — GNSS degradable ou brouillable' {
+    #hypothese #a-valider
+    description '''
+      **Enonce.** GPS/GNSS peut etre degrade ou brouille localement ; la
+      navigation doit tolerer des trous.
+      **Evidence : MEDIUM** (phenomene documente, probabilite locale inconnue).
+
+      **Si faux** : la redondance de position (INS + odometrie + relative)
+      peut etre allegee. **Restant le plus risque** : la probabilite locale
+      n'est pas caracterisee -> a valider par campagne de brouillage.
+    '''
+    metadata { niveau_preuve 'MEDIUM'; section '§1.2'; impact_si_faux 'redondance allegeable'; risque 'probabilite locale inconnue' }
+  }
+
+  h4 = hypothesis 'H4 — Coordination hors portee via relais Edge' {
+    #hypothese #a-valider
+    description '''
+      **Enonce.** La coordination inter-plateformes au-dela de la portee radio
+      directe passe par un relais Edge (plateforme ou station relais).
+      **Evidence : MEDIUM.**
+
+      **Si faux** (mesh suffisant) : la couche Edge perd sa justification de
+      coordination ; reste pertinente pour la passarelle de confiance.
+    '''
+    metadata { niveau_preuve 'MEDIUM'; section '§1.2'; impact_si_faux 'Edge reduit a passarelle' }
+  }
+
+  h5 = hypothesis 'H5 — Autorite humaine sur les actions critiques' {
+    #hypothese #validee
+    description '''
+      **Enonce.** Les actions critiques (armement, largage, tir, changement de
+      zone) restent sous autorite humaine ou sous regles embarquees pre-approuvees.
+      **Evidence : HIGH** (exigence de gouvernance, non technique).
+
+      **Si faux** : `onboard.safety` (ABORT local pre-approuve) et `c2.auth`
+      (authorization_ref) sont a revoir ; le modele d'autorisation change.
+    '''
+    metadata { niveau_preuve 'HIGH (gouvernance)'; section '§1.2'; impact_si_faux 'modele d autorisation a revoir' }
+  }
+
+  // ===========================================================================
+  // LOT 1 — DECISIONS D'ARCHITECTURE (ADR, cf. §10 conflits arbitres + §3)
+  // ===========================================================================
+  adr1 = decision 'ADR-1 — Contrat de mission embarque, replanification opportuniste' {
+    #decision
+    description '''
+      **Contexte.** Conflit §10.1 : centralisation (C2) vs autonomie (onboard).
+      **Decision.** Plan embarque versionne et signe ; le C2 replanifie UNIQUEMENT
+      quand le lien est disponible (hybride).
+      **Alternatives rejetees.** (a) Pilotage C2 temps reel -> exclu (H2) ;
+      (b) autonomie totale sans C2 -> perd l'autorite humaine (H5).
+      **Consequence.** `onboard.mission` doit fonctionner sans lien ; le C2 est
+      un optimiseur, pas un point de passage obligatoire.
+    '''
+    metadata { conflit '§10.1'; alternatives_rejetees 'C2 temps reel; autonomie totale'; statut 'acceptee' }
+  }
+
+  adr2 = decision 'ADR-2 — Fraicheur explicite, pas de coherence forte' {
+    #decision
+    description '''
+      **Contexte.** Conflit §10.2 : fraicheur vs coherence (SCIENCE/DATA).
+      **Decision.** Chaque message porte t_publish et t_valid ; la fraicheur est
+      explicite et jamais supposee. Pas de coherence forte distribuee.
+      **Alternatives rejetees.** Horloge globale synchronisee -> impossible hors
+      lien permanent (H2).
+      **Consequence.** `onboard.telemetry` porte les deux horodatages ;
+      `onboard.linkRadio` transporte le delta avec priorisation.
+    '''
+    metadata { conflit '§10.2'; alternatives_rejetees 'horloge globale synchronisee'; statut 'acceptee' }
+  }
+
+  adr3 = decision 'ADR-3 — Canaux de surete et de securite separes' {
+    #decision
+    description '''
+      **Contexte.** Conflit §10.3 : surete (SAFETY) vs securite (SECURITY).
+      **Decision.** `onboard.safety` n'est PAS bloquee par la couche crypto ;
+      les ordres critiques entrent signes ; une compromission reste isolee.
+      **Alternatives rejetees.** Crypto sur la voie de surete -> introduirait un
+      point de defaillance commun et une latence.
+      **Consequence.** Deux chemins distincts vers `onboard.autopilot` :
+      mission (bus interne) et safety (voie preemptive independante du lien).
+    '''
+    metadata { conflit '§10.3'; alternatives_rejetees 'crypto sur voie de surete'; statut 'acceptee' }
+  }
+
+  adr4 = decision 'ADR-4 — Traitement lourd deporte hors boucle de controle' {
+    #decision
+    description '''
+      **Contexte.** Conflit §10.4 : traitement lourd (ALGORITHMS) vs ressources
+      onboard (HARDWARE).
+      **Decision.** Edge pour la fusion tactique de proximite ; Cloud uniquement
+      en differe et hors boucle de controle.
+      **Alternatives rejetees.** Traitement lourd onboard -> cout energetique et
+      thermique incompatible avec l'autonomie.
+      **Consequence.** Aucune dependance bloquante onboard/edge -> cloud.
+    '''
+    metadata { conflit '§10.4'; alternatives_rejetees 'traitement lourd onboard'; statut 'acceptee' }
+  }
+
+  adr5 = decision 'ADR-5 — Robustesse preferee a l optimalite sous partition' {
+    #decision
+    description '''
+      **Contexte.** Conflit §10.5 : optimalite vs robustesse (ALGORITHMS/VALIDATION).
+      **Decision.** Allocation par encheres decentralisees (consensus eventuel),
+      jamais de consensus global dur.
+      **Alternatives rejetees.** Optimisation globale centralisee -> fragile
+      des que le lien tombe (H2).
+      **Consequence.** `onboard.task-auction` est le mecanisme par defaut ;
+      la replanification C2 est un bonus opportuniste.
+    '''
+    metadata { conflit '§10.5'; alternatives_rejetees 'optimisation globale centralisee'; statut 'acceptee' }
+  }
+
+  // ===========================================================================
+  // LOT 1 — DOCUMENT SOURCE (entite de tracabilite)
+  // Le document d'architecture est un artefact du systeme documentaire :
+  // on le modelise pour que la tracabilite soit VISIBLE et REQUETABLE,
+  // pas seulement une metadonnee cachee.
+  // ===========================================================================
+  docSource = external 'Document d architecture — swarm30_arch.md' {
+    #source-doc
+    description '''
+      Document source de reference (13 sections, 370 lignes).
+      **C'est lui qui porte les enonces H1..H5 (§1.2), les conflits (§10)
+      et les budgets (§8).** Chaque composant porte `metadata.source` = sa
+      section ; cette entite materialise le lien dans le graphe.
+
+      Fichier : `swarm30_arch.md` (livrable 1).
+    '''
+    metadata { type 'document'; sections '13'; chemin '/home/hermesagent/workspace/swarm30_arch.md' }
+    style { icon bootstrap:file-earmark-text }
+  }
+
+  // ===========================================================================
+  // EXTERNES
+  // ===========================================================================
+  radios = external 'Radios / GNSS / Capteurs' {
+    #external-src
+    description '''
+      Sources et moyens physiques hors perimetre logiciel :
+      GNSS (degradable/brouillable), INS, odometrie, capteurs de perception,
+      radios heterogenes (LoRa, 802.11 mesh, lien dedie, longue portee).
+      H3 : GPS/GNSS peut etre degrade ou brouille localement.
+    '''
+    style { icon bootstrap:broadcast }
+  }
+
+  operator = operator 'Operateur humain (GCS)'
+
+  // ===========================================================================
+  // BOUNDARY 1 — ONBOARD (x30)
+  // Tout ce qui touche a la surete de vol et a la continuite de mission locale.
+  // ===========================================================================
+  onboard = platform 'Plateformes onboard (x30)' {
+    #zone-onboard
+    description '''
+      18 UAV-R (multirotors), 8 UAV-F (voilure fixe), 4 USV.
+      Instance unique dans le modele logique : elle est materialisee 30 fois
+      dans le modele de deploiement (cf. deployment).
+      **Doit terminer sa mission nominale sans C2 ni cloud.**
+    '''
+    metadata { source '§3 zones / §4.1 onboard' }
+
+    sensorsHAL = component 'onboard.sensors-hal' {
+      #best-effort
+      technology 'HAL — drivers bas niveau'
+      description 'Abstraction materielle capteurs/actionneurs. Absorbe l\'heterogeneite des plateformes.'
+      metadata {
+        criticite 'best-effort'
+        frequence 'selon capteur'
+        principe 'abstraction obligatoire (HARDWARE)'
+        source '§4.1 onboard.sensors-hal'
+      }
+      style { icon bootstrap:cpu }
+    }
+
+    perception = component 'onboard.perception' {
+      #safety-critical
+      technology 'Fusion capteurs + filtre complementaire'
+      description '''
+        Fusion multi-capteurs, detection/evitement (sense-and-avoid),
+        estimation d'etat et estimation relative inter-agents.
+        Redondance de position : GNSS + INS + odometrie + relative.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        frequence '10-60 Hz'
+        alerte 'sense-and-avoid -> action : <= 100 ms [EXTRAP]'
+        source '§4.1 onboard.perception / §8 budget'
+      }
+      style { icon bootstrap:crosshair2 }
+    }
+
+    autopilot = component 'onboard.autopilot' {
+      #safety-critical
+      technology 'Bus interne MAVLink / UART-CAN'
+      description '''
+        Controle d'attitude/position, execution des consignes de vol,
+        application du geofence. H1 : mode "mission embarquee"
+        (waypoints, geofence, RTL) disponible sur tout autopilote.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        frequence '50-400 Hz'
+        budget_latence '<= 10 ms (boucle pilotage)'
+        interface 'setpoints, statut armement'
+        source '§4.1 onboard.autopilot / §8 budget'
+      }
+      style { icon bootstrap:compass }
+    }
+
+    safety = component 'onboard.safety' {
+      #safety-critical
+      technology 'Garde-fous independants'
+      description '''
+        Geofence, detection de perte de controle, RTL / atterrissage
+        d'urgence, limitateur d'energie. Voie de surete SEPAREE :
+        non bloquee par la couche crypto et fonctionnelle sans lien.
+        ABORT declenche localement selon regles pre-approuvees.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        autonomie 'doit fonctionner sans lien'
+        arbitrage 'surete vs securite : canaux separes (§10.3)'
+        source '§4.1 onboard.safety / ADR-3'
+      }
+      style { icon bootstrap:shield-check }
+    }
+
+    mission = component 'onboard.mission' {
+      #mission-critical
+      technology 'Executeur de plan embarque (machine a etats)'
+      description '''
+        Executeur du plan de mission embarque et allocation locale de taches.
+        Machine a etats : INIT -> READY -> LAUNCH -> EXECUTE
+        -> (DEGRADED <=> EXECUTE) -> RTL/RECOVER -> LAND -> DONE ; ABORT partout.
+        EXECUTE fonctionne SANS lien.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        frequence '1-10 Hz'
+        etats 'INIT->READY->LAUNCH->EXECUTE->DEGRADED->RTL/RECOVER->LAND->DONE'
+        navigateur 'contient le contrat de mission'
+        source '§4.1 onboard.mission / §6 machine a etats'
+      }
+      style { icon bootstrap:clipboard-check }
+    }
+
+    taskAuction = component 'onboard.task-auction' {
+      #mission-critical
+      technology 'Encheres decentralisees (marche / consensus)'
+      description '''
+        Allocation de taches par encheres embarquee — option par defaut,
+        robuste aux partitions. Replanification C2 uniquement quand le lien
+        est disponible (hybride, §10.1).
+      '''
+      metadata {
+        criticite 'mission-critical'
+        frequence '0.2-1 Hz'
+        mode 'consensus eventuel, jamais de consensus global dur'
+        source '§4.1 onboard.task-auction / ADR-5'
+      }
+      style { icon bootstrap:arrow-repeat }
+    }
+
+    health = component 'onboard.health' {
+      #mission-critical
+      technology 'Diagnostic embarque'
+      description 'Diagnostic interne (batterie, moteurs, capteurs, temperatures), prediction de defaillance, marge d\'energie.'
+      metadata { criticite 'mission-critical'; frequence '1-10 Hz'; source '§4.1 onboard.health' }
+      style { icon bootstrap:activity }
+    }
+
+    energy = component 'onboard.energy' {
+      #mission-critical
+      technology 'Jauge de fin de mission'
+      description 'Gestion de l\'energie et budget de retour (RTL budget).'
+      metadata { criticite 'mission-critical'; frequence '0.2-2 Hz'; source '§4.1 onboard.energy' }
+      style { icon bootstrap:battery-half }
+    }
+
+    telemetry = component 'onboard.telemetry' {
+      #best-effort
+      technology 'Formatage + priorisation + compactage delta'
+      description '''
+        Formatage / priorisation de la telemetrie. Chaque message porte
+        t_publish (horloge source) et t_valid (duree de validite) :
+        la fraicheur est explicite, jamais supposee.
+      '''
+      metadata {
+        criticite 'best-effort'
+        frequence '1-10 Hz selon mode'
+        file_priorite '1) surete 2) etat mission 3) telemetrie 4) debug'
+        source '§5 telemetrie / ADR-2'
+      }
+      style { icon bootstrap:file-earmark-bar-graph }
+    }
+
+    linkRadio = component 'onboard.link' {
+      technology 'Radios heterogenes (LoRa / 802.11 mesh / lien dedie)'
+      description '''
+        Gestion du lien radio : decouverte de voisins, mesh/relais,
+        store-and-forward, file de messages, priorisation, chiffrement.
+        Lien intermittent par defaut (H2) : jamais une dependance.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        frequence 'continue, best-effort'
+        modes 'nominal / autonome / acoustique (annexe UUV)'
+        principe 'le lien est un bonus'
+        source '§4.1 onboard.link / §11 annexe UUV'
+      }
+      style { icon bootstrap:wifi }
+    }
+  }
+
+  // ===========================================================================
+  // BOUNDARY 2 — EDGE (1..N)
+  // Ce qui exige une vue a plusieurs agents mais tolere une portee locale.
+  // ===========================================================================
+  edge = edgeStation 'Edge — relais / station de proximite (1..N)' {
+    #zone-edge
+    description '''
+      Absorbe la fusion tactique et la coordination de proximite.
+      **Fonctionne en mode C2-deconnecte.**
+    '''
+    metadata { source '§3 zones / §4.2 edge' }
+
+    relay = component 'edge.relay' {
+      #mission-critical
+      technology 'Mesh + lien longue portee'
+      description 'Relais de communication inter-plateformes et vers le C2, store-and-forward.'
+      metadata { criticite 'mission-critical'; frequence 'continue'; mode 'C2-deconnecte ok'; source '§4.2 edge.relay' }
+      style { icon bootstrap:broadcast }
+    }
+
+    fusion = component 'edge.fusion' {
+      #mission-critical
+      technology 'Fusion tactique multi-plateformes'
+      description 'Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la perte d\'un agent.'
+      metadata { criticite 'mission-critical'; frequence '1-10 Hz'; source '§4.2 edge.fusion' }
+      style { icon bootstrap:diagram-3 }
+    }
+
+    coordinator = component 'edge.coordinator' {
+      #mission-critical
+      technology 'Coordination de proximite'
+      description '''
+        Resolution de conflits d'espace, allocation locale lorsque le C2 est
+        indisponible. Prend le relais de l'allocation quand le lien C2 tombe.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        budget_latence 'coordination locale <= 1 s [EXTRAP]'
+        mode 'fonctionne en mode C2-deconnecte'
+        source '§4.2 edge.coordinator / §8 budget'
+      }
+      style { icon bootstrap:signpost-split }
+    }
+
+    cache = component 'edge.cache' {
+      #best-effort
+      technology 'Persistance locale'
+      description 'Persistance locale (mission, logs, artefacts) en cas de coupure vers C2/cloud.'
+      metadata { criticite 'best-effort'; source '§4.2 edge.cache' }
+      style { shape storage; icon bootstrap:hdd-stack }
+    }
+
+    gateway = component 'edge.gateway' {
+      #mission-critical
+      technology 'Passerelle de protocoles + controle d\'acces'
+      description 'Passerelle essaim <-> C2 <-> cloud : normalisation, controle d\'acces, frontiere de confiance.'
+      metadata { criticite 'mission-critical'; point_singulier 'frontiere de confiance'; source '§4.2 edge.gateway / §3' }
+      style { icon bootstrap:shield-exclamation }
+    }
+  }
+
+  // ===========================================================================
+  // BOUNDARY 3 — C2 / GCS
+  // Decision strategique, supervision, intervention humaine.
+  // ===========================================================================
+  c2 = c2System 'C2 / GCS' {
+    #zone-c2
+    description '''
+      Supervision, (re)planification, autorite humaine, allocation globale.
+      Accessible de facon INTERMITTENTE : aucune responsabilite de surete ici.
+    '''
+    metadata { source '§3 zones / §4.3 c2' }
+
+    gcs = component 'c2.gcs' {
+      #mission-critical
+      technology 'IHM operateur'
+      description '''
+        Poste de commandement : visualisation, supervision, autorite humaine,
+        validation des actions critiques. Seul chemin d'autorisation humaine.
+      '''
+      metadata { criticite 'mission-critical'; interface 'humaine'; source '§4.3 c2.gcs' }
+      style { icon bootstrap:person-check }
+    }
+
+    planner = component 'c2.planner' {
+      #mission-critical
+      technology '(Re)planification + allocation globale'
+      description '''
+        Generation de plans embarquables VERSIONNES et signes.
+        Replanification opportuniste : 1-30 s [EXTRAP].
+      '''
+      metadata {
+        criticite 'mission-critical'
+        budget_latence '1-30 s [EXTRAP]'
+        sortie 'Plan versionne + signe'
+        source '§4.3 c2.planner / §8 budget'
+      }
+      style { icon bootstrap:map-fill }
+    }
+
+    auth = component 'c2.auth' {
+      #safety-critical
+      technology 'IAM + journalisation d\'audit'
+      description '''
+        Authentification, autorisation, journalisation des decisions (audit).
+        Emet les jetons de decision et garantit authorization_ref sur
+        toute action critique. Zero perte non journalisee.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        exigence '100% des ordres critiques signes'
+        source '§4.3 c2.auth / ADR-3'
+      }
+      style { icon bootstrap:key-fill }
+    }
+
+    missionStore = component 'c2.mission-store' {
+      #mission-critical
+      technology 'Registre de missions versionne'
+      description 'Registre de missions (versions, plans, statuts) — source de verite de configuration.'
+      metadata { criticite 'mission-critical'; role 'source de verite configuration'; source '§4.3 c2.mission-store' }
+      style { shape storage; icon bootstrap:database-fill-gear }
+    }
+
+    alerting = component 'c2.alerting' {
+      #best-effort
+      technology 'Agregation d\'alarmes'
+      description 'Agregation des alarmes et notification operateur.'
+      metadata { criticite 'best-effort'; source '§4.3 c2.alerting' }
+      style { icon bootstrap:exclamation-triangle }
+    }
+  }
+
+  // ===========================================================================
+  // BOUNDARY 4 — CLOUD (hors boucle de controle)
+  // Non temps reel, couteux, tolerable en differe.
+  // ===========================================================================
+  cloud = cloudSystem 'Cloud (hors boucle de controle)' {
+    #zone-cloud
+    description '''
+      Strictement hors boucle de controle. Budget : minutes (differe).
+      Aucune dependance bloquante admise vers cette zone depuis onboard/edge.
+    '''
+    metadata { source '§3 zones / §4.4 cloud' }
+
+    twin = component 'cloud.twin' {
+      #cloudOnly
+      technology 'Jumeau numerique'
+      description 'Jumeau numerique : rejeu, simulation, prediction de derive, calibration / entrainement de modeles.'
+      metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; source '§4.4 cloud.twin' }
+      style { icon bootstrap:layers }
+    }
+
+    analytics = component 'cloud.analytics' {
+      #cloudOnly
+      technology 'Analytics post-mission'
+      description 'Analyse post-mission, metriques de performance, detection d\'anomalies a posteriori.'
+      metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; source '§4.4 cloud.analytics' }
+      style { icon bootstrap:graph-up }
+    }
+
+    modelRegistry = component 'cloud.model-registry' {
+      #cloudOnly
+      technology 'Registre de modeles'
+      description 'Versionnement des modeles (perception, allocation) et des configurations.'
+      metadata { criticite 'best-effort'; source '§4.4 cloud.model-registry' }
+      style { shape storage; icon bootstrap:file-earmark-richtext }
+    }
+
+    replayStore = component 'cloud.replay-store' {
+      #cloudOnly
+      technology 'Stockage de journaux'
+      description 'Stockage des journaux pour rejouabilite et tests de non-regression.'
+      metadata { criticite 'best-effort'; usage 'Monte-Carlo + non-regression'; source '§4.4 cloud.replay-store / §9 tests' }
+      style { shape storage; icon bootstrap:clock-history }
+    }
+  }
+
+  // ===========================================================================
+  // RELATIONS — liste EXACTE de la section 13 du document d'entree
+  // ===========================================================================
+
+  // --- 13.1 Externe -> Onboard ---
+  radios -> onboard.sensorsHAL 'capteurs / GNSS / liaisons physiques' {
+    technology 'Electrique / bus capteur'
+    metadata { criticite 'safety-critical'; fiabilite 'GNSS degradable (H3)' }
+  }
+
+  // --- 13.2 Boucle onboard (bus interne) ---
+  onboard.sensorsHAL -> onboard.perception 'flux capteurs' {
+    technology 'Bus capteur'; metadata { criticite 'safety-critical'; frequence '10-60 Hz' } }
+  onboard.sensorsHAL -> onboard.health 'sante capteurs' {
+    technology 'Bus capteur'; metadata { criticite 'mission-critical' } }
+  onboard.sensorsHAL -> onboard.autopilot 'etat navigation' {
+    technology 'Bus interne'; metadata { criticite 'safety-critical' } }
+  onboard.perception -> onboard.autopilot 'estimation position/etat' {
+    technology 'Bus interne MAVLink'; metadata { criticite 'safety-critical'; frequence '50-400 Hz' } }
+  onboard.perception -> onboard.mission 'pistes/obstacles' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical' } }
+  onboard.perception -> onboard.safety 'detection d\'evitement' {
+    technology 'Bus interne'; metadata { criticite 'safety-critical'; latence '<= 100 ms [EXTRAP]' } }
+  onboard.mission -> onboard.autopilot 'setpoints de mission' {
+    technology 'Bus interne MAVLink'; metadata { criticite 'safety-critical'; frequence '50-400 Hz' } }
+  onboard.mission -> onboard.taskAuction 'taches ouvertes' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical'; frequence '0.2-1 Hz' } }
+  onboard.taskAuction -> onboard.mission 'attributions de taches' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical' } }
+  onboard.health -> onboard.safety 'niveaux de sante' {
+    technology 'Bus interne'; metadata { criticite 'safety-critical' } }
+  onboard.health -> onboard.energy 'etat batterie' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical' } }
+  onboard.health -> onboard.telemetry 'diagnostic' {
+    technology 'Bus interne'; metadata { criticite 'best-effort' } }
+  onboard.energy -> onboard.mission 'marge/retour' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical'; frequence '0.2-2 Hz' } }
+  onboard.energy -> onboard.safety 'seuils critiques' {
+    technology 'Bus interne'; metadata { criticite 'safety-critical' } }
+  onboard.safety -> onboard.autopilot 'commandes preemptives (RTL/atterrissage)' {
+    technology 'Bus interne — voie de surete'
+    metadata { criticite 'safety-critical'; priorite '1 (preemptif)'; independant_du_lien 'oui' } }
+  onboard.mission -> onboard.telemetry 'etat de mission' {
+    technology 'Bus interne'; metadata { criticite 'mission-critical'; frequence '1-10 Hz' } }
+  onboard.telemetry -> onboard.linkRadio 'telemetrie priorisee' {
+    technology 'File priorisee'; metadata { criticite 'best-effort'; compactage 'delta + quantification' } }
+  onboard.mission -> onboard.linkRadio 'annonces etat/taches' {
+    technology 'Protocole essaim'; metadata { criticite 'mission-critical'; signature 'obligatoire' } }
+  onboard.linkRadio -> onboard.mission 'taches/ordres recus' {
+    technology 'Protocole essaim'; metadata { criticite 'mission-critical'; controle 'ordres signes uniquement' } }
+  onboard.linkRadio -> onboard.safety 'ordres critiques entrants' {
+    technology 'Protocole essaim'
+    metadata { criticite 'safety-critical'; controle 'refus des ordres non signes'; note 'safety non bloquee par la crypto' } }
+
+  // --- 13.3 Onboard <-> Edge (radio intermittente) ---
+  onboard.linkRadio -> edge.relay 'trafic essaim (radio)' {
+    technology 'Radio directe / mesh — intermittente'
+    metadata { criticite 'mission-critical'; intermittence 'par defaut (H2)'; mode 'store-and-forward si coupure' } }
+  edge.relay -> onboard.linkRadio 'messages descendants' {
+    technology 'Radio directe / mesh — intermittente'
+    metadata { criticite 'mission-critical'; note 'lien = bonus, jamais dependance' } }
+
+  // --- 13.4 Boucle Edge ---
+  edge.relay -> edge.fusion 'trafic consolide' {
+    technology 'Bus Edge'; metadata { criticite 'mission-critical'; frequence '1-10 Hz' } }
+  edge.relay -> edge.gateway 'trafic vers C2/cloud' {
+    technology 'Passerelle'; metadata { criticite 'mission-critical' } }
+  edge.fusion -> edge.coordinator 'image tactique locale' {
+    technology 'Bus Edge'; metadata { criticite 'mission-critical' } }
+  edge.fusion -> edge.gateway 'image tactique vers C2' {
+    technology 'Passerelle'; metadata { criticite 'mission-critical' } }
+  edge.coordinator -> edge.relay 'directives vers agents' {
+    technology 'Bus Edge'; metadata { criticite 'mission-critical'; latence '<= 1 s [EXTRAP]' } }
+  edge.coordinator -> edge.cache 'snapshot d\'etat' {
+    technology 'Persistance locale'; metadata { criticite 'best-effort' } }
+  edge.cache -> edge.gateway 'artefacts persistes' {
+    technology 'Passerelle'; metadata { criticite 'best-effort' } }
+
+  // --- 13.5 Edge <-> C2 ---
+  edge.gateway -> c2.gcs 'image tactique/telemetrie' {
+    technology 'MQTT / broker (protocole normalise)'
+    metadata { criticite 'mission-critical'; intermittence 'oui'; contrat 'versionne' } }
+  c2.gcs -> edge.gateway 'ordres/plans' {
+    technology 'MQTT / broker'
+    metadata { criticite 'mission-critical'; exigence 'ordres signes + authorization_ref' } }
+
+  // --- 13.6 Boucle C2 ---
+  c2.gcs -> c2.planner 'intentions operateur' {
+    technology 'Bus C2'; metadata { criticite 'mission-critical' } }
+  c2.planner -> c2.missionStore 'plans versionnes' {
+    technology 'Bus C2'; metadata { criticite 'mission-critical'; versionnement 'plan_version' } }
+  c2.planner -> edge.gateway 'plans embarquables' {
+    technology 'MQTT / broker'; metadata { criticite 'mission-critical'; signature 'obligatoire' } }
+  c2.auth -> c2.gcs 'jetons d\'autorisation' {
+    technology 'Bus C2'; metadata { criticite 'safety-critical'; exigence 'authorization_ref sur action critique' } }
+  c2.auth -> c2.missionStore 'traces d\'audit' {
+    technology 'Bus C2'; metadata { criticite 'safety-critical'; exigence 'zero perte non journalisee' } }
+  c2.gcs -> c2.alerting 'evenements a notifier' {
+    technology 'Bus C2'; metadata { criticite 'best-effort' } }
+  c2.alerting -> c2.gcs 'notifications operateur' {
+    technology 'IHM'; metadata { criticite 'best-effort' } }
+  operator -> c2.gcs 'supervise et autorise les actions critiques' {
+    technology 'IHM operateur'
+    metadata { criticite 'safety-critical'; autorite 'humaine (H5)' } }
+
+  // --- 13.7 Edge <-> Cloud (differe, hors boucle) ---
+  edge.gateway -> cloud.twin 'logs/etat differes' {
+    technology 'MQTT / API differee — store-and-forward'
+    metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; latence 'minutes' } }
+
+  // --- 13.8 Boucle Cloud ---
+  cloud.twin -> cloud.analytics 'donnees de rejeu' {
+    technology 'Pipeline differe'; metadata { criticite 'best-effort' } }
+  cloud.analytics -> cloud.modelRegistry 'metriques -> modeles' {
+    technology 'Pipeline differe'; metadata { criticite 'best-effort' } }
+  cloud.replayStore -> cloud.twin 'journaux rejouables' {
+    technology 'Pipeline differe'; metadata { criticite 'best-effort'; usage 'non-regression' } }
+
+  // --- 13.9 Cloud -> C2 (retour de modeles, differe, JAMAIS bloquant) ---
+  cloud.modelRegistry -> c2.planner 'modeles/configurations' {
+    technology 'API differee'
+    metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; dependance 'non bloquante' } }
+
+  // ===========================================================================
+  // LOT 1 — RELATIONS DE TRACABILITE : composants -> hypotheses
+  // Lecture : "si l'hypothese est fausse, cet element est a revoir".
+  // C'est ce qui rend l'analyse d'impact requetable (vue `hypotheses`).
+  // ===========================================================================
+
+  onboard.autopilot -> h1 'repose sur le mode mission embarque' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+  onboard.mission -> h1 'le plan embarque suppose H1' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+  onboard.safety -> h1 'garde-fous locaux supposent l autopilote' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+
+  onboard.linkRadio -> h2 'dimensionne pour un lien intermittent' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+  onboard.mission -> h2 'la continuite de mission suppose H2' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+  onboard.taskAuction -> h2 'robuste aux partitions (H2)' {
+    technology 'Hypothese de conception'; metadata { impact 'critique' } }
+  edge.coordinator -> h2 'prend le relais quand le lien tombe' {
+    technology 'Hypothese de conception'; metadata { impact 'eleve' } }
+
+  onboard.perception -> h3 'redondance de position pour tolerer les trous GNSS' {
+    technology 'Hypothese de conception'; metadata { impact 'eleve'; risque 'MEDIUM' } }
+
+  edge.relay -> h4 'justifie le relais hors portee directe' {
+    technology 'Hypothese de conception'; metadata { impact 'moyen' } }
+  edge.coordinator -> h4 'coordination via Edge au-dela de la portee' {
+    technology 'Hypothese de conception'; metadata { impact 'moyen' } }
+
+  onboard.safety -> h5 'ABORT local selon regles pre-approuvees' {
+    technology 'Hypothese de gouvernance'; metadata { impact 'critique' } }
+  c2.auth -> h5 'authorization_ref sur action critique' {
+    technology 'Hypothese de gouvernance'; metadata { impact 'critique' } }
+  c2.gcs -> h5 'seul chemin d autorisation humaine' {
+    technology 'Hypothese de gouvernance'; metadata { impact 'critique' } }
+  operator -> h5 'autorite humaine sur les actions critiques' {
+    technology 'Hypothese de gouvernance'; metadata { impact 'critique' } }
+
+  // ===========================================================================
+  // LOT 1 — RELATIONS DE TRACABILITE : decisions -> ce qu'elles justifient
+  // ===========================================================================
+  adr1 -> onboard.mission 'plan embarque + replanif opportuniste' {
+    metadata { conflit '§10.1' } }
+  adr1 -> c2.planner 'replanification quand le lien est disponible' {
+    metadata { conflit '§10.1' } }
+  adr2 -> onboard.telemetry 't_publish / t_valid explicites' {
+    metadata { conflit '§10.2' } }
+  adr3 -> onboard.safety 'voie de surete non bloquee par la crypto' {
+    metadata { conflit '§10.3' } }
+  adr3 -> c2.auth 'ordres critiques signes + audit' {
+    metadata { conflit '§10.3' } }
+  adr4 -> edge.fusion 'fusion tactique deportee sur Edge' {
+    metadata { conflit '§10.4' } }
+  adr4 -> cloud.twin 'traitement lourd en differe, hors boucle' {
+    metadata { conflit '§10.4' } }
+  adr5 -> onboard.taskAuction 'encheres decentralisees par defaut' {
+    metadata { conflit '§10.5' } }
+
+  // ===========================================================================
+  // LOT 1 — RELATIONS DE TRACABILITE : zones/hypotheses/ADR -> document source
+  // Materialise dans le graphe le lien "cette affirmation vient de la section X".
+  // ===========================================================================
+  onboard -> docSource 'decrit en §4.1 (13 composants)' {
+    technology 'Tracabilite documentaire'; metadata { sections '§4.1' } }
+  edge -> docSource 'decrit en §4.2 (5 composants)' {
+    technology 'Tracabilite documentaire'; metadata { sections '§4.2' } }
+  c2 -> docSource 'decrit en §4.3 (7 composants)' {
+    technology 'Tracabilite documentaire'; metadata { sections '§4.3' } }
+  cloud -> docSource 'decrit en §4.4 (4 composants)' {
+    technology 'Tracabilite documentaire'; metadata { sections '§4.4' } }
+  h1 -> docSource 'enonce en §1.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§1.2' } }
+  h2 -> docSource 'enonce en §1.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§1.2' } }
+  h3 -> docSource 'enonce en §1.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§1.2' } }
+  h4 -> docSource 'enonce en §1.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§1.2' } }
+  h5 -> docSource 'enonce en §1.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§1.2' } }
+  adr1 -> docSource 'arbitre le conflit §10.1' {
+    technology 'Tracabilite documentaire'; metadata { sections '§10.1' } }
+  adr2 -> docSource 'arbitre le conflit §10.2' {
+    technology 'Tracabilite documentaire'; metadata { sections '§10.2' } }
+  adr3 -> docSource 'arbitre le conflit §10.3' {
+    technology 'Tracabilite documentaire'; metadata { sections '§10.3' } }
+  adr4 -> docSource 'arbitre le conflit §10.4' {
+    technology 'Tracabilite documentaire'; metadata { sections '§10.4' } }
+  adr5 -> docSource 'arbitre le conflit §10.5' {
+    technology 'Tracabilite documentaire'; metadata { sections '§10.5' } }
+
+  // ===========================================================================
+  // LOT 3 — ÉLÉMENTS LOT 3 : LOGICIELS ET ALGORITHMES
+  // Source : swarm30_annexe_v1.md §A (logiciels) et §B (algorithmes),
+  //          IDs verifies dans mapping_ids_annexe_v1.md (camelCase),
+  //          licences verifiees dans verification_annexe_v1.md.
+  // Portee VOLONTAIREMENT limitee : AUCUNE relation, AUCUNE vue dans ce lot.
+  // ===========================================================================
+
+  // --- §A.1 Socle de vol ------------------------------------------------------
+  AutopilotPX4 = software 'PX4 Autopilot' {
+    metadata { licence 'BSD-3-Clause'; role 'PRIMARY'; zone 'onboard'; evidence 'HIGH' }
+  }
+
+  ArduPilot = software 'ArduPilot' {
+    metadata { licence 'GPL-3.0'; role 'SECONDARY'; zone 'onboard'; evidence 'HIGH' }
+  }
+
+  // --- §A.2 Middleware & bus de donnees --------------------------------------
+  ROS2 = software 'ROS 2' {
+    metadata { licence 'Apache-2.0'; role 'PRIMARY'; zone 'onboard'; evidence 'HIGH' }
+  }
+
+  Zenoh = software 'Eclipse Zenoh' {
+    metadata { licence 'Apache-2.0-OR-EPL-2.0'; role 'SECONDARY'; zone 'edge'; evidence 'MEDIUM' }
+    description 'Adequation essaim radio a 30 agents = [EXTRAP], non prouvee. Preprint unique 2023.'
+  }
+
+  MosquittoMQTT = software 'Eclipse Mosquitto (MQTT)' {
+    metadata { licence 'EPL-2.0-OR-BSD-3-Clause'; role 'SECONDARY'; zone 'edge'; evidence 'MEDIUM' }
+  }
+
+  // --- §A.3 Pont MCU / autopilote <-> ordinateur compagnon --------------------
+  MicroXRCEDDS = software 'eProsima Micro XRCE-DDS' {
+    metadata { licence 'Apache-2.0'; role 'PRIMARY'; zone 'onboard'; evidence 'HIGH' }
+    description 'Reserve : README micro-ROS signale "not ready for production use" -> SIL/HIL renforce.'
+  }
+
+  MAVLinkMAVSDK = software 'MAVLink / MAVSDK' {
+    metadata { licence 'MIT-AND-BSD-3-Clause'; role 'SECONDARY'; zone 'onboard'; evidence 'HIGH' }
+  }
+
+  // --- §A.6 GCS / supervision -------------------------------------------------
+  QGroundControl = software 'QGroundControl' {
+    metadata { licence 'Apache-2.0'; role 'PRIMARY'; zone 'c2'; evidence 'HIGH' }
+  }
+
+  // --- §A.8 Cloud : jumeau, stockage, observabilite ---------------------------
+  GazeboSim = software 'Gazebo Sim (gz-sim)' {
+    metadata { licence 'Apache-2.0'; role 'PRIMARY'; zone 'cloud'; evidence 'HIGH' }
+  }
+
+  MinIO = software 'MinIO' {
+    metadata { licence 'AGPL-3.0'; role 'PRIMARY'; zone 'cloud'; evidence 'HIGH' }
+    description 'AGPLv3 : obligations fortes si exposition reseau d une version modifiee. A valider juridiquement.'
+  }
+
+  Prometheus = software 'Prometheus' {
+    metadata { licence 'Apache-2.0'; role 'PRIMARY'; zone 'cloud'; evidence 'HIGH' }
+  }
+
+  Grafana = software 'Grafana' {
+    metadata { licence 'AGPL-3.0'; role 'PRIMARY'; zone 'cloud'; evidence 'HIGH' }
+    description 'AGPL-3.0-only sur le coeur, sous-composants Apache-2.0. Meme remarque AGPL que MinIO.'
+  }
+
+  // --- §A.8 Donnees / registre de missions ------------------------------------
+  PostgreSQLPostGIS = software 'PostgreSQL + PostGIS' {
+    metadata { licence 'PostgreSQL-AND-GPL-2.0'; role 'SECONDARY'; zone 'cloud'; evidence 'HIGH' }
+    description 'PostgreSQL License (permissive) pour le SGBD ; PostGIS en GPL-2.0+ (copyleft).'
+  }
+
+  // --- §A.9 Cartographie / navigation marine (USV) ----------------------------
+  OpenCPN = software 'OpenCPN' {
+    metadata { licence 'GPL-2.0'; role 'PRIMARY'; zone 'onboard'; evidence 'HIGH' }
+    description 'Plotter marine des 4 USV ; composants LGPLv2+/v3 ; S-57 ENC, AIS, NMEA 0183/2000.'
+  }
+
+  // ===========================================================================
+  // ALGORITHMES (§B) — une famille par FONCTION, 7 fonctions B.1..B.7
+  // Toute performance a 30 agents heterogenes non mesuree est une extrapolation.
+  // ===========================================================================
+
+  // B.1 — perception / fusion multi-capteurs et multi-agents
+  AlgorithmsPerceptionFusionEKFUKF = algorithm 'Perception et fusion (EKF/UKF local + pistes Edge)' {
+    metadata { fonction 'perception-fusion'; robustesse_lien 'elevee'; maturite 'mature-local / median multi-agents'; evidence 'MEDIUM' }
+    description 'EKF/UKF local par plateforme (socle safety) + fusion de pistes au niveau Edge. Fusion multi-agents a 30 = non etablie.'
+  }
+
+  // B.2 — navigation sous GNSS degrade
+  AlgorithmsNavigationGNSSDegradeEKFVIO = algorithm 'Navigation GNSS degrade (EKF + bascule VIO)' {
+    metadata { fonction 'navigation-GNSS-degrade'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
+    description 'Defaut EKF IMU+odom+GNSS ; bascule VIO en GNSS-denied ; reduction de zone + RTL sur seuil de derive.'
+  }
+
+  // B.3 — allocation de taches
+  AlgorithmsTaskAllocationCBBA = algorithm 'Allocation par encheres (CBBA)' {
+    metadata { fonction 'allocation-taches'; robustesse_lien 'elevee'; maturite 'mature-en-labo'; evidence 'HIGH-existence_LOW-perf' }
+    description 'Mature en laboratoire. Convergence sous partition et retrait d agent a 30 = non mesurees.'
+  }
+
+  // B.4 — coordination sous partition (CRDT / LWW)
+  AlgorithmsCoordinationCRDTLWW = algorithm 'Coordination sous partition (CRDT / LWW + horloges logiques)' {
+    metadata { fonction 'coordination-partition'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'HIGH' }
+    description 'Resolution par role (C2 > Edge > Onboard). Pas de quorum global. Reconvergence a 30 agents = MEDIUM.'
+  }
+
+  // B.5 — planification (mission / trajectoire / couverture)
+  AlgorithmsPlanificationWaypointsMPC = algorithm 'Planification waypoints + MPC court horizon' {
+    metadata { fonction 'planification'; robustesse_lien 'moyenne'; maturite 'mature'; evidence 'MEDIUM' }
+    description 'Plan embarque versionne par defaut ; MPC court-horizon au niveau Edge si ressource ; re-optimisation C2 differee.'
+  }
+
+  // B.6 — evitement de collision / deconfliction spatiale
+  AlgorithmsEvitementCollisionCBF = algorithm 'Evitement de collision (Control Barrier Functions)' {
+    metadata { fonction 'evitement-collision'; robustesse_lien 'elevee'; maturite 'emergente'; evidence 'MEDIUM' }
+    description 'Couche surete embarquee non negociable, independante du lien et de l allocation. Preuve a 30 agents non etablie.'
+  }
+
+  // B.7 — surete (garanties et comportement degrade)
+  AlgorithmsSureteReglesCBF = algorithm 'Surete embarquee (regles pre-approuvees + CBF)' {
+    metadata { fonction 'surete'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
+    description 'Regles/reflexes embarques HIGH + watchdog independant ; CBF en renfort. Validation Monte-Carlo adversarial (N>=1000) NON faite.'
+  }
+
+  // ===========================================================================
+  // LOT 3 — RISQUES (§D) ET ANGLES MORTS (§C)
+  // Source : swarm30_annexe_v1.md §C (16 angles morts) et §D (15 risques).
+  // Distinction : un RISQUE est un evenement redoute (P x I) ; un ANGLE MORT
+  // est un trou de specification reconnu (pas encore un evenement).
+  // Conventions LikeC4 respectees : ID sans point, metadata simple, PAS de tag
+  // inline dans le corps (cause d'echec de validation constatee).
+  // ===========================================================================
+
+  // --- Risques (§D) -----------------------------------------------------------
+
+  riskR1 = risk 'R-1 Contention radio a 30 agents' {
+    metadata { categorie 'technique'; probabilite 'elevee'; impact 'eleve'; criticite 'critique'; mitigation 'Budget radio modelise; QoS par criticite; delta-compression; repli autonome.'; alerte 'Perte messages critiques > 1 pct; latence p95 hors budget.' }
+  }
+
+  riskR2 = risk 'R-2 Prise de controle via lien non authentifie' {
+    metadata { categorie 'securite'; probabilite 'moyenne'; impact 'eleve'; criticite 'critique'; mitigation 'mTLS/DDS-Security; signature ordres critiques; PKI + rotation; red-team.'; alerte 'Ordres non signes; echecs d authentification.' }
+  }
+
+  riskR3 = risk 'R-3 Validation reelle a 30 agents non realisable' {
+    metadata { categorie 'programme'; probabilite 'elevee'; impact 'eleve'; criticite 'critique'; mitigation 'Plafonner l echelle reelle; pousser SIL/HIL/digital twin; declarer ce qui est prouve par modalite.'; alerte 'Glissement calendrier; refus BVLOS.' }
+  }
+
+  riskR4 = risk 'R-4 Perte de coherence sous partition (split-brain)' {
+    metadata { categorie 'technique'; probabilite 'moyenne'; impact 'eleve'; criticite 'critique'; mitigation 'CRDT/LWW + resolution par role; pas de quorum global; lease expiry; tests multi-partitions.'; alerte 'Divergence de versions; reconvergence > T_reconv.' }
+  }
+
+  riskR5 = risk 'R-5 Derive en GNSS-degrade' {
+    metadata { categorie 'technique-science'; probabilite 'moyenne'; impact 'eleve'; criticite 'critique'; mitigation 'EKF + bascule VIO; reduction de zone; RTL sur seuil de derive.'; alerte 'Croissance incertitude position; RTL multiples.' }
+  }
+
+  riskR6 = risk 'R-6 Non-conformite reglementaire (BVLOS, COLREGs)' {
+    metadata { categorie 'reglementaire'; probabilite 'moyenne'; impact 'eleve'; criticite 'elevee'; mitigation 'Cartographie reglementaire par domaine; regles d evitement maritimes en conception; dossier d autorisation precoce.'; alerte 'Nouvelles exigences autorite; refus de zone.' }
+  }
+
+  riskR7 = risk 'R-7 Conflit de licence bloquant la distribution' {
+    metadata { categorie 'programme'; probabilite 'moyenne'; impact 'moyen'; criticite 'moyenne'; mitigation 'Decision ecrite du socle; revue juridique AGPL; alternatives permissives.'; alerte 'Obligation d ouverture non anticipee.' }
+  }
+
+  riskR8 = risk 'R-8 Fusion degradee en scenario dense (fausses pistes)' {
+    metadata { categorie 'science'; probabilite 'moyenne'; impact 'moyen'; criticite 'moyenne'; mitigation 'Metriques P_d/P_fa cibles; fusion Edge avec covariance; tests denses a 30 agents.'; alerte 'Taux fausses pistes hors cible; latence fusion hors budget.' }
+  }
+
+  riskR9 = risk 'R-9 Collision en scenario d urgence' {
+    metadata { categorie 'operationnel'; probabilite 'faible-moyenne'; impact 'eleve'; criticite 'elevee'; mitigation 'Couche surete embarquee (CBF/geometrie) independante du lien; zone d exclusion agent defaillant; Monte-Carlo adversarial.'; alerte 'Violations espace > 1 pct des pas; minima locaux d evitement.' }
+  }
+
+  riskR10 = risk 'R-10 Desynchronisation d horloge (donnees perimees)' {
+    metadata { categorie 'technique'; probabilite 'moyenne'; impact 'moyen'; criticite 'moyenne'; mitigation 'Source de temps specifiee; garde-fous en perte GNSS; tests de derive.'; alerte 'Ecart horloge inter-plateformes > seuil.' }
+  }
+
+  riskR11 = risk 'R-11 Fidelite du jumeau numerique insuffisante' {
+    metadata { categorie 'science'; probabilite 'moyenne'; impact 'moyen'; criticite 'elevee'; mitigation 'Metriques de fidelite sim-reel; recalibration; verification croisee.'; alerte 'Ecart trajectoire/energie/timing > seuil.' }
+  }
+
+  riskR12 = risk 'R-12 Taches orphelines par non-prise en compte de l energie' {
+    metadata { categorie 'operationnel'; probabilite 'moyenne'; impact 'moyen'; criticite 'moyenne'; mitigation 'Cout d enchere pondere energie; seuils de repli; suivi energie par plateforme.'; alerte 'RTL en serie; taux taches non terminees.' }
+  }
+
+  riskR13 = risk 'R-13 Effort de R&D sous-estime sur la fusion multi-agents' {
+    metadata { categorie 'programme-science'; probabilite 'elevee'; impact 'moyen'; criticite 'elevee'; mitigation 'Decouper la brique; metriques et donnees de test precoces; phase d integration dediee.'; alerte 'Derive du planning sur edge.fusion.' }
+  }
+
+  riskR14 = risk 'R-14 Charge C2 humaine excessive sous incertitude' {
+    metadata { categorie 'operationnel'; probabilite 'moyenne'; impact 'moyen'; criticite 'moyenne'; mitigation 'Automatiser les bascules pre-approuvees; escalades graduees; mesures de charge.'; alerte 'Temps de decision croissant; escalades en rafale.' }
+  }
+
+  riskR15 = risk 'R-15 Handoff inter-domaines ambigu' {
+    metadata { categorie 'technique-operationnel'; probabilite 'moyenne'; impact 'faible-moyen'; criticite 'moyenne'; mitigation 'Protocole lease + acquittement; tests de handoff; journalisation.'; alerte 'Taches executees deux fois; taches abandonnees sans trace.' }
+  }
+
+  // --- Angles morts (§C) ------------------------------------------------------
+
+  blindspotAM1 = blindspot 'AM-1 Arbitrage de licence non tranche (BSD-3 vs GPLv3)' {
+    metadata { gravite 'critique'; statut 'couvrir'; consequence 'Refonte couteuse si le socle est choisi sans decision juridique prealable.' }
+  }
+
+  blindspotAM2 = blindspot 'AM-2 Exposition AGPLv3 dans le Cloud' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Obligation de publier des modifications; blocage d un modele SaaS.' }
+  }
+
+  blindspotAM3 = blindspot 'AM-3 Budget radio a 30 agents non dimensionne' {
+    metadata { gravite 'critique'; statut 'couvrir'; consequence 'Saturation; perte de messages de surete; degradation en cascade.' }
+  }
+
+  blindspotAM4 = blindspot 'AM-4 Perception d essaim sans brique ni metrique' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Sous-estimation de l effort; qualite de l image tactique non mesurable.' }
+  }
+
+  blindspotAM5 = blindspot 'AM-5 Validation d echelle 2-5-12-30 irrealiste en reel' {
+    metadata { gravite 'critique'; statut 'couvrir+accepter'; consequence 'Critere d acceptation a 30 agents risque de n etre jamais mesure en reel.' }
+  }
+
+  blindspotAM6 = blindspot 'AM-6 Desynchronisation d horloge non specifiee' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Fusion incoherente; versions LWW mal resolues; regressions silencieuses.' }
+  }
+
+  blindspotAM7 = blindspot 'AM-7 Cybersecurite du lien montant et de l autopilote' {
+    metadata { gravite 'critique'; statut 'couvrir'; consequence 'Prise de controle; injection d ordres; deni de service provoquant des chutes.' }
+  }
+
+  blindspotAM8 = blindspot 'AM-8 Cadre reglementaire BVLOS et COLREGs' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Impossibilite legale d exploiter; refonte des comportements d evitement.' }
+  }
+
+  blindspotAM9 = blindspot 'AM-9 Gestion energetique heterogene non globale' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Taches orphelines; RTL en serie; mission non completee.' }
+  }
+
+  blindspotAM10 = blindspot 'AM-10 Handover inter-domaines mal defini (UAV-USV)' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Double execution d une tache, ou abandon silencieux.' }
+  }
+
+  blindspotAM11 = blindspot 'AM-11 Ontologie commune non specifiee' {
+    metadata { gravite 'mineur'; statut 'surveiller'; consequence 'Integrations ad hoc; dette technique; jumeau numerique divergent.' }
+  }
+
+  blindspotAM12 = blindspot 'AM-12 Comportement en cas d agent defaillant non traite' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Collision avec l agent defaillant; tache perdue; faux positif de partition.' }
+  }
+
+  blindspotAM13 = blindspot 'AM-13 Observabilite et rejeu non contractuels' {
+    metadata { gravite 'mineur'; statut 'couvrir'; consequence 'Rejeu non deterministe; incident non reproductible.' }
+  }
+
+  blindspotAM14 = blindspot 'AM-14 Bruit et fausses detections non quantifies' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Criteres d acceptation non testables.' }
+  }
+
+  blindspotAM15 = blindspot 'AM-15 Fidelite du jumeau numerique non proceduree' {
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Criteres valides en simulation qui echouent au reel.' }
+  }
+
+  blindspotAM16 = blindspot 'AM-16 Facteur humain et charge du C2' {
+    metadata { gravite 'mineur'; statut 'surveiller'; consequence 'Goulot humain sous situation incertaine; decisions tardives.' }
+  }
+
+  // ===========================================================================
+  // LOT 3 — RELATIONS DE TRACABILITE (§E.2)
+  // Relient l'architecture logique (composants) aux briques, algorithmes,
+  // risques et angles morts. C'est ce qui rend le modele requetable et ce qui
+  // fait apparaitre les nouveaux elements dans les vues.
+  // IDs camelCase conformes au mapping (onboard.sensorsHAL, onboard.linkRadio,
+  // onboard.taskAuction, cloud.replayStore, cloud.modelRegistry).
+  // ===========================================================================
+
+  // --- Composants implementes par des logiciels du marche ---------------------
+  onboard.autopilot -> AutopilotPX4 'implemente par (primaire)'
+  onboard.autopilot -> ArduPilot 'alternative (secondaire)'
+  onboard.mission -> AutopilotPX4 'plan embarque'
+  onboard.safety -> AutopilotPX4 'geofence, RTL'
+  onboard.perception -> ROS2 'composition'
+  onboard.perception -> GazeboSim 'valide en simulation'
+  onboard.sensorsHAL -> MicroXRCEDDS 'pont MCU <-> DDS'
+  onboard.sensorsHAL -> MAVLinkMAVSDK 'alternative MAVLink'
+  onboard.linkRadio -> Zenoh 'relais mesh decentralise'
+  onboard.linkRadio -> MosquittoMQTT 'mode store-and-forward degrade'
+  edge.fusion -> ROS2 'fusion de pistes'
+  edge.gateway -> Zenoh 'passerelle amont/aval'
+  edge.relay -> Zenoh 'relais'
+  c2.gcs -> QGroundControl 'supervision et planification'
+  c2.planner -> QGroundControl 'planification de mission'
+  onboard.energy -> MinIO 'historisation telemetrie'
+  cloud.twin -> GazeboSim 'jumeau numerique'
+  cloud.replayStore -> MinIO 'stockage objet S3'
+  cloud.replayStore -> GazeboSim 'rejeu sur jumeau'
+  cloud.analytics -> Prometheus 'metriques'
+  cloud.analytics -> Grafana 'tableaux de bord'
+  cloud.analytics -> PostgreSQLPostGIS 'registre de missions et geometrie'
+  onboard.mission -> OpenCPN 'navigation marine des USV'
+
+  // --- Composants s'appuyant sur des familles algorithmiques -------------------
+  onboard.perception -> AlgorithmsPerceptionFusionEKFUKF 's appuie sur'
+  onboard.perception -> AlgorithmsNavigationGNSSDegradeEKFVIO 'navigation degradée'
+  edge.fusion -> AlgorithmsPerceptionFusionEKFUKF 's appuie sur'
+  onboard.taskAuction -> AlgorithmsTaskAllocationCBBA 's appuie sur'
+  onboard.taskAuction -> AlgorithmsCoordinationCRDTLWW 'coordination sous partition'
+  edge.coordinator -> AlgorithmsCoordinationCRDTLWW 's appuie sur'
+  c2.planner -> AlgorithmsPlanificationWaypointsMPC 's appuie sur'
+  onboard.mission -> AlgorithmsPlanificationWaypointsMPC 'plan embarque'
+  onboard.safety -> AlgorithmsEvitementCollisionCBF 'separation de proximite'
+  onboard.safety -> AlgorithmsSureteReglesCBF 'regles pre-approuvees'
+
+  // --- Briques logicielles exposees a des risques -----------------------------
+  AutopilotPX4 -> riskR5 'expose a'
+  MinIO -> riskR7 'expose a (AGPL)'
+  Grafana -> riskR7 'expose a (AGPL)'
+  Zenoh -> riskR1 'expose a la contention radio'
+  MosquittoMQTT -> riskR1 'expose a'
+  QGroundControl -> riskR14 'expose a la charge C2'
+  ROS2 -> riskR8 'expose aux fausses pistes'
+
+  // --- Familles algorithmiques vs angles morts (ce qui n'est PAS couvert) -----
+  AlgorithmsPerceptionFusionEKFUKF -> blindspotAM4 'ne couvre pas la fusion essaim'
+  AlgorithmsTaskAllocationCBBA -> blindspotAM9 'ne couvre pas l energie'
+  AlgorithmsTaskAllocationCBBA -> blindspotAM10 'ne couvre pas le handoff'
+  AlgorithmsCoordinationCRDTLWW -> blindspotAM6 'ne couvre pas l horloge'
+  AlgorithmsSureteReglesCBF -> blindspotAM5 'validation d echelle non couverte'
+  AlgorithmsCoordinationCRDTLWW -> blindspotAM12 'agent defaillant non couvert'
+  AlgorithmsPerceptionFusionEKFUKF -> blindspotAM14 'P_d/P_fa non quantifies'
+
+
+  // ---------------------------------------------------------------------------
+  // ACTION 1 : relations de tracabilite point 4 vers composants d architecture
+  // Source : relations_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
+  // ---------------------------------------------------------------------------
+  // -- composant_vers_element (87)
+  onboard.linkRadio -> riskR1 'point unique de saturation radio a 30 agents'
+  edge.relay -> riskR1 'relais agregateur soumis a la contention'
+  onboard.telemetry -> riskR1 'volume de telemetrie non budgete'
+  onboard.linkRadio -> riskR2 'surface d attaque du lien montant'
+  onboard.autopilot -> riskR2 'commands non signes atteignent la boucle de vol'
+  c2.auth -> riskR2 'emission et signature des ordres critiques'
+  cloud.twin -> riskR3 'validation d echelle reportee sur le jumeau'
+  cloud.replayStore -> riskR3 'campagnes rejouables pour l echelle'
+  onboard.taskAuction -> riskR4 'allocation decentralisee sous partition'
+  edge.coordinator -> riskR4 'coordination locale divergente de la vue C2'
+  edge.fusion -> riskR4 'vues tactiques divergentes entre zones'
+  onboard.perception -> riskR5 'estimation de position derivee sans GNSS'
+  onboard.safety -> riskR5 'RTL sur seuil de derive'
+  onboard.mission -> riskR5 'mission nominale sans recalage GNSS'
+  edge.coordinator -> riskR6 'deconfliction locale sans regle normative'
+  onboard.mission -> riskR6 'navigation marine des 4 USV a conformer'
+  c2.gcs -> riskR6 'configuration des zones soumise aux autorisations'
+  cloud.replayStore -> riskR7 'stockage objet AGPLv3 impose une revue'
+  cloud.analytics -> riskR7 'chaines AGPL et source-available cote cloud'
+  onboard.autopilot -> riskR7 'socle de vol copyleft ou permissif'
+  edge.fusion -> riskR8 'fausses pistes et latence de fusion'
+  onboard.perception -> riskR8 'cibles P_d et P_fa non fixees en source'
+  cloud.replayStore -> riskR8 'mesure de fausses pistes rejouable'
+  onboard.safety -> riskR9 'barriere de surete independante du lien'
+  onboard.perception -> riskR9 'detection d urgence pour evitement'
+  edge.fusion -> riskR9 'detection de la perte d un agent'
+  onboard.telemetry -> riskR10 't_publish et t_valid reposent sur l horloge locale'
+  edge.fusion -> riskR10 'fusion de pistes fondee sur des horodatages'
+  cloud.twin -> riskR11 'jumeau non mesure contre le reel'
+  cloud.analytics -> riskR11 'ecart sim contre reel non instrumente'
+  onboard.energy -> riskR12 'budget de retour non integre a l allocation'
+  onboard.taskAuction -> riskR12 'encheres sans ponderation energetique'
+  onboard.health -> riskR12 'marge d energie a exposer a l allocation'
+  edge.fusion -> riskR13 'brique de fusion non specifiee'
+  onboard.perception -> riskR13 'chaine de perception essaim a construire'
+  cloud.modelRegistry -> riskR13 'voie de gestion de modeles non tranchee'
+  c2.gcs -> riskR14 'goulot humain sur 30 agents'
+  c2.alerting -> riskR14 'agregation d alarmes non calibree a la charge'
+  edge.gateway -> riskR15 'frontiere de confiance et normalisation du handoff'
+  onboard.taskAuction -> riskR15 'attribution sans regle d autorite inter domaines'
+  onboard.mission -> riskR15 'execution de la tache transferee non identifiee'
+  onboard.autopilot -> blindspotAM1 'socle de vol non fige dans le modele'
+  c2.gcs -> blindspotAM1 'GCS dual licence non tranchee'
+  onboard.mission -> blindspotAM1 'voie USV sous licence non etablie'
+  cloud.replayStore -> blindspotAM2 'stockage AGPL expose en reseau'
+  cloud.analytics -> blindspotAM2 'tableaux de bord AGPL-3.0'
+  cloud.modelRegistry -> blindspotAM2 'pipeline a caveat Confluent non OSI'
+  onboard.linkRadio -> blindspotAM3 'aucun budget radio total dans le composant'
+  onboard.telemetry -> blindspotAM3 'debit de telemetrie non chiffre globalement'
+  edge.relay -> blindspotAM3 'agregation a 30 agents plus Edge non dimensionnee'
+  onboard.perception -> blindspotAM4 'pas de metrique cible de fusion essaim'
+  edge.fusion -> blindspotAM4 'fusion multi agents sans brique identifiee'
+  cloud.replayStore -> blindspotAM4 'aucun jeu de donnees de test associe'
+  cloud.twin -> blindspotAM5 'prouver l echelle en simulation faute de reel'
+  cloud.replayStore -> blindspotAM5 'campagnes rejouables pour l echelle'
+  onboard.telemetry -> blindspotAM6 'aucune source de temps declaree'
+  edge.fusion -> blindspotAM6 'fusion horodatee sans garde fou de derive'
+  onboard.health -> blindspotAM6 'derive d horloge non surveillee'
+  onboard.linkRadio -> blindspotAM7 'lien montant sans modele de menaces'
+  onboard.autopilot -> blindspotAM7 'surface d attaque de l autopilote'
+  c2.auth -> blindspotAM7 'rotation et revocation non etablies'
+  onboard.safety -> blindspotAM8 'regles d evitement non normatives a ce stade'
+  onboard.mission -> blindspotAM8 'comportement USV a conformer aux COLREGs'
+  c2.planner -> blindspotAM8 'plans de zone a contrainte reglementaire'
+  onboard.energy -> blindspotAM9 'budget de retour par plateforme seulement'
+  onboard.taskAuction -> blindspotAM9 'allocation sans contrainte energetique globale'
+  onboard.health -> blindspotAM9 'marge d energie non exposee globalement'
+  edge.gateway -> blindspotAM10 'frontiere de confiance inter domaines'
+  onboard.taskAuction -> blindspotAM10 'transfert de tache sans regle d autorite'
+  onboard.sensorsHAL -> blindspotAM10 'frames et unites heterogenes a normaliser'
+  cloud.twin -> blindspotAM11 'schema commun non fixe pour le jumeau'
+  edge.fusion -> blindspotAM11 'vocabulaire de pistes non normalise'
+  cloud.modelRegistry -> blindspotAM11 'versionnement de schema non defini'
+  edge.fusion -> blindspotAM12 'perte d agent detectee sans suite definie'
+  onboard.health -> blindspotAM12 'detection de defaillance sans reallocation'
+  onboard.taskAuction -> blindspotAM12 'tache orpheline apres perte d agent'
+  cloud.replayStore -> blindspotAM13 'contrat de trace non specifie'
+  onboard.telemetry -> blindspotAM13 'entrees et alea absents de la trace'
+  c2.auth -> blindspotAM13 'journalisation d audit non liee au rejeu'
+  onboard.perception -> blindspotAM14 'aucune cible P_d et P_fa'
+  edge.fusion -> blindspotAM14 'fusion sans cible de fausses pistes'
+  cloud.twin -> blindspotAM15 'procedure de fidelite absente'
+  cloud.analytics -> blindspotAM15 'metrique d ecart sim reel absente'
+  cloud.replayStore -> blindspotAM15 'campagne de recalibration non definie'
+  c2.gcs -> blindspotAM16 'charge d un operateur sur 30 agents non evaluee'
+  c2.alerting -> blindspotAM16 'escalades en rafale non mesurees'
+  c2.planner -> blindspotAM16 'replanification sous incertitude a charge humaine'
+
+  // -- element_vers_reference (14)
+  riskR1 -> h2 'contention aggravee par le lien intermittent'
+  riskR2 -> adr3 'canaux surete et securite separes a tenir'
+  riskR3 -> adr4 'deport du lourd hors boucle a justifier'
+  riskR4 -> adr5 'robustesse sous partition arbitree'
+  riskR5 -> h3 'hypothese GNSS degradable directement teste'
+  riskR9 -> adr3 'voie de surete a maintenir non bloquee'
+  riskR10 -> adr2 'fraicheur explicite suppose un temps fiable'
+  riskR12 -> adr5 'allocation robuste a ponderer energie'
+  riskR14 -> h5 'autorite humaine a rendre tenable a l echelle'
+  // -- Correction M2 : le facteur humain (R-14 / AM-16) est porte par l acteur, pas par un poste
+  operator -> riskR14 'charge humaine sous incertitude a 30 agents'
+  operator -> blindspotAM16 'autorite humaine non tenable a cette echelle'
+  blindspotAM3 -> adr2 'priorisation des deltas depend du budget radio'
+  blindspotAM5 -> adr4 'deport du lourd conditionne la preuve d echelle'
+  blindspotAM6 -> adr2 'fraicheur explicite sans specification du temps'
+  blindspotAM7 -> adr3 'arbitrage surete securite non resolu en conception'
+  blindspotAM9 -> adr5 'allocation robuste a pondere par l energie'
+
+
+// ---------------------------------------------------------------------------
+// ACTION 2 : decisions en attente (arbitrages non tranches)
+// Source : decisions_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
+// Les ADR-1..5 existantes sont toutes 'acceptee' ; ces 4 decisions sont 'ouverte'
+// ---------------------------------------------------------------------------
+
+  de1 = decision 'DE-01 Socle de vol et regime de distribution du firmware' {
+    description '''
+      **Question.** Socle permissif (PX4, BSD-3) ou copyleft (ArduPilot, GPLv3),
+      et le livrable peut-il rester ferme ?
+      **Options.** PX4 BSD-3 socle unique et livrable ferme ; ArduPilot GPLv3 socle
+      unique avec publication du derive embarque ; PX4 avec compagnon partiellement
+      proprietaire ; coexistence PX4 (UAV) et ArduPilot Rover (USV) par domaine.
+      **Si non tranche.** Choix de fait par le premier developpeur ; refonte tardive
+      touchant autopilot, mission, safety, HIL et documentation.
+    '''
+    metadata { statut 'ouverte'; nature 'juridique et programme'; porteur 'direction technique avec avis juridique'; echeance 'avant conception detaillee du socle embarque'; angle_mort 'blindspotAM1' }
+  }
+
+  de2 = decision 'DE-02 Plafond d echelle reelle et repartition des preuves' {
+    description '''
+      **Question.** Jusqu a quelle taille d essaim valide-t-on en vol reel, et quels
+      criteres sont declares prouves en SIL/HIL/jumeau numerique ?
+      **Options.** Reel plafonne a 5 et 12/30 simules ; reel a 12 et 30 simule ;
+      30 en reel en acceptant cout et delais ; renoncer au critere 30 et redefinir
+      les criteres autour d un palier atteignable.
+      **Si non tranche.** Le critere "a 30 agents" reste inscrit sans modalite qui le
+      produise : contourne implicitement ou bloquant en recette.
+    '''
+    metadata { statut 'ouverte'; nature 'cout et preuve et calendrier'; porteur 'responsable essais avec direction technique'; echeance 'avant plan de campagne d essais'; angle_mort 'blindspotAM5' }
+  }
+
+  de3 = decision 'DE-03 Modele de menaces et strategie de cles' {
+    description '''
+      **Question.** Quel niveau d authentification et de gestion de cles impose-t-on au
+      lien montant, au lien essaim et a l autopilote, et comment preserve-t-on la surete
+      quand la securite est compromise ou indisponible ?
+      **Options.** Profil fort (mTLS/DDS-Security, PKI embarquee, ordres signes) ;
+      securite graduee par zone ; securite differee apres le premier palier de vol ;
+      segregation stricte (canal de surete isole, canal de securite chiffre).
+      **Si non tranche.** L implementation par defaut (MAVLink et DDS non authentifies)
+      persiste ; le conflit surete/securite de l ADR-3 reste non resolu.
+    '''
+    metadata { statut 'ouverte'; nature 'surete versus securite'; porteur 'architecte systeme securite ou porteur a designer'; echeance 'avant conception des interfaces et avant premier vol avec lien'; angle_mort 'blindspotAM7' }
+  }
+
+  de4 = decision 'DE-04 Architecture radio a 30 agents et mecanisme de priorite' {
+    description '''
+      **Question.** Quelle architecture radio et quel mecanisme d acces priorise
+      retient-on pour 30 agents plus les noeuds Edge sans perdre les messages de surete,
+      une fois le budget radio etabli ?
+      **Options.** Maille Zenoh decentralisee avec priorite par criticite ; relais Edge
+      centralise en etoile avec QoS par classe ; architecture hybride maille plus lien
+      longue portee dedie ; profil multi-radio par domaine UAV/USV avec passerelle.
+      **Condition.** Cette decision est conditionnee a la production prealable du budget
+      radio (travail d ingenierie, pas arbitrage).
+      **Si non tranche.** A 30 agents la contention est non lineaire : le premier palier
+      reel sature le canal et perd les messages de surete avec la telemetrie.
+    '''
+    metadata { statut 'ouverte'; nature 'technique apres budget radio'; porteur 'architecte systeme communications'; echeance 'apres budget radio, avant palier 12 plateformes'; angle_mort 'blindspotAM3' }
+  }
+
+  // -- Relations : l angle mort appelle une decision (sens : AM -> DE)
+  blindspotAM1 -> de1 'arbitrage de licence a trancher'
+  blindspotAM5 -> de2 'plafond d echelle a arbitrer'
+  blindspotAM7 -> de3 'modele de menaces a arreter'
+  blindspotAM3 -> de4 'architecture radio a choisir apres budget'
+
+  // -- Relations : la decision conditionne le traitement du risque (sens : DE -> risque)
+  //    Formulation au conditionnel : la decision est OUVERTE, elle ne resout rien encore.
+  de1 -> riskR7 'conditionne la levee du conflit de licence'
+  de2 -> riskR3 'conditionne la borne de validation d echelle'
+  de3 -> riskR2 'conditionne la reduction de la surface d attaque'
+  de4 -> riskR1 'conditionne le traitement de la contention radio'
+
+}
+
+// =============================================================================
+//  MODELE DE DEPLOIEMENT
+//  Materialise le caractere "x30" des plateformes et "1..N" des stations Edge.
+// =============================================================================
+deployment {
+
+  onboardPool = host 'Parc onboard — 30 plateformes' {
+    description '''
+      18 UAV-R (multirotors), 8 UAV-F (voilure fixe), 4 USV.
+      Les 30 instances sont materialisees : chacune execute la MEME pile
+      logicielle onboard (instanceOf onboard), seule la plateforme physique
+      differe (absorbee par onboard.sensors-hal). Cf. hypothese H1.
+    '''
+    style { color zoneOnboard }
+
+    // Sous-groupe par type : reduit la densite du layout et documente
+    // l'heterogeneite (18/8/4). UX : trois blocs lisibles au lieu de 30.
+    uavR = host 'UAV-R — 18 multirotors' {
+      style { color zoneOnboard }
+      n01 = instanceOf onboard 'UAV-R #01'
+      n02 = instanceOf onboard 'UAV-R #02'
+      n03 = instanceOf onboard 'UAV-R #03'
+      n04 = instanceOf onboard 'UAV-R #04'
+      n05 = instanceOf onboard 'UAV-R #05'
+      n06 = instanceOf onboard 'UAV-R #06'
+      n07 = instanceOf onboard 'UAV-R #07'
+      n08 = instanceOf onboard 'UAV-R #08'
+      n09 = instanceOf onboard 'UAV-R #09'
+      n10 = instanceOf onboard 'UAV-R #10'
+      n11 = instanceOf onboard 'UAV-R #11'
+      n12 = instanceOf onboard 'UAV-R #12'
+      n13 = instanceOf onboard 'UAV-R #13'
+      n14 = instanceOf onboard 'UAV-R #14'
+      n15 = instanceOf onboard 'UAV-R #15'
+      n16 = instanceOf onboard 'UAV-R #16'
+      n17 = instanceOf onboard 'UAV-R #17'
+      n18 = instanceOf onboard 'UAV-R #18'
+    }
+
+    uavF = host 'UAV-F — 8 voilure fixe' {
+      style { color zoneOnboard }
+      n19 = instanceOf onboard 'UAV-F #19'
+      n20 = instanceOf onboard 'UAV-F #20'
+      n21 = instanceOf onboard 'UAV-F #21'
+      n22 = instanceOf onboard 'UAV-F #22'
+      n23 = instanceOf onboard 'UAV-F #23'
+      n24 = instanceOf onboard 'UAV-F #24'
+      n25 = instanceOf onboard 'UAV-F #25'
+      n26 = instanceOf onboard 'UAV-F #26'
+    }
+
+    usv = host 'USV — 4 navires de surface' {
+      style { color zoneOnboard }
+      n27 = instanceOf onboard 'USV #27'
+      n28 = instanceOf onboard 'USV #28'
+      n29 = instanceOf onboard 'USV #29'
+      n30 = instanceOf onboard 'USV #30'
+    }
+  }
+
+  edgePool = host 'Edge — stations de proximite (1..N)' {
+    description 'Deploiement minimal illustratif : 2 stations Edge (N variable).'
+    style { color zoneEdge }
+    edge01 = instanceOf edge 'Station Edge #1 (primaire)'
+    edge02 = instanceOf edge 'Station Edge #2 (secondaire / redondance)'
+  }
+
+  c2Pool = host 'C2 — poste de commandement' {
+    style { color zoneC2 }
+    c2Site = instanceOf c2
+  }
+
+  cloudPool = host 'Cloud (hors boucle de controle)' {
+    style { color cloudCyan }
+    cloudSite = instanceOf cloud
+  }
+}

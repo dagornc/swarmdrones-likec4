@@ -1,0 +1,13 @@
+{
+  "$schema": "https://likec4.dev/schemas/config.json",
+  "name": "swarmdrones",
+  "title": "SwarmDrones — Architecture logicielle, essaim de 30 drones heterogenes",
+  "metadata": {
+    "owner": "SwarmDrones — architecture systeme",
+    "domain": "Essaim de drones heterogenes (UAV-R, UAV-F, USV)",
+    "scope": "Onboard x30 / Edge 1..N / C2 / Cloud",
+    "principe": "Le contrat de mission est embarque ; le lien est un bonus, pas une dependance.",
+    "source": "swarm30_arch.md (13 sections) — profil swarmdrone",
+    "generated": "2026-09-14"
+  }
+}

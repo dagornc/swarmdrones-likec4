@@ -1,0 +1,166 @@
+// =============================================================================
+//  E05-INTEG — ACQUIS MATERIELS SOURCES (carte t_72dfb8c1)
+//
+//  Source primaire de ces faits : attachements de t_699fc55f
+//  (auteur : profil swarmdrone, 2026-09-15), 422 l. de faits structures
+//  + 618 l. de rapport.
+//
+//  PRINCIPE DE FIDELITE : un TBD « partiellement clos » ne devient PAS
+//  un fait etabli. Il devient : (une option sourcee) + (ce qui reste
+//  ouvert). Le contenu de `tbd` dans hardware.c4 est donc remplace par
+//  une formulation qui conserve l'incertitude.
+//
+//  LEGENDE EPISTEMIQUE (celle du producteur, conservee telle quelle) :
+//    FAIT      documente en source primaire
+//    FAIT_exp  resultat experimental publie
+//    EXTRAP    extrapolation, non demontre a l echelle cible
+//    HYP       hypothese de conception
+//    Non_verifie  rien d etabli en source primaire
+//
+//  AVERTISSEMENT : les faits ci-dessous proviennent de ce producteur.
+//  Ils n'ont PAS ete re-verifies par le profil principal. Les URL
+//  listees sont celles declarees par le producteur.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. FAITS SOURCES — controleur de vol
+  // ===========================================================================
+
+  factFlightController = factSheet 'FAIT — Controleur de vol (proposition de reference)' {
+    #fact #hardware
+    description '''
+      Famille Pixhawk FMUv6X (Holybro Pixhawk 6X).
+      FMU : STM32H753, Cortex-M7 @ 480 MHz, 2 Mo flash, 1 Mo RAM.
+      IO : STM32F103 (Cortex-M3, 72 MHz, 64 Ko SRAM).
+      IMU : 3x TDK ICM-45686 (BalancedGyro), bus separes.
+      Baro : ICP20100 + BMP388/580/581. Mag : BMM150.
+      Ethernet 100 Mbps integre (voie companion computer).
+      Masse FC 23-31 g ; baseboard standard 51-72 g. -40 a +85 C.
+    '''
+    metadata {
+      statut 'FAIT'
+      source 'https://docs.px4.io/main/en/flight_controller/pixhawk6x'
+      source2 'https://holybro.com/products/pixhawk-6x'
+      source3 'Pixhawk-Standards DS-012 (FMUv6X), DS-010 (Bus), DS-009 (Connector)'
+      reste_ouvert 'certification aeronautique = Non_verifie'
+      piege 'ne pas confondre conformite FMUv6X et certification DAL'
+      applique_a 'hardware.c4 flightCtrl'
+    }
+  }
+
+  // ===========================================================================
+  //  2. FAITS SOURCES — calcul de bord
+  // ===========================================================================
+
+  factCompanion = factSheet 'FAIT — Calcul de bord (options)' {
+    #fact #hardware
+    description '''
+      Options documentees : ModalAI VOXL 2 (15 TOPS, 0,1-7 W, 16 g),
+      NVIDIA Orin NX, NXP i.MX 8M Plus.
+      TBD amont restant : budget de calcul (TOPS) requis par variante.
+    '''
+    metadata {
+      statut 'FAIT (composants) / TBD (budget requis)'
+      source 'ModalAI VOXL 2 datasheet'
+      reste_ouvert 'budget TOPS cible non defini'
+      applique_a 'hardware.c4 companion'
+    }
+  }
+
+  // ===========================================================================
+  //  3. FAITS SOURCES — perception relative
+  // ===========================================================================
+
+  factRelativePerception = factSheet 'FAIT_exp — Perception relative (UWB demontre en vol)' {
+    #fact #hardware
+    description '''
+      UWB Qorvo DW3000 documente. Vols reels publies : 13 a 26 agents
+      selon la metrique (26 = delai, 13 = precision, 8 = RMSE).
+      Technologie exacte et nombre de tags par plateforme : reste ouvert.
+    '''
+    metadata {
+      statut 'FAIT_exp'
+      source 'Qorvo DW3000 + publications de vols reels'
+      extrapolation 'UWB demontre a 26 agents au plus ; 30 = EXTRAP'
+      reste_ouvert 'technologie retenue + nb tags/plateforme'
+      applique_a 'hardware.c4 perceptionRel'
+    }
+  }
+
+  // ===========================================================================
+  //  4. FAITS SOURCES — liaison radio et maillage
+  // ===========================================================================
+
+  factRadioLink = factSheet 'FAIT — Liaison radio (options de bande)' {
+    #fact #hardware
+    description '''
+      Deux options documentees, choix reglementaire a trancher :
+      - 2,4 GHz ISM : microhard pMDDL2450, 25 Mbps ;
+      - bandes M1-M6 MANET : Doodle Labs Mesh Rider, 100 Mbps.
+      Middleware : Zenoh vs DDS ; Zenoh recommande par le producteur.
+      Maillage a eclater en : L2 radio-link / L3 middleware / politique
+      store-and-forward deconnecte.
+    '''
+    metadata {
+      statut 'FAIT (options) / TBD (choix)'
+      source 'microhard pMDDL2450 datasheet ; Doodle Labs Mesh Rider datasheet'
+      reste_ouvert 'bande reglementaire non instruite (UWB 3,1-10,6 GHz ; M1-M6)'
+      limite 'portees = annonces commerciales, aucune mesure independante'
+      applique_a 'hardware.c4 radioLnk, netMesh'
+    }
+  }
+
+  // ===========================================================================
+  //  5. FAITS SOURCES — sense-and-avoid
+  // ===========================================================================
+
+  factSae = factSheet 'FAIT — Sense-and-avoid (borne normative)' {
+    #fact #hardware
+    description '''
+      ASTM F3442-25 : rayon DWC (Detect and Avoid Well Clear) 2000 ft
+      soit environ 610 m. Faisabilite vision : AirTrack 700 m.
+      Le « <= 100 ms » du modele est une HYPOTHESE non sourcee et non
+      decomposee -> requalifie en hypothese a valider par simulation
+      d encounters (ASTM F3442 Annexe X2).
+    '''
+    metadata {
+      statut 'FAIT (norme) / HYP (delai 100 ms)'
+      source 'ASTM F3442-25 ; AirTrack'
+      requalification 'delai_action passe de FAIT implicite a HYP explicite'
+      applique_a 'hardware.c4 saeSensor'
+    }
+  }
+
+  // ===========================================================================
+  //  6. FAITS SOURCES — energie (reste ouvert)
+  // ===========================================================================
+
+  factEnergy = factSheet 'TBD — Energie (reste ouvert)' {
+    #fact #hardware #tbd
+    description '''
+      Cellule documentee : Molicel P42A, 15,5 Wh.
+      La CAPACITE par variante reste NON DETERMINEE : trois inconnues
+      amont manquent (endurance cible, masse, puissance par variante).
+      Choisir une valeur en Wh serait une invention.
+    '''
+    metadata {
+      statut 'TBD — RESTE OUVERT'
+      source 'Molicel P42A datasheet (cellule uniquement)'
+      bloquant 'endurance cible / masse / puissance par variante'
+      applique_a 'hardware.c4 power'
+    }
+  }
+
+  // ===========================================================================
+  //  7. LIAISON FAIT -> ELEMENT DU MODELE MATERIEL
+  // ===========================================================================
+
+  refDrone.flightCtrl -[derives-from]-> factFlightController 'applique ces faits'
+  refDrone.companion -[derives-from]-> factCompanion 'applique ces faits'
+  refDrone.perceptionRel -[derives-from]-> factRelativePerception 'applique ces faits'
+  refDrone.radioLnk -[derives-from]-> factRadioLink 'options de bande'
+  refDrone.saeSensor -[derives-from]-> factSae 'borne normative DWC'
+  refDrone.power -[derives-from]-> factEnergy 'lacune documentee'
+}

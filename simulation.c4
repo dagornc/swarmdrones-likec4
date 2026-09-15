@@ -1,0 +1,232 @@
+// =============================================================================
+//  E10 — CONTRAT DE SIMULATION (SWARM-3D-ARCHITECTURE, carte t_6641b537)
+//
+//  Objectif : definir CE QUE le modele promet a ses consommateurs, et
+//  SOUS QUELLES CONDITIONS. C est le contrat d interface entre :
+//
+//    PRODUCTEUR : ce modele LikeC4 (source de verite semantique)
+//    CONSOMMATEURS : simulateur, Blender, moteur Web 3D, environnement
+//                    pedagogique, jumeau numerique
+//
+//  Regle de mission : LikeC4 reste SEMANTIQUE. Ce fichier ne contient
+//  AUCUNE coordonnee 3D, aucun maillage, aucune texture. Il declare ce
+//  qui est FOURNI, ce qui est laisse au consommateur, et les invariants
+//  que tout consommateur doit respecter.
+//
+//  Un consommateur qui viole un invariant d ici n est plus aligne sur
+//  l architecture : c est verifiable, pas declaratif.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. FRONTIERE DE RESPONSABILITE — qui fournit quoi
+  // ===========================================================================
+
+  simContract = specDoc 'Contrat de simulation (E10)' {
+    #simulation
+    description '''
+      Contrat d interface entre le modele semantique et ses consommateurs.
+      Declare le perimetre de responsabilite de chacun. Toute ambiguite
+      d integration se resout ici, pas dans le code du consommateur.
+    '''
+    metadata {
+      producteur 'modele LikeC4 (cette source de verite)'
+      consommateurs 'simulateur, Blender, moteur Web 3D, env. pedagogique, jumeau'
+      version '1.0'
+      statut 'CONTRAT — non implemente'
+    }
+  }
+
+  providesSemantics = interface 'FOURNI par le modele : semantique' {
+    #simulation
+    description 'Identites, capacites, fonctions, algorithmes, messages, sequences causales, invariants.'
+  }
+  providesTopology = interface 'FOURNI par le modele : topologie logique' {
+    #simulation
+    description 'Liens de communication, domaines, zones, chaines de deploiement. Qui parle a qui, pas ou.'
+  }
+  providesContracts = interface 'FOURNI par le modele : contrats de comportement' {
+    #simulation
+    description 'Invariants, conditions de degradation, criteres de succes, ancrages risque/angle mort.'
+  }
+
+  leftToConsumer = interface 'LAISSE au consommateur : spatialisation' {
+    #simulation
+    description 'Coordonnees 3D, maillages, textures, cinematique, rendu. AUCUNE de ces donnees n est dans le modele.'
+  }
+  leftToConsumer2 = interface 'LAISSE au consommateur : dynamique temporelle' {
+    #simulation
+    description 'Horloge de simulation, pas de temps, integration physique, interpolation. Le modele fournit des SEQUENCES, pas des durees.'
+  }
+  leftToConsumer3 = interface 'LAISSE au consommateur : fidelite capteur' {
+    #simulation
+    description 'Bruit, turbulence, modeles de canal radio. Le modele declare les cas ; le consommateur les realise.'
+  }
+
+  unknownCapability = interface 'NON DEFINI — energie embarquee' {
+    #simulation #hypothese
+    description '''
+      DE-07 reste ouvert : la capacite batterie n a JAMAIS ete determinee.
+      Consequence pour le simulateur : le scenario SCN-08 (energie
+      critique) ne peut PAS etre simule de facon fidele. Un consommateur
+      qui simule l energie invente une valeur.
+    '''
+    metadata { decision 'DE-07'; impact 'SCN-08 non simulable fidelement'; regle 'ne pas inventer' }
+  }
+
+  // ===========================================================================
+  //  2. INVARIANTS QUE TOUT CONSOMMATEUR DOIT RESPECTER
+  //     Ce ne sont pas des conseils : ce sont des criteres verifiables.
+  // ===========================================================================
+
+  invNoC2 = specDoc 'INV-1 — La mission s accomplit sans C2 ni cloud' {
+    #simulation
+    description '''
+      Tout consommateur doit pouvoir representer SCN-01 de bout en bout
+      avec C2 et cloud ABSENTS. Si une animation ou une simulation exige
+      le cloud pour que la mission aboutisse, elle viole l architecture.
+    '''
+    metadata { verifiable 'oui'; test 'SCN-01 avec noeuds c2/cloud desactives'; source 'hypothesis H1' }
+  }
+
+  invSafetyLocal = specDoc 'INV-2 — La surete ne depend jamais du reseau' {
+    #simulation
+    description '''
+      L evitement de collision et les regles de surete doivent fonctionner
+      avec un lien coupe. La surete est une couche NON NEGOCIABLE.
+    '''
+    metadata { verifiable 'oui'; test 'SCN-06 avec CH_MESH et CH_COMMAND coupes'; source 'ADR-3' }
+  }
+
+  invScale30 = specDoc 'INV-3 — L echelle cible est 30, non prouvee a 30' {
+    #simulation
+    description '''
+      Le modele declare 30 plateformes (UAV-R x18, UAV-F x8, USV x4).
+      La validation experimentale reelle plafonne a 26. Tout consommateur
+      qui affiche ou simule 30 doit porter cette limite apparente.
+    '''
+    metadata { verifiable 'oui'; test 'etiquetage obligatoire N=30 NON PROUVE'; source 'riskR3' }
+  }
+
+  invNo3DInModel = specDoc 'INV-4 — Aucune donnee 3D dans le modele semantique' {
+    #simulation
+    description '''
+      Le modele fournit des sequences causales et une topologie logique.
+      Il ne fournit AUCUNE position. Un consommateur qui attend des
+      coordonnees du modele fait une erreur d integration.
+    '''
+    metadata { verifiable 'oui'; test 'aucun fichier .c4 ne contient de x/y/z'; source 'decision architecturale' }
+  }
+
+  invEvidence = specDoc 'INV-5 — Une affirmation non sourcee reste non sourcee' {
+    #simulation
+    description '''
+      Le modele distingue FAIT (source primaire verifiee), HYP (hypothese)
+      et TBD (inconnu). Un consommateur ne peut PAS promouvoir une HYP en
+      fait, ni combler un TBD par une valeur plausible.
+    '''
+    metadata { verifiable 'oui'; test 'chaque affirmation porte son statut epistemique'; source 'regle SwarmDrone' }
+  }
+
+  // ===========================================================================
+  //  3. CIBLES DE CONSOMMATION — qui consomme quoi
+  // ===========================================================================
+
+  consSimulator = application 'Simulateur (consommateur)' {
+    #simulation
+    description 'Moteur de simulation qui execute les scenarios sur 30 agents.'
+    metadata { consomme 'semantique + topologie + contrats'; fournit 'resultats mesurables'; statut 'A CONSTRUIRE' }
+  }
+  consBlender = application 'Blender (consommateur)' {
+    #simulation
+    description 'Production des maillages et de l animation de la scene.'
+    metadata { consomme 'identites + sequences causales'; fournit 'scene 3D'; statut 'A CONSTRUIRE' }
+  }
+  consWeb3D = application 'Moteur Web 3D (consommateur)' {
+    #simulation
+    description 'Rendu temps reel de la scene pour l environnement pedagogique.'
+    metadata { consomme 'topologie + etats des scenarios'; fournit 'experience interactive'; statut 'A CONSTRUIRE' }
+  }
+  consPedago = application 'Environnement pedagogique (consommateur)' {
+    #simulation
+    description 'Parcours d apprentissage adosses au modele et aux scenarios.'
+    metadata { consomme 'capacites + fonctions + scenarios'; fournit 'parcours navigables'; statut 'A CONSTRUIRE' }
+  }
+  consTwin = application 'Jumeau numerique (consommateur)' {
+    #simulation
+    description 'Reflet du systeme reel alimente par la telemetrie.'
+    metadata { consomme 'etats + telemetrie'; fournit 'suivi et replay'; statut 'PARTIELLEMENT DEFINI' }
+  }
+
+  // ===========================================================================
+  //  4. CONDITIONS DE DEGRADATION — ce que le consommateur doit savoir
+  // ===========================================================================
+
+  degLinkLoss = specDoc 'DEG-1 — Perte de lien acceptee' {
+    #simulation
+    description 'Le lien peut tomber. Le consommateur ne doit PAS representer une perte de lien comme une defaillance du drone.'
+  }
+  degGNSS = specDoc 'DEG-2 — GNSS degradable' {
+    #simulation
+    description 'La degradation GNSS est un cas NOMINAL. Derive non quantifiee (DE-08).'
+  }
+  degSpectrum = specDoc 'DEG-3 — Saturation du spectre non dimensionnee' {
+    #simulation
+    description 'AM3 ouvert : le point de saturation radio n est pas connu. Le consommateur ne doit pas simuler une limite qu il invente.'
+  }
+  degPerception = specDoc 'DEG-4 — Fausses pistes en densite' {
+    #simulation
+    description 'La fusion degradee en densite (R-8) est attendue. Le consommateur doit representer la degradation, pas la masquer.'
+  }
+
+  // ===========================================================================
+  //  5. RELATIONS — le contrat et ses dependances
+  // ===========================================================================
+
+  simContract -[uses]-> providesSemantics 'fournit'
+  simContract -[uses]-> providesTopology 'fournit'
+  simContract -[uses]-> providesContracts 'fournit'
+  simContract -[uses]-> leftToConsumer 'laisse'
+  simContract -[uses]-> leftToConsumer2 'laisse'
+  simContract -[uses]-> leftToConsumer3 'laisse'
+  simContract -[uses]-> unknownCapability 'lacune declaree'
+
+  simContract -[exposes]-> invNoC2 'invariant'
+  simContract -[exposes]-> invSafetyLocal 'invariant'
+  simContract -[exposes]-> invScale30 'invariant'
+  simContract -[exposes]-> invNo3DInModel 'invariant'
+  simContract -[exposes]-> invEvidence 'invariant'
+
+  consSimulator -[uses]-> simContract 'consomme le contrat'
+  consBlender -[uses]-> simContract 'consomme le contrat'
+  consWeb3D -[uses]-> simContract 'consomme le contrat'
+  consPedago -[uses]-> simContract 'consomme le contrat'
+  consTwin -[uses]-> simContract 'consomme le contrat'
+
+  consSimulator -[uses]-> scn10 'scenario non prouve a 30'
+  consSimulator -[uses]-> scn01 'scenario nominal'
+  consSimulator -[uses]-> scn06 'surete locale'
+  consPedago -[uses]-> capFly 'parcours'
+  consPedago -[uses]-> capCooperate 'parcours'
+  consWeb3D -[uses]-> edge.coordinator 'topologie logique'
+
+  // Le contrat repose sur le modele reel, pas sur une abstraction
+  // Conditions de degradation : le contrat les declare ET les ancre
+  simContract -[uses]-> degLinkLoss 'condition'
+  simContract -[uses]-> degGNSS 'condition'
+  simContract -[uses]-> degSpectrum 'condition'
+  simContract -[uses]-> degPerception 'condition'
+  degLinkLoss -[exposes]-> scn02 'scenario correspondant'
+  degGNSS -[exposes]-> scn05 'scenario correspondant'
+  degSpectrum -[exposes]-> scn07 'scenario correspondant'
+  degPerception -[exposes]-> scn09 'scenario correspondant'
+  degLinkLoss -[exposes]-> h2 'hypothese liens intermittents'
+  degGNSS -[exposes]-> h3 'hypothese GNSS degradable'
+
+  simContract -[uses]-> onboard.mission 'invariant INV-1'
+  simContract -[uses]-> onboard.safety 'invariant INV-2'
+  simContract -[uses]-> algCollisionAvoidance 'surete locale'
+  simContract -[uses]-> onboard 'echelle N=30'
+  simContract -[uses]-> factFlightController 'statuts epistemiques'
+}

@@ -1,0 +1,351 @@
+// =============================================================================
+//  E06 — MODELE DES MESSAGES (SWARM-3D-ARCHITECTURE, carte t_f7a97194)
+//
+//  Objectif : rendre les communications EXPLICITEMENT OBSERVABLES.
+//  Chaque message devient un objet de premiere classe du metamodele.
+//
+//  Ces informations alimenteront la visualisation des flux animes en 3D.
+//
+//  REGLES :
+//    - un message sans producteur OU sans consommateur est un defaut : marque
+//      et suivi en Kanban, jamais comble par invention ;
+//    - protocole/topic/frequence inconnus -> TBD + tag #tbd ;
+//    - aucune coordonnee 3D ;
+//    - les 12 messages de la mission (etape 6) sont la base, completee par
+//      ceux que le modele existant implique deja.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  CANAUX DE TRANSPORT
+  //  Un canal est le support logique d'un ensemble de messages.
+  // ===========================================================================
+
+  chMesh = channel 'CH_MESH — canal inter-agents' {
+    #message
+    technology 'Zenoh (mesh decentralise) + repli MQTT store-and-forward'
+    description '''
+      Canal principal de coordination entre drones.
+      Intermittent par construction. Porte les messages critiques
+      de coordination ET les messages best-effort de telemetrie.
+    '''
+    metadata {
+      criticite 'mission-critical'
+      disponibilite 'intermittente — non garantie'
+      source 'architecture.c4 onboard.linkRadio -> Zenoh / MosquittoMQTT'
+      tbd 'budget radio total (cf. blindspotAM3)'
+    }
+  }
+
+  chCommand = channel 'CH_CMD — canal de commandement' {
+    #message #safety-critical
+    technology 'MAVLink / MAVSDK + ordres signes'
+    description 'Canal de la GCS vers les drones. Ordres soumis a autorisation.'
+    metadata { criticite 'safety-critical'; source 'architecture.c4 c2.gcs -> edge.gateway' }
+  }
+
+  chLocal = channel 'CH_LOCAL — bus interne du drone' {
+    #message #safety-critical
+    technology 'Bus MAVLink interne / UART-CAN'
+    description '''
+      Bus temps reel entre la perception, la mission, la surete
+      et l autopilote. Ne depend d aucune communication externe.
+    '''
+    metadata { criticite 'safety-critical'; source 'architecture.c4 onboard.autopilot technology' }
+  }
+
+  chCloud = channel 'CH_CLOUD — canal montant differe' {
+    #message
+    technology 'HTTPS / MQTT vers edge puis cloud'
+    description 'Telemetrie agregee, journaux, artefacts. Hors boucle de controle.'
+    metadata { criticite 'best-effort'; source 'architecture.c4 edge.gateway -> cloud.twin' }
+  }
+
+  // ===========================================================================
+  //  1. MESSAGES DE COORDINATION INTER-AGENTS
+  //     Les 12 messages de l'etape 6 de la mission.
+  // ===========================================================================
+
+  msgDroneState = message 'MSG_DRONE_STATE — etat de drone' {
+    #message
+    description '''
+      Etat complet d'un agent : position, vitesse, cap, energie, sante,
+      tache courante, mode de vol.
+    '''
+    metadata {
+      producteur 'onboard.telemetry'
+      consommateurs 'onboard.mission, edge.coordinator, c2.gcs'
+      canal 'CH_MESH (diffusion) + CH_CLOUD (agrege)'
+      frequence '1-10 Hz [EXTRAP]'
+      criticite 'mission-critical'
+      schema 'TBD — a formaliser'
+      perte 'etat remplace par le suivant ; pas de retransmission'
+    }
+  }
+
+  msgHeartbeat = message 'MSG_HEARTBEAT — battement de vivacite' {
+    #message
+    description '''
+      Signal de vie periodique. Base de la detection de perte d'un drone
+      (SCN-06) et de la reconfiguration de l'essaim.
+    '''
+    metadata {
+      producteur 'onboard.health'
+      consommateurs 'onboard.mission, edge.coordinator, c2.gcs'
+      canal 'CH_MESH (diffusion)'
+      frequence '1 Hz [EXTRAP]'
+      criticite 'safety-critical'
+      schema 'TBD'
+      perte 'expiration par delai — declenche la detection de perte'
+    }
+  }
+
+  msgPositionUpdate = message 'MSG_POSITION_UPDATE — mise a jour de position' {
+    #message
+    description 'Position relative ou absolue d un agent, pour la formation et la separation.'
+    metadata {
+      producteur 'onboard.perception'
+      consommateurs 'onboard.mission, onboard.safety'
+      canal 'CH_MESH'
+      frequence '10-20 Hz [EXTRAP]'
+      criticite 'safety-critical'
+      schema 'TBD'
+      perte 'derive : la separation se degrade sans recalage'
+    }
+  }
+
+  msgNeighborState = message 'MSG_NEIGHBOR_STATE — etat de voisinage' {
+    #message
+    description 'Vue synthetique des voisins proches : identifiants, positions relatives, sante.'
+    metadata {
+      producteur 'onboard.perception'
+      consommateurs 'onboard.mission, onboard.safety, onboard.taskAuction'
+      canal 'CH_MESH'
+      frequence '5-10 Hz [EXTRAP]'
+      criticite 'mission-critical'
+      schema 'TBD'
+      perte 'decision degradee en aveugle local'
+    }
+  }
+
+  msgTaskBid = message 'MSG_TASK_BID — enchere de tache' {
+    #message
+    description '''
+      Offre d'un agent pour une tache ouverte. Coeur de l'allocation
+      distribuee (SCN-04) et de la reallocation apres perte (SCN-07).
+    '''
+    metadata {
+      producteur 'onboard.taskAuction'
+      consommateurs 'onboard.mission, edge.coordinator'
+      canal 'CH_MESH'
+      frequence 'sur evenement'
+      criticite 'mission-critical'
+      algorithme 'ALG_TASK_ALLOCATION (CBBA)'
+      schema 'TBD — enchere, cout, identifiant de tache'
+      perte 'enchere manquante : allocation sous-optimale, pas incorrecte'
+    }
+  }
+
+  msgTaskAssignment = message 'MSG_TASK_ASSIGNMENT — attribution de tache' {
+    #message
+    description 'Decision d attribution d une tache a un agent. Resultat du consensus d encheres.'
+    metadata {
+      producteur 'onboard.taskAuction'
+      consommateurs 'onboard.mission, edge.coordinator, c2.gcs'
+      canal 'CH_MESH'
+      frequence 'sur evenement'
+      criticite 'mission-critical'
+      algorithme 'ALG_TASK_ALLOCATION (CBBA)'
+      schema 'TBD'
+      perte 'conflit d attribution possible a resoudre'
+    }
+  }
+
+  msgTrajectoryProposal = message 'MSG_TRAJECTORY_PROPOSAL — proposition de trajectoire' {
+    #message
+    description '''
+      Un agent propose une trajectoire, pour negociation avant execution.
+      Mecanisme de coordination distribuee sans autorite centrale.
+    '''
+    metadata {
+      producteur 'onboard.taskAuction'
+      consommateurs 'onboard.mission, edge.coordinator'
+      canal 'CH_MESH'
+      frequence 'sur evenement'
+      criticite 'mission-critical'
+      schema 'TBD — points, horodatage, cout'
+      perte 'negociation incomplete : trajectoire par defaut locale'
+    }
+  }
+
+  msgTrajectoryUpdate = message 'MSG_TRAJECTORY_UPDATE — mise a jour de trajectoire' {
+    #message
+    description 'Trajectoire retenue et en cours d execution. Consommee par la surete.'
+    metadata {
+      producteur 'onboard.mission'
+      consommateurs 'onboard.autopilot, onboard.safety, edge.coordinator'
+      canal 'CH_LOCAL + CH_MESH'
+      frequence '2-5 Hz [EXTRAP]'
+      criticite 'safety-critical'
+      schema 'TBD'
+      perte 'poursuite de la trajectoire precedente'
+    }
+  }
+
+  msgFormationState = message 'MSG_FORMATION_STATE — etat de la formation' {
+    #message
+    description '''
+      Etat global de la formation : positions cibles, erreurs, cohésion.
+      Sert au scenario SCN-03 (creation de formation).
+    '''
+    metadata {
+      producteur 'onboard.mission'
+      consommateurs 'onboard.mission (voisins), edge.coordinator, c2.gcs'
+      canal 'CH_MESH'
+      frequence '2-5 Hz [EXTRAP]'
+      criticite 'mission-critical'
+      algorithme 'ALG_FORMATION_CONTROL'
+      schema 'TBD'
+      perte 'formation relachee en mode local'
+    }
+  }
+
+  msgCollisionAlert = message 'MSG_COLLISION_ALERT — alerte de collision' {
+    #safety-critical #message
+    description '''
+      Alerte de proximite imminente. Message le plus critique du systeme :
+      declenche une action d evitement LOCALE, sans attendre le reseau.
+    '''
+    metadata {
+      producteur 'onboard.perception (sense-and-avoid)'
+      consommateurs 'onboard.safety, onboard.autopilot'
+      canal 'CH_LOCAL (prioritaire)'
+      frequence 'sur evenement'
+      latence_cible '<= 100 ms [EXTRAP — §8 budget, non confirme]'
+      criticite 'safety-critical'
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      schema 'TBD'
+      perte 'inacceptable : voie locale independante du reseau'
+    }
+  }
+
+  msgMissionCommand = message 'MSG_MISSION_COMMAND — commande de mission' {
+    #safety-critical #message
+    description 'Ordre de mission emanant de la GCS. Soumis a autorisation et signature.'
+    metadata {
+      producteur 'c2.gcs'
+      consommateurs 'edge.gateway, onboard.mission'
+      canal 'CH_CMD'
+      frequence 'sur evenement'
+      criticite 'safety-critical'
+      securite 'ordres critiques signes + audit (cf. adr3)'
+      schema 'TBD'
+      perte 'la mission en cours se poursuit ; aucune commande n est inventee'
+    }
+  }
+
+  msgConsensusVote = message 'MSG_CONSENSUS_VOTE — vote de consensus' {
+    #message
+    description '''
+      Vote d'un agent dans une decision collective. Implique un etat
+      convergeant (CRDT / consensus) tolerant aux partitions.
+    '''
+    metadata {
+      producteur 'onboard.taskAuction'
+      consommateurs 'onboard.mission, edge.coordinator'
+      canal 'CH_MESH'
+      frequence 'sur evenement'
+      criticite 'mission-critical'
+      algorithme 'ALG_CONSENSUS'
+      schema 'TBD'
+      perte 'convergence retardee, pas remise en cause'
+    }
+  }
+
+  msgFailureNotification = message 'MSG_FAILURE_NOTIFICATION — notification de defaillance' {
+    #safety-critical #message
+    description '''
+      Un agent signale sa propre degradation ou celle d'un pair.
+      Base de la detection de defaillance sans reallocation (blindspotAM12).
+    '''
+    metadata {
+      producteur 'onboard.health'
+      consommateurs 'edge.coordinator, c2.gcs, onboard.mission'
+      canal 'CH_MESH + CH_CLOUD'
+      frequence 'sur evenement'
+      criticite 'safety-critical'
+      schema 'TBD'
+      perte 'defaillance non detectee : angle mort AM12'
+      angle_mort 'AM12 — detection sans reallocation'
+    }
+  }
+
+  // ===========================================================================
+  //  2. RELATIONS DE PUBLICATION
+  //     Producteur -> message : le message est publie.
+  //     Ce graphe sera consomme par la vue des flux animes (V3 de la roadmap).
+  // ===========================================================================
+
+  onboard.telemetry -[publishes]-> msgDroneState
+  onboard.health -[publishes]-> msgHeartbeat
+  onboard.health -[publishes]-> msgFailureNotification
+  onboard.perception -[publishes]-> msgPositionUpdate
+  onboard.perception -[publishes]-> msgNeighborState
+  onboard.perception -[publishes]-> msgCollisionAlert
+  onboard.taskAuction -[publishes]-> msgTaskBid
+  onboard.taskAuction -[publishes]-> msgTaskAssignment
+  onboard.taskAuction -[publishes]-> msgTrajectoryProposal
+  onboard.taskAuction -[publishes]-> msgConsensusVote
+  onboard.mission -[publishes]-> msgTrajectoryUpdate
+  onboard.mission -[publishes]-> msgFormationState
+  c2.gcs -[publishes]-> msgMissionCommand
+
+  // ===========================================================================
+  //  3. RELATIONS DE SOUSCRIPTION
+  //     Message -> consommateur. Type 'subscribes' : abonnement logique.
+  // ===========================================================================
+
+  msgDroneState -[subscribes]-> onboard.mission
+  msgDroneState -[subscribes]-> edge.coordinator
+  msgHeartbeat -[subscribes]-> onboard.mission
+  msgHeartbeat -[subscribes]-> edge.coordinator
+  msgPositionUpdate -[subscribes]-> onboard.safety
+  msgPositionUpdate -[subscribes]-> onboard.mission
+  msgNeighborState -[subscribes]-> onboard.mission
+  msgNeighborState -[subscribes]-> onboard.taskAuction
+  msgTaskBid -[subscribes]-> onboard.mission
+  msgTaskBid -[subscribes]-> edge.coordinator
+  msgTaskAssignment -[subscribes]-> onboard.mission
+  msgTaskAssignment -[subscribes]-> edge.coordinator
+  msgTrajectoryProposal -[subscribes]-> onboard.mission
+  msgTrajectoryUpdate -[subscribes]-> onboard.autopilot
+  msgTrajectoryUpdate -[subscribes]-> onboard.safety
+  msgFormationState -[subscribes]-> edge.coordinator
+  msgCollisionAlert -[subscribes]-> onboard.safety
+  msgCollisionAlert -[subscribes]-> onboard.autopilot
+  msgMissionCommand -[subscribes]-> edge.gateway
+  msgMissionCommand -[subscribes]-> onboard.mission
+  msgConsensusVote -[subscribes]-> onboard.mission
+  msgFailureNotification -[subscribes]-> edge.coordinator
+  msgFailureNotification -[subscribes]-> c2.gcs
+
+  // ===========================================================================
+  //  4. MESSAGES SUR LEUR CANAL
+  // ===========================================================================
+
+  msgDroneState -[uses]-> chMesh
+  msgHeartbeat -[uses]-> chMesh
+  msgPositionUpdate -[uses]-> chMesh
+  msgNeighborState -[uses]-> chMesh
+  msgTaskBid -[uses]-> chMesh
+  msgTaskAssignment -[uses]-> chMesh
+  msgTrajectoryProposal -[uses]-> chMesh
+  msgTrajectoryUpdate -[uses]-> chMesh
+  msgFormationState -[uses]-> chMesh
+  msgConsensusVote -[uses]-> chMesh
+  msgFailureNotification -[uses]-> chMesh
+  msgCollisionAlert -[uses]-> chLocal
+  msgMissionCommand -[uses]-> chCommand
+}
+

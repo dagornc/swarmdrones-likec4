@@ -1,0 +1,44 @@
+[
+ {
+  "id": "I-1",
+  "nom": "Integrite referentielle",
+  "ok": true,
+  "detail": "544 relations, 0 arcs casses"
+ },
+ {
+  "id": "I-2",
+  "nom": "Elements orphelins",
+  "ok": true,
+  "detail": "0 orphelins"
+ },
+ {
+  "id": "I-3",
+  "nom": "Chaine CAPACITE->FONCTION->ALGORITHME",
+  "ok": true,
+  "detail": "20 liens capacite->fonction, 20 avec algorithme rattache"
+ },
+ {
+  "id": "I-4",
+  "nom": "Contrat de simulation",
+  "ok": true,
+  "detail": "contrat: True, invariants nommes: 5"
+ },
+ {
+  "id": "I-5",
+  "nom": "Garde-fous World Model",
+  "ok": true,
+  "detail": "6 regles de rendu, 6 portent un test"
+ },
+ {
+  "id": "I-6",
+  "nom": "Aucune valeur inventee",
+  "ok": true,
+  "detail": "0 valeurs chiffrees non sourcees"
+ },
+ {
+  "id": "I-7",
+  "nom": "Coherence scientifique",
+  "ok": true,
+  "detail": "8 constats = 4 avec verdict + 4 gaps ; 4 verdicts sources"
+ }
+]

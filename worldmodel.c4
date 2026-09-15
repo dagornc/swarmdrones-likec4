@@ -1,0 +1,299 @@
+// =============================================================================
+//  E11 — WORLD MODEL (SWARM-3D-ARCHITECTURE, carte t_ab3002bd)
+//
+//  Objectif : preparer la consommation du modele par Blender et le moteur
+//  Web 3D, SANS introduire de 3D dans LikeC4 (invariant INV-4 du contrat E10).
+//
+//  Le World Model est un modele INDEPENDANT et DERIVE :
+//    - il ne contient AUCUNE coordonnee, aucun maillage, aucune texture ;
+//    - il declare les ENTITES SIMULABLES, leurs ZONES et leurs CATEGORIES ;
+//    - c est la couche de correspondance entre la semantique et le rendu.
+//
+//  Schema de derivation (fichier machine-lisible, cf. docs/world-model-spec.md) :
+//    id_likec4 (stable) -> role_scene -> categorie_visuelle -> population
+//
+//  L id_likec4 est la cle etrangere. Le consommateur 3D ne doit JAMAIS
+//  inventer un identifiant : il prend ceux d ici.
+//
+//  Population reelle (source : architecture.c4, point4) :
+//    UAV-R x18 (reconnaissance, voilure fixe)
+//    UAV-F x8  (multirotor)
+//    USV x4    (surface maritime)
+//    TOTAL 30 plateformes + 1 drone de reference (maquette)
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. ZONES SEMANTIQUES — ou se joue la simulation (pas de coordonnees)
+  // ===========================================================================
+
+  zoneAir = zoneSemantic 'ZONE_AIR — Aerien' {
+    #world
+    description 'Espace aerien. Accueille UAV-R et UAV-F. Pas de coordonnees ici.'
+    metadata { categorie 'domaine'; entites 'UAV-R, UAV-F'; densite 'haute'; risque 'collision, congestion' }
+  }
+  zoneSurface = zoneSemantic 'ZONE_SURFACE — Surface maritime' {
+    #world
+    description 'Milieu de surface. Accueille les USV.'
+    metadata { categorie 'domaine'; entites 'USV'; densite 'basse'; risque 'COLREGs, houle' }
+  }
+  zoneAllocation = zoneSemantic 'ZONE_ALLOCATION — Domaine de mission' {
+    #world
+    description 'Emprise geographique de la mission (abstraite, sans bornes chiffrees).'
+    metadata { categorie 'domaine'; entites 'toutes'; contrainte 'BVLOS, geofence' }
+  }
+  zoneCommsRelay = zoneSemantic 'ZONE_COMMS — Portee de communication' {
+    #world
+    description 'Etendue couverte par le lien. Abstraite : la portee reelle est une ANNONCE COMMERCIALE, non verifiee.'
+    metadata { categorie 'domaine'; entites 'lien radio'; limite 'portee non verifiee' }
+  }
+  zoneCommand = zoneSemantic 'ZONE_COMMAND — Perimetre C2' {
+    #world
+    description 'Zone d influence du poste de commandement. Intermittente et degradable (H2).'
+    metadata { categorie 'domaine'; entites 'C2'; limite 'lien intermittent par hypothese H2' }
+  }
+  zoneCloud = zoneSemantic 'ZONE_CLOUD — Perimetre cloud' {
+    #world
+    description 'Infrastructure distante. ABSENTE du scenario nominal SCN-01 (INV-1).'
+    metadata { categorie 'domaine'; entites 'cloud'; contrainte 'non requise pour la mission' }
+  }
+
+  // ===========================================================================
+  //  2. ENTITES SIMULABLES — la population exacte, avec sa categorisation
+  //     Chaque entite porte l id_likec4 qui la rattache au modele semantique.
+  // ===========================================================================
+
+  entUavR = worldEntity 'UAV-R — Reconnaissance (x18)' {
+    #world
+    description 'Voilure fixe, longue portee, haute altitude relative. 18 exemplaires.'
+    metadata {
+      id_likec4 'onboard'
+      population '18'
+      categorie_visuelle 'fixed-wing'
+      domaine 'ZONE_AIR'
+      role_scene 'agent de reconnaissance'
+      nature 'plateforme_essaim'
+    }
+  }
+  entUavF = worldEntity 'UAV-F — Multirotor (x8)' {
+    #world
+    description 'Multirotor, vol stationnaire, manœuvre fine. 8 exemplaires.'
+    metadata {
+      id_likec4 'onboard'
+      population '8'
+      categorie_visuelle 'multirotor'
+      domaine 'ZONE_AIR'
+      role_scene 'agent de proximite'
+      nature 'plateforme_essaim'
+    }
+  }
+  entUsv = worldEntity 'USV — Surface (x4)' {
+    #world
+    description 'Plateforme de surface maritime. 4 exemplaires.'
+    metadata {
+      id_likec4 'onboard'
+      population '4'
+      categorie_visuelle 'surface-vessel'
+      domaine 'ZONE_SURFACE'
+      role_scene 'agent de surface'
+      nature 'plateforme_essaim'
+    }
+  }
+  entReference = worldEntity 'Drone de reference (x1)' {
+    #world
+    description 'Maquette de reference, non comptee dans les 30. Sert de prototype visuel.'
+    metadata {
+      id_likec4 'refDrone'
+      population '1'
+      categorie_visuelle 'reference-mockup'
+      domaine 'ZONE_ALLOCATION'
+      role_scene 'prototype'; nature 'maquette_reference'
+      note 'NE PAS confondre avec les 30 plateformes operationnelles'
+    }
+  }
+  entGroundStation = worldEntity 'Poste de commandement (x1)' {
+    #world
+    description 'Station sol C2. Peut etre ABSENTE du scenario (SCN-01, SCN-02).'
+    metadata { id_likec4 'c2.gcs'; population '1'; categorie_visuelle 'ground-station'; domaine 'ZONE_COMMAND'; role_scene 'operateur'; nature 'infrastructure' }
+  }
+  entEdgeNode = worldEntity 'Noeud Edge (x1)' {
+    #world
+    description 'Coordination, fusion, cache. Optionnel mais jamais critique pour la surete.'
+    metadata { id_likec4 'edge.coordinator'; population '1'; categorie_visuelle 'edge-node'; domaine 'ZONE_COMMS'; role_scene 'coordinateur'; nature 'infrastructure' }
+  }
+  entTwin = worldEntity 'Jumeau numerique (x1)' {
+    #world
+    description 'Reflet du systeme. Consommateur d observation, pas acteur de vol.'
+    metadata { id_likec4 'cloud.twin'; population '1'; categorie_visuelle 'digital-twin'; domaine 'ZONE_CLOUD'; role_scene 'observateur'; nature 'infrastructure' }
+  }
+
+  // ===========================================================================
+  //  3. CATEGORIES DE SCENE — regroupements pour le rendu
+  //     Ce sont des classes de consommation, pas des objets du systeme.
+  // ===========================================================================
+
+  catAerial = sceneCategory 'Air' {
+    #world
+    description 'Tout ce qui vole. Rendu distinct des plateformes de surface.'
+    metadata { consiste_de 'UAV-R (18) + UAV-F (8) = 26 aeriens' }
+  }
+  catSurface = sceneCategory 'Surface' {
+    #world
+    description 'Plateformes de surface.'
+    metadata { consiste_de 'USV (4)' }
+  }
+  catCommand = sceneCategory 'Commandement et observation' {
+    #world
+    description 'C2, Edge, jumeau numerique. Peuvent etre affiches comme ABSENTS.'
+    metadata { consiste_de 'GCS (1) + Edge (1) + Twin (1) = 3' }
+  }
+  catReference = sceneCategory 'Reference' {
+    #world
+    description 'Maquette de reference. Doit etre visuellement DISTINCTE des 30.'
+    metadata { consiste_de 'refDrone (1)' }
+  }
+
+  // ===========================================================================
+  //  4. ETATS D APPARENCE — derives des scenarios E09
+  //     Le rendu 3D represente des ETATS, pas seulement des objets.
+  // ===========================================================================
+
+  stNominal = worldState 'ETAT — Nominal' {
+    #world
+    description 'Toutes les entites actives, liens disponibles, mission en cours.'
+    metadata { scenario 'SCN-01'; rendu 'normal'; reseau 'indifferent' }
+  }
+  stLinkLost = worldState 'ETAT — Lien C2 perdu' {
+    #world
+    description 'Le GCS n est plus joignable. Les drones restent actifs et surs.'
+    metadata { scenario 'SCN-02'; rendu 'GCS en pointilles'; invariant 'surete intade' }
+  }
+  stAgentLost = worldState 'ETAT — Agent perdu' {
+    #world
+    description 'Un ou plusieurs agents cessent d emettre. Les autres se reconfigurent.'
+    metadata { scenario 'SCN-03'; rendu 'agent estompe, reconfiguration visible' }
+  }
+  stPartition = worldState 'ETAT — Partition reseau' {
+    #world
+    description 'Deux groupes ne communiquent plus. Le rendu doit montrer DEUX grappes.'
+    metadata { scenario 'SCN-04'; rendu 'deux sous-graphes separes' }
+  }
+  stGnssDegraded = worldState 'ETAT — GNSS degrade' {
+    #world
+    description 'Precision de position degradee, non chiffree (DE-08 ouvert).'
+    metadata { scenario 'SCN-05'; rendu 'incertitude elargie, sans valeur inventee' }
+  }
+  stCollisionRisk = worldState 'ETAT — Risque de collision' {
+    #world
+    description 'Deux agents convergent. La surete locale agit SANS reseau.'
+    metadata { scenario 'SCN-06'; rendu 'surlignage de la paire, correction locale' }
+  }
+  stSpectrumSat = worldState 'ETAT — Spectre sature' {
+    #world
+    description 'Coordination degradee. Point de saturation INCONNU (AM3 ouvert).'
+    metadata { scenario 'SCN-07'; rendu 'liens de coordination attenues'; limite 'AM3 non dimensionne' }
+  }
+  stEnergyCritical = worldState 'ETAT — Energie critique' {
+    #world
+    description 'Marge insuffisante. ATTENTION : capacite batterie NON DETERMINEE (DE-07).'
+    metadata { scenario 'SCN-08'; rendu 'NE PAS afficher de pourcentage chiffre'; statut 'NON SIMULABLE FIDELEMENT' }
+  }
+  stDense = worldState 'ETAT — Densite elevee' {
+    #world
+    description 'Fusion degradee, fausses pistes (R-8).'
+    metadata { scenario 'SCN-09'; rendu 'pistes parasites rejetees' }
+  }
+  stLeaderLost = worldState 'ETAT — Leader perdu a N=30' {
+    #world
+    description 'Reconfiguration a pleine echelle. NON PROUVE a 30 : le rendu doit porter la limite.'
+    metadata { scenario 'SCN-10'; rendu 'etiquettee N=30 NON PROUVE'; source 'riskR3' }
+  }
+
+  // ===========================================================================
+  //  5. REGLES DE REPRESENTATION — ce que le consommateur PEUT et NE PEUT PAS faire
+  //     Ce sont les garde-fous qui protegent la verite du modele.
+  // ===========================================================================
+
+  ruleNoInventId = renderRule 'REG-1 — Ne jamais inventer d identifiant' {
+    #world
+    description 'Tout objet de scene doit provenir de la table de correspondance. Un identifiant absent = erreur d integration.'
+    metadata { verifiable 'oui'; test 'tout id de scene existe dans le modele' }
+  }
+  ruleNoInventEnergy = renderRule 'REG-2 — Ne pas afficher de valeur d energie' {
+    #world
+    description 'DE-07 ouvert : la capacite batterie n a jamais ete determinee. Aucun pourcentage, aucune autonomie affichee.'
+    metadata { verifiable 'oui'; test 'aucune valeur Wh/min/Pct dans la scene'; source 'DE-07' }
+  }
+  ruleNoInventRadio = renderRule 'REG-3 — Ne pas afficher de portee radio chiffree' {
+    #world
+    description 'Les portees publiees sont des ANNONCES COMMERCIALES non verifiees. Afficher « non verifie » ou rien.'
+    metadata { verifiable 'oui'; test 'aucune portee m/km affichee'; source 'constat corpus' }
+  }
+  ruleNoInventRange = renderRule 'REG-4 — Porter la limite N=30' {
+    #world
+    description 'La validation reelle plafonne a 26 en vol. Toute scene a 30 doit l etiqueter NON PROUVE.'
+    metadata { verifiable 'oui'; test 'scene a 30 porte la mention'; source 'riskR3' }
+  }
+  ruleNoInventCount = renderRule 'REG-5 — 30 operationnels + 1 reference distincte' {
+    #world
+    description 'Les 30 plateformes et la maquette de reference ne doivent jamais etre confondues dans le rendu.'
+    metadata { verifiable 'oui'; test 'refDrone visuellement distinct' }
+  }
+  ruleSemanticOnly = renderRule 'REG-6 — Aucune position issue du modele semantique' {
+    #world
+    description 'Toute position vient du consommateur. Le modele ne fournit jamais de coordonnees.'
+    metadata { verifiable 'oui'; test 'aucun x/y/z dans les fichiers .c4'; source 'INV-4' }
+  }
+
+  // ===========================================================================
+  //  6. RELATIONS — la derivation, verifiable
+  // ===========================================================================
+
+  entUavR -[populates]-> zoneAir '18 exemplaires'
+  entUavF -[populates]-> zoneAir '8 exemplaires'
+  entUsv -[populates]-> zoneSurface '4 exemplaires'
+  entGroundStation -[populates]-> zoneCommand '1'
+  entEdgeNode -[populates]-> zoneCommsRelay '1'
+  entTwin -[populates]-> zoneCloud '1'
+  entReference -[populates]-> zoneAllocation '1 maquette'
+
+  entUavR -[maps-to]-> refDrone 'instance du drone de reference'
+  entUavF -[maps-to]-> refDrone 'instance du drone de reference'
+  entUsv -[maps-to]-> refDrone 'instance du drone de reference'
+  entUavR -[maps-to]-> onboard 'composants embarques'
+  entUavF -[maps-to]-> onboard 'composants embarques'
+  entUsv -[maps-to]-> onboard 'composants embarques'
+
+  entUavR -[belongs-to]-> catAerial 'aerial'
+  entUavF -[belongs-to]-> catAerial 'aerial'
+  entUsv -[belongs-to]-> catSurface 'surface'
+  entReference -[belongs-to]-> catReference 'reference'
+  entGroundStation -[belongs-to]-> catCommand 'commandement'
+  entEdgeNode -[belongs-to]-> catCommand 'commandement'
+  entTwin -[belongs-to]-> catCommand 'commandement'
+
+  stNominal -[derives-from]-> scn01 'scenario source'
+  stLinkLost -[derives-from]-> scn02 'scenario source'
+  stAgentLost -[derives-from]-> scn03 'scenario source'
+  stPartition -[derives-from]-> scn04 'scenario source'
+  stGnssDegraded -[derives-from]-> scn05 'scenario source'
+  stCollisionRisk -[derives-from]-> scn06 'scenario source'
+  stSpectrumSat -[derives-from]-> scn07 'scenario source'
+  stEnergyCritical -[derives-from]-> scn08 'scenario source'
+  stDense -[derives-from]-> scn09 'scenario source'
+  stLeaderLost -[derives-from]-> scn10 'scenario source'
+
+  stEnergyCritical -[exposes]-> riskR3 'non simulable fidelement'
+  stLeaderLost -[exposes]-> riskR3 'echelle 30 non prouvee'
+  stSpectrumSat -[exposes]-> blindspotAM3 'budget radio non dimensionne'
+  stDense -[exposes]-> riskR8 'fausses pistes'
+
+  ruleNoInventId -[constrains]-> catAerial 'regle de rendu'
+  ruleNoInventId -[constrains]-> catSurface 'regle de rendu'
+  ruleNoInventEnergy -[constrains]-> stEnergyCritical 'interdit la valeur chiffree'
+  ruleNoInventRadio -[constrains]-> zoneCommsRelay 'interdit la portee chiffree'
+  ruleNoInventRange -[constrains]-> stLeaderLost 'exige la mention N=30 NON PROUVE'
+  ruleNoInventCount -[constrains]-> catReference 'distingue la maquette'
+  ruleSemanticOnly -[constrains]-> simContract 'garantit INV-4'
+}

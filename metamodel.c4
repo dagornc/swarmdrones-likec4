@@ -1,0 +1,680 @@
+// =============================================================================
+//  SPECIFICATION — METAMODELE SWARMDRONE
+//  Mission SWARM-3D-ARCHITECTURE · Epic E01 · Carte t_b6b0fb55
+//
+//  PRINCIPE : LikeC4 est la SOURCE DE VERITE SEMANTIQUE de l'architecture.
+//  Il doit decrire STRUCTURE et SEMANTIQUE, jamais le rendu ni l'espace 3D.
+//  Aucune coordonnee graphique n'est autorisee dans ce fichier.
+//
+//  Les kinds existants (operator, external, platform, edgeStation, c2System,
+//  cloudSystem, component, hypothesis, decision, software, algorithm, risk,
+//  blindspot) sont CONSERVES a l'identique : aucun identifiant existant n'est
+//  renomme, aucune relation existante n'est invalidee.
+//  Les nouvelles familles sont AJOUTEES par surcouche.
+// =============================================================================
+
+specification {
+
+  // ---------------------------------------------------------------------------
+  // COULEURS (existantes)
+  // ---------------------------------------------------------------------------
+  color criticalRed   #C62828
+  color warningAmber  #F9A825
+  color effortGray    #546E7A
+  color cloudCyan     #00838F
+  color zoneOnboard   #0277BD
+  color zoneEdge      #EF6C00
+  color zoneC2        #3F51B5
+  color zoneCloud     #00838F
+  color extBrown      #6D4C41
+  color hypothesePurple #8E24AA
+  color sciencePink #AD1457
+  color worldIndigo #283593
+  color factTeal       #00695C
+  color decisionGreen   #2E7D32
+  color sourceGray      #616161
+
+  color softwareTeal    #00695C
+  color algoIndigo      #283593
+  color riskRed         #B71C1C
+  color riskOrange      #EF6C00
+  color blindspotBrown  #4E342E
+
+  // --- Palette des nouvelles familles (E01) ---
+  color systemBlue      #01579B   // famille SYSTEME
+  color funcGreen       #2E7D32   // famille FONCTIONNEL
+  color dataPurple      #6A1B9A   // famille DONNEES
+  color commOrange      #E65100   // famille COMMUNICATION
+  color hwSlate         #37474F   // famille MATERIEL
+  color infraBrown      #5D4037   // famille INFRASTRUCTURE
+  color docGray         #455A64   // famille DOCUMENTATION
+  color agentCyan       #00838F   // agent autonome
+  color capabilityPink  #AD1457   // capacite / mission
+
+  // ---------------------------------------------------------------------------
+  // TAGS SEMANTIQUES AJOUTES PAR E01/E05
+  // Distinguent ce qui est etabli de ce qui est suppose. Règle de mission :
+  // une donnee inconnue n'est pas inventee, elle est marquee et suit un Kanban.
+  // ---------------------------------------------------------------------------
+  tag hardware     { color #455A64 }   // entite physique
+  tag reference    { color #00695C }   // modele de reference (a instancier)
+  tag tbd          { color #D32F2F }   // valeur inconnue — decision requise
+  tag extrap       { color #F57C00 }   // valeur deduite, non confirmee par source
+  tag algorithm    { color #6A1B9A }   // objet algorithmique de premiere classe
+  tag message      { color #0277BD }   // message observable
+  tag scenario     { color #00838F }   // scenario dynamique
+  tag metric       { color #2E7D32 }   // metrique de simulation
+  tag fact         { color #00695C }   // fait relie a une source primaire
+  tag deployment   { color #4E342E }   // entite de deploiement
+  tag capability   { color #00695C }   // capacite fonctionnelle
+  tag function     { color #2E7D32 }   // fonction realisee
+  tag simulation   { color #0277BD }   // contrat de simulation
+  tag science      { color #AD1457 }   // referentiel scientifique / verdict
+  tag world        { color #283593 }   // world model / preparation 3D
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 1 — SYSTEME (existant partiel : platform)
+  // ---------------------------------------------------------------------------
+  element system {
+    title 'Systeme'
+    notation 'System'
+    description 'Systeme de systemes ou systeme racine. Conteneur semantique de plus haut niveau.'
+    style { shape rectangle; color systemBlue; border solid }
+  }
+
+  element subsystem {
+    title 'Sous-systeme'
+    notation 'Subsystem'
+    description 'Sous-ensemble coherent du systeme, delimite par une responsabilite fonctionnelle.'
+    style { shape rectangle; color systemBlue }
+  }
+
+  element capability {
+    title 'Capacite'
+    notation 'Capability'
+    description 'Ce que le systeme SAIT FAIRE, independamment de son implementation. Relie les missions aux fonctions.'
+    style { shape rectangle; color capabilityPink; border dashed }
+  }
+
+  element mission {
+    title 'Mission'
+    notation 'Mission'
+    description 'Objectif operationnel assigne a l essaim. Consomme des capacites, genere des taches.'
+    style { shape rectangle; color capabilityPink }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 2 — FONCTIONNEL
+  // ---------------------------------------------------------------------------
+  element function {
+    title 'Fonction'
+    notation 'Function'
+    description 'Transformation elementaire entree -> sortie. Ne presage pas de son implementation.'
+    style { shape rectangle; color funcGreen }
+  }
+
+  element process {
+    title 'Processus'
+    notation 'Process'
+    description 'Enchainement ordonne de fonctions, avec etat et cycle de vie.'
+    style { shape rectangle; color funcGreen; border dashed }
+  }
+
+  element responsibility {
+    title 'Responsabilite'
+    notation 'Responsibility'
+    description 'Qui detient l autorite sur une decision. Distingue l autorite humaine de l autonomie embarquee.'
+    style { shape rectangle; color funcGreen; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 3 — LOGICIEL (existant partiel : component, software)
+  // ---------------------------------------------------------------------------
+  element application {
+    title 'Application'
+    notation 'Application'
+    description 'Programme deployable, avec son propre cycle de vie.'
+    style { shape component; color softwareTeal }
+  }
+
+  element service {
+    title 'Service'
+    notation 'Service'
+    description 'Unite de traitement exposant une interface. Peut etre local ou distant.'
+    style { shape component; color softwareTeal }
+  }
+
+  element agent {
+    title 'Agent autonome'
+    notation 'Agent'
+    description 'Entite logicielle autonome, avec etat, objectifs et capacite de decision locale. Coeur de l essaim : chaque drone embarque un agent.'
+    style { shape component; color agentCyan; border solid }
+  }
+
+  element module {
+    title 'Module'
+    notation 'Module'
+    description 'Sous-partie d un composant, sans interface publique autonome.'
+    style { shape component; color softwareTeal }
+  }
+
+  element apiContract {
+    title 'API'
+    notation 'API'
+    description 'Contrat d interface entre deux briques logicielles.'
+    style { shape rectangle; color softwareTeal; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 4 — ALGORITHMIQUE (existant partiel : algorithm)
+  // Les algorithmes sont des OBJETS DE PREMIERE CLASSE (E04).
+  // Le code n est PAS stocke ici : LikeC4 reference le depot Git.
+  // ---------------------------------------------------------------------------
+  element strategy {
+    title 'Strategie'
+    notation 'Strategy'
+    description 'Famille de variantes interchangeables repondant au meme besoin. Niveau B de modification (E16).'
+    style { shape rectangle; color algoIndigo; border dashed }
+  }
+
+  element policy {
+    title 'Politique'
+    notation 'Policy'
+    description 'Regle de decision ou de comportement appliquee par un agent.'
+    style { shape rectangle; color algoIndigo; border dashed }
+  }
+
+  element optimizer {
+    title 'Optimiseur'
+    notation 'Optimizer'
+    description 'Algorithme resolvant un probleme d optimisation sous contraintes.'
+    style { shape rectangle; color algoIndigo }
+  }
+
+  element planner {
+    title 'Planificateur'
+    notation 'Planner'
+    description 'Algorithme produisant une sequence d actions ou de trajectoires.'
+    style { shape rectangle; color algoIndigo }
+  }
+
+  element controller {
+    title 'Controleur'
+    notation 'Controller'
+    description 'Algorithme de commande en boucle fermee (poursuite de trajectoire, stabilisation de formation).'
+    style { shape rectangle; color algoIndigo }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 5 — DONNEES
+  // Les messages deviennent EXPLICITEMENT OBSERVABLES (E06).
+  // C est la base des flux animes dans la scene 3D.
+  // ---------------------------------------------------------------------------
+  element message {
+    title 'Message'
+    notation 'Message'
+    description 'Unite d information echangee entre deux entites. Porte producteur, consommateurs, protocole, frequence, criticite et latence cible.'
+    style { shape rectangle; color dataPurple }
+  }
+
+  element event {
+    title 'Evenement'
+    notation 'Event'
+    description 'Notification de changement d etat, sans destinataire designe a l emission.'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  element scenario {
+    title 'Scenario'
+    notation 'Scenario'
+    description 'Sequence causale expliquant le fonctionnement de l essaim. Non executee sauf mention contraire. Alimente les guided tours, l animation 3D et les cas de test.'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  element command {
+    title 'Commande'
+    notation 'Command'
+    description 'Ordre d execution adresse a une cible identifiee. Semantique imperative et tracable.'
+    style { shape rectangle; color dataPurple }
+  }
+
+  element telemetry {
+    title 'Telemetrie'
+    notation 'Telemetry'
+    description 'Flux de mesures periodiques remontees. Volume eleve, criticite variable.'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  element state {
+    title 'Etat'
+    notation 'State'
+    description 'Etat partage ou replique representant la vision d une entite a un instant donne.'
+    style { shape rectangle; color dataPurple }
+  }
+
+  element dataset {
+    title 'Jeu de donnees'
+    notation 'Dataset'
+    description 'Ensemble de donnees persistant : journal de mission, replay, entrainement.'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 6 — COMMUNICATION
+  // ---------------------------------------------------------------------------
+  element topic {
+    title 'Topic'
+    notation 'Topic'
+    description 'Sujet de publication logique (nom de flux de messages).'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  element channel {
+    title 'Channel'
+    notation 'Channel'
+    description 'Canal de communication physique ou logique (support de messages).'
+    style { shape rectangle; color dataPurple; border dashed }
+  }
+
+  element factSheet {
+    title 'Fait source'
+    notation 'Fait'
+    description 'Enonce factuel relie a une source verifiable. Porte son statut epistemique.'
+    style { shape rectangle; color factTeal }
+  }
+
+  element finding {
+    title 'Constat scientifique'
+    notation 'Finding'
+    description 'Verdict reliant une affirmation technique a ses sources primaires. Porte le verdict, le niveau de preuve et les limites DECLAREES par les auteurs.'
+    style { shape rectangle; color sciencePink }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE — WORLD MODEL (E11). Modele DERIVE, sans aucune 3D.
+  // ---------------------------------------------------------------------------
+
+  element zoneSemantic {
+    title 'Zone semantique'
+    notation 'Zone'
+    description 'Domaine abstrait de simulation. AUCUNE coordonnee : le consommateur 3D la spatialise.'
+    style { shape rectangle; color worldIndigo; border dashed }
+  }
+
+  element worldEntity {
+    title 'Entite simulable'
+    notation 'Entity'
+    description 'Population simulable du World Model. Porte id_likec4 (cle vers le modele semantique), population et categorie visuelle.'
+    style { shape rectangle; color worldIndigo }
+  }
+
+  element sceneCategory {
+    title 'Categorie de scene'
+    notation 'Category'
+    description 'Classe de consommation pour le rendu. Regroupe des entites sans les redefinir.'
+    style { shape rectangle; color worldIndigo; border dashed }
+  }
+
+  element worldState {
+    title 'Etat d apparence'
+    notation 'State'
+    description 'Etat visuel derive d un scenario E09. Le rendu represente des etats, pas seulement des objets.'
+    style { shape rectangle; color worldIndigo; border dashed }
+  }
+
+  element renderRule {
+    title 'Regle de representation'
+    notation 'Rule'
+    description 'Garde-fou verifiable : interdit au consommateur d inventer une donnee que le modele ne fournit pas.'
+    style { shape rectangle; color worldIndigo; border solid }
+  }
+
+  element deploymentUnit {
+    title 'Unite de deploiement'
+    notation 'Deployment Unit'
+    description 'Regroupement de ce qui est deploye ensemble : instance de plateforme, zone ou environnement.'
+    style { shape rectangle; color infraBrown; border dashed }
+  }
+
+  element protocol {
+    title 'Protocole'
+    notation 'Protocol'
+    description 'Regle d echange normalisee (MAVLink, DDS, Zenoh, MQTT, DTN). Porte version et standard de reference.'
+    style { shape rectangle; color commOrange; border dashed }
+  }
+
+  element interface {
+    title 'Interface'
+    notation 'Interface'
+    description 'Point de raccordement technique entre deux entites (serie, ethernet, radio, API).'
+    style { shape rectangle; color commOrange; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 7 — MATERIEL
+  // Base du drone de reference (E05) et des assets Blender.
+  // ---------------------------------------------------------------------------
+  element drone {
+    title 'Drone / Plateforme'
+    notation 'Drone'
+    description 'Plateforme physique de l essaim. Instance de l architecture de drone de reference. Les 30 drones du simulateur sont des instances de ce type.'
+    style { shape rectangle; color hwSlate; border solid }
+  }
+
+  element sensor {
+    title 'Capteur'
+    notation 'Sensor'
+    description 'Dispositif produisant une mesure : IMU, GNSS, camera, lidar, barometre, magnetometre.'
+    style { shape rectangle; color hwSlate }
+  }
+
+  element actuator {
+    title 'Actionneur'
+    notation 'Actuator'
+    description 'Dispositif produisant une action physique : moteur, servo, ESC, charge utile.'
+    style { shape rectangle; color hwSlate }
+  }
+
+  element computeNode {
+    title 'Noeud de calcul'
+    notation 'Compute Node'
+    description 'Unite de calcul embarquee (SoC, SBC, GPU edge).'
+    style { shape rectangle; color hwSlate }
+  }
+
+  element flightController {
+    title 'Controleur de vol'
+    notation 'Flight Controller'
+    description 'Calculateur temps reel certifie portant la boucle de vol et la voie de surete.'
+    style { shape rectangle; color hwSlate; border solid }
+  }
+
+  element companionComputer {
+    title 'Calcul de bord'
+    notation 'Companion Computer'
+    description 'Calculateur non temps reel hebergeant la pile de coordination et les algorithmes embarques.'
+    style { shape rectangle; color hwSlate; border dashed }
+  }
+
+  element networkDevice {
+    title 'Equipement reseau'
+    notation 'NetworkDevice'
+    description 'Radio, modem, switch, antenne, relais physique.'
+    style { shape rectangle; color hwSlate; border dashed }
+  }
+
+  element groundStation {
+    title 'Station sol'
+    notation 'GroundStation'
+    description 'Moyen sol : station de controle, antenne de poursuite, poste operateur.'
+    style { shape rectangle; color hwSlate }
+  }
+
+  element server {
+    title 'Serveur'
+    notation 'Server'
+    description 'Machine d execution cote edge ou cloud.'
+    style { shape rectangle; color hwSlate }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 8 — INFRASTRUCTURE
+  // ---------------------------------------------------------------------------
+  element container {
+    title 'Conteneur'
+    notation 'Container'
+    description 'Unite d isolation de deploiement (Docker, k8s pod).'
+    style { shape rectangle; color infraBrown; border dashed }
+  }
+
+  element network {
+    title 'Reseau'
+    notation 'Network'
+    description 'Lien ou domaine de communication physique/logique entre entites.'
+    style { shape rectangle; color infraBrown; border dashed }
+  }
+
+  element runtime {
+    title 'Environnement d execution'
+    notation 'Runtime'
+    description 'Support d execution : OS, middleware, hyperviseur, intergiciel temps reel.'
+    style { shape rectangle; color infraBrown; border dashed }
+  }
+
+  element middleware {
+    title 'Intergiciel'
+    notation 'Middleware'
+    description 'Couche de mediation : bus DDS, broker MQTT, bus Zenoh, framework ROS 2.'
+    style { shape rectangle; color infraBrown; border dashed }
+  }
+
+  // ---------------------------------------------------------------------------
+  // FAMILLE 9 — DOCUMENTATION ET PREUVES
+  // Toute affirmation scientifique importante doit pointable vers une source.
+  // Aucune source n est inventee : les entrees non verifiables portent
+  // evidence = unknown et generent une carte Kanban.
+  // ---------------------------------------------------------------------------
+  element scientificPaper {
+    title 'Article scientifique'
+    notation 'Paper'
+    description 'Publication de reference (titre, auteurs, annee, DOI, resultat principal, limites). Supporte les affirmations algorithmiques.'
+    style { shape rectangle; color docGray }
+  }
+
+  element specDoc {
+    title 'Specification'
+    notation 'Spec'
+    description 'Document de specification interne ou normatif.'
+    style { shape rectangle; color docGray; border dashed }
+  }
+
+  element standard {
+    title 'Standard / Norme'
+    notation 'Standard'
+    description 'Norme externe : RFC, DO-178C, STANAG, ASTM, MIL-STD.'
+    style { shape rectangle; color docGray; border dashed }
+  }
+
+  element sourceCode {
+    title 'Code source'
+    notation 'SourceCode'
+    description 'Depot ou module versionne (Git/GitHub). LikeC4 REFERENCE le code, il ne le contient pas.'
+    style { shape rectangle; color docGray; border dashed }
+  }
+
+  element test {
+    title 'Test'
+    notation 'Test'
+    description 'Cas de verification, avec critere d acceptation mesurable.'
+    style { shape rectangle; color docGray; border dashed }
+  }
+
+  element experiment {
+    title 'Experience / Campagne'
+    notation 'Experiment'
+    description 'Campagne de mesure ou de simulation produisant des resultats quantifies.'
+    style { shape rectangle; color docGray; border dashed }
+  }
+
+  // ===========================================================================
+  //  RELATIONS TYPÉES — coeur du metamodele
+  //  REGLE DE MISSION : eviter les relations generiques non semantiques.
+  //  Un arc dont le sens reel est inconnu porte `unknown`, JAMAIS un kind
+  //  choisi par defaut. Une carte Kanban est creee pour chaque `unknown`.
+  //
+  //  Les 14 kinds de relation historiques (sync, flow, radio, command, store,
+  //  async, safety, depend-on, justifie, derives-from, implemented-by,
+  //  alternative-to, exposed-to, does-not-cover) sont CONSERVES a l identique.
+  //  Les kinds ci-dessous sont AJOUTES : ils donnent aux arcs existants une
+  //  semantique que le libelle seul ne portait pas.
+  // ===========================================================================
+
+  // --- Structure ---
+  /** Appartenance structurelle : le parent contient l enfant (composition). */
+  relationship contains { title 'Contient'; line solid; color systemBlue }
+  /** Derivation : l element est une variante/instance derivee de la cible. */
+  relationship derivedFrom { title 'Derive de'; line dashed; color sourceGray }
+  /** Nature non etablie. Explicite, jamais un defaut silencieux. */
+  relationship unknown { title 'Non qualifie'; line dotted; color criticalRed }
+
+  // --- Implementation et execution ---
+  /** Le sujet realise la cible : composant -> fonction, composant -> capacite. */
+  relationship implements { title 'Implemente'; line solid; color funcGreen }
+  /** Le sujet s execute sur la cible (runtime, noeud de calcul). */
+  relationship deployedAs {
+    title 'est deploye comme'
+    description 'Relie une entite executable a son unite de deploiement.'
+  }
+
+  relationship runsOn { title 'S execute sur'; line solid; color hwSlate }
+
+  relationship realizes {
+    title 'realise'
+    description 'Relie une capacite a une fonction, ou une fonction au composant qui la realise.'
+    line solid
+    color factTeal
+  }
+  /** Le sujet est deploye sur la cible (noeud de deploiement). */
+  relationship deployedOn { title 'Deploye sur'; line solid; color infraBrown }
+
+  // --- Flux de messages ---
+  /** Le sujet publie sur la cible (topic/canal). */
+  relationship publishes { title 'Publie sur'; line solid; color dataPurple }
+  /** Le sujet s abonne a la cible (topic/canal). */
+  relationship subscribes { title 'S abonne a'; line solid; color dataPurple }
+  /** Le sujet emet la cible (message, commande). */
+  relationship sends { title 'Emet'; line solid; color dataPurple }
+  /** Le sujet recoit la cible (message, commande). */
+  relationship receives { title 'Recoit'; line solid; color dataPurple }
+
+  // --- Commande et observation ---
+  /** Le sujet commande la cible (autorite imperative). */
+  relationship commands { title 'Commande'; line solid; color criticalRed }
+  /** Le sujet observe la cible (mesure, surveillance). */
+  relationship observes { title 'Observe'; line dashed; color commOrange }
+  /** Le sujet controle la cible (boucle fermee). */
+  relationship controls { title 'Controle'; line solid; color criticalRed }
+
+  // --- Dependances logiques ---
+  /** Le sujet depend de la cible pour assurer sa fonction. */
+  relationship dependsOn { title 'Depend de'; line dotted; color effortGray }
+  /** Le sujet appelle la cible (invocation synchrone ou distante). */
+  relationship calls { title 'Appelle'; line solid; color effortGray }
+
+  // --- Donnees ---
+  /** Le sujet produit la cible (message, donnee, etat). */
+  relationship produces { title 'Produit'; line dashed; color dataPurple }
+  /** Le sujet consomme la cible. */
+  relationship consumes { title 'Consomme'; line dashed; color dataPurple }
+  /** Le sujet utilise la cible (ressource, protocole, brique). */
+  relationship uses { title 'Utilise'; line dotted; color effortGray }
+
+  relationship exposes {
+    title 'Expose a'
+    description 'Relie un scenario au risque ou a l angle mort qu il met en evidence.'
+    line dashed
+    color riskRed
+  }
+
+  relationship triggers {
+    title 'Declenche'
+    description 'Enchainement causal : un scenario declenche une etape, une etape la suivante.'
+    line solid
+    color factTeal
+  }
+
+
+  relationship populates {
+    title 'Peuple'
+    description 'Une entite simulable occupe une zone semantique.'
+    line solid
+    color worldIndigo
+  }
+
+  relationship maps-to {
+    title 'Correspond a'
+    description 'Cle de derivation : entite du World Model vers l element LikeC4 d origine.'
+    line dashed
+    color worldIndigo
+  }
+
+  relationship belongs-to {
+    title 'Appartient a'
+    description 'Regroupement de rendu d une entite dans une categorie de scene.'
+    line dotted
+    color worldIndigo
+  }
+
+  relationship constrains {
+    title 'Contraint'
+    description 'Une regle de representation s impose a un element de scene. Garde-fou verifiable.'
+    line solid
+    color worldIndigo
+  }
+
+
+  relationship evidences {
+    title 'Etaye'
+    description 'Relie un constat scientifique a l algorithme qu il etaye ou contredit.'
+    line solid
+    color sciencePink
+  }
+
+  // --- Verification et preuve ---
+  /** Le sujet valide la cible (test -> fonction, test -> algorithme). */
+  relationship validates { title 'Valide'; line dashed; color decisionGreen }
+  /** Le sujet est documente par la cible. */
+  relationship documentedBy { title 'Documente par'; line dotted; color docGray }
+  /** Le sujet est supporte par la cible (preuve scientifique). */
+  relationship supportedBy { title 'Supporte par'; line solid; color docGray }
+  /** Le sujet est mesure par la cible (metrique, campagne). */
+  relationship measuredBy { title 'Mesure par'; line dotted; color docGray }
+  /** Le sujet evalue la cible (paper -> algorithme, experiment -> strategie). */
+  relationship evaluates { title 'Evalue'; line dashed; color docGray }
+
+  // ===========================================================================
+  //  KINDS DE NOEUDS DE DEPLOIEMENT
+  //  NOTE : `host` reste declare dans architecture.c4 (utilise par les vues
+  //  existantes). Ne pas le redeclarer ici : collision de kind.
+  //  Ajouts : droneNode, edgeNode, groundNode, cloudNode, softwareInstance.
+  // ===========================================================================
+
+  deploymentNode droneNode {
+    title 'Drone'
+    notation 'Drone (x30)'
+    description 'Plateforme de l essaim. Les 30 instances sont generees par le simulateur.'
+    style { color zoneOnboard }
+  }
+
+  deploymentNode edgeNode {
+    title 'Noeud Edge'
+    notation 'Edge'
+    description 'Noeud de proximite : relais, fusion, coordination locale.'
+    style { color zoneEdge }
+  }
+
+  deploymentNode groundNode {
+    title 'Noeud Sol / C2'
+    notation 'Ground'
+    description 'Poste de commandement, station de controle, operateur.'
+    style { color zoneC2 }
+  }
+
+  deploymentNode cloudNode {
+    title 'Noeud Cloud'
+    notation 'Cloud'
+    description 'Hors boucle de controle. Strictement differe.'
+    style { color cloudCyan }
+  }
+
+  deploymentNode softwareSystemInstance {
+    title 'Instance logicielle'
+    notation 'Instance'
+    description 'Occurrence deployee d une brique logicielle.'
+    style { color softwareTeal }
+  }
+}
+
+
+
+

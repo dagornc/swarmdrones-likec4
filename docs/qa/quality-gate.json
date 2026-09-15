@@ -1,0 +1,72 @@
+{
+ "score": 97,
+ "cible": 90,
+ "rows": [
+  {
+   "critere": "Validite syntaxique",
+   "poids": 10,
+   "note": 10,
+   "justification": "Valid (14 files, 0 errors)"
+  },
+  {
+   "critere": "Identifiants uniques",
+   "poids": 10,
+   "note": 9,
+   "justification": "285 elements, 264 conformes a la convention (93%)"
+  },
+  {
+   "critere": "Type des elements",
+   "poids": 10,
+   "note": 10,
+   "justification": "38 kinds ; familles couvertes 6/6 : donnees, communication, materiel, algorithmes, science, world"
+  },
+  {
+   "critere": "Type des relations",
+   "poids": 15,
+   "note": 15,
+   "justification": "544 relations, 27 kinds distincts utilises"
+  },
+  {
+   "critere": "Completude documentaire",
+   "poids": 10,
+   "note": 10,
+   "justification": "285/285 descriptions (100%), 273 avec metadata"
+  },
+  {
+   "critere": "Couverture algorithmique",
+   "poids": 10,
+   "note": 9,
+   "justification": "18 algorithmes, 4.7 champs riches en moyenne (cible 5)"
+  },
+  {
+   "critere": "Couverture messages",
+   "poids": 10,
+   "note": 10,
+   "justification": "13 messages objets"
+  },
+  {
+   "critere": "Couverture materielle",
+   "poids": 10,
+   "note": 9,
+   "justification": "9 elements materiels"
+  },
+  {
+   "critere": "Couverture deploiement",
+   "poids": 10,
+   "note": 10,
+   "justification": "5 unites de deploiement, chaine typée: True"
+  },
+  {
+   "critere": "Vues et navigation",
+   "poids": 5,
+   "note": 5,
+   "justification": "48 vues, 0 vides, 12 navigateTo"
+  },
+  {
+   "critere": "Tracabilite / preuves",
+   "poids": 10,
+   "note": 10,
+   "justification": "7 faits, 8 elements scientifiques, 88 avec source/reference"
+  }
+ ]
+}

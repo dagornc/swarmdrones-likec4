@@ -1,0 +1,40 @@
+# --- Sauvegardes manuelles ---
+# 22 copies datees du modele, accumulees AVANT la mise sous versionnement.
+# Git rend cette pratique redondante : l'historique est desormais tenu par
+# les commits. Elles restent sur disque (archive ponctuelle) mais ne sont pas
+# versionnees : elles representeraient 4,2 Mo de doublons stricts.
+backup_v*/
+
+# --- Sorties REGENERABLES du pipeline ---
+# Ces fichiers sont PRODUITS par le pipeline et verifiables par recalcul.
+# Les versionner creerait un risque de divergence silencieuse (un artefact
+# versionne peut mentir sur ce que le code produit reellement) et alourdirait
+# le depot sans valeur ajoutee.
+#
+# NOTE : export/scene.json et viewer/scene.json sont volontairement EXCLUS.
+# export_scene.py --check impose deja leur coherence mutuelle : versionner la
+# sortie doublerait ce controle sans le renforcer, et brouillerait les diffs.
+export/scene.json
+export/scene.sha256
+export/world-model.json
+viewer/scene.json
+viewer/scene.sha256
+assets/glb/*.glb
+assets/assets.json
+assets/preview.png
+
+# --- Exports d'images LikeC4 (regenerables via export_likec4.sh) ---
+# 16 PNG pesant ~25 Mo au total, tous reproductibles depuis le modele .c4.
+# Le SCRIPT export_likec4.sh est versionne, lui : il porte les lecons apprises
+# (timeouts Playwright, fichiers root-owned, includes dangereux). C'est la
+# connaissance qui a de la valeur, pas la sortie binaire.
+png/*.png
+point4/*.png
+point4/*.drawio
+drawio/*.drawio
+
+# --- Outils / caches / secrets ---
+node_modules/
+__pycache__/
+*.pyc
+.env

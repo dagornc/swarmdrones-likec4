@@ -1,0 +1,230 @@
+// =============================================================================
+//  E08 — REFERENTIEL SCIENTIFIQUE (SWARM-3D-ARCHITECTURE, carte t_361b3beb)
+//
+//  Objectif : relier les ALGORITHMES du catalogue a des SOURCES PRIMAIRES,
+//  et surtout : porter le VERDICT REE L de chaque affirmation.
+//
+//  ORIGINE : audit de fidelite documentaire execute par le profil
+//  SwarmDrone (carte t_81787f59, livrable claim-fidelity-audit.md).
+//  4 affirmations confrontees a leurs sources primaires.
+//
+//  RESULTAT BRUTAL ET UTILE : une affirmation du modele est
+//  CONTREDITE par sa source primaire. Voir sciCbf. On ne l a pas
+//  corrigee dans le sens arrangeant.
+//
+//  REGLE DE MISSION : si aucun article fiable n est trouve, ecrire
+//  « aucun article trouve » et NE PAS noter SUPPORTED.
+//  Les DOI/arXiv ci-dessous proviennent de pages REELLEMENT lues.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. SOURCES PRIMAIRES
+  // ===========================================================================
+
+  srcCBBA = specDoc 'Choi, Brunet, How (2009) — Consensus-Based Decentralized Auctions' {
+    #science
+    description 'IEEE T-RO 2009. Prouve CBBA conflict-free et convergent sous communications synchrones/completes, optimalite a 50%.'
+    metadata { nature 'source primaire'; type 'article de revue'; corpus '#17'; statut 'CONSULTEE' }
+  }
+  srcCBBA24 = specDoc 'Bi et al. (2024) — Improved CBBA, Drones 8(8):345' {
+    #science
+    description 'Reallocation de mission multi-UAV heterogene. Heartbeat-hold pour detecter l agent detruit. N=8 UAV dans le scenario.'
+    metadata { doi '10.3390/drones8080345'; annee '2024'; n_reel '8 UAV'; nature 'primaire'; statut 'CONSULTEE' }
+  }
+  srcDegraded30 = specDoc 'Integrated Consensus Framework for a Degraded UAV Fleet (2025)' {
+    #science
+    description 'Exactement 30 agents / 30 taches, portee variable (0.1D/0.5D/1D), perte d UAV aleatoire, 837 runs Monte-Carlo. C est de la SIMULATION.'
+    metadata { doi '10.70322/dav.2025.10016'; annee '2025'; n '30 (simulation)'; nature 'primaire'; statut 'CONSULTEE' }
+  }
+  srcCAHCBF = specDoc 'Kim et al. (2026) — CA-HCBF, arXiv:2604.13245' {
+    #science
+    description 'Control Barrier Functions heterogenes decentralisees. Simulation N in {10,20,30}. MATERIEL REEL : 5 robots LIMO Pro seulement.'
+    metadata { arxiv '2604.13245'; annee '2026'; n_sim '30'; n_reel '5 robots'; nature 'primaire'; statut 'CONSULTEE' }
+  }
+  srcCRDT = specDoc 'Shapiro, Preguica, Baquero, Zawirski (2011) — CRDT, INRIA RR-7687' {
+    #science
+    description 'CRDT LWW-Register = semilattice join-based. Sous eventual delivery, convergence PROUVEE (strong eventual consistency). C est un theoreme.'
+    metadata { nature 'rapport de recherche INRIA'; annee '2011'; statut 'CONSULTEE' }
+  }
+  srcKilobot = specDoc 'Swarm Intelligence (2025) — Global coordinate system, up to 200 Kilobots' {
+    #science
+    description 'Jusqu a 200 Kilobots REELS. Mecanismes proches (stigmergie versionnee, horloges logiques) mais ne nomment pas toujours des CRDT formels.'
+    metadata { doi '10.1007/s11721-025-00251-4'; annee '2025'; n_reel 'jusqu a 200 Kilobots'; nature 'primaire' }
+  }
+  srcUUV = specDoc 'Survey UUV Clusters — Robust State Estimation and Information Fusion' {
+    #science
+    description 'Revue MDPI sur la fusion distribuee en milieu GNSS-denied (UUV). Cadre de comparaison quantitatif, sur SCENARIO SIMULE.'
+    metadata { corpus '#221'; nature 'revue avec benchmark'; statut 'CONSULTEE' }
+  }
+
+  // ===========================================================================
+  //  2. VERDICTS — une affirmation, un verdict, une raison
+  //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
+  // ===========================================================================
+
+  sciCbba = finding 'SCI-1 — CBBA converge sous retrait d agents / partition' {
+    #science
+    description '''
+      Ce qui est PROUVE : CBBA est conflict-free et convergent sous
+      communications synchrones/completes, optimalite a 50%.
+
+      Ce qui est seulement EMPIRIQUE : la robustesse au retrait d agents
+      est traitee par mecanismes add-on (heartbeat, reactivite) et
+      validee EN SIMULATION.
+
+      TROU : aucun article primaire ne prouve la convergence de CBBA
+      sous partition PERSISTANTE. Les preuves exigent un graphe de
+      communication permettant l echange de consensus ; une partition
+      prolongee casse cette hypothese.
+    '''
+    metadata {
+      verdict 'CONDITIONAL'
+      transfere_au_dela_de_30 'UNSUPPORTED'
+      niveau_preuve 'MEDIUM'
+      source 'srcCBBA, srcCBBA24, srcDegraded30'
+      correction_modele 'evidence vague -> CONDITIONAL explicite'
+    }
+  }
+
+  sciCbf = finding 'SCI-2 — CBF : garanties a 30 agents en experience REELLE' {
+    #science
+    description '''
+      VERDICT : UNSUPPORTED telle qu enoncee. ET C EST UNE CORRECTION
+      IMPORTANTE DU MODELE.
+
+      La source primaire (CA-HCBF, arXiv:2604.13245) donne :
+        - SIMULATION : N in {10, 20, 30}
+        - MATERIEL REEL : 5 robots LIMO Pro
+        - A N=30 (simulation) : 89,6% d arrivee, 5,1 violations de paire
+          en moyenne (ecart-type 9,6), 669,6 infeasibilities QP par essai
+
+      Donc : « 30 agents » = SIMULATION. « En experience reelle » = FAUX
+      pour N~30 (le reel plafonne a 5). Et « garanties » n est pas
+      absolue : les violations ne tombent pas a zero, et l infeasibility
+      QP n est pas totalement eliminee.
+
+      ECART D ECHELLE : reel=5, sim=30, cible=30 (SWARM-3D) et 200 (revendique).
+      Facteur 40 vs le reel pour 200.
+    '''
+    metadata {
+      verdict 'UNSUPPORTED'
+      transfere_au_dela_de '5 (reel) / 30 (simulation)'
+      niveau_preuve 'LOW — contradictoire'
+      source 'srcCAHCBF'
+      correction_modele 'contraintes et tbd requalifies en contradiction sourcee'
+      compromis 'garantie absolue (sRCBF, <5% arrivee a N=30) vs performance (CA-HCBF)'
+    }
+  }
+
+  sciCrdt = finding 'SCI-3 — CRDT LWW converge sous partition reseau' {
+    #science
+    description '''
+      DOUBLE VERDICT.
+
+      THEORIE (SUPPORTED) : un CRDT LWW-Register est un semilattice
+      join-based ; sous eventual delivery, la convergence est PROUVEE
+      (strong eventual consistency). La convergence sous partition est
+      un THEOREME, pas une observation.
+
+      APPLICATION ESSAIM (CONDITIONAL) : tres peu de sources evaluent
+      un CRDT sur essaim de drones a grande echelle. Les travaux les
+      plus proches sont en micro-robotique (Kilobots, jusqu a 200 reels)
+      et ne testent pas le brouillage RF en vol.
+
+      DISTINCTION CRITIQUE : convergence CRDT != convergence de tache.
+      LWW garantit que tous convergent vers le MEME etat, pas que cet
+      etat soit CORRECT pour la mission. Sous partition longue, les deux
+      cotes peuvent converger vers une decision hors du plan initial.
+    '''
+    metadata {
+      verdict 'SUPPORTED (theorie) / CONDITIONAL (essaim)'
+      transfere_au_dela_de '30 — theoreme independant de N mais non teste en vol'
+      niveau_preuve 'HIGH (theorie) / LOW (application)'
+      source 'srcCRDT, srcKilobot'
+      correction_modele 'ADR-2 requalifie : convergence d ETAT prouvee, convergence de MISSION non'
+    }
+  }
+
+  sciEkf = finding 'SCI-4 — EKF/UKF distribue cooperatif a ~30 plateformes' {
+    #science
+    description '''
+      VERDICT : CONDITIONAL.
+
+      ETABLI : les filtres distribues cooperatifs (Consensus EKF/UKF,
+      Covariance Intersection, Split CI) sont une famille mature et
+      theorisee, convergence sous graphe connexe.
+
+      LIMITE : la validation est majoritairement en SIMULATION et sur
+      UUV/AUV (milieu GNSS-denied, acoustique). Le chiffre « ~30
+      plateformes REELLES » n a PAS ete confirme par une source primaire.
+
+      UAV vs UUV : hypotheses reseau tres differentes. Transposer une
+      preuve UUV vers un essaim UAV n est pas direct.
+    '''
+    metadata {
+      verdict 'CONDITIONAL'
+      transfere_au_dela_de '30 non confirme (beaucoup de demos reelles plafonnent a 3-10)'
+      niveau_preuve 'MEDIUM'
+      source 'srcUUV'
+      correction_modele 'evidence vague -> CONDITIONAL, validation majoritairement sim/UUV'
+    }
+  }
+
+  // ===========================================================================
+  //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
+  //     Declares comme objets : ce sont des cibles de recherche futures.
+  // ===========================================================================
+
+  gap1 = finding 'GAP-1 — CBBA a 30 sous partition persistante + brouillage' {
+    #science
+    description 'Mesurer : temps de re-consensus, taux de conflit residuel. Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCbba'; priorite 'haute' }
+  }
+  gap2 = finding 'GAP-2 — CBF heterogene au-dela de 30 en materiel reel' {
+    #science
+    description 'Avec comptage des infeasibilities QP et profondeur de violation. Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCbf'; priorite 'haute' }
+  }
+  gap3 = finding 'GAP-3 — CRDT (LWW + OR-Set) sur drones en vol, brouillage RF reel' {
+    #science
+    description 'Mesurer convergence d etat ET qualite de decision de mission. Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCrdt'; priorite 'moyenne' }
+  }
+  gap4 = finding 'GAP-4 — Fusion EKF/UKF hierarchique a >=100 plateformes' {
+    #science
+    description 'Avec budget de communication explicite et metrique de derive de consensus. Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciEkf'; priorite 'moyenne' }
+  }
+
+  // ===========================================================================
+  //  4. RELATIONS — le referentiel s ancre sur les algorithmes reels
+  // ===========================================================================
+
+  sciCbba -[evidences]-> algTaskAllocation 'algorithme concerne'
+  sciCbba -[uses]-> srcCBBA 'source primaire'
+  sciCbba -[uses]-> srcCBBA24 'source primaire'
+  sciCbba -[uses]-> srcDegraded30 'source primaire'
+  sciCbf -[evidences]-> algCollisionAvoidance 'algorithme concerne'
+  sciCbf -[uses]-> srcCAHCBF 'source primaire decisive'
+  sciCrdt -[evidences]-> algConsensus 'algorithme concerne'
+  sciCrdt -[uses]-> srcCRDT 'theoreme'
+  sciCrdt -[uses]-> srcKilobot 'echelle reelle'
+  sciEkf -[evidences]-> algPerceptionFusion 'algorithme concerne'
+  sciEkf -[uses]-> srcUUV 'revue'
+
+  gap1 -[exposes]-> sciCbba 'doute a lever'
+  gap2 -[exposes]-> sciCbf 'doute a lever'
+  gap3 -[exposes]-> sciCrdt 'doute a lever'
+  gap4 -[exposes]-> sciEkf 'doute a lever'
+
+  // Ancrage sur les risques et hypotheses du modele
+  sciCbf -[exposes]-> riskR9 'collision en urgence'
+  sciCbf -[exposes]-> riskR3 'validation a 30 non realisable'
+  sciCbba -[exposes]-> riskR4 'reconfiguration sous partition'
+  sciCrdt -[exposes]-> adr2 'fraicheur explicite, coherence faible'
+  sciCrdt -[exposes]-> riskR4 'split-brain'
+  sciEkf -[exposes]-> riskR8 'fusion degradee en densite'
+  sciEkf -[exposes]-> h3 'GNSS degradable'
+}

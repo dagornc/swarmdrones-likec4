@@ -1,0 +1,252 @@
+// =============================================================================
+//  E05 — ARCHITECTURE MATERIELLE DU DRONE DE REFERENCE
+//  Mission SWARM-3D-ARCHITECTURE · Carte t_0028effd
+//
+//  Objectif : rendre le drone de reference EXPLICITE au sens du metamodele.
+//  Le modele existant decrit `onboard` comme une `platform` opaque contenant
+//  des `component`. E05 lui ajoute :
+//    - les capteurs (kind sensor) ;
+//    - les actionneurs (kind actuator) ;
+//    - les noeuds de calcul (kind computeNode, flightController,
+//      companionComputer) ;
+//    - les equipements reseau (kind networkDevice).
+//
+//  REGLES DE CONSTRUCTION (mission) :
+//    - on AJOUTE, on ne remplace rien ;
+//    - `onboard` reste une `platform` : aucune vue existante ne casse ;
+//    - les 30 instances de deploiement continuent de pointer sur `onboard` ;
+//    - les identifiants suivent docs/naming-conventions.md (HW_*) ;
+//    - toute valeur inconnue est `TBD` et porte un tag #tbd ;
+//      toute valeur deduite porte un tag #extrap ;
+//      toute valeur issue d'une source porte sa provenance ;
+//    - aucune coordonnee 3D, aucun asset graphique.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  NOYAU PHYSIQUE DU DRONE DE REFERENCE
+  //  Ce modele est INSTANCIE 30 fois par le simulateur (cf. deployment).
+  //  Il decrit la STRUCTURE ; l'etat dynamique viendra du moteur de simulation.
+  // ===========================================================================
+
+  refDrone = drone 'Drone de reference — UAV-R multirotor' {
+    #hardware #reference
+    description '''
+      Architecture materielle de reference d'un drone de l'essaim.
+      Les 30 plateformes du simulateur sont des instances de ce modele,
+      selon trois variantes : UAV-R (18), UAV-F (8), USV (4).
+
+      Le drone DOIT terminer sa mission nominale sans C2 ni cloud.
+      Toute fonction marquee #tbd releve d'une decision non prise.
+    '''
+    metadata {
+      source '§4.1 onboard / deployment uavR|uavF|usv'
+      variantes 'UAV-R 18 / UAV-F 8 / USV 4 (N=30)'
+      criticite 'safety-critical'
+    }
+    style { color zoneOnboard }
+
+    // -----------------------------------------------------------------------
+    //  1. CHAINE DE CALCUL
+    //     Deux ordinateurs de bord : temps reel certifie + calcul non temps reel.
+    // -----------------------------------------------------------------------
+
+    flightCtrl = flightController 'HW_FC — Controleur de vol (PX4)' {
+      #safety-critical #hardware #fact #tbd
+      technology 'Pixhawk FMUv6X, STM32H753 (Cortex-M7 480 MHz, 2 Mo flash, 1 Mo RAM), NuttX/PX4'
+      description '''
+        Boucle de controle attitude/position temps reel (~400 Hz).
+        Porte la voie de surete : geofence, RTL, atterrissage d'urgence.
+        Executable sans aucun lien de communication.
+      '''
+      metadata {
+        frequence '400 Hz [EXTRAP — famille Pixhawk]'
+        criticite 'safety-critical'
+        autonomie 'autorite locale non delegable'
+        source '§4.1 onboard.autopilot'
+        socle 'Holybro Pixhawk 6X, conforme standard ouvert FMUv6X (DS-012), Bus (DS-010), Connector (DS-009) [FAIT — PX4 docs + Holybro]'
+        io 'STM32F103 (M3, 72 MHz, 64 Ko SRAM) [FAIT — PX4/Holybro]'
+        alim 'entree max 6 V, servo rail 0-36 V, triple alim POWER1/POWER2/USB [FAIT — PX4 docs + Holybro]'
+        masse 'FC 23-31 g ; baseboard standard 51-72 g [FAIT — PX4 docs + Holybro]'
+        temp '-40 a +85 C [FAIT — PX4 docs + Holybro]'
+        ethernet '100 Mbps integre — voie companion computer [FAIT — PX4 docs + Holybro]'
+        redondance '3x IMU ICM-45686 + 2x baro, bus separes (FAIT — PX4/Holybro)'
+        source_fc 'https://docs.px4.io/main/en/flight_controller/pixhawk6x ; https://holybro.com/products/pixhawk-6x'
+        tbd 'certification aeronautique non verifiee ; ne pas confondre conformite FMUv6X et certification DAL'
+        decision 'DE-05 (socle de vol et niveau d assurance)'
+      }
+      style { icon bootstrap:cpu }
+    }
+
+    companion = companionComputer 'HW_COMPANION — Calcul de bord non temps reel' {
+      #mission-critical #hardware #tbd
+      technology 'SoC ARM64, Linux, ROS 2 si retenu'
+      description '''
+        Heberge la pile de coordination : perception, mission, encheres
+        de taches, sante, telemetrie. Execute le swarm agent.
+        C'est ici que vivent les algorithmes embarques.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        role 'hote des algorithmes embarques'
+        source '§4.1 onboard (perception..telemetry)'
+        tbd 'options FAIT : VOXL 2 (15 TOPS, 0,1-7 W, 16 g) / Orin NX / i.MX 8M Plus ; TBD amont = budget de calcul TOPS'
+      }
+      style { icon bootstrap:motherboard }
+    }
+
+    // -----------------------------------------------------------------------
+    //  2. CAPTEURS (kind sensor)
+    //     Chaque capteur est une source de donnees identifiable. Les
+    //     capteurs feedent `onboard.sensors-hal` par la relation feeds.
+    // -----------------------------------------------------------------------
+
+    imu = sensor 'HW_IMU — Centrale inertielle' {
+      #safety-critical #hardware #tbd
+      technology 'IMU 6 axes, redondance TBD'
+      description 'Mesure accélération et vitesse angulaire. Base de l estimation d attitude.'
+      metadata { frequence '100-400 Hz [HYP]'; criticite 'safety-critical'; tbd 'modele exact depend du choix du controleur de vol ; derive non quantifiee (Non_verifie) ; redondance FAIT si FC FMUv6X : 3x ICM-45686 bus separes' }
+    }
+
+    gnss = sensor 'HW_GNSS — Positionnement satellite' {
+      #mission-critical #hardware
+      technology 'GNSS multi-constellation (+ RTK TBD)'
+      description '''
+        Position absolue. Indisponible en zone brouillee ou couverte :
+        c'est la source de la degradation de position (cf. blindspotAM16).
+      '''
+      metadata {
+        frequence '5-20 Hz [EXTRAP]'
+        criticite 'mission-critical'
+        vulnerabilite 'brouillage, leurrage, couvert'
+        source '§4.1 perception (redondance position)'
+      }
+    }
+
+    odometry = sensor 'HW_ODOM — Odometrie / barometre / magnetometre' {
+      #mission-critical #hardware
+      technology 'Capteurs proprioceptifs'
+      description 'Complement du GNSS en cas de perte : derive lente, non bornee.'
+      metadata { criticite 'mission-critical'; limite 'derive non bornee sans recalage' }
+    }
+
+    perceptionRel = sensor 'HW_REL — Perception relative inter-agents' {
+      #mission-critical #hardware #tbd #extrap
+      technology 'Camera / lidar / UWB TBD'
+      description '''
+        Estimation relative de position des voisins. Rôle critique pour la
+        formation et l'évitement sans GNSS.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        tbd 'technologie exacte + nb tags/plateforme : TBD ; #extrap UWB demontre en vol reel 13-26 agents'
+        source '§4.1 perception (estimation relative)'
+      }
+    }
+
+    saeSensor = sensor 'HW_SAE — Detection d obstacles (sense-and-avoid)' {
+      #safety-critical #hardware #tbd #extrap
+      technology 'Radar / lidar / vision TBD'
+      description '''
+        Detection de proximite. Le budget d action de perception est <= 100 ms
+        dans le modele existant — valeur EXTRAP, non confirmee par une source.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        delai_action '<= 100 ms [HYP — hypothese non sourcee, non decomposee ; a valider par simulation d encounters, ASTM F3442 Annexe X2]'
+        tbd 'borne basse normative = rayon DWC ~610 m (2000 ft, ASTM F3442-25) ; faisabilite vision AirTrack 700 m'
+      }
+    }
+
+    healthSensor = sensor 'HW_HEALTH — Surveillance materielle' {
+      #best-effort #hardware
+      technology 'Sondes tension/temperature/rotation'
+      description 'Sante batterie, temperatures, defaillances de capteur.'
+      metadata { criticite 'best-effort'; source '§4.1 onboard.health' }
+    }
+
+    // -----------------------------------------------------------------------
+    //  3. ACTIONNEURS (kind actuator)
+    // -----------------------------------------------------------------------
+
+    propulsion = actuator 'HW_PROP — Propulsion' {
+      #safety-critical #hardware
+      description 'Ensemble moteurs + ESC. Repond aux consignes de l autopilote.'
+      metadata { criticite 'safety-critical'; tbd 'configuration moteurs par variante' }
+    }
+
+    servos = actuator 'HW_SRV — Actionneurs de mission' {
+      #best-effort #hardware
+      description 'Servitudes specifiques (largage, orientation capteur selon variante).'
+      metadata { criticite 'best-effort'; tbd 'presence selon variante' }
+    }
+
+    // -----------------------------------------------------------------------
+    //  4. COMMUNICATIONS PHYSIQUES (kind networkDevice)
+    // -----------------------------------------------------------------------
+
+    radioLnk = networkDevice 'HW_RADIO — Lien radio principal' {
+      #mission-critical #hardware #tbd
+      technology 'RF sans fil — options FAIT : 2,4 GHz ISM (pMDDL2450, 25 Mbps) / M1-M6 MANET (Mesh Rider, 100 Mbps)'
+      description '''
+        Lien inter-drones et drone-vers-edge. Intermittent par construction.
+        Porte les messages de coordination ET la telemetrie.
+      '''
+      metadata {
+        criticite 'mission-critical'
+        vulnerabilite 'brouillage, partition, latence variable'
+        tbd 'CHOIX de bande (reglementaire) a trancher ; portees = annonces commerciales, non mesurees'
+      }
+    }
+
+    netMesh = networkDevice 'HW_MESH — Maillage inter-agents' {
+      #mission-critical #hardware #tbd
+      description 'Topologie dynamique entre pairs. Support du store-and-forward.'
+      metadata { criticite 'mission-critical'; tbd 'eclater en L2 radio-link / L3 middleware (Zenoh recommande) / politique store-and-forward deconnecte' }
+    }
+
+    // -----------------------------------------------------------------------
+    //  5. ENERGIE
+    // -----------------------------------------------------------------------
+
+    power = computeNode 'HW_POWER — Energie et distribution' {
+      #safety-critical #hardware #tbd
+      description '''
+        Batterie et distribution. L'energie est une ressource critique de
+        l'essaim : elle conditionne l'allocation de taches et la resilience.
+      '''
+      metadata {
+        criticite 'safety-critical'
+        unite 'Wh / pourcentage'
+        tbd 'RESTE OUVERT — 3 inconnues amont : endurance cible, masse, puissance par variante ; cellule Molicel P42A 15,5 Wh documentee'
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    //  6. RELATIONS MATERIELLES
+    //     Le sens : capteur -> chaine de calcul -> actionneur.
+    // -----------------------------------------------------------------------
+
+    imu -[flow]-> onboard.sensorsHAL 'etat inertiel'
+    gnss -[flow]-> onboard.sensorsHAL 'position absolue'
+    odometry -[flow]-> onboard.sensorsHAL 'vitesse / cap / altitude'
+    perceptionRel -[flow]-> onboard.sensorsHAL 'pistes relatives voisins'
+    saeSensor -[flow]-> onboard.sensorsHAL 'obstacles proches'
+    healthSensor -[flow]-> onboard.sensorsHAL 'etat materiel'
+
+    onboard.sensorsHAL -[runsOn]-> companion 'HAL executee sur le calcul de bord'
+    companion -[commands]-> propulsion 'consignes via autopilote'
+    companion -[commands]-> servos 'actionneurs de mission'
+    flightCtrl -[commands]-> propulsion 'consignes temps reel'
+    flightCtrl -[flow]-> power 'alimentation'
+
+    companion -[uses]-> radioLnk 'canal de communication'
+    companion -[uses]-> netMesh 'canal inter-agents'
+    flightCtrl -[flow]-> companion 'etat de vol'
+
+    // Le drone de reference est implemente par la plateforme logique onboard :
+    // c'est le pont entre le modele physique et le modele logiciel.
+    refDrone -[implemented-by]-> onboard 'pile logicielle onboard'
+  }
+}

@@ -1,0 +1,386 @@
+// =============================================================================
+//  E04 — CATALOGUE D'ALGORITHMES (SWARM-3D-ARCHITECTURE, carte t_83ae834a)
+//
+//  Objectif : chaque algorithme devient un OBJET DE PREMIERE CLASSE.
+//
+//  NE PAS CONFONDRE avec les elements `algorithm` d'architecture.c4 :
+//  ceux-ci sont des FAMILLES algorithmiques reliees aux hypotheses et
+//  aux angles morts. Ce fichier les ENRICHIT en objets de catalogue
+//  actionnables par le simulateur.
+//
+//  REGLES DE MISSION :
+//    - le code NE VIT PAS dans LikeC4 : on reference un repository/chemin ;
+//    - toute valeur inconnue -> TBD + #tbd, jamais inventee ;
+//    - toute affirmation scientifique importante doit pouvoir etre reliee
+//      a une source. Sans source trouvee -> 'aucune source verifiee' ;
+//    - executionMode = conceptual | emulated | simulated | executable ;
+//    - implementationStatus = idea | specified | prototype | implemented |
+//      tested | validated.
+//
+//  AVERTISSEMENT D'HONNETETE : aucune source primaire n'a ete verifiee
+//  dans cette session. Les champs `references` portent donc la valeur
+//  'aucune source verifiee' et le champ `evidence` reste conserve tel
+//  qu'il figurait dans le modele existant. Le profil SwarmDrone doit
+//  lever ces TBD avant tout usage de comparaison.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  A. COORDINATION, ALLOCATION, DECISION DISTRIBUEE
+  // ===========================================================================
+
+  algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA)' {
+    #algorithm
+    description '''
+      Consensus-based Bundle Algorithm : encheres successives avec
+      resolution de conflits. Chaque agent construit un ensemble de
+      taches et surenchérit jusqu a consensus.
+    '''
+    metadata {
+      category 'coordination / allocation'
+      purpose 'Repartir un ensemble de taches entre agents heterogenes sans autorite centrale'
+      inputs 'ensemble de taches, couts par agent, etat des voisins'
+      outputs 'attribution locale de taches, ensemble de faisceaux'
+      parameters 'neighborCount, bidValue, conflictWindow, timeout'
+      hypotheses 'communication periodique ; couts additifs ; agents cooperatifs'
+      contraintes 'convergence non garantie sous partition severe'
+      state 'local par agent + etat partage des encheres'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD — a identifier'
+      sourcePath 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345'
+      version 'TBD'
+      maturity 'mature-en-labo (repris du modele existant)'
+      evidence 'MEDIUM — CONDITIONAL (cf SCI-1) : convergence prouvee sous comms ideales ; robustesse au retrait seulement EMPIRIQUE'
+      metrics 'makespan, qualite d allocation, temps de convergence, messages echanges'
+      references 'Choi 2009 ; Bi 2024 (N=8 reel) ; DOI 10.70322/dav.2025.10016 (N=30 SIMULATION) — CONSULTEES'
+      relatedComponents 'onboard.taskAuction, edge.coordinator'
+      relatedMessages 'MSG_TASK_BID, MSG_TASK_ASSIGNMENT, MSG_CONSENSUS_VOTE'
+      variantes 'CBBA, PI-CBBA, ACBBA, consensus simple'
+      tbd 'GAP-1 ouvert : convergence sous partition PERSISTANTE non prouvee — AUCUN ARTICLE TROUVE'
+    }
+  }
+
+  algConsensus = algorithm 'ALG_CONSENSUS — Consensus distribue' {
+    #algorithm
+    description '''
+      Convergence d un etat partage entre agents par echange iteratif
+      (moyenne, max-consensus, ou CRDT LWW selon le besoin).
+    '''
+    metadata {
+      category 'coordination / consensus'
+      purpose 'Etablir un etat commun sans autorite centrale, tolerant aux partitions'
+      inputs 'etat local, etats des voisins, topologie de communication'
+      outputs 'etat converge'
+      parameters 'gains de consensus, periode d echange, seuil de convergence'
+      hypotheses 'graphe connexe a terme ; delais bornes'
+      contraintes 'partition prolongee : convergence non garantie'
+      state 'etat partage replique'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'mature (repris du modele : coordination CRDT/LWW)'
+      evidence 'HIGH (theorie CRDT prouvee) / LOW (application essaim drones) — cf SCI-3'
+      metrics 'temps de convergence, ecart residuel, nombre de messages'
+      references 'Shapiro et al. 2011 INRIA RR-7687 (theoreme semilattice) ; Swarm Intell. 2025 DOI 10.1007/s11721-025-00251-4 (jusqu a 200 Kilobots reels) — CONSULTEES'
+      relatedComponents 'onboard.taskAuction, edge.coordinator'
+      relatedMessages 'MSG_CONSENSUS_VOTE'
+      variantes 'CRDT LWW (retenu par defaut dans le modele), max-consensus'
+      tbd 'GAP-3 : convergence d ETAT prouvee ; convergence de MISSION et brouillage RF reel NON testes — AUCUN ARTICLE TROUVE'
+    }
+  }
+
+  algFormationControl = algorithm 'ALG_FORMATION_CONTROL — Controle de formation' {
+    #algorithm
+    description '''
+      Maintien d une geometrie relative entre agents (offset de position
+      ou de vitesse) sans reference centralisee.
+    '''
+    metadata {
+      category 'coordination / formation'
+      purpose 'Maintenir une formation geometrique malgre les perturbations'
+      inputs 'positions relatives des voisins, geometrie cible'
+      outputs 'consignes de correction de trajectoire'
+      parameters 'geometrie cible, gains, distance de separation nominale'
+      hypotheses 'acces a une estimation relative fiable'
+      contraintes 'depend de la qualite de la perception relative'
+      state 'local'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'TBD'
+      evidence 'aucune source verifiee'
+      metrics 'erreur de formation, temps d etablissement, energie de correction'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.mission, onboard.perception'
+      relatedMessages 'MSG_FORMATION_STATE, MSG_POSITION_UPDATE'
+      variantes 'leader-follower, virtuel structure, comportemental'
+    }
+  }
+
+  algLeaderElection = algorithm 'ALG_LEADER_ELECTION — Election de leader' {
+    #algorithm
+    description '''
+      Designation d un coordinateur temporaire apres perte du leader
+      courant. Condition de la reconfiguration (SCN-10).
+    '''
+    metadata {
+      category 'coordination / resilience'
+      purpose 'Restaurer une autorite de coordination apres perte'
+      inputs 'etat de sante des agents, identifiants, priorites'
+      outputs 'identifiant du leader retenu'
+      parameters 'seuil de detection de perte, priorite, timeout'
+      hypotheses 'detection fiable de la perte du leader'
+      contraintes 'risque de double leader sous partition'
+      state 'partage'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'TBD'
+      evidence 'aucune source verifiee'
+      metrics 'temps d election, taux de double leader, messages echanges'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.mission, edge.coordinator'
+      relatedMessages 'MSG_HEARTBEAT, MSG_FAILURE_NOTIFICATION'
+    }
+  }
+
+  // ===========================================================================
+  //  B. PERCEPTION, NAVIGATION, SURETE
+  // ===========================================================================
+
+  algPerceptionFusion = algorithm 'ALG_PERCEPTION_FUSION — Fusion multi-capteurs (EKF/UKF)' {
+    #algorithm
+    description '''
+      Fusion de capteurs par filtre de Kalman etendu ou unscented.
+      Local par plateforme (socle de surete), avec fusion de pistes
+      au niveau Edge.
+    '''
+    metadata {
+      category 'perception / estimation'
+      purpose 'Estimer l etat de la plateforme et les pistes des voisins'
+      inputs 'IMU, GNSS, odometrie, pistes relatives, pistes Edge'
+      outputs 'etat estime (position, vitesse, attitude), pistes fusionnees'
+      parameters 'bruits de processus/mesure, seuils de rejet d outlier'
+      hypotheses 'bruits gaussiens ; linearisation acceptable (EKF)'
+      contraintes 'divergence possible en cas d outliers non filtres'
+      state 'estime local'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'mature-local / median multi-agents (repris du modele existant)'
+      evidence 'MEDIUM — CONDITIONAL (cf SCI-4) : theorie mature ; validation surtout simulation/UUV'
+      metrics 'erreur RMSE, temps de convergence, taux de fausses pistes'
+      references 'Survey UUV Clusters (corpus #221, MDPI) — CONSULTEE. Validation majoritairement en SIMULATION/UUV.'
+      relatedComponents 'onboard.perception, edge.fusion'
+      relatedMessages 'MSG_POSITION_UPDATE, MSG_NEIGHBOR_STATE'
+      variantes 'EKF, UKF, filtres particulaires'
+      tbd 'GAP-4 : fusion EKF/UKF hierarchique a >=100 plateformes — AUCUN ARTICLE TROUVE. Le ~30 reel n est PAS confirme.'
+    }
+  }
+
+  algNavigationGNSSDegrade = algorithm 'ALG_NAV_GNSS_DEGRADE — Navigation sous GNSS degrade' {
+    #algorithm
+    description '''
+      Bascule EKF (IMU + odometrie + GNSS) vers VIO en environnement
+      GNSS-denied. Reduction de zone et RTL sur seuil de derive.
+    '''
+    metadata {
+      category 'navigation / resilience'
+      purpose 'Maintenir une navigation utilisable malgre la perte du GNSS'
+      inputs 'IMU, odometrie, vision, etat du GNSS'
+      outputs 'estimation de position degradee, declenchement de repli'
+      parameters 'seuil de derive, seuil de bascule VIO, zone de repli'
+      hypotheses 'derive bornee sur la duree de bascule'
+      contraintes 'derive non bornee sans recalage : securite par RTL'
+      state 'estime local + etat de bascule'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'mature (repris du modele existant)'
+      evidence 'MEDIUM (repris du modele existant)'
+      metrics 'erreur de position sous GNSS-denied, temps avant RTL'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.perception, onboard.safety, onboard.autopilot'
+      relatedMessages 'MSG_POSITION_UPDATE'
+      variantes 'EKF, VIO, GNSS/INS couple'
+    }
+  }
+
+  algCollisionAvoidance = algorithm 'ALG_COLLISION_AVOIDANCE — Evitement de collision (CBF)' {
+    #algorithm
+    description '''
+      Control Barrier Functions : garantie de non-collision sur un
+      horizon court. Couche de surete embarquee NON NEGOCIABLE,
+      independante du lien et de l allocation.
+    '''
+    metadata {
+      category 'surete / evitement'
+      purpose 'Garantir la non-collision locale sans dependre du reseau'
+      inputs 'positions relatives, vitesses, marges de securite'
+      outputs 'correction de consigne minimale preservant la securite'
+      parameters 'distance minimale, horizon, parametres de barriere'
+      hypotheses 'contraintes differentiellement realisables ; dynamique connue'
+      contraintes 'CORRIGE E08 (SCI-2) : source primaire CA-HCBF arXiv:2604.13245 — N=30 UNIQUEMENT EN SIMULATION ; materiel reel = 5 robots ; violations residuelles 5,1 par essai a N=30'
+      state 'local, sans etat partage'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'emergente (repris du modele existant)'
+      evidence 'LOW — CONTREDIT par la source primaire (cf SCI-2)'
+      metrics 'collisions, quasi-collisions, temps de reaction, surcout de commande'
+      references 'arXiv:2604.13245 (Kim et al. 2026, CA-HCBF) — CONSULTEE'
+      relatedComponents 'onboard.safety, onboard.perception, onboard.autopilot'
+      relatedMessages 'MSG_COLLISION_ALERT'
+      variantes 'CBF, ORCA/RVO, champs de potentiel'
+      tbd 'GAP-2 ouvert : CBF heterogene au-dela de 30 en materiel reel — AUCUN ARTICLE TROUVE'
+    }
+  }
+
+  algSafetyRules = algorithm 'ALG_SAFETY_RULES — Surete par regles pre-approuvees' {
+    #algorithm
+    description '''
+      Regles et reflexes embarques, avec watchdog independant ; CBF en
+      renfort. Fonctionne sans aucun lien de communication.
+    '''
+    metadata {
+      category 'surete / autonomie minimale'
+      purpose 'Garantir un comportement sur sans lien ni coordination'
+      inputs 'etat de vol, frontiere de zone, seuils de derive et d energie'
+      outputs 'RTL, atterrissage d urgence, gel de manoeuvre'
+      parameters 'seuils de derive, frontiere geographique, seuils d energie'
+      hypotheses 'capteurs essentiels encore valides'
+      contraintes 'validation Monte-Carlo adversarial (N>=1000) NON faite'
+      state 'local, etat de securite'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'mature (repris du modele existant)'
+      evidence 'MEDIUM (repris du modele existant)'
+      metrics 'declenchements corrects, fausses alertes, temps de reaction'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.safety, onboard.autopilot'
+      relatedMessages 'MSG_COLLISION_ALERT, MSG_FAILURE_NOTIFICATION'
+      tbd 'validation Monte-Carlo adversarial NON faite (repris du modele)'
+    }
+  }
+
+  algPathPlanning = algorithm 'ALG_PATH_PLANNING — Planification de trajectoire (waypoints + MPC)' {
+    #algorithm
+    description '''
+      Plan embarque versionne par defaut ; MPC court horizon au niveau
+      Edge si la ressource le permet ; re-optimisation C2 differee.
+    '''
+    metadata {
+      category 'planification'
+      purpose 'Produire et maintenir une trajectoire faisable vers l objectif'
+      inputs 'objectif, contraintes d espace, dynamique, obstacles'
+      outputs 'trajectoire, consignes successives'
+      parameters 'horizon MPC, couts, poids des contraintes'
+      hypotheses 'modele dynamique suffisamment fidele'
+      contraintes 're-optimisation centralisee seulement si le lien le permet'
+      state 'plan local versionne'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'mature (repris du modele existant)'
+      evidence 'MEDIUM (repris du modele existant)'
+      metrics 'temps de calcul, faisabilite, energie consommee, ecart a l optimal'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.mission, c2.planner, edge.coordinator'
+      relatedMessages 'MSG_TRAJECTORY_PROPOSAL, MSG_TRAJECTORY_UPDATE'
+      variantes 'waypoints, MPC, A*, RRT*, CBS/ECBS multi-agents'
+    }
+  }
+
+  // ===========================================================================
+  //  C. SURVEILLANCE, ENERGIE, TOLERANCE AUX PANNES
+  // ===========================================================================
+
+  algHealthMonitoring = algorithm 'ALG_HEALTH_MONITORING — Surveillance d etat et detection de faute' {
+    #algorithm
+    description '''
+      Surveillance continue de la sante des sous-systemes, detection
+      d anomalie et qualification de la degradation. Alimente la
+      reconfiguration et l election de leader.
+    '''
+    metadata {
+      category 'resilience / diagnostic'
+      purpose 'Detecter une faute et qualifier la degradation avant qu elle ne devienne critique'
+      inputs 'telemetrie interne, heartbeat voisins, indicateurs capteurs'
+      outputs 'etat de sante, alarme de faute, qualification de degradation'
+      parameters 'seuils de detection, fenetres temporelles, hysteresis'
+      hypotheses 'les indicateurs internes sont observables'
+      contraintes 'faux positifs et faux negatifs non caracterises'
+      state 'etat de sante local + agregat Edge'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'TBD'
+      evidence 'aucune source verifiee'
+      metrics 'taux de detection, faux positifs, delai de detection'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.health, edge.coordinator'
+      relatedMessages 'MSG_HEARTBEAT, MSG_FAILURE_NOTIFICATION'
+    }
+  }
+
+  algEnergyAware = algorithm 'ALG_ENERGY_AWARE — Planification sensible a l energie' {
+    #algorithm
+    description '''
+      Arbitrage entre couverture, duree et marge de repli. Conditionne
+      la faisabilite de toute mission longue et la comparaison de
+      variantes algorithmiques (V5).
+    '''
+    metadata {
+      category 'optimisation / endurance'
+      purpose 'Maximiser la valeur de mission sous contrainte d energie residuelle'
+      inputs 'etat de charge, consommation estimee, objectifs'
+      outputs 'arbitrage de mission, planification de repli'
+      parameters 'marge de securite, seuils de retour, couts energetiques'
+      hypotheses 'consommation previsible a court terme'
+      contraintes 'modele energetique a calibrer'
+      state 'local'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'TBD'
+      evidence 'aucune source verifiee'
+      metrics 'endurance, couverture realisee, marge de repli restante'
+      references 'aucune source verifiee dans cette session'
+      relatedComponents 'onboard.mission, onboard.autopilot'
+      relatedMessages 'MSG_MISSION_COMMAND'
+    }
+  }
+
+  // ===========================================================================
+  //  D. RELATIONS CATALOGUE -> ARCHITECTURE
+  //     Relie chaque algorithme a son composant d accueil et a ses
+  //     familles algorithmiques existantes (architecture.c4).
+  // ===========================================================================
+
+  onboard.taskAuction -[implements]-> algTaskAllocation 'algorithme d allocation'
+  onboard.taskAuction -[implements]-> algConsensus 'consensus des encheres'
+  onboard.mission -[uses]-> algPathPlanning 'planification de mission'
+  onboard.mission -[uses]-> algFormationControl 'maintien de formation'
+  onboard.mission -[uses]-> algEnergyAware 'arbitrage energetique'
+  onboard.mission -[uses]-> algLeaderElection 'reconfiguration apres perte'
+  onboard.perception -[implements]-> algPerceptionFusion 'fusion multi-capteurs'
+  onboard.perception -[implements]-> algNavigationGNSSDegrade 'navigation degradee'
+  onboard.safety -[implements]-> algCollisionAvoidance 'evitement de collision'
+  onboard.safety -[implements]-> algSafetyRules 'regles de surete'
+  onboard.health -[implements]-> algHealthMonitoring 'surveillance d etat'
+  edge.coordinator -[uses]-> algTaskAllocation 'allocation au niveau Edge'
+  edge.coordinator -[uses]-> algConsensus 'consensus Edge'
+}

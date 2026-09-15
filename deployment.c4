@@ -1,0 +1,225 @@
+// =============================================================================
+//  E07 — DEPLOYMENT MODEL (SWARM-3D-ARCHITECTURE, carte t_de7c0750)
+//
+//  Objectif : rendre explicite la chaine
+//      ALGORITHME -> COMPOSANT -> RUNTIME -> NOEUD PHYSIQUE
+//  et rendre INSTANCIABLE le deploiement a l echelle de l essaim.
+//
+//  PRINCIPE DE MISSION : LikeC4 reste SEMANTIQUE. Aucune latitude,
+//  longitude, altitude ou coordonnee 3D n est introduite ici. On
+//  modelise ce qui est DEPLOYE SUR QUOI, pas OU c est dans l espace.
+//  Le placement spatial appartient au futur World Model (E11).
+//
+//  ECHELLE REELLE (issue de l existant) : N = 30
+//    UAV-R x18 (multirotor "reference")
+//    UAV-F x8  (variante fixe)
+//    USV   x4  (variante surface)
+//
+//  AVERTISSEMENT : les correspondances composant -> noeud ci-dessous
+//  proviennent de la structure existante d architecture.c4 et
+//  hardware.c4. Les CHOIX de plateforme (quel SoC, quel OS, quel
+//  middleware) sont marques TBD quand DE-05/DE-06/DE-08 ne sont pas
+//  tranchees. Aucune valeur de ressource (RAM, CPU, TOPS) n est
+//  inventee.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. RUNTIMES — les supports d execution
+  // ===========================================================================
+
+  rtFlight = runtime 'RT_FLIGHT — Runtime de vol temps reel' {
+    #deployment
+    description '''
+      Support temps reel du controleur de vol : microcontroleur, RTOS
+      NuttX/PX4. C est ici que vivent la boucle de vol et la voie de
+      surete, sans dependance au reseau.
+    '''
+    metadata {
+      noeud_hote 'refDrone.flightCtrl'
+      os 'NuttX / PX4 (FAIT si FC FMUv6X)'
+      criticite 'safety-critical'
+      determinisme 'temps reel'
+      reseau_requis 'non'
+      tbd 'famille exacte depend de DE-04'
+    }
+  }
+
+  rtCompanion = runtime 'RT_COMPANION — Runtime de calcul de bord' {
+    #deployment
+    description '''
+      Support non temps reel : Linux sur SoC ARM64. Heberge la pile de
+      coordination, la fusion de pistes et les algorithmes embarques.
+    '''
+    metadata {
+      noeud_hote 'refDrone.companion'
+      os 'Linux (ARM64)'
+      criticite 'mission-critical'
+      determinisme 'non temps reel'
+      reseau_requis 'non (mais coordination degradee sans lien)'
+      tbd 'plateforme depend de DE-05 ; budget TOPS non specifie'
+    }
+  }
+
+  rtSensorsHAL = runtime 'RT_SENSORS — Runtime capteurs / HAL' {
+    #deployment
+    description '''
+      Couche d abstraction materielle des capteurs. Point de passage
+      oblige des donnees de perception vers les algorithmes.
+    '''
+    metadata {
+      noeud_hote 'refDrone (chaine capteur -> flightCtrl)'
+      criticite 'safety-critical'
+      reseau_requis 'non'
+    }
+  }
+
+  rtEdge = runtime 'RT_EDGE — Runtime de coordination Edge' {
+    #deployment
+    description '''
+      Support Edge : serveur ou SBC au sol, hors plateforme. Heberge la
+      coordination, l allocation et la fusion multi-agents.
+      NON EMBARQUE : sa perte degrade la coordination, pas la securite.
+    '''
+    metadata {
+      noeud_hote 'edge (serveur au sol)'
+      os 'Linux'
+      criticite 'mission-critical'
+      reseau_requis 'oui'
+      contrainte 'peut etre injoignable : le drone doit voler sans lui'
+    }
+  }
+
+  rtC2 = runtime 'RT_C2 — Runtime de commandement' {
+    #deployment
+    description 'Support du poste de commandement et controle (C2).'
+    metadata {
+      noeud_hote 'c2.gcs (station sol)'
+      os 'Linux'
+      criticite 'best-effort'
+      reseau_requis 'oui'
+    }
+  }
+
+  rtCloud = runtime 'RT_CLOUD — Runtime cloud (jumeau numerique)' {
+    #deployment
+    description '''
+      Support cloud : jumeau numerique, historique, analytics. C est le
+      consommateur aval du deployment, pas un acteur du vol.
+    '''
+    metadata {
+      noeud_hote 'cloud (infra distante)'
+      os 'Linux / conteneurs'
+      criticite 'best-effort'
+      reseau_requis 'oui'
+      role 'jumeau numerique — cible du Digital Twin 3D'
+    }
+  }
+
+  // ===========================================================================
+  //  2. INSTANCES DE DEPLOIEMENT — l essaim a l echelle N=30
+  //     Aucune coordonnee : uniquement la cardinalite et la variante.
+  // ===========================================================================
+
+  deplDroneRef = deploymentUnit 'INST_DRONE_REF — Instance type de plateforme' {
+    #deployment #reference
+    description '''
+      Instance-type d une plateforme. Le simulateur en cree 30 copies
+      reparties en 3 variantes. C est le point d ancrage du passage
+      « modele semantique -> essaim simule ».
+    '''
+    metadata {
+      cardinalite_totale '30'
+      repartition 'UAV-R x18, UAV-F x8, USV x4'
+      variante_ref 'UAV-R (drone de reference refDrone)'
+      instance_de 'refDrone'
+      coordonnees 'NON MODELISEES — appartient au World Model (E11)'
+    }
+  }
+
+  // ===========================================================================
+  //  3. ZONES DE DEPLOIEMENT (logiques, pas geometriques)
+  // ===========================================================================
+
+  zoneOnboardDepl = deploymentUnit 'ZONE_ONBOARD — Embarque par plateforme' {
+    #deployment
+    description 'Ce qui s execute sur CHAQUE plateforme (x30).'
+    metadata { echelle 'x30'; reseau_requis 'non pour la surete' }
+  }
+
+  zoneEdgeDepl = deploymentUnit 'ZONE_EDGE — Coordination au sol' {
+    #deployment
+    description 'Ce qui s execute sur l infrastructure Edge (partagee).'
+    metadata { echelle 'x1 (partagee)'; reseau_requis 'oui'; perte_toleree 'oui — degradation' }
+  }
+
+  zoneC2Depl = deploymentUnit 'ZONE_C2 — Poste de commandement' {
+    #deployment
+    description 'Poste operateur. Sa perte n empeche pas la mission nominale.'
+    metadata { echelle 'x1'; reseau_requis 'oui'; perte_toleree 'oui' }
+  }
+
+  zoneCloudDepl = deploymentUnit 'ZONE_CLOUD — Jumeau numerique' {
+    #deployment
+    description 'Infrastructure distante : jumeau numerique et donnees historiques.'
+    metadata { echelle 'x1'; reseau_requis 'oui'; perte_toleree 'oui'; role 'consommateur aval' }
+  }
+
+  // ===========================================================================
+  //  4. CHAINE DE DEPLOIEMENT — ALGORITHME -> COMPOSANT -> RUNTIME -> NOEUD
+  //
+  //  C est le coeur de E07. Chaque arc relie un algorithme du catalogue
+  //  a son composant d accueil, puis au runtime, puis au noeud physique.
+  //  Cette chaine se lit dans les deux sens :
+  //    - descendant : « ou tourne cet algorithme ? »
+  //    - montant    : « qu est-ce qui tourne sur cette plateforme ? »
+  // ===========================================================================
+
+  // ---- Chaîne de SURETE : fonctionne SANS reseau ----
+  algSafetyRules -[runsOn]-> onboard.safety 'heberge par'
+  onboard.safety -[runsOn]-> rtFlight 'execute dans le runtime de vol'
+  rtFlight -[runsOn]-> refDrone.flightCtrl 'tourne sur le controleur de vol'
+
+  algCollisionAvoidance -[runsOn]-> onboard.safety 'heberge par'
+  algPerceptionFusion -[runsOn]-> onboard.perception 'heberge par'
+  algNavigationGNSSDegrade -[runsOn]-> onboard.perception 'heberge par'
+  onboard.perception -[runsOn]-> rtSensorsHAL 'passe par le HAL capteurs'
+  rtSensorsHAL -[runsOn]-> refDrone 'tourne sur la plateforme'
+
+  algHealthMonitoring -[runsOn]-> onboard.health 'heberge par'
+  onboard.health -[runsOn]-> rtCompanion 'execute dans le runtime companion'
+
+  // ---- Chaîne de COORDINATION : depend du reseau ----
+  algTaskAllocation -[runsOn]-> onboard.taskAuction 'heberge par'
+  algConsensus -[runsOn]-> onboard.taskAuction 'heberge par'
+  onboard.taskAuction -[runsOn]-> rtCompanion 'execute dans le runtime companion'
+  rtCompanion -[runsOn]-> refDrone.companion 'tourne sur le calcul de bord'
+
+  algPathPlanning -[runsOn]-> onboard.mission 'heberge par'
+  algFormationControl -[runsOn]-> onboard.mission 'heberge par'
+  algEnergyAware -[runsOn]-> onboard.mission 'heberge par'
+  algLeaderElection -[runsOn]-> onboard.mission 'heberge par'
+  onboard.mission -[runsOn]-> rtCompanion 'execute dans le runtime companion'
+
+  // ---- Chaîne Edge : coordination partagee ----
+  algTaskAllocation -[runsOn]-> edge.coordinator 'declinaison Edge'
+  algConsensus -[runsOn]-> edge.coordinator 'declinaison Edge'
+  edge.coordinator -[runsOn]-> rtEdge 'execute dans le runtime Edge'
+
+  // ---- Chaîne de commandement et jumeau ----
+  c2.gcs -[runsOn]-> rtC2 'execute dans le runtime C2'
+  cloud.twin -[runsOn]-> rtCloud 'execute dans le runtime cloud'
+
+  // ---- Appartenance des runtimes aux zones de deploiement ----
+  rtFlight -[deployedAs]-> zoneOnboardDepl 'embarque'
+  rtCompanion -[deployedAs]-> zoneOnboardDepl 'embarque'
+  rtSensorsHAL -[deployedAs]-> zoneOnboardDepl 'embarque'
+  rtEdge -[deployedAs]-> zoneEdgeDepl 'au sol (partage)'
+  rtC2 -[deployedAs]-> zoneC2Depl 'au sol'
+  rtCloud -[deployedAs]-> zoneCloudDepl 'distant'
+
+  // ---- Le drone de reference EST l instance-type ----
+  refDrone -[deployedAs]-> deplDroneRef 'instancie x30'
+  deplDroneRef -[deployedAs]-> zoneOnboardDepl 'appartient a la zone embarquee'
+}

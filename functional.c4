@@ -1,0 +1,274 @@
+// =============================================================================
+//  E02 — ARCHITECTURE FONCTIONNELLE (SWARM-3D-ARCHITECTURE, carte t_4e4ec60b)
+//
+//  Objectif : relier les CAPACITES du systeme aux COMPOSANTS qui les
+//  portent. C est le niveau « pourquoi / quoi » au-dessus du « comment ».
+//
+//  METHODE : chaque fonction est DERIVEE de la description d un
+//  composant existant d architecture.c4. Aucune fonction inventee.
+//  Quand la description existante est trop vague pour fonder une
+//  fonction, elle est marquee TBD plutot que devinee.
+//
+//  NOUVEAU NIVEAU : ce fichier introduit un niveau d abstraction qui
+//  n existait pas. Il NE REMPLACE rien : les composants restent dans
+//  architecture.c4. On ajoute la couche capacite -> fonction -> composant.
+//
+//  CAS D USAGE : cette couche est ce qui permet de raconter le systeme
+//  a un public non technique (documentation pedagogique, E13) et de
+//  generer des scenarios qui expliquent le fonctionnement (E09).
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. CAPACITES — les grandes aptitudes du systeme
+  // ===========================================================================
+
+  capFly = capability 'CAP_FLY — Voler et se maintenir en vol' {
+    #capability
+    description 'Aptitude de base : decoller, tenir une attitude, se deplacer de facon controlee.'
+    metadata { criticite 'safety-critical'; sans_lien 'oui' }
+  }
+
+  capPerceive = capability 'CAP_PERCEIVE — Percevoir et se situer' {
+    #capability
+    description '''
+      Connaitre son propre etat et percevoir l environnement et les
+      autres agents. Socle de toute decision.
+    '''
+    metadata { criticite 'safety-critical'; sans_lien 'oui' }
+  }
+
+  capDecide = capability 'CAP_DECIDE — Decider et reagir' {
+    #capability
+    description 'Transformer une perception en action : eviter, suivre un plan, appliquer une regle.'
+    metadata { criticite 'safety-critical'; sans_lien 'oui (regles embarquees)' }
+  }
+
+  capCooperate = capability 'CAP_COOPERATE — Cooperer en essaim' {
+    #capability
+    description '''
+      Se coordonner avec les autres agents : repartir les taches,
+      converger, tenir une formation, elire un leader.
+    '''
+    metadata { criticite 'mission-critical'; sans_lien 'NON — depend du reseau' }
+  }
+
+  capCommunicate = capability 'CAP_COMMUNICATE — Communiquer' {
+    #capability
+    description 'Echanger des messages entre agents, avec le sol et avec le cloud.'
+    metadata { criticite 'mission-critical'; sans_lien 'NON (Mesh) / OUI (bus interne)' }
+  }
+
+  capSurvive = capability 'CAP_SURVIVE — Survivre aux pannes' {
+    #capability
+    description 'Detecter une degradation, se reconfigurer, terminer proprement ou se replier.'
+    metadata { criticite 'safety-critical'; sans_lien 'oui (repli local)' }
+  }
+
+  capObserve = capability 'CAP_OBSERVE — Etre observe et expliquee' {
+    #capability
+    description '''
+      Rendre le systeme observable : telemetrie, jumeau numerique,
+      rejeu, analyse. C est la capacite qui sert le projet pedagogique
+      et le Digital Twin 3D.
+    '''
+    metadata { criticite 'best-effort'; sans_lien 'non requise pour voler' }
+  }
+
+  capCommand = capability 'CAP_COMMAND — Etre commande' {
+    #capability
+    description 'Recevoir et appliquer des ordres d un operateur, sans dependre de lui.'
+    metadata { criticite 'mission-critical'; sans_lien 'NON — perte toleree' }
+  }
+
+  // ===========================================================================
+  //  2. FONCTIONS — ce que le systeme FAIT concretement
+  //     Chaque description est DERIVEE de architecture.c4. La reference
+  //     est portee dans metadata.source pour tracer l origine.
+  // ===========================================================================
+
+  // ---- CAP_PERCEIVE ----
+  fnSensorAcquisition = function 'FN_SENSOR_ACQUISITION — Acquérir les mesures capteurs' {
+    #function
+    description 'Lire IMU, GNSS, odometrie, barometre et les exposer normalisees aux algorithmes.'
+    metadata { capacite 'CAP_PERCEIVE'; source 'hardware.c4 sensorsHAL'; criticite 'safety-critical' }
+  }
+
+  fnStateEstimation = function 'FN_STATE_ESTIMATION — Estimer l etat de la plateforme' {
+    #function
+    description 'Fusion multi-capteurs et estimation d etat (attitude, position, vitesse).'
+    metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception'; algo 'algPerceptionFusion'; criticite 'safety-critical' }
+  }
+
+  fnRelativeEstimation = function 'FN_RELATIVE_ESTIMATION — Estimer la position relative' {
+    #function
+    description 'Estimation relative inter-agents : socle de la formation et de l evitement cooperatif.'
+    metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception (redondance de position)'; tbd 'technologie depend de DE-08' }
+  }
+
+  fnNavigation = function 'FN_NAVIGATION — Se situer et naviguer' {
+    #function
+    description 'Navigation nominale EKF IMU+odom+GNSS, avec bascule en environnement GNSS-denied.'
+    metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception'; algo 'algNavigationGNSSDegrade' }
+  }
+
+  // ---- CAP_DECIDE ----
+  fnCollisionAvoidance = function 'FN_COLLISION_AVOIDANCE — Eviter les collisions' {
+    #function
+    description 'Detection et evitement (sense-and-avoid) local, independant du lien et de l allocation.'
+    metadata { capacite 'CAP_DECIDE'; source 'architecture.c4 onboard.perception / onboard.safety'; algo 'algCollisionAvoidance'; criticite 'safety-critical'; tbd 'delai d action = HYP non sourcee' }
+  }
+
+  fnSafetyRules = function 'FN_SAFETY_RULES — Appliquer les regles pre-approuvees' {
+    #function
+    description 'Geofence, detection de perte de controle, RTL, atterrissage d urgence, limitateur d energie.'
+    metadata { capacite 'CAP_DECIDE'; source 'architecture.c4 onboard.safety'; algo 'algSafetyRules'; propriete 'fonctionne SANS lien' }
+  }
+
+  fnFlightControl = function 'FN_FLIGHT_CONTROL — Tenir la boucle de vol' {
+    #function
+    description 'Asservissement d attitude et de position temps reel.'
+    metadata { capacite 'CAP_FLY'; source 'architecture.c4 onboard.autopilot'; criticite 'safety-critical' }
+  }
+
+  // ---- CAP_COOPERATE ----
+  fnTaskAllocation = function 'FN_TASK_ALLOCATION — Repartir les taches' {
+    #function
+    description 'Attribution distribuee des taches entre agents par encheres avec resolution de conflits.'
+    metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.task-auction'; algo 'algTaskAllocation'; tbd 'convergence a 30 non mesuree' }
+  }
+
+  fnConsensus = function 'FN_CONSENSUS — Converger vers un etat commun' {
+    #function
+    description 'Convergence d un etat partage sans autorite centrale, tolerante aux partitions.'
+    metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.task-auction / coordination CRDT-LWW'; algo 'algConsensus' }
+  }
+
+  fnFormationControl = function 'FN_FORMATION_CONTROL — Tenir la formation' {
+    #function
+    description 'Maintien de la geometrie relative entre agents.'
+    metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.mission'; algo 'algFormationControl' }
+  }
+
+  fnPathPlanning = function 'FN_PATH_PLANNING — Planifier la trajectoire' {
+    #function
+    description 'Plan embarque versionne ; MPC court horizon au niveau Edge si ressource.'
+    metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.mission / c2.planner'; algo 'algPathPlanning' }
+  }
+
+  fnReconfiguration = function 'FN_RECONFIGURATION — Se reconfigurer apres une perte' {
+    #function
+    description 'Election d un nouveau leader et reorganisation apres la perte d un agent.'
+    metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.mission'; algo 'algLeaderElection' }
+  }
+
+  // ---- CAP_COMMUNICATE ----
+  fnMeshCommunication = function 'FN_MESH_COMMUNICATION — Communiquer en maillage' {
+    #function
+    description 'Echange inter-agents par maillage radio, avec store-and-forward si deconnecte.'
+    metadata { capacite 'CAP_COMMUNICATE'; source 'architecture.c4 onboard.link / edge.relay'; tbd 'bande et protocole = DE-06' }
+  }
+
+  fnC2Link = function 'FN_C2_LINK — Lier au commandement' {
+    #function
+    description 'Liaison de commandement et controle avec la station sol.'
+    metadata { capacite 'CAP_COMMAND'; source 'architecture.c4 c2.gcs / onboard.link'; perte_toleree 'oui' }
+  }
+
+  // ---- CAP_SURVIVE ----
+  fnHealthMonitoring = function 'FN_HEALTH_MONITORING — Surveiller la sante' {
+    #function
+    description 'Diagnostic interne (batterie, moteurs, capteurs, temperatures) et prediction de defaillance.'
+    metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.health'; algo 'algHealthMonitoring' }
+  }
+
+  fnEnergyManagement = function 'FN_ENERGY_MANAGEMENT — Gerer l energie' {
+    #function
+    description 'Gestion de l energie et budget de retour (RTL budget).'
+    metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.energy'; algo 'algEnergyAware'; tbd 'capacite batterie = DE-07 ouvert' }
+  }
+
+  // ---- CAP_OBSERVE ----
+  fnTelemetry = function 'FN_TELEMETRY — Emettre la telemetrie' {
+    #function
+    description 'Emission de l etat vers le Edge, le C2 et le cloud.'
+    metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 onboard.telemetry' }
+  }
+
+  fnDigitalTwin = function 'FN_DIGITAL_TWIN — Alimenter le jumeau numerique' {
+    #function
+    description 'Reconstruire une representation exploitable de l essaim cote cloud.'
+    metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 cloud.twin'; role 'cible du Digital Twin 3D' }
+  }
+
+  fnReplay = function 'FN_REPLAY — Rejouer une mission' {
+    #function
+    description 'Conserver et rejouer les donnees de mission pour analyse et pedagogie.'
+    metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 cloud.replay-store'; usage 'pedagogie, comparaison de variantes' }
+  }
+
+  // ===========================================================================
+  //  3. RELATIONS — capacite -> fonction -> composant
+  //     C est le graphe qui rend l architecture FONCTIONNELLE lisible :
+  //     « a quoi sert ce composant ? » et « qui realise cette capacite ? »
+  // ===========================================================================
+
+  // -- CAP_FLY
+  capFly -[realizes]-> fnFlightControl 'tenue du vol'
+
+  // -- CAP_PERCEIVE
+  capPerceive -[realizes]-> fnSensorAcquisition 'acquisition'
+  capPerceive -[realizes]-> fnStateEstimation 'estimation d etat'
+  capPerceive -[realizes]-> fnRelativeEstimation 'perception relative'
+  capPerceive -[realizes]-> fnNavigation 'navigation'
+  fnSensorAcquisition -[realizes]-> onboard.sensorsHAL 'realise par'
+  fnStateEstimation -[realizes]-> onboard.perception 'realise par'
+  fnRelativeEstimation -[realizes]-> onboard.perception 'realise par'
+  fnNavigation -[realizes]-> onboard.perception 'realise par'
+
+  // -- CAP_DECIDE
+  capDecide -[realizes]-> fnCollisionAvoidance 'evitement'
+  capDecide -[realizes]-> fnSafetyRules 'regles de surete'
+  capDecide -[realizes]-> fnFlightControl 'boucle de vol'
+  fnCollisionAvoidance -[realizes]-> onboard.safety 'realise par'
+  fnSafetyRules -[realizes]-> onboard.safety 'realise par'
+  fnFlightControl -[realizes]-> onboard.autopilot 'realise par'
+
+  // -- CAP_COOPERATE
+  capCooperate -[realizes]-> fnTaskAllocation 'allocation'
+  capCooperate -[realizes]-> fnConsensus 'consensus'
+  capCooperate -[realizes]-> fnFormationControl 'formation'
+  capCooperate -[realizes]-> fnPathPlanning 'planification'
+  fnTaskAllocation -[realizes]-> onboard.taskAuction 'realise par'
+  fnTaskAllocation -[realizes]-> edge.coordinator 'realise par (Edge)'
+  fnConsensus -[realizes]-> onboard.taskAuction 'realise par'
+  fnFormationControl -[realizes]-> onboard.mission 'realise par'
+  fnPathPlanning -[realizes]-> onboard.mission 'realise par'
+  fnPathPlanning -[realizes]-> c2.planner 'realise par (C2)'
+
+  // -- CAP_COMMUNICATE
+  capCommunicate -[realizes]-> fnMeshCommunication 'maillage'
+  fnMeshCommunication -[realizes]-> onboard.linkRadio 'realise par'
+  fnMeshCommunication -[realizes]-> edge.relay 'realise par (relais)'
+
+  // -- CAP_COMMAND
+  capCommand -[realizes]-> fnC2Link 'liaison C2'
+  fnC2Link -[realizes]-> c2.gcs 'realise par'
+
+  // -- CAP_SURVIVE
+  capSurvive -[realizes]-> fnHealthMonitoring 'surveillance'
+  capSurvive -[realizes]-> fnEnergyManagement 'energie'
+  capSurvive -[realizes]-> fnReconfiguration 'reconfiguration'
+  fnHealthMonitoring -[realizes]-> onboard.health 'realise par'
+  fnEnergyManagement -[realizes]-> onboard.energy 'realise par'
+  fnReconfiguration -[realizes]-> onboard.mission 'realise par'
+
+  // -- CAP_OBSERVE
+  capObserve -[realizes]-> fnTelemetry 'telemetrie'
+  capObserve -[realizes]-> fnDigitalTwin 'jumeau numerique'
+  capObserve -[realizes]-> fnReplay 'rejeu'
+  fnTelemetry -[realizes]-> onboard.telemetry 'realise par'
+  fnDigitalTwin -[realizes]-> cloud.twin 'realise par'
+  fnReplay -[realizes]-> cloud.replayStore 'realise par'
+}

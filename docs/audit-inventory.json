@@ -1,0 +1,1869 @@
+{
+ "generatedAt": "2026-09-15T06:49:43.670928+00:00",
+ "projectId": "swarmdrones",
+ "counts": {
+  "elements": 97,
+  "relations": 239,
+  "views": 22,
+  "tags": 23,
+  "elementKinds": 13,
+  "relationshipKinds": 14
+ },
+ "elementKindsUsed": {
+  "hypothesis": 5,
+  "decision": 9,
+  "external": 2,
+  "operator": 1,
+  "platform": 1,
+  "edgeStation": 1,
+  "c2System": 1,
+  "cloudSystem": 1,
+  "software": 14,
+  "algorithm": 7,
+  "risk": 15,
+  "blindspot": 16,
+  "component": 24
+ },
+ "elementsByKind": {
+  "algorithm": [
+   {
+    "id": "AlgorithmsPerceptionFusionEKFUKF",
+    "title": "Perception et fusion (EKF/UKF local + pistes Edge)",
+    "path": "AlgorithmsPerceptionFusionEKFUKF",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsNavigationGNSSDegradeEKFVIO",
+    "title": "Navigation GNSS degrade (EKF + bascule VIO)",
+    "path": "AlgorithmsNavigationGNSSDegradeEKFVIO",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsTaskAllocationCBBA",
+    "title": "Allocation par encheres (CBBA)",
+    "path": "AlgorithmsTaskAllocationCBBA",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsCoordinationCRDTLWW",
+    "title": "Coordination sous partition (CRDT / LWW + horloges logiques)",
+    "path": "AlgorithmsCoordinationCRDTLWW",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsPlanificationWaypointsMPC",
+    "title": "Planification waypoints + MPC court horizon",
+    "path": "AlgorithmsPlanificationWaypointsMPC",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsEvitementCollisionCBF",
+    "title": "Evitement de collision (Control Barrier Functions)",
+    "path": "AlgorithmsEvitementCollisionCBF",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "AlgorithmsSureteReglesCBF",
+    "title": "Surete embarquee (regles pre-approuvees + CBF)",
+    "path": "AlgorithmsSureteReglesCBF",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "fonction",
+     "maturite",
+     "robustesse_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   }
+  ],
+  "blindspot": [
+   {
+    "id": "blindspotAM1",
+    "title": "AM-1 Arbitrage de licence non tranche (BSD-3 vs GPLv3)",
+    "path": "blindspotAM1",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM2",
+    "title": "AM-2 Exposition AGPLv3 dans le Cloud",
+    "path": "blindspotAM2",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM3",
+    "title": "AM-3 Budget radio a 30 agents non dimensionne",
+    "path": "blindspotAM3",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM4",
+    "title": "AM-4 Perception d essaim sans brique ni metrique",
+    "path": "blindspotAM4",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM5",
+    "title": "AM-5 Validation d echelle 2-5-12-30 irrealiste en reel",
+    "path": "blindspotAM5",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM6",
+    "title": "AM-6 Desynchronisation d horloge non specifiee",
+    "path": "blindspotAM6",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM7",
+    "title": "AM-7 Cybersecurite du lien montant et de l autopilote",
+    "path": "blindspotAM7",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM8",
+    "title": "AM-8 Cadre reglementaire BVLOS et COLREGs",
+    "path": "blindspotAM8",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM9",
+    "title": "AM-9 Gestion energetique heterogene non globale",
+    "path": "blindspotAM9",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM10",
+    "title": "AM-10 Handover inter-domaines mal defini (UAV-USV)",
+    "path": "blindspotAM10",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM11",
+    "title": "AM-11 Ontologie commune non specifiee",
+    "path": "blindspotAM11",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM12",
+    "title": "AM-12 Comportement en cas d agent defaillant non traite",
+    "path": "blindspotAM12",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM13",
+    "title": "AM-13 Observabilite et rejeu non contractuels",
+    "path": "blindspotAM13",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM14",
+    "title": "AM-14 Bruit et fausses detections non quantifies",
+    "path": "blindspotAM14",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM15",
+    "title": "AM-15 Fidelite du jumeau numerique non proceduree",
+    "path": "blindspotAM15",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   },
+   {
+    "id": "blindspotAM16",
+    "title": "AM-16 Facteur humain et charge du C2",
+    "path": "blindspotAM16",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "consequence",
+     "gravite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Angle mort (AM*)"
+   }
+  ],
+  "c2System": [
+   {
+    "id": "c2",
+    "title": "C2 / GCS",
+    "path": "c2",
+    "parent": null,
+    "tags": [
+     "zone-c2"
+    ],
+    "metadataKeys": [
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "C2 (supervision)"
+   }
+  ],
+  "cloudSystem": [
+   {
+    "id": "cloud",
+    "title": "Cloud (hors boucle de controle)",
+    "path": "cloud",
+    "parent": null,
+    "tags": [
+     "zone-cloud"
+    ],
+    "metadataKeys": [
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Cloud (hors boucle)"
+   }
+  ],
+  "component": [
+   {
+    "id": "onboard.sensorsHAL",
+    "title": "onboard.sensors-hal",
+    "path": "onboard.sensorsHAL",
+    "parent": null,
+    "tags": [
+     "best-effort"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "principe",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.perception",
+    "title": "onboard.perception",
+    "path": "onboard.perception",
+    "parent": null,
+    "tags": [
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "alerte",
+     "criticite",
+     "frequence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.autopilot",
+    "title": "onboard.autopilot",
+    "path": "onboard.autopilot",
+    "parent": null,
+    "tags": [
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "budget_latence",
+     "criticite",
+     "frequence",
+     "interface",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.safety",
+    "title": "onboard.safety",
+    "path": "onboard.safety",
+    "parent": null,
+    "tags": [
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "arbitrage",
+     "autonomie",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.mission",
+    "title": "onboard.mission",
+    "path": "onboard.mission",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "etats",
+     "frequence",
+     "navigateur",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.taskAuction",
+    "title": "onboard.task-auction",
+    "path": "onboard.taskAuction",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "mode",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.health",
+    "title": "onboard.health",
+    "path": "onboard.health",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.energy",
+    "title": "onboard.energy",
+    "path": "onboard.energy",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.telemetry",
+    "title": "onboard.telemetry",
+    "path": "onboard.telemetry",
+    "parent": null,
+    "tags": [
+     "best-effort"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "file_priorite",
+     "frequence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "onboard.linkRadio",
+    "title": "onboard.link",
+    "path": "onboard.linkRadio",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "modes",
+     "principe",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "edge.relay",
+    "title": "edge.relay",
+    "path": "edge.relay",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "mode",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "edge.fusion",
+    "title": "edge.fusion",
+    "path": "edge.fusion",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "edge.coordinator",
+    "title": "edge.coordinator",
+    "path": "edge.coordinator",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "budget_latence",
+     "criticite",
+     "mode",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "edge.cache",
+    "title": "edge.cache",
+    "path": "edge.cache",
+    "parent": null,
+    "tags": [
+     "best-effort"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "edge.gateway",
+    "title": "edge.gateway",
+    "path": "edge.gateway",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "point_singulier",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "c2.gcs",
+    "title": "c2.gcs",
+    "path": "c2.gcs",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "interface",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "c2.planner",
+    "title": "c2.planner",
+    "path": "c2.planner",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "budget_latence",
+     "criticite",
+     "sortie",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "c2.auth",
+    "title": "c2.auth",
+    "path": "c2.auth",
+    "parent": null,
+    "tags": [
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "exigence",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "c2.missionStore",
+    "title": "c2.mission-store",
+    "path": "c2.missionStore",
+    "parent": null,
+    "tags": [
+     "mission-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "role",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "c2.alerting",
+    "title": "c2.alerting",
+    "path": "c2.alerting",
+    "parent": null,
+    "tags": [
+     "best-effort"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "cloud.twin",
+    "title": "cloud.twin",
+    "path": "cloud.twin",
+    "parent": null,
+    "tags": [
+     "cloudOnly"
+    ],
+    "metadataKeys": [
+     "boucle",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "cloud.analytics",
+    "title": "cloud.analytics",
+    "path": "cloud.analytics",
+    "parent": null,
+    "tags": [
+     "cloudOnly"
+    ],
+    "metadataKeys": [
+     "boucle",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "cloud.modelRegistry",
+    "title": "cloud.model-registry",
+    "path": "cloud.modelRegistry",
+    "parent": null,
+    "tags": [
+     "cloudOnly"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   },
+   {
+    "id": "cloud.replayStore",
+    "title": "cloud.replay-store",
+    "path": "cloud.replayStore",
+    "parent": null,
+    "tags": [
+     "cloudOnly"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Composant"
+   }
+  ],
+  "decision": [
+   {
+    "id": "adr1",
+    "title": "ADR-1 — Contrat de mission embarque, replanification opportuniste",
+    "path": "adr1",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "alternatives_rejetees",
+     "conflit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "adr2",
+    "title": "ADR-2 — Fraicheur explicite, pas de coherence forte",
+    "path": "adr2",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "alternatives_rejetees",
+     "conflit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "adr3",
+    "title": "ADR-3 — Canaux de surete et de securite separes",
+    "path": "adr3",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "alternatives_rejetees",
+     "conflit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "adr4",
+    "title": "ADR-4 — Traitement lourd deporte hors boucle de controle",
+    "path": "adr4",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "alternatives_rejetees",
+     "conflit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "adr5",
+    "title": "ADR-5 — Robustesse preferee a l optimalite sous partition",
+    "path": "adr5",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "alternatives_rejetees",
+     "conflit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "de1",
+    "title": "DE-01 Socle de vol et regime de distribution du firmware",
+    "path": "de1",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "angle_mort",
+     "echeance",
+     "nature",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "de2",
+    "title": "DE-02 Plafond d echelle reelle et repartition des preuves",
+    "path": "de2",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "angle_mort",
+     "echeance",
+     "nature",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "de3",
+    "title": "DE-03 Modele de menaces et strategie de cles",
+    "path": "de3",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "angle_mort",
+     "echeance",
+     "nature",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "de4",
+    "title": "DE-04 Architecture radio a 30 agents et mecanisme de priorite",
+    "path": "de4",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "angle_mort",
+     "echeance",
+     "nature",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   }
+  ],
+  "edgeStation": [
+   {
+    "id": "edge",
+    "title": "Edge — relais / station de proximite (1..N)",
+    "path": "edge",
+    "parent": null,
+    "tags": [
+     "zone-edge"
+    ],
+    "metadataKeys": [
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Edge (1..N)"
+   }
+  ],
+  "external": [
+   {
+    "id": "docSource",
+    "title": "Document d architecture — swarm30_arch.md",
+    "path": "docSource",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "chemin",
+     "sections",
+     "type"
+    ],
+    "hasDescription": true,
+    "notation": "Externe"
+   },
+   {
+    "id": "radios",
+    "title": "Radios / GNSS / Capteurs",
+    "path": "radios",
+    "parent": null,
+    "tags": [
+     "external-src"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Externe"
+   }
+  ],
+  "hypothesis": [
+   {
+    "id": "h1",
+    "title": "H1 — Autopilote avec mode mission embarquee",
+    "path": "h1",
+    "parent": null,
+    "tags": [
+     "hypothese",
+     "validee"
+    ],
+    "metadataKeys": [
+     "impact_si_faux",
+     "niveau_preuve",
+     "section"
+    ],
+    "hasDescription": true,
+    "notation": "Hypothese (H*)"
+   },
+   {
+    "id": "h2",
+    "title": "H2 — Liens intermittents par defaut",
+    "path": "h2",
+    "parent": null,
+    "tags": [
+     "hypothese",
+     "validee"
+    ],
+    "metadataKeys": [
+     "impact_si_faux",
+     "niveau_preuve",
+     "section"
+    ],
+    "hasDescription": true,
+    "notation": "Hypothese (H*)"
+   },
+   {
+    "id": "h3",
+    "title": "H3 — GNSS degradable ou brouillable",
+    "path": "h3",
+    "parent": null,
+    "tags": [
+     "hypothese",
+     "a-valider"
+    ],
+    "metadataKeys": [
+     "impact_si_faux",
+     "niveau_preuve",
+     "risque",
+     "section"
+    ],
+    "hasDescription": true,
+    "notation": "Hypothese (H*)"
+   },
+   {
+    "id": "h4",
+    "title": "H4 — Coordination hors portee via relais Edge",
+    "path": "h4",
+    "parent": null,
+    "tags": [
+     "hypothese",
+     "a-valider"
+    ],
+    "metadataKeys": [
+     "impact_si_faux",
+     "niveau_preuve",
+     "section"
+    ],
+    "hasDescription": true,
+    "notation": "Hypothese (H*)"
+   },
+   {
+    "id": "h5",
+    "title": "H5 — Autorite humaine sur les actions critiques",
+    "path": "h5",
+    "parent": null,
+    "tags": [
+     "hypothese",
+     "validee"
+    ],
+    "metadataKeys": [
+     "impact_si_faux",
+     "niveau_preuve",
+     "section"
+    ],
+    "hasDescription": true,
+    "notation": "Hypothese (H*)"
+   }
+  ],
+  "operator": [
+   {
+    "id": "operator",
+    "title": "Operateur humain (GCS)",
+    "path": "operator",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Acteur"
+   }
+  ],
+  "platform": [
+   {
+    "id": "onboard",
+    "title": "Plateformes onboard (x30)",
+    "path": "onboard",
+    "parent": null,
+    "tags": [
+     "zone-onboard"
+    ],
+    "metadataKeys": [
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Onboard (x30)"
+   }
+  ],
+  "risk": [
+   {
+    "id": "riskR1",
+    "title": "R-1 Contention radio a 30 agents",
+    "path": "riskR1",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR2",
+    "title": "R-2 Prise de controle via lien non authentifie",
+    "path": "riskR2",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR3",
+    "title": "R-3 Validation reelle a 30 agents non realisable",
+    "path": "riskR3",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR4",
+    "title": "R-4 Perte de coherence sous partition (split-brain)",
+    "path": "riskR4",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR5",
+    "title": "R-5 Derive en GNSS-degrade",
+    "path": "riskR5",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR6",
+    "title": "R-6 Non-conformite reglementaire (BVLOS, COLREGs)",
+    "path": "riskR6",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR7",
+    "title": "R-7 Conflit de licence bloquant la distribution",
+    "path": "riskR7",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR8",
+    "title": "R-8 Fusion degradee en scenario dense (fausses pistes)",
+    "path": "riskR8",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR9",
+    "title": "R-9 Collision en scenario d urgence",
+    "path": "riskR9",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR10",
+    "title": "R-10 Desynchronisation d horloge (donnees perimees)",
+    "path": "riskR10",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR11",
+    "title": "R-11 Fidelite du jumeau numerique insuffisante",
+    "path": "riskR11",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR12",
+    "title": "R-12 Taches orphelines par non-prise en compte de l energie",
+    "path": "riskR12",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR13",
+    "title": "R-13 Effort de R&D sous-estime sur la fusion multi-agents",
+    "path": "riskR13",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR14",
+    "title": "R-14 Charge C2 humaine excessive sous incertitude",
+    "path": "riskR14",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   },
+   {
+    "id": "riskR15",
+    "title": "R-15 Handoff inter-domaines ambigu",
+    "path": "riskR15",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "alerte",
+     "categorie",
+     "criticite",
+     "impact",
+     "mitigation",
+     "probabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Risque (R*)"
+   }
+  ],
+  "software": [
+   {
+    "id": "AutopilotPX4",
+    "title": "PX4 Autopilot",
+    "path": "AutopilotPX4",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "ArduPilot",
+    "title": "ArduPilot",
+    "path": "ArduPilot",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "ROS2",
+    "title": "ROS 2",
+    "path": "ROS2",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "Zenoh",
+    "title": "Eclipse Zenoh",
+    "path": "Zenoh",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "MosquittoMQTT",
+    "title": "Eclipse Mosquitto (MQTT)",
+    "path": "MosquittoMQTT",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "MicroXRCEDDS",
+    "title": "eProsima Micro XRCE-DDS",
+    "path": "MicroXRCEDDS",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "MAVLinkMAVSDK",
+    "title": "MAVLink / MAVSDK",
+    "path": "MAVLinkMAVSDK",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "QGroundControl",
+    "title": "QGroundControl",
+    "path": "QGroundControl",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "GazeboSim",
+    "title": "Gazebo Sim (gz-sim)",
+    "path": "GazeboSim",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "MinIO",
+    "title": "MinIO",
+    "path": "MinIO",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "Prometheus",
+    "title": "Prometheus",
+    "path": "Prometheus",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "Grafana",
+    "title": "Grafana",
+    "path": "Grafana",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "PostgreSQLPostGIS",
+    "title": "PostgreSQL + PostGIS",
+    "path": "PostgreSQLPostGIS",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   },
+   {
+    "id": "OpenCPN",
+    "title": "OpenCPN",
+    "path": "OpenCPN",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "evidence",
+     "licence",
+     "role",
+     "zone"
+    ],
+    "hasDescription": true,
+    "notation": "COTS / OSS"
+   }
+  ]
+ },
+ "relations": {
+  "byKind": {
+   "NONE": 239
+  },
+  "untyped": [],
+  "total": 239
+ },
+ "views": [
+  {
+   "id": "index",
+   "title": "SwarmDrones — Paysage des zones de deploiement",
+   "type": "element",
+   "nodes": 6,
+   "edges": 8,
+   "hasDescription": true
+  },
+  {
+   "id": "contexte-amont",
+   "title": "Contexte amont — externes, Onboard (x30), Edge (1..N)",
+   "type": "element",
+   "nodes": 19,
+   "edges": 30,
+   "hasDescription": true
+  },
+  {
+   "id": "contexte-aval",
+   "title": "Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)",
+   "type": "element",
+   "nodes": 15,
+   "edges": 14,
+   "hasDescription": true
+  },
+  {
+   "id": "contexte",
+   "title": "Contexte (synthese) — vue d'ensemble des zones",
+   "type": "element",
+   "nodes": 6,
+   "edges": 8,
+   "hasDescription": true
+  },
+  {
+   "id": "paysage-criticite",
+   "title": "Paysage par criticite — safety / mission / best-effort / cloud",
+   "type": "element",
+   "nodes": 18,
+   "edges": 25,
+   "hasDescription": true
+  },
+  {
+   "id": "zone-onboard",
+   "title": "Zone Onboard (x30) — surete, mission et lien",
+   "type": "element",
+   "nodes": 12,
+   "edges": 21,
+   "hasDescription": true
+  },
+  {
+   "id": "zone-edge",
+   "title": "Zone Edge — relais, fusion, coordination (1..N)",
+   "type": "element",
+   "nodes": 12,
+   "edges": 12,
+   "hasDescription": true
+  },
+  {
+   "id": "zone-c2",
+   "title": "Zone C2 / GCS — supervision et autorite humaine",
+   "type": "element",
+   "nodes": 11,
+   "edges": 11,
+   "hasDescription": true
+  },
+  {
+   "id": "zone-cloud",
+   "title": "Zone Cloud — hors boucle de controle",
+   "type": "element",
+   "nodes": 9,
+   "edges": 6,
+   "hasDescription": true
+  },
+  {
+   "id": "deploiement-30-plateformes",
+   "title": "Deploiement — 30 plateformes, N stations Edge, 1 C2, 1 cloud",
+   "type": "deployment",
+   "nodes": 41,
+   "edges": 127,
+   "hasDescription": true
+  },
+  {
+   "id": "mission-nominale",
+   "title": "Mission nominale — INIT -> READY -> LAUNCH -> EXECUTE -> LAND -> DONE",
+   "type": "dynamic",
+   "nodes": 23,
+   "edges": 36,
+   "hasDescription": true
+  },
+  {
+   "id": "perte-de-lien",
+   "title": "Scenario degrade — perte de lien C2 + GNSS degrade",
+   "type": "dynamic",
+   "nodes": 16,
+   "edges": 25,
+   "hasDescription": true
+  },
+  {
+   "id": "perte-de-lien-c2-operateur",
+   "title": "Perte de lien C2 — vue operateur (brief de quart)",
+   "type": "dynamic",
+   "nodes": 8,
+   "edges": 18,
+   "hasDescription": true
+  },
+  {
+   "id": "hypotheses",
+   "title": "Hypotheses et impact — si une hypothese tombe, quoi revoir ?",
+   "type": "element",
+   "nodes": 14,
+   "edges": 19,
+   "hasDescription": true
+  },
+  {
+   "id": "decisions",
+   "title": "Decisions tranchees : ADR-1..5 et ce qu elles justifient",
+   "type": "element",
+   "nodes": 10,
+   "edges": 13,
+   "hasDescription": true
+  },
+  {
+   "id": "decisionsOuvertes",
+   "title": "Decisions ouvertes : DE-01..04 appelees par les angles morts critiques",
+   "type": "element",
+   "nodes": 12,
+   "edges": 8,
+   "hasDescription": true
+  },
+  {
+   "id": "tracabilite",
+   "title": "Tracabilite — couverture documentaire par zone",
+   "type": "element",
+   "nodes": 19,
+   "edges": 35,
+   "hasDescription": true
+  },
+  {
+   "id": "techAutopilot",
+   "title": "Choix technologiques 1/3 — autopilotage & perception (§A)",
+   "type": "element",
+   "nodes": 12,
+   "edges": 15,
+   "hasDescription": true
+  },
+  {
+   "id": "techComms",
+   "title": "Choix technologiques 2/3 — communication & coordination (§A)",
+   "type": "element",
+   "nodes": 18,
+   "edges": 23,
+   "hasDescription": true
+  },
+  {
+   "id": "techData",
+   "title": "Choix technologiques 3/3 — données, observabilité & jumeau (§A)",
+   "type": "element",
+   "nodes": 12,
+   "edges": 10,
+   "hasDescription": true
+  },
+  {
+   "id": "riskMatrix",
+   "title": "Matrice de risques — 15 risques (§D)",
+   "type": "element",
+   "nodes": 22,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "blindspotBySeverity",
+   "title": "Angles morts — 16 lacunes de specification (§C)",
+   "type": "element",
+   "nodes": 20,
+   "edges": 7,
+   "hasDescription": true
+  }
+ ],
+ "issues": {
+  "noDescription": [],
+  "noMetadata": [
+   "radios",
+   "operator"
+  ],
+  "noTags": [
+   "operator",
+   "AutopilotPX4",
+   "ArduPilot",
+   "ROS2",
+   "Zenoh",
+   "MosquittoMQTT",
+   "MicroXRCEDDS",
+   "MAVLinkMAVSDK",
+   "QGroundControl",
+   "GazeboSim",
+   "MinIO",
+   "Prometheus",
+   "Grafana",
+   "PostgreSQLPostGIS",
+   "OpenCPN",
+   "AlgorithmsPerceptionFusionEKFUKF",
+   "AlgorithmsNavigationGNSSDegradeEKFVIO",
+   "AlgorithmsTaskAllocationCBBA",
+   "AlgorithmsCoordinationCRDTLWW",
+   "AlgorithmsPlanificationWaypointsMPC",
+   "AlgorithmsEvitementCollisionCBF",
+   "AlgorithmsSureteReglesCBF",
+   "riskR1",
+   "riskR2",
+   "riskR3",
+   "riskR4",
+   "riskR5",
+   "riskR6",
+   "riskR7",
+   "riskR8",
+   "riskR9",
+   "riskR10",
+   "riskR11",
+   "riskR12",
+   "riskR13",
+   "riskR14",
+   "riskR15",
+   "blindspotAM1",
+   "blindspotAM2",
+   "blindspotAM3",
+   "blindspotAM4",
+   "blindspotAM5",
+   "blindspotAM6",
+   "blindspotAM7",
+   "blindspotAM8",
+   "blindspotAM9",
+   "blindspotAM10",
+   "blindspotAM11",
+   "blindspotAM12",
+   "blindspotAM13",
+   "blindspotAM14",
+   "blindspotAM15",
+   "blindspotAM16",
+   "de1",
+   "de2",
+   "de3",
+   "de4",
+   "onboard.linkRadio"
+  ],
+  "orphan": [],
+  "noTechnology": [],
+  "brokenRef": []
+ },
+ "metadataKeys": {
+  "niveau_preuve": 5,
+  "section": 5,
+  "impact_si_faux": 5,
+  "risque": 1,
+  "conflit": 5,
+  "alternatives_rejetees": 5,
+  "statut": 25,
+  "type": 1,
+  "sections": 1,
+  "chemin": 1,
+  "source": 28,
+  "licence": 14,
+  "role": 15,
+  "zone": 14,
+  "evidence": 21,
+  "fonction": 7,
+  "robustesse_lien": 7,
+  "maturite": 7,
+  "categorie": 15,
+  "probabilite": 15,
+  "impact": 15,
+  "criticite": 39,
+  "mitigation": 15,
+  "alerte": 16,
+  "gravite": 16,
+  "consequence": 16,
+  "nature": 4,
+  "porteur": 4,
+  "echeance": 4,
+  "angle_mort": 4,
+  "frequence": 11,
+  "principe": 2,
+  "budget_latence": 3,
+  "interface": 2,
+  "autonomie": 1,
+  "arbitrage": 1,
+  "etats": 1,
+  "navigateur": 1,
+  "mode": 3,
+  "file_priorite": 1,
+  "modes": 1,
+  "point_singulier": 1,
+  "sortie": 1,
+  "exigence": 1,
+  "boucle": 2,
+  "usage": 1
+ }
+}

@@ -1,0 +1,162 @@
+// =============================================================================
+//  E05-INTEG — DECISIONS OUVERTES DE-05..DE-10 (carte t_72dfb8c1)
+//
+//  Source : attachements t_699fc55f (profil swarmdrone, 2026-09-15).
+//  Ces decisions sont des OBJETS DE PREMIERE CLASSE : elles portent
+//  leurs options, leur porteur, leur critere d arbitrage et leur
+//  niveau de preuve. Aucune n est tranchee : elles restent ouvertes.
+//
+//  ATTENTION — RENUMEROTATION (correction E05-INTEG) :
+//  le rapport source proposait DE-04..DE-09, mais DE-04 etait DEJA
+//  attribue dans architecture.c4 L1523 a « Architecture radio a 30
+//  agents et mecanisme de priorite » (issu de AM-3, deja trace dans
+//  views.c4 et decisions_swarmdrone.md). Pour eviter deux decisions
+//  distinctes sous un meme identifiant, les decisions materielles de
+//  E05 sont numerotees DE-05..DE-10. Correspondance :
+//     rapport DE-04 (socle de vol)        -> DE-05
+//     rapport DE-05 (partition calcul)    -> DE-06
+//     rapport DE-06 (bande radio)         -> DE-07
+//     rapport DE-07 (budget energie)      -> DE-08
+//     rapport DE-08 (classe IMU)          -> DE-09
+//     rapport DE-09 (sense-and-avoid)     -> DE-10
+//  DE-07 (bande radio, E05) et DE-04 (architecture radio, AM-3) sont
+//  adjacents et devront etre fusionnes ou relies avant la conception RF.
+//
+//  Aucune option n est recommandee en dur — c est a Christophe de
+//  trancher. Le modele expose le CHOIX, il ne le fait pas.
+// =============================================================================
+
+model {
+
+  decVolSocle = decision 'DE-05 — Socle de vol et niveau d assurance' {
+    #decision #tbd
+    description '''
+      Catégorie specific / SORA avec autopilote non certifié, ou
+      chemin certified (DO-178C DAL-B) ? Si non certifié, quelle voie
+      de sûreté compense (geofence, RTL, parachute) ?
+    '''
+    metadata {
+      statut 'OUVERTE'
+      option_a 'specific/SORA + autopilote non certifie + voie de surete compensatoire'
+      option_b 'chemin certified DO-178C DAL-B (cout eleve)'
+      porteur 'direction technique + responsable certification/qualite'
+      critere 'cout du chemin certifie vs acceptation du risque residuel SORA'
+      prerequis 'avant la conception detaillee du socle embarque'
+      niveau_preuve 'MEDIUM'
+      piege 'ne pas confondre « certifie » et « conforme a un standard »'
+      bloque 'refDrone.flightCtrl'
+    }
+  }
+
+  decPartitionCalcul = decision 'DE-06 — Partition calcul temps reel / non temps reel' {
+    #decision #tbd
+    description '''
+      Deux cartes (FC + companion), carte integree type VOXL 2, ou
+      deux cartes redondees avec arbitrage. Fait echo a la topologie
+      actuelle du modele (flightCtrl + companion separes).
+    '''
+    metadata {
+      statut 'OUVERTE'
+      option_a 'deux cartes (FC Pixhawk 6X + companion separe) — separation nette des criticites'
+      option_b 'carte integree VOXL 2 — SWaP minimal, mais criticites fusionnees'
+      option_c 'deux cartes redondees avec arbitrage — robustesse max, cout/masse max'
+      porteur 'architecte systeme'
+      critere 'masse <= cible, conso <= budget, separation de criticite, approvisionnement'
+      prerequis 'specifier d abord le budget de calcul (charge en TOPS)'
+      niveau_preuve 'MEDIUM'
+      bloque 'refDrone.companion'
+    }
+  }
+
+  decBandeRadio = decision 'DE-07 — Bande et budget radio a 30 agents' {
+    #decision #tbd
+    description '''
+      Alignement sur l angle mort AM3 (budget radio). Option A, B, C.
+      Depend directement du dimensionnement du budget radio a 30 agents,
+      qui reste NON RESOLU.
+    '''
+    metadata {
+      statut 'OUVERTE'
+      option_a '2,4 GHz ISM (pMDDL2450) — licence souveraine, masse faible, debit modeste'
+      option_b 'bandes M1-M6 MANET (Mesh Rider) — debit/portee superieurs, autorisation a instruire'
+      option_c 'double bande (C2 basse dediee + donnees 2,4 GHz) — resilience max, complexite max'
+      porteur 'architecte RF + responsable reglementaire'
+      critere 'debit requis par le budget de coordination, autorisations, masse disponible'
+      prerequis 'DIMENSIONNER LE BUDGET RADIO A 30 AGENTS (AM3, non resolu)'
+      niveau_preuve 'LOW (portees = annonces commerciales)'
+      bloque 'refDrone.radioLnk, refDrone.netMesh'
+    }
+  }
+
+  decEnergie = decision 'DE-08 — Budget energie et endurance par variante' {
+    #decision #tbd
+    description '''
+      SEUL TBD restant REELLEMENT OUVERT. Bloque la propulsion, la
+      masse totale et donc la capacite batterie. Aucune specification
+      de mission ne permet de le fermer aujourd hui.
+    '''
+    metadata {
+      statut 'OUVERTE — TBD REEL'
+      porteur 'architecte plateforme'
+      prerequis 'specification de mission (endurance cible) inexistante'
+      niveau_preuve 'LOW — la cellule est un fait, le TBD ne l est pas'
+      bloquant 'endurance cible / masse / puissance par variante'
+      bloque 'refDrone.power'
+      recommandation_producteur 'laisser explicitement TBD apres ce travail'
+    }
+  }
+
+  decImu = decision 'DE-09 — Classe IMU et autonomie de navigation sans GNSS' {
+    #decision #tbd
+    description '''
+      MEMS grand public redonde x3, IMU classe navigation (ADIS/HG4930),
+      ou hybride (MEMS + fusion UWB/vision). A traiter conjointement
+      avec la PERCEPTION RELATIVE (refDrone.perceptionRel, UWB) : les
+      deux repondent a la meme question — comment naviguer sans GNSS.
+    '''
+    metadata {
+      statut 'OUVERTE'
+      option_a 'MEMS grand public redonde x3 (comme FMUv6X) — derive non quantifiee sans GNSS'
+      option_b 'IMU classe navigation (ADIS/HG4930) — derive caracterisee, cout/masse/conso superieurs'
+      option_c 'hybride MEMS + fusion UWB/vision pour borner la derive'
+      porteur 'architecte navigation'
+      critere 'temps de navigation sans GNSS requis, budget SWaP'
+      niveau_preuve 'MEDIUM (redondance) / LOW (derive non quantifiee)'
+      lien 'a traiter avec la perception relative (meme question : comment naviguer sans GNSS)'
+      bloque 'refDrone.imu'
+    }
+  }
+
+  decSae = decision 'DE-10 — Architecture sense-and-avoid et portee cible' {
+    #decision #tbd
+    description '''
+      Vision seule (AirTrack, 700 m demontres), radar, ou fusion
+      multi-capteurs. La norme encourage explicitement la fusion.
+    '''
+    metadata {
+      statut 'OUVERTE'
+      option_a 'vision seule (type AirTrack) — SWaP minimal, limite par lumiere/contraste'
+      option_b 'radar — toutes meteo, portee superieure, masse/conso/cout eleves'
+      option_c 'fusion multi-capteurs (radar, EO/IR, acoustique) — robustesse max, complexite max'
+      porteur 'architecte surete + responsable essais'
+      critere 'niveau SAIL/ARC vise, cas cooperatif vs non cooperatif, budget SWaP'
+      norme 'ASTM F3442-25 (DWC ~610 m) ; fusion encouragee'
+      niveau_preuve 'MEDIUM'
+      bloque 'refDrone.saeSensor'
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  //  Ancrage des decisions ouvertes (E12) : une decision OUVERTE doit
+  //  pointer l element qu elle bloque, sinon le modele cache un trou.
+  //  Ajoute apres le controle d integrite I-2 (7 orphelins detectes).
+  // ---------------------------------------------------------------------
+  decVolSocle -[justifie]-> refDrone.flightCtrl 'conditionne le socle de vol'
+  decPartitionCalcul -[justifie]-> refDrone.companion 'conditionne la separation des cartes'
+  decBandeRadio -[justifie]-> refDrone.radioLnk 'conditionne le budget radio'
+  decBandeRadio -[justifie]-> refDrone.netMesh 'conditionne le budget radio'
+  decEnergie -[justifie]-> refDrone.power 'conditionne le budget energie'
+  decImu -[justifie]-> refDrone.imu 'conditionne la navigation sans GNSS'
+  decSae -[justifie]-> refDrone.saeSensor 'conditionne la fonction sense-and-avoid'
+  chCloud -[uses]-> cloud.twin 'canal montant differe'
+}
