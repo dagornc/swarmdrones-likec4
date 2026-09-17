@@ -37,6 +37,10 @@ model {
     link https://doi.org/10.1007/s12065-026-01257-5 "Survival probability-weighted clustering for UAV-based multi-robot task allocation in disaster response"
     link https://doi.org/10.1016/j.ergon.2026.103981 "Homogeneous or heterogeneous? Simulation-based comparison of task allocation strategies for multi-operator UAV swarms control"
     link https://doi.org/10.1007/s42401-026-00540-8 "Multi-UAV cooperative task allocation using chaos theory and an adaptive genetic algorithm"
+    link https://doi.org/10.3390/app12136780 "Centralized Task Allocation and Alignment Based on Constraint Table and Genetic Algorithm"
+    link https://doi.org/10.3390/electronics12112508 "A Period Training Method for Heterogeneous UUV Dynamic Task Allocation"
+    link https://doi.org/10.3390/biomimetics11010069 "Large-Scale Multi-UAV Task Allocation via a Centrality-Driven Load-Aware Approach"
+    link https://doi.org/10.1038/s41598-025-09753-x "Integrated method for multi-UAV task assignment and trajectory planning"
     description '''
       Consensus-based Bundle Algorithm : encheres successives avec
       resolution de conflits. Chaque agent construit un ensemble de
@@ -110,6 +114,10 @@ model {
     link https://doi.org/10.1038/s41598-026-67888-x "UAV formation control for multi-target tracking based on an improved multi-agent double soft actor–critic"
     link https://arxiv.org/abs/2609.04158 "Formation Matrix and Energy-based Control of Multi-Agent Systems"
     link https://doi.org/10.5772/intechopen.1016154 "Control Strategies for Cooperative Swarm UAV Systems: Coordination, Stability and Real-World Deployment"
+    link https://doi.org/10.1002/rnc.5754 "Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles"
+    link https://doi.org/10.20944/preprints202602.1104.v1 "Adaptive Formation Control for Multi-UAV Swarms in Cluttered Environments"
+    link https://doi.org/10.3390/s26051477 "Formation Control for UAVs Considering Safety Constraints Based on Control Barrier Functions"
+    link https://doi.org/10.3390/app16136554 "Multi-Agent Deep Reinforcement Learning (MADRL)-Based End-to-End Formation Control"
     description '''
       Maintien d une geometrie relative entre agents (offset de position
       ou de vitesse) sans reference centralisee.
@@ -316,6 +324,10 @@ model {
     link https://arxiv.org/abs/2606.31197 "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms"
     link https://doi.org/10.1038/s41598-026-70043-1 "A comparative study of path planning algorithms for low-altitude emergency medical UAVs considering task priorities"
     link https://doi.org/10.1007/s44443-026-00976-0 "Neighborhood elite learning multi-strategy cooperative particle swarm optimization for coordinated simultaneous arrival path planning of multiple amphibious UAVs"
+    link https://doi.org/10.3390/machines13070600 "Addressing Local Minima in Path Planning for Drones with Reinforcement Learning"
+    link https://arxiv.org/abs/2509.15799 "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Navigation"
+    link https://doi.org/10.1109/LRA.2025.3619745 "SwarmGPT: Combining Large Language Models With Safe Motion Planning for Drone Swarms"
+    link https://arxiv.org/abs/2609.09380 "AccelMPC: High-Rate, Low-Power FPGA-Accelerated Model Predictive Control"
     description '''
       Plan embarque versionne par defaut ; MPC court horizon au niveau
       Edge si la ressource le permet ; re-optimisation C2 differee.
