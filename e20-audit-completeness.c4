@@ -1,0 +1,464 @@
+// =============================================================================
+//  E20 — AUDIT DE COMPLETUDE + CONFORMITE LITTERATURE (carte t_bd64f950)
+//
+//  Objet : comparer les 11 aspects de gestion d un essaim de 30 drones
+//  heterogenes (UAV-R x18, UAV-F x8, USV x4) a la litterature repertoriee
+//  par le profil swarmdrone (corpus /home/hermesagent/swarmdrone-research).
+//
+//  RESULTAT DE L AUDIT (detail complet dans le commentaire de la carte) :
+//     COUVERT (4)  : coordination, allocation, evitement de collision, surete
+//     PARTIEL (6)  : formation, communication intermittente, GNSS degrade,
+//                    tolerance aux pannes, energie, perception relative
+//     ABSENT  (1)  : cyber-resilience sous brouillage (aspect decouvert dans
+//                    la litterature, hors liste initiale)
+//     SENSE-AND-AVOID : COUVERT au plan normatif (ASTM F3442-25), delai
+//                    d action = HYP a valider (non demontre).
+//
+//  CORRECTIONS APPORTEES ICI (additives uniquement) :
+//    - 12 nouvelles sources primaires (specDoc) tirees du corpus ;
+//    - 7 nouveaux constats-verdicts (finding) SCI-5..SCI-11 ;
+//    - 4 nouveaux algorithmes (event-triggered comm, localisation
+//      cooperative, allocation de commande tolérante aux fautes, mode
+//      double sous brouillage) ;
+//    - 1 nouveau message (qualite de lien / QoS) ;
+//    - ancrage des constats sur les algorithmes, risques et angles morts
+//      EXISTANTS (aucun renommage, aucune suppression).
+//
+//  REGLE D HONNETETE (invariant INV-5) : chaque source porte son statut de
+//  verification reel — CONSULTEE (fichier lu) ou REPERTORIEE (titre+DOI du
+//  catalogue uniquement). Aucun resultat n est invente.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. NOUVELLES SOURCES PRIMAIRES (specDoc)
+  //     Toutes proviennent du corpus swarmdrone-research/articles/.
+  //     Le champ `statut` dit exactement ce qui a ete verifie.
+  // ===========================================================================
+
+  srcSwarmRaft = specDoc 'Dev, Madhwal, Shevelo, Osinenko, Yanovich (2025) — SwarmRaft' {
+    #science
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
+    description '''Consensus de type Raft adapte aux essaims en environnement GNSS-degrade. Detection de fautes par vote local (local vote broadcast), correction et recuperation de position. Corps du fichier consulte (corpus #205).'''
+    metadata { arxiv '2508.00622'; annee '2025'; nature 'primaire'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcEventTrigConsensus = specDoc 'MDPI Sensors 24(2):339 (2024) — Adaptive Event-Triggered Consensus' {
+    #science
+    link https://www.mdpi.com/1424-8220/24/2/339 "Adaptive Event-Triggered Consensus of Multi-Agent Systems in Sense of Asymptotic Convergence"
+    description 'Consensus adaptatif declenche par evenement, convergence asymptotique. Etablit le mecanisme « n emettre que sur evenement » que le modele ne formalisait pas (corpus #121).'
+    metadata { doi '10.3390/s24020339'; annee '2024'; nature 'primaire'; statut 'REPERTORIEE (titre+DOI)' }
+  }
+  srcETPBBA = specDoc 'Cong, Li, Zhu, Wang (2026) — ET-PBBA, Drones 10(9):684' {
+    #science
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
+    description 'Allocation de taches multi-UAV dynamique declenchee par evenement et sensible a l energie (event-triggered path-based bid assignment). N=10 UAV / 50 taches ; activation par evenement : taux de completion +0.046 (0.065 sous fautes) vs allocation periodique 10 s ; temps et energie reduits vs CBBA (corpus #1026).'
+    metadata { doi '10.3390/drones10090684'; annee '2026'; n_reel '10 UAV (simulation)'; nature 'primaire'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcSTDCL = specDoc 'Drones 10(1):69 (2026) — ST-DCL, localisation cooperative d essaims dynamiques' {
+    #science
+    link https://www.mdpi.com/2504-446X/10/1/69 "ST-DCL: A Spatio-Temporally Decoupled Cooperative Localization Method for Dynamic Drone Swarms"
+    description 'Localisation cooperative spatio-temporellement decouplee pour essaims de drones dynamiques. Conforte l existence d une famille d algorithmes dedies a la localisation relative, absente du modele (corpus #284).'
+    metadata { doi '10.3390/drones10010069'; annee '2026'; nature 'primaire'; statut 'REPERTORIEE (titre+DOI)' }
+  }
+  srcUSVCoopLoc = specDoc 'Fu, Wen, Shen (2026) — Cooperative Localization of USV, IEEE T-IE' {
+    #science
+    link https://doi.org/10.1109/tie.2026.3672870 "Cooperative Localization of USV in Heterogeneous Sensor Networks: A Consensus-Based Estimation Approach"
+    description 'Localisation cooperative d USV en reseaux de capteurs heterogenes par estimation basee consensus. Conforte la localisation relative multi-agent pour le domaine de surface (corpus #972). Resume non verifie par l editeur dans le corpus.'
+    metadata { doi '10.1109/tie.2026.3672870'; annee '2026'; nature 'primaire'; statut 'CONSULTEE (fichier lu, resume non verifie)' }
+  }
+  srcFTCAllocUSV = specDoc 'Thai, Bang, Ha, Kim, Youn (2026) — Fault-tolerant control allocation USV, Ocean Eng.' {
+    #science
+    link https://doi.org/10.1016/j.oceaneng.2026.127394 "A hybrid fault-tolerant control allocation for an over-actuated USV with azimuth thruster saturation: Experimental system identification and HITL validation"
+    description 'Allocation de commande tolerante aux fautes pour USV sur-actionne avec saturation d azimuth ; identification systeme experimentale + validation HITL. Documente la tolerance aux pannes AU NIVEAU ACTUATEUR, absente du modele (corpus #966). Resume non verifie par l editeur.'
+    metadata { doi '10.1016/j.oceaneng.2026.127394'; annee '2026'; nature 'primaire'; statut 'CONSULTEE (fichier lu, resume non verifie)' }
+  }
+  srcADMOS = specDoc 'Hassan et al. (2026) — ADMOS, swarm control under communication jamming' {
+    #science
+    link https://doi.org/10.1007/s44465-026-00041-0 "Adaptive dual mode operational swarm control for resilient asset defense under communication jamming"
+    description '''Architecture de commande d essaim sous brouillage : (i) estimation distribuee par Covariance Intersection ; (ii) superviseur hybride basculant chaque agent entre mode cooperatif et autonome (hysteresis + dwell time) ; (iii) filtre de surete HOCBF. Constat cle : le consensus de reference se degrade nettement des ~40% de perte de paquets (corpus #929).'''
+    metadata { doi '10.1007/s44465-026-00041-0'; annee '2026'; nature 'primaire'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcZeroTrust = specDoc 'Gonzales et al. (2026) — Zero-Trust for robotic fleets' {
+    #science
+    link https://doi.org/10.48550/arxiv.2609.05741 "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking"
+    description 'Cadre Zero-Trust pour flottes robotiques : racine de confiance materielle TPM 2.0, telemetrie SIEM (ELK/Kismet), watermarking de delai inter-paquets (IPD). Evalue sur testbed ROS 2 reel sous exploits OSI L2-L5 (corpus #1003).'
+    metadata { doi '10.48550/arxiv.2609.05741'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcHeteroUAVUSV = specDoc 'Zhang, Zhong, Song (2026) — Formation heterogene UAV-USV, ISA Trans.' {
+    #science
+    link https://doi.org/10.1016/j.isatra.2026.05.014 "Robust formation control of heterogeneous UAV-USV multi-agent systems: An actor-critic enhanced hyperbolic sliding mode approach with dynamic event-triggering"
+    description 'Controle de formation robuste de systemes multi-agents heterogenes UAV-USV (sliding mode hyperbolique ameliore par actor-critic, event-triggering dynamique). Correspond EXACTEMENT a la flotte cible (aeriens + surface) (corpus #961). Resume non verifie par l editeur.'
+    metadata { doi '10.1016/j.isatra.2026.05.014'; annee '2026'; nature 'primaire'; statut 'CONSULTEE (fichier lu, resume non verifie)' }
+  }
+  srcQAR = specDoc 'IJETT 74(8) (2026) — QAR, QoS-aware FANET routing' {
+    #science
+    link https://doi.org/10.14445/22315381/ijett-v74i8p125 "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR)"
+    description 'Routage FANET sensible a la QoS : surveillance continue delai/pertes/debit, selection de route guidee par la QoS ; traite explicitement la variabilite du lien et la connectivite intermittente (corpus #1024).'
+    metadata { doi '10.14445/22315381/ijett-v74i8p125'; annee '2026'; nature 'primaire'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcSlamSurvey = specDoc 'Survey SLAM/odometry for GPS-denied environments' {
+    #science
+    link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
+    description '''Revue organisee par modalite sensorielle : visuel, visuel-inertiel, LiDAR, LiDAR-inertiel, LiDAR-visuel-inertiel, et groupe heterogene (sonar/radar/thermique). Conclusion : aucune configuration universellement optimale ; la robustesse GNSS-denied exige de combiner des modalites aux modes de defaillance complementaires (corpus #1037).'''
+    metadata { doi '10.21203/rs.3.rs-10409860/v1'; annee '2026'; nature 'revue'; statut 'CONSULTEE (fichier lu)' }
+  }
+  srcVisFormGPSDeg = specDoc 'Vision-Based Leader-Follower Formation in GPS-Degraded (2017/2026)' {
+    #science
+    link https://arxiv.org/abs/2609.01420 "Vision-Based Leader-Follower Formation Control for Cooperative UAVs in GPS-Degraded Environments"
+    description 'Formation cooperative leader-follower par vision (RGB-D + detecteur YOLO embarqué) : estimation de pose relative du leader, secours quand le GPS est indisponible ; ROS + simulation XTDrone avec bruit et coupures de communication (corpus #593).'
+    metadata { doi '10.3846/16487788.2017.1378265'; arxiv '2609.01420'; nature 'primaire'; statut 'CONSULTEE (fichier lu)' }
+  }
+
+  // ===========================================================================
+  //  2. NOUVEAUX CONSTATS-VERDICTS (finding) SCI-5..SCI-11
+  //     Un verdict, une raison, des sources. Suite de science.c4 (SCI-1..4).
+  // ===========================================================================
+
+  sciGnssDegraded = finding 'SCI-5 — Navigation GNSS-degradee : famille sourcée, eclatée par modalite' {
+    #science
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
+    description '''Le TBD « aucune source verifiee » d algNavigationGNSSDegrade est leve PARTIELLEMENT : la famille est abondamment documentee.
+      - SwarmRaft (arXiv:2508.00622) : consensus + detection de fautes + correction de position en GNSS-degrade (simulation).
+      - Revue SLAM/odometry GPS-denied (10.21203/rs.3.rs-10409860) : AUCUNE modalite universelle ; robustesse par fusion de modalites complementaires — ce qui rend le choix VIO seul insuffisant.
+      - Leader-follower par vision en GPS-degrade (10.3846/16487788.2017.1378265) : perception relative comme secours au GNSS.
+      LIMITE NON LEVEE : aucune source ne demontre la bascule a N=30 en vol reel.'''
+    metadata {
+      verdict 'SUPPORTED (famille) / CONDITIONAL (a 30 reel)'
+      niveau_preuve 'MEDIUM'
+      source 'srcSwarmRaft, srcSlamSurvey, srcVisFormGPSDeg'
+      correction_modele 'algNavigationGNSSDegrade : references « aucune source » remplacees par ces 3 sources ; VIO requalifie en option parmi des modalites complementaires'
+    }
+  }
+
+  sciEventTriggered = finding 'SCI-6 — Communication intermittente : event-triggered + routage QoS' {
+    #science
+    link https://www.mdpi.com/1424-8220/24/2/339 "Adaptive Event-Triggered Consensus of Multi-Agent Systems in Sense of Asymptotic Convergence"
+    description '''L aspect « communication intermittente » n etait couvert qu en HYPOTHESE (H2) et en propriete de canal (chMesh store-and-forward). La litterature fournit le MECANISME :
+      - consensus adaptatif declenche par evenement (10.3390/s24020339) : n emettre que lorsque necessaire ;
+      - routage FANET QoS-aware QAR (10.14445/22315381/ijett-v74i8p125) : selection de route guidee par QoS sous connectivite intermittente ;
+      - ET-PBBA (10.3390/drones10090684) : allocation declenchee par evenement, mesure de l avantage vs allocation periodique.
+      Ceci leve PARTIELLEMENT blindspotAM3 (budget radio non dimensionne) : le levier de reduction existe, son chiffrage a 30 reste ouvert.'''
+    metadata {
+      verdict 'SUPPORTED'
+      niveau_preuve 'MEDIUM'
+      source 'srcEventTrigConsensus, srcQAR, srcETPBBA'
+      correction_modele 'ajout algEventTriggeredComm + msgLinkQuality ; AM3 passe de « aucun mecanisme » a « mecanisme connu, chiffrage 30 ouvert »'
+    }
+  }
+
+  sciCoopLocalization = finding 'SCI-7 — Perception relative : localisation cooperative dediee' {
+    #science
+    link https://www.mdpi.com/2504-446X/10/1/69 "ST-DCL: A Spatio-Temporally Decoupled Cooperative Localization Method for Dynamic Drone Swarms"
+    description '''fnRelativeEstimation etait en TBD de technologie ; factRelativePerception documente UWB (13-26 agents) mais AUCUN algorithme de localisation relative n existait dans le catalogue. La litterature fournit la famille :
+      - ST-DCL (10.3390/drones10010069) : localisation cooperative decouplee spatio-temporellement pour essaims dynamiques ;
+      - localisation cooperative d USV par consensus (10.1109/tie.2026.3672870) : directement applicable aux 4 USV.
+      LIMITE : validation majoritairement simulation ; aucun resultat a 30 plateformes en vol reel identifie.'''
+    metadata {
+      verdict 'SUPPORTED'
+      niveau_preuve 'MEDIUM'
+      source 'srcSTDCL, srcUSVCoopLoc'
+      correction_modele 'ajout algCooperativeLocalization ; TBD techno de fnRelativeEstimation conserve (choix UWB vs vision non tranche)'
+    }
+  }
+
+  sciFaultTolerantCtrl = finding 'SCI-8 — Tolerance aux pannes : allocation de commande tolérante (USV)' {
+    #science
+    link https://doi.org/10.1016/j.oceaneng.2026.127394 "A hybrid fault-tolerant control allocation for an over-actuated USV with azimuth thruster saturation: Experimental system identification and HITL validation"
+    description '''La tolerance aux pannes du modele s arretait au DIAGNOSTIC (algHealthMonitoring) et a la REELECTION (algLeaderElection). La litterature documente le niveau ACTUATEUR, critique pour les 4 USV sur-actionnes :
+      - allocation de commande tolérante aux fautes, saturation d azimuth, identification systeme + validation HITL (10.1016/j.oceaneng.2026.127394) ;
+      - formation tolérante aux fautes pour multi-USV avec fautes d actionneurs (10.1016/j.oceaneng.2026.127355, corpus #965).
+      LIMITE : validation HITL / simulation ; pas de vol d essaim a 30.'''
+    metadata {
+      verdict 'SUPPORTED (niveau actionneur) / CONDITIONAL (essaim complet)'
+      niveau_preuve 'MEDIUM'
+      source 'srcFTCAllocUSV'
+      correction_modele 'ajout algFaultTolerantControlAlloc ; AM12 (agent defaillant) enrichi : defaillance actionneur traitee en plus de la perte d agent'
+    }
+  }
+
+  sciJammingResilience = finding 'SCI-9 — Cyber-resilience sous brouillage (aspect absent du modele)' {
+    #science
+    link https://doi.org/10.1007/s44465-026-00041-0 "Adaptive dual mode operational swarm control for resilient asset defense under communication jamming"
+    description '''Aspect decouvert dans la litterature, ABSENT du modele : la resilience sous BROUILLAGE de communication. Le modele n avait que riskR2, blindspotAM7 et adr3 (separation de canaux), sans mecanisme.
+      - ADMOS (10.1007/s44465-026-00041-0) : bascule supervisee cooperative/autonome (hysteresis + dwell time), fusion CI, filtre HOCBF ; le consensus de reference se degrade nettement des ~40% de perte de paquets.
+      - Zero-Trust (10.48550/arxiv.2609.05741) : attestation TPM 2.0 + watermarking IPD, evalue sur ROS 2 reel (L2-L5).
+      LIMITE : testbed Wi-Fi/ROS, pas un essaim de 30 en vol brouille.'''
+    metadata {
+      verdict 'SUPPORTED (mecanisme) / CONDITIONAL (echelle essaim 30)'
+      niveau_preuve 'MEDIUM'
+      source 'srcADMOS, srcZeroTrust'
+      correction_modele 'ajout algJammingResilientMode ; AM7 passe de « non traite » a « mecanisme connu, essai 30 ouvert »'
+    }
+  }
+
+  sciEnergyTaskAlloc = finding 'SCI-10 — Energie : allocation energy-aware sourcee' {
+    #science
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
+    description '''blindspotAM9 (CBBA ne couvre pas l energie) est leve PARTIELLEMENT : la litterature fournit une allocation sensible a l energie.
+      - ET-PBBA (10.3390/drones10090684) : score d enchere integrant recompense, longueur de chemin, energie predite et pression charge-energie ; N=10 UAV / 50 taches ; energie totale -4.3% vs CBBA.
+      LIMITE : N=10, pas 30. La CAPACITE batterie (DE-07) reste ouverte et independante.'''
+    metadata {
+      verdict 'SUPPORTED (N=10) / EXTRAP (N=30)'
+      niveau_preuve 'MEDIUM'
+      source 'srcETPBBA'
+      correction_modele 'algEnergyAware et algTaskAllocation relies a cette source ; AM9 requalifie : mecanisme connu, echelle 30 ouverte'
+    }
+  }
+
+  sciHeteroFormation = finding 'SCI-11 — Formation heterogene UAV-USV : source exacte de la flotte' {
+    #science
+    link https://doi.org/10.1016/j.isatra.2026.05.014 "Robust formation control of heterogeneous UAV-USV multi-agent systems: An actor-critic enhanced hyperbolic sliding mode approach with dynamic event-triggering"
+    description '''algFormationControl portait « aucune source verifiee » alors que la litterature documente PRECISEMENT le cas heterogene aerien+surface de la flotte cible :
+      - formation robuste heterogene UAV-USV (10.1016/j.isatra.2026.05.014) : sliding mode ameliore + event-triggering dynamique ;
+      - formation leader-follower par vision en GPS-degrade (10.3846/16487788.2017.1378265) : la perception relative comme socle de formation.
+      LIMITE : validation simulation ; pas de formation UAV-USV a 30 en reel.'''
+    metadata {
+      verdict 'SUPPORTED'
+      niveau_preuve 'MEDIUM'
+      source 'srcHeteroUAVUSV, srcVisFormGPSDeg'
+      correction_modele 'algFormationControl source ; AM10 (handoff UAV-USV) precise : la formation heterogene est documentee, le handoff inter-domaines reste ouvert'
+    }
+  }
+
+  // ===========================================================================
+  //  3. NOUVEAUX GAPS — ce qui reste a prouver apres ces corrections
+  // ===========================================================================
+
+  gap5 = finding 'GAP-5 — Brouillage reel sur un essaim de 30 en vol' {
+    #science
+    description 'Mesurer la degradation de coordination sous brouillage RF a N=30 (ADMOS ne donne pas N). Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciJammingResilience'; priorite 'haute' }
+  }
+  gap6 = finding 'GAP-6 — Localisation cooperative a 30 plateformes en vol reel' {
+    #science
+    description 'Mesurer la precision relative et la robustesse au brouillage GNSS a N=30 (ST-DCL/USV sont simules). Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciCoopLocalization'; priorite 'moyenne' }
+  }
+
+  // ===========================================================================
+  //  4. NOUVEAUX ALGORITHMES — comblent les aspects PARTIEL / ABSENT
+  // ===========================================================================
+
+  algEventTriggeredComm = algorithm 'ALG_EVENT_TRIGGERED_COMM — Communication declenchee par evenement' {
+    #algorithm
+    link https://www.mdpi.com/1424-8220/24/2/339 "Adaptive Event-Triggered Consensus of Multi-Agent Systems in Sense of Asymptotic Convergence"
+    link https://doi.org/10.14445/22315381/ijett-v74i8p125 "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR)"
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
+    link https://doi.org/10.1016/j.oceaneng.2026.127430 "Event-triggered practical prescribed-time distributed optimal formation control of heterogeneous multi-USVs Under intermittent communication"
+    description '''Politique d emission sur evenement (depassement de seuil d etat, franchissement de zone, alerte) au lieu d un battement periodique systematique. Reduit la charge spectrale a 30 agents (blindspotAM3 / risque R-1).'''
+    metadata {
+      category 'communication / optimisation spectrale'
+      purpose 'Reduire le debit de coordination sans perdre la fraicheur des decisions critiques'
+      inputs 'etat local, seuils de declenchement, qualite de lien (MSG_LINK_QUALITY)'
+      outputs 'decision d emission (quoi, quand, a qui)'
+      parameters 'seuils de declenchement, periode minimale de garde, hysteresis'
+      hypotheses 'la surete locale ne depend pas de ce canal ; les alertes critiques restent sur CH_LOCAL'
+      contraintes 'sur-déclenchement possible en regime turbulent ; borne de debit a 30 non chiffree'
+      state 'local + compteurs de declenchement'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'emergente (famille event-triggered mature en theorie du consensus)'
+      evidence 'SUPPORTED — SCI-6 (event-triggered consensus 10.3390/s24020339 ; QAR 10.14445/22315381/ijett-v74i8p125 ; ET-PBBA 10.3390/drones10090684)'
+      metrics 'debit moyen, latence de bout en bout, nombre de declenchements'
+      references 'srcEventTrigConsensus, srcQAR, srcETPBBA — CONSULTEES/REPERTORIEES'
+      relatedComponents 'onboard.linkRadio, edge.relay'
+      relatedMessages 'MSG_DRONE_STATE (sur evenement), MSG_CONSENSUS_VOTE, MSG_LINK_QUALITY'
+      variantes 'event-triggered, self-triggered, time-triggered hybride'
+      tbd 'GAP de chiffrage : budget radio a 30 reste a mesurer (AM3)'
+    }
+  }
+
+  algCooperativeLocalization = algorithm 'ALG_COOPERATIVE_LOCALIZATION — Localisation cooperative inter-agents' {
+    #algorithm
+    link https://www.mdpi.com/2504-446X/10/1/69 "ST-DCL: A Spatio-Temporally Decoupled Cooperative Localization Method for Dynamic Drone Swarms"
+    link https://doi.org/10.1109/tie.2026.3672870 "Cooperative Localization of USV in Heterogeneous Sensor Networks: A Consensus-Based Estimation Approach"
+    link https://doi.org/10.1007/978-981-92-4392-1_19 "Research on Vision-Based Multi-robot Cooperative Localisation and Mapping System"
+    link https://doi.org/10.1016/j.measurement.2026.122307 "A Huber-based adaptive unscented Kalman filter for robust multi-AUV cooperative localization"
+    description '''Estimation de position relative (et absolue degradee) par echange de mesures entre voisins et fusion par consensus. Socle de la formation et de l evitement cooperatif, secours en GNSS-degrade.'''
+    metadata {
+      category 'perception / localisation relative'
+      purpose 'Fournir une estimation relative fiable sans dependre du GNSS ni d une infrastructure'
+      inputs 'mesures UWB/ranging, odometrie, IMU, etats des voisins'
+      outputs 'positions relatives estimees, incertitudes associees'
+      parameters 'topologie de voisinage, gains de consensus, bruits de mesure'
+      hypotheses 'graphe de voisinage suffisamment connexe ; horloges approximativement alignees'
+      contraintes 'degrade en partition profonde ; derive sans recalage absolu'
+      state 'partage (consensus) + local'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'emergente (famille documentee en simulation)'
+      evidence 'SUPPORTED — SCI-7 (ST-DCL 10.3390/drones10010069 ; USV consensus 10.1109/tie.2026.3672870)'
+      metrics 'RMSE relative, taux de convergence, robustesse au brouillage GNSS'
+      references 'srcSTDCL, srcUSVCoopLoc — CONSULTEES/REPERTORIEES'
+      relatedComponents 'onboard.perception, edge.fusion'
+      relatedMessages 'MSG_POSITION_UPDATE, MSG_NEIGHBOR_STATE'
+      variantes 'ST-DCL, consensus-based (USV), EKF distribue, UWB TOF/TDOA'
+      tbd 'GAP-6 : precision a 30 en vol reel non demontree ; choix capteur (UWB vs vision) = DE-08'
+    }
+  }
+
+  algFaultTolerantControlAlloc = algorithm 'ALG_FAULT_TOLERANT_CONTROL_ALLOC — Allocation de commande tolérante aux fautes' {
+    #algorithm
+    link https://doi.org/10.1016/j.oceaneng.2026.127394 "A hybrid fault-tolerant control allocation for an over-actuated USV with azimuth thruster saturation: Experimental system identification and HITL validation"
+    description '''Redistribution de l effort de commande sur les actionneurs restants apres une faute (propulseur, gouverne, moteur), avec gestion des saturations. Critique pour les USV sur-actionnes.'''
+    metadata {
+      category 'resilience / controle'
+      purpose 'Maintenir la commande malgre une faute actionneur, sans reconfiguration de mission'
+      inputs 'etat de sante actionneurs, consigne de commande, limites de saturation'
+      outputs 'allocation d effort recalculee, signaux actionneurs'
+      parameters 'matrice d allocation, limites de saturation, priorites actionneurs'
+      hypotheses 'la faute est detectee et qualifiee en amont (algHealthMonitoring)'
+      contraintes 'degradation de manoeuvrabilite si faute critique ; validation HITL, pas de vol essaim'
+      state 'local'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'emergente (HITL)'
+      evidence 'SUPPORTED (niveau actionneur) — SCI-8 (10.1016/j.oceaneng.2026.127394, HITL)'
+      metrics 'erreur de commande residuelle, saturation evitee, enveloppe de manoeuvre restante'
+      references 'srcFTCAllocUSV — CONSULTEE'
+      relatedComponents 'onboard.autopilot, onboard.health'
+      relatedMessages 'MSG_FAILURE_NOTIFICATION'
+      variantes 'allocation hybride, pseudo-inverse ponderee, allocation sous saturation azimuth'
+      tbd 'integration au fil de surete UAV (voilure fixe/tournante) non documentee'
+    }
+  }
+
+  algJammingResilientMode = algorithm 'ALG_JAMMING_RESILIENT_MODE — Mode double coopératif/autonome sous brouillage' {
+    #algorithm
+    link https://doi.org/10.1007/s44465-026-00041-0 "Adaptive dual mode operational swarm control for resilient asset defense under communication jamming"
+    link https://doi.org/10.48550/arxiv.2609.05741 "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking"
+    link https://doi.org/10.3389/ffutr.2026.1923890 "Explainable and cyber-resilient vision transformers for joint steering and collision-avoidance perception in autonomous drone navigation: a multi-task Grad-CAM framework"
+    link https://arxiv.org/abs/2607.17025 "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation"
+    link https://doi.org/10.1016/j.ins.2026.124096 "Meta policy switching for resilient UAV navigation in adversarial airspace"
+    description '''Bascule supervisee entre fonctionnement cooperatif (consensus) et autonome (plan embarque) quand la communication se degrade sous brouillage, avec hysteresis et temps de maintien minimal pour eviter l oscillation de mode.'''
+    metadata {
+      category 'resilience / cyber'
+      purpose 'Rester operationnel quand le canal de coordination est brouille ou degrade'
+      inputs 'taux de perte de paquets, qualite de lien, etat de la mission'
+      outputs 'mode courant (cooperatif / autonome), consigne de bascule'
+      parameters 'seuil de bascule (~40% pertes constate dans ADMOS), hysteresis, dwell time minimal'
+      hypotheses 'la surete locale (HOCBF/regles) reste active quel que soit le mode'
+      contraintes 'deux modes peuvent diverger sur la decision de mission ; reconvergence a la restauration du lien'
+      state 'superviseur local + etat partage degrade'
+      executionMode 'conceptual'
+      implementationStatus 'idea'
+      repository 'TBD'
+      version 'TBD'
+      maturity 'emergente (simulation)'
+      evidence 'SUPPORTED (mecanisme) — SCI-9 (ADMOS 10.1007/s44465-026-00041-0 ; Zero-Trust 10.48550/arxiv.2609.05741)'
+      metrics 'taux de perte de paquets tolere, temps de bascule, fausses bascules'
+      references 'srcADMOS, srcZeroTrust — CONSULTEES'
+      relatedComponents 'onboard.mission, onboard.perception, edge.coordinator'
+      relatedMessages 'MSG_LINK_QUALITY, MSG_DRONE_STATE'
+      variantes 'ADMOS (CI + hysteresis + HOCBF), mode degrade consensus seul, plan embarque seul'
+      tbd 'GAP-5 : brouillage reel a N=30 en vol non demontre ; attestation TPM non integree au modele materiel'
+    }
+  }
+
+  // ===========================================================================
+  //  5. NOUVEAU MESSAGE — qualite de lien / QoS
+  //     Pre-requis observe du routage QoS-aware (QAR) et du declenchement
+  //     par evenement : il faut OBSERVER la qualite de lien.
+  // ===========================================================================
+
+  msgLinkQuality = message 'MSG_LINK_QUALITY — qualite de lien / QoS' {
+    #message
+    link https://doi.org/10.14445/22315381/ijett-v74i8p125 "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR)"
+    description '''Mesure de qualite du lien radio inter-agents (delai, pertes, debit estime). Alimente le routage QoS-aware et la decision d emission sur evenement.'''
+    metadata {
+      producteur 'onboard.linkRadio'
+      consommateurs 'onboard.mission, edge.coordinator, edge.relay'
+      canal 'CH_MESH'
+      frequence 'sur evenement / 0.5-1 Hz [EXTRAP]'
+      criticite 'mission-critical'
+      algorithme 'ALG_EVENT_TRIGGERED_COMM, ALG_JAMMING_RESILIENT_MODE'
+      schema 'TBD — perte, delai, debit estime, voisinage'
+      perte 'decision de routage sous-optimale, pas de risque de surete'
+    }
+  }
+
+  // ===========================================================================
+  //  6. RELATIONS — sources -> constats -> algorithmes -> composants/messages
+  // ===========================================================================
+
+  // --- Constats etayes par leurs sources ---
+  sciGnssDegraded -[uses]-> srcSwarmRaft 'source primaire'
+  sciGnssDegraded -[uses]-> srcSlamSurvey 'revue par modalite'
+  sciGnssDegraded -[uses]-> srcVisFormGPSDeg 'perception relative en secours GNSS'
+  sciEventTriggered -[uses]-> srcEventTrigConsensus 'mecanisme'
+  sciEventTriggered -[uses]-> srcQAR 'routage QoS'
+  sciEventTriggered -[uses]-> srcETPBBA 'mesure de l avantage'
+  sciCoopLocalization -[uses]-> srcSTDCL 'essaims dynamiques'
+  sciCoopLocalization -[uses]-> srcUSVCoopLoc 'domaine surface'
+  sciFaultTolerantCtrl -[uses]-> srcFTCAllocUSV 'HITL USV'
+  sciJammingResilience -[uses]-> srcADMOS 'bascule de mode'
+  sciJammingResilience -[uses]-> srcZeroTrust 'attestation + watermarking'
+  sciEnergyTaskAlloc -[uses]-> srcETPBBA 'energy-aware allocation'
+  sciHeteroFormation -[uses]-> srcHeteroUAVUSV 'heterogene UAV-USV'
+  sciHeteroFormation -[uses]-> srcVisFormGPSDeg 'formation par vision'
+
+  // --- Gaps exposes par les constats ---
+  gap5 -[exposes]-> sciJammingResilience 'doute a lever'
+  gap6 -[exposes]-> sciCoopLocalization 'doute a lever'
+
+  // --- Constats qui etayent les algorithmes EXISTANTS ---
+  sciGnssDegraded -[evidences]-> algNavigationGNSSDegrade 'source la famille'
+  sciEventTriggered -[evidences]-> algConsensus 'consensus sur evenement'
+  sciCoopLocalization -[evidences]-> algPerceptionFusion 'fusion relative coopérative'
+  sciFaultTolerantCtrl -[evidences]-> algHealthMonitoring 'le diagnostic alimente la reallocation'
+  sciEnergyTaskAlloc -[evidences]-> algEnergyAware 'allocation sensible a l energie'
+  sciEnergyTaskAlloc -[evidences]-> algTaskAllocation 'variante energy-aware de CBBA'
+  sciHeteroFormation -[evidences]-> algFormationControl 'source la formation'
+
+  // --- Constats qui etayent les algorithmes NOUVEAUX ---
+  sciEventTriggered -[evidences]-> algEventTriggeredComm 'algorithme ajoute'
+  sciCoopLocalization -[evidences]-> algCooperativeLocalization 'algorithme ajoute'
+  sciFaultTolerantCtrl -[evidences]-> algFaultTolerantControlAlloc 'algorithme ajoute'
+  sciJammingResilience -[evidences]-> algJammingResilientMode 'algorithme ajoute'
+
+  // --- Nouveaux algorithmes portes par les composants ---
+  onboard.linkRadio -[implements]-> algEventTriggeredComm 'politique d emission'
+  edge.relay -[uses]-> algEventTriggeredComm 'relais sur evenement'
+  onboard.perception -[implements]-> algCooperativeLocalization 'localisation relative'
+  edge.fusion -[uses]-> algCooperativeLocalization 'fusion multi-agents'
+  onboard.autopilot -[implements]-> algFaultTolerantControlAlloc 'commande tolerante'
+  onboard.mission -[implements]-> algJammingResilientMode 'superviseur de mode'
+  edge.coordinator -[uses]-> algJammingResilientMode 'bascule au niveau Edge'
+
+  // --- Nouveaux algorithmes et messages ---
+  algEventTriggeredComm -[uses]-> msgLinkQuality 'decide sur la qualite de lien'
+  algJammingResilientMode -[uses]-> msgLinkQuality 'seuil de bascule'
+  algCooperativeLocalization -[uses]-> msgPositionUpdate 'mesure relative'
+  algCooperativeLocalization -[uses]-> msgNeighborState 'etats voisins'
+
+  // E25 — enrichissement additif (carte t_97fefb21) : allocation tolerante aux fautes
+  algFaultTolerantControlAlloc -[uses]-> msgFailureNotification 'defaillance actionneur signalee'
+  algFaultTolerantControlAlloc -[exposed-to]-> blindspotAM12 'defaillance actionneur non couverte (AM12)'
+
+  // --- Publication / souscription du nouveau message ---
+  onboard.linkRadio -[publishes]-> msgLinkQuality
+  msgLinkQuality -[subscribes]-> onboard.mission
+  msgLinkQuality -[subscribes]-> edge.coordinator
+  msgLinkQuality -[subscribes]-> edge.relay
+  msgLinkQuality -[uses]-> chMesh
+
+  // --- Ancrage epistemique : constats -> risques / angles morts EXISTANTS ---
+  sciGnssDegraded -[exposes]-> riskR5 'derive GNSS-degrade'
+  sciGnssDegraded -[exposes]-> h3 'GNSS degradable'
+  sciEventTriggered -[exposes]-> blindspotAM3 'budget radio non dimensionne'
+  sciEventTriggered -[exposes]-> riskR1 'contention radio a 30'
+  sciCoopLocalization -[exposes]-> blindspotAM4 'fusion essaim sans brique'
+  sciFaultTolerantCtrl -[exposes]-> blindspotAM12 'agent defaillant'
+  sciJammingResilience -[exposes]-> blindspotAM7 'cybersecurite du lien'
+  sciJammingResilience -[exposes]-> riskR2 'prise de controle via lien'
+  sciEnergyTaskAlloc -[exposes]-> blindspotAM9 'CBBA sans energie'
+  sciEnergyTaskAlloc -[exposes]-> riskR12 'taches orphelines par energie'
+  sciHeteroFormation -[exposes]-> blindspotAM10 'handoff inter-domaines UAV-USV'
+}

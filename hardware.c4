@@ -32,6 +32,7 @@ model {
 
   refDrone = drone 'Drone de reference — UAV-R multirotor' {
     #hardware #reference
+    link https://doi.org/10.32604/iasc.2025.060364 "A Comprehensive Review of Next-Gen UAV Swarm Robotics: Optimisation Techniques and Control Strategies for Dynamic Environments"
     description '''
       Architecture materielle de reference d'un drone de l'essaim.
       Les 30 plateformes du simulateur sont des instances de ce modele,
@@ -75,6 +76,7 @@ model {
         source_fc 'https://docs.px4.io/main/en/flight_controller/pixhawk6x ; https://holybro.com/products/pixhawk-6x'
         tbd 'certification aeronautique non verifiee ; ne pas confondre conformite FMUv6X et certification DAL'
         decision 'DE-05 (socle de vol et niveau d assurance)'
+        evidence 'aucun article trouve dans le corpus swarmdrone'
       }
       style { icon bootstrap:cpu }
     }
@@ -92,6 +94,7 @@ model {
         role 'hote des algorithmes embarques'
         source '§4.1 onboard (perception..telemetry)'
         tbd 'options FAIT : VOXL 2 (15 TOPS, 0,1-7 W, 16 g) / Orin NX / i.MX 8M Plus ; TBD amont = budget de calcul TOPS'
+        evidence 'aucun article trouve dans le corpus swarmdrone'
       }
       style { icon bootstrap:motherboard }
     }
@@ -104,6 +107,7 @@ model {
 
     imu = sensor 'HW_IMU — Centrale inertielle' {
       #safety-critical #hardware #tbd
+      link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
       technology 'IMU 6 axes, redondance TBD'
       description 'Mesure accélération et vitesse angulaire. Base de l estimation d attitude.'
       metadata { frequence '100-400 Hz [HYP]'; criticite 'safety-critical'; tbd 'modele exact depend du choix du controleur de vol ; derive non quantifiee (Non_verifie) ; redondance FAIT si FC FMUv6X : 3x ICM-45686 bus separes' }
@@ -111,6 +115,7 @@ model {
 
     gnss = sensor 'HW_GNSS — Positionnement satellite' {
       #mission-critical #hardware
+      link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
       technology 'GNSS multi-constellation (+ RTK TBD)'
       description '''
         Position absolue. Indisponible en zone brouillee ou couverte :
@@ -126,6 +131,7 @@ model {
 
     odometry = sensor 'HW_ODOM — Odometrie / barometre / magnetometre' {
       #mission-critical #hardware
+      link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
       technology 'Capteurs proprioceptifs'
       description 'Complement du GNSS en cas de perte : derive lente, non bornee.'
       metadata { criticite 'mission-critical'; limite 'derive non bornee sans recalage' }
@@ -133,6 +139,7 @@ model {
 
     perceptionRel = sensor 'HW_REL — Perception relative inter-agents' {
       #mission-critical #hardware #tbd #extrap
+      link https://doi.org/10.1007/978-3-032-30156-7_34 "Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex Optimization"
       technology 'Camera / lidar / UWB TBD'
       description '''
         Estimation relative de position des voisins. Rôle critique pour la
@@ -147,6 +154,7 @@ model {
 
     saeSensor = sensor 'HW_SAE — Detection d obstacles (sense-and-avoid)' {
       #safety-critical #hardware #tbd #extrap
+      link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
       technology 'Radar / lidar / vision TBD'
       description '''
         Detection de proximite. Le budget d action de perception est <= 100 ms
@@ -161,6 +169,7 @@ model {
 
     healthSensor = sensor 'HW_HEALTH — Surveillance materielle' {
       #best-effort #hardware
+      link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
       technology 'Sondes tension/temperature/rotation'
       description 'Sante batterie, temperatures, defaillances de capteur.'
       metadata { criticite 'best-effort'; source '§4.1 onboard.health' }
@@ -173,13 +182,13 @@ model {
     propulsion = actuator 'HW_PROP — Propulsion' {
       #safety-critical #hardware
       description 'Ensemble moteurs + ESC. Repond aux consignes de l autopilote.'
-      metadata { criticite 'safety-critical'; tbd 'configuration moteurs par variante' }
+      metadata { criticite 'safety-critical'; tbd 'configuration moteurs par variante' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
     }
 
     servos = actuator 'HW_SRV — Actionneurs de mission' {
       #best-effort #hardware
       description 'Servitudes specifiques (largage, orientation capteur selon variante).'
-      metadata { criticite 'best-effort'; tbd 'presence selon variante' }
+      metadata { criticite 'best-effort'; tbd 'presence selon variante' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
     }
 
     // -----------------------------------------------------------------------
@@ -188,6 +197,7 @@ model {
 
     radioLnk = networkDevice 'HW_RADIO — Lien radio principal' {
       #mission-critical #hardware #tbd
+      link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
       technology 'RF sans fil — options FAIT : 2,4 GHz ISM (pMDDL2450, 25 Mbps) / M1-M6 MANET (Mesh Rider, 100 Mbps)'
       description '''
         Lien inter-drones et drone-vers-edge. Intermittent par construction.
@@ -202,6 +212,7 @@ model {
 
     netMesh = networkDevice 'HW_MESH — Maillage inter-agents' {
       #mission-critical #hardware #tbd
+      link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
       description 'Topologie dynamique entre pairs. Support du store-and-forward.'
       metadata { criticite 'mission-critical'; tbd 'eclater en L2 radio-link / L3 middleware (Zenoh recommande) / politique store-and-forward deconnecte' }
     }
@@ -212,6 +223,7 @@ model {
 
     power = computeNode 'HW_POWER — Energie et distribution' {
       #safety-critical #hardware #tbd
+      link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
       description '''
         Batterie et distribution. L'energie est une ressource critique de
         l'essaim : elle conditionne l'allocation de taches et la resilience.

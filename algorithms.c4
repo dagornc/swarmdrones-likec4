@@ -32,6 +32,11 @@ model {
 
   algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA)' {
     #algorithm
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
+    link https://arxiv.org/abs/2609.06273 "Bundle Length Tradeoffs in Decentralized Multi-Robot Task Allocation Under Degraded Communications"
+    link https://doi.org/10.1007/s12065-026-01257-5 "Survival probability-weighted clustering for UAV-based multi-robot task allocation in disaster response"
+    link https://doi.org/10.1016/j.ergon.2026.103981 "Homogeneous or heterogeneous? Simulation-based comparison of task allocation strategies for multi-operator UAV swarms control"
+    link https://doi.org/10.1007/s42401-026-00540-8 "Multi-UAV cooperative task allocation using chaos theory and an adaptive genetic algorithm"
     description '''
       Consensus-based Bundle Algorithm : encheres successives avec
       resolution de conflits. Chaque agent construit un ensemble de
@@ -64,6 +69,9 @@ model {
 
   algConsensus = algorithm 'ALG_CONSENSUS — Consensus distribue' {
     #algorithm
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
+    link https://arxiv.org/abs/2609.01870 "ArcticSwarm: Deferring Early Consensus in Long-Horizon Multi-Agent Research"
+    link https://doi.org/10.1016/j.asoc.2026.116398 "Hierarchical optimal consensus for economically efficient path planning in multi-UAV"
     description '''
       Convergence d un etat partage entre agents par echange iteratif
       (moyenne, max-consensus, ou CRDT LWW selon le besoin).
@@ -94,6 +102,11 @@ model {
 
   algFormationControl = algorithm 'ALG_FORMATION_CONTROL — Controle de formation' {
     #algorithm
+    link https://doi.org/10.3390/app16178852 "Formation-Preserving Control for Multi-Robot Systems: Experimental Validation"
+    link https://arxiv.org/abs/2410.18495 "Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning"
+    link https://doi.org/10.1038/s41598-026-67888-x "UAV formation control for multi-target tracking based on an improved multi-agent double soft actor–critic"
+    link https://arxiv.org/abs/2609.04158 "Formation Matrix and Energy-based Control of Multi-Agent Systems"
+    link https://doi.org/10.5772/intechopen.1016154 "Control Strategies for Cooperative Swarm UAV Systems: Coordination, Stability and Real-World Deployment"
     description '''
       Maintien d une geometrie relative entre agents (offset de position
       ou de vitesse) sans reference centralisee.
@@ -123,6 +136,7 @@ model {
 
   algLeaderElection = algorithm 'ALG_LEADER_ELECTION — Election de leader' {
     #algorithm
+    link https://doi.org/10.3390/fractalfract10050315 "Resilient Leader–Follower Consensus of Fractional-Order Nonlinear Multi-Agent Systems Under Sybil and DoS Attacks via Event-Triggered Adaptive Control"
     description '''
       Designation d un coordinateur temporaire apres perte du leader
       courant. Condition de la reconfiguration (SCN-10).
@@ -155,6 +169,8 @@ model {
 
   algPerceptionFusion = algorithm 'ALG_PERCEPTION_FUSION — Fusion multi-capteurs (EKF/UKF)' {
     #algorithm
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
+    link https://arxiv.org/abs/2603.08379 "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild"
     description '''
       Fusion de capteurs par filtre de Kalman etendu ou unscented.
       Local par plateforme (socle de surete), avec fusion de pistes
@@ -186,6 +202,9 @@ model {
 
   algNavigationGNSSDegrade = algorithm 'ALG_NAV_GNSS_DEGRADE — Navigation sous GNSS degrade' {
     #algorithm
+    link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
+    link https://arxiv.org/abs/2601.13657 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Learning"
+    link https://arxiv.org/abs/2309.03678 "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones"
     description '''
       Bascule EKF (IMU + odometrie + GNSS) vers VIO en environnement
       GNSS-denied. Reduction de zone et RTL sur seuil de derive.
@@ -215,6 +234,9 @@ model {
 
   algCollisionAvoidance = algorithm 'ALG_COLLISION_AVOIDANCE — Evitement de collision (CBF)' {
     #algorithm
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
+    link https://arxiv.org/abs/2309.13285 "Collision Avoidance and Navigation for a Quadrotor Swarm Using End-to-end Deep Reinforcement Learning"
+    link https://arxiv.org/abs/2401.14554 "GCBF+: A Neural Graph Control Barrier Function Framework for Distributed Safe Multi-Agent Control"
     description '''
       Control Barrier Functions : garantie de non-collision sur un
       horizon court. Couche de surete embarquee NON NEGOCIABLE,
@@ -246,6 +268,7 @@ model {
 
   algSafetyRules = algorithm 'ALG_SAFETY_RULES — Surete par regles pre-approuvees' {
     #algorithm
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description '''
       Regles et reflexes embarques, avec watchdog independant ; CBF en
       renfort. Fonctionne sans aucun lien de communication.
@@ -275,6 +298,11 @@ model {
 
   algPathPlanning = algorithm 'ALG_PATH_PLANNING — Planification de trajectoire (waypoints + MPC)' {
     #algorithm
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
+    link https://arxiv.org/abs/2603.09031 "ImpedanceDiffusion: Diffusion-Based Global Path Planning for UAV Swarm Navigation with Generative Impedance Control"
+    link https://arxiv.org/abs/2606.31197 "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms"
+    link https://doi.org/10.1038/s41598-026-70043-1 "A comparative study of path planning algorithms for low-altitude emergency medical UAVs considering task priorities"
+    link https://doi.org/10.1007/s44443-026-00976-0 "Neighborhood elite learning multi-strategy cooperative particle swarm optimization for coordinated simultaneous arrival path planning of multiple amphibious UAVs"
     description '''
       Plan embarque versionne par defaut ; MPC court horizon au niveau
       Edge si la ressource le permet ; re-optimisation C2 differee.
@@ -308,6 +336,7 @@ model {
 
   algHealthMonitoring = algorithm 'ALG_HEALTH_MONITORING — Surveillance d etat et detection de faute' {
     #algorithm
+    link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
     description '''
       Surveillance continue de la sante des sous-systemes, detection
       d anomalie et qualification de la degradation. Alimente la
@@ -337,6 +366,9 @@ model {
 
   algEnergyAware = algorithm 'ALG_ENERGY_AWARE — Planification sensible a l energie' {
     #algorithm
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
+    link https://doi.org/10.1016/j.asoc.2026.115505 "A knowledge-driven collaborative discrete Jaya algorithm for energy-efficient multi-robot task allocation and scheduling problem"
+    link https://arxiv.org/abs/2609.01764 "Curriculum-Guided Reinforcement Learning for Energy-Efficient UAV-ISAC in Post-Disaster Search-and-Rescue Operations"
     description '''
       Arbitrage entre couverture, duree et marge de repli. Conditionne
       la faisabilite de toute mission longue et la comparaison de
@@ -383,4 +415,20 @@ model {
   onboard.health -[implements]-> algHealthMonitoring 'surveillance d etat'
   edge.coordinator -[uses]-> algTaskAllocation 'allocation au niveau Edge'
   edge.coordinator -[uses]-> algConsensus 'consensus Edge'
+
+  // ===========================================================================
+  //  E25 — ENRICHISSEMENT DES ALGORITHMES PAUVRES (carte t_97fefb21)
+  //  Uniquement ADDITIF. Sens de `evidences` conforme au metamodele :
+  //  constat -[evidences]-> algorithme (aucun `evidences` inverse ajoute).
+  // ===========================================================================
+
+  algPathPlanning -[uses]-> msgTrajectoryProposal 'proposition de trajectoire a negocier'
+  algPathPlanning -[uses]-> msgTrajectoryUpdate 'trajectoire retenue en execution'
+  algPathPlanning -[uses]-> scn01 'mission nominale sans C2'
+
+  algLeaderElection -[uses]-> msgConsensusVote 'vote d election distribue'
+  algLeaderElection -[exposed-to]-> blindspotAM12 'agent defaillant / double leader'
+
+  algSafetyRules -[uses]-> msgCollisionAlert 'alerte consommee par la voie de surete'
+  algSafetyRules -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
 }

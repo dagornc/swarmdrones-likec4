@@ -25,36 +25,38 @@ model {
 
   srcCBBA = specDoc 'Choi, Brunet, How (2009) — Consensus-Based Decentralized Auctions' {
     #science
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     description 'IEEE T-RO 2009. Prouve CBBA conflict-free et convergent sous communications synchrones/completes, optimalite a 50%.'
     metadata { nature 'source primaire'; type 'article de revue'; corpus '#17'; statut 'CONSULTEE' }
   }
   srcCBBA24 = specDoc 'Bi et al. (2024) — Improved CBBA, Drones 8(8):345' {
     #science
     description 'Reallocation de mission multi-UAV heterogene. Heartbeat-hold pour detecter l agent detruit. N=8 UAV dans le scenario.'
-    metadata { doi '10.3390/drones8080345'; annee '2024'; n_reel '8 UAV'; nature 'primaire'; statut 'CONSULTEE' }
+    metadata { doi '10.3390/drones8080345'; annee '2024'; n_reel '8 UAV'; nature 'primaire'; statut 'CONSULTEE' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
   srcDegraded30 = specDoc 'Integrated Consensus Framework for a Degraded UAV Fleet (2025)' {
     #science
     description 'Exactement 30 agents / 30 taches, portee variable (0.1D/0.5D/1D), perte d UAV aleatoire, 837 runs Monte-Carlo. C est de la SIMULATION.'
-    metadata { doi '10.70322/dav.2025.10016'; annee '2025'; n '30 (simulation)'; nature 'primaire'; statut 'CONSULTEE' }
+    metadata { doi '10.70322/dav.2025.10016'; annee '2025'; n '30 (simulation)'; nature 'primaire'; statut 'CONSULTEE' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
   srcCAHCBF = specDoc 'Kim et al. (2026) — CA-HCBF, arXiv:2604.13245' {
     #science
     description 'Control Barrier Functions heterogenes decentralisees. Simulation N in {10,20,30}. MATERIEL REEL : 5 robots LIMO Pro seulement.'
-    metadata { arxiv '2604.13245'; annee '2026'; n_sim '30'; n_reel '5 robots'; nature 'primaire'; statut 'CONSULTEE' }
+    metadata { arxiv '2604.13245'; annee '2026'; n_sim '30'; n_reel '5 robots'; nature 'primaire'; statut 'CONSULTEE' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
   srcCRDT = specDoc 'Shapiro, Preguica, Baquero, Zawirski (2011) — CRDT, INRIA RR-7687' {
     #science
     description 'CRDT LWW-Register = semilattice join-based. Sous eventual delivery, convergence PROUVEE (strong eventual consistency). C est un theoreme.'
-    metadata { nature 'rapport de recherche INRIA'; annee '2011'; statut 'CONSULTEE' }
+    metadata { nature 'rapport de recherche INRIA'; annee '2011'; statut 'CONSULTEE' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
   srcKilobot = specDoc 'Swarm Intelligence (2025) — Global coordinate system, up to 200 Kilobots' {
     #science
     description 'Jusqu a 200 Kilobots REELS. Mecanismes proches (stigmergie versionnee, horloges logiques) mais ne nomment pas toujours des CRDT formels.'
-    metadata { doi '10.1007/s11721-025-00251-4'; annee '2025'; n_reel 'jusqu a 200 Kilobots'; nature 'primaire' }
+    metadata { doi '10.1007/s11721-025-00251-4'; annee '2025'; n_reel 'jusqu a 200 Kilobots'; nature 'primaire' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
   srcUUV = specDoc 'Survey UUV Clusters — Robust State Estimation and Information Fusion' {
     #science
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     description 'Revue MDPI sur la fusion distribuee en milieu GNSS-denied (UUV). Cadre de comparaison quantitatif, sur SCENARIO SIMULE.'
     metadata { corpus '#221'; nature 'revue avec benchmark'; statut 'CONSULTEE' }
   }
@@ -66,6 +68,7 @@ model {
 
   sciCbba = finding 'SCI-1 — CBBA converge sous retrait d agents / partition' {
     #science
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     description '''
       Ce qui est PROUVE : CBBA est conflict-free et convergent sous
       communications synchrones/completes, optimalite a 50%.
@@ -90,6 +93,7 @@ model {
 
   sciCbf = finding 'SCI-2 — CBF : garanties a 30 agents en experience REELLE' {
     #science
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description '''
       VERDICT : UNSUPPORTED telle qu enoncee. ET C EST UNE CORRECTION
       IMPORTANTE DU MODELE.
@@ -120,6 +124,7 @@ model {
 
   sciCrdt = finding 'SCI-3 — CRDT LWW converge sous partition reseau' {
     #science
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     description '''
       DOUBLE VERDICT.
 
@@ -149,6 +154,7 @@ model {
 
   sciEkf = finding 'SCI-4 — EKF/UKF distribue cooperatif a ~30 plateformes' {
     #science
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     description '''
       VERDICT : CONDITIONAL.
 
@@ -180,22 +186,22 @@ model {
   gap1 = finding 'GAP-1 — CBBA a 30 sous partition persistante + brouillage' {
     #science
     description 'Mesurer : temps de re-consensus, taux de conflit residuel. Aucun article trouve.'
-    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCbba'; priorite 'haute' }
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciCbba'; priorite 'haute' }
   }
   gap2 = finding 'GAP-2 — CBF heterogene au-dela de 30 en materiel reel' {
     #science
     description 'Avec comptage des infeasibilities QP et profondeur de violation. Aucun article trouve.'
-    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCbf'; priorite 'haute' }
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciCbf'; priorite 'haute' }
   }
   gap3 = finding 'GAP-3 — CRDT (LWW + OR-Set) sur drones en vol, brouillage RF reel' {
     #science
     description 'Mesurer convergence d etat ET qualite de decision de mission. Aucun article trouve.'
-    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciCrdt'; priorite 'moyenne' }
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciCrdt'; priorite 'moyenne' }
   }
   gap4 = finding 'GAP-4 — Fusion EKF/UKF hierarchique a >=100 plateformes' {
     #science
     description 'Avec budget de communication explicite et metrique de derive de consensus. Aucun article trouve.'
-    metadata { statut 'AUCUN ARTICLE TROUVE'; impact 'sciEkf'; priorite 'moyenne' }
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciEkf'; priorite 'moyenne' }
   }
 
   // ===========================================================================

@@ -29,6 +29,7 @@ model {
 
   scn01 = scenario 'SCN-01 — Mission nominale sans C2 ni cloud' {
     #scenario #hypothese
+    link https://doi.org/10.1016/j.ast.2026.112100 "Distributed self-organizing control for cross-domain unmanned swarm multi-target tracking under constrained communication"
     description '''
       Scenario de REFERENCE. Un drone effectue sa mission complete avec
       C2 et cloud INDISPONIBLES du debut a la fin.
@@ -48,6 +49,7 @@ model {
 
   scn02 = scenario 'SCN-02 — Perte du lien de commandement' {
     #scenario #hypothese
+    link https://doi.org/10.1007/s44465-026-00041-0 "Adaptive dual mode operational swarm control for resilient asset defense under communication jamming"
     description '''
       Le lien C2 tombe en cours de mission. Le drone poursuit sa mission
       nominale sur son plan embarque et applique ses regles de surete.
@@ -63,6 +65,7 @@ model {
 
   scn03 = scenario 'SCN-03 — Perte d un agent et reconfiguration' {
     #scenario #hypothese
+    link https://doi.org/10.3390/fractalfract10050315 "Resilient Leader–Follower Consensus of Fractional-Order Nonlinear Multi-Agent Systems Under Sybil and DoS Attacks via Event-Triggered Adaptive Control"
     description '''
       Un agent est perdu. Les autres doivent le detecter, redistribuer
       sa charge et, si c etait le leader, en elire un nouveau.
@@ -80,6 +83,7 @@ model {
 
   scn04 = scenario 'SCN-04 — Partition du reseau' {
     #scenario #hypothese
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     description '''
       Le maillage se coupe en deux groupes qui ne communiquent plus.
       Chaque groupe doit rester sur et ne pas converger vers deux etats
@@ -97,6 +101,7 @@ model {
 
   scn05 = scenario 'SCN-05 — GNSS degrade / denied' {
     #scenario #hypothese
+    link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
     description '''
       La positionnement satellite se degrade puis disparait. Bascule en
       VIO, puis reduction de zone et RTL si la derive depasse le seuil.
@@ -113,6 +118,7 @@ model {
 
   scn06 = scenario 'SCN-06 — Evitement de collision' {
     #scenario #hypothese
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description '''
       Deux agents convergent vers une collision. La couche de surete
       embarque doit produire une correction minimale, SANS dependre du
@@ -131,6 +137,7 @@ model {
 
   scn07 = scenario 'SCN-07 — Saturation du spectre / budget radio' {
     #scenario #hypothese
+    link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
     description '''
       Le besoin de coordination depasse ce que le lien peut porter.
       Degradation de la coordination, la surete reste intacte.
@@ -147,6 +154,7 @@ model {
 
   scn08 = scenario 'SCN-08 — Energie critique' {
     #scenario #hypothese
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
     description '''
       La marge d energie devient insuffisante pour terminer la mission.
       Arbitrage entre valeur de mission et marge de repli.
@@ -163,6 +171,7 @@ model {
 
   scn09 = scenario 'SCN-09 — Charge dense et perception degradee' {
     #scenario #hypothese
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     description '''
       Densite elevee : la fusion de pistes produit des fausses pistes
       (risque R-8). Le systeme doit degrader proprement.
@@ -179,6 +188,7 @@ model {
 
   scn10 = scenario 'SCN-10 — Perte du leader et reconfiguration a 30' {
     #scenario #hypothese
+    link https://doi.org/10.3390/fractalfract10050315 "Resilient Leader–Follower Consensus of Fractional-Order Nonlinear Multi-Agent Systems Under Sybil and DoS Attacks via Event-Triggered Adaptive Control"
     description '''
       Le coordinateur est perdu alors que l essaim est a pleine echelle
       (N=30). C est le scenario qui teste la reconfiguration a l echelle

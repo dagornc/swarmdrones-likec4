@@ -208,13 +208,13 @@ specification {
   // ===========================================================================
   // KINDS DE RELATIONS — la criticite du flux se lit sur le diagramme
   // ===========================================================================
-  relationship sync    { title 'Appel synchrone (bus interne)' }
-  relationship flow    { title 'Flux de donnees' }
-  relationship radio   { title 'Lien radio (intermittent)' }
-  relationship command { title 'Ordre / commande' }
-  relationship store   { title 'Persistance / stockage' }
-  relationship async   { title 'Differe / store-and-forward' }
-  relationship safety  { title 'Voie de surete (independante du lien)' }
+  relationship sync    { title 'Appel synchrone (bus interne)'; line solid }
+  relationship flow    { title 'Flux de donnees'; line solid }
+  relationship radio   { title 'Lien radio (intermittent)'; line dashed }
+  relationship command { title 'Ordre / commande'; line dashed }
+  relationship store   { title 'Persistance / stockage'; line dotted }
+  relationship async   { title 'Differe / store-and-forward'; line dotted }
+  relationship safety  { title 'Voie de surete (independante du lien)'; line solid }
 
   // --- Relations d'enrichissement (lot 1) ---
   /** Le composant s'appuie sur une hypothese : si l'hypothese est fausse,
@@ -285,6 +285,17 @@ specification {
 //  Regle : la hierarchie reflete les zones de deploiement, pas la structure
 //  organisationnelle. Toutes les relations sont declarees a plat APRES les
 //  declarations de frontieres (LikeC4 interdit parent <-> enfant).
+//
+//  DECLARATION DE GRANULARITE C4 (modele C4 de Simon Brown) :
+//    N1 Contexte   -> vues `contexte` / `contexte-amont` / `contexte-aval`
+//    N2 Conteneurs -> les 4 ZONES (onboard / edge / c2 / cloud) SONT les
+//                     conteneurs executables ; vue `conteneurs`
+//    N3 Composants -> les elements `onboard.*` / `edge.*` / `c2.*` / `cloud.*`
+//                     sont les composants ; vues `zone-*`
+//    N4 Code       -> non couvert (optionnel, genere depuis le code)
+//  Les kinds hypothesis / decision / software / algorithm / risk / blindspot
+//  sont des QUALIFICATEURS de l'architecture, pas des composants : ils
+//  n'apparaissent jamais dans les vues de zone.
 // =============================================================================
 model {
 
@@ -481,6 +492,7 @@ model {
   // ===========================================================================
   onboard = platform 'Plateformes onboard (x30)' {
     #zone-onboard
+    link https://doi.org/10.20944/preprints202603.2299.v1 "A Systematic Mapping of UAV Swarming Strategies: From Fundamentals to Coordination Mechanisms and Algorithmic Paradigms"
     description '''
       18 UAV-R (multirotors), 8 UAV-F (voilure fixe), 4 USV.
       Instance unique dans le modele logique : elle est materialisee 30 fois
@@ -489,10 +501,34 @@ model {
     '''
     metadata { source '§3 zones / §4.1 onboard' }
 
-    sensorsHAL = component 'onboard.sensors-hal' {
+    sensorsHAL = component 'Interfaces capteurs' {
       #best-effort
       technology 'HAL — drivers bas niveau'
-      description 'Abstraction materielle capteurs/actionneurs. Absorbe l\'heterogeneite des plateformes.'
+      description '''
+Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des plateformes.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.sensorsHAL`
+
+**Rôle :** Interfaces capteurs.
+
+**Technologie déclarée :** HAL — drivers bas niveau.
+
+**Entrées :** radios — capteurs / GNSS / liaisons physiques; refDrone.imu — etat inertiel; refDrone.gnss — position absolue; refDrone.odometry — vitesse / cap / altitude; refDrone.perceptionRel — pistes relatives voisins; refDrone.saeSensor — obstacles proches; refDrone.healthSensor — etat materiel
+
+**Sorties :** onboard.perception — flux capteurs; onboard.health — sante capteurs; onboard.autopilot — etat navigation
+
+**Contraintes déclarées :** criticite: best-effort; frequence: selon capteur; principe: abstraction obligatoire (HARDWARE)
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.sensors-hal ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'best-effort'
         frequence 'selon capteur'
@@ -502,14 +538,36 @@ model {
       style { icon bootstrap:cpu }
     }
 
-    perception = component 'onboard.perception' {
+    perception = component 'Perception et localisation' {
       #safety-critical
       technology 'Fusion capteurs + filtre complementaire'
       description '''
-        Fusion multi-capteurs, detection/evitement (sense-and-avoid),
-        estimation d'etat et estimation relative inter-agents.
-        Redondance de position : GNSS + INS + odometrie + relative.
-      '''
+Fusion multi-capteurs, detection/evitement (sense-and-avoid),
+estimation d'etat et estimation relative inter-agents.
+Redondance de position : GNSS + INS + odometrie + relative.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.perception`
+
+**Rôle :** Perception et localisation.
+
+**Technologie déclarée :** Fusion capteurs + filtre complementaire.
+
+**Entrées :** onboard.sensorsHAL — flux capteurs
+
+**Sorties :** onboard.autopilot — estimation position/etat; onboard.mission — pistes/obstacles; onboard.safety — detection d'evitement
+
+**Contraintes déclarées :** criticite: safety-critical; frequence: 10-60 Hz; alerte: sense-and-avoid -> action : <= 100 ms [EXTRAP]
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.perception / §8 budget ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'safety-critical'
         frequence '10-60 Hz'
@@ -519,14 +577,36 @@ model {
       style { icon bootstrap:crosshair2 }
     }
 
-    autopilot = component 'onboard.autopilot' {
+    autopilot = component 'Pilotage automatique' {
       #safety-critical
       technology 'Bus interne MAVLink / UART-CAN'
       description '''
-        Controle d'attitude/position, execution des consignes de vol,
-        application du geofence. H1 : mode "mission embarquee"
-        (waypoints, geofence, RTL) disponible sur tout autopilote.
-      '''
+Controle d'attitude/position, execution des consignes de vol,
+application du geofence. H1 : mode "mission embarquee"
+(waypoints, geofence, RTL) disponible sur tout autopilote.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.autopilot`
+
+**Rôle :** Pilotage automatique.
+
+**Technologie déclarée :** Bus interne MAVLink / UART-CAN.
+
+**Entrées :** onboard.sensorsHAL — etat navigation; onboard.perception — estimation position/etat; onboard.mission — setpoints de mission; onboard.safety — commandes preemptives (RTL/atterrissage)
+
+**Sorties :** Aucun flux explicite dans le modèle ; à documenter si nécessaire.
+
+**Contraintes déclarées :** criticite: safety-critical; frequence: 50-400 Hz; budget_latence: <= 10 ms (boucle pilotage); interface: setpoints, statut armement
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.autopilot / §8 budget ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'safety-critical'
         frequence '50-400 Hz'
@@ -537,15 +617,37 @@ model {
       style { icon bootstrap:compass }
     }
 
-    safety = component 'onboard.safety' {
+    safety = component 'Garde-fous de sûreté' {
       #safety-critical
       technology 'Garde-fous independants'
       description '''
-        Geofence, detection de perte de controle, RTL / atterrissage
-        d'urgence, limitateur d'energie. Voie de surete SEPAREE :
-        non bloquee par la couche crypto et fonctionnelle sans lien.
-        ABORT declenche localement selon regles pre-approuvees.
-      '''
+Geofence, detection de perte de controle, RTL / atterrissage
+d'urgence, limitateur d'energie. Voie de surete SEPAREE :
+non bloquee par la couche crypto et fonctionnelle sans lien.
+ABORT declenche localement selon regles pre-approuvees.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.safety`
+
+**Rôle :** Garde-fous de sûreté.
+
+**Technologie déclarée :** Garde-fous independants.
+
+**Entrées :** onboard.perception — detection d'evitement; onboard.health — niveaux de sante; onboard.energy — seuils critiques; onboard.linkRadio — ordres critiques entrants
+
+**Sorties :** onboard.autopilot — commandes preemptives (RTL/atterrissage)
+
+**Contraintes déclarées :** criticite: safety-critical; autonomie: doit fonctionner sans lien; arbitrage: surete vs securite : canaux separes (§10.3)
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.safety / ADR-3 ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'safety-critical'
         autonomie 'doit fonctionner sans lien'
@@ -555,15 +657,37 @@ model {
       style { icon bootstrap:shield-check }
     }
 
-    mission = component 'onboard.mission' {
+    mission = component 'Exécution de mission' {
       #mission-critical
       technology 'Executeur de plan embarque (machine a etats)'
       description '''
-        Executeur du plan de mission embarque et allocation locale de taches.
-        Machine a etats : INIT -> READY -> LAUNCH -> EXECUTE
-        -> (DEGRADED <=> EXECUTE) -> RTL/RECOVER -> LAND -> DONE ; ABORT partout.
-        EXECUTE fonctionne SANS lien.
-      '''
+Executeur du plan de mission embarque et allocation locale de taches.
+Machine a etats : INIT -> READY -> LAUNCH -> EXECUTE
+-> (DEGRADED <=> EXECUTE) -> RTL/RECOVER -> LAND -> DONE ; ABORT partout.
+EXECUTE fonctionne SANS lien.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.mission`
+
+**Rôle :** Exécution de mission.
+
+**Technologie déclarée :** Executeur de plan embarque (machine a etats).
+
+**Entrées :** onboard.perception — pistes/obstacles; onboard.taskAuction — attributions de taches; onboard.energy — marge/retour; onboard.linkRadio — taches/ordres recus
+
+**Sorties :** onboard.autopilot — setpoints de mission; onboard.taskAuction — taches ouvertes; onboard.telemetry — etat de mission; onboard.linkRadio — annonces etat/taches
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: 1-10 Hz; etats: INIT->READY->LAUNCH->EXECUTE->DEGRADED->RTL/RECOVER->LAND->DONE; navigateur: contient le contrat de mission
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.mission / §6 machine a etats ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'mission-critical'
         frequence '1-10 Hz'
@@ -574,14 +698,36 @@ model {
       style { icon bootstrap:clipboard-check }
     }
 
-    taskAuction = component 'onboard.task-auction' {
+    taskAuction = component 'Allocation locale des tâches' {
       #mission-critical
       technology 'Encheres decentralisees (marche / consensus)'
       description '''
-        Allocation de taches par encheres embarquee — option par defaut,
-        robuste aux partitions. Replanification C2 uniquement quand le lien
-        est disponible (hybride, §10.1).
-      '''
+Allocation de taches par encheres embarquee — option par defaut,
+robuste aux partitions. Replanification C2 uniquement quand le lien
+est disponible (hybride, §10.1).
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.taskAuction`
+
+**Rôle :** Allocation locale des tâches.
+
+**Technologie déclarée :** Encheres decentralisees (marche / consensus).
+
+**Entrées :** onboard.mission — taches ouvertes
+
+**Sorties :** onboard.mission — attributions de taches
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: 0.2-1 Hz; mode: consensus eventuel, jamais de consensus global dur
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.task-auction / ADR-5 ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'mission-critical'
         frequence '0.2-1 Hz'
@@ -591,30 +737,100 @@ model {
       style { icon bootstrap:arrow-repeat }
     }
 
-    health = component 'onboard.health' {
+    health = component 'Diagnostic de santé' {
       #mission-critical
       technology 'Diagnostic embarque'
-      description 'Diagnostic interne (batterie, moteurs, capteurs, temperatures), prediction de defaillance, marge d\'energie.'
+      description '''
+Diagnostic interne (batterie, moteurs, capteurs, temperatures), prediction de defaillance, marge d'energie.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.health`
+
+**Rôle :** Diagnostic de santé.
+
+**Technologie déclarée :** Diagnostic embarque.
+
+**Entrées :** onboard.sensorsHAL — sante capteurs
+
+**Sorties :** onboard.safety — niveaux de sante; onboard.energy — etat batterie; onboard.telemetry — diagnostic
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: 1-10 Hz
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.health ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; frequence '1-10 Hz'; source '§4.1 onboard.health' }
       style { icon bootstrap:activity }
     }
 
-    energy = component 'onboard.energy' {
+    energy = component 'Gestion de l’énergie' {
       #mission-critical
       technology 'Jauge de fin de mission'
-      description 'Gestion de l\'energie et budget de retour (RTL budget).'
+      description '''
+Gestion de l'energie et budget de retour (RTL budget).
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.energy`
+
+**Rôle :** Gestion de l’énergie.
+
+**Technologie déclarée :** Jauge de fin de mission.
+
+**Entrées :** onboard.health — etat batterie
+
+**Sorties :** onboard.mission — marge/retour; onboard.safety — seuils critiques
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: 0.2-2 Hz
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.energy ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; frequence '0.2-2 Hz'; source '§4.1 onboard.energy' }
       style { icon bootstrap:battery-half }
     }
 
-    telemetry = component 'onboard.telemetry' {
+    telemetry = component 'Télémétrie priorisée' {
       #best-effort
       technology 'Formatage + priorisation + compactage delta'
       description '''
-        Formatage / priorisation de la telemetrie. Chaque message porte
-        t_publish (horloge source) et t_valid (duree de validite) :
-        la fraicheur est explicite, jamais supposee.
-      '''
+Formatage / priorisation de la telemetrie. Chaque message porte
+t_publish (horloge source) et t_valid (duree de validite) :
+la fraicheur est explicite, jamais supposee.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.telemetry`
+
+**Rôle :** Télémétrie priorisée.
+
+**Technologie déclarée :** Formatage + priorisation + compactage delta.
+
+**Entrées :** onboard.health — diagnostic; onboard.mission — etat de mission
+
+**Sorties :** onboard.linkRadio — telemetrie priorisee
+
+**Contraintes déclarées :** criticite: best-effort; frequence: 1-10 Hz selon mode; file_priorite: 1) surete 2) etat mission 3) telemetrie 4) debug
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §5 telemetrie / ADR-2 ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'best-effort'
         frequence '1-10 Hz selon mode'
@@ -624,13 +840,35 @@ model {
       style { icon bootstrap:file-earmark-bar-graph }
     }
 
-    linkRadio = component 'onboard.link' {
+    linkRadio = component 'Communications embarquées' {
       technology 'Radios heterogenes (LoRa / 802.11 mesh / lien dedie)'
       description '''
-        Gestion du lien radio : decouverte de voisins, mesh/relais,
-        store-and-forward, file de messages, priorisation, chiffrement.
-        Lien intermittent par defaut (H2) : jamais une dependance.
-      '''
+Gestion du lien radio : decouverte de voisins, mesh/relais,
+store-and-forward, file de messages, priorisation, chiffrement.
+Lien intermittent par defaut (H2) : jamais une dependance.
+
+### Fiche de lecture
+
+**Identifiant stable :** `onboard.linkRadio`
+
+**Rôle :** Communications embarquées.
+
+**Technologie déclarée :** Radios heterogenes (LoRa / 802.11 mesh / lien dedie).
+
+**Entrées :** onboard.telemetry — telemetrie priorisee; onboard.mission — annonces etat/taches; edge.relay — messages descendants
+
+**Sorties :** onboard.mission — taches/ordres recus; onboard.safety — ordres critiques entrants; edge.relay — trafic essaim (radio)
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: continue, best-effort; modes: nominal / autonome / acoustique (annexe UUV); principe: le lien est un bonus
+
+**Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
+
+**Références :** §4.1 onboard.link / §11 annexe UUV ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-onboard/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'mission-critical'
         frequence 'continue, best-effort'
@@ -654,29 +892,99 @@ model {
     '''
     metadata { source '§3 zones / §4.2 edge' }
 
-    relay = component 'edge.relay' {
+    relay = component 'Relais de proximité' {
       #mission-critical
       technology 'Mesh + lien longue portee'
-      description 'Relais de communication inter-plateformes et vers le C2, store-and-forward.'
+      description '''
+Relais de communication inter-plateformes et vers le C2, store-and-forward.
+
+### Fiche de lecture
+
+**Identifiant stable :** `edge.relay`
+
+**Rôle :** Relais de proximité.
+
+**Technologie déclarée :** Mesh + lien longue portee.
+
+**Entrées :** onboard.linkRadio — trafic essaim (radio); edge.coordinator — directives vers agents
+
+**Sorties :** onboard.linkRadio — messages descendants; edge.fusion — trafic consolide; edge.gateway — trafic vers C2/cloud
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: continue; mode: C2-deconnecte ok
+
+**Autonomie :** Conception : fonctionnement C2-déconnecté ; disponibilité locale et radio non garanties.
+
+**Références :** §4.2 edge.relay ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-edge/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; frequence 'continue'; mode 'C2-deconnecte ok'; source '§4.2 edge.relay' }
       style { icon bootstrap:broadcast }
     }
 
-    fusion = component 'edge.fusion' {
+    fusion = component 'Fusion tactique' {
       #mission-critical
       technology 'Fusion tactique multi-plateformes'
-      description 'Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la perte d\'un agent.'
+      description '''
+Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la perte d'un agent.
+
+### Fiche de lecture
+
+**Identifiant stable :** `edge.fusion`
+
+**Rôle :** Fusion tactique.
+
+**Technologie déclarée :** Fusion tactique multi-plateformes.
+
+**Entrées :** edge.relay — trafic consolide
+
+**Sorties :** edge.coordinator — image tactique locale; edge.gateway — image tactique vers C2
+
+**Contraintes déclarées :** criticite: mission-critical; frequence: 1-10 Hz
+
+**Autonomie :** Conception : fonctionnement C2-déconnecté ; disponibilité locale et radio non garanties.
+
+**Références :** §4.2 edge.fusion ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-edge/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; frequence '1-10 Hz'; source '§4.2 edge.fusion' }
       style { icon bootstrap:diagram-3 }
     }
 
-    coordinator = component 'edge.coordinator' {
+    coordinator = component 'Coordination locale' {
       #mission-critical
       technology 'Coordination de proximite'
       description '''
-        Resolution de conflits d'espace, allocation locale lorsque le C2 est
-        indisponible. Prend le relais de l'allocation quand le lien C2 tombe.
-      '''
+Resolution de conflits d'espace, allocation locale lorsque le C2 est
+indisponible. Prend le relais de l'allocation quand le lien C2 tombe.
+
+### Fiche de lecture
+
+**Identifiant stable :** `edge.coordinator`
+
+**Rôle :** Coordination locale.
+
+**Technologie déclarée :** Coordination de proximite.
+
+**Entrées :** edge.fusion — image tactique locale
+
+**Sorties :** edge.relay — directives vers agents; edge.cache — snapshot d'etat
+
+**Contraintes déclarées :** criticite: mission-critical; budget_latence: coordination locale <= 1 s [EXTRAP]; mode: fonctionne en mode C2-deconnecte
+
+**Autonomie :** Conception : fonctionnement C2-déconnecté ; disponibilité locale et radio non garanties.
+
+**Références :** §4.2 edge.coordinator / §8 budget ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-edge/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'mission-critical'
         budget_latence 'coordination locale <= 1 s [EXTRAP]'
@@ -686,18 +994,66 @@ model {
       style { icon bootstrap:signpost-split }
     }
 
-    cache = component 'edge.cache' {
+    cache = component 'Cache de continuité' {
       #best-effort
       technology 'Persistance locale'
-      description 'Persistance locale (mission, logs, artefacts) en cas de coupure vers C2/cloud.'
+      description '''
+Persistance locale (mission, logs, artefacts) en cas de coupure vers C2/cloud.
+
+### Fiche de lecture
+
+**Identifiant stable :** `edge.cache`
+
+**Rôle :** Cache de continuité.
+
+**Technologie déclarée :** Persistance locale.
+
+**Entrées :** edge.coordinator — snapshot d'etat
+
+**Sorties :** edge.gateway — artefacts persistes
+
+**Contraintes déclarées :** criticite: best-effort
+
+**Autonomie :** Conception : fonctionnement C2-déconnecté ; disponibilité locale et radio non garanties.
+
+**Références :** §4.2 edge.cache ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-edge/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; source '§4.2 edge.cache' }
       style { shape storage; icon bootstrap:hdd-stack }
     }
 
-    gateway = component 'edge.gateway' {
+    gateway = component 'Passerelle de confiance' {
       #mission-critical
       technology 'Passerelle de protocoles + controle d\'acces'
-      description 'Passerelle essaim <-> C2 <-> cloud : normalisation, controle d\'acces, frontiere de confiance.'
+      description '''
+Passerelle essaim <-> C2 <-> cloud : normalisation, controle d'acces, frontiere de confiance.
+
+### Fiche de lecture
+
+**Identifiant stable :** `edge.gateway`
+
+**Rôle :** Passerelle de confiance.
+
+**Technologie déclarée :** Passerelle de protocoles + controle d'acces.
+
+**Entrées :** edge.relay — trafic vers C2/cloud; edge.fusion — image tactique vers C2; edge.cache — artefacts persistes; c2.gcs — ordres/plans; c2.planner — plans embarquables
+
+**Sorties :** c2.gcs — image tactique/telemetrie; cloud.twin — logs/etat differes
+
+**Contraintes déclarées :** criticite: mission-critical; point_singulier: frontiere de confiance
+
+**Autonomie :** Conception : fonctionnement C2-déconnecté ; disponibilité locale et radio non garanties.
+
+**Références :** §4.2 edge.gateway / §3 ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-edge/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; point_singulier 'frontiere de confiance'; source '§4.2 edge.gateway / §3' }
       style { icon bootstrap:shield-exclamation }
     }
@@ -715,24 +1071,68 @@ model {
     '''
     metadata { source '§3 zones / §4.3 c2' }
 
-    gcs = component 'c2.gcs' {
+    gcs = component 'Console opérateur' {
       #mission-critical
       technology 'IHM operateur'
       description '''
-        Poste de commandement : visualisation, supervision, autorite humaine,
-        validation des actions critiques. Seul chemin d'autorisation humaine.
-      '''
+Poste de commandement : visualisation, supervision, autorite humaine,
+validation des actions critiques. Seul chemin d'autorisation humaine.
+
+### Fiche de lecture
+
+**Identifiant stable :** `c2.gcs`
+
+**Rôle :** Console opérateur.
+
+**Technologie déclarée :** IHM operateur.
+
+**Entrées :** edge.gateway — image tactique/telemetrie; c2.auth — jetons d'autorisation; c2.alerting — notifications operateur; operator — supervise et autorise les actions critiques
+
+**Sorties :** edge.gateway — ordres/plans; c2.planner — intentions operateur; c2.alerting — evenements a notifier
+
+**Contraintes déclarées :** criticite: mission-critical; interface: humaine
+
+**Autonomie :** Supervision intermittente ; ne porte pas la boucle de pilotage embarquée.
+
+**Références :** §4.3 c2.gcs ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-c2/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; interface 'humaine'; source '§4.3 c2.gcs' }
       style { icon bootstrap:person-check }
     }
 
-    planner = component 'c2.planner' {
+    planner = component 'Planification de mission' {
       #mission-critical
       technology '(Re)planification + allocation globale'
       description '''
-        Generation de plans embarquables VERSIONNES et signes.
-        Replanification opportuniste : 1-30 s [EXTRAP].
-      '''
+Generation de plans embarquables VERSIONNES et signes.
+Replanification opportuniste : 1-30 s [EXTRAP].
+
+### Fiche de lecture
+
+**Identifiant stable :** `c2.planner`
+
+**Rôle :** Planification de mission.
+
+**Technologie déclarée :** (Re)planification + allocation globale.
+
+**Entrées :** c2.gcs — intentions operateur; cloud.modelRegistry — modeles/configurations
+
+**Sorties :** c2.missionStore — plans versionnes; edge.gateway — plans embarquables
+
+**Contraintes déclarées :** criticite: mission-critical; budget_latence: 1-30 s [EXTRAP]; sortie: Plan versionne + signe
+
+**Autonomie :** Supervision intermittente ; ne porte pas la boucle de pilotage embarquée.
+
+**Références :** §4.3 c2.planner / §8 budget ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-c2/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'mission-critical'
         budget_latence '1-30 s [EXTRAP]'
@@ -742,14 +1142,36 @@ model {
       style { icon bootstrap:map-fill }
     }
 
-    auth = component 'c2.auth' {
+    auth = component 'Autorisations et audit' {
       #safety-critical
       technology 'IAM + journalisation d\'audit'
       description '''
-        Authentification, autorisation, journalisation des decisions (audit).
-        Emet les jetons de decision et garantit authorization_ref sur
-        toute action critique. Zero perte non journalisee.
-      '''
+Authentification, autorisation, journalisation des decisions (audit).
+Emet les jetons de decision et garantit authorization_ref sur
+toute action critique. Zero perte non journalisee.
+
+### Fiche de lecture
+
+**Identifiant stable :** `c2.auth`
+
+**Rôle :** Autorisations et audit.
+
+**Technologie déclarée :** IAM + journalisation d'audit.
+
+**Entrées :** Aucun flux explicite dans le modèle ; à documenter si nécessaire.
+
+**Sorties :** c2.gcs — jetons d'autorisation; c2.missionStore — traces d'audit
+
+**Contraintes déclarées :** criticite: safety-critical; exigence: 100% des ordres critiques signes
+
+**Autonomie :** Supervision intermittente ; ne porte pas la boucle de pilotage embarquée.
+
+**Références :** §4.3 c2.auth / ADR-3 ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-c2/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata {
         criticite 'safety-critical'
         exigence '100% des ordres critiques signes'
@@ -758,18 +1180,66 @@ model {
       style { icon bootstrap:key-fill }
     }
 
-    missionStore = component 'c2.mission-store' {
+    missionStore = component 'Registre des missions' {
       #mission-critical
       technology 'Registre de missions versionne'
-      description 'Registre de missions (versions, plans, statuts) — source de verite de configuration.'
+      description '''
+Registre de missions (versions, plans, statuts) — source de verite de configuration.
+
+### Fiche de lecture
+
+**Identifiant stable :** `c2.missionStore`
+
+**Rôle :** Registre des missions.
+
+**Technologie déclarée :** Registre de missions versionne.
+
+**Entrées :** c2.planner — plans versionnes; c2.auth — traces d'audit
+
+**Sorties :** Aucun flux explicite dans le modèle ; à documenter si nécessaire.
+
+**Contraintes déclarées :** criticite: mission-critical
+
+**Autonomie :** Supervision intermittente ; ne porte pas la boucle de pilotage embarquée.
+
+**Références :** §4.3 c2.mission-store ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-c2/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'mission-critical'; role 'source de verite configuration'; source '§4.3 c2.mission-store' }
       style { shape storage; icon bootstrap:database-fill-gear }
     }
 
-    alerting = component 'c2.alerting' {
+    alerting = component 'Notifications opérateur' {
       #best-effort
       technology 'Agregation d\'alarmes'
-      description 'Agregation des alarmes et notification operateur.'
+      description '''
+Agregation des alarmes et notification operateur.
+
+### Fiche de lecture
+
+**Identifiant stable :** `c2.alerting`
+
+**Rôle :** Notifications opérateur.
+
+**Technologie déclarée :** Agregation d'alarmes.
+
+**Entrées :** c2.gcs — evenements a notifier
+
+**Sorties :** c2.gcs — notifications operateur
+
+**Contraintes déclarées :** criticite: best-effort
+
+**Autonomie :** Supervision intermittente ; ne porte pas la boucle de pilotage embarquée.
+
+**Références :** §4.3 c2.alerting ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-c2/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; source '§4.3 c2.alerting' }
       style { icon bootstrap:exclamation-triangle }
     }
@@ -787,34 +1257,130 @@ model {
     '''
     metadata { source '§3 zones / §4.4 cloud' }
 
-    twin = component 'cloud.twin' {
+    twin = component 'Jumeau numérique' {
       #cloudOnly
       technology 'Jumeau numerique'
-      description 'Jumeau numerique : rejeu, simulation, prediction de derive, calibration / entrainement de modeles.'
+      description '''
+Jumeau numerique : rejeu, simulation, prediction de derive, calibration / entrainement de modeles.
+
+### Fiche de lecture
+
+**Identifiant stable :** `cloud.twin`
+
+**Rôle :** Jumeau numérique.
+
+**Technologie déclarée :** Jumeau numerique.
+
+**Entrées :** edge.gateway — logs/etat differes; cloud.replayStore — journaux rejouables
+
+**Sorties :** cloud.analytics — donnees de rejeu
+
+**Contraintes déclarées :** criticite: best-effort; boucle: hors boucle de controle
+
+**Autonomie :** Traitement différé, hors boucle de contrôle ; jamais bloquant pour la mission.
+
+**Références :** §4.4 cloud.twin ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-cloud/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; source '§4.4 cloud.twin' }
       style { icon bootstrap:layers }
     }
 
-    analytics = component 'cloud.analytics' {
+    analytics = component 'Analyse post-mission' {
       #cloudOnly
       technology 'Analytics post-mission'
-      description 'Analyse post-mission, metriques de performance, detection d\'anomalies a posteriori.'
+      description '''
+Analyse post-mission, metriques de performance, detection d'anomalies a posteriori.
+
+### Fiche de lecture
+
+**Identifiant stable :** `cloud.analytics`
+
+**Rôle :** Analyse post-mission.
+
+**Technologie déclarée :** Analytics post-mission.
+
+**Entrées :** cloud.twin — donnees de rejeu
+
+**Sorties :** cloud.modelRegistry — metriques -> modeles
+
+**Contraintes déclarées :** criticite: best-effort; boucle: hors boucle de controle
+
+**Autonomie :** Traitement différé, hors boucle de contrôle ; jamais bloquant pour la mission.
+
+**Références :** §4.4 cloud.analytics ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-cloud/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; boucle 'hors boucle de controle'; source '§4.4 cloud.analytics' }
       style { icon bootstrap:graph-up }
     }
 
-    modelRegistry = component 'cloud.model-registry' {
+    modelRegistry = component 'Registre des modèles' {
       #cloudOnly
       technology 'Registre de modeles'
-      description 'Versionnement des modeles (perception, allocation) et des configurations.'
+      description '''
+Versionnement des modeles (perception, allocation) et des configurations.
+
+### Fiche de lecture
+
+**Identifiant stable :** `cloud.modelRegistry`
+
+**Rôle :** Registre des modèles.
+
+**Technologie déclarée :** Registre de modeles.
+
+**Entrées :** cloud.analytics — metriques -> modeles
+
+**Sorties :** c2.planner — modeles/configurations
+
+**Contraintes déclarées :** criticite: best-effort
+
+**Autonomie :** Traitement différé, hors boucle de contrôle ; jamais bloquant pour la mission.
+
+**Références :** §4.4 cloud.model-registry ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-cloud/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; source '§4.4 cloud.model-registry' }
       style { shape storage; icon bootstrap:file-earmark-richtext }
     }
 
-    replayStore = component 'cloud.replay-store' {
+    replayStore = component 'Journaux de rejeu' {
       #cloudOnly
       technology 'Stockage de journaux'
-      description 'Stockage des journaux pour rejouabilite et tests de non-regression.'
+      description '''
+Stockage des journaux pour rejouabilite et tests de non-regression.
+
+### Fiche de lecture
+
+**Identifiant stable :** `cloud.replayStore`
+
+**Rôle :** Journaux de rejeu.
+
+**Technologie déclarée :** Stockage de journaux.
+
+**Entrées :** Aucun flux explicite dans le modèle ; à documenter si nécessaire.
+
+**Sorties :** cloud.twin — journaux rejouables
+
+**Contraintes déclarées :** criticite: best-effort; usage: Monte-Carlo + non-regression
+
+**Autonomie :** Traitement différé, hors boucle de contrôle ; jamais bloquant pour la mission.
+
+**Références :** §4.4 cloud.replay-store / §9 tests ; consulter les relations de traçabilité vers les hypothèses et ADR.
+
+**Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
+
+[Retour à la couche](/view/zone-cloud/) · [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/)
+'''
       metadata { criticite 'best-effort'; usage 'Monte-Carlo + non-regression'; source '§4.4 cloud.replay-store / §9 tests' }
       style { shape storage; icon bootstrap:clock-history }
     }
@@ -1119,42 +1685,49 @@ model {
 
   // B.1 — perception / fusion multi-capteurs et multi-agents
   AlgorithmsPerceptionFusionEKFUKF = algorithm 'Perception et fusion (EKF/UKF local + pistes Edge)' {
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     metadata { fonction 'perception-fusion'; robustesse_lien 'elevee'; maturite 'mature-local / median multi-agents'; evidence 'MEDIUM' }
     description 'EKF/UKF local par plateforme (socle safety) + fusion de pistes au niveau Edge. Fusion multi-agents a 30 = non etablie.'
   }
 
   // B.2 — navigation sous GNSS degrade
   AlgorithmsNavigationGNSSDegradeEKFVIO = algorithm 'Navigation GNSS degrade (EKF + bascule VIO)' {
+    link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
     metadata { fonction 'navigation-GNSS-degrade'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
     description 'Defaut EKF IMU+odom+GNSS ; bascule VIO en GNSS-denied ; reduction de zone + RTL sur seuil de derive.'
   }
 
   // B.3 — allocation de taches
   AlgorithmsTaskAllocationCBBA = algorithm 'Allocation par encheres (CBBA)' {
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     metadata { fonction 'allocation-taches'; robustesse_lien 'elevee'; maturite 'mature-en-labo'; evidence 'HIGH-existence_LOW-perf' }
     description 'Mature en laboratoire. Convergence sous partition et retrait d agent a 30 = non mesurees.'
   }
 
   // B.4 — coordination sous partition (CRDT / LWW)
   AlgorithmsCoordinationCRDTLWW = algorithm 'Coordination sous partition (CRDT / LWW + horloges logiques)' {
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     metadata { fonction 'coordination-partition'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'HIGH' }
     description 'Resolution par role (C2 > Edge > Onboard). Pas de quorum global. Reconvergence a 30 agents = MEDIUM.'
   }
 
   // B.5 — planification (mission / trajectoire / couverture)
   AlgorithmsPlanificationWaypointsMPC = algorithm 'Planification waypoints + MPC court horizon' {
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
     metadata { fonction 'planification'; robustesse_lien 'moyenne'; maturite 'mature'; evidence 'MEDIUM' }
     description 'Plan embarque versionne par defaut ; MPC court-horizon au niveau Edge si ressource ; re-optimisation C2 differee.'
   }
 
   // B.6 — evitement de collision / deconfliction spatiale
   AlgorithmsEvitementCollisionCBF = algorithm 'Evitement de collision (Control Barrier Functions)' {
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     metadata { fonction 'evitement-collision'; robustesse_lien 'elevee'; maturite 'emergente'; evidence 'MEDIUM' }
     description 'Couche surete embarquee non negociable, independante du lien et de l allocation. Preuve a 30 agents non etablie.'
   }
 
   // B.7 — surete (garanties et comportement degrade)
   AlgorithmsSureteReglesCBF = algorithm 'Surete embarquee (regles pre-approuvees + CBF)' {
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     metadata { fonction 'surete'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
     description 'Regles/reflexes embarques HIGH + watchdog independant ; CBF en renfort. Validation Monte-Carlo adversarial (N>=1000) NON faite.'
   }
@@ -1359,6 +1932,33 @@ model {
   AlgorithmsSureteReglesCBF -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
   AlgorithmsCoordinationCRDTLWW -[exposed-to]-> blindspotAM12 'agent defaillant non couvert'
   AlgorithmsPerceptionFusionEKFUKF -[exposed-to]-> blindspotAM14 'P_d/P_fa non quantifies'
+
+  // ---------------------------------------------------------------------------
+  // E25 — ENRICHISSEMENT DES ALGORITHMES PAUVRES (carte t_97fefb21)
+  // Uniquement ADDITIF : aucune relation ni vue existante modifiee.
+  // Convention E25 : alg -[uses]-> scenario = l algorithme est EXERCE par ce scenario.
+  // Sens de `evidences` conforme au metamodele : constat -[evidences]-> algorithme.
+  // ---------------------------------------------------------------------------
+
+  // B.2 — navigation GNSS degradee
+  AlgorithmsNavigationGNSSDegradeEKFVIO -[uses]-> msgPositionUpdate 'mesure de position consommee par EKF/VIO'
+  AlgorithmsNavigationGNSSDegradeEKFVIO -[uses]-> scn05 'bascule VIO en GNSS degrade'
+  sciGnssDegraded -[evidences]-> AlgorithmsNavigationGNSSDegradeEKFVIO 'famille sourcee (SCI-5)'
+
+  // B.5 — planification waypoints + MPC
+  AlgorithmsPlanificationWaypointsMPC -[uses]-> msgTrajectoryProposal 'negociation de trajectoire'
+  AlgorithmsPlanificationWaypointsMPC -[uses]-> scn01 'plan embarque sans C2'
+
+  // B.6 — evitement de collision (CBF)
+  AlgorithmsEvitementCollisionCBF -[uses]-> msgCollisionAlert 'declencheur sense-and-avoid'
+  AlgorithmsEvitementCollisionCBF -[uses]-> scn06 'evitement de collision'
+  AlgorithmsEvitementCollisionCBF -[exposed-to]-> blindspotAM5 'preuve a 30 agents non etablie (SCI-2)'
+  sciCbf -[evidences]-> AlgorithmsEvitementCollisionCBF 'verdict CBF (SCI-2)'
+
+  // B.7 — surete embarquee (regles + CBF)
+  AlgorithmsSureteReglesCBF -[uses]-> msgCollisionAlert 'declencheur de la voie de surete'
+  AlgorithmsSureteReglesCBF -[uses]-> scn02 'surete autonome sans lien'
+  sciCbf -[evidences]-> AlgorithmsSureteReglesCBF 'CBF en renfort (SCI-2)'
 
 
   // ---------------------------------------------------------------------------

@@ -26,12 +26,14 @@ model {
 
   capFly = capability 'CAP_FLY — Voler et se maintenir en vol' {
     #capability
+    link https://doi.org/10.3390/s24041343 "Artificial Potential Field Based Trajectory Tracking for Quadcopter UAV Moving Targets"
     description 'Aptitude de base : decoller, tenir une attitude, se deplacer de facon controlee.'
     metadata { criticite 'safety-critical'; sans_lien 'oui' }
   }
 
   capPerceive = capability 'CAP_PERCEIVE — Percevoir et se situer' {
     #capability
+    link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
     description '''
       Connaitre son propre etat et percevoir l environnement et les
       autres agents. Socle de toute decision.
@@ -41,12 +43,14 @@ model {
 
   capDecide = capability 'CAP_DECIDE — Decider et reagir' {
     #capability
+    link https://doi.org/10.32604/iasc.2025.060364 "A Comprehensive Review of Next-Gen UAV Swarm Robotics: Optimisation Techniques and Control Strategies for Dynamic Environments"
     description 'Transformer une perception en action : eviter, suivre un plan, appliquer une regle.'
     metadata { criticite 'safety-critical'; sans_lien 'oui (regles embarquees)' }
   }
 
   capCooperate = capability 'CAP_COOPERATE — Cooperer en essaim' {
     #capability
+    link https://doi.org/10.20944/preprints202603.2299.v1 "A Systematic Mapping of UAV Swarming Strategies: From Fundamentals to Coordination Mechanisms and Algorithmic Paradigms"
     description '''
       Se coordonner avec les autres agents : repartir les taches,
       converger, tenir une formation, elire un leader.
@@ -56,18 +60,21 @@ model {
 
   capCommunicate = capability 'CAP_COMMUNICATE — Communiquer' {
     #capability
+    link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
     description 'Echanger des messages entre agents, avec le sol et avec le cloud.'
     metadata { criticite 'mission-critical'; sans_lien 'NON (Mesh) / OUI (bus interne)' }
   }
 
   capSurvive = capability 'CAP_SURVIVE — Survivre aux pannes' {
     #capability
+    link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
     description 'Detecter une degradation, se reconfigurer, terminer proprement ou se replier.'
     metadata { criticite 'safety-critical'; sans_lien 'oui (repli local)' }
   }
 
   capObserve = capability 'CAP_OBSERVE — Etre observe et expliquee' {
     #capability
+    link https://doi.org/10.1016/j.cma.2025.117999 "A machine-learning enabled digital-twin framework for tactical drone-swarm design"
     description '''
       Rendre le systeme observable : telemetrie, jumeau numerique,
       rejeu, analyse. C est la capacite qui sert le projet pedagogique
@@ -78,6 +85,7 @@ model {
 
   capCommand = capability 'CAP_COMMAND — Etre commande' {
     #capability
+    link https://doi.org/10.6109/jkiice.2026.30.8.1408 "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operation"
     description 'Recevoir et appliquer des ordres d un operateur, sans dependre de lui.'
     metadata { criticite 'mission-critical'; sans_lien 'NON — perte toleree' }
   }
@@ -91,24 +99,28 @@ model {
   // ---- CAP_PERCEIVE ----
   fnSensorAcquisition = function 'FN_SENSOR_ACQUISITION — Acquérir les mesures capteurs' {
     #function
+    link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
     description 'Lire IMU, GNSS, odometrie, barometre et les exposer normalisees aux algorithmes.'
     metadata { capacite 'CAP_PERCEIVE'; source 'hardware.c4 sensorsHAL'; criticite 'safety-critical' }
   }
 
   fnStateEstimation = function 'FN_STATE_ESTIMATION — Estimer l etat de la plateforme' {
     #function
+    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     description 'Fusion multi-capteurs et estimation d etat (attitude, position, vitesse).'
     metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception'; algo 'algPerceptionFusion'; criticite 'safety-critical' }
   }
 
   fnRelativeEstimation = function 'FN_RELATIVE_ESTIMATION — Estimer la position relative' {
     #function
+    link https://doi.org/10.1007/978-3-032-30156-7_34 "Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex Optimization"
     description 'Estimation relative inter-agents : socle de la formation et de l evitement cooperatif.'
     metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception (redondance de position)'; tbd 'technologie depend de DE-08' }
   }
 
   fnNavigation = function 'FN_NAVIGATION — Se situer et naviguer' {
     #function
+    link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
     description 'Navigation nominale EKF IMU+odom+GNSS, avec bascule en environnement GNSS-denied.'
     metadata { capacite 'CAP_PERCEIVE'; source 'architecture.c4 onboard.perception'; algo 'algNavigationGNSSDegrade' }
   }
@@ -116,18 +128,21 @@ model {
   // ---- CAP_DECIDE ----
   fnCollisionAvoidance = function 'FN_COLLISION_AVOIDANCE — Eviter les collisions' {
     #function
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description 'Detection et evitement (sense-and-avoid) local, independant du lien et de l allocation.'
     metadata { capacite 'CAP_DECIDE'; source 'architecture.c4 onboard.perception / onboard.safety'; algo 'algCollisionAvoidance'; criticite 'safety-critical'; tbd 'delai d action = HYP non sourcee' }
   }
 
   fnSafetyRules = function 'FN_SAFETY_RULES — Appliquer les regles pre-approuvees' {
     #function
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description 'Geofence, detection de perte de controle, RTL, atterrissage d urgence, limitateur d energie.'
     metadata { capacite 'CAP_DECIDE'; source 'architecture.c4 onboard.safety'; algo 'algSafetyRules'; propriete 'fonctionne SANS lien' }
   }
 
   fnFlightControl = function 'FN_FLIGHT_CONTROL — Tenir la boucle de vol' {
     #function
+    link https://doi.org/10.3390/s24041343 "Artificial Potential Field Based Trajectory Tracking for Quadcopter UAV Moving Targets"
     description 'Asservissement d attitude et de position temps reel.'
     metadata { capacite 'CAP_FLY'; source 'architecture.c4 onboard.autopilot'; criticite 'safety-critical' }
   }
@@ -135,30 +150,37 @@ model {
   // ---- CAP_COOPERATE ----
   fnTaskAllocation = function 'FN_TASK_ALLOCATION — Repartir les taches' {
     #function
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
+    link https://doi.org/10.1109/jiot.2026.3714884 "Edge Intelligence for IoT Terminal Coordination: A Low-Power SoC-Embedded GNN Framework for UAV Swarm Task Allocation in Smart City Environments"
     description 'Attribution distribuee des taches entre agents par encheres avec resolution de conflits.'
     metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.task-auction'; algo 'algTaskAllocation'; tbd 'convergence a 30 non mesuree' }
   }
 
   fnConsensus = function 'FN_CONSENSUS — Converger vers un etat commun' {
     #function
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     description 'Convergence d un etat partage sans autorite centrale, tolerante aux partitions.'
     metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.task-auction / coordination CRDT-LWW'; algo 'algConsensus' }
   }
 
   fnFormationControl = function 'FN_FORMATION_CONTROL — Tenir la formation' {
     #function
+    link https://doi.org/10.3390/app16178852 "Formation-Preserving Control for Multi-Robot Systems: Experimental Validation"
     description 'Maintien de la geometrie relative entre agents.'
     metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.mission'; algo 'algFormationControl' }
   }
 
   fnPathPlanning = function 'FN_PATH_PLANNING — Planifier la trajectoire' {
     #function
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
+    link https://arxiv.org/abs/2608.23123 "Distributed Trajectory Planning and Resource Allocation for Dynamic Multi-UAV Collaborative Computing"
     description 'Plan embarque versionne ; MPC court horizon au niveau Edge si ressource.'
     metadata { capacite 'CAP_COOPERATE'; source 'architecture.c4 onboard.mission / c2.planner'; algo 'algPathPlanning' }
   }
 
   fnReconfiguration = function 'FN_RECONFIGURATION — Se reconfigurer apres une perte' {
     #function
+    link https://doi.org/10.3390/fractalfract10050315 "Resilient Leader–Follower Consensus of Fractional-Order Nonlinear Multi-Agent Systems Under Sybil and DoS Attacks via Event-Triggered Adaptive Control"
     description 'Election d un nouveau leader et reorganisation apres la perte d un agent.'
     metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.mission'; algo 'algLeaderElection' }
   }
@@ -166,12 +188,14 @@ model {
   // ---- CAP_COMMUNICATE ----
   fnMeshCommunication = function 'FN_MESH_COMMUNICATION — Communiquer en maillage' {
     #function
+    link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
     description 'Echange inter-agents par maillage radio, avec store-and-forward si deconnecte.'
     metadata { capacite 'CAP_COMMUNICATE'; source 'architecture.c4 onboard.link / edge.relay'; tbd 'bande et protocole = DE-06' }
   }
 
   fnC2Link = function 'FN_C2_LINK — Lier au commandement' {
     #function
+    link https://doi.org/10.6109/jkiice.2026.30.8.1408 "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operation"
     description 'Liaison de commandement et controle avec la station sol.'
     metadata { capacite 'CAP_COMMAND'; source 'architecture.c4 c2.gcs / onboard.link'; perte_toleree 'oui' }
   }
@@ -179,12 +203,14 @@ model {
   // ---- CAP_SURVIVE ----
   fnHealthMonitoring = function 'FN_HEALTH_MONITORING — Surveiller la sante' {
     #function
+    link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
     description 'Diagnostic interne (batterie, moteurs, capteurs, temperatures) et prediction de defaillance.'
     metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.health'; algo 'algHealthMonitoring' }
   }
 
   fnEnergyManagement = function 'FN_ENERGY_MANAGEMENT — Gerer l energie' {
     #function
+    link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
     description 'Gestion de l energie et budget de retour (RTL budget).'
     metadata { capacite 'CAP_SURVIVE'; source 'architecture.c4 onboard.energy'; algo 'algEnergyAware'; tbd 'capacite batterie = DE-07 ouvert' }
   }
@@ -192,12 +218,14 @@ model {
   // ---- CAP_OBSERVE ----
   fnTelemetry = function 'FN_TELEMETRY — Emettre la telemetrie' {
     #function
+    link https://doi.org/10.6109/jkiice.2026.30.8.1408 "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operation"
     description 'Emission de l etat vers le Edge, le C2 et le cloud.'
     metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 onboard.telemetry' }
   }
 
   fnDigitalTwin = function 'FN_DIGITAL_TWIN — Alimenter le jumeau numerique' {
     #function
+    link https://doi.org/10.1016/j.cma.2025.117999 "A machine-learning enabled digital-twin framework for tactical drone-swarm design"
     description 'Reconstruire une representation exploitable de l essaim cote cloud.'
     metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 cloud.twin'; role 'cible du Digital Twin 3D' }
   }
@@ -205,7 +233,7 @@ model {
   fnReplay = function 'FN_REPLAY — Rejouer une mission' {
     #function
     description 'Conserver et rejouer les donnees de mission pour analyse et pedagogie.'
-    metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 cloud.replay-store'; usage 'pedagogie, comparaison de variantes' }
+    metadata { capacite 'CAP_OBSERVE'; source 'architecture.c4 cloud.replay-store'; usage 'pedagogie, comparaison de variantes' ; evidence 'aucun article trouve dans le corpus swarmdrone' }
   }
 
   // ===========================================================================

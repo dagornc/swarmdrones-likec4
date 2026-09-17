@@ -69,6 +69,7 @@ model {
 
   msgDroneState = message 'MSG_DRONE_STATE — etat de drone' {
     #message
+    link https://arxiv.org/abs/2309.06741 "A Multi-task Learning Framework for Drone State Identification and Trajectory Prediction"
     description '''
       Etat complet d'un agent : position, vitesse, cap, energie, sante,
       tache courante, mode de vol.
@@ -81,6 +82,7 @@ model {
       criticite 'mission-critical'
       schema 'TBD — a formaliser'
       perte 'etat remplace par le suivant ; pas de retransmission'
+      evidence 'aucun article trouve dans le corpus swarmdrone'
     }
   }
 
@@ -98,11 +100,13 @@ model {
       criticite 'safety-critical'
       schema 'TBD'
       perte 'expiration par delai — declenche la detection de perte'
+      evidence 'aucun article trouve dans le corpus swarmdrone'
     }
   }
 
   msgPositionUpdate = message 'MSG_POSITION_UPDATE — mise a jour de position' {
     #message
+    link https://doi.org/10.1007/978-3-032-30156-7_34 "Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex Optimization"
     description 'Position relative ou absolue d un agent, pour la formation et la separation.'
     metadata {
       producteur 'onboard.perception'
@@ -117,6 +121,7 @@ model {
 
   msgNeighborState = message 'MSG_NEIGHBOR_STATE — etat de voisinage' {
     #message
+    link https://doi.org/10.3390/drones10010069 "ST-DCL: A Spatio-Temporally Decoupled Cooperative Localization Method for Dynamic Drone Swarms"
     description 'Vue synthetique des voisins proches : identifiants, positions relatives, sante.'
     metadata {
       producteur 'onboard.perception'
@@ -131,6 +136,7 @@ model {
 
   msgTaskBid = message 'MSG_TASK_BID — enchere de tache' {
     #message
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     description '''
       Offre d'un agent pour une tache ouverte. Coeur de l'allocation
       distribuee (SCN-04) et de la reallocation apres perte (SCN-07).
@@ -149,6 +155,7 @@ model {
 
   msgTaskAssignment = message 'MSG_TASK_ASSIGNMENT — attribution de tache' {
     #message
+    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     description 'Decision d attribution d une tache a un agent. Resultat du consensus d encheres.'
     metadata {
       producteur 'onboard.taskAuction'
@@ -164,6 +171,7 @@ model {
 
   msgTrajectoryProposal = message 'MSG_TRAJECTORY_PROPOSAL — proposition de trajectoire' {
     #message
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
     description '''
       Un agent propose une trajectoire, pour negociation avant execution.
       Mecanisme de coordination distribuee sans autorite centrale.
@@ -181,6 +189,7 @@ model {
 
   msgTrajectoryUpdate = message 'MSG_TRAJECTORY_UPDATE — mise a jour de trajectoire' {
     #message
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
     description 'Trajectoire retenue et en cours d execution. Consommee par la surete.'
     metadata {
       producteur 'onboard.mission'
@@ -195,6 +204,7 @@ model {
 
   msgFormationState = message 'MSG_FORMATION_STATE — etat de la formation' {
     #message
+    link https://doi.org/10.3390/app16178852 "Formation-Preserving Control for Multi-Robot Systems: Experimental Validation"
     description '''
       Etat global de la formation : positions cibles, erreurs, cohésion.
       Sert au scenario SCN-03 (creation de formation).
@@ -213,6 +223,7 @@ model {
 
   msgCollisionAlert = message 'MSG_COLLISION_ALERT — alerte de collision' {
     #safety-critical #message
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     description '''
       Alerte de proximite imminente. Message le plus critique du systeme :
       declenche une action d evitement LOCALE, sans attendre le reseau.
@@ -232,6 +243,7 @@ model {
 
   msgMissionCommand = message 'MSG_MISSION_COMMAND — commande de mission' {
     #safety-critical #message
+    link https://doi.org/10.6109/jkiice.2026.30.8.1408 "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operation"
     description 'Ordre de mission emanant de la GCS. Soumis a autorisation et signature.'
     metadata {
       producteur 'c2.gcs'
@@ -247,6 +259,7 @@ model {
 
   msgConsensusVote = message 'MSG_CONSENSUS_VOTE — vote de consensus' {
     #message
+    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     description '''
       Vote d'un agent dans une decision collective. Implique un etat
       convergeant (CRDT / consensus) tolerant aux partitions.
@@ -265,6 +278,7 @@ model {
 
   msgFailureNotification = message 'MSG_FAILURE_NOTIFICATION — notification de defaillance' {
     #safety-critical #message
+    link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
     description '''
       Un agent signale sa propre degradation ou celle d'un pair.
       Base de la detection de defaillance sans reallocation (blindspotAM12).

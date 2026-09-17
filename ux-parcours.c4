@@ -1,0 +1,95 @@
+/** Parcours pédagogiques : projections du modèle, pas télémétrie réelle. */
+views {
+  dynamic view apprendre-capteur {
+    title '02 Scénarios / Guidés / 1 — Du capteur à l’action'
+    description '''
+      **Question : comment une observation devient-elle une action locale ?**
+      Suivre les étapes numérotées. La dernière illustre la voie de sûreté prioritaire,
+      pas une commande systématiquement exécutée après chaque perception.
+      Les étapes sont un ordre pédagogique, pas une trace horodatée.
+      [Suite : préparer une mission](/view/apprendre-mission/) · [Accueil](/view/index/)
+    '''
+    radios -> onboard.sensorsHAL { notes '1. Les interfaces matérielles reçoivent les observations. GNSS dégradable : consulter H3.' }
+    onboard.sensorsHAL -> onboard.perception { notes '2. Fusionner les capteurs pour estimer la situation.' }
+    onboard.perception -> onboard.autopilot { notes '3. Transmettre une estimation au pilotage ; ne pas confondre estimation et consigne.' }
+    onboard.perception -> onboard.safety { notes '4. Évaluer séparément les contraintes et besoins d’évitement.' }
+    onboard.safety -> onboard.autopilot { notes '5. Si les règles pré-approuvées le nécessitent : commande préemptive de sûreté, indépendante du lien C2.' }
+    global style lectureZones
+    autoLayout LeftRight
+  }
+  dynamic view apprendre-mission {
+    title '02 Scénarios / Guidés / 2 — De l’intention au plan embarqué'
+    description '''
+      **Question : qui décide et comment le plan arrive-t-il à bord ?**
+      Les références d’autorisation et signatures sont des exigences du modèle,
+      pas une preuve que leur implémentation a été auditée. Attention : le modèle
+      ne déclare pas de relation descendante gateway → relay. Les étapes 4 et 5
+      montrent donc deux segments, pas une chaîne de livraison démontrée.
+      [Autorisation et audit](/view/lecture-autorisation/) · [Suite : télémétrie](/view/apprendre-telemetrie/)
+    '''
+    operator -> c2.gcs { notes '1. L’opérateur supervise et autorise les actions critiques.' }
+    c2.gcs -> c2.planner { notes '2. Traduire les intentions en plan.' }
+    c2.planner -> c2.missionStore { notes '3. Conserver une version du plan.' }
+    c2.planner -> edge.gateway { notes '4. Publier le plan embarquable signé ; transfert opportuniste.' }
+    edge.relay -> onboard.linkRadio { notes '5. Segment descendant déclaré. La jonction gateway → relay reste à documenter ; ne pas inférer une livraison de bout en bout.' }
+    onboard.linkRadio -> onboard.mission { notes '6. Réception des tâches et ordres : contrôle de signature requis.' }
+    onboard.mission -> onboard.autopilot { notes '7. Exécuter localement le contrat embarqué, sans dépendance continue au C2.' }
+    global style lectureZones
+    autoLayout LeftRight
+  }
+  dynamic view apprendre-telemetrie {
+    title '02 Scénarios / Guidés / 3 — De la télémétrie à l’analyse'
+    description '''
+      **Question : comment apprendre de la mission sans bloquer son exécution ?**
+      La fraîcheur des messages est explicite. Le traitement cloud est différé.
+      Aucun flux animé ne constitue une mesure de trafic réel.
+      [Explorer le cloud](/view/zone-cloud/) · [Accueil](/view/index/)
+    '''
+    onboard.mission -> onboard.telemetry { notes '1. Produire l’état de mission.' }
+    onboard.telemetry -> onboard.linkRadio { notes '2. Prioriser et compacter les messages ; conserver leur validité temporelle.' }
+    onboard.linkRadio -> edge.relay { notes '3. Transport intermittent ; store-and-forward si nécessaire.' }
+    edge.relay -> edge.gateway { notes '4. Router le trafic vers C2/cloud.' }
+    edge.gateway -> cloud.twin { notes '5. Transférer les journaux et états en différé, hors boucle de contrôle.' }
+    cloud.twin -> cloud.analytics { notes '6. Analyser les données de rejeu.' }
+    cloud.analytics -> cloud.modelRegistry { notes '7. Capitaliser les métriques et modèles ; validation nécessaire avant réutilisation.' }
+    global style lectureZones
+    autoLayout LeftRight
+  }
+  view lecture-surete {
+    title '03 Risques et garanties / 1 — Qui protège localement la plateforme ?'
+    description '''
+      Examiner les entrées de sûreté et la commande préemptive vers le pilotage.
+      Rouge = criticité de conception, jamais panne mesurée. Indépendance du lien
+      selon le modèle ; les délais EXTRAP restent à éprouver.
+      [Impact des hypothèses](/view/hypotheses/) · [Parcours capteur](/view/apprendre-capteur/)
+    '''
+    include onboard.perception, onboard.health, onboard.energy, onboard.safety, onboard.autopilot
+    global style criticite
+    autoLayout LeftRight
+  }
+  view lecture-autorisation {
+    title '03 Risques et garanties / 2 — Qui autorise et qui garde la trace ?'
+    description '''
+      Autorité humaine, jetons d’autorisation, plans versionnés et traces d’audit.
+      Lire les flèches dans leur sens : auth fournit des jetons à la console.
+      Les exigences de signature ne valent pas attestation de conformité.
+      [Distribution du plan](/view/apprendre-mission/) · [ADR](/view/decisions/)
+    '''
+    include operator, c2.gcs, c2.auth, c2.planner, c2.missionStore
+    global style criticite
+    autoLayout LeftRight
+  }
+  view lecture-autonomie {
+    title '03 Risques et garanties / 3 — Que reste-t-il sans liaison C2 ?'
+    description '''
+      Vue volontairement limitée aux responsabilités locales : contrat de mission,
+      allocation embarquée, sûreté et pilotage. Le C2 et le cloud ne sont pas dessinés,
+      ce qui ne supprime aucune relation du modèle.
+      Autonomie attendue sous les hypothèses du système, pas garantie universelle.
+      [Scénario dégradé complet](/view/perte-de-lien/) · [Hypothèses](/view/hypotheses/)
+    '''
+    include onboard.mission, onboard.taskAuction, onboard.safety, onboard.autopilot, onboard.energy
+    global style lectureZones
+    autoLayout LeftRight
+  }
+}
