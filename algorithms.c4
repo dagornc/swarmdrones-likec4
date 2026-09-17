@@ -72,6 +72,9 @@ model {
     link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     link https://arxiv.org/abs/2609.01870 "ArcticSwarm: Deferring Early Consensus in Long-Horizon Multi-Agent Research"
     link https://doi.org/10.1016/j.asoc.2026.116398 "Hierarchical optimal consensus for economically efficient path planning in multi-UAV"
+    link https://doi.org/10.3390/s25216738 "A Two-Level Clustered Consensus-Based Bundle Algorithm for Dynamic Heterogeneous Multi-UAV Task Allocation"
+    link https://arxiv.org/abs/2609.09066 "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Agents"
+    link https://doi.org/10.3390/machines14070715 "Dynamic Event-Triggered Consensus Formation Control Method for Multi-UAV Systems"
     description '''
       Convergence d un etat partage entre agents par echange iteratif
       (moyenne, max-consensus, ou CRDT LWW selon le besoin).
@@ -171,6 +174,9 @@ model {
     #algorithm
     link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     link https://arxiv.org/abs/2603.08379 "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild"
+    link https://doi.org/10.1007/s00773-026-01144-9 "Active sonar-based perception and wall following for AUV operations"
+    link https://doi.org/10.1016/j.apor.2026.105222 "Visual perception for autonomous surface vehicles in complex waterway environments"
+    link https://doi.org/10.3390/s26175631 "Adaptive Localization for Underwater Nodes in Uncertain Environments: A Geometric Topology Perception-Enhanced Multi-Stage Reinforcement Learning"
     description '''
       Fusion de capteurs par filtre de Kalman etendu ou unscented.
       Local par plateforme (socle de surete), avec fusion de pistes
@@ -205,6 +211,9 @@ model {
     link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
     link https://arxiv.org/abs/2601.13657 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Learning"
     link https://arxiv.org/abs/2309.03678 "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones"
+    link https://doi.org/10.3390/app16031412 "Learning-Based Multi-Robot Active SLAM: A Conceptual Framework and Survey"
+    link https://doi.org/10.1088/1361-6501/aea4e1 "DR-TC-SLAM: A Dynamic-Interference-Aware Tightly Coupled Visual-LiDAR-Inertial SLAM"
+    link https://doi.org/10.21203/rs.3.rs-10409860/v1 "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments"
     description '''
       Bascule EKF (IMU + odometrie + GNSS) vers VIO en environnement
       GNSS-denied. Reduction de zone et RTL sur seuil de derive.
@@ -237,6 +246,10 @@ model {
     link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     link https://arxiv.org/abs/2309.13285 "Collision Avoidance and Navigation for a Quadrotor Swarm Using End-to-end Deep Reinforcement Learning"
     link https://arxiv.org/abs/2401.14554 "GCBF+: A Neural Graph Control Barrier Function Framework for Distributed Safe Multi-Agent Control"
+    link https://doi.org/10.3390/drones8080415 "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-UAV"
+    link https://doi.org/10.1109/YAC66630.2025.11150122 "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance"
+    link https://doi.org/10.1109/ACCESS.2025.3646978 "POF+MADER: Trajectory Planner in Dynamic Environments With Improved Collision Avoidance"
+    link https://doi.org/10.1016/j.oceaneng.2026.127080 "Tether-aware dynamic collision avoidance for USV–HROV marine robotic systems"
     description '''
       Control Barrier Functions : garantie de non-collision sur un
       horizon court. Couche de surete embarquee NON NEGOCIABLE,
