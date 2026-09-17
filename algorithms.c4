@@ -148,6 +148,7 @@ model {
   algLeaderElection = algorithm 'ALG_LEADER_ELECTION — Election de leader' {
     #algorithm
     link https://doi.org/10.3390/fractalfract10050315 "Resilient Leader–Follower Consensus of Fractional-Order Nonlinear Multi-Agent Systems Under Sybil and DoS Attacks via Event-Triggered Adaptive Control"
+    link https://doi.org/10.1016/j.dsp.2026.106256 "Digital twin-enabled neural bandit learning for two-hop UAV relay selection"
     description '''
       Designation d un coordinateur temporaire apres perte du leader
       courant. Condition de la reconfiguration (SCN-10).
@@ -290,6 +291,8 @@ model {
   algSafetyRules = algorithm 'ALG_SAFETY_RULES — Surete par regles pre-approuvees' {
     #algorithm
     link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
+    link https://doi.org/10.1007/s11071-025-11497-2 "Comprehensive Multi-Level Optimization of Safe Swarm Motion"
+    link https://doi.org/10.3390/s26175544 "Integrated Trajectory Planning, MEC Offloading, and Safety Coordination for UAV Swarms"
     description '''
       Regles et reflexes embarques, avec watchdog independant ; CBF en
       renfort. Fonctionne sans aucun lien de communication.
@@ -362,6 +365,7 @@ model {
   algHealthMonitoring = algorithm 'ALG_HEALTH_MONITORING — Surveillance d etat et detection de faute' {
     #algorithm
     link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
+    link https://arxiv.org/abs/2609.06257 "SeaCausal-FL: Federated Fuzzy Causal Learning for Maritime IoT Fault Detection"
     description '''
       Surveillance continue de la sante des sous-systemes, detection
       d anomalie et qualification de la degradation. Alimente la
@@ -394,6 +398,9 @@ model {
     link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"
     link https://doi.org/10.1016/j.asoc.2026.115505 "A knowledge-driven collaborative discrete Jaya algorithm for energy-efficient multi-robot task allocation and scheduling problem"
     link https://arxiv.org/abs/2609.01764 "Curriculum-Guided Reinforcement Learning for Energy-Efficient UAV-ISAC in Post-Disaster Search-and-Rescue Operations"
+    link https://doi.org/10.3389/fmars.2026.1865602 "Neuro-symbolic framework for multi-USV coordination: COLREGs-compliant energy-aware control"
+    link https://doi.org/10.3390/jmse14040384 "System-Level Optimization of AUV Swarm Control and Perception: An Energy-Aware Approach"
+    link https://doi.org/10.1007/s11370-022-00452-4 "Research on energy-efficient swarm drone control"
     description '''
       Arbitrage entre couverture, duree et marge de repli. Conditionne
       la faisabilite de toute mission longue et la comparaison de
