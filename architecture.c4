@@ -540,11 +540,14 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
 
     perception = component 'Perception et localisation' {
       #safety-critical
+      link https://www.kongsberg.com/what-we-do/ocean-space/autonomous-and-uncrewed-solutions/auv/hugin/ "HUGIN (AUV) — KONGSBERG"
       technology 'Fusion capteurs + filtre complementaire'
       description '''
 Fusion multi-capteurs, detection/evitement (sense-and-avoid),
 estimation d'etat et estimation relative inter-agents.
 Redondance de position : GNSS + INS + odometrie + relative.
+Traitement in-mission (reconnaissance de cibles, navigation de terrain)
+requis pour les USV/AUV : renforce le besoin de calcul local de perception.
 
 ### Fiche de lecture
 
