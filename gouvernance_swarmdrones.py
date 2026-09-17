@@ -68,6 +68,23 @@ def export_model():
     return True
 
 
+def export_likec4_json():
+    """Regenere le likec4.json a la racine du workspace (modele compile).
+
+    Ce fichier est un export manuel qui peut se perimer si on ne le regenere
+    pas. Le regenere a chaque gouvernance garantit qu'il reflete toujours le
+    modele courant (liens, elements, vues).
+    """
+    code, out, err = docker_exec(
+        ["likec4", "export", "json", DATA_DIR, "-o", f"{DATA_DIR}/likec4.json"]
+    )
+    if code != 0:
+        print(f"[ERREUR] regeneration likec4.json a echoue : {err.strip()}")
+        return False
+    print("  likec4.json regenere (modele compile a jour).")
+    return True
+
+
 def load_model():
     """Charge le modele compile exporte."""
     with open(MODEL_EXPORT) as f:
@@ -234,9 +251,11 @@ def main():
         ok = check_divergence()
     else:
         ok_v = check_validate()
+        # Regenerer le likec4.json (modele compile a jour) a chaque controle complet.
+        ok_l = export_likec4_json()
         ok_b = check_baseline(init=args.init)
         ok_d = check_divergence()
-        ok = ok_v and ok_b and ok_d
+        ok = ok_v and ok_l and ok_b and ok_d
 
     print()
     print("=== RESULTAT GLOBAL : " + ("OK" if ok else "ECHEC") + " ===")
