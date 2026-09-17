@@ -541,6 +541,7 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
     perception = component 'Perception et localisation' {
       #safety-critical
       link https://www.kongsberg.com/what-we-do/ocean-space/autonomous-and-uncrewed-solutions/auv/hugin/ "HUGIN (AUV) — KONGSBERG"
+      link https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/2.-ocean-space/1.-autonomous-and-uncrewed-solutions/hugin/documents/110-0047668-b-hugin_3000_datasheet.pdf "HUGIN 3000 — datasheet (capteurs SAS, navigation inertielle)"
       technology 'Fusion capteurs + filtre complementaire'
       description '''
 Fusion multi-capteurs, detection/evitement (sense-and-avoid),
