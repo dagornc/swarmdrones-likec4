@@ -774,8 +774,8 @@ views {
     include blindspotAM5, blindspotAM6, blindspotAM7, blindspotAM8
     include blindspotAM9, blindspotAM10, blindspotAM11, blindspotAM12
     include blindspotAM13, blindspotAM14, blindspotAM15, blindspotAM16
-    include AlgorithmsPerceptionFusionEKFUKF, AlgorithmsTaskAllocationCBBA
-    include AlgorithmsCoordinationCRDTLWW, AlgorithmsSureteReglesCBF
+    include algPerceptionFusion, algTaskAllocation
+    include algConsensus, algSafetyRules
     autoLayout TopBottom
   }
 
@@ -1216,5 +1216,37 @@ views {
     include stCollisionRisk, stSpectrumSat, stEnergyCritical, stDense, stLeaderLost
     autoLayout LeftRight
   }
+
+  /** DECISIONS MATERIELLES OUVERTES (DE-05..DE-10) : les arbitrages de
+   *  conception materielle non tranches. Chaque decision conditionne un
+   *  element de `refDrone` (hardware.c4) : tant qu'elle est ouverte, le
+   *  choix correspondant reste un trou du modele.
+   *
+   *  Complement de `decisionsOuvertes` (DE-01..04, appelees par les angles
+   *  morts critiques). Ici, l'amont est le composant materiel conditionne. */
+  view decisionsMaterielles {
+    title '01 · Gouvernance \/ Decisions materielles : DE-05..10 et le composant conditionne'
+
+    description '''
+      **Arbitrages materiels non tranches.** Six decisions de conception
+      (socle de vol, partition calcul, bande radio, energie, IMU, sense-and-avoid)
+      n'ont pas ete prises. Chacune conditionne un composant de `refDrone`.
+
+      Lire le sens ainsi : `decision -> composant` = **ce choix conditionne
+      cet element** ; tant que la decision est ouverte, le composant porte
+      une incertitude de conception.
+
+      Detail complet : cliquer une decision affiche sa description (Markdown),
+      ses options, son porteur et son critere de decision.
+    '''
+    include decVolSocle, decPartitionCalcul, decBandeRadio, decEnergie, decImu, decSae
+    include decVolSocle -> refDrone.flightCtrl, decPartitionCalcul -> refDrone.companion
+    include decBandeRadio -> refDrone.radioLnk, decBandeRadio -> refDrone.netMesh
+    include decEnergie -> refDrone.power, decImu -> refDrone.imu
+    include decSae -> refDrone.saeSensor
+    global style criticite
+    autoLayout LeftRight
+  }
+
 }
 
