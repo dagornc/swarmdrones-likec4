@@ -63,7 +63,7 @@ views {
   // systeme, qui l'entoure, qu'englobe-t-il ?"
   // ===========================================================================
   view system-context {
-    title '01 - Gouvernance & Stratégie (Executive View) \/ 01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement'
+    title '01 · Gouvernance \/ 01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement'
 
     description '''
       **Niveau 1 (System Context, C4).** L'essaim est un systeme de systemes :

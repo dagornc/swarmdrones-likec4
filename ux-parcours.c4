@@ -1,7 +1,7 @@
 /** Parcours pédagogiques : projections du modèle, pas télémétrie réelle. */
 views {
   dynamic view apprendre-capteur {
-    title '02 - Parcours & Opérations (Business & Scenarios) \/ UX Parcours \/ Chaînes de valeur \/ 1 — Du capteur à l’action'
+    title '02 · Parcours \/ Chaînes de valeur \/ 1 — Du capteur à l’action'
 
     description '''
       **Question : comment une observation devient-elle une action locale ?**
@@ -19,7 +19,7 @@ views {
     autoLayout LeftRight
   }
   dynamic view apprendre-mission {
-    title '02 - Parcours & Opérations (Business & Scenarios) \/ UX Parcours \/ Chaînes de valeur \/ 2 — De l’intention au plan embarqué'
+    title '02 · Parcours \/ Chaînes de valeur \/ 2 — De l’intention au plan embarqué'
 
     description '''
       **Question : qui décide et comment le plan arrive-t-il à bord ?**
@@ -40,7 +40,7 @@ views {
     autoLayout LeftRight
   }
   dynamic view apprendre-telemetrie {
-    title '02 - Parcours & Opérations (Business & Scenarios) \/ UX Parcours \/ Chaînes de valeur \/ 3 — De la télémétrie à l’analyse'
+    title '02 · Parcours \/ Chaînes de valeur \/ 3 — De la télémétrie à l’analyse'
 
     description '''
       **Question : comment apprendre de la mission sans bloquer son exécution ?**
@@ -59,7 +59,7 @@ views {
     autoLayout LeftRight
   }
   view lecture-surete {
-    title '99 - Vues complémentaires \/ 1 — Qui protège localement la plateforme ?'
+    title '99 · Compléments \/ 1 — Qui protège localement la plateforme ?'
 
     description '''
       Examiner les entrées de sûreté et la commande préemptive vers le pilotage.
@@ -72,7 +72,7 @@ views {
     autoLayout LeftRight
   }
   view lecture-autorisation {
-    title '99 - Vues complémentaires \/ 2 — Qui autorise et qui garde la trace ?'
+    title '99 · Compléments \/ 2 — Qui autorise et qui garde la trace ?'
 
     description '''
       Autorité humaine, jetons d’autorisation, plans versionnés et traces d’audit.
@@ -85,7 +85,7 @@ views {
     autoLayout LeftRight
   }
   view lecture-autonomie {
-    title '99 - Vues complémentaires \/ 3 — Que reste-t-il sans liaison C2 ?'
+    title '99 · Compléments \/ 3 — Que reste-t-il sans liaison C2 ?'
 
     description '''
       Vue volontairement limitée aux responsabilités locales : contrat de mission,
