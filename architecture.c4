@@ -1688,53 +1688,18 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   // ===========================================================================
 
   // B.1 — perception / fusion multi-capteurs et multi-agents
-  AlgorithmsPerceptionFusionEKFUKF = algorithm 'Perception et fusion (EKF/UKF local + pistes Edge)' {
-    link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
-    metadata { fonction 'perception-fusion'; robustesse_lien 'elevee'; maturite 'mature-local / median multi-agents'; evidence 'MEDIUM' }
-    description 'EKF/UKF local par plateforme (socle safety) + fusion de pistes au niveau Edge. Fusion multi-agents a 30 = non etablie.'
-  }
 
   // B.2 — navigation sous GNSS degrade
-  AlgorithmsNavigationGNSSDegradeEKFVIO = algorithm 'Navigation GNSS degrade (EKF + bascule VIO)' {
-    link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
-    metadata { fonction 'navigation-GNSS-degrade'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
-    description 'Defaut EKF IMU+odom+GNSS ; bascule VIO en GNSS-denied ; reduction de zone + RTL sur seuil de derive.'
-  }
 
   // B.3 — allocation de taches
-  AlgorithmsTaskAllocationCBBA = algorithm 'Allocation par encheres (CBBA)' {
-    link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
-    metadata { fonction 'allocation-taches'; robustesse_lien 'elevee'; maturite 'mature-en-labo'; evidence 'HIGH-existence_LOW-perf' }
-    description 'Mature en laboratoire. Convergence sous partition et retrait d agent a 30 = non mesurees.'
-  }
 
   // B.4 — coordination sous partition (CRDT / LWW)
-  AlgorithmsCoordinationCRDTLWW = algorithm 'Coordination sous partition (CRDT / LWW + horloges logiques)' {
-    link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
-    metadata { fonction 'coordination-partition'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'HIGH' }
-    description 'Resolution par role (C2 > Edge > Onboard). Pas de quorum global. Reconvergence a 30 agents = MEDIUM.'
-  }
 
   // B.5 — planification (mission / trajectoire / couverture)
-  AlgorithmsPlanificationWaypointsMPC = algorithm 'Planification waypoints + MPC court horizon' {
-    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
-    metadata { fonction 'planification'; robustesse_lien 'moyenne'; maturite 'mature'; evidence 'MEDIUM' }
-    description 'Plan embarque versionne par defaut ; MPC court-horizon au niveau Edge si ressource ; re-optimisation C2 differee.'
-  }
 
   // B.6 — evitement de collision / deconfliction spatiale
-  AlgorithmsEvitementCollisionCBF = algorithm 'Evitement de collision (Control Barrier Functions)' {
-    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
-    metadata { fonction 'evitement-collision'; robustesse_lien 'elevee'; maturite 'emergente'; evidence 'MEDIUM' }
-    description 'Couche surete embarquee non negociable, independante du lien et de l allocation. Preuve a 30 agents non etablie.'
-  }
 
   // B.7 — surete (garanties et comportement degrade)
-  AlgorithmsSureteReglesCBF = algorithm 'Surete embarquee (regles pre-approuvees + CBF)' {
-    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
-    metadata { fonction 'surete'; robustesse_lien 'elevee'; maturite 'mature'; evidence 'MEDIUM' }
-    description 'Regles/reflexes embarques HIGH + watchdog independant ; CBF en renfort. Validation Monte-Carlo adversarial (N>=1000) NON faite.'
-  }
 
   // ===========================================================================
   // LOT 3 — RISQUES (§D) ET ANGLES MORTS (§C)
@@ -1908,16 +1873,16 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   onboard.mission -[implemented-by]-> OpenCPN 'navigation marine des USV'
 
   // --- Composants s'appuyant sur des familles algorithmiques -------------------
-  onboard.perception -[implements]-> AlgorithmsPerceptionFusionEKFUKF 's appuie sur'
-  onboard.perception -[implements]-> AlgorithmsNavigationGNSSDegradeEKFVIO 'navigation degradée'
-  edge.fusion -[implements]-> AlgorithmsPerceptionFusionEKFUKF 's appuie sur'
-  onboard.taskAuction -[implements]-> AlgorithmsTaskAllocationCBBA 's appuie sur'
-  onboard.taskAuction -[implements]-> AlgorithmsCoordinationCRDTLWW 'coordination sous partition'
-  edge.coordinator -[implements]-> AlgorithmsCoordinationCRDTLWW 's appuie sur'
-  c2.planner -[implements]-> AlgorithmsPlanificationWaypointsMPC 's appuie sur'
-  onboard.mission -[implements]-> AlgorithmsPlanificationWaypointsMPC 'plan embarque'
-  onboard.safety -[implements]-> AlgorithmsEvitementCollisionCBF 'separation de proximite'
-  onboard.safety -[implements]-> AlgorithmsSureteReglesCBF 'regles pre-approuvees'
+  onboard.perception -[implements]-> algPerceptionFusion 's appuie sur'
+  onboard.perception -[implements]-> algNavigationGNSSDegrade 'navigation degradée'
+  edge.fusion -[implements]-> algPerceptionFusion 's appuie sur'
+  onboard.taskAuction -[implements]-> algTaskAllocation 's appuie sur'
+  onboard.taskAuction -[implements]-> algConsensus 'coordination sous partition'
+  edge.coordinator -[implements]-> algConsensus 's appuie sur'
+  c2.planner -[implements]-> algPathPlanning 's appuie sur'
+  onboard.mission -[implements]-> algPathPlanning 'plan embarque'
+  onboard.safety -[implements]-> algCollisionAvoidance 'separation de proximite'
+  onboard.safety -[implements]-> algSafetyRules 'regles pre-approuvees'
 
   // --- Briques logicielles exposees a des risques -----------------------------
   AutopilotPX4 -[exposed-to]-> riskR5 'expose a'
@@ -1929,13 +1894,13 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   ROS2 -[exposed-to]-> riskR8 'expose aux fausses pistes'
 
   // --- Familles algorithmiques vs angles morts (ce qui n'est PAS couvert) -----
-  AlgorithmsPerceptionFusionEKFUKF -[exposed-to]-> blindspotAM4 'ne couvre pas la fusion essaim'
-  AlgorithmsTaskAllocationCBBA -[exposed-to]-> blindspotAM9 'ne couvre pas l energie'
-  AlgorithmsTaskAllocationCBBA -[exposed-to]-> blindspotAM10 'ne couvre pas le handoff'
-  AlgorithmsCoordinationCRDTLWW -[exposed-to]-> blindspotAM6 'ne couvre pas l horloge'
-  AlgorithmsSureteReglesCBF -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
-  AlgorithmsCoordinationCRDTLWW -[exposed-to]-> blindspotAM12 'agent defaillant non couvert'
-  AlgorithmsPerceptionFusionEKFUKF -[exposed-to]-> blindspotAM14 'P_d/P_fa non quantifies'
+  algPerceptionFusion -[exposed-to]-> blindspotAM4 'ne couvre pas la fusion essaim'
+  algTaskAllocation -[exposed-to]-> blindspotAM9 'ne couvre pas l energie'
+  algTaskAllocation -[exposed-to]-> blindspotAM10 'ne couvre pas le handoff'
+  algConsensus -[exposed-to]-> blindspotAM6 'ne couvre pas l horloge'
+  algSafetyRules -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
+  algConsensus -[exposed-to]-> blindspotAM12 'agent defaillant non couvert'
+  algPerceptionFusion -[exposed-to]-> blindspotAM14 'P_d/P_fa non quantifies'
 
   // ---------------------------------------------------------------------------
   // E25 — ENRICHISSEMENT DES ALGORITHMES PAUVRES (carte t_97fefb21)
@@ -1945,24 +1910,24 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   // ---------------------------------------------------------------------------
 
   // B.2 — navigation GNSS degradee
-  AlgorithmsNavigationGNSSDegradeEKFVIO -[uses]-> msgPositionUpdate 'mesure de position consommee par EKF/VIO'
-  AlgorithmsNavigationGNSSDegradeEKFVIO -[uses]-> scn05 'bascule VIO en GNSS degrade'
-  sciGnssDegraded -[evidences]-> AlgorithmsNavigationGNSSDegradeEKFVIO 'famille sourcee (SCI-5)'
+  algNavigationGNSSDegrade -[uses]-> msgPositionUpdate 'mesure de position consommee par EKF/VIO'
+  algNavigationGNSSDegrade -[uses]-> scn05 'bascule VIO en GNSS degrade'
+  sciGnssDegraded -[evidences]-> algNavigationGNSSDegrade 'famille sourcee (SCI-5)'
 
   // B.5 — planification waypoints + MPC
-  AlgorithmsPlanificationWaypointsMPC -[uses]-> msgTrajectoryProposal 'negociation de trajectoire'
-  AlgorithmsPlanificationWaypointsMPC -[uses]-> scn01 'plan embarque sans C2'
+  algPathPlanning -[uses]-> msgTrajectoryProposal 'negociation de trajectoire'
+  algPathPlanning -[uses]-> scn01 'plan embarque sans C2'
 
   // B.6 — evitement de collision (CBF)
-  AlgorithmsEvitementCollisionCBF -[uses]-> msgCollisionAlert 'declencheur sense-and-avoid'
-  AlgorithmsEvitementCollisionCBF -[uses]-> scn06 'evitement de collision'
-  AlgorithmsEvitementCollisionCBF -[exposed-to]-> blindspotAM5 'preuve a 30 agents non etablie (SCI-2)'
-  sciCbf -[evidences]-> AlgorithmsEvitementCollisionCBF 'verdict CBF (SCI-2)'
+  algCollisionAvoidance -[uses]-> msgCollisionAlert 'declencheur sense-and-avoid'
+  algCollisionAvoidance -[uses]-> scn06 'evitement de collision'
+  algCollisionAvoidance -[exposed-to]-> blindspotAM5 'preuve a 30 agents non etablie (SCI-2)'
+  sciCbf -[evidences]-> algCollisionAvoidance 'verdict CBF (SCI-2)'
 
   // B.7 — surete embarquee (regles + CBF)
-  AlgorithmsSureteReglesCBF -[uses]-> msgCollisionAlert 'declencheur de la voie de surete'
-  AlgorithmsSureteReglesCBF -[uses]-> scn02 'surete autonome sans lien'
-  sciCbf -[evidences]-> AlgorithmsSureteReglesCBF 'CBF en renfort (SCI-2)'
+  algSafetyRules -[uses]-> msgCollisionAlert 'declencheur de la voie de surete'
+  algSafetyRules -[uses]-> scn02 'surete autonome sans lien'
+  sciCbf -[evidences]-> algSafetyRules 'CBF en renfort (SCI-2)'
 
 
   // ---------------------------------------------------------------------------
