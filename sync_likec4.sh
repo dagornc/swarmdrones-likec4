@@ -124,10 +124,15 @@ echo "$n fichier(s) traité(s)."
 # --- Validation post-synchronisation -----------------------------------------
 if [ "$MODE" = "apply" ]; then
   echo "=== Validation du modèle ==="
-  if docker exec "$CONTAINER" npx likec4 validate 2>&1 | grep -qE "Valid"; then
+  # NB: capturer la sortie AVANT le test — avec `set -o pipefail`, un `grep -q`
+  # qui ferme le pipe prématurément fait échouer `docker exec` (SIGPIPE) et
+  # propage un faux négatif.
+  VALID_OUT="$(docker exec "$CONTAINER" npx likec4 validate 2>&1 || true)"
+  if printf '%s' "$VALID_OUT" | grep -qE "Valid"; then
     echo "✓ likec4 validate : Valid"
   else
     echo "✗ likec4 validate : ÉCHEC — restauration recommandée depuis $BACKUP_DIR/$TS" >&2
+    printf '%s\n' "$VALID_OUT" | tail -5 >&2
     exit 1
   fi
   echo
