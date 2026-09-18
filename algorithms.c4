@@ -30,8 +30,10 @@ model {
   //  A. COORDINATION, ALLOCATION, DECISION DISTRIBUEE
   // ===========================================================================
 
-  algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA)' {
+  algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA v3)' {
     #algorithm
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V3.pdf "Specification detaillee Task Allocation v3 (PDF) — spec genie logiciel"
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_CBBA.pdf "Specification detaillee CBBA (PDF, v1.1) — spec genie logiciel"
     link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V2.pdf "Specification detaillee Task Allocation v2 (PDF) — spec genie logiciel"
     link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     link https://arxiv.org/abs/2609.06273 "Bundle Length Tradeoffs in Decentralized Multi-Robot Task Allocation Under Degraded Communications"
@@ -53,22 +55,22 @@ model {
       inputs 'ensemble de taches, couts par agent, etat des voisins'
       outputs 'attribution locale de taches, ensemble de faisceaux'
       parameters 'neighborCount, bidValue, conflictWindow, timeout'
-      hypotheses 'communication periodique ; couts additifs ; agents cooperatifs'
-      contraintes 'convergence non garantie sous partition severe'
-      state 'local par agent + etat partage des encheres'
+      hypotheses 'communication evenementielle (ED-CBBA) ; couts additifs ; agents cooperatifs ; partition detectable par heartbeat'
+      contraintes 'convergence globale non garantie sous partition persistante (garantie locale) ; optimalite 50% pire-cas ; budget radio'
+      state 'local par agent + etat partage des encheres + etat de partition'
       executionMode 'conceptual'
       implementationStatus 'idea'
       repository 'TBD — a identifier'
-      sourcePath 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345'
-      version 'TBD'
+      sourcePath 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345 ; Sao et al. 2025 arXiv 2509.06481'
+      version 'v3 (spec SWARM-SPEC-ALG-001-V3, 2026-09-18)'
       maturity 'mature-en-labo (repris du modele existant)'
-      evidence 'MEDIUM — CONDITIONAL (cf SCI-1) : convergence prouvee sous comms ideales ; robustesse au retrait seulement EMPIRIQUE'
-      metrics 'makespan, qualite d allocation, temps de convergence, messages echanges'
+      evidence 'MEDIUM — CONDITIONNEL (cf SCI-1) : convergence prouvee sous comms ideales ; convergence locale sous partition (HYPOTHESE) ; robustesse au retrait seulement EMPIRIQUE'
+      metrics 'makespan, qualite d allocation, temps de convergence, messages echanges, taux de completion sous partition'
       references 'Choi 2009 ; Bi 2024 (N=8 reel) ; DOI 10.70322/dav.2025.10016 (N=30 SIMULATION) — CONSULTEES'
-      relatedComponents 'onboard.taskAuction, edge.coordinator'
-      relatedMessages 'MSG_TASK_BID, MSG_TASK_ASSIGNMENT, MSG_CONSENSUS_VOTE'
-      variantes 'CBBA, PI-CBBA, ACBBA, consensus simple'
-      tbd 'GAP-1 ouvert : convergence sous partition PERSISTANTE non prouvee — AUCUN ARTICLE TROUVE'
+      relatedComponents 'onboard.taskAuction, edge.coordinator, onboard.resilience'
+      relatedMessages 'MSG_TASK_BID, MSG_TASK_ASSIGNMENT, MSG_CONSENSUS_VOTE, MSG_HEARTBEAT'
+      variantes 'CBBA, PI-CBBA, ACBBA, ED-CBBA v3, TLC-CBBA, CLAC-CBBA, ET-PBBA'
+      tbd 'GAP-1 : convergence globale sous partition persistante (locale prouvee, globale HYPOTHESE) ; GAP-2 : N=30 reel non demontre ; GAP-7 : biais appris et DMG'
     }
   }
 
