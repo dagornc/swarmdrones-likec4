@@ -63,7 +63,8 @@ views {
   // systeme, qui l'entoure, qu'englobe-t-il ?"
   // ===========================================================================
   view system-context {
-    title '01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement'
+    title 'Vue générale / 01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement'
+
     description '''
       **Niveau 1 (System Context, C4).** L'essaim est un systeme de systemes :
       il englobe les 4 zones de deploiement par des relations de composition
