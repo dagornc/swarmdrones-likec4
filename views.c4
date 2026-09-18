@@ -872,7 +872,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \/ Catalogue — 15 algorithmes'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes et 1 specification'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -977,7 +977,7 @@ views {
   // ===========================================================================
 
   view capabilityMap {
-    title '04 · Algorithmique \/ Carte des capacites — 8 capacites, 19 fonctions'
+    title '03 · Architecture \/ Carte des capacites — 8 capacites, 19 fonctions'
 
     description '''
       Niveau « pourquoi / quoi ». Chaque capacite est DERIVEE des
