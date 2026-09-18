@@ -32,9 +32,6 @@ model {
 
   algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA v3)' {
     #algorithm
-    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V3.pdf "Specification detaillee Task Allocation v3 (PDF) — spec genie logiciel"
-    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_CBBA.pdf "Specification detaillee CBBA (PDF, v1.1) — spec genie logiciel"
-    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V2.pdf "Specification detaillee Task Allocation v2 (PDF) — spec genie logiciel"
     link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     link https://arxiv.org/abs/2609.06273 "Bundle Length Tradeoffs in Decentralized Multi-Robot Task Allocation Under Degraded Communications"
     link https://doi.org/10.1007/s12065-026-01257-5 "Survival probability-weighted clustering for UAV-based multi-robot task allocation in disaster response"
@@ -466,4 +463,34 @@ model {
 
   algSafetyRules -[uses]-> msgCollisionAlert 'alerte consommee par la voie de surete'
   algSafetyRules -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
+
+  // === E26 — LIENS ALGORITHMES <-> COMPOSANTS + SPECIFICATIONS DETAILLEES ===
+  // 1. Element de type specDoc : stocke les liens vers les
+  //    differentes versions du document de specification detaillee.
+  // 2. Relations algorithm -> component (sens `runsOn` manquant).
+  // =========================================================================
+
+  specTaskAllocation = specDoc 'Specification detaillee — ALG_TASK_ALLOCATION (3 versions)' {
+    #source-doc
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V3.pdf "Specification detaillee Task Allocation v3 (PDF) — version courante"
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V2.pdf "Specification detaillee Task Allocation v2 (PDF) — version anterieure"
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_CBBA.pdf "Specification detaillee CBBA (PDF, v1.1) — version initiale"
+    description 'Document de specification detaillee de l algorithme d allocation de taches. Trois versions successives conservees : CBBA v1.1 (initiale), v2, v3 (courante).'
+    metadata {
+      algorithme 'ALG_TASK_ALLOCATION'
+      versions '3 (CBBA v1.1, v2, v3)'
+      versionCourante 'v3 (2026-09-18)'
+      nature 'specification genie logiciel interne'
+      statut 'DISPONIBLE'
+    }
+  }
+
+  algTaskAllocation -[documentedBy]-> specTaskAllocation 'specification detaillee (3 versions)'
+
+  // --- Relations algorithm -> component (sens `runsOn` manquant) ---
+  algEventTriggeredComm -[runsOn]-> onboard.linkRadio 'politique d emission evenementielle (cf onboard.linkRadio -[implements]->)'
+  algCooperativeLocalization -[runsOn]-> onboard.perception 'localisation relative (cf onboard.perception -[implements]->)'
+  algFaultTolerantControlAlloc -[runsOn]-> onboard.autopilot 'commande tolerante (cf onboard.autopilot -[implements]->)'
+  algJammingResilientMode -[runsOn]-> onboard.mission 'superviseur de mode (cf onboard.mission -[implements]->)'
+
 }

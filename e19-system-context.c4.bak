@@ -1,0 +1,97 @@
+// =============================================================================
+//  E19 — CONFORMITE C4 : ELEMENT `system` RACINE + VUE SYSTEM CONTEXT (L1)
+//  Carte t_27f16b94 — profil architecte — 2026-09-16
+//
+//  OBJET : le modele etait a 2 niveaux (Zone -> Component). E19 ajoute le
+//  niveau System manquant, SANS casser les 544 relations et 54 vues existantes.
+//
+//  METHODE (contrainte critique respectee) :
+//    - AUCUN identifiant existant n'est renomme, aucune relation ni vue n'est
+//      supprimee. Fichier purement ADDITIF.
+//    - Le systeme racine `essaim` est relie aux 4 zones par une relation de
+//      COMPOSITION (`contains`), et NON par une imbrication physique : une
+//      imbrication aurait reecrit les ids (onboard -> essaim.onboard) et casse
+//      les 544 relations + 54 vues. Le kind `contains` etait deja declare dans
+//      metamodel.c4 (jamais instancie) ; le kind `system` egalement.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  // SYSTEME RACINE — l'essaim comme systeme de systemes (niveau C4 L1)
+  // ===========================================================================
+  essaim = system 'Essaim SwarmDrones — systeme de systemes' {
+    description '''
+      Systeme racine de l'essaim heterogene : 30 plateformes (18 UAV-R,
+      8 UAV-F, 4 USV), stations Edge (1..N), poste C2/GCS et Cloud
+      (hors boucle de controle).
+
+      Ce niveau n'existait pas avant E19 : la hierarchie s'arretait a
+      Zone -> Component. Le systeme racine est AJOUTE par relation de
+      composition (`contains`) vers les 4 zones, sans reecrire aucun
+      identifiant existant. C'est la conformite C4 System Context (L1).
+
+      Principe directeur conserve : le contrat de mission est embarque ;
+      le lien est un bonus, pas une dependance. La zone Onboard (x30)
+      doit terminer sa mission nominale sans C2 ni cloud.
+    '''
+    metadata { source '§3 zones / §1 principes' }
+  }
+
+  // ---------------------------------------------------------------------------
+  // COMPOSITION : essaim -> zones (relation `contains`, non destructrice)
+  // ---------------------------------------------------------------------------
+  essaim -[contains]-> onboard 'comprend les 30 plateformes embarquees'
+  essaim -[contains]-> edge 'comprend les stations de proximite (1..N)'
+  essaim -[contains]-> c2 'comprend le poste de commandement / GCS'
+  essaim -[contains]-> cloud 'comprend le cloud hors boucle de controle'
+
+  // ---------------------------------------------------------------------------
+  // CONTEXTE (L1) : acteurs et externes autour du systeme
+  // ---------------------------------------------------------------------------
+  operator -[commands]-> essaim 'supervise et autorise les actions critiques'
+  radios -[flow]-> essaim 'GNSS, capteurs, liaisons radio'
+  essaim -[derives-from]-> docSource 'documente par §3 zones'
+
+}
+
+views {
+
+  // ===========================================================================
+  // SYSTEM CONTEXT (C4 L1) — l'essaim et son environnement
+  // Public : direction, system engineering. Question : "qu'est-ce que le
+  // systeme, qui l'entoure, qu'englobe-t-il ?"
+  // ===========================================================================
+  view system-context {
+    title '01 - Gouvernance & Stratégie (Executive View) \/ 01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement'
+
+    description '''
+      **Niveau 1 (System Context, C4).** L'essaim est un systeme de systemes :
+      il englobe les 4 zones de deploiement par des relations de composition
+      `contains`. Autour de lui : l'operateur (acteur humain), les sources
+      physiques (radios / GNSS / capteurs) et le document d'architecture.
+
+      Ce niveau a ete ajoute par E19 pour corriger l'ecart C4 (hierarchie
+      a 2 niveaux sans niveau System). Le systeme racine s'ajoute sans
+      reecrire aucun identifiant : la composition est portee par des
+      relations `contains`, pas par une imbrication physique.
+
+      A retenir : l'operateur ne commande jamais la boucle temps reel
+      embarque ; les fleches vers le cloud sont strictement hors boucle.
+
+      Poursuivre : [Paysage des zones](/view/index/) puis [Onboard](/view/zone-onboard/),
+      [Edge](/view/zone-edge/), [C2](/view/zone-c2/), [Cloud](/view/zone-cloud/).
+    '''
+    include essaim with { navigateTo index }
+    include operator
+    include radios
+    include docSource
+    include onboard with { navigateTo zone-onboard }
+    include edge with { navigateTo zone-edge }
+    include c2 with { navigateTo zone-c2 }
+    include cloud with { navigateTo zone-cloud }
+    global style lectureZones
+    global style zones
+    autoLayout LeftRight
+  }
+}
