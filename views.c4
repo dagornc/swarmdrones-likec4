@@ -1,3 +1,4 @@
+// === E27 — CORRECTION DES VUES ALGORITHMIQUES ===
 /**
  * =============================================================================
  *  SwarmDrones — VUES (projections du modele unique defini dans architecture.c4)
@@ -870,7 +871,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 11 algorithmes'
+    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 15 algorithmes (E27)'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -884,6 +885,11 @@ views {
     include algPerceptionFusion, algNavigationGNSSDegrade
     include algCollisionAvoidance, algSafetyRules, algPathPlanning
     include algHealthMonitoring, algEnergyAware
+    // E27 : les 4 algorithmes ajoutes par E20 etaient absents du catalogue.
+    include algEventTriggeredComm, algCooperativeLocalization
+    include algFaultTolerantControlAlloc, algJammingResilientMode
+    // E27 : element de specification detaillee (sinon invisible dans l UI).
+    include specTaskAllocation
     autoLayout LeftRight
   }
 
@@ -897,8 +903,11 @@ views {
     '''
     include onboard.perception, algPerceptionFusion, algNavigationGNSSDegrade
     include onboard.safety, algCollisionAvoidance, algSafetyRules
-    include onboard.autopilot
+    include onboard.autopilot, algFaultTolerantControlAlloc
     include onboard.health, algHealthMonitoring
+    // E27 : localisation relative inter-agents (sans lien) et commande
+    // tolerante aux fautes appartiennent a la chaine de surete.
+    include algCooperativeLocalization
     autoLayout LeftRight
   }
 
@@ -914,6 +923,9 @@ views {
     include onboard.mission, algPathPlanning, algFormationControl
     include algLeaderElection, algEnergyAware
     include edge.coordinator
+    // E27 : communication declenchee par evenement et mode resilient au
+    // brouillage dependent du lien -> chaine de coordination.
+    include algEventTriggeredComm, algJammingResilientMode
     autoLayout LeftRight
   }
 
