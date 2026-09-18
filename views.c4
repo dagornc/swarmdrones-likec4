@@ -1,3 +1,4 @@
+// === E28 — REFONTE DES TITRES (ECHANTILLON) ===
 // === E27 — CORRECTION DES VUES ALGORITHMIQUES ===
 /**
  * =============================================================================
@@ -683,7 +684,7 @@ views {
   /** CHOIX TECHNOLOGIQUES (1/3) — autopilotage, perception et navigation.
    *  Liste explicite des elements (pas de include * — cf. piege du tirage transitif). */
   view techAutopilot {
-    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — autopilotage & perception'
+    title '04 · Algorithmique \/ Autopilotage & perception'
 
     description '''
       **Socle embarque.** PX4 (BSD-3, primaire) vs ArduPilot (GPL-3, alternative).
@@ -699,7 +700,7 @@ views {
 
   /** CHOIX TECHNOLOGIQUES (2/3) — communication, coordination et supervision. */
   view techComms {
-    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — communication & coordination'
+    title '04 · Algorithmique \/ Communication & coordination'
 
     description '''
       **Lien et coordination.** Zenoh (Apache-2.0 OR EPL-2.0, primaire decentralise)
@@ -716,7 +717,7 @@ views {
 
   /** CHOIX TECHNOLOGIQUES (3/3) — donnees, observabilite et jumeau numerique. */
   view techData {
-    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — données, observabilité & jumeau'
+    title '04 · Algorithmique \/ Données, observabilité & jumeau'
 
     description '''
       **Socle de donnees.** Stockage objet : MinIO (⚠️ AGPL-3.0). Metriques :
@@ -871,7 +872,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 15 algorithmes'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -894,7 +895,7 @@ views {
   }
 
   view algorithmSafety {
-    title '04 - Algorithmique & Capacités (Components) \/ Chaînes algorithmiques \/ Chaine de surete — algorithmes embarquables sans lien'
+    title '04 · Algorithmique \/ Chaine de sûreté'
 
     description '''
       Point cle de l architecture : la chaine de surete fonctionne
