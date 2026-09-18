@@ -38,3 +38,6 @@ node_modules/
 __pycache__/
 *.pyc
 .env
+*.bak
+*.bak-*
+likec4_sync_backups/
