@@ -871,7 +871,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 15 algorithmes (E27)'
+    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 15 algorithmes'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
