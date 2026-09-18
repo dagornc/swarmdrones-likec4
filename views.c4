@@ -84,7 +84,7 @@ views {
   // Public : tout le monde. Question : "quelles zones, qui parle a qui ?"
   // ===========================================================================
   view index {
-    title 'Architecture et algorithmes / 00 Découvrir / SwarmDrones — Paysage des zones de deploiement'
+    title '05 - Physique & Déploiement (Infrastructure) \/ SwarmDrones — Paysage des zones de deploiement'
 
     description '''
       **Commencer ici : comprendre → explorer → suivre un flux → examiner les garanties.**
@@ -138,7 +138,7 @@ views {
    *  Frontiere haute : `edge.gateway` (passerelle de confiance).
    *  Tout ce qui doit fonctionner SANS lien est ici. */
   view contexte-amont {
-    title 'Architecture et algorithmes / 00 Découvrir / Contexte amont — externes, Onboard (x30), Edge (1..N)'
+    title '99 - Vues complémentaires \/ Contexte amont — externes, Onboard (x30), Edge (1..N)'
 
     description '''
       **Perimetre : tout ce qui doit fonctionner SANS lien C2.**
@@ -166,7 +166,7 @@ views {
   /** CONTEXTE AVAL — supervision, planification, cloud (hors boucle).
    *  Tout est atteint de facon INTERMITTENTE et non bloquante. */
   view contexte-aval {
-    title 'Architecture et algorithmes / 00 Découvrir / Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)'
+    title '99 - Vues complémentaires \/ Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)'
 
     description '''
       **Perimetre : tout ce qui est atteint de facon intermittente.**
@@ -194,7 +194,7 @@ views {
   /** CONTEXTE (synthèse) — vue d'ensemble compacte, une ligne par zone.
    *  Pour la navigation ; le detail est dans contexte-amont/aval. */
   view contexte {
-    title 'Architecture et algorithmes / 00 Découvrir / Contexte (synthese) — vue d\'ensemble des zones'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Contexte (synthese) — vue d\\\'ensemble des zones'
 
     description '''
       Synthese volontairement compacte : une ligne par zone, deux externes.
@@ -229,7 +229,7 @@ views {
    *  Public : architectes, system engineering, integration.
    *  Question : "quels conteneurs executables, et comment communiquent-ils ?" */
   view conteneurs {
-    title 'Architecture et algorithmes / 00 Découvrir / Conteneurs (niveau 2) — les 4 zones et leurs echanges'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Conteneurs (niveau 2) — les 4 zones et leurs echanges'
 
     description '''
       **Niveau 2 du modele C4.** Les 4 zones sont les conteneurs executables ;
@@ -264,7 +264,7 @@ views {
   // Question : "qu'est-ce qui est safety, mission, best-effort ?"
   // ===========================================================================
   view paysage-criticite {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / Paysage par criticite — safety / mission / best-effort / cloud'
+    title '99 - Vues complémentaires \/ Paysage par criticite — safety \\\/ mission \\\/ best-effort \\\/ cloud'
 
     description '''
       Vue transversale de **priorisation** : on montre les composants
@@ -292,7 +292,7 @@ views {
   /** ONBOARD (x30) — tout le safety y est visible.
    *  Public : equipe logiciel embarque, safety, navigabilite. */
   view zone-onboard {
-    title 'Architecture et algorithmes / 01 Couches logicielles / Zone Onboard (x30) — surete, mission et lien'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Détail des Zones (Contexte amont \\\/ aval) \/ Zone Onboard (x30) — surete, mission et lien'
 
     description '''
       Machine a etats de mission, allocation, garde-fous.
@@ -317,7 +317,7 @@ views {
   /** EDGE — ce qui exige une vue multi-agents a portee locale.
    *  Public : equipe coordination / fusion, exploitation de proximite. */
   view zone-edge {
-    title 'Architecture et algorithmes / 01 Couches logicielles / Zone Edge — relais, fusion, coordination (1..N)'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Détail des Zones (Contexte amont \\\/ aval) \/ Zone Edge — relais, fusion, coordination (1..N)'
 
     description '''
       Point cle : **`edge.coordinator` fonctionne en mode C2-deconnecte.**
@@ -339,7 +339,7 @@ views {
   /** C2 — supervision, (re)planification, autorite humaine.
    *  Public : operateurs, autorite humaine, audit / conformite. */
   view zone-c2 {
-    title 'Architecture et algorithmes / 01 Couches logicielles / Zone C2 / GCS — supervision et autorite humaine'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ GCS — supervision et autorite humaine'
 
     description '''
       Le C2 est atteint **intermittentement** : aucune responsabilite de
@@ -362,7 +362,7 @@ views {
   /** CLOUD — hors boucle de controle.
    *  Public : data / simulation, validation, direction technique. */
   view zone-cloud {
-    title 'Architecture et algorithmes / 01 Couches logicielles / Zone Cloud — hors boucle de controle'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Détail des Zones (Contexte amont \\\/ aval) \/ Zone Cloud — hors boucle de controle'
 
     description '''
       Budget : minutes (differe). **Aucune dependance bloquante admise
@@ -383,7 +383,7 @@ views {
   /** DEPLOIEMENT — materialisation du x30 et du 1..N.
    *  Public : integration, logistique, exploitation, planification. */
   deployment view deploiement-30-plateformes {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Deploiement — 30 plateformes, N stations Edge, 1 C2, 1 cloud'
+    title '05 - Physique & Déploiement (Infrastructure) \/ Deploiement — 30 plateformes, N stations Edge, 1 C2, 1 cloud'
 
     description '''
       Materialise le caractere "x30" de la zone Onboard (18 UAV-R, 8 UAV-F,
@@ -410,7 +410,7 @@ views {
   /** Sequence nominale de mission : INIT -> ... -> DONE.
    *  A lire en variante "sequence" dans l'UI pour l'ordre temporel UML. */
   dynamic view mission-nominale {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / Mission nominale — INIT -> READY -> LAUNCH -> EXECUTE -> LAND -> DONE'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ Séquence nominale — INIT -> READY -> LAUNCH -> EXECUTE'
 
     description '''
       Sequence nominale, **sans aucun lien C2** pendant la majorite de la
@@ -468,7 +468,7 @@ views {
   /** Scenario degrade : perte de lien C2 puis degradation GNSS.
    *  Montre la degradation gracieuse et le retour a l'etat nominal. */
   dynamic view perte-de-lien {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / Scenario degrade — perte de lien C2 + GNSS degrade'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ Scenario degrade — perte de lien C2 + GNSS degrade'
 
     description '''
       Scenario combine (§7 du document d'entree). **Le systeme ne doit
@@ -536,7 +536,7 @@ views {
   /** Variante de lecture : la meme panne vue du poste operateur
    *  (brief de quart et formation). */
   dynamic view perte-de-lien-c2-operateur {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / Perte de lien C2 — vue operateur (brief de quart)'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ Perte de lien C2 — vue operateur (brief de quart)'
 
     description '''
       Meme scenario, du point de vue du poste de commandement : que voit,
@@ -584,7 +584,7 @@ views {
    *  Les hypotheses sont en amont (gauche) ; les composants dependants a droite,
    *  colores par leur criticite. */
   view hypotheses {
-    title 'Architecture et algorithmes / 04 Décisions et hypothèses / Hypotheses et impact — si une hypothese tombe, quoi revoir ?'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Hypotheses et impact — si une hypothese tombe, quoi revoir'
 
     description '''
       **Outil d'analyse de risque.** Chaque hypothese (violet, bord pointille)
@@ -607,7 +607,7 @@ views {
   /** DECISIONS D'ARCHITECTURE (ADR) : ce qui est arbitre et pourquoi.
    *  Les decisions (vert) justifient les elements de conception a droite. */
   view decisions {
-    title 'Architecture et algorithmes / 04 Décisions et hypothèses / Decisions tranchees : ADR-1..5 et ce qu elles justifient'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Decisions tranchees : ADR-1..5 et ce qu\\\'elles justifient'
 
     description '''
       **Memoire des choix tranches.** Chaque ADR porte son contexte (conflit §10.x),
@@ -631,7 +631,7 @@ views {
    *  angles morts critiques. Aucune option n'est retenue — c'est un travail
    *  de decision a faire, avec porteur et echeance. */
   view decisionsOuvertes {
-    title 'Architecture et algorithmes / 04 Décisions et hypothèses / Decisions ouvertes : DE-01..04 appelees par les angles morts critiques'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Decisions ouvertes : DE-01..04 appelees par les angles morts'
 
     description '''
       **Arbitrages non tranches.** Les 4 angles morts de gravite `critique`
@@ -655,7 +655,7 @@ views {
   /** TRACABILITE : le modele est-il rattache au document source ?
    *  Controle de couverture par ZONE (pas par composant) pour rester lisible. */
   view tracabilite {
-    title 'Architecture et algorithmes / 04 Décisions et hypothèses / Tracabilite — couverture documentaire par zone'
+    title '06 - Sûreté, Vérification & Recherche \/ Tracabilite — couverture documentaire par zone'
 
     description '''
       **Controle de couverture documentaire.** Chaque composant porte
@@ -682,7 +682,7 @@ views {
   /** CHOIX TECHNOLOGIQUES (1/3) — autopilotage, perception et navigation.
    *  Liste explicite des elements (pas de include * — cf. piege du tirage transitif). */
   view techAutopilot {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Choix technologiques 1/3 — autopilotage & perception (§A)'
+    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — autopilotage & perception'
 
     description '''
       **Socle embarque.** PX4 (BSD-3, primaire) vs ArduPilot (GPL-3, alternative).
@@ -698,7 +698,7 @@ views {
 
   /** CHOIX TECHNOLOGIQUES (2/3) — communication, coordination et supervision. */
   view techComms {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Choix technologiques 2/3 — communication & coordination (§A)'
+    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — communication & coordination'
 
     description '''
       **Lien et coordination.** Zenoh (Apache-2.0 OR EPL-2.0, primaire decentralise)
@@ -715,7 +715,7 @@ views {
 
   /** CHOIX TECHNOLOGIQUES (3/3) — donnees, observabilite et jumeau numerique. */
   view techData {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Choix technologiques 3/3 — données, observabilité & jumeau (§A)'
+    title '04 - Algorithmique & Capacités (Components) \/ Vues thématiques (§A) \/ 3 — données, observabilité & jumeau'
 
     description '''
       **Socle de donnees.** Stockage objet : MinIO (⚠️ AGPL-3.0). Metriques :
@@ -736,7 +736,7 @@ views {
   /** MATRICE DE RISQUES : les 15 risques du §D.
    *  Colores par criticite. Chaque risque porte sa mitigation et son alerte precoce. */
   view riskMatrix {
-    title 'Architecture et algorithmes / 03 Risques et garanties / Matrice de risques — 15 risques (§D)'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Matrice de risques — 15 risques (§D)'
 
     description '''
       **Risques identifies** (probabilite x impact). 5 critiques : R-1 (radio),
@@ -757,7 +757,7 @@ views {
 
   /** ANGLES MORTS : les 16 angles morts du §C, groupes par gravite. */
   view blindspotBySeverity {
-    title 'Architecture et algorithmes / 03 Risques et garanties / Angles morts — 16 lacunes de specification (§C)'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Angles morts — 16 lacunes de specification (§C)'
 
     description '''
       **Angles morts** = zones que l'architecture ne couvre pas ou couvre mal.
@@ -783,7 +783,7 @@ views {
   //  Ce modele est INSTANCIE 30 fois : la vue montre la STRUCTURE, pas les 30.
   // ===========================================================================
   view hardwareArchitecture {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Architecture materielle — drone de reference'
+    title '99 - Vues complémentaires \/ Architecture materielle — drone de reference'
 
     description '''
       Architecture physique du drone de reference (kind `drone`).
@@ -802,7 +802,7 @@ views {
   }
 
   view droneInternal {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Drone de reference — vue interne'
+    title '05 - Physique & Déploiement (Infrastructure) \/ Drone de reference — vue interne (Architecture materielle)'
 
     description '''Detail de la vue hardware : chaque sous-systeme et ses liens.'''
     include refDrone.*
@@ -814,7 +814,7 @@ views {
   // ===========================================================================
 
   view communicationArchitecture {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Architecture de communication — canaux'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Architecture de communication — canaux'
 
     description '''
       Quatre canaux, quatre regimes de disponibilite.
@@ -832,7 +832,7 @@ views {
   }
 
   view messageArchitecture {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Architecture des messages — 13 messages, 0 orphelin'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Architecture des messages — 13 messages, 0 orphelin'
 
     description '''
       Graphe producteur -> message -> consommateur.
@@ -854,7 +854,7 @@ views {
   }
 
   view criticalMessages {
-    title 'Architecture et algorithmes / 03 Risques et garanties / Messages critiques — voie de surete locale'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ Messages critiques — voie de surete locale'
 
     description '''
       Les messages safety-critical. Point cle : `MSG_COLLISION_ALERT`
@@ -870,7 +870,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Catalogue algorithmique — 11 algorithmes'
+    title '04 - Algorithmique & Capacités (Components) \/ Catalogue algorithmique — 11 algorithmes'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -888,7 +888,7 @@ views {
   }
 
   view algorithmSafety {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Chaine de surete — algorithmes embarquables sans lien'
+    title '04 - Algorithmique & Capacités (Components) \/ Chaînes algorithmiques \/ Chaine de surete — algorithmes embarquables sans lien'
 
     description '''
       Point cle de l architecture : la chaine de surete fonctionne
@@ -903,7 +903,7 @@ views {
   }
 
   view algorithmCoordination {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Chaine de coordination — algorithmes dependants du lien'
+    title '04 - Algorithmique & Capacités (Components) \/ Chaînes algorithmiques \/ Chaine de coordination — algorithmes dependants du lien'
 
     description '''
       A l inverse de la chaine de surete, toute cette chaine depend
@@ -922,7 +922,7 @@ views {
   // ===========================================================================
 
   view deploymentChain {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Chaine de deploiement — Algorithm -> Component -> Runtime -> Node'
+    title '05 - Physique & Déploiement (Infrastructure) \/ Chaine de deploiement — Algorithm -> Component -> Runtime'
 
     description '''
       Lecture descendante : « ou tourne cet algorithme ? »
@@ -947,7 +947,7 @@ views {
   }
 
   view deploymentZones {
-    title 'Architecture et algorithmes / 05 Matériel et déploiement / Zones de deploiement — embarque vs sol vs distant'
+    title '99 - Vues complémentaires \/ Zones de deploiement — embarque vs sol vs distant'
 
     description '''
       Ce qui est embarque (x30) vs ce qui est au sol (x1 partage).
@@ -964,7 +964,7 @@ views {
   // ===========================================================================
 
   view capabilityMap {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Carte des capacites — 8 capacites, 19 fonctions'
+    title '04 - Algorithmique & Capacités (Components) \/ Carte des capacites — 8 capacites, 19 fonctions'
 
     description '''
       Niveau « pourquoi / quoi ». Chaque capacite est DERIVEE des
@@ -980,7 +980,7 @@ views {
   }
 
   view survivabilitySplit {
-    title 'Architecture et algorithmes / 03 Risques et garanties / Frontiere avec lien / sans lien — ce qui vole sans reseau'
+    title '99 - Vues complémentaires \/ Frontiere avec lien \\\/ sans lien — ce qui vole sans reseau'
 
     description '''
       Capacites qui fonctionnent SANS aucun reseau (vert) vs celles qui
@@ -997,7 +997,7 @@ views {
   }
 
   view observeChain {
-    title 'Architecture et algorithmes / 06 Fonctions et technologies / Chaine d observation — du drone au jumeau numerique'
+    title '04 - Algorithmique & Capacités (Components) \/ Chaînes algorithmiques \/ Chaine d\\\'observation — du drone au jumeau numerique'
 
     description '''
       La capacite CAP_OBSERVE : c est elle qui alimente le Digital Twin
@@ -1013,7 +1013,7 @@ views {
   // ===========================================================================
 
   view scenarioCatalogue {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / Catalogue des scenarios — 10 scenarios'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ Catalogue des scenarios — 10 scenarios'
 
     description '''
       Le systeme en mouvement. Un scenario decrit une SEQUENCE CAUSALE,
@@ -1027,7 +1027,7 @@ views {
   }
 
   view scenarioNominal {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / SCN-01 — Mission nominale SANS C2 ni cloud (scenario de reference)'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ Mission nominale — INIT -> READY -> LAUNCH -> EXECUTE'
 
     description '''
       Le predicat central de l architecture, deroule.
@@ -1041,7 +1041,7 @@ views {
   }
 
   view scenarioScaleChallenge {
-    title 'Architecture et algorithmes / 02 Scénarios / Experts / SCN-10 — Perte du leader a N=30 (ce qui n est PAS mesure)'
+    title '02 - Parcours & Opérations (Business & Scenarios) \/ SCN-10 — Perte du leader a N=30'
 
     description '''
       Le scenario le plus important pour la credibilite : il teste a
@@ -1056,7 +1056,7 @@ views {
   }
 
   view scenarioRiskMapping {
-    title 'Architecture et algorithmes / 03 Risques et garanties / Scenarios x risques — ce que chaque scenario teste'
+    title '99 - Vues complémentaires \/ Scenarios x risques — ce que chaque scenario teste'
 
     description '''
       Lecture QA : chaque scenario est relie au risque ou a l angle mort
@@ -1072,7 +1072,7 @@ views {
   // ===========================================================================
 
   view simulationBoundary {
-    title 'Architecture et algorithmes / 08 Simulation et représentation / Frontiere producteur / consommateur — ce que le modele fournit et ne fournit pas'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Consommateurs du modele — ce que le modele fournit et ne fournit pas'
 
     description '''
       Haut : ce que le modele FOURNIT (semantique, topologie, contrats).
@@ -1086,7 +1086,7 @@ views {
   }
 
   view consumerMap {
-    title 'Architecture et algorithmes / 08 Simulation et représentation / Consommateurs du modele — 5 cibles'
+    title '01 - Gouvernance & Stratégie (Executive View) \/ Consommateurs du modele — 5 cibles'
 
     description '''
       Simulateur, Blender, moteur Web 3D, environnement pedagogique,
@@ -1098,7 +1098,7 @@ views {
   }
 
   view invariantsView {
-    title 'Architecture et algorithmes / 03 Risques et garanties / 5 invariants verifiables du contrat'
+    title '06 - Sûreté, Vérification & Recherche \/ 5 invariants verifiables du contrat'
 
     description '''
       INV-1 sans C2 ni cloud · INV-2 surete locale · INV-3 echelle 30
@@ -1117,7 +1117,7 @@ views {
   // ===========================================================================
 
   view scienceVerdicts {
-    title 'Architecture et algorithmes / 07 Science et preuves / Verdicts scientifiques — 4 affirmations decisives'
+    title '06 - Sûreté, Vérification & Recherche \/ Verdicts scientifiques — 4 affirmations decisives'
 
     description '''
       Chaque affirmation est confrontee a ses sources primaires.
@@ -1131,7 +1131,7 @@ views {
   }
 
   view scienceToAlgorithms {
-    title 'Architecture et algorithmes / 07 Science et preuves / Sources -> verdicts -> algorithmes concernes'
+    title '99 - Vues complémentaires \/ Sources -> verdicts -> algorithmes concernes'
 
     description '''
       Tracabilite complete : une affirmation du catalogue algorithmique
@@ -1144,7 +1144,7 @@ views {
   }
 
   view benchmarkGaps {
-    title 'Architecture et algorithmes / 07 Science et preuves / Trous de benchmark — ce qui n est PAS prouve (aucun article trouve)'
+    title '06 - Sûreté, Vérification & Recherche \/ Trous de benchmark — ce qui n est PAS prouve'
 
     description '''
       4 cibles de recherche futures, explicitement declarees. Ce ne sont
@@ -1161,7 +1161,7 @@ views {
   // ===========================================================================
 
   view worldModelMap {
-    title 'Architecture et algorithmes / 08 Simulation et représentation / World Model — entites, zones et categories (AUCUNE 3D)'
+    title '03 - Architecture Logique & Flux (C4 Containers & Interactions) \/ World Model — entites, zones et categories (AUCUNE 3D)'
 
     description '''
       Modele DERIVE pour la consommation Blender / Web 3D. Il ne contient
@@ -1178,7 +1178,7 @@ views {
   }
 
   view renderRules {
-    title 'Architecture et algorithmes / 08 Simulation et représentation / 6 regles de representation — garde-fous verifiables'
+    title '06 - Sûreté, Vérification & Recherche \/ 6 regles de representation — garde-fous verifiables'
 
     description '''
       Ces regles protegent la verite du modele. Elles interdisent au
@@ -1193,7 +1193,7 @@ views {
   }
 
   view worldStates {
-    title 'Architecture et algorithmes / 08 Simulation et représentation / 10 etats d apparence — le rendu represente des ETATS'
+    title '06 - Sûreté, Vérification & Recherche \/ 10 etats d\\\'apparence — le rendu represente des ETATS'
 
     description '''
       Chaque etat derive d un scenario E09. Le World Model ne cree aucun
