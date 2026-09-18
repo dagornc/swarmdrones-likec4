@@ -32,6 +32,7 @@ model {
 
   algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA)' {
     #algorithm
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V2.pdf "Specification detaillee Task Allocation v2 (PDF) — spec genie logiciel"
     link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     link https://arxiv.org/abs/2609.06273 "Bundle Length Tradeoffs in Decentralized Multi-Robot Task Allocation Under Degraded Communications"
     link https://doi.org/10.1007/s12065-026-01257-5 "Survival probability-weighted clustering for UAV-based multi-robot task allocation in disaster response"
