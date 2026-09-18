@@ -6,12 +6,19 @@
 # Toute édition du repo git est INVISIBLE sur likec4.breizh.ai tant qu'elle n'est pas copiée.
 #
 # USAGE :
-#   ./sync_likec4.sh            # synchronise (dry-run par défaut ? non : applique)
-#   ./sync_likec4.sh --dry-run  # montre ce qui serait copié, sans rien modifier
-#   ./sync_likec4.sh --check    # vérifie l'état de synchronisation (exit 1 si divergence)
+#   ./sync_likec4.sh              # synchronise + redémarre le conteneur si un .c4 a changé
+#   ./sync_likec4.sh --dry-run    # montre ce qui serait copié, sans rien modifier
+#   ./sync_likec4.sh --check      # vérifie l'état de synchronisation (exit 1 si divergence)
+#   ./sync_likec4.sh --no-restart # synchronise sans redémarrer le conteneur
 #
 # SÉCURITÉ : ne supprime jamais de fichier dans la destination ; ne copie que les .c4
 # et le contenu de public/. Sauvegarde horodatée avant chaque copie.
+#
+# REDÉMARRAGE : le dev server LikeC4 (Vite) ne recharge PAS le modèle de façon fiable
+# quand un .c4 change (HMR inopérant sur le modèle compilé). Un `docker restart` est
+# nécessaire pour que likec4.breizh.ai serve le modèle à jour. Ce script le fait
+# automatiquement après une synchronisation ayant modifié au moins un .c4, puis
+# VÉRIFIE que le modèle servi contient bien les changements (preuve, pas supposition).
 
 set -euo pipefail
 
@@ -19,14 +26,20 @@ SRC="${LIKEC4_SRC:-/home/hermesagent/workspace/swarmdrones_likec4}"
 DST="${LIKEC4_DST:-/docker/likec4/workspace}"
 BACKUP_DIR="${LIKEC4_BACKUP:-/home/hermesagent/workspace/likec4_sync_backups}"
 CONTAINER="${LIKEC4_CONTAINER:-likec4}"
+SITE="${LIKEC4_SITE:-https://likec4.breizh.ai}"
+RESTART_WAIT="${LIKEC4_RESTART_WAIT:-30}"
 
 MODE="apply"
-case "${1:-}" in
-  --dry-run) MODE="dry-run" ;;
-  --check)   MODE="check" ;;
-  "")        MODE="apply" ;;
-  *) echo "Usage: $0 [--dry-run|--check]" >&2; exit 2 ;;
-esac
+RESTART=1
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run)    MODE="dry-run" ;;
+    --check)      MODE="check" ;;
+    --no-restart) RESTART=0 ;;
+    "")           ;;
+    *) echo "Usage: $0 [--dry-run|--check|--no-restart]" >&2; exit 2 ;;
+  esac
+done
 
 die() { echo "ERREUR: $*" >&2; exit 1; }
 
@@ -87,6 +100,7 @@ fi
 
 echo "=== Synchronisation SRC -> DST ($MODE) ==="
 n=0
+CHANGED_C4=()
 for f in "${C4_FILES[@]}"; do
   if [ -f "$DST/$f" ] && cmp -s "$SRC/$f" "$DST/$f"; then
     continue
@@ -96,6 +110,7 @@ for f in "${C4_FILES[@]}"; do
   else
     cp -p "$SRC/$f" "$DST/$f"
     echo "  copié $f"
+    CHANGED_C4+=("$f")
   fi
   n=$((n+1))
 done
@@ -121,7 +136,7 @@ fi
 echo
 echo "$n fichier(s) traité(s)."
 
-# --- Validation post-synchronisation -----------------------------------------
+# --- Validation + redémarrage + vérification du modèle servi ------------------
 if [ "$MODE" = "apply" ]; then
   echo "=== Validation du modèle ==="
   # NB: capturer la sortie AVANT le test — avec `set -o pipefail`, un `grep -q`
@@ -135,8 +150,88 @@ if [ "$MODE" = "apply" ]; then
     printf '%s\n' "$VALID_OUT" | tail -5 >&2
     exit 1
   fi
-  echo
-  echo "NOTE: les fichiers .c4 sont rechargés automatiquement (dev server)."
-  echo "      Les fichiers ajoutés dans public/ nécessitent un redémarrage :"
-  echo "      docker restart $CONTAINER"
+
+  # --- Redémarrage si un .c4 a changé ----------------------------------------
+  # Le dev server Vite ne recharge pas le modèle compilé de façon fiable : sans
+  # redémarrage, likec4.breizh.ai continue de servir l'ANCIEN modèle (HTTP 200
+  # trompeur). On redémarre donc, puis on VÉRIFIE le contenu réellement servi.
+  if [ "$n" -gt 0 ] && [ "$RESTART" -eq 1 ]; then
+    echo
+    echo "=== Redémarrage du conteneur ($CONTAINER) ==="
+    echo "  raison : $n fichier(s) modifié(s) — le dev server ne recharge pas le modèle"
+    docker restart "$CONTAINER" >/dev/null
+    echo "  conteneur redémarré, attente de la régénération (max ${RESTART_WAIT}s)..."
+
+    # Attendre que le serveur réponde ET que le modèle soit régénéré.
+    ready=0
+    for i in $(seq 1 "$RESTART_WAIT"); do
+      sleep 1
+      code="$(curl -s -o /dev/null -w '%{http_code}' "$SITE/" 2>/dev/null || echo 000)"
+      if [ "$code" = "200" ]; then
+        # le modèle compilé doit être servi (taille > 1 Mo = vrai modèle, pas le fallback HTML)
+        msz="$(curl -s -o /dev/null -w '%{size_download}' \
+               "$SITE/@id/likec4:plugin/swarmdrones/model.js" 2>/dev/null || echo 0)"
+        if [ "${msz:-0}" -gt 1000000 ]; then
+          ready=1
+          echo "  ✓ serveur prêt après ${i}s (modèle servi : ${msz} octets)"
+          break
+        fi
+      fi
+    done
+
+    if [ "$ready" -eq 0 ]; then
+      echo "  ✗ le serveur n'a pas régénéré le modèle en ${RESTART_WAIT}s" >&2
+      echo "    vérifier : docker logs $CONTAINER --tail 30" >&2
+      exit 1
+    fi
+
+    # --- Preuve : le modèle servi contient-il les fichiers modifiés ? --------
+    echo
+    echo "=== Vérification du modèle réellement servi ==="
+    # NB: écrire le modèle dans un FICHIER, pas dans une variable shell.
+    # Un `grep -q` sur une variable de ~7,7 Mo ferme le pipe au premier match
+    # (SIGPIPE sur printf) et produit un faux négatif — même piège que plus haut.
+    MODEL_TMP="$(mktemp)"
+    if ! curl -s -o "$MODEL_TMP" "$SITE/@id/likec4:plugin/swarmdrones/model.js" 2>/dev/null; then
+      echo "  ✗ modèle servi illisible" >&2
+      rm -f "$MODEL_TMP"
+      exit 1
+    fi
+    if [ ! -s "$MODEL_TMP" ]; then
+      echo "  ✗ modèle servi vide" >&2
+      rm -f "$MODEL_TMP"
+      exit 1
+    fi
+    # Pour chaque .c4 modifié, on extrait un identifiant distinctif et on vérifie
+    # sa présence dans le modèle compilé servi.
+    miss=0
+    for f in "${CHANGED_C4[@]}"; do
+      # premier identifiant d'élément du fichier (ex: "algTaskAllocation = algorithm")
+      id="$(grep -oE '^[[:space:]]*[a-zA-Z][a-zA-Z0-9_]*[[:space:]]*=[[:space:]]*(algorithm|component|specDoc|system|software|message|scenario|risk|blindspot|hypothesis|decision)' \
+            "$DST/$f" 2>/dev/null | head -1 | sed -E 's/^[[:space:]]*([a-zA-Z0-9_]+).*/\1/')"
+      if [ -z "$id" ]; then
+        echo "  ? $f : aucun identifiant détectable (ignoré)"
+        continue
+      fi
+      if grep -q "$id" "$MODEL_TMP"; then
+        echo "  ✓ $f : '$id' présent dans le modèle servi"
+      else
+        echo "  ✗ $f : '$id' ABSENT du modèle servi" >&2
+        miss=$((miss+1))
+      fi
+    done
+    rm -f "$MODEL_TMP"
+    if [ "$miss" -gt 0 ]; then
+      echo "  ✗ $miss fichier(s) non reflété(s) dans le modèle servi" >&2
+      exit 1
+    fi
+    echo "  ✓ modèle servi à jour"
+  elif [ "$n" -gt 0 ] && [ "$RESTART" -eq 0 ]; then
+    echo
+    echo "NOTE: --no-restart — le conteneur n'a PAS été redémarré."
+    echo "      Le modèle servi peut être périmé : docker restart $CONTAINER"
+  else
+    echo
+    echo "Aucun fichier modifié — pas de redémarrage nécessaire."
+  fi
 fi
