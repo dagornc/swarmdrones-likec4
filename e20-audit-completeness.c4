@@ -268,6 +268,8 @@ model {
       relatedMessages 'MSG_DRONE_STATE (sur evenement), MSG_CONSENSUS_VOTE, MSG_LINK_QUALITY'
       variantes 'event-triggered, self-triggered, time-triggered hybride'
       tbd 'GAP de chiffrage : budget radio a 30 reste a mesurer (AM3)'
+      evidenceLevel 'SUPPORTED'
+      maturityLevel 'EMERGENTE'
     }
   }
 
@@ -299,6 +301,8 @@ model {
       relatedMessages 'MSG_POSITION_UPDATE, MSG_NEIGHBOR_STATE'
       variantes 'ST-DCL, consensus-based (USV), EKF distribue, UWB TOF/TDOA'
       tbd 'GAP-6 : precision a 30 en vol reel non demontree ; choix capteur (UWB vs vision) = DE-08'
+      evidenceLevel 'SUPPORTED'
+      maturityLevel 'EMERGENTE'
     }
   }
 
@@ -327,6 +331,8 @@ model {
       relatedMessages 'MSG_FAILURE_NOTIFICATION'
       variantes 'allocation hybride, pseudo-inverse ponderee, allocation sous saturation azimuth'
       tbd 'integration au fil de surete UAV (voilure fixe/tournante) non documentee'
+      evidenceLevel 'SUPPORTED'
+      maturityLevel 'EMERGENTE'
     }
   }
 
@@ -359,6 +365,8 @@ model {
       relatedMessages 'MSG_LINK_QUALITY, MSG_DRONE_STATE'
       variantes 'ADMOS (CI + hysteresis + HOCBF), mode degrade consensus seul, plan embarque seul'
       tbd 'GAP-5 : brouillage reel a N=30 en vol non demontre ; attestation TPM non integree au modele materiel'
+      evidenceLevel 'SUPPORTED'
+      maturityLevel 'EMERGENTE'
     }
   }
 

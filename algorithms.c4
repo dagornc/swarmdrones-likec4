@@ -68,6 +68,8 @@ model {
       relatedMessages 'MSG_TASK_BID, MSG_TASK_ASSIGNMENT, MSG_CONSENSUS_VOTE, MSG_HEARTBEAT'
       variantes 'CBBA, PI-CBBA, ACBBA, ED-CBBA v3, TLC-CBBA, CLAC-CBBA, ET-PBBA'
       tbd 'GAP-1 : convergence globale sous partition persistante (locale prouvee, globale HYPOTHESE) ; GAP-2 : N=30 reel non demontre ; GAP-7 : biais appris et DMG'
+      evidenceLevel 'MEDIUM'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -104,6 +106,8 @@ model {
       relatedMessages 'MSG_CONSENSUS_VOTE'
       variantes 'CRDT LWW (retenu par defaut dans le modele), max-consensus'
       tbd 'GAP-3 : convergence d ETAT prouvee ; convergence de MISSION et brouillage RF reel NON testes — AUCUN ARTICLE TROUVE'
+      evidenceLevel 'HIGH'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -142,6 +146,8 @@ model {
       relatedComponents 'onboard.mission, onboard.perception'
       relatedMessages 'MSG_FORMATION_STATE, MSG_POSITION_UPDATE'
       variantes 'leader-follower, virtuel structure, comportemental'
+      evidenceLevel 'NONE'
+      maturityLevel 'TBD'
     }
   }
 
@@ -172,6 +178,8 @@ model {
       references 'aucune source verifiee dans cette session'
       relatedComponents 'onboard.mission, edge.coordinator'
       relatedMessages 'MSG_HEARTBEAT, MSG_FAILURE_NOTIFICATION'
+      evidenceLevel 'NONE'
+      maturityLevel 'TBD'
     }
   }
 
@@ -212,6 +220,8 @@ model {
       relatedMessages 'MSG_POSITION_UPDATE, MSG_NEIGHBOR_STATE'
       variantes 'EKF, UKF, filtres particulaires'
       tbd 'GAP-4 : fusion EKF/UKF hierarchique a >=100 plateformes — AUCUN ARTICLE TROUVE. Le ~30 reel n est PAS confirme.'
+      evidenceLevel 'MEDIUM'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -247,6 +257,8 @@ model {
       relatedComponents 'onboard.perception, onboard.safety, onboard.autopilot'
       relatedMessages 'MSG_POSITION_UPDATE'
       variantes 'EKF, VIO, GNSS/INS couple'
+      evidenceLevel 'MEDIUM'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -285,6 +297,8 @@ model {
       relatedMessages 'MSG_COLLISION_ALERT'
       variantes 'CBF, ORCA/RVO, champs de potentiel'
       tbd 'GAP-2 ouvert : CBF heterogene au-dela de 30 en materiel reel — AUCUN ARTICLE TROUVE'
+      evidenceLevel 'LOW'
+      maturityLevel 'EMERGENTE'
     }
   }
 
@@ -317,6 +331,8 @@ model {
       relatedComponents 'onboard.safety, onboard.autopilot'
       relatedMessages 'MSG_COLLISION_ALERT, MSG_FAILURE_NOTIFICATION'
       tbd 'validation Monte-Carlo adversarial NON faite (repris du modele)'
+      evidenceLevel 'MEDIUM'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -355,6 +371,8 @@ model {
       relatedComponents 'onboard.mission, c2.planner, edge.coordinator'
       relatedMessages 'MSG_TRAJECTORY_PROPOSAL, MSG_TRAJECTORY_UPDATE'
       variantes 'waypoints, MPC, A*, RRT*, CBS/ECBS multi-agents'
+      evidenceLevel 'MEDIUM'
+      maturityLevel 'MATURE'
     }
   }
 
@@ -390,6 +408,8 @@ model {
       references 'aucune source verifiee dans cette session'
       relatedComponents 'onboard.health, edge.coordinator'
       relatedMessages 'MSG_HEARTBEAT, MSG_FAILURE_NOTIFICATION'
+      evidenceLevel 'NONE'
+      maturityLevel 'TBD'
     }
   }
 
@@ -425,6 +445,8 @@ model {
       references 'aucune source verifiee dans cette session'
       relatedComponents 'onboard.mission, onboard.autopilot'
       relatedMessages 'MSG_MISSION_COMMAND'
+      evidenceLevel 'NONE'
+      maturityLevel 'TBD'
     }
   }
 
