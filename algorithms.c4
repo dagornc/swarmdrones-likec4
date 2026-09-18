@@ -58,7 +58,7 @@ model {
       executionMode 'conceptual'
       implementationStatus 'idea'
       repository 'TBD — a identifier'
-      sourcePath 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345 ; Sao et al. 2025 arXiv 2509.06481'
+      sourceDocs 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345 ; Sao et al. 2025 arXiv 2509.06481'
       version 'v3 (spec SWARM-SPEC-ALG-001-V3, 2026-09-18)'
       maturity 'mature-en-labo (repris du modele existant)'
       evidence 'MEDIUM — CONDITIONNEL (cf SCI-1) : convergence prouvee sous comms ideales ; convergence locale sous partition (HYPOTHESE) ; robustesse au retrait seulement EMPIRIQUE'
