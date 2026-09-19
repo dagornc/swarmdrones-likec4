@@ -16,9 +16,14 @@
 #
 # REDÉMARRAGE : le dev server LikeC4 (Vite) ne recharge PAS le modèle de façon fiable
 # quand un .c4 change (HMR inopérant sur le modèle compilé). Un `docker restart` est
-# nécessaire pour que likec4.breizh.ai serve le modèle à jour. Ce script le fait
-# automatiquement après une synchronisation ayant modifié au moins un .c4, puis
-# VÉRIFIE que le modèle servi contient bien les changements (preuve, pas supposition).
+# nécessaire pour que likec4.breizh.ai serve le modèle à jour. Le redémarrage est un
+# acte MANUEL soumis à l'AUTORISATION EXPLICITE de Christophe (service en production) :
+#   - Le mode apply par défaut (sans --no-restart) redémarre le conteneur si un .c4 a
+#     changé, puis VÉRIFIE que le modèle servi contient bien les changements (preuve,
+#     pas supposition). Réservé à un opérateur qui a cette autorisation.
+#   - L'automatisation git (.git/hooks/post-commit) appelle TOUJOURS ce script avec
+#     --no-restart : aucun redémarrage n'est effectué automatiquement ; le hook signale
+#     alors « docker restart likec4 requis (autorisation Christophe) ».
 
 set -euo pipefail
 
@@ -151,7 +156,11 @@ if [ "$MODE" = "apply" ]; then
     exit 1
   fi
 
-  # --- Redémarrage si un .c4 a changé ----------------------------------------
+  # --- Redémarrage si un .c4 a changé (usage opérateur direct, AUTORISÉ) -----
+  # Cette branche n'est atteinte qu'en mode apply SANS --no-restart, c'est-à-dire
+  # uniquement lorsqu'un opérateur disposant de l'autorisation explicite de
+  # Christophe invoque ce script directement. Le hook post-commit utilise toujours
+  # --no-restart et n'atteint JAMAIS cette branche.
   # Le dev server Vite ne recharge pas le modèle compilé de façon fiable : sans
   # redémarrage, likec4.breizh.ai continue de servir l'ANCIEN modèle (HTTP 200
   # trompeur). On redémarre donc, puis on VÉRIFIE le contenu réellement servi.
@@ -230,6 +239,7 @@ if [ "$MODE" = "apply" ]; then
     echo
     echo "NOTE: --no-restart — le conteneur n'a PAS été redémarré."
     echo "      Le modèle servi peut être périmé : docker restart $CONTAINER"
+    echo "      (redémarrage = acte MANUEL, autorisation Christophe requise)"
   else
     echo
     echo "Aucun fichier modifié — pas de redémarrage nécessaire."
