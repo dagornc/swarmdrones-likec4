@@ -531,21 +531,22 @@ model {
   algConsensus -[documentedBy]-> specConsensus 'specification detaillee (5 versions)'
 
   // E29 : portage Rust de l algorithme. LikeC4 REFERENCE le code, il ne le
-  // contient pas (cf metamodel.c4, type sourceCode). Le depot est local :
-  // /home/hermesagent/workspace/consensus_rs
+  // contient pas (cf metamodel.c4, type sourceCode). Le depot est publie sur
+  // GitHub : https://github.com/dagornc/SwarmDrones
   srcConsensusRs = sourceCode 'consensus_rs — portage Rust de ALG_CONSENSUS' {
     #source-code
+    link https://github.com/dagornc/SwarmDrones "Depot GitHub SwarmDrones — code source du portage Rust (consensus_rs)"
     link https://likec4.breizh.ai/consensus_rs/README.md "README du portage Rust (parite bit-a-bit avec la reference Python)"
-    description 'Portage Rust de l algorithme ALG_CONSENSUS (CRDT semi-treillis + gossip). Depot local : /home/hermesagent/workspace/consensus_rs. Parite bit-a-bit verifiee avec la reference Python sim_consensus.py : 9 000 comparaisons (9 tests x 1 000 graines), 0 ecart. 18/18 tests passent. Performance : 13x plus rapide que Python (9 000 simulations en 1,29 s, soit 6 977 sim/s contre 535 sim/s). Le point difficile du portage est le generateur pseudo-aleatoire : MT19937 avec initialisation init_by_array de CPython, random(), randint() et sample() reproduits a l identique (ordre de selection, setsize). Structure : src/rng.rs (RNG compatible CPython), src/sim.rs (etat, fusion semi-treillis, gossip, harnais T1-T9), src/main.rs (CLI compatible sim_consensus.py), tests/parite.rs (5 tests de parite CPython), verify_parite_rust.py (comparaison automatique Rust vs Python).'
+    description 'Portage Rust de l algorithme ALG_CONSENSUS (CRDT semi-treillis + gossip). Depot GitHub : https://github.com/dagornc/SwarmDrones (dossier consensus_rs). Parite bit-a-bit verifiee avec la reference Python sim_consensus.py : 9 000 comparaisons (9 tests x 1 000 graines), 0 ecart. 18/18 tests passent. Performance : environ 21x plus rapide que Python (9 000 simulations en 1,18 s, soit 7 647 sim/s contre 352 sim/s). Le point difficile du portage est le generateur pseudo-aleatoire : MT19937 avec initialisation init_by_array de CPython, random(), randint() et sample() reproduits a l identique (ordre de selection, setsize). Structure : src/rng.rs (RNG compatible CPython), src/sim.rs (etat, fusion semi-treillis, gossip, harnais T1-T9), src/main.rs (CLI compatible sim_consensus.py), tests/parite.rs (5 tests de parite CPython), reference/sim_consensus.py (reference Python embarquee), verify_parite_rust.py (comparaison automatique Rust vs Python).'
     metadata {
       algorithme 'ALG_CONSENSUS'
-      langage 'Rust (edition 2021, rustc 1.98.1)'
-      depot '/home/hermesagent/workspace/consensus_rs'
+      langage 'Rust (edition 2024, rustc 1.98.1)'
+      depot 'https://github.com/dagornc/SwarmDrones'
       parite 'bit-a-bit avec sim_consensus.py — 9 000 comparaisons, 0 ecart'
       tests '18/18 (13 unitaires + 5 de parite CPython)'
-      performance '13x plus rapide que Python (6 977 sim/s contre 535 sim/s)'
+      performance 'environ 21x plus rapide que Python (7 647 sim/s contre 352 sim/s)'
       nature 'portage de reference'
-      statut 'DISPONIBLE'
+      statut 'PUBLIE'
     }
   }
 
