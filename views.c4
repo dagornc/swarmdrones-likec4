@@ -872,7 +872,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \/ Catalogue — 15 algorithmes et 2 specifications'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes, 2 specifications et 1 portage'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -896,6 +896,9 @@ views {
     // pour la spec Consensus). Les 5 PDF etaient publies mais la carte
     // n etait affichee nulle part.
     include specConsensus
+    // E29 : portage Rust de ALG_CONSENSUS (sourceCode). Relie a algConsensus
+    // par `implements` et a specConsensus par `documentedBy`.
+    include srcConsensusRs
     autoLayout LeftRight
   }
 
