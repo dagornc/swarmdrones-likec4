@@ -248,6 +248,35 @@ check_model_drift() {
 [ -d "$SRC" ] || die "source introuvable: $SRC"
 [ -d "$DST" ] || die "destination introuvable: $DST"
 
+# --- Copie automatique des artefacts de code publies --------------------------
+# E29 (2026-09-19) : la carte srcConsensusRs (algorithms.c4) pointe vers
+# https://likec4.breizh.ai/consensus_rs/README.md. Ce fichier est une COPIE du
+# README du depot Rust, qui vit hors de $SRC. Sans cette etape, le lien se
+# casse des que le README source est modifie (la copie manuelle n'est pas
+# fiable — meme cause racine que « un correctif de code n'est pas un correctif
+# de livrable »). On recopie donc systematiquement avant l'inventaire.
+#
+# Table de correspondance : SRC_PUBLIE -> DEST_PUBLIE (relatif a public/).
+# Ajouter une ligne ici pour publier un nouvel artefact de code.
+sync_artefacts_code() {
+  local pairs=(
+    "/home/hermesagent/workspace/consensus_rs/README.md|consensus_rs/README.md"
+  )
+  local pair src_file rel dst_file
+  for pair in "${pairs[@]}"; do
+    src_file="${pair%%|*}"
+    rel="${pair##*|}"
+    dst_file="$SRC/public/$rel"
+    [ -f "$src_file" ] || { echo "  ⚠ artefact source introuvable : $src_file" >&2; continue; }
+    mkdir -p "$(dirname "$dst_file")"
+    if [ -f "$dst_file" ] && cmp -s "$src_file" "$dst_file"; then
+      continue
+    fi
+    cp -p "$src_file" "$dst_file"
+    echo "  copié (artefact de code) public/$rel"
+  done
+}
+
 # --- Mode drift : vérification isolée, sans synchronisation ni redémarrage ----
 if [ "$MODE" = "drift" ]; then
   drift=0
@@ -260,6 +289,11 @@ fi
 # --- Inventaire des fichiers à synchroniser -----------------------------------
 # 1. Tous les .c4 à la racine de SRC
 # 2. Le contenu de public/ (PDF, assets)
+# 0. Artefacts de code recopiés depuis leur dépôt (avant l'inventaire, pour
+#    qu'ils soient pris en compte par la synchronisation et le contrôle).
+if [ "$MODE" != "drift" ]; then
+  sync_artefacts_code
+fi
 mapfile -t C4_FILES < <(cd "$SRC" && find . -maxdepth 1 -name '*.c4' -printf '%f\n' | sort)
 [ "${#C4_FILES[@]}" -gt 0 ] || die "aucun fichier .c4 dans $SRC"
 
