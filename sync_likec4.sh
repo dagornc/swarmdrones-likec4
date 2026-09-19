@@ -9,7 +9,7 @@
 #   ./sync_likec4.sh              # synchronise + redémarre le conteneur si un .c4 a changé
 #   ./sync_likec4.sh --dry-run    # montre ce qui serait copié, sans rien modifier
 #   ./sync_likec4.sh --check      # vérifie l'état de synchronisation (exit 1 si divergence)
-#   ./sync_likec4.sh --drift      # vérifie la cohérence public/ vs servi (exit 1 si écart)
+#   ./sync_likec4.sh --drift      # vérifie la cohérence public/ vs servi ET modèle servi vs algorithms.c4 (exit 1 si écart)
 #   ./sync_likec4.sh --no-restart # synchronise sans redémarrer le conteneur
 #
 # SÉCURITÉ : ne supprime jamais de fichier dans la destination ; ne copie que les .c4
@@ -163,16 +163,98 @@ check_drift() {
   fi
 }
 
+# --- Contrôle de cohérence du MODÈLE servi vs algorithms.c4 -------------------
+# ANGLE MORT COMBLÉ (2026-09-19) : check_drift ne compare que les fichiers de
+# public/ (PDF). Il ne voit PAS que le MODÈLE C4 servi par le dev server peut
+# être périmé alors que public/ est parfaitement cohérent. Cas réel constaté :
+# le modèle servi affichait encore « 18,7/20 PUBLIABLE SOUS RESERVE » alors que
+# algorithms.c4 était à « 19,1/20 PUBLIABLE SANS RESERVE » (commit 61877e7) et
+# que check_drift rapportait 8/8 conformes. Le conteneur servait un instantané
+# pris à son démarrage (up 2 h). 5ᵉ occurrence de la divergence disque/serveur.
+#
+# Méthode : on extrait du fichier SOURCE les valeurs de métadonnées des éléments
+# specDoc (versionCourante, notesValidation) et on vérifie leur présence
+# LITTÉRALE dans le modèle compilé réellement servi. Si une valeur manque, le
+# modèle servi est périmé → docker restart likec4 requis (autorisation
+# Christophe). AUCUN redémarrage n'est effectué ici. Non bloquant si le
+# conteneur ou le site est inaccessible (même politique que check_drift).
+check_model_drift() {
+  local src_file model_tmp val miss checked
+  src_file="$SRC/algorithms.c4"
+  miss=0
+  checked=0
+
+  echo "=== Contrôle de cohérence du modèle servi vs algorithms.c4 ==="
+
+  if [ ! -f "$src_file" ]; then
+    echo "  ⚠ $src_file introuvable — vérification impossible (non bloquant)." >&2
+    return 0
+  fi
+
+  # NB: écrire le modèle dans un FICHIER, jamais dans une variable shell.
+  # Un `grep -q` sur une variable de ~7,9 Mo ferme le pipe au premier match
+  # (SIGPIPE) et produit un faux négatif — piège déjà documenté plus bas.
+  model_tmp="$(mktemp)"
+  if ! curl -s -o "$model_tmp" "$SITE/@id/likec4:plugin/swarmdrones/model.js" 2>/dev/null; then
+    echo "  ⚠ modèle servi illisible ($SITE) — vérification impossible (non bloquant)." >&2
+    rm -f "$model_tmp"
+    return 0
+  fi
+  if [ ! -s "$model_tmp" ]; then
+    echo "  ⚠ modèle servi vide ou inaccessible — vérification impossible (non bloquant)." >&2
+    rm -f "$model_tmp"
+    return 0
+  fi
+  # Un modèle valide pèse plusieurs Mo ; un fallback HTML de la SPA est bien plus
+  # petit. En dessous du seuil, on considère le modèle non servi (non bloquant).
+  if [ "$(wc -c < "$model_tmp")" -lt 1000000 ]; then
+    echo "  ⚠ modèle servi anormalement petit (fallback HTML ?) — vérification impossible (non bloquant)." >&2
+    rm -f "$model_tmp"
+    return 0
+  fi
+
+  # Valeurs de métadonnées à vérifier : versionCourante et notesValidation de
+  # chaque élément specDoc. On lit la source ligne à ligne (pas de parsing C4
+  # complet) : les valeurs sont des chaînes entre apostrophes.
+  while IFS= read -r val; do
+    [ -n "$val" ] || continue
+    checked=$((checked+1))
+    if grep -qF "$val" "$model_tmp"; then
+      echo "  ✓ modèle servi à jour : « ${val:0:60}… »"
+    else
+      echo "  ⚠ DIVERGENCE: modèle servi PÉRIMÉ — valeur absente : « ${val:0:60}… » — docker restart likec4 requis (autorisation Christophe)"
+      miss=$((miss+1))
+    fi
+  done < <(grep -oE "(versionCourante|notesValidation)[[:space:]]+'[^']+'" "$src_file" 2>/dev/null \
+             | sed -E "s/^[a-zA-Z]+[[:space:]]+'//; s/'$//" | sort -u)
+
+  rm -f "$model_tmp"
+
+  if [ "$checked" -eq 0 ]; then
+    echo "  ⚠ aucune valeur de métadonnée extraite de $src_file — vérification impossible (non bloquant)." >&2
+    return 0
+  fi
+
+  echo
+  if [ "$miss" -eq 0 ]; then
+    echo "✓ Cohérence modèle — le modèle servi reflète algorithms.c4 ($checked valeur(s) vérifiée(s))."
+    return 0
+  else
+    echo "✗ $miss valeur(s) périmée(s) dans le modèle servi — docker restart likec4 requis (autorisation Christophe)."
+    return 1
+  fi
+}
+
 [ -d "$SRC" ] || die "source introuvable: $SRC"
 [ -d "$DST" ] || die "destination introuvable: $DST"
 
 # --- Mode drift : vérification isolée, sans synchronisation ni redémarrage ----
 if [ "$MODE" = "drift" ]; then
-  if check_drift; then
-    exit 0
-  else
-    exit 1
-  fi
+  drift=0
+  check_drift || drift=1
+  echo
+  check_model_drift || drift=1
+  exit "$drift"
 fi
 
 # --- Inventaire des fichiers à synchroniser -----------------------------------
@@ -373,10 +455,13 @@ if [ "$MODE" = "apply" ]; then
   # Voir check_drift() en tête de script. Sort en code 1 si écart disque vs servi,
   # pour que le hook post-commit rende la divergence visible. Aucun redémarrage.
   echo
-  if check_drift; then
-    drift=0
-  else
-    drift=$?
-  fi
+  drift=0
+  check_drift || drift=1
+  # --- Contrôle de cohérence du MODÈLE servi vs algorithms.c4 -----------------
+  # Voir check_model_drift() en tête de script. Comble l'angle mort de
+  # check_drift : un modèle C4 périmé côté serveur alors que public/ est
+  # cohérent. Aucun redémarrage — avertissement + exit 1 seulement.
+  echo
+  check_model_drift || drift=1
   exit "$drift"
 fi
