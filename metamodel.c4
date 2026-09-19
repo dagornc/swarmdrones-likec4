@@ -71,6 +71,7 @@ specification {
   tag simulation   { color #0277BD }   // contrat de simulation
   tag science      { color #AD1457 }   // referentiel scientifique / verdict
   tag world        { color #283593 }   // world model / preparation 3D
+  tag source-code  { color #616161 }   // code source versionne (cf type sourceCode)
 
   // ---------------------------------------------------------------------------
   // FAMILLE 1 — SYSTEME (existant partiel : platform)
