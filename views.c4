@@ -872,7 +872,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \/ Catalogue — 15 algorithmes et 1 specification'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes et 2 specifications'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -891,6 +891,11 @@ views {
     include algFaultTolerantControlAlloc, algJammingResilientMode
     // E27 : element de specification detaillee (sinon invisible dans l UI).
     include specTaskAllocation
+    // E28 : specConsensus etait defini dans algorithms.c4 mais absent de
+    // toute vue -> invisible dans l UI (meme defaut que E27, non traite
+    // pour la spec Consensus). Les 5 PDF etaient publies mais la carte
+    // n etait affichee nulle part.
+    include specConsensus
     autoLayout LeftRight
   }
 
