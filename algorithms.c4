@@ -97,7 +97,7 @@ model {
       executionMode 'conceptual'
       implementationStatus 'idea'
       repository 'TBD'
-      version 'TBD'
+      version 'v1.0 (spec SWARM-SPEC-ALG-002, 2026-09-18)'
       maturity 'mature (repris du modele : coordination CRDT/LWW)'
       evidence 'HIGH (theorie CRDT prouvee) / LOW (application essaim drones) — cf SCI-3'
       metrics 'temps de convergence, ecart residuel, nombre de messages'
@@ -508,6 +508,21 @@ model {
   }
 
   algTaskAllocation -[documentedBy]-> specTaskAllocation 'specification detaillee (3 versions)'
+
+  specConsensus = specDoc 'Specification detaillee — ALG_CONSENSUS (1 version)' {
+    #source-doc
+    link https://likec4.breizh.ai/Spec_ALG_CONSENSUS_V1.pdf "Specification detaillee Consensus d etat d essaim v1 (PDF) — version courante"
+    description 'Document de specification detaillee de l algorithme de consensus d etat d essaim (CRDT semi-treillis + gossip). Reference SWARM-SPEC-ALG-002, version 1.0.'
+    metadata {
+      algorithme 'ALG_CONSENSUS'
+      versions '1 (v1.0)'
+      versionCourante 'v1.0 (2026-09-18)'
+      nature 'specification genie logiciel interne'
+      statut 'DISPONIBLE'
+    }
+  }
+
+  algConsensus -[documentedBy]-> specConsensus 'specification detaillee (1 version)'
 
   // --- Relations algorithm -> component (sens `runsOn` manquant) ---
   algEventTriggeredComm -[runsOn]-> onboard.linkRadio 'politique d emission evenementielle (cf onboard.linkRadio -[implements]->)'
