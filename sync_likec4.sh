@@ -9,6 +9,7 @@
 #   ./sync_likec4.sh              # synchronise + redémarre le conteneur si un .c4 a changé
 #   ./sync_likec4.sh --dry-run    # montre ce qui serait copié, sans rien modifier
 #   ./sync_likec4.sh --check      # vérifie l'état de synchronisation (exit 1 si divergence)
+#   ./sync_likec4.sh --drift      # vérifie la cohérence public/ vs servi (exit 1 si écart)
 #   ./sync_likec4.sh --no-restart # synchronise sans redémarrer le conteneur
 #
 # SÉCURITÉ : ne supprime jamais de fichier dans la destination ; ne copie que les .c4
@@ -40,16 +41,139 @@ for arg in "$@"; do
   case "$arg" in
     --dry-run)    MODE="dry-run" ;;
     --check)      MODE="check" ;;
+    --drift)      MODE="drift" ;;
     --no-restart) RESTART=0 ;;
     "")           ;;
-    *) echo "Usage: $0 [--dry-run|--check|--no-restart]" >&2; exit 2 ;;
+    *) echo "Usage: $0 [--dry-run|--check|--drift|--no-restart]" >&2; exit 2 ;;
   esac
 done
 
 die() { echo "ERREUR: $*" >&2; exit 1; }
 
+# --- Contrôle de cohérence public/ vs servi ----------------------------------
+# Contexte : `likec4 start --public-dir` ne lit les fichiers de public/ qu'au
+# DÉMARRAGE du conteneur (instantané). Un fichier AJOUTÉ après le démarrage n'est
+# pas servi (l'URL renvoie le fallback HTML de la SPA) ; un fichier MODIFIÉ reste
+# servi dans son ANCIENNE version. Dans les deux cas, seul un `docker restart`
+# re-synchronise l'index. Un second cache (Cloudflare, max-age=14400) peut en
+# plus servir une version périmée de façon transitoire. check_drift compare :
+#   - « disque » : ce que le conteneur voit dans /data/public (docker exec
+#     sha256sum) — reflète le bind mount /docker/likec4/workspace/public.
+#   - « servi »  : ce qui est réellement renvoyé sur l'URL publique (curl).
+# En cas d'écart, on interroge l'ORIGINE (curl dans le conteneur, sans
+# Cloudflare ni cache) pour distinguer « index likec4 périmé » (restart requis)
+# de « cache CDN transitoire » (pas de restart). Aucun redémarrage n'est jamais
+# effectué ici ; en cas de divergence le script sort en code non nul pour que le
+# hook post-commit rende l'écart visible. En cas d'indisponibilité (conteneur
+# arrêté, site inaccessible), on AVERTIT sans échouer : la vérification ne doit
+# jamais bloquer un commit.
+check_drift() {
+  local rel disk_hash served_hash origin_hash code ctype origin_code origin_ctype
+  local diverg restart_needed list
+  diverg=0
+  restart_needed=0
+  echo "=== Contrôle de cohérence public/ vs servi ==="
+
+  list="$(docker exec "$CONTAINER" sh -c 'cd /data/public 2>/dev/null && find . -type f -printf "%P\n" | sort' 2>/dev/null || true)"
+  if [ -z "$list" ]; then
+    if ! docker exec "$CONTAINER" true >/dev/null 2>&1; then
+      echo "  ⚠ conteneur $CONTAINER inaccessible — vérification impossible (non bloquant)." >&2
+      return 0
+    fi
+    echo "  (aucun fichier dans /data/public)"
+    return 0
+  fi
+
+  while IFS= read -r rel; do
+    [ -n "$rel" ] || continue
+    disk_hash="$(docker exec "$CONTAINER" sha256sum "/data/public/$rel" 2>/dev/null | cut -d' ' -f1 || true)"
+    if [ -z "$disk_hash" ]; then
+      echo "  ⚠ public/$rel : empreinte disque illisible — ignoré." >&2
+      continue
+    fi
+    # Les fichiers de public/ sont servis à la racine du site (via Cloudflare).
+    # NB : noms plats et URL-safe dans ce projet ; pas d'encodage d'URL.
+    meta="$(curl -s -o /dev/null -w '%{http_code} %{content_type}' "$SITE/$rel" 2>/dev/null || true)"
+    code="${meta%% *}"
+    ctype="${meta#* }"
+    case "$code" in
+      200) ;;
+      000|"")
+        echo "  ⚠ public/$rel : URL servie inaccessible ($SITE) — vérification impossible (non bloquant)." >&2
+        continue ;;
+      *)
+        echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (HTTP $code — non servi) — docker restart likec4 requis (autorisation Christophe)"
+        diverg=$((diverg+1)); restart_needed=$((restart_needed+1))
+        continue ;;
+    esac
+    case "$ctype" in
+      text/html*|"")
+        # Fallback HTML de la SPA : likec4 n'a pas ce fichier dans son index
+        # (ajouté après le démarrage). Cas persistant → restart requis.
+        echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (fallback HTML — non servi) — docker restart likec4 requis (autorisation Christophe)"
+        diverg=$((diverg+1)); restart_needed=$((restart_needed+1))
+        continue ;;
+    esac
+    served_hash="$(curl -s "$SITE/$rel" 2>/dev/null | sha256sum | cut -d' ' -f1 || true)"
+    if [ -z "$served_hash" ]; then
+      echo "  ⚠ public/$rel : corps servi illisible — vérification impossible (non bloquant)." >&2
+      continue
+    fi
+    if [ "$disk_hash" = "$served_hash" ]; then
+      echo "  ✓ public/$rel : servi conforme (${disk_hash:0:8}…)"
+    else
+      # Écart disque vs servi. Deux causes possibles : (a) likec4 sert une autre
+      # version (index périmé) → restart requis ; (b) cache Cloudflare transitoire
+      # → se résorbe. On lit l'ORIGINE (conteneur, localhost, sans CDN ni cache).
+      origin_meta="$(docker exec "$CONTAINER" curl -s -o /dev/null -w '%{http_code} %{content_type}' "http://localhost:5173/$rel" 2>/dev/null || true)"
+      origin_code="${origin_meta%% *}"
+      origin_ctype="${origin_meta#* }"
+      if [ "$origin_code" != "200" ]; then
+        echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (${served_hash:0:8}…) — origine illisible, docker restart likec4 requis (autorisation Christophe)"
+        diverg=$((diverg+1)); restart_needed=$((restart_needed+1))
+      else
+        case "$origin_ctype" in
+          text/html*|"")
+            echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (${served_hash:0:8}…) — non servi par likec4, docker restart likec4 requis (autorisation Christophe)"
+            diverg=$((diverg+1)); restart_needed=$((restart_needed+1)) ;;
+          *)
+            origin_hash="$(docker exec "$CONTAINER" curl -s "http://localhost:5173/$rel" 2>/dev/null | sha256sum | cut -d' ' -f1 || true)"
+            if [ "$origin_hash" = "$disk_hash" ]; then
+              echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (${served_hash:0:8}…) — cache Cloudflare transitoire, l'origine sert déjà la bonne version (pas de restart requis)"
+              diverg=$((diverg+1))
+            else
+              echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (${served_hash:0:8}…) — l'origine sert une autre version, docker restart likec4 requis (autorisation Christophe)"
+              diverg=$((diverg+1)); restart_needed=$((restart_needed+1))
+            fi ;;
+        esac
+      fi
+    fi
+  done <<< "$list"
+
+  echo
+  if [ "$diverg" -eq 0 ]; then
+    echo "✓ Cohérence public/ — aucun écart entre le disque et le contenu servi."
+    return 0
+  elif [ "$restart_needed" -gt 0 ]; then
+    echo "✗ $diverg divergence(s) public/ — docker restart likec4 requis (autorisation Christophe)."
+    return 1
+  else
+    echo "✗ $diverg divergence(s) public/ — écarts transitoires (cache Cloudflare) ; l'origine est à jour, aucun restart requis."
+    return 1
+  fi
+}
+
 [ -d "$SRC" ] || die "source introuvable: $SRC"
 [ -d "$DST" ] || die "destination introuvable: $DST"
+
+# --- Mode drift : vérification isolée, sans synchronisation ni redémarrage ----
+if [ "$MODE" = "drift" ]; then
+  if check_drift; then
+    exit 0
+  else
+    exit 1
+  fi
+fi
 
 # --- Inventaire des fichiers à synchroniser -----------------------------------
 # 1. Tous les .c4 à la racine de SRC
@@ -244,4 +368,15 @@ if [ "$MODE" = "apply" ]; then
     echo
     echo "Aucun fichier modifié — pas de redémarrage nécessaire."
   fi
+
+  # --- Contrôle de cohérence public/ vs servi (toujours, même sans changement) -
+  # Voir check_drift() en tête de script. Sort en code 1 si écart disque vs servi,
+  # pour que le hook post-commit rende la divergence visible. Aucun redémarrage.
+  echo
+  if check_drift; then
+    drift=0
+  else
+    drift=$?
+  fi
+  exit "$drift"
 fi
