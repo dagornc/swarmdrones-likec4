@@ -514,13 +514,15 @@ model {
     link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v1.pdf "Specification detaillee Consensus d etat d essaim v1 (PDF) — version anterieure"
     link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v2.pdf "Specification detaillee Consensus d etat d essaim v2 (PDF) — version anterieure"
     link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v3.pdf "Specification detaillee Consensus d etat d essaim v3 (PDF) — version anterieure"
-    link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v4.pdf "Specification detaillee Consensus d etat d essaim v4 (PDF) — version rejetee (validation independante 11,7/20)"
-    link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v5.pdf "Specification detaillee Consensus d etat d essaim v5 (PDF) — version courante, validation en cours"
-    description 'Document de specification detaillee de l algorithme de consensus d etat d essaim (CRDT semi-treillis + gossip). Reference SWARM-SPEC-ALG-002. Cinq versions successives conservees : v1.0 (initiale), v2.0, v3.0, v4.0 (rejetee, validation independante 11,7/20), v5.0 (courante, 15,2/20 sous conditions, re-validation en cours).'
+    link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v4.pdf "Specification detaillee Consensus d etat d essaim v4 (PDF) — version rejetee (11,7/20, 2 bloquants, 9 majeurs — regression documentee)"
+    link https://likec4.breizh.ai/Specification_ALG_CONSENSUS_v5.pdf "Specification detaillee Consensus d etat d essaim v5 (PDF) — version courante (15,2/20, publiable sous conditions, re-validation en cours)"
+    description 'Document de specification detaillee de l algorithme de consensus d etat d essaim (CRDT semi-treillis + gossip). Reference SWARM-SPEC-ALG-002. Cinq versions conservees : v1.0 (initiale), v2.0, v3.0, v4.0 (rejetee), v5.0 (courante). Validation independante : v1 10,5/20 ; v2 14,0/20 ; v3 18,0/20 ; v4 11,7/20 REJETEE (2 bloquants, 9 majeurs — regression documentee, pas une reference) ; v5 15,2/20 PUBLIABLE SOUS CONDITIONS (re-validation en cours apres cycles 5-6, carte t_452f080c).'
     metadata {
       algorithme 'ALG_CONSENSUS'
       versions '5 (v1.0, v2.0, v3.0, v4.0, v5.0)'
-      versionCourante 'v5.0 (2026-09-19)'
+      versionCourante 'v5.0 (2026-09-19) — publiable sous conditions'
+      versionRejetee 'v4.0 — 11,7/20 (2 bloquants, 9 majeurs)'
+      notesValidation 'v1 10,5/20 ; v2 14,0/20 ; v3 18,0/20 ; v4 11,7/20 ; v5 15,2/20'
       nature 'specification genie logiciel interne'
       statut 'DISPONIBLE'
     }
