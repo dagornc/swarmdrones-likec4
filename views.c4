@@ -872,7 +872,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \/ Catalogue — 15 algorithmes, 2 specifications et 1 portage'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes, 2 specifications et 2 portages'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -899,6 +899,10 @@ views {
     // E29 : portage Rust de ALG_CONSENSUS (sourceCode). Relie a algConsensus
     // par `implements` et a specConsensus par `documentedBy`.
     include srcConsensusRs
+    // E29 : portage Rust de ALG_TASK_ALLOCATION (sourceCode). Relie a
+    // algTaskAllocation par `implements` et a specTaskAllocation par
+    // `documentedBy`. Meme patron que srcConsensusRs.
+    include srcAlgTaskAllocation
     autoLayout LeftRight
   }
 
@@ -1253,6 +1257,110 @@ views {
     include decEnergie -> refDrone.power, decImu -> refDrone.imu
     include decSae -> refDrone.saeSensor
     global style criticite
+    autoLayout LeftRight
+  }
+
+  // ===========================================================================
+  //  H-ZIP v2.1 — PROTOCOLE DE COMMUNICATION D'ESSAIM (ajout 2026-09-20)
+  //  Integration de la specification H-Zip v2.1 (Dream-Zip).
+  //  Aucune vue existante n'est modifiee : ces vues sont AJOUTEES.
+  // ===========================================================================
+
+  view hzipProtocol {
+    title '05 · Protocole \\/ H-Zip v2.1 — protocole, couches et trames'
+
+    description '''
+      **H-Zip v2.1 (Dream-Zip)** — protocole de coordination d essaim
+      heterogene sous contrainte extreme de bande passante.
+
+      Quatre couches independantes, du plus reactif au plus cognitif.
+      Une couche inferieure ne depend JAMAIS d une couche superieure.
+
+      Point cle : la **couche 3 (LLM) est en lecture seule**. Elle ne
+      peut pas ecrire dans les couches 0, 1 ou 2 — un LLM en boucle
+      reactive introduirait latence, energie et non-determinisme.
+
+      Les quatre trames (R, S, D, H) sont des messages observables :
+      elles portent producteur, consommateurs, canal, frequence et
+      comportement en perte.
+    '''
+    include hzip
+    include hzip -> hzipLayer0, hzipLayer1, hzipLayer2, hzipLayer3, hzipTopology
+    include hzip -> hzipFrameR, hzipFrameS, hzipFrameD, hzipFrameH
+    include hzip -> specHzip
+    autoLayout TopBottom
+  }
+
+  view hzipLayers {
+    title '05 · Protocole \\/ H-Zip — les 4 couches et leurs algorithmes'
+
+    description '''
+      Chaque couche s appuie sur un algorithme existant du catalogue.
+      Aucun algorithme n est duplique : H-Zip les REUTILISE.
+
+      `Couche 1 -> ALG_COLLISION_AVOIDANCE` (APF, Khatib 1986)
+      `Couche 2 -> ALG_FORMATION_CONTROL` (PSO, Kennedy & Eberhart 1995)
+      `Couche 0 -> ALG_COOPERATIVE_LOCALIZATION` (prediction)
+      `Topologie -> ALG_LEADER_ELECTION` (election du Hub)
+    '''
+    include hzipLayer0, hzipLayer1, hzipLayer2, hzipLayer3, hzipTopology
+    include algCollisionAvoidance, algFormationControl, algCooperativeLocalization
+    include algConsensus, algLeaderElection, algEventTriggeredComm
+    include onboard.linkRadio, onboard.perception, onboard.mission, onboard.health
+    autoLayout LeftRight
+  }
+
+  view hzipFrames {
+    title '05 · Protocole \\/ H-Zip — les 4 trames et leurs canaux'
+
+    description '''
+      Les trames H-Zip utilisent les canaux EXISTANTS du modele :
+      `CH_LOCAL` pour la voie de surete locale, `CH_MESH` pour la
+      coordination inter-agents.
+
+      La Trame R (4 octets) est la plus critique : elle porte la
+      priorite de survie qui suspend le PSO.
+    '''
+    include hzipFrameR, hzipFrameS, hzipFrameD, hzipFrameH
+    include chLocal, chMesh
+    include onboard.perception, onboard.health, onboard.mission
+    include onboard.safety, onboard.autopilot, onboard.linkRadio
+    autoLayout LeftRight
+  }
+
+  view hzipEvidence {
+    title '05 · Protocole \\/ H-Zip — sources academiques (DOI verifies)'
+
+    description '''
+      Chaque mecanisme du protocole est ancre sur une source primaire
+      verifiee (DOI resolu via Crossref, references arXiv resolues via
+      l API arXiv). Aucune source n est inventee.
+
+      **Non couvert par la litterature** : le « silence predictif » comme
+      protocole nomme, et l usage d un LLM embarque pour la coordination
+      d essaim. Ces deux points sont des PROPOSITIONS ORIGINALES, pas
+      des resultats etablis.
+    '''
+    include paperKhatib1986, paperKennedy1995, paperDimarogonas2012
+    include paperTseng2002, paperAkyildiz2005, paperOlfatiSaber2007
+    include paperHuYan2007, paperReynolds1987
+    include hzipLayer0, hzipLayer1, hzipLayer2, hzipTopology, hzipFrameD, hzipFrameH
+    autoLayout LeftRight
+  }
+
+  view hzipTests {
+    title '05 · Protocole \\/ H-Zip — criteres d acceptation (non executes)'
+
+    description '''
+      Quatre criteres de verification sont definis. **Aucun n a ete
+      execute** : ce sont des criteres, pas des resultats.
+
+      Un protocole qui « semble marcher » en simulation propre mais
+      produit des comportements erratiques sous bruit est un danger :
+      ces tests sont la condition de passage a l implementation.
+    '''
+    include testHzipCrc, testHzipLatence, testHzipDivergence, testHzipBande
+    include hzipFrameR, hzipLayer0, hzipLayer1, hzip
     autoLayout LeftRight
   }
 

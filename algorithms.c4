@@ -56,8 +56,8 @@ model {
       contraintes 'convergence globale non garantie sous partition persistante (garantie locale) ; optimalite 50% pire-cas ; budget radio'
       state 'local par agent + etat partage des encheres + etat de partition'
       executionMode 'conceptual'
-      implementationStatus 'idea'
-      repository 'TBD — a identifier'
+      implementationStatus 'implemented'
+      repository 'https://github.com/dagornc/alg-task-allocation'
       sourceDocs 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345 ; Sao et al. 2025 arXiv 2509.06481'
       version 'v3 (spec SWARM-SPEC-ALG-001-V3, 2026-09-18)'
       maturity 'mature-en-labo (repris du modele existant)'
@@ -95,8 +95,8 @@ model {
       contraintes 'partition prolongee : convergence non garantie'
       state 'etat partage replique'
       executionMode 'conceptual'
-      implementationStatus 'idea'
-      repository 'TBD'
+      implementationStatus 'implemented'
+      repository 'https://github.com/dagornc/alg-consensus'
       version 'v5.0 (spec SWARM-SPEC-ALG-002, 2026-09-19)'
       maturity 'mature (repris du modele : coordination CRDT/LWW)'
       evidence 'HIGH (theorie CRDT prouvee) / LOW (application essaim drones) — cf SCI-3'
@@ -492,22 +492,56 @@ model {
   // 2. Relations algorithm -> component (sens `runsOn` manquant).
   // =========================================================================
 
-  specTaskAllocation = specDoc 'Specification detaillee — ALG_TASK_ALLOCATION (3 versions)' {
+  specTaskAllocation = specDoc 'Specification detaillee — ALG_TASK_ALLOCATION (4 versions)' {
     #source-doc
-    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V3.pdf "Specification detaillee Task Allocation v3 (PDF) — version courante"
+    link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V3.pdf "Specification detaillee Task Allocation v3 (PDF) — version anterieure"
     link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_V2.pdf "Specification detaillee Task Allocation v2 (PDF) — version anterieure"
     link https://likec4.breizh.ai/Spec_ALG_TASK_ALLOCATION_CBBA.pdf "Specification detaillee CBBA (PDF, v1.1) — version initiale"
-    description 'Document de specification detaillee de l algorithme d allocation de taches. Trois versions successives conservees : CBBA v1.1 (initiale), v2, v3 (courante).'
+    description 'Document de specification detaillee de l algorithme d allocation de taches. Quatre versions successives conservees : CBBA v1.1 (initiale), v2, v3, v4 (couche operationnelle, loop engineering).'
     metadata {
       algorithme 'ALG_TASK_ALLOCATION'
-      versions '3 (CBBA v1.1, v2, v3)'
-      versionCourante 'v3 (2026-09-18)'
+      versions '4 (CBBA v1.1, v2, v3, v4)'
+      versionCourante 'v4 (2026-09-20)'
       nature 'specification genie logiciel interne'
       statut 'DISPONIBLE'
     }
   }
 
-  algTaskAllocation -[documentedBy]-> specTaskAllocation 'specification detaillee (3 versions)'
+  algTaskAllocation -[documentedBy]-> specTaskAllocation 'specification detaillee (4 versions)'
+
+  // E29 : portage Rust de l algorithme. LikeC4 REFERENCE le code, il ne le
+  // contient pas (cf metamodel.c4, type sourceCode).
+  //
+  // Architecture multi-depots (2026-09-20) : le code de l algorithme vit
+  // desormais dans son propre depot `alg-task-allocation`, rattache au depot
+  // principal `SwarmDrones` en tant que Git submodule (algorithms/task-allocation).
+  srcAlgTaskAllocation = sourceCode 'alg-task-allocation — portage Rust de ALG_TASK_ALLOCATION' {
+    #source-code
+    link https://github.com/dagornc/alg-task-allocation "Depot GitHub alg-task-allocation — code source du portage Rust (task_alloc_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A (submodule algorithms/task-allocation)"
+    description 'Portage Rust de l algorithme ALG_TASK_ALLOCATION (ED-CBBA evenementiel v3 + resilience a la partition + allocation apprise). Le code vit dans le depot dedie https://github.com/dagornc/alg-task-allocation, rattache au depot principal https://github.com/dagornc/SwarmDrones en tant que Git submodule (chemin algorithms/task-allocation). Parite bit-a-bit verifiee avec la reference Python normative reference/sim_task_alloc.py : 180/180 comparaisons identiques (30 graines x 6 scenarios), 0 ecart. 37 tests passent (26 unitaires + 11 d integration). Trois variantes d implementation coexistent, emboitees v3 ⊃ v2 ⊃ v1 : v1 (CBBA standard, emission a chaque periode), v2 (ED-CBBA, emission seulement si l etat publie change), v3 (ED-CBBA + heartbeat/quorum + biais appris beta). Proprietes de non-regression testees : beta=0 ⟹ v2 ; evenementiel=false ⟹ v1 ; resilience=false ⟹ aucune detection de partition. Reduction de messages mesuree sur horizon complet : 95.8 % (82 775 messages contre 1 960 000 pour v1, sur 100 graines). Structure : src/rng.rs (RNG deterministe compatible CPython), src/sim.rs (coeur du simulateur ED-CBBA v3), src/evenementiel.rs (v2, logique de communication evenementielle), src/partition.rs (v3, heartbeat, quorum, degradation/re-fusion), src/main.rs (CLI compatible sim_task_alloc.py), tests/parite.rs (tests d integration T1-T8 + invariants), reference/sim_task_alloc.py (reference Python normative), verify_parite_rust.py (harnais de verification Rust vs Python). Triangle de verification : sim.rs (implementation), reference/sim_task_alloc.py (norme executable), verify_parite_rust.py (preuve de conformite) — aucune modification de l algorithme n est recevable sans que les trois restent alignes.'
+    metadata {
+      algorithme 'ALG_TASK_ALLOCATION'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-task-allocation'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'Git submodule — algorithms/task-allocation'
+      variantes 'v1 (CBBA standard) ; v2 (ED-CBBA evenementiel) ; v3 (ED-CBBA + resilience partition + biais appris) ; v4 (couche operationnelle, loop engineering)'
+      versionsImplementation 'v1 ; v2 ; v3 ; v4 (emboitees v4 ⊃ v3 ⊃ v2 ⊃ v1)'
+      parite 'bit-a-bit avec reference/sim_task_alloc.py — 180/180 comparaisons, 0 ecart'
+      tests '37/37 sur master (v1 : 26 unitaires + 11 d integration) ; 43/43 sur v2 ; 50/50 sur v3 ; 81/81 sur v4 (70 unitaires + 11 d integration)'
+      performance 'reduction de messages 95.8 % sur horizon complet (82 775 contre 1 960 000 pour v1, 100 graines)'
+      scenariosVerifies 'nominal, perte, retrait, partition, duplication, latence'
+      limites 'partition asymetrique silencieuse non couverte ; biais appris g_theta = sin(i+j) deterministe (support de test, pas une politique apprise) ; topologie fixe (grille), mobilite non simulee'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference'
+      statut 'PUBLIE'
+    }
+  }
+
+  // Le code implemente l algorithme et est documente par la specification.
+  srcAlgTaskAllocation -[implements]-> algTaskAllocation 'portage Rust de reference (parite bit-a-bit)'
+  srcAlgTaskAllocation -[documentedBy]-> specTaskAllocation 'specification detaillee (3 versions)'
 
   specConsensus = specDoc 'Specification detaillee — ALG_CONSENSUS (5 versions)' {
     #source-doc
@@ -548,11 +582,11 @@ model {
       depot 'https://github.com/dagornc/alg-consensus'
       depotPrincipal 'https://github.com/dagornc/SwarmDrones'
       integration 'Git submodule — algorithms/consensus'
-      branches 'master (v1) ; v2 (reconnexion des agents isoles) ; v3 (quiescence)'
-      versionsImplementation 'v1 (master) ; v2 (branche v2) ; v3 (branche v3)'
+      branches 'master (v1) ; v2 (reconnexion des agents isoles) ; v3 (quiescence) ; v4 (couche operationnelle) ; v5 (moteur optimise)'
+      versionsImplementation 'v1 (master) ; v2 (branche v2) ; v3 (branche v3) ; v4 (branche v4) ; v5 (branche v5)'
       notesVersions 'v1 15,7/20 ; v2 16,3/20 ; v3 19,5/20'
       parite 'bit-a-bit avec sim_consensus.py — 9 000 comparaisons, 0 ecart'
-      tests '30/30 (25 unitaires + 5 de parite CPython)'
+      tests '18/18 sur master (v1 : 13 unitaires + 5 de parite CPython) ; 30/30 sur v3 (25 unitaires + 5 de parite) ; 62/62 sur v4 ; 68/68 sur v5'
       performance 'environ 21x plus rapide que Python (7 647 sim/s contre 352 sim/s)'
       nature 'portage de reference'
       statut 'PUBLIE'

@@ -1,0 +1,672 @@
+// =============================================================================
+//  H-ZIP v2.1 — INTEGRATION DU PROTOCOLE DE COMMUNICATION D'ESSAIM
+//  Mission SWARM-3D-ARCHITECTURE · Integration LikeC4
+//
+//  OBJET : integrer la specification H-Zip v2.1 (Dream-Zip) au modele
+//  SwarmDrones SANS renommer, invalider ni dupliquer aucun element existant.
+//
+//  PRINCIPE DIRECTEUR (cf metamodel.c4) :
+//    LikeC4 est la SOURCE DE VERITE SEMANTIQUE. Il decrit STRUCTURE et
+//    SEMANTIQUE, jamais le rendu ni l'espace 3D. Aucune coordonnee ici.
+//
+//  REGLES DE MISSION APPLIQUEES :
+//    - aucun identifiant existant n'est renomme ;
+//    - aucune relation existante n'est invalidee ;
+//    - toute valeur inconnue -> TBD + tag #tbd, JAMAIS inventee ;
+//    - toute affirmation scientifique importante est reliee a une source
+//      verifiee (DOI/arXiv resolus) ou marquee 'aucune source verifiee' ;
+//    - le code NE VIT PAS dans LikeC4 : on reference le depot/chemin.
+//
+//  NATURE DE CETTE INTEGRATION :
+//    H-Zip est un PROTOCOLE (element `protocol` du metamodele, famille 6
+//    COMMUNICATION). Il est DECLARE ici, relie aux canaux et messages
+//    existants, et documente par sa specification. Il ne remplace PAS les
+//    canaux existants : il en est une POLITIQUE D'ENCODAGE applicable.
+//
+//  AVERTISSEMENT D'HONNETETE :
+//    Les valeurs numeriques du protocole (T_hb, epsilon, seuils, tailles)
+//    sont des valeurs de DEPART marquees [A CALIBRER]. Elles ne sont PAS
+//    des resultats mesures. Le document de specification les porte comme
+//    telles. Aucune mesure n'a ete effectuee dans cette session.
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  1. LE PROTOCOLE H-ZIP (element de premiere classe)
+  // ===========================================================================
+
+  hzip = protocol 'H-Zip v2.1 (Dream-Zip) — protocole de coordination d essaim heterogene' {
+    #message
+    link https://likec4.breizh.ai/H-Zip_v2.1_Specification_premium.docx "Specification H-Zip v2.1 (Dream-Zip) — document normatif complet (Word, 17 sections, 19 tableaux, 5 figures)"
+    description '''
+Protocole de communication decentralise pour essaim heterogene
+(UAV / USV / UUV) sous contrainte extreme de bande passante.
+
+**Principe.** Quatre couches independantes, du plus reactif au plus
+cognitif. Chaque couche a sa frequence, sa latence cible et sa
+tolerance a l erreur. Une couche inferieure ne depend JAMAIS d une
+couche superieure.
+
+**Couche 0 — Prediction deterministe.** Chaque noeud predit la
+position de ses voisins par un modele cinematique PARTAGE. Aucun
+apprentissage, aucun LLM : la prediction est reproductible et
+verifiable. Le heartbeat recadre periodiquement la prediction.
+
+**Couche 1 — Reactive APF (Artificial Potential Fields).** Anti-collision
+locale, 10-50 Hz, latence cible < 20 ms, tolerance a l erreur NULLE.
+Porte la Trame R (4 octets). Priorite de survie absolue : elle
+suspend le PSO.
+
+**Couche 2 — Strategique PSO (Particle Swarm Optimization).**
+Convergence vers l objectif, 0,1-2 Hz, latence cible < 500 ms,
+tolerance a l erreur moyenne. Porte les trames S et D.
+
+**Couche 3 — Cognitive (LLM).** Interpretation d evenements complexes,
+evenementielle, latence cible < 2 s. NE DOIT JAMAIS ecrire dans les
+couches 0, 1 ou 2. Fallback deterministe obligatoire.
+
+**Topologie.** Hierarchique : les USV sont des Hubs de secteur, les
+UAV et UUV sont des terminaux rattaches a un Hub. Le broadcast global
+est borne (Hubs uniquement, ou crash imminent d un terminal).
+
+**Ecarts assumes vs H-Zip v1.** Suppression de l encodage ASCII
+`A`-`e` (plage non contigue, source de bugs de parsing) ; suppression
+de l acquittement bloquant ; suppression du LLM en boucle reactive ;
+ajout d un CRC, d une intensite APF et d une separation des trames.
+'''
+    metadata {
+      version 'v2.1 (2026-09-20)'
+      statut 'SPECIFICATION — non implemente'
+      nature 'protocole de communication'
+      portee 'essaim heterogene UAV / USV / UUV'
+      couches '4 (prediction / reactive APF / strategique PSO / cognitive LLM)'
+      trames 'R (4 octets) ; S ; D ; H'
+      contrainte 'bande passante extreme (radio bruitee, acoustique sous-marine)'
+      principe 'le silence est l etat nominal ; on ne transmet que la deviation'
+      documentNormatif 'H-Zip_v2.1_Specification_premium.docx (Word, 17 sections)'
+      tbd 'T_hb, epsilon, seuils de declenchement, tailles de cluster — [A CALIBRER]'
+      source 'Specification H-Zip v2.1, 2026-09-20'
+    }
+  }
+
+  // ===========================================================================
+  //  2. LES QUATRE TRAMES (objets de premiere classe, type `message`)
+  //     Chaque trame est un message observable : elle porte producteur,
+  //     consommateurs, canal, frequence, criticite et comportement en perte.
+  // ===========================================================================
+
+  hzipFrameR = message 'TRAME R — reactive APF (4 octets)' {
+    #message #safety-critical
+    description '''
+Trame reactive anti-collision. La plus critique du protocole.
+
+**Structure (4 octets).**
+- Octet 0 : `SYNC` = `0xAA` (preambule de synchronisation).
+- Octet 1 : `ID` — bits 7-5 type de plateforme (`000` UAV / `001` USV /
+  `010` UUV / `011`-`111` reserve, DOIT etre rejete) ; bits 4-0
+  identifiant (0-31).
+- Octet 2 : `APF` — bits 7-5 direction (8 secteurs N/NE/E/SE/S/SO/O/NO) ;
+  bits 4-2 intensite (0-7) ; bits 1-0 priorite (`00` aucune /
+  `01` vigilance / `10` evitement / `11` survie).
+- Octet 3 : `CRC-8` polynome `0x07`, init `0x00`, couvre les octets 1 et 2
+  (PAS le SYNC).
+
+**Regle d ecrasement.** Si `priorite = 11` (survie), tout recepteur DOIT
+suspendre son calcul PSO et n appliquer que la repulsion APF.
+Si `priorite = 00`, direction et intensite DOIVENT etre ignorees.
+
+**Exemple normatif.** `AA 20 00 3C` = USV (type `001`), ID 0, APF nul,
+CRC `0x3C`.
+'''
+    metadata {
+      producteur 'onboard.perception (sense-and-avoid)'
+      consommateurs 'onboard.safety, onboard.autopilot, onboard.linkRadio'
+      canal 'CH_LOCAL (prioritaire) + CH_MESH (voisinage)'
+      frequence '10-50 Hz [A CALIBRER]'
+      latence_cible '<= 20 ms [A CALIBRER]'
+      criticite 'safety-critical'
+      taille '4 octets'
+      schema 'SYNC(1) + ID(1) + APF(1) + CRC-8(1)'
+      perte 'inacceptable : la voie locale ne depend pas du reseau'
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      trame 'R'
+    }
+  }
+
+  hzipFrameS = message 'TRAME S — strategique PSO (etat complet)' {
+    #message
+    description '''
+Trame strategique de convergence vers l objectif.
+
+**Structure.** `SYNC` + `ID` + `gBest` (azimut 8 bits + elevation 6 bits)
++ `fitness` (6 bits) + `sequence` (4 bits) + `CRC-8`.
+
+**Point cle.** L elevation est INDISPENSABLE : un UAV et un UUV n evoluent
+pas dans le meme referentiel. Une direction purement cardinale (N/S/E/O)
+ne suffit pas pour un essaim 3D.
+
+**Fitness.** 64 niveaux (6 bits), et non 3 etats comme en v1 : la
+confiance est une grandeur continue, pas un booleen.
+'''
+    metadata {
+      producteur 'onboard.mission'
+      consommateurs 'onboard.mission (voisins), edge.coordinator'
+      canal 'CH_MESH'
+      frequence '0,1-2 Hz [A CALIBRER]'
+      latence_cible '<= 500 ms [A CALIBRER]'
+      criticite 'mission-critical'
+      taille '6-8 octets'
+      schema 'SYNC + ID + gBest(azimut 8b + elevation 6b) + fitness(6b) + seq(4b) + CRC-8'
+      perte 'convergence retardee ; le gBest precedent reste applique'
+      algorithme 'ALG_FORMATION_CONTROL'
+      trame 'S'
+    }
+  }
+
+  hzipFrameD = message 'TRAME D — delta predictif (correction)' {
+    #message
+    description '''
+Trame de correction par rapport au modele predictif partage.
+
+**Principe.** On ne transmet PAS la position absolue, mais la DEVIATION
+entre la position reelle et la position predite. Si la deviation reste
+sous le seuil epsilon, le noeud NE DOIT PAS emettre (silence nominal).
+
+**Role.** C est cette trame qui rend le « silence predictif » viable :
+elle ne coute de la bande que lorsque la prediction se trompe.
+'''
+    metadata {
+      producteur 'onboard.mission'
+      consommateurs 'onboard.mission (voisins), edge.coordinator'
+      canal 'CH_MESH'
+      frequence 'sur evenement (declenchee par depassement de epsilon)'
+      latence_cible '<= 500 ms [A CALIBRER]'
+      criticite 'mission-critical'
+      taille '4-6 octets'
+      schema 'SYNC + ID + delta + seq + CRC-8'
+      perte 'derive du modele predictif ; recadrage par heartbeat'
+      trame 'D'
+    }
+  }
+
+  hzipFrameH = message 'TRAME H — heartbeat de recadrage' {
+    #message #safety-critical
+    description '''
+Trame de recadrage periodique du modele predictif.
+
+**Role.** Borne superieurement l erreur de prediction. Sans heartbeat,
+deux noeuds peuvent diverger indefiniment.
+
+**Contrainte chiffree.** La borne d erreur entre deux heartbeats est
+`e_max = 0,5 x a_max x T_hb^2`. Avec `a_max = 2 m/s2` et `T_hb = 10 s`,
+l erreur atteint ~100 m — INACCEPTABLE en essaim dense. Il faut viser
+`T_hb` de l ordre de 1 s pour les UAV.
+
+**Contrainte de bande.** Un heartbeat global a 1 Hz sur 200 noeuds coute
+~12,8 kbit/s, ce qui DEPASSE la capacite d un canal acoustique unique.
+Le heartbeat DOIT donc etre limite au voisinage local, et la hierarchie
+par Hubs est INDISPENSABLE.
+'''
+    metadata {
+      producteur 'onboard.health'
+      consommateurs 'onboard.mission, onboard.linkRadio, edge.coordinator'
+      canal 'CH_MESH (voisinage local)'
+      frequence 'T_hb — 0,5-1 s (UAV) / 1-2 s (USV) / 5-10 s (UUV) [A CALIBRER]'
+      latence_cible '<= 500 ms [A CALIBRER]'
+      criticite 'safety-critical'
+      taille '4-6 octets'
+      schema 'SYNC + ID + position + seq + CRC-8'
+      perte 'derive non bornee du modele predictif — risque de collision'
+      borne_erreur 'e_max = 0,5 x a_max x T_hb^2'
+      trame 'H'
+    }
+  }
+
+  // ===========================================================================
+  //  3. LES QUATRE COUCHES (objets de premiere classe, type `policy`)
+  //     Chaque couche est une POLITIQUE de traitement, pas un composant.
+  // ===========================================================================
+
+  hzipLayer0 = policy 'H-Zip Couche 0 — prediction deterministe' {
+    #algorithm
+    description '''
+Prediction de la position des voisins par modele cinematique PARTAGE.
+
+**Interdiction.** Aucun LLM, aucun apprentissage. La prediction DOIT etre
+reproductible : deux noeuds avec le meme etat produisent la meme
+prediction. C est la condition de non-divergence.
+
+**Recadrage.** Le heartbeat (Trame H) borne l erreur. Sans lui, la
+prediction derive.
+'''
+    metadata {
+      couche '0'
+      frequence 'continue'
+      latence 'n/a (calcul local)'
+      tolerance 'nulle (deterministe)'
+      mecanisme 'modele cinematique partage + recadrage heartbeat'
+      interdit 'LLM, apprentissage, toute source de non-determinisme'
+      borne 'e_max = 0,5 x a_max x T_hb^2'
+      source 'Specification H-Zip v2.1, Partie III'
+    }
+  }
+
+  hzipLayer1 = policy 'H-Zip Couche 1 — reactive APF (anti-collision)' {
+    #algorithm #safety-critical
+    description '''
+Champ de potentiel artificiel pour l evitement local.
+
+**Priorite absolue.** Si la Trame R porte `priorite = 11` (survie), tout
+recepteur DOIT suspendre le calcul PSO et n appliquer que la repulsion.
+
+**Fondement.** Khatib (1986), *Real-Time Obstacle Avoidance for
+Manipulators and Mobile Robots*, IJRR.
+'''
+    metadata {
+      couche '1'
+      frequence '10-50 Hz [A CALIBRER]'
+      latence_cible '<= 20 ms [A CALIBRER]'
+      tolerance 'nulle'
+      trame 'R'
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      fondement 'Khatib 1986 (APF)'
+      source 'Specification H-Zip v2.1, Partie IV'
+    }
+  }
+
+  hzipLayer2 = policy 'H-Zip Couche 2 — strategique PSO (convergence)' {
+    #algorithm
+    description '''
+Optimisation par essaim particulaire pour la convergence vers l objectif.
+
+**Ponderation heterogene.** Un UUV NE DOIT PAS appliquer un gBest aerien
+avec le meme gain qu un UAV : les dynamiques sont incompatibles (l air
+se deplace plus vite que l eau). Le gain est pondere par classe.
+
+**Fondement.** Kennedy & Eberhart (1995), *Particle swarm optimization*,
+ICNN 95.
+'''
+    metadata {
+      couche '2'
+      frequence '0,1-2 Hz [A CALIBRER]'
+      latence_cible '<= 500 ms [A CALIBRER]'
+      tolerance 'moyenne'
+      trames 'S, D'
+      algorithme 'ALG_FORMATION_CONTROL'
+      fondement 'Kennedy & Eberhart 1995 (PSO)'
+      ponderation 'matrice de gain par classe (UAV/USV/UUV) — [A CALIBRER]'
+      source 'Specification H-Zip v2.1, Partie VI'
+    }
+  }
+
+  hzipLayer3 = policy 'H-Zip Couche 3 — cognitive (LLM, lecture seule)' {
+    #algorithm
+    description '''
+Interpretation d evenements complexes par petit modele de langage
+quantifie (<= 1B, Q4).
+
+**INTERDICTION ABSOLUE.** Cette couche NE DOIT JAMAIS ecrire dans les
+couches 0, 1 ou 2. Elle est en LECTURE SEULE sur l etat de l essaim.
+Un fallback deterministe DOIT exister : si le LLM est indisponible ou
+produit une sortie non conforme, le systeme continue sans lui.
+
+**Justification.** Un LLM en boucle reactive introduirait latence,
+consommation energetique et non-determinisme — inacceptables en
+securite de vol.
+'''
+    metadata {
+      couche '3'
+      frequence 'evenementielle'
+      latence_cible '<= 2 s [A CALIBRER]'
+      tolerance 'elevee (hors boucle de controle)'
+      modele '<= 1B parametres, quantifie Q4 [A CALIBRER]'
+      interdit 'ecriture dans les couches 0, 1, 2'
+      obligatoire 'fallback deterministe'
+      source 'Specification H-Zip v2.1, Partie VIII'
+    }
+  }
+
+  // ===========================================================================
+  //  4. LA TOPOLOGIE HIERARCHIQUE (Hubs USV / terminaux)
+  // ===========================================================================
+
+  hzipTopology = policy 'H-Zip — topologie hierarchique (Hubs USV / terminaux)' {
+    #algorithm
+    description '''
+Partitionnement dynamique en clusters.
+
+**Hubs.** Les USV (surface, lourds) sont des routeurs de secteur. Ils
+agregent les trames de leurs terminaux et n emettent qu une trame
+consolidee vers les autres Hubs.
+
+**Terminaux.** UAV et UUV ne diffusent PAS a l echelle globale : ils ne
+s adressent qu a leur Hub d affectation.
+
+**Broadcast borne.** Le broadcast global (`*`) est autorise UNIQUEMENT
+pour les Hubs, ou en cas de crash imminent d un terminal.
+
+**Fondement.** Tseng et al. (2002), *The Broadcast Storm Problem in a
+Mobile Ad Hoc Network* — justification du partitionnement.
+
+**Point de defaillance.** Un Hub unique est un SPOF. Un Hub secondaire
+et un protocole d election DOIVENT exister.
+'''
+    metadata {
+      hubs 'USV (surface, lourds) — routeurs de secteur'
+      terminaux 'UAV, UUV — rattaches a un Hub'
+      broadcast 'borne : Hubs uniquement, ou crash imminent'
+      agregat 'barycentre des signaux des eclaireurs, une trame consolidee'
+      spof 'Hub unique = point de defaillance — Hub secondaire + election requis'
+      fondement 'Tseng et al. 2002 (broadcast storm)'
+      source 'Specification H-Zip v2.1, Partie V'
+    }
+  }
+
+  // ===========================================================================
+  //  5. LA SPECIFICATION (document normatif, type `specDoc`)
+  // ===========================================================================
+
+  specHzip = specDoc 'Specification H-Zip v2.1 (Dream-Zip) — document normatif' {
+    #source-doc
+    link https://likec4.breizh.ai/H-Zip_v2.1_Specification_premium.docx "Specification H-Zip v2.1 (Dream-Zip) — document Word premium (17 sections, 19 tableaux, 5 figures, bibliographie verifiee)"
+    description '''
+Document normatif complet du protocole H-Zip v2.1.
+
+**Contenu.** 17 sections principales, 30 sous-sections, 19 tableaux,
+5 figures, bibliographie academique verifiee (DOI resolus via Crossref,
+references arXiv resolues via l API arXiv).
+
+**Methode.** Loop Engineering : diverger, converger, attaquer, corriger,
+industrialiser, verifier.
+
+**Statut.** Specification, PAS implementation. Toutes les valeurs
+numeriques sont marquees [A CALIBRER] : ce sont des points de depart,
+pas des resultats mesures.
+'''
+    metadata {
+      titre 'H-Zip v2.1 (Dream-Zip) — Specification technique'
+      version 'v2.1'
+      date '2026-09-20'
+      format 'Word (.docx)'
+      sections '17 principales, 30 sous-sections'
+      tableaux '19'
+      figures '5'
+      bibliographie 'verifiee (Crossref + arXiv)'
+      statut 'SPECIFICATION — non implemente'
+      valeurs 'toutes marquees [A CALIBRER]'
+    }
+  }
+
+  // ===========================================================================
+  //  6. LES SOURCES ACADEMIQUES (type `scientificPaper`)
+  //     Chaque source a ete resolue (DOI via Crossref, arXiv via API).
+  //     Aucune source n est inventee.
+  // ===========================================================================
+
+  paperKhatib1986 = scientificPaper 'Khatib 1986 — Real-Time Obstacle Avoidance (APF)' {
+    #science
+    link https://doi.org/10.1177/027836498600500106 "Khatib, O. (1986). Real-Time Obstacle Avoidance for Manipulators and Mobile Robots. The International Journal of Robotics Research, 5(1), 90-98."
+    description 'Fondement des champs de potentiel artificiels (APF). Source primaire de la couche reactive H-Zip.'
+    metadata {
+      auteurs 'Oussama Khatib'
+      annee '1986'
+      revue 'The International Journal of Robotics Research'
+      doi '10.1177/027836498600500106'
+      apport 'Champs de potentiel artificiels pour l evitement d obstacles en temps reel'
+      usage 'Couche 1 reactive APF'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperKennedy1995 = scientificPaper 'Kennedy & Eberhart 1995 — Particle Swarm Optimization' {
+    #science
+    link https://doi.org/10.1109/icnn.1995.488968 "Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. Proceedings of ICNN 95 - International Conference on Neural Networks, 4, 1942-1948."
+    description 'Fondement de l optimisation par essaim particulaire (PSO). Source primaire de la couche strategique H-Zip.'
+    metadata {
+      auteurs 'James Kennedy, Russell Eberhart'
+      annee '1995'
+      conference 'ICNN 95 — International Conference on Neural Networks'
+      doi '10.1109/icnn.1995.488968'
+      apport 'Optimisation par essaim particulaire (gBest / pBest)'
+      usage 'Couche 2 strategique PSO'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperDimarogonas2012 = scientificPaper 'Dimarogonas et al. 2012 — Distributed Event-Triggered Control' {
+    #science
+    link https://doi.org/10.1109/tac.2011.2174666 "Dimarogonas, D. V., Frazzoli, E., & Johansson, K. H. (2012). Distributed Event-Triggered Control for Multi-Agent Systems. IEEE Transactions on Automatic Control, 57(5), 1291-1297."
+    description 'Fondement theorique du passage d un reseau state-driven a event-driven. Justifie le silence predictif et la borne d erreur entre evenements.'
+    metadata {
+      auteurs 'Dimarogonas, Frazzoli, Johansson'
+      annee '2012'
+      revue 'IEEE Transactions on Automatic Control'
+      doi '10.1109/tac.2011.2174666'
+      apport 'Controle evenementiel distribue : on ne transmet que si un seuil est franchi'
+      usage 'Justification du silence predictif et de la Trame D'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperTseng2002 = scientificPaper 'Tseng et al. 2002 — The Broadcast Storm Problem' {
+    #science
+    link https://doi.org/10.1023/a:1013763825347 "Tseng, Y.-C., Ni, S.-Y., Chen, Y.-S., & Sheu, J.-P. (2002). The Broadcast Storm Problem in a Mobile Ad Hoc Network. Wireless Networks, 8(2/3), 153-167."
+    description 'Fondement du partitionnement hierarchique. Justifie le passage d une topologie flat a une topologie par Hubs.'
+    metadata {
+      auteurs 'Tseng, Ni, Chen, Sheu'
+      annee '2002'
+      revue 'Wireless Networks'
+      doi '10.1023/a:1013763825347'
+      apport 'Le broadcast en reseau ad hoc s effondre au-dela d une densite critique'
+      usage 'Justification de la topologie hierarchique par Hubs'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperAkyildiz2005 = scientificPaper 'Akyildiz et al. 2005 — Underwater Acoustic Sensor Networks' {
+    #science
+    link https://doi.org/10.1016/j.adhoc.2005.01.004 "Akyildiz, I. F., Pompili, D., & Melodia, T. (2005). Underwater acoustic sensor networks: research challenges. Ad Hoc Networks, 3(3), 257-279."
+    description 'Source de la contrainte de bande passante acoustique. Justifie la borne de debit des UUV et l impossibilite d un heartbeat global.'
+    metadata {
+      auteurs 'Akyildiz, Pompili, Melodia'
+      annee '2005'
+      revue 'Ad Hoc Networks'
+      doi '10.1016/j.adhoc.2005.01.004'
+      apport 'Bande passante acoustique sous-marine tres limitee (100 bit/s a quelques kbit/s)'
+      usage 'Contrainte de debit des UUV ; impossibilite du heartbeat global'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperOlfatiSaber2007 = scientificPaper 'Olfati-Saber et al. 2007 — Consensus and Cooperation' {
+    #science
+    link https://doi.org/10.1109/jproc.2006.887293 "Olfati-Saber, R., Fax, J. A., & Murray, R. M. (2007). Consensus and Cooperation in Networked Multi-Agent Systems. Proceedings of the IEEE, 95(1), 215-233."
+    description 'Cadre theorique du consensus distribue. Relie H-Zip a ALG_CONSENSUS.'
+    metadata {
+      auteurs 'Olfati-Saber, Fax, Murray'
+      annee '2007'
+      revue 'Proceedings of the IEEE'
+      doi '10.1109/jproc.2006.887293'
+      apport 'Cadre unifie du consensus en systemes multi-agents en reseau'
+      usage 'Fondement theorique du consensus d essaim'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperHuYan2007 = scientificPaper 'Hu & Yan 2007 — Stability Robustness under Packet Loss' {
+    #science
+    link https://doi.org/10.1016/j.automatica.2006.12.020 "Hu, S., & Yan, W.-Y. (2007). Stability robustness of networked control systems with respect to packet loss. Automatica, 43(7), 1243-1248."
+    description 'Fondement de la robustesse aux pertes de paquets. Justifie le comportement en perte de chaque trame H-Zip.'
+    metadata {
+      auteurs 'Hu, Yan'
+      annee '2007'
+      revue 'Automatica'
+      doi '10.1016/j.automatica.2006.12.020'
+      apport 'Robustesse de stabilite des systemes commandes en reseau face aux pertes'
+      usage 'Justification du comportement en perte des trames'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  paperReynolds1987 = scientificPaper 'Reynolds 1987 — Flocks, Herds and Schools' {
+    #science
+    link https://doi.org/10.1145/37402.37406 "Reynolds, C. W. (1987). Flocks, herds and schools: A distributed behavioral model. ACM SIGGRAPH Computer Graphics, 21(4), 25-34."
+    description 'Fondement des comportements collectifs distribues (boids). Ancetre conceptuel de la coordination locale sans autorite centrale.'
+    metadata {
+      auteurs 'Craig W. Reynolds'
+      annee '1987'
+      conference 'ACM SIGGRAPH'
+      doi '10.1145/37402.37406'
+      apport 'Modele comportemental distribue : separation, alignement, cohesion'
+      usage 'Ancetre conceptuel de la coordination locale'
+      statut 'VERIFIEE (DOI resolu via Crossref)'
+    }
+  }
+
+  // ===========================================================================
+  //  7. RELATIONS — PROTOCOLE <-> MODELE EXISTANT
+  //     Aucune relation existante n est modifiee. On AJOUTE des arcs.
+  // ===========================================================================
+
+  // --- Le protocole est porte par le composant de communication existant ---
+  onboard.linkRadio -[implements]-> hzip 'politique d encodage et de coordination (H-Zip v2.1)'
+  hzip -[runsOn]-> onboard.linkRadio 'execute par la pile de communication embarquee'
+
+  // --- Le protocole est documente par sa specification ---
+  hzip -[documentedBy]-> specHzip 'specification normative complete (v2.1)'
+
+  // --- Les trames sont des messages du protocole ---
+  hzip -[produces]-> hzipFrameR 'trame reactive (4 octets)'
+  hzip -[produces]-> hzipFrameS 'trame strategique'
+  hzip -[produces]-> hzipFrameD 'trame delta predictif'
+  hzip -[produces]-> hzipFrameH 'trame heartbeat de recadrage'
+
+  // --- Les couches composent le protocole ---
+  hzip -[contains]-> hzipLayer0 'couche 0 — prediction deterministe'
+  hzip -[contains]-> hzipLayer1 'couche 1 — reactive APF'
+  hzip -[contains]-> hzipLayer2 'couche 2 — strategique PSO'
+  hzip -[contains]-> hzipLayer3 'couche 3 — cognitive LLM (lecture seule)'
+  hzip -[contains]-> hzipTopology 'topologie hierarchique par Hubs'
+
+  // --- Les trames utilisent les canaux existants ---
+  hzipFrameR -[uses]-> chLocal 'voie locale prioritaire (surete)'
+  hzipFrameR -[uses]-> chMesh 'diffusion de voisinage'
+  hzipFrameS -[uses]-> chMesh 'canal inter-agents'
+  hzipFrameD -[uses]-> chMesh 'canal inter-agents'
+  hzipFrameH -[uses]-> chMesh 'canal inter-agents (voisinage local)'
+
+  // --- Les trames sont produites et consommees par les composants existants ---
+  onboard.perception -[publishes]-> hzipFrameR 'sense-and-avoid'
+  onboard.health -[publishes]-> hzipFrameH 'heartbeat de recadrage'
+  onboard.mission -[publishes]-> hzipFrameS 'gBest strategique'
+  onboard.mission -[publishes]-> hzipFrameD 'correction delta'
+  hzipFrameR -[subscribes]-> onboard.safety 'voie de surete'
+  hzipFrameR -[subscribes]-> onboard.autopilot 'commande d evitement'
+  hzipFrameH -[subscribes]-> onboard.mission 'recadrage predictif'
+  hzipFrameS -[subscribes]-> onboard.mission 'convergence'
+  hzipFrameD -[subscribes]-> onboard.mission 'correction'
+
+  // --- Les couches s appuient sur les algorithmes existants ---
+  hzipLayer1 -[uses]-> algCollisionAvoidance 'evitement reactif (APF)'
+  hzipLayer2 -[uses]-> algFormationControl 'convergence de formation (PSO)'
+  hzipLayer0 -[uses]-> algCooperativeLocalization 'prediction et localisation relative'
+  hzipLayer2 -[uses]-> algConsensus 'consensus d etat d essaim'
+  hzipTopology -[uses]-> algLeaderElection 'election du Hub de secteur'
+  hzipLayer3 -[uses]-> algEventTriggeredComm 'politique d emission evenementielle'
+
+  // --- Les sources academiques etayent les couches ---
+  paperKhatib1986 -[evidences]-> hzipLayer1 'fondement des champs de potentiel (APF)'
+  paperKennedy1995 -[evidences]-> hzipLayer2 'fondement de l optimisation par essaim (PSO)'
+  paperDimarogonas2012 -[evidences]-> hzipLayer0 'controle evenementiel distribue'
+  paperDimarogonas2012 -[evidences]-> hzipFrameD 'transmission sur franchissement de seuil'
+  paperTseng2002 -[evidences]-> hzipTopology 'effondrement du broadcast flat'
+  paperAkyildiz2005 -[evidences]-> hzipFrameH 'contrainte de bande acoustique'
+  paperOlfatiSaber2007 -[evidences]-> hzipLayer2 'cadre du consensus distribue'
+  paperHuYan2007 -[evidences]-> hzipFrameD 'robustesse aux pertes de paquets'
+  paperReynolds1987 -[evidences]-> hzipLayer1 'coordination locale distribuee'
+
+  // --- Le protocole est relie aux hypotheses et angles morts existants ---
+  hzip -[exposed-to]-> blindspotAM3 'budget radio total non mesure — H-Zip aggrave la contrainte'
+  hzip -[exposed-to]-> blindspotAM4 'perception d essaim sans brique ni metrique'
+
+  // ===========================================================================
+  //  8. TESTS ET CRITERES D'ACCEPTATION (type `test`)
+  // ===========================================================================
+
+  testHzipCrc = test 'TEST H-Zip — detection de corruption CRC-8' {
+    #tbd
+    description '''
+Critere d acceptation : sur N trames R injectees avec un bit flippe
+aleatoire, le taux de trames corrompues NON detectees DOIT etre de 0.
+
+Justification : en environnement bruite, un octet corrompu peut
+transformer `priorite = 00` en `priorite = 11` et declencher un
+evitement critique fantome.
+'''
+    metadata {
+      cible 'taux de corruption non detectee = 0'
+      methode 'injection de fautes (bit-flip) sur trames R'
+      statut 'NON EXECUTE — critere defini'
+      tbd 'nombre de tirages N — [A CALIBRER]'
+    }
+  }
+
+  testHzipLatence = test 'TEST H-Zip — latence de la couche reactive' {
+    #tbd
+    description '''
+Critere d acceptation : la latence de bout en bout de la couche 1
+(perception -> decision -> commande) DOIT rester sous 20 ms.
+
+Justification : la couche reactive a une tolerance a l erreur nulle.
+Toute latence excessive est un risque de collision.
+'''
+    metadata {
+      cible 'latence <= 20 ms [A CALIBRER]'
+      methode 'mesure de bout en bout sur banc de test'
+      statut 'NON EXECUTE — critere defini'
+    }
+  }
+
+  testHzipDivergence = test 'TEST H-Zip — borne de divergence du modele predictif' {
+    #tbd
+    description '''
+Critere d acceptation : l erreur de prediction entre deux heartbeats
+DOIT rester sous `e_max = 0,5 x a_max x T_hb^2`.
+
+Justification : sans cette borne, deux noeuds divergent et la
+coordination devient incoherente.
+'''
+    metadata {
+      cible 'e_i(t) <= e_max pour tout t'
+      methode 'simulation multi-agents avec acceleration bornee'
+      statut 'NON EXECUTE — critere defini'
+      tbd 'T_hb et e_max — [A CALIBRER]'
+    }
+  }
+
+  testHzipBande = test 'TEST H-Zip — budget de bande passante par noeud' {
+    #tbd
+    description '''
+Critere d acceptation : le debit par noeud DOIT rester compatible avec
+le canal le plus contraint (acoustique UUV).
+
+Justification : un heartbeat global a 1 Hz sur 200 noeuds coute
+~12,8 kbit/s, au-dela de la capacite d un canal acoustique unique.
+'''
+    metadata {
+      cible 'debit par noeud <= capacite du canal acoustique'
+      methode 'comptage de trames x taille / duree'
+      statut 'NON EXECUTE — critere defini'
+      tbd 'capacite acoustique reelle du modem — [A CALIBRER]'
+    }
+  }
+
+  // --- Relations de verification ---
+  testHzipCrc -[validates]-> hzipFrameR 'integrite de la trame reactive'
+  testHzipLatence -[validates]-> hzipLayer1 'latence de la couche reactive'
+  testHzipDivergence -[validates]-> hzipLayer0 'borne du modele predictif'
+  testHzipBande -[validates]-> hzip 'budget de bande passante'
+
+}
+
