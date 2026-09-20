@@ -1261,16 +1261,16 @@ views {
   }
 
   // ===========================================================================
-  //  H-ZIP v2.1 — PROTOCOLE DE COMMUNICATION D'ESSAIM (ajout 2026-09-20)
-  //  Integration de la specification H-Zip v2.1 (Dream-Zip).
+  //  H-ZIP v2.2 — PROTOCOLE DE COMMUNICATION D'ESSAIM (ajout 2026-09-20)
+  //  Integration de la specification H-Zip v2.2 (Dream-Zip).
   //  Aucune vue existante n'est modifiee : ces vues sont AJOUTEES.
   // ===========================================================================
 
   view hzipProtocol {
-    title '05 · Protocole \\/ H-Zip v2.1 — protocole, couches et trames'
+    title '05 · Protocole \\/ H-Zip v2.2 — protocole, couches et trames'
 
     description '''
-      **H-Zip v2.1 (Dream-Zip)** — protocole de coordination d essaim
+      **H-Zip v2.2 (Dream-Zip)** — protocole de coordination d essaim
       heterogene sous contrainte extreme de bande passante.
 
       Quatre couches independantes, du plus reactif au plus cognitif.
