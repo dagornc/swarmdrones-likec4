@@ -32,6 +32,8 @@
 17. [Dépannage](#17-dépannage)
 18. [Glossaire](#18-glossaire)
 19. [Licence](#19-licence)
+20. [Version 2 — reconnexion des agents isolés](#20-version-2--reconnexion-des-agents-isolés)
+21. [Version 3 — quiescence (loop engineering)](#21-version-3--quiescence-loop-engineering)
 
 ---
 
@@ -908,6 +910,9 @@ Vérification exhaustive sur les 10 graines concernées :
 topologie. Un agent sans aucun lien ne peut pas participer à un consensus
 distribué. Le résultat est **correct** et **documenté**.
 
+> **La v2 corrige ce cas.** Voir la section 20 — la reconnexion des agents
+> isolés ramène T8 à **1000/1000** sans aucune régression.
+
 ### 15.2 Le retrait peut ne pas avoir lieu
 
 Si la convergence survient **avant** `t_retrait`, la simulation s'arrête
@@ -1065,6 +1070,209 @@ Copyright (c) 2026 Christophe Dagorn.
 
 ---
 
+## 20. Version 2 — reconnexion des agents isolés
+
+La **v2** est un **mode additionnel**. Elle ne remplace pas la v1 : sans
+l'option `--v2`, le comportement est **strictement identique** à la v1, à la
+parité bit-à-bit près.
+
+### 20.1 Le défaut corrigé
+
+La v1 ne peut pas atteindre l'accord quand un agent se retrouve **sans aucun
+pair joignable** (section 15.1). Le mécanisme v2 traite exactement ce cas.
+
+### 20.2 Le mécanisme
+
+Trois éléments, dans `src/reconnexion.rs` et `src/sim.rs` :
+
+1. **Détection de l'isolement réel.** La v1 n'exclut pas les agents inactifs
+   de ses cibles d'émission : un agent peut « émettre » vers des voisins
+   retirés, qui ne reçoivent rien. La v2 ne compte que les pairs
+   **effectivement joignables**.
+2. **Élargissement monotone du rayon.** Un agent isolé élargit son rayon de
+   contact (distance de Chebyshev) d'une unité par période d'isolement,
+   plafonné à `RAYON_MAX`. Le rayon **ne redescend jamais** : sans cette
+   monotonie, l'agent oscillerait entre rayon 1 (isolé) et rayon 2 (connecté)
+   sans jamais rester connecté assez longtemps pour converger.
+3. **Réception élargie.** Un agent isolé lit l'état des pairs de son rayon
+   élargi. Sans cela, le mécanisme serait **asymétrique** : l'agent isolé
+   émettrait vers des pairs éloignés, mais ces pairs ne le compteraient pas
+   parmi leurs propres cibles et ne lui répondraient jamais. C'est cette
+   asymétrie qui bloquait l'accord.
+
+### 20.3 Résultats mesurés
+
+Sur 1 000 graines (1001–2000) :
+
+| Test | v1 | v2 | Δ accord | Messages v1 | Messages v2 | Δ messages |
+|---|---|---|---|---|---|---|
+| T1 | 1000/1000 | 1000/1000 | 0 | 470 204 | 470 204 | 0,0 % |
+| T2 | 1000/1000 | 1000/1000 | 0 | 470 204 | 470 204 | 0,0 % |
+| T3 | 1000/1000 | 1000/1000 | 0 | 529 396 | 529 396 | 0,0 % |
+| T4 | 1000/1000 | 1000/1000 | 0 | 940 408 | 940 408 | 0,0 % |
+| T5 | 1000/1000 | 1000/1000 | 0 | 3 348 978 | 3 348 978 | 0,0 % |
+| T5D | 1000/1000 | 1000/1000 | 0 | 9 094 000 | 9 094 000 | 0,0 % |
+| T6 | 1000/1000 | 1000/1000 | 0 | 470 204 | 470 204 | 0,0 % |
+| **T8** | **990/1000** | **1000/1000** | **+10** | **619 038** | **420 982** | **−32,0 %** |
+| T9 | 1000/1000 | 1000/1000 | 0 | 3 348 978 | 3 348 978 | 0,0 % |
+
+**Lecture.** Le gain est **ciblé sur T8** : c'est le seul test qui produit des
+agents isolés. Sur les huit autres tests, le mécanisme ne se déclenche jamais
+et le résultat est **strictement identique** — c'est le comportement attendu
+d'un mode additionnel.
+
+Le **−32 % de messages** sur T8 est un effet secondaire : en v1, l'agent isolé
+émettait chaque période vers des voisins retirés (messages perdus). La v2
+supprime ce trafic inutile.
+
+**Aucune régression** : sur les 1 000 graines, aucune graine qui convergeait
+en v1 n'échoue en v2.
+
+### 20.4 Utilisation
+
+```bash
+# v1 (comportement historique, par défaut)
+consensus_rs --test T8 --seeds 1001-2000 --out t8_v1.csv
+
+# v2 (reconnexion active)
+consensus_rs --test T8 --seeds 1001-2000 --out t8_v2.csv --v2
+```
+
+En bibliothèque :
+
+```rust
+use consensus_rs::sim::{simuler, Params};
+
+let p = Params { reconnexion: true, ..Default::default() };
+let r = simuler(1010, &p);
+assert!(r.accord);
+```
+
+### 20.5 Garanties
+
+- **Parité v1 préservée** : 9 000 graines, 0 écart (`verify_parite_rust.py`).
+- **26/26 tests** passent (21 unitaires + 5 d'intégration), 0 warning.
+- **Non-régression testée** : `v2_ne_degrade_pas_les_graines_qui_convergeaient`
+  vérifie sur 200 graines qu'aucune ne passe d'accord à échec.
+
+---
+
+## 21. Version 3 — quiescence (loop engineering)
+
+### 21.1 Le problème laissé par la v2
+
+La v2 corrige l'isolement des agents, mais elle conserve un défaut de fond :
+**chaque agent émet à chaque période, indéfiniment**, même quand tous les
+agents partagent déjà la même valeur. Le coût en messages est donc
+proportionnel au nombre de périodes simulées, pas à l'information réellement
+transportée.
+
+Mesures v2 sur 1 000 graines :
+
+- T1 : 470 messages en moyenne, convergence médiane à 5 périodes.
+- T5D : **9 094 messages**, convergence à 103 périodes.
+
+T5D transporte une information qui tient en quelques dizaines de messages
+utiles, mais en consomme 9 094.
+
+### 21.2 Le mécanisme
+
+Chaque agent tient un compteur `stable[i]` : nombre de périodes consécutives
+pendant lesquelles son état n'a pas changé. Au-delà de `SEUIL_QUIESCENCE`
+(8 périodes), l'agent cesse d'émettre — il est **quiescent**.
+
+Un agent quiescent **reste récepteur** : s'il reçoit un état différent, son
+compteur retombe à zéro et il se réveille.
+
+### 21.3 Le piège : la stabilité est locale
+
+La première implémentation — quiescence pure, sans réveil — **casse la
+convergence**. Mesuré : T5D passe de 1000/1000 à **0/1000** d'accord.
+
+La cause est structurelle. Dans T5D, une partition force une divergence entre
+deux moitiés. Chaque moitié converge **en interne** bien avant la re-fusion :
+tous les agents deviennent donc quiescents vers la période 8. Quand la
+partition tombe à t = 103, **plus personne n'émet** : les deux moitiés ne se
+reparlent jamais.
+
+La stabilité est une propriété **locale**. Un agent stable dans sa composante
+peut appartenir à une composante qui doit encore fusionner avec une autre.
+
+### 21.4 La correction : réveil périodique
+
+Un agent quiescent émet quand même tous les `PERIODE_REVEIL` (16) tours. Cela
+garantit qu'une information nouvelle finit toujours par circuler, au prix
+d'un coût résiduel borné.
+
+```rust
+pub fn doit_emettre(stable: usize) -> bool {
+    if stable < SEUIL_QUIESCENCE {
+        return true;
+    }
+    stable % PERIODE_REVEIL == 0
+}
+```
+
+### 21.5 Résultats mesurés (1 000 graines par test, 9 tests)
+
+| test | v2 accord | v2 messages | v3 accord | v3 messages | delta |
+|------|-----------|-------------|-----------|-------------|-------|
+| T1   | 1000/1000 | 470 204     | 1000/1000 | 470 166     | −0,0 % |
+| T3   | 1000/1000 | 529 396     | 1000/1000 | 529 207     | −0,0 % |
+| T4   | 1000/1000 | 940 408     | 1000/1000 | 940 332     | −0,0 % |
+| T5   | 1000/1000 | 3 348 978   | 1000/1000 | 795 873     | **−76,2 %** |
+| T5D  | 1000/1000 | 9 094 000   | 1000/1000 | 1 541 184   | **−83,1 %** |
+| T8   | 1000/1000 | 420 982     | 1000/1000 | 420 875     | −0,0 % |
+| T9   | 1000/1000 | 3 348 978   | 1000/1000 | 795 873     | **−76,2 %** |
+
+**Total : −66,3 % de messages par rapport à la v2, −66,6 % par rapport à la
+v1, avec un accord de 1000/1000 sur les 9 tests.**
+
+Le seul coût : T5D converge à 117 périodes au lieu de 103 (+14). C'est le prix
+du réveil périodique — échange très favorable.
+
+### 21.6 Utilisation
+
+En ligne de commande :
+
+```bash
+consensus_rs --test T5D --seeds 1001-2000 --v3 --out resultats.csv
+```
+
+En bibliothèque :
+
+```rust
+use consensus_rs::sim::{simuler, Params};
+
+let p = Params { reconnexion: true, quiescence: true, ..Default::default() };
+let r = simuler(1001, &p);
+assert!(r.accord);
+```
+
+### 21.7 Garanties
+
+- **Parité v1 préservée** : 9 000 graines, 0 écart (`verify_parite_rust.py`).
+- **30/30 tests** passent (25 unitaires + 5 d'intégration), 0 warning.
+- **Non-régression mesurée** : accord v3 ≥ accord v2 sur les 9 tests.
+
+### 21.8 Méthode : loop engineering
+
+La v3 a été produite en appliquant les *building blocks* de **loop
+engineering** (Lulla et al., 2026, arXiv:2608.21884v2) :
+
+- **Goal & stop condition** — objectif : réduire le coût en messages sans
+  dégrader l'accord. Critère d'arrêt machine-checkable : accord v3 ≥ accord v2
+  sur les 9 tests.
+- **State & memory** — les mesures sont persistées dans des CSV et comparées
+  par `compare_v1_v2_v3.py`.
+- **Verification (maker/checker)** — le harnais de mesure est indépendant du
+  code de simulation ; la parité v1 est vérifiée par un script séparé.
+- **Human oversight** — la v3 reste sur sa branche, non fusionnée dans
+  `master` : le changement de comportement par défaut est une décision humaine.
+- **Budgets** — la boucle est bornée : 9 tests × 1 000 graines par itération.
+
+---
+
 ## Références
 
 - Spécification **ALG_CONSENSUS v5**, §4.7.1 (harnais de tests).
@@ -1073,3 +1281,6 @@ Copyright (c) 2026 Christophe Dagorn.
 - CPython, `Lib/random.py` et `Modules/_randommodule.c` — sémantique de
   `random.Random`, `randint`, `sample`, `getrandbits`.
 - Shapiro, M. et al. (2011). *Conflict-free Replicated Data Types.* SSS 2011.
+- Lulla, J., Nersesyan, A., Mohsenimofidi, S., Treude, C. & Baltes, S. (2026).
+  *Loop Engineering: A Framework for Automated Control Structures over Coding
+  Agents.* arXiv:2608.21884v2. JAWs@ASE 2026.

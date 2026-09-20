@@ -541,16 +541,18 @@ model {
     link https://github.com/dagornc/alg-consensus "Depot GitHub alg-consensus — code source du portage Rust (consensus_rs)"
     link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A (submodule algorithms/consensus)"
     link https://likec4.breizh.ai/consensus_rs/README.md "README du portage Rust (parite bit-a-bit avec la reference Python)"
-    description 'Portage Rust de l algorithme ALG_CONSENSUS (CRDT semi-treillis + gossip). Le code vit dans le depot dedie https://github.com/dagornc/alg-consensus, rattache au depot principal https://github.com/dagornc/SwarmDrones en tant que Git submodule (chemin algorithms/consensus). Parite bit-a-bit verifiee avec la reference Python sim_consensus.py : 9 000 comparaisons (9 tests x 1 000 graines), 0 ecart. 26/26 tests passent. Performance : environ 21x plus rapide que Python (9 000 simulations en 1,18 s, soit 7 647 sim/s contre 352 sim/s). Le point difficile du portage est le generateur pseudo-aleatoire : MT19937 avec initialisation init_by_array de CPython, random(), randint() et sample() reproduits a l identique (ordre de selection, setsize). Structure : src/rng.rs (RNG compatible CPython), src/sim.rs (etat, fusion semi-treillis, gossip, harnais T1-T9), src/reconnexion.rs (v2 : reconnexion des agents isoles), src/main.rs (CLI compatible sim_consensus.py), tests/parite.rs (5 tests de parite CPython), reference/sim_consensus.py (reference Python embarquee), verify_parite_rust.py (comparaison automatique Rust vs Python).'
+    description 'Portage Rust de l algorithme ALG_CONSENSUS (CRDT semi-treillis + gossip). Le code vit dans le depot dedie https://github.com/dagornc/alg-consensus, rattache au depot principal https://github.com/dagornc/SwarmDrones en tant que Git submodule (chemin algorithms/consensus). Parite bit-a-bit verifiee avec la reference Python sim_consensus.py : 9 000 comparaisons (9 tests x 1 000 graines), 0 ecart. 30/30 tests passent. Trois versions d implementation coexistent sur des branches dediees : v1 (master, comportement historique), v2 (branche v2, reconnexion des agents isoles), v3 (branche v3, quiescence par loop engineering). Notation /20 : v1 15,7 ; v2 16,3 ; v3 19,5. Structure : src/rng.rs (RNG compatible CPython), src/sim.rs (etat, fusion semi-treillis, gossip, harnais T1-T9), src/reconnexion.rs (v2), src/quiescence.rs (v3), src/main.rs (CLI compatible sim_consensus.py, flags --v2 et --v3), tests/parite.rs (5 tests de parite CPython), reference/sim_consensus.py (reference Python embarquee), verify_parite_rust.py (comparaison automatique Rust vs Python).'
     metadata {
       algorithme 'ALG_CONSENSUS'
       langage 'Rust (edition 2024, rustc 1.98.1)'
       depot 'https://github.com/dagornc/alg-consensus'
       depotPrincipal 'https://github.com/dagornc/SwarmDrones'
       integration 'Git submodule — algorithms/consensus'
-      branches 'master (v1) ; v2 (reconnexion des agents isoles)'
+      branches 'master (v1) ; v2 (reconnexion des agents isoles) ; v3 (quiescence)'
+      versionsImplementation 'v1 (master) ; v2 (branche v2) ; v3 (branche v3)'
+      notesVersions 'v1 15,7/20 ; v2 16,3/20 ; v3 19,5/20'
       parite 'bit-a-bit avec sim_consensus.py — 9 000 comparaisons, 0 ecart'
-      tests '26/26 (21 unitaires + 5 de parite CPython)'
+      tests '30/30 (25 unitaires + 5 de parite CPython)'
       performance 'environ 21x plus rapide que Python (7 647 sim/s contre 352 sim/s)'
       nature 'portage de reference'
       statut 'PUBLIE'
