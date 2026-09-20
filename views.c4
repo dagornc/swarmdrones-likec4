@@ -1288,6 +1288,9 @@ views {
     include hzip -> hzipLayer0, hzipLayer1, hzipLayer2, hzipLayer3, hzipTopology
     include hzip -> hzipFrameR, hzipFrameS, hzipFrameD, hzipFrameH
     include hzip -> specHzip
+    // HZIP-P1 : le code source du protocole (option a) et la decision d arbitrage.
+    include srcAlgProtocole
+    include decHzipProtocole
     autoLayout TopBottom
   }
 

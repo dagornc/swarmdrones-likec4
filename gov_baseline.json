@@ -1,14 +1,14 @@
 {
-  "total_elements": 332,
-  "total_relations": 683,
+  "total_elements": 334,
+  "total_relations": 685,
   "total_views": 62,
   "total_deployments": 2,
   "elements_by_kind": {
     "algorithm": 15,
     "specDoc": 32,
-    "sourceCode": 2,
+    "sourceCode": 3,
     "hypothesis": 5,
-    "decision": 15,
+    "decision": 16,
     "external": 2,
     "operator": 1,
     "platform": 1,
@@ -50,10 +50,10 @@
     "renderRule": 6
   },
   "relations_by_kind": {
-    "implements": 25,
+    "implements": 26,
     "uses": 116,
     "exposed-to": 113,
-    "documentedBy": 5,
+    "documentedBy": 6,
     "runsOn": 30,
     "radio": 3,
     "flow": 40,

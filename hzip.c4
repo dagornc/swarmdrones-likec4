@@ -24,10 +24,13 @@
 //    canaux existants : il en est une POLITIQUE D'ENCODAGE applicable.
 //
 //  AVERTISSEMENT D'HONNETETE :
-//    Les valeurs numeriques du protocole (T_hb, epsilon, seuils, tailles)
-//    sont des valeurs de DEPART marquees [A CALIBRER]. Elles ne sont PAS
-//    des resultats mesures. Le document de specification les porte comme
-//    telles. Aucune mesure n'a ete effectuee dans cette session.
+//    Les parametres du protocole ont ete FIGES le 2026-09-20 (carte
+//    t_53fee5f0, cf docs/ADR-hzip-protocole-calibration.md). Ce sont des
+//    valeurs DECIDEES et JUSTIFIEES par calcul (borne de divergence, budget
+//    de bande, adressage, probabilites de perte), PAS des mesures : elles
+//    devront etre re-confirmees par simulation multi-agents puis en banc.
+//    Les bornes physiques de classe (a_max, v_max, d_min) et la capacite du
+//    modem acoustique restent A MESURER (decisions DE-05/DE-06/DE-07).
 // =============================================================================
 
 model {
@@ -85,7 +88,7 @@ ajout d un CRC, d une intensite APF et d une separation des trames.
       contrainte 'bande passante extreme (radio bruitee, acoustique sous-marine)'
       principe 'le silence est l etat nominal ; on ne transmet que la deviation'
       documentNormatif 'H-Zip_v2.1_Specification_premium.docx (Word, 17 sections)'
-      tbd 'T_hb, epsilon, seuils de declenchement, tailles de cluster — [A CALIBRER]'
+      tbd 'a_max/v_max/d_min par classe et capacite du modem acoustique a mesurer (DE-05/DE-06/DE-07) — les 18 parametres du protocole sont FIGES (ADR-hzip-protocole-calibration)'
       source 'Specification H-Zip v2.1, 2026-09-20'
     }
   }
@@ -123,8 +126,8 @@ CRC `0x3C`.
       producteur 'onboard.perception (sense-and-avoid)'
       consommateurs 'onboard.safety, onboard.autopilot, onboard.linkRadio'
       canal 'CH_LOCAL (prioritaire) + CH_MESH (voisinage)'
-      frequence '10-50 Hz [A CALIBRER]'
-      latence_cible '<= 20 ms [A CALIBRER]'
+      frequence '10-50 Hz [FIGE] — bornee par la boucle du controleur de vol et le sense-and-avoid'
+      latence_cible '<= 20 ms [FIGE] — une periode de boucle a 50 Hz'
       criticite 'safety-critical'
       taille '4 octets'
       schema 'SYNC(1) + ID(1) + APF(1) + CRC-8(1)'
@@ -139,25 +142,27 @@ CRC `0x3C`.
     description '''
 Trame strategique de convergence vers l objectif.
 
-**Structure.** `SYNC` + `ID` + `gBest` (azimut 8 bits + elevation 6 bits)
-+ `fitness` (6 bits) + `sequence` (4 bits) + `CRC-8`.
+**Structure.** `SYNC` + `ID` + `AZIMUT` (8 bits) + `ELEVATION` (6 bits +
+2 reserves) + `FITNESS` (1 mode + 1 reserve + 2 classe + 4 score) +
+`SEQ` (8 bits) + `CRC-16`.
 
 **Point cle.** L elevation est INDISPENSABLE : un UAV et un UUV n evoluent
 pas dans le meme referentiel. Une direction purement cardinale (N/S/E/O)
 ne suffit pas pour un essaim 3D.
 
-**Fitness.** 64 niveaux (6 bits), et non 3 etats comme en v1 : la
-confiance est une grandeur continue, pas un booleen.
+**Fitness.** 4 classes de confiance (2 bits) x 16 scores (4 bits), et
+non 3 etats comme en v1 : la confiance est une grandeur continue, pas
+un booleen.
 '''
     metadata {
       producteur 'onboard.mission'
       consommateurs 'onboard.mission (voisins), edge.coordinator'
       canal 'CH_MESH'
-      frequence '0,1-2 Hz [A CALIBRER]'
-      latence_cible '<= 500 ms [A CALIBRER]'
+      frequence '0,1-2 Hz [FIGE] — convergence PSO, cadence strategique (cf T_hb)'
+      latence_cible '<= 500 ms [FIGE] — hors boucle reactive, tolere un cycle strategique'
       criticite 'mission-critical'
-      taille '6-8 octets'
-      schema 'SYNC + ID + gBest(azimut 8b + elevation 6b) + fitness(6b) + seq(4b) + CRC-8'
+      taille '8 octets'
+      schema 'SYNC(1) + ID(1) + AZIMUT(1) + ELEVATION(1) + FITNESS(1) + SEQ(1) + CRC-16(2)'
       perte 'convergence retardee ; le gBest precedent reste applique'
       algorithme 'ALG_FORMATION_CONTROL'
       trame 'S'
@@ -181,10 +186,10 @@ elle ne coute de la bande que lorsque la prediction se trompe.
       consommateurs 'onboard.mission (voisins), edge.coordinator'
       canal 'CH_MESH'
       frequence 'sur evenement (declenchee par depassement de epsilon)'
-      latence_cible '<= 500 ms [A CALIBRER]'
+      latence_cible '<= 500 ms [FIGE] — event-driven, hors boucle reactive'
       criticite 'mission-critical'
-      taille '4-6 octets'
-      schema 'SYNC + ID + delta + seq + CRC-8'
+      taille '4 octets'
+      schema 'SYNC(1) + TARGET(1) + DELTA(1) + CRC-8(1)'
       perte 'derive du modele predictif ; recadrage par heartbeat'
       trame 'D'
     }
@@ -200,8 +205,11 @@ deux noeuds peuvent diverger indefiniment.
 
 **Contrainte chiffree.** La borne d erreur entre deux heartbeats est
 `e_max = 0,5 x a_max x T_hb^2`. Avec `a_max = 2 m/s2` et `T_hb = 10 s`,
-l erreur atteint ~100 m — INACCEPTABLE en essaim dense. Il faut viser
-`T_hb` de l ordre de 1 s pour les UAV.
+l erreur atteint ~100 m — INACCEPTABLE en essaim dense.
+
+**Valeur FIGEE (ADR-hzip-protocole-calibration).** T_hb par classe :
+UAV 1 s (e_max 1,0 m), USV 2 s (e_max 2,0 m), UUV 5 s (e_max 6,25 m).
+Regle de coherence : `e_max <= 0,25 x d_min(classe)`.
 
 **Contrainte de bande.** Un heartbeat global a 1 Hz sur 200 noeuds coute
 ~12,8 kbit/s, ce qui DEPASSE la capacite d un canal acoustique unique.
@@ -212,11 +220,11 @@ par Hubs est INDISPENSABLE.
       producteur 'onboard.health'
       consommateurs 'onboard.mission, onboard.linkRadio, edge.coordinator'
       canal 'CH_MESH (voisinage local)'
-      frequence 'T_hb — 0,5-1 s (UAV) / 1-2 s (USV) / 5-10 s (UUV) [A CALIBRER]'
-      latence_cible '<= 500 ms [A CALIBRER]'
+      frequence 'T_hb [FIGE] : 1 s (UAV) / 2 s (USV) / 5 s (UUV) — cf borne e_max'
+      latence_cible '<= 500 ms [FIGE] — recadrage periodique, non bloquant'
       criticite 'safety-critical'
-      taille '4-6 octets'
-      schema 'SYNC + ID + position + seq + CRC-8'
+      taille '8 octets'
+      schema 'SYNC(1) + ID(1) + AZIMUT(1) + ELEVATION(1) + FITNESS(1) + SEQ(1) + CRC-16(2)'
       perte 'derive non bornee du modele predictif — risque de collision'
       borne_erreur 'e_max = 0,5 x a_max x T_hb^2'
       trame 'H'
@@ -265,8 +273,8 @@ Manipulators and Mobile Robots*, IJRR.
 '''
     metadata {
       couche '1'
-      frequence '10-50 Hz [A CALIBRER]'
-      latence_cible '<= 20 ms [A CALIBRER]'
+      frequence '10-50 Hz [FIGE] — bornee par la boucle du controleur de vol et le sense-and-avoid'
+      latence_cible '<= 20 ms [FIGE] — une periode de boucle a 50 Hz'
       tolerance 'nulle'
       trame 'R'
       algorithme 'ALG_COLLISION_AVOIDANCE'
@@ -289,13 +297,13 @@ ICNN 95.
 '''
     metadata {
       couche '2'
-      frequence '0,1-2 Hz [A CALIBRER]'
-      latence_cible '<= 500 ms [A CALIBRER]'
+      frequence '0,1-2 Hz [FIGE] — convergence PSO, cadence strategique (cf T_hb)'
+      latence_cible '<= 500 ms [FIGE] — hors boucle reactive, tolere un cycle strategique'
       tolerance 'moyenne'
       trames 'S, D'
       algorithme 'ALG_FORMATION_CONTROL'
       fondement 'Kennedy & Eberhart 1995 (PSO)'
-      ponderation 'matrice de gain par classe (UAV/USV/UUV) — [A CALIBRER]'
+      ponderation 'matrice de gain 3x3 par classe + constantes tau [FIGE] (cf ADR §3 parametre 19) — w_min = 0,2'
       source 'Specification H-Zip v2.1, Partie VI'
     }
   }
@@ -318,9 +326,9 @@ securite de vol.
     metadata {
       couche '3'
       frequence 'evenementielle'
-      latence_cible '<= 2 s [A CALIBRER]'
+      latence_cible '<= 2 s [FIGE] — evenementielle, hors boucle de controle'
       tolerance 'elevee (hors boucle de controle)'
-      modele '<= 1B parametres, quantifie Q4 [A CALIBRER]'
+      modele '<= 1B parametres, quantifie Q4 [FIGE] — borne materielle (candidats SmolLM2 135M/360M, Qwen2.5 0.5B, TinyLlama 1.1B, Gemma3 1B)'
       interdit 'ecriture dans les couches 0, 1, 2'
       obligatoire 'fallback deterministe'
       source 'Specification H-Zip v2.1, Partie VIII'
@@ -380,8 +388,9 @@ references arXiv resolues via l API arXiv).
 **Methode.** Loop Engineering : diverger, converger, attaquer, corriger,
 industrialiser, verifier.
 
-**Statut.** Specification, PAS implementation. Toutes les valeurs
-numeriques sont marquees [A CALIBRER] : ce sont des points de depart,
+**Statut.** Specification, PAS implementation. Les valeurs numeriques ont
+ete FIGEES le 2026-09-20 (ADR-hzip-protocole-calibration) : ce sont des
+valeurs DECIDEES par calcul, a re-confirmer par simulation puis en banc,
 pas des resultats mesures.
 '''
     metadata {
@@ -394,7 +403,70 @@ pas des resultats mesures.
       figures '5'
       bibliographie 'verifiee (Crossref + arXiv)'
       statut 'SPECIFICATION — non implemente'
-      valeurs 'toutes marquees [A CALIBRER]'
+      valeurs 'FIGEES le 2026-09-20 (ADR-hzip-protocole-calibration) — a re-confirmer par simulation multi-agents puis en banc'
+    }
+  }
+
+  // ===========================================================================
+  //  5bis. LE CODE SOURCE DU PROTOCOLE (type `sourceCode`, option (a) tranchee)
+  //     Decision HZIP-P1 (ADR-hzip-protocole-calibration) : H-Zip reste un
+  //     `protocol` ; la demande « un algorithme appele Protocole » est
+  //     satisfaite par un DEPOT SOURCE dedie, meme patron que srcConsensusRs
+  //     et srcAlgTaskAllocation (LikeC4 reference le code, ne le contient pas).
+  // ===========================================================================
+
+  srcAlgProtocole = sourceCode 'alg-protocole — implementation de reference de H-Zip v2.1' {
+    #source-code
+    link https://github.com/dagornc/alg-protocole "Depot GitHub alg-protocole — code source de l implementation de reference du protocole H-Zip v2.1"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur (submodule protocols/hzip)"
+    description '''
+Implementation de reference du protocole H-Zip v2.1 (Dream-Zip). Le code
+vit dans le depot dedie https://github.com/dagornc/alg-protocole, rattache
+au depot principal https://github.com/dagornc/SwarmDrones en tant que Git
+submodule (chemin protocols/hzip).
+
+STATUT DU DEPOT : CIBLE DECLAREE — la creation effective du depot est une
+action externe (autorisation Christophe requise), non executee dans cette
+session. Aucun code n existe encore : ce qui est fige, ce sont les 18
+parametres du protocole et la borne de divergence (cf ADR).
+
+Pointe le meme patron de verification que les autres portages : parite
+bit-a-bit avec une reference Python normative, une fois le depot cree.
+'''
+    metadata {
+      protocole 'H-Zip v2.1'
+      langage 'a definir (Rust recommande, coherence avec les portages ALG_*)'
+      depot 'https://github.com/dagornc/alg-protocole'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'Git submodule — protocols/hzip'
+      statut 'CIBLE — depot a creer (autorisation Christophe requise)'
+      nature 'implementation de reference du protocole'
+    }
+  }
+
+  decHzipProtocole = decision 'HZIP-P1 — Cible du protocole H-Zip (depot source)' {
+    #decision
+    description '''
+Arbitrage de la demande « place cette specif dans un algorithme appele
+Protocole ». H-Zip est un protocole (kind protocol), pas un algorithme :
+creer un 16e `algorithm` dupliquerait semantiquement `hzip`.
+
+Option retenue : (a) depot `dagornc/alg-protocole` + instance `sourceCode`
+reliee au protocole par `implements` et a la specification par
+`documentedBy` — meme patron que srcConsensusRs / srcAlgTaskAllocation.
+Option (b) renommer le kind `protocol` : ecartee (regression metamodele).
+Option (c) ne rien creer : ecartee (demande initiale sans reponse).
+
+Justification complete : docs/ADR-hzip-protocole-calibration.md §1.
+'''
+    metadata {
+      statut 'TRANCHEE (option a)'
+      option_a 'depot dagornc/alg-protocole + sourceCode (implements -> hzip, documentedBy -> specHzip)'
+      option_b 'renommer/etendre le kind protocol — ecartee (regression 44 kinds)'
+      option_c 'ne rien creer, garder hzip seul — ecartee (demande sans reponse)'
+      porteur 'Christophe (creation du depot = autorisation requise)'
+      critere 'coherence avec le patron sourceCode existant ; pas de duplication semantique'
+      prerequis 'creation du depot avant toute implementation'
     }
   }
 
@@ -536,6 +608,10 @@ pas des resultats mesures.
   // --- Le protocole est documente par sa specification ---
   hzip -[documentedBy]-> specHzip 'specification normative complete (v2.1)'
 
+  // --- Le code source du protocole (option a, HZIP-P1) ---
+  srcAlgProtocole -[implements]-> hzip 'implementation de reference du protocole'
+  srcAlgProtocole -[documentedBy]-> specHzip 'specification normative v2.1'
+
   // --- Les trames sont des messages du protocole ---
   hzip -[produces]-> hzipFrameR 'trame reactive (4 octets)'
   hzip -[produces]-> hzipFrameS 'trame strategique'
@@ -608,7 +684,7 @@ evitement critique fantome.
       cible 'taux de corruption non detectee = 0'
       methode 'injection de fautes (bit-flip) sur trames R'
       statut 'NON EXECUTE — critere defini'
-      tbd 'nombre de tirages N — [A CALIBRER]'
+      tbd 'N = 10 000 tirages [FIGE] — IC95 unilateral <= 0,03 % (cf ADR) ; etendre aux salves multi-bits'
     }
   }
 
@@ -622,7 +698,7 @@ Justification : la couche reactive a une tolerance a l erreur nulle.
 Toute latence excessive est un risque de collision.
 '''
     metadata {
-      cible 'latence <= 20 ms [A CALIBRER]'
+      cible 'latence <= 20 ms [FIGE] — une periode de boucle a 50 Hz'
       methode 'mesure de bout en bout sur banc de test'
       statut 'NON EXECUTE — critere defini'
     }
@@ -641,7 +717,7 @@ coordination devient incoherente.
       cible 'e_i(t) <= e_max pour tout t'
       methode 'simulation multi-agents avec acceleration bornee'
       statut 'NON EXECUTE — critere defini'
-      tbd 'T_hb et e_max — [A CALIBRER]'
+      tbd 'T_hb FIGE (1/2/5 s) et e_max FIGE (1,0/2,0/6,25 m) — cf ADR §2.2'
     }
   }
 
@@ -658,7 +734,7 @@ Justification : un heartbeat global a 1 Hz sur 200 noeuds coute
       cible 'debit par noeud <= capacite du canal acoustique'
       methode 'comptage de trames x taille / duree'
       statut 'NON EXECUTE — critere defini'
-      tbd 'capacite acoustique reelle du modem — [A CALIBRER]'
+      tbd 'capacite acoustique reelle du modem a MESURER (DE-07) — hypothese de travail 100 bit/s a 10 kbit/s (Akyildiz 2005)'
     }
   }
 
