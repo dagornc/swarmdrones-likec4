@@ -1,8 +1,8 @@
 // =============================================================================
-//  H-ZIP v2.1 — INTEGRATION DU PROTOCOLE DE COMMUNICATION D'ESSAIM
+//  H-ZIP v2.2 — INTEGRATION DU PROTOCOLE DE COMMUNICATION D'ESSAIM
 //  Mission SWARM-3D-ARCHITECTURE · Integration LikeC4
 //
-//  OBJET : integrer la specification H-Zip v2.1 (Dream-Zip) au modele
+//  OBJET : integrer la specification H-Zip v2.2 (Dream-Zip) au modele
 //  SwarmDrones SANS renommer, invalider ni dupliquer aucun element existant.
 //
 //  PRINCIPE DIRECTEUR (cf metamodel.c4) :
@@ -39,9 +39,9 @@ model {
   //  1. LE PROTOCOLE H-ZIP (element de premiere classe)
   // ===========================================================================
 
-  hzip = protocol 'H-Zip v2.1 (Dream-Zip) — protocole de coordination d essaim heterogene' {
+  hzip = protocol 'H-Zip v2.2 (Dream-Zip) — protocole de coordination d essaim heterogene' {
     #message
-    link https://likec4.breizh.ai/H-Zip_v2.1_Specification_premium.docx "Specification H-Zip v2.1 (Dream-Zip) — document normatif complet (Word, 17 sections, 19 tableaux, 5 figures)"
+    link https://likec4.breizh.ai/H-Zip_v2.2_Specification_premium.docx "Specification H-Zip v2.2 (Dream-Zip) — document normatif complet (Word, 17 sections, 19 tableaux, 5 figures)"
     description '''
 Protocole de communication decentralise pour essaim heterogene
 (UAV / USV / UUV) sous contrainte extreme de bande passante.
@@ -79,17 +79,17 @@ de l acquittement bloquant ; suppression du LLM en boucle reactive ;
 ajout d un CRC, d une intensite APF et d une separation des trames.
 '''
     metadata {
-      version 'v2.1 (2026-09-20)'
+      version 'v2.2 (2026-09-20)'
       statut 'SPECIFICATION — non implemente'
       nature 'protocole de communication'
       portee 'essaim heterogene UAV / USV / UUV'
       couches '4 (prediction / reactive APF / strategique PSO / cognitive LLM)'
-      trames 'R (4 octets) ; S ; D ; H'
+      trames 'R (4 octets) ; S (8 octets) ; D (4 octets) ; H (8 octets)'
       contrainte 'bande passante extreme (radio bruitee, acoustique sous-marine)'
       principe 'le silence est l etat nominal ; on ne transmet que la deviation'
-      documentNormatif 'H-Zip_v2.1_Specification_premium.docx (Word, 17 sections)'
-      tbd 'a_max/v_max/d_min par classe et capacite du modem acoustique a mesurer (DE-05/DE-06/DE-07) — les 18 parametres du protocole sont FIGES (ADR-hzip-protocole-calibration)'
-      source 'Specification H-Zip v2.1, 2026-09-20'
+      documentNormatif 'H-Zip_v2.2_Specification_premium.docx (Word, 17 sections)'
+      tbd 'a_max/v_max/d_min par classe et capacite du modem acoustique a mesurer (DE-05/DE-06/DE-07) — les 19 parametres du protocole sont FIGES (ADR-hzip-protocole-calibration)'
+      source 'Specification H-Zip v2.2, 2026-09-20'
     }
   }
 
@@ -256,7 +256,7 @@ prediction derive.
       mecanisme 'modele cinematique partage + recadrage heartbeat'
       interdit 'LLM, apprentissage, toute source de non-determinisme'
       borne 'e_max = 0,5 x a_max x T_hb^2'
-      source 'Specification H-Zip v2.1, Partie III'
+      source 'Specification H-Zip v2.2, Partie III'
     }
   }
 
@@ -279,7 +279,7 @@ Manipulators and Mobile Robots*, IJRR.
       trame 'R'
       algorithme 'ALG_COLLISION_AVOIDANCE'
       fondement 'Khatib 1986 (APF)'
-      source 'Specification H-Zip v2.1, Partie IV'
+      source 'Specification H-Zip v2.2, Partie IV'
     }
   }
 
@@ -304,7 +304,7 @@ ICNN 95.
       algorithme 'ALG_FORMATION_CONTROL'
       fondement 'Kennedy & Eberhart 1995 (PSO)'
       ponderation 'matrice de gain 3x3 par classe + constantes tau [FIGE] (cf ADR §3 parametre 19) — w_min = 0,2'
-      source 'Specification H-Zip v2.1, Partie VI'
+      source 'Specification H-Zip v2.2, Partie VI'
     }
   }
 
@@ -331,7 +331,7 @@ securite de vol.
       modele '<= 1B parametres, quantifie Q4 [FIGE] — borne materielle (candidats SmolLM2 135M/360M, Qwen2.5 0.5B, TinyLlama 1.1B, Gemma3 1B)'
       interdit 'ecriture dans les couches 0, 1, 2'
       obligatoire 'fallback deterministe'
-      source 'Specification H-Zip v2.1, Partie VIII'
+      source 'Specification H-Zip v2.2, Partie VIII'
     }
   }
 
@@ -367,7 +367,7 @@ et un protocole d election DOIVENT exister.
       agregat 'barycentre des signaux des eclaireurs, une trame consolidee'
       spof 'Hub unique = point de defaillance — Hub secondaire + election requis'
       fondement 'Tseng et al. 2002 (broadcast storm)'
-      source 'Specification H-Zip v2.1, Partie V'
+      source 'Specification H-Zip v2.2, Partie V'
     }
   }
 
@@ -375,11 +375,11 @@ et un protocole d election DOIVENT exister.
   //  5. LA SPECIFICATION (document normatif, type `specDoc`)
   // ===========================================================================
 
-  specHzip = specDoc 'Specification H-Zip v2.1 (Dream-Zip) — document normatif' {
+  specHzip = specDoc 'Specification H-Zip v2.2 (Dream-Zip) — document normatif' {
     #source-doc
-    link https://likec4.breizh.ai/H-Zip_v2.1_Specification_premium.docx "Specification H-Zip v2.1 (Dream-Zip) — document Word premium (17 sections, 19 tableaux, 5 figures, bibliographie verifiee)"
+    link https://likec4.breizh.ai/H-Zip_v2.2_Specification_premium.docx "Specification H-Zip v2.2 (Dream-Zip) — document Word premium (17 sections, 19 tableaux, 5 figures, bibliographie verifiee)"
     description '''
-Document normatif complet du protocole H-Zip v2.1.
+Document normatif complet du protocole H-Zip v2.2.
 
 **Contenu.** 17 sections principales, 30 sous-sections, 19 tableaux,
 5 figures, bibliographie academique verifiee (DOI resolus via Crossref,
@@ -394,8 +394,8 @@ valeurs DECIDEES par calcul, a re-confirmer par simulation puis en banc,
 pas des resultats mesures.
 '''
     metadata {
-      titre 'H-Zip v2.1 (Dream-Zip) — Specification technique'
-      version 'v2.1'
+      titre 'H-Zip v2.2 (Dream-Zip) — Specification technique'
+      version 'v2.2'
       date '2026-09-20'
       format 'Word (.docx)'
       sections '17 principales, 30 sous-sections'
@@ -415,12 +415,12 @@ pas des resultats mesures.
   //     et srcAlgTaskAllocation (LikeC4 reference le code, ne le contient pas).
   // ===========================================================================
 
-  srcAlgProtocole = sourceCode 'alg-protocole — implementation de reference de H-Zip v2.1' {
+  srcAlgProtocole = sourceCode 'alg-protocole — implementation de reference de H-Zip v2.2' {
     #source-code
-    link https://github.com/dagornc/alg-protocole "Depot GitHub alg-protocole — code source de l implementation de reference du protocole H-Zip v2.1"
+    link https://github.com/dagornc/alg-protocole "Depot GitHub alg-protocole — code source de l implementation de reference du protocole H-Zip v2.2"
     link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur (submodule protocols/hzip)"
     description '''
-Implementation de reference du protocole H-Zip v2.1 (Dream-Zip). Le code
+Implementation de reference du protocole H-Zip v2.2 (Dream-Zip). Le code
 vit dans le depot dedie https://github.com/dagornc/alg-protocole, rattache
 au depot principal https://github.com/dagornc/SwarmDrones en tant que Git
 submodule (chemin protocols/hzip).
@@ -434,7 +434,7 @@ Pointe le meme patron de verification que les autres portages : parite
 bit-a-bit avec une reference Python normative, une fois le depot cree.
 '''
     metadata {
-      protocole 'H-Zip v2.1'
+      protocole 'H-Zip v2.2'
       langage 'a definir (Rust recommande, coherence avec les portages ALG_*)'
       depot 'https://github.com/dagornc/alg-protocole'
       depotPrincipal 'https://github.com/dagornc/SwarmDrones'
@@ -602,15 +602,15 @@ Justification complete : docs/ADR-hzip-protocole-calibration.md §1.
   // ===========================================================================
 
   // --- Le protocole est porte par le composant de communication existant ---
-  onboard.linkRadio -[implements]-> hzip 'politique d encodage et de coordination (H-Zip v2.1)'
+  onboard.linkRadio -[implements]-> hzip 'politique d encodage et de coordination (H-Zip v2.2)'
   hzip -[runsOn]-> onboard.linkRadio 'execute par la pile de communication embarquee'
 
   // --- Le protocole est documente par sa specification ---
-  hzip -[documentedBy]-> specHzip 'specification normative complete (v2.1)'
+  hzip -[documentedBy]-> specHzip 'specification normative complete (v2.2)'
 
   // --- Le code source du protocole (option a, HZIP-P1) ---
   srcAlgProtocole -[implements]-> hzip 'implementation de reference du protocole'
-  srcAlgProtocole -[documentedBy]-> specHzip 'specification normative v2.1'
+  srcAlgProtocole -[documentedBy]-> specHzip 'specification normative v2.2'
 
   // --- Les trames sont des messages du protocole ---
   hzip -[produces]-> hzipFrameR 'trame reactive (4 octets)'

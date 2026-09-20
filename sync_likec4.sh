@@ -261,6 +261,7 @@ check_model_drift() {
 sync_artefacts_code() {
   local pairs=(
     "/home/hermesagent/workspace/consensus_rs/README.md|consensus_rs/README.md"
+    "/home/hermesagent/workspace/H-Zip_v2.2_Specification_premium.docx|H-Zip_v2.2_Specification_premium.docx"
   )
   local pair src_file rel dst_file
   for pair in "${pairs[@]}"; do
