@@ -107,12 +107,17 @@ check_drift() {
         continue ;;
     esac
     case "$ctype" in
-      text/html*|"")
+      text/html*)
         # Fallback HTML de la SPA : likec4 n'a pas ce fichier dans son index
         # (ajouté après le démarrage). Cas persistant → restart requis.
         echo "  ⚠ DIVERGENCE: public/$rel (disque ${disk_hash:0:8}…) != servi (fallback HTML — non servi) — docker restart likec4 requis (autorisation Christophe)"
         diverg=$((diverg+1)); restart_needed=$((restart_needed+1))
         continue ;;
+      "")
+        # Content-Type absent : le serveur ne déclare pas le type (fréquent pour
+        # .docx/.bin). Ce n'est PAS un fallback SPA — on tranche sur le hash.
+        # (Corrigé 2026-09-21 : un ctype vide était classé « non servi » à tort.)
+        ;;
     esac
     served_hash="$(curl -s "$SITE/$rel" 2>/dev/null | sha256sum | cut -d' ' -f1 || true)"
     if [ -z "$served_hash" ]; then
