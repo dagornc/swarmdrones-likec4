@@ -503,6 +503,10 @@ model {
 
     sensorsHAL = component 'Interfaces capteurs' {
       #best-effort
+      link https://www.kongsberg.com/what-we-do/defence-and-security/remote-weapon-systems/ "PROTECTOR Remote Weapon Systems - Kongsberg"
+      link https://maritimerobotics.ams3.digitaloceanspaces.com/statamic/files/mr-mariner-usv-brochure-a3-digital.pdf "Mariner USV Technical Brochure"
+      link https://www.exail.com/fr/media-file/7642/exail-datasheet-iguana-e.pdf "Exail Iguana E Datasheet"
+      link https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/2.-ocean-space/1.-autonomous-and-uncrewed-solutions/hugin/documents/110-0047669-b-hugin_6000_datasheet.pdf "HUGIN® 6000 Datasheet"
       technology 'HAL — drivers bas niveau'
       description '''
 Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des plateformes.
@@ -540,6 +544,7 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
 
     perception = component 'Perception et localisation' {
       #safety-critical
+      link https://csc.ucdavis.edu/~chaos/courses/nlp/Projects2008/NicholasTravers/FlockingProjectFinalPaper.pdf "Simulated Flocking Behavior - Complexity Sciences Center"
       link https://www.kongsberg.com/what-we-do/ocean-space/autonomous-and-uncrewed-solutions/auv/hugin/ "HUGIN (AUV) — KONGSBERG"
       link https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/2.-ocean-space/1.-autonomous-and-uncrewed-solutions/hugin/documents/110-0047668-b-hugin_3000_datasheet.pdf "HUGIN 3000 — datasheet (capteurs SAS, navigation inertielle)"
       technology 'Fusion capteurs + filtre complementaire'
@@ -623,6 +628,7 @@ application du geofence. H1 : mode "mission embarquee"
 
     safety = component 'Garde-fous de sûreté' {
       #safety-critical
+      link https://doi.org/10.1109/CDC.2014.7040372 "Control Barrier Certificates for Safe Swarm Behavior"
       technology 'Garde-fous independants'
       description '''
 Geofence, detection de perte de controle, RTL / atterrissage
@@ -704,6 +710,7 @@ EXECUTE fonctionne SANS lien.
 
     taskAuction = component 'Allocation locale des tâches' {
       #mission-critical
+      link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
       technology 'Encheres decentralisees (marche / consensus)'
       description '''
 Allocation de taches par encheres embarquee — option par defaut,
@@ -775,6 +782,9 @@ Diagnostic interne (batterie, moteurs, capteurs, temperatures), prediction de de
 
     energy = component 'Gestion de l’énergie' {
       #mission-critical
+      link https://apl.uw.edu/project/project.php?id=seaglider_auv "Seaglider: Autonomous Underwater Vehicle - APL-UW"
+      link https://doi.org/10.1109/48.972073 "Seaglider: a long-range autonomous underwater vehicle for oceanographic research"
+      link https://www.edgetech.com/images/ut-news/articles/ut2_hugin_4500_article_1006.pdf "Deep, Deeper, Deepest - EdgeTech"
       technology 'Jauge de fin de mission'
       description '''
 Gestion de l'energie et budget de retour (RTL budget).
@@ -845,6 +855,7 @@ la fraicheur est explicite, jamais supposee.
     }
 
     linkRadio = component 'Communications embarquées' {
+      link https://www.youtube.com/watch?v=bmLE9BT76Pc "I Built a $40,000 Military Drone for $120.07"
       technology 'Radios heterogenes (LoRa / 802.11 mesh / lien dedie)'
       description '''
 Gestion du lien radio : decouverte de voisins, mesh/relais,
@@ -898,6 +909,7 @@ Lien intermittent par defaut (H2) : jamais une dependance.
 
     relay = component 'Relais de proximité' {
       #mission-critical
+      link https://www.sintrones.com/solution/military-defense/ "Rugged Military & Defense Computing Solutions - SINTRONES"
       technology 'Mesh + lien longue portee'
       description '''
 Relais de communication inter-plateformes et vers le C2, store-and-forward.
@@ -962,6 +974,7 @@ Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la pert
 
     coordinator = component 'Coordination locale' {
       #mission-critical
+      link https://ojs.aaai.org/index.php/AAAI/article/view/17344/17151 "Lifelong Multi-Agent Path Finding in Large-Scale Warehouses"
       technology 'Coordination de proximite'
       description '''
 Resolution de conflits d'espace, allocation locale lorsque le C2 est
