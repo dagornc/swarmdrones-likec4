@@ -1910,16 +1910,14 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   onboard.mission -[implemented-by]-> OpenCPN 'navigation marine des USV'
 
   // --- Composants s'appuyant sur des familles algorithmiques -------------------
-  onboard.perception -[implements]-> algPerceptionFusion 's appuie sur'
-  onboard.perception -[implements]-> algNavigationGNSSDegrade 'navigation degradée'
+  //  Les paires composant -> algorithme deja declarees dans algorithms.c4
+  //  (section D, relations catalogue -> architecture) ne sont PAS repetees ici :
+  //  un meme fait affirme deux fois produit deux arcs superposes dans l'UI.
+  //  Ne restent ci-dessous que les liens non couverts par algorithms.c4.
   edge.fusion -[implements]-> algPerceptionFusion 's appuie sur'
-  onboard.taskAuction -[implements]-> algTaskAllocation 's appuie sur'
-  onboard.taskAuction -[implements]-> algConsensus 'coordination sous partition'
   edge.coordinator -[implements]-> algConsensus 's appuie sur'
   c2.planner -[implements]-> algPathPlanning 's appuie sur'
   onboard.mission -[implements]-> algPathPlanning 'plan embarque'
-  onboard.safety -[implements]-> algCollisionAvoidance 'separation de proximite'
-  onboard.safety -[implements]-> algSafetyRules 'regles pre-approuvees'
 
   // --- Briques logicielles exposees a des risques -----------------------------
   AutopilotPX4 -[exposed-to]-> riskR5 'expose a'

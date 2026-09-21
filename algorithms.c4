@@ -603,6 +603,50 @@ model {
   algFaultTolerantControlAlloc -[runsOn]-> onboard.autopilot 'commande tolerante (cf onboard.autopilot -[implements]->)'
   algJammingResilientMode -[runsOn]-> onboard.mission 'superviseur de mode (cf onboard.mission -[implements]->)'
 
+  // ===========================================================================
+  //  F. LIENS DECLARES MAIS ABSENTS (audit 2026-09-21)
+  //     Chaque algorithme porte une metadonnee `relatedComponents` qui declare
+  //     les composants auxquels il se rattache. 10 de ces liens declares
+  //     n'avaient AUCUNE relation dans le modele : la carte affichait donc un
+  //     composant lie dans sa fiche, mais aucun arc sur le diagramme.
+  //     On materialise ici le sens composant -> algorithme (`implements`),
+  //     conforme au metamodele, pour les paires declarees et manquantes.
+  //     `onboard.resilience` (declare par algTaskAllocation) n'existe pas comme
+  //     composant : lien fantome, NON materialise — a arbitrer cote modele.
+  // ===========================================================================
+
+  // algCollisionAvoidance : onboard.perception, onboard.autopilot
+  onboard.perception -[implements]-> algCollisionAvoidance 'detection d obstacles en amont'
+  onboard.autopilot -[implements]-> algCollisionAvoidance 'execution des manoeuvres d evitement'
+
+  // algNavigationGNSSDegrade : onboard.safety, onboard.autopilot
+  onboard.safety -[implements]-> algNavigationGNSSDegrade 'seuils de repli en navigation degradee'
+  onboard.autopilot -[implements]-> algNavigationGNSSDegrade 'pilotage en mode degrade'
+
+  // algSafetyRules : onboard.autopilot
+  onboard.autopilot -[implements]-> algSafetyRules 'application des regles pre-approuvees'
+
+  // algEnergyAware : onboard.autopilot
+  onboard.autopilot -[implements]-> algEnergyAware 'arbitrage energetique en vol'
+
+  // algFormationControl : onboard.perception
+  onboard.perception -[implements]-> algFormationControl 'estimation relative pour le maintien de formation'
+
+  // algJammingResilientMode : onboard.perception
+  onboard.perception -[implements]-> algJammingResilientMode 'detection de degradation du signal'
+
+  // algHealthMonitoring : edge.coordinator
+  edge.coordinator -[implements]-> algHealthMonitoring 'surveillance d etat au niveau Edge'
+
+  // algLeaderElection : edge.coordinator
+  edge.coordinator -[implements]-> algLeaderElection 'election de coordinateur apres perte'
+
+  // algPathPlanning : edge.coordinator
+  edge.coordinator -[implements]-> algPathPlanning 'replanification au niveau Edge'
+
+  // algFaultTolerantControlAlloc : onboard.health
+  onboard.health -[implements]-> algFaultTolerantControlAlloc 'etat de sante des actionneurs'
+
 }
 
 
