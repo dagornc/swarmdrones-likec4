@@ -99,6 +99,8 @@ views {
 
       **Bibliothèque :** [Décisions](/view/decisions/) · [Hypothèses](/view/hypotheses/) · [Décisions ouvertes](/view/decisionsOuvertes/)
 
+      **Protocole :** [H-Zip v2.2 — protocole, couches et trames](/view/hzipProtocol/) · [Couches](/view/hzipLayers/) · [Trames](/view/hzipFrames/) · [Sources](/view/hzipEvidence/) · [Critères d'acceptation](/view/hzipTests/)
+
       **Légende :** couleur = couche dans les vues de découverte ; rouge/ambre = criticité uniquement dans les vues dédiées. Un rouge ne signifie pas une panne. Trait plein = données ou sûreté, tirets = commande ou radio, pointillés = différé ou persistance : lire aussi le libellé et la technologie.
 
       **Niveau de preuve :** VALIDE est un statut du modèle, pas une certification ; EXTRAP est une estimation ; A-VALIDER reste une hypothèse. Aucun état temps réel ni taux mesuré ne se déduit de ce diagramme.
@@ -872,7 +874,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \/ Catalogue — 15 algorithmes, 2 specifications et 2 portages'
+    title '04 · Algorithmique \\/ Catalogue — 15 algorithmes, 2 specifications et 3 portages'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -903,6 +905,11 @@ views {
     // algTaskAllocation par `implements` et a specTaskAllocation par
     // `documentedBy`. Meme patron que srcConsensusRs.
     include srcAlgTaskAllocation
+    // E30 : implementation de reference du protocole H-Zip v2.2 (sourceCode).
+    // Reliee a hzip par `implements` et a specHzip par `documentedBy`.
+    // Meme patron que srcConsensusRs / srcAlgTaskAllocation. Sans cette
+    // ligne, le 3e portage restait absent du catalogue (asymetrie E29).
+    include srcAlgProtocole
     autoLayout LeftRight
   }
 
@@ -1291,11 +1298,18 @@ views {
     // HZIP-P1 : le code source du protocole (option a) et la decision d arbitrage.
     include srcAlgProtocole
     include decHzipProtocole
+    // E30 : les 5 vues H-Zip etaient orphelines de navigation (0 navigateTo
+    // vers hzip dans tout le modele, absentes de la vue `index`). On ouvre
+    // ici les 4 vues filles depuis la vue pivot du protocole.
+    include hzipLayer0 with { navigateTo hzipLayers }
+    include hzipFrameR with { navigateTo hzipFrames }
+    include paperKhatib1986 with { navigateTo hzipEvidence }
+    include testHzipCrc with { navigateTo hzipTests }
     autoLayout TopBottom
   }
 
   view hzipLayers {
-    title '05 · Protocole \\/ H-Zip — les 4 couches et leurs algorithmes'
+    title '05 · Protocole \\/ H-Zip v2.2 — les 4 couches et leurs algorithmes'
 
     description '''
       Chaque couche s appuie sur un algorithme existant du catalogue.
@@ -1314,7 +1328,7 @@ views {
   }
 
   view hzipFrames {
-    title '05 · Protocole \\/ H-Zip — les 4 trames et leurs canaux'
+    title '05 · Protocole \\/ H-Zip v2.2 — les 4 trames et leurs canaux'
 
     description '''
       Les trames H-Zip utilisent les canaux EXISTANTS du modele :
@@ -1332,7 +1346,7 @@ views {
   }
 
   view hzipEvidence {
-    title '05 · Protocole \\/ H-Zip — sources academiques (DOI verifies)'
+    title '05 · Protocole \\/ H-Zip v2.2 — sources academiques (DOI verifies)'
 
     description '''
       Chaque mecanisme du protocole est ancre sur une source primaire
@@ -1352,7 +1366,7 @@ views {
   }
 
   view hzipTests {
-    title '05 · Protocole \\/ H-Zip — criteres d acceptation (non executes)'
+    title '05 · Protocole \\/ H-Zip v2.2 — criteres d acceptation (non executes)'
 
     description '''
       Quatre criteres de verification sont definis. **Aucun n a ete

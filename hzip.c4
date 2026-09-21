@@ -612,6 +612,14 @@ Justification complete : docs/ADR-hzip-protocole-calibration.md §1.
   srcAlgProtocole -[implements]-> hzip 'implementation de reference du protocole'
   srcAlgProtocole -[documentedBy]-> specHzip 'specification normative v2.2'
 
+  // --- La decision HZIP-P1 justifie la cible du depot source ---
+  // E30 : decHzipProtocole etait le SEUL des 16 noeuds `decision` sans
+  // aucune arete (ni `justifie`, ni `exposed-to`). Le patron du modele
+  // est `decX -[justifie]-> <element conditionne>` (cf decisions_hw.c4
+  // l.154-157). L arbitrage HZIP-P1 tranche la cible du protocole :
+  // il conditionne donc l existence et la nature de srcAlgProtocole.
+  decHzipProtocole -[justifie]-> srcAlgProtocole 'conditionne la cible du depot source (option a)'
+
   // --- Les trames sont des messages du protocole ---
   hzip -[produces]-> hzipFrameR 'trame reactive (4 octets)'
   hzip -[produces]-> hzipFrameS 'trame strategique'
