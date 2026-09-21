@@ -949,6 +949,66 @@ views {
     autoLayout LeftRight
   }
 
+  // ---------------------------------------------------------------------------
+  //  E31 — ALGORITHMES PAR COMPOSANT D'ACCUEIL (ajout 2026-09-21)
+  //
+  //  Repond a la question : « quel composant heberge quels algorithmes ? »
+  //
+  //  C'est le lien PRINCIPAL du modele : algorithme -> composant d'accueil
+  //  (`implements` / `uses` / `runsOn`). Ce n'est PAS un lien vers les
+  //  applications consommatrices (consSimulator, consBlender, ...) : celles-ci
+  //  consomment le contrat de simulation, elles n'executent aucun algorithme.
+  //
+  //  Les 15 algorithmes sont couverts : 11 dans algorithms.c4 + 4 ajoutes
+  //  par E20 (e20-audit-completeness.c4).
+  // ---------------------------------------------------------------------------
+  view algorithmHosting {
+    title '04 · Algorithmique \/ Algorithmes par composant d accueil — 15 algorithmes, 11 composants'
+
+    description '''
+      **Question : « quel composant heberge quels algorithmes ? »**
+
+      C est le lien PRINCIPAL du modele : `algorithme -> composant d accueil`
+      (`implements` / `uses` / `runsOn`). Il repond a « ou vit cet algorithme ? »
+      et complete `deploymentChain` (qui descend jusqu au runtime).
+
+      **Ce que cette vue n est PAS :** un lien vers les applications
+      consommatrices (`consSimulator`, `consBlender`, `consWeb3D`,
+      `consPedago`, `consTwin`). Celles-ci consomment le contrat de
+      simulation (`simContract`) et des scenarios : elles n executent
+      aucun algorithme. Les relier aux algorithmes serait un contresens
+      de modele (cf. analyse E31).
+
+      **Lecture par zone :**
+      - **Onboard** — 7 composants hebergent 15 algorithmes : c est la ou
+        vit l essentiel du calcul embarque ;
+      - **Edge** — 3 composants (coordinator, fusion, relay) hebergent les
+        algorithmes de coordination et de fusion multi-agents ;
+      - **C2** — 1 composant (planner) heberge la planification de mission.
+
+      **Propriete lisible :** les algorithmes de la chaine de surete
+      (safety, collision, navigation degradee) sont heberges par des
+      composants onboard uniquement — aucun ne depend d Edge, du C2 ou
+      du cloud. C est le predicat fondateur rendu visible.
+
+      Complement : `algorithmCatalog` (catalogue plat) et
+      `algorithmSafety` / `algorithmCoordination` (chaines thematiques).
+    '''
+    include onboard.safety, onboard.perception, onboard.autopilot
+    include onboard.mission, onboard.taskAuction, onboard.health, onboard.linkRadio
+    include edge.coordinator, edge.fusion, edge.relay
+    include c2.planner
+    include algSafetyRules, algCollisionAvoidance, algNavigationGNSSDegrade
+    include algPerceptionFusion, algCooperativeLocalization
+    include algFaultTolerantControlAlloc, algHealthMonitoring
+    include algTaskAllocation, algConsensus, algLeaderElection
+    include algPathPlanning, algFormationControl, algEnergyAware
+    include algEventTriggeredComm, algJammingResilientMode
+    global style lectureZones
+    global style criticite
+    autoLayout LeftRight
+  }
+
   // ===========================================================================
   //  E07 — DEPLOYMENT (ajout 2026-09-15)
   // ===========================================================================
