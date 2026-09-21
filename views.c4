@@ -198,7 +198,7 @@ views {
   /** CONTEXTE (synthèse) — vue d'ensemble compacte, une ligne par zone.
    *  Pour la navigation ; le detail est dans contexte-amont/aval. */
   view contexte {
-    title '01 · Gouvernance \/ Contexte (synthese) — vue d\\\'ensemble des zones'
+    title '01 · Gouvernance \/ Contexte (synthese) — vue d\'ensemble des zones'
 
     description '''
       Synthese volontairement compacte : une ligne par zone, deux externes.
@@ -268,7 +268,7 @@ views {
   // Question : "qu'est-ce qui est safety, mission, best-effort ?"
   // ===========================================================================
   view paysage-criticite {
-    title '99 · Compléments \/ Paysage par criticite — safety \\\/ mission \\\/ best-effort \\\/ cloud'
+    title '99 · Compléments \/ Paysage par criticite — safety / mission / best-effort / cloud'
 
     description '''
       Vue transversale de **priorisation** : on montre les composants
@@ -611,7 +611,7 @@ views {
   /** DECISIONS D'ARCHITECTURE (ADR) : ce qui est arbitre et pourquoi.
    *  Les decisions (vert) justifient les elements de conception a droite. */
   view decisions {
-    title '01 · Gouvernance \/ Decisions tranchees : ADR-1..5 et ce qu\\\'elles justifient'
+    title '01 · Gouvernance \/ Decisions tranchees : ADR-1..5 et ce qu\'elles justifient'
 
     description '''
       **Memoire des choix tranches.** Chaque ADR porte son contexte (conflit §10.x),
@@ -874,7 +874,7 @@ views {
   // ===========================================================================
 
   view algorithmCatalog {
-    title '04 · Algorithmique \\/ Catalogue — 15 algorithmes, 2 specifications et 3 portages'
+    title '04 · Algorithmique \/ Catalogue — 15 algorithmes, 2 specifications et 3 portages'
 
     description '''
       Chaque algorithme est un objet de premiere classe, relie a son
@@ -1012,7 +1012,7 @@ views {
   }
 
   view survivabilitySplit {
-    title '99 · Compléments \/ Frontiere avec lien \\\/ sans lien — ce qui vole sans reseau'
+    title '99 · Compléments \/ Frontiere avec lien / sans lien — ce qui vole sans reseau'
 
     description '''
       Capacites qui fonctionnent SANS aucun reseau (vert) vs celles qui
@@ -1029,7 +1029,7 @@ views {
   }
 
   view observeChain {
-    title '04 · Algorithmique \/ Chaine d\\\'observation — du drone au jumeau numerique'
+    title '04 · Algorithmique \/ Chaine d\'observation — du drone au jumeau numerique'
 
     description '''
       La capacite CAP_OBSERVE : c est elle qui alimente le Digital Twin
@@ -1225,7 +1225,7 @@ views {
   }
 
   view worldStates {
-    title '07 · Sûreté \/ 10 etats d\\\'apparence — le rendu represente des ETATS'
+    title '07 · Sûreté \/ 10 etats d\'apparence — le rendu represente des ETATS'
 
     description '''
       Chaque etat derive d un scenario E09. Le World Model ne cree aucun
@@ -1274,7 +1274,7 @@ views {
   // ===========================================================================
 
   view hzipProtocol {
-    title '06 · Protocole \\/ H-Zip v2.2 — protocole, couches et trames'
+    title '06 · Protocole \/ H-Zip v2.2 — protocole, couches et trames'
 
     description '''
       **H-Zip v2.2 (Dream-Zip)** — protocole de coordination d essaim
@@ -1309,7 +1309,7 @@ views {
   }
 
   view hzipLayers {
-    title '06 · Protocole \\/ H-Zip v2.2 — les 4 couches et leurs algorithmes'
+    title '06 · Protocole \/ H-Zip v2.2 — les 4 couches et leurs algorithmes'
 
     description '''
       Chaque couche s appuie sur un algorithme existant du catalogue.
@@ -1328,7 +1328,7 @@ views {
   }
 
   view hzipFrames {
-    title '06 · Protocole \\/ H-Zip v2.2 — les 4 trames et leurs canaux'
+    title '06 · Protocole \/ H-Zip v2.2 — les 4 trames et leurs canaux'
 
     description '''
       Les trames H-Zip utilisent les canaux EXISTANTS du modele :
@@ -1346,7 +1346,7 @@ views {
   }
 
   view hzipEvidence {
-    title '06 · Protocole \\/ H-Zip v2.2 — sources academiques (DOI verifies)'
+    title '06 · Protocole \/ H-Zip v2.2 — sources academiques (DOI verifies)'
 
     description '''
       Chaque mecanisme du protocole est ancre sur une source primaire
@@ -1366,7 +1366,7 @@ views {
   }
 
   view hzipTests {
-    title '06 · Protocole \\/ H-Zip v2.2 — criteres d acceptation (non executes)'
+    title '06 · Protocole \/ H-Zip v2.2 — criteres d acceptation (non executes)'
 
     description '''
       Quatre criteres de verification sont definis. **Aucun n a ete
