@@ -142,7 +142,7 @@ views {
    *  Frontiere haute : `edge.gateway` (passerelle de confiance).
    *  Tout ce qui doit fonctionner SANS lien est ici. */
   view contexte-amont {
-    title '99 · Compléments \/ Contexte amont — externes, Onboard (x30), Edge (1..N)'
+    title '03 · Architecture \/ Contexte amont — externes, Onboard (x30), Edge (1..N)'
 
     description '''
       **Perimetre : tout ce qui doit fonctionner SANS lien C2.**
@@ -170,7 +170,7 @@ views {
   /** CONTEXTE AVAL — supervision, planification, cloud (hors boucle).
    *  Tout est atteint de facon INTERMITTENTE et non bloquante. */
   view contexte-aval {
-    title '99 · Compléments \/ Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)'
+    title '03 · Architecture \/ Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)'
 
     description '''
       **Perimetre : tout ce qui est atteint de facon intermittente.**
@@ -198,7 +198,7 @@ views {
   /** CONTEXTE (synthèse) — vue d'ensemble compacte, une ligne par zone.
    *  Pour la navigation ; le detail est dans contexte-amont/aval. */
   view contexte {
-    title '01 · Gouvernance \/ Contexte (synthese) — vue d\'ensemble des zones'
+    title '03 · Architecture \/ Contexte (synthese) — vue d\'ensemble des zones'
 
     description '''
       Synthese volontairement compacte : une ligne par zone, deux externes.
