@@ -1536,6 +1536,75 @@ views {
   }
 
   // ---------------------------------------------------------------------------
+  //  G-2b — APPLICATIONS DE SERVICE vs COMPOSANTS EMBARQUES (ajout 2026-09-21)
+  //
+  //  Repond a : « ou est la couche applicative, et en quoi differe-t-elle
+  //  du logiciel embarque ? »
+  //
+  //  CONSTAT DE L'AUDIT (E32) : la couche applicative EXISTE deja dans le
+  //  modele, mais elle est typee `component` comme le logiciel embarque.
+  //  Le kind `application` n'est utilise que pour les 5 consommateurs du
+  //  modele ; le kind `service` est declare mais vide (0 occurrence).
+  //
+  //  Cette vue ne restructure RIEN : elle projette la distinction deja
+  //  presente dans les faits (technologie, cycle de vie, criticite) sans
+  //  retyper un seul element. Aucun risque de regression sur les 49 vues.
+  // ---------------------------------------------------------------------------
+  view applicationVsEmbedded {
+    title '03 · Architecture \/ Applications de service vs composants embarques'
+
+    description '''
+      **Question : « ou est la couche applicative, et en quoi differe-t-elle
+      du logiciel embarque ? »**
+
+      **Constat (E32) :** la couche applicative EXISTE deja dans le modele.
+      Les 9 briques de service (`c2.*`, `cloud.*`) sont des programmes
+      deployables avec leur propre cycle de vie — la definition meme d une
+      `application` au sens du metamodele. Elles sont simplement typees
+      `component`, comme le logiciel embarque.
+
+      **Cette vue ne restructure rien.** Elle projette la distinction deja
+      presente dans les faits, sans retyper un seul element : aucun risque
+      de regression sur les vues existantes.
+
+      **Deux natures, deux regimes :**
+
+      | | Composants embarques | Applications de service |
+      |---|---|---|
+      | Zone | onboard, edge | c2, cloud |
+      | Regime | temps reel, embarque | cycle de vie logiciel |
+      | Criticite | safety / mission | mission / best-effort |
+      | Deploiement | 30 instances identiques | 1 instance, versionnee |
+      | Mise a jour | figee en vol | hors vol, versionnee |
+
+      **Propriete lisible :** aucune application de service n est dans la
+      boucle de pilotage. Le C2 et le cloud sont hors boucle de controle —
+      c est ce qui rend defendable « le drone termine sa mission sans C2
+      ni cloud ».
+
+      **Trou nomme (honnetete du modele) :** le kind `service` reste vide.
+      Ce n est pas un manque a combler artificiellement : un service sera
+      modelise quand son contrat d interface sera specifie.
+
+      Complement : `applicationArchitecture` (applications et interfaces),
+      `softwareArchitecture` (composants et dependances).
+    '''
+    // --- Applications de service (C2) ---
+    include c2.gcs, c2.planner, c2.auth, c2.missionStore, c2.alerting
+    // --- Applications de service (Cloud) ---
+    include cloud.twin, cloud.analytics, cloud.modelRegistry, cloud.replayStore
+    // --- Composants embarques (Onboard) ---
+    include onboard.sensorsHAL, onboard.perception, onboard.autopilot
+    include onboard.safety, onboard.mission, onboard.taskAuction
+    include onboard.health, onboard.energy, onboard.telemetry, onboard.linkRadio
+    // --- Composants embarques (Edge) ---
+    include edge.relay, edge.fusion, edge.coordinator, edge.cache, edge.gateway
+    global style lectureZones
+    global style criticite
+    autoLayout LeftRight
+  }
+
+  // ---------------------------------------------------------------------------
   //  G-3 — ARCHITECTURE FONCTIONNELLE
   //  La chaine capacite -> fonction -> composant, en entier.
   //  Repond a : « a quoi sert ce composant, et qui realise cette capacite ? »
