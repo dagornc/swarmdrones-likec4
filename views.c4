@@ -659,7 +659,7 @@ views {
   /** TRACABILITE : le modele est-il rattache au document source ?
    *  Controle de couverture par ZONE (pas par composant) pour rester lisible. */
   view tracabilite {
-    title '06 · Sûreté \/ Tracabilite — couverture documentaire par zone'
+    title '07 · Sûreté \/ Tracabilite — couverture documentaire par zone'
 
     description '''
       **Controle de couverture documentaire.** Chaque composant porte
@@ -1130,7 +1130,7 @@ views {
   }
 
   view invariantsView {
-    title '06 · Sûreté \/ 5 invariants verifiables du contrat'
+    title '07 · Sûreté \/ 5 invariants verifiables du contrat'
 
     description '''
       INV-1 sans C2 ni cloud · INV-2 surete locale · INV-3 echelle 30
@@ -1149,7 +1149,7 @@ views {
   // ===========================================================================
 
   view scienceVerdicts {
-    title '06 · Sûreté \/ Verdicts scientifiques — 4 affirmations decisives'
+    title '07 · Sûreté \/ Verdicts scientifiques — 4 affirmations decisives'
 
     description '''
       Chaque affirmation est confrontee a ses sources primaires.
@@ -1176,7 +1176,7 @@ views {
   }
 
   view benchmarkGaps {
-    title '06 · Sûreté \/ Trous de benchmark — ce qui n est PAS prouve'
+    title '07 · Sûreté \/ Trous de benchmark — ce qui n est PAS prouve'
 
     description '''
       4 cibles de recherche futures, explicitement declarees. Ce ne sont
@@ -1210,7 +1210,7 @@ views {
   }
 
   view renderRules {
-    title '06 · Sûreté \/ 6 regles de representation — garde-fous verifiables'
+    title '07 · Sûreté \/ 6 regles de representation — garde-fous verifiables'
 
     description '''
       Ces regles protegent la verite du modele. Elles interdisent au
@@ -1225,7 +1225,7 @@ views {
   }
 
   view worldStates {
-    title '06 · Sûreté \/ 10 etats d\\\'apparence — le rendu represente des ETATS'
+    title '07 · Sûreté \/ 10 etats d\\\'apparence — le rendu represente des ETATS'
 
     description '''
       Chaque etat derive d un scenario E09. Le World Model ne cree aucun
@@ -1274,7 +1274,7 @@ views {
   // ===========================================================================
 
   view hzipProtocol {
-    title '05 · Protocole \\/ H-Zip v2.2 — protocole, couches et trames'
+    title '06 · Protocole \\/ H-Zip v2.2 — protocole, couches et trames'
 
     description '''
       **H-Zip v2.2 (Dream-Zip)** — protocole de coordination d essaim
@@ -1309,7 +1309,7 @@ views {
   }
 
   view hzipLayers {
-    title '05 · Protocole \\/ H-Zip v2.2 — les 4 couches et leurs algorithmes'
+    title '06 · Protocole \\/ H-Zip v2.2 — les 4 couches et leurs algorithmes'
 
     description '''
       Chaque couche s appuie sur un algorithme existant du catalogue.
@@ -1328,7 +1328,7 @@ views {
   }
 
   view hzipFrames {
-    title '05 · Protocole \\/ H-Zip v2.2 — les 4 trames et leurs canaux'
+    title '06 · Protocole \\/ H-Zip v2.2 — les 4 trames et leurs canaux'
 
     description '''
       Les trames H-Zip utilisent les canaux EXISTANTS du modele :
@@ -1346,7 +1346,7 @@ views {
   }
 
   view hzipEvidence {
-    title '05 · Protocole \\/ H-Zip v2.2 — sources academiques (DOI verifies)'
+    title '06 · Protocole \\/ H-Zip v2.2 — sources academiques (DOI verifies)'
 
     description '''
       Chaque mecanisme du protocole est ancre sur une source primaire
@@ -1366,7 +1366,7 @@ views {
   }
 
   view hzipTests {
-    title '05 · Protocole \\/ H-Zip v2.2 — criteres d acceptation (non executes)'
+    title '06 · Protocole \\/ H-Zip v2.2 — criteres d acceptation (non executes)'
 
     description '''
       Quatre criteres de verification sont definis. **Aucun n a ete
