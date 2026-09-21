@@ -1010,6 +1010,57 @@ views {
   }
 
   // ===========================================================================
+  //  E33 — TRACABILITE COMPOSANT -> ALGORITHME -> SPECIFICATION DETAILLEE
+  //  (ajout 2026-09-21)
+  //
+  //  OBJET : rendre lisible le chemin qui va d un COMPOSANT a la
+  //  SPECIFICATION DETAILLEE de l algorithme qu il implemente.
+  //
+  //  SENS REEL DU MODELE (verifie dans metamodel.c4) :
+  //    component -[implements]->   algorithm   ('Implemente')
+  //    algorithm -[documentedBy]-> specDoc     ('Documente par')
+  //  Le chemin est donc  component -> algorithm -> specDoc.
+  //
+  //  AUCUN ARC N EST INVENTE : la vue projette les relations existantes.
+  //  Les algorithmes SANS specification detaillee restent VISIBLES et sont
+  //  marques TBD : le trou est nomme, jamais comble.
+  //
+  //  ETAT MESURE (2026-09-21) : 15 algorithmes, 2 specifications detaillees
+  //  (specTaskAllocation, specConsensus). 13 algorithmes sans spec -> TBD.
+  // ===========================================================================
+
+  view algorithmSpecTraceability {
+    title '04 · Algorithmique \/ Traçabilite composant -> algorithme -> specification'
+    description '''
+      Lecture : « quel composant implemente cet algorithme, et ou est sa
+      specification detaillee ? »
+
+      Chemin projete (sens reel du metamodele) :
+        component -[implements]-> algorithm -[documentedBy]-> specDoc
+
+      ETAT MESURE : sur 15 algorithmes, 2 seulement portent une
+      specification detaillee (ALG_TASK_ALLOCATION, ALG_CONSENSUS).
+      Les 13 autres sont marques TBD — le trou est NOMME, pas comble.
+
+      Aucun arc n est invente : seules les relations deja presentes dans
+      le modele sont projetees.
+    '''
+    include onboard.taskAuction, onboard.perception, onboard.safety
+    include onboard.health, onboard.autopilot, onboard.mission, onboard.linkRadio
+    include edge.coordinator, edge.fusion, c2.planner
+    include algTaskAllocation, algConsensus, algPerceptionFusion
+    include algNavigationGNSSDegrade, algCollisionAvoidance, algSafetyRules
+    include algHealthMonitoring, algPathPlanning, algFormationControl
+    include algEnergyAware, algLeaderElection, algEventTriggeredComm
+    include algCooperativeLocalization, algFaultTolerantControlAlloc
+    include algJammingResilientMode
+    include specTaskAllocation, specConsensus
+    global style lectureZones
+    global style criticite
+    autoLayout LeftRight
+  }
+
+  // ===========================================================================
   //  E07 — DEPLOYMENT (ajout 2026-09-15)
   // ===========================================================================
 
