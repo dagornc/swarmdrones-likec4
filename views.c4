@@ -1381,5 +1381,179 @@ views {
     autoLayout LeftRight
   }
 
+  // ===========================================================================
+  //  AUDIT 03 · ARCHITECTURE — 4 SCHEMAS D'ARCHITECTURE MANQUANTS
+  //  (ajout 2026-09-21 · cf. docs/audit-03-architecture.md)
+  //
+  //  Constat de l'audit : le dossier « 03 · Architecture » couvrait le
+  //  contexte, les conteneurs, les zones et la communication, mais il
+  //  manquait 3 des 4 dimensions d'architecture :
+  //    - LOGICIELLE  : aucune vue des composants et de leurs dependances ;
+  //    - APPLICATIVE : aucune vue des applications et de leurs interfaces ;
+  //    - FONCTIONNELLE : `capabilityMap` ne montrait que les capacites,
+  //      sans la chaine capacite -> fonction -> composant ;
+  //    - MATERIELLE  : la vue existait mais etait classee en 99 · Complements.
+  //
+  //  REGLES DE CONSTRUCTION (identiques au reste du modele) :
+  //    - on AJOUTE, on ne supprime ni ne renomme rien ;
+  //    - aucun element n'est invente : seuls les objets deja presents
+  //      dans le modele sont projetes ;
+  //    - les trous sont NOMMES dans les descriptions, pas combles ;
+  //    - aucune coordonnee 3D (INV-4).
+  // ===========================================================================
+
+  // ---------------------------------------------------------------------------
+  //  G-1 — ARCHITECTURE LOGICIELLE
+  //  Les 24 composants, groupes par zone, avec leurs dependances typées.
+  //  Repond a : « comment le logiciel est-il structure, et qui depend de qui ? »
+  // ---------------------------------------------------------------------------
+  view softwareArchitecture {
+    title '03 · Architecture \/ Architecture logicielle — composants et dependances'
+
+    description '''
+      **Dimension LOGICIELLE.** Les 24 composants du systeme, groupes par
+      zone, avec leurs dependances typées (`flow`, `commands`, `runsOn`,
+      `safety`, `radio`).
+
+      **Ce que cette vue montre :**
+      - la structure en 4 zones logicielles (onboard x30, edge 1..N, c2, cloud) ;
+      - la frontiere de criticite : rouge = safety, ambre = mission,
+        gris = best-effort, cyan = cloud ;
+      - la regle d'architecture : **un composant safety ne depend que de
+        composants safety** — toute arete rouge -> non-rouge est un defaut
+        a justifier.
+
+      **Ce qu'elle ne montre pas :** le detail interne d'un composant
+      (c'est le niveau 4, non couvert) ni le deploiement physique
+      (cf. `05 · Déploiement`).
+
+      Cliquer une zone ouvre sa vue de composants detaillee.
+    '''
+    include onboard.** with { navigateTo zone-onboard }
+    include edge.** with { navigateTo zone-edge }
+    include c2.** with { navigateTo zone-c2 }
+    include cloud.** with { navigateTo zone-cloud }
+    global style lectureZones
+    global style criticite
+    autoLayout LeftRight
+  }
+
+  // ---------------------------------------------------------------------------
+  //  G-2 — ARCHITECTURE APPLICATIVE
+  //  Les applications du systeme et les briques logicielles qui les portent.
+  //  Repond a : « qu'est-ce qui tourne, et avec quelle interface ? »
+  // ---------------------------------------------------------------------------
+  view applicationArchitecture {
+    title '03 · Architecture \/ Architecture applicative — applications et interfaces'
+
+    description '''
+      **Dimension APPLICATIVE.** Les applications du systeme et les
+      briques logicielles qui les portent.
+
+      **Deux familles d'applications :**
+      - les **applications du systeme** : GCS (supervision), planner
+        (planification), twin (jumeau numerique), analytics (analyse),
+        replay-store (rejeu) — chacune portee par un composant ;
+      - les **applications consommatrices du modele** : simulateur,
+        Blender, moteur Web 3D, environnement pedagogique, jumeau
+        numerique — elles consomment `scene.json`, jamais l'inverse.
+
+      **Trou nomme (honnetete du modele) :** le kind `service` est declare
+      dans le metamodele mais **aucun service n'est encore modelise**.
+      Cette vue ne comble pas ce trou : elle le rend visible. Un service
+      sera ajoute quand son contrat d'interface sera specifie.
+
+      **Regle de lecture :** le modele est la source de verite ; les
+      applications consommatrices sont en aval et ne peuvent pas inventer
+      d'identifiant (REG-1..REG-6).
+    '''
+    include c2.gcs, c2.planner, c2.auth, c2.missionStore, c2.alerting
+    include cloud.twin, cloud.analytics, cloud.modelRegistry, cloud.replayStore
+    include consSimulator, consBlender, consWeb3D, consPedago, consTwin
+    include simContract
+    global style lectureZones
+    autoLayout LeftRight
+  }
+
+  // ---------------------------------------------------------------------------
+  //  G-3 — ARCHITECTURE FONCTIONNELLE
+  //  La chaine capacite -> fonction -> composant, en entier.
+  //  Repond a : « a quoi sert ce composant, et qui realise cette capacite ? »
+  // ---------------------------------------------------------------------------
+  view functionalArchitecture {
+    title '03 · Architecture \/ Architecture fonctionnelle — capacites, fonctions, composants'
+
+    description '''
+      **Dimension FONCTIONNELLE.** La chaine complete
+      **capacite -> fonction -> composant**, en 3 niveaux :
+
+      1. **8 capacites** — ce que le systeme SAIT FAIRE (CAP_FLY,
+         CAP_PERCEIVE, CAP_DECIDE, CAP_COOPERATE, CAP_COMMUNICATE,
+         CAP_SURVIVE, CAP_OBSERVE, CAP_COMMAND) ;
+      2. **19 fonctions** — ce qu'il FAIT concretement, chacune derivee
+         de la description d'un composant existant (tracabilite dans
+         `metadata.source`) ;
+      3. **les composants** qui les realisent.
+
+      **Propriete lisible ici :** les capacites marquees `sans_lien=oui`
+      (CAP_FLY, CAP_PERCEIVE, CAP_DECIDE, CAP_SURVIVE) sont exactement
+      celles qui doivent survivre a la perte du C2 et du cloud. C'est le
+      predicat fondateur du systeme, rendu visible.
+
+      Complement : `capabilityMap` (vue existante) reste la carte
+      compacte des seules capacites.
+    '''
+    include capFly, capPerceive, capDecide, capCooperate
+    include capCommunicate, capSurvive, capObserve, capCommand
+    include fnFlightControl, fnSensorAcquisition, fnStateEstimation
+    include fnRelativeEstimation, fnNavigation, fnCollisionAvoidance
+    include fnSafetyRules, fnTaskAllocation, fnConsensus, fnFormationControl
+    include fnPathPlanning, fnReconfiguration, fnMeshCommunication, fnC2Link
+    include fnHealthMonitoring, fnEnergyManagement, fnTelemetry
+    include fnDigitalTwin, fnReplay
+    include onboard.sensorsHAL, onboard.perception, onboard.autopilot
+    include onboard.safety, onboard.mission, onboard.taskAuction
+    include onboard.health, onboard.energy, onboard.telemetry, onboard.linkRadio
+    include edge.coordinator, edge.relay, c2.gcs, c2.planner
+    include cloud.twin, cloud.replayStore
+    autoLayout LeftRight
+  }
+
+  // ---------------------------------------------------------------------------
+  //  G-4 — ARCHITECTURE MATERIELLE (synthese dans 03)
+  //  Le drone de reference et sa chaine capteurs -> calcul -> actionneurs.
+  //  La vue detaillee reste en 99 · Complements (non dupliquee).
+  // ---------------------------------------------------------------------------
+  view hardwareArchitectureOverview {
+    title '03 · Architecture \/ Architecture materielle — drone de reference (synthese)'
+
+    description '''
+      **Dimension MATERIELLE.** Le drone de reference et sa chaine
+      **capteurs -> chaine de calcul -> actionneurs**.
+
+      Ce modele est **INSTANCIE 30 fois** (UAV-R x18, UAV-F x8, USV x4) :
+      la vue montre la STRUCTURE, pas les 30 instances.
+
+      **Deux ordinateurs de bord :**
+      - `HW_FC` — controleur de vol temps reel (PX4), porte la voie de
+        surete : geofence, RTL, atterrissage d'urgence. Fonctionne sans
+        aucun lien ;
+      - `HW_COMPANION` — calcul de bord non temps reel, heberge les
+        algorithmes embarques.
+
+      **Etiquetage de preuve :** `#tbd` = valeur inconnue, decision
+      requise ; `#extrap` = valeur deduite, non confirmee par une source.
+      Aucune dimension physique n'est revendiquee comme mesuree.
+
+      Detail complet (chaque capteur, chaque actionneur) :
+      vue `hardwareArchitecture` en `99 · Complements`.
+    '''
+    include refDrone
+    include refDrone.* with { navigateTo droneInternal }
+    include onboard.sensorsHAL, onboard.perception, onboard.autopilot
+    include onboard.safety, onboard.health, onboard.energy
+    autoLayout LeftRight
+  }
+
 }
 
