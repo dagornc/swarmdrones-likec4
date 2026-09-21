@@ -710,6 +710,8 @@ EXECUTE fonctionne SANS lien.
 
     taskAuction = component 'Allocation locale des tâches' {
       #mission-critical
+      link https://ojs.aaai.org/index.php/AAAI/article/view/39340/43301 "Beyond Monotonicity: Revisiting Factorization Principles in Multi-Agent Q-Learning"
+      link https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=4601&context=sis_research "Scalable greedy algorithms for task/resource constrained multi-agent stochastic planning"
       link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
       technology 'Encheres decentralisees (marche / consensus)'
       description '''
@@ -782,6 +784,7 @@ Diagnostic interne (batterie, moteurs, capteurs, temperatures), prediction de de
 
     energy = component 'Gestion de l’énergie' {
       #mission-critical
+      link https://aast.edu/pheed/staffadminview/pdf_retreive.php?url=50575_4_1_07565126.pdf&stafftype=staffpdf "Energy Efficient Path Planning Techniques for UAV-based Systems with Space Discretization"
       link https://apl.uw.edu/project/project.php?id=seaglider_auv "Seaglider: Autonomous Underwater Vehicle - APL-UW"
       link https://doi.org/10.1109/48.972073 "Seaglider: a long-range autonomous underwater vehicle for oceanographic research"
       link https://www.edgetech.com/images/ut-news/articles/ut2_hugin_4500_article_1006.pdf "Deep, Deeper, Deepest - EdgeTech"
