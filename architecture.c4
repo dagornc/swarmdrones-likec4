@@ -544,6 +544,7 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
 
     perception = component 'Perception et localisation' {
       #safety-critical
+      link https://arxiv.org/html/2309.03678v2 "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones"
       link https://csc.ucdavis.edu/~chaos/courses/nlp/Projects2008/NicholasTravers/FlockingProjectFinalPaper.pdf "Simulated Flocking Behavior - Complexity Sciences Center"
       link https://www.kongsberg.com/what-we-do/ocean-space/autonomous-and-uncrewed-solutions/auv/hugin/ "HUGIN (AUV) — KONGSBERG"
       link https://www.kongsberg.com/globalassets/kongsberg/1.-what-we-do/2.-ocean-space/1.-autonomous-and-uncrewed-solutions/hugin/documents/110-0047668-b-hugin_3000_datasheet.pdf "HUGIN 3000 — datasheet (capteurs SAS, navigation inertielle)"
@@ -588,6 +589,10 @@ requis pour les USV/AUV : renforce le besoin de calcul local de perception.
 
     autopilot = component 'Pilotage automatique' {
       #safety-critical
+      link https://pmc.ncbi.nlm.nih.gov/articles/PMC10893262/ "Artificial Potential Field Based Trajectory Tracking for Quadcopter UAV Moving Targets"
+      link https://doi.org/10.1016/j.arcontrol.2021.10.001 "Contraction Theory for Robust Learning-based Control: Toward Aerospace and Robotic Autonomy"
+      link https://doi.org/10.1007/978-981-19-6613-2_660 "Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles with Feedforward Components"
+      link https://arxiv.org/pdf/2001.00685 "Online Trajectory Optimization Using Inexact Gradient Feedback for Time-Varying Environments"
       technology 'Bus interne MAVLink / UART-CAN'
       description '''
 Controle d'attitude/position, execution des consignes de vol,
@@ -628,6 +633,8 @@ application du geofence. H1 : mode "mission embarquee"
 
     safety = component 'Garde-fous de sûreté' {
       #safety-critical
+      link https://arxiv.org/html/2402.03741v3 "SUB-PLAY: Adversarial Policies against Partially Observed Multi-Agent Reinforcement Learning Systems"
+      link https://arxiv.org/pdf/2309.06741 "A Multi-task Learning Framework for Drone State Identification and Trajectory Prediction"
       link https://doi.org/10.1109/CDC.2014.7040372 "Control Barrier Certificates for Safe Swarm Behavior"
       technology 'Garde-fous independants'
       description '''
@@ -669,6 +676,7 @@ ABORT declenche localement selon regles pre-approuvees.
 
     mission = component 'Exécution de mission' {
       #mission-critical
+      link https://www.scitepress.org/Papers/2024/126860/126860.pdf "Swarm Intelligence Path-Planning Pipeline and Algorithms for UAVs"
       technology 'Executeur de plan embarque (machine a etats)'
       description '''
 Executeur du plan de mission embarque et allocation locale de taches.
@@ -710,6 +718,9 @@ EXECUTE fonctionne SANS lien.
 
     taskAuction = component 'Allocation locale des tâches' {
       #mission-critical
+      link https://www.mdpi.com/1424-8220/24/2/339 "Adaptive Event-Triggered Consensus of Multi-Agent Systems in Sense of Asymptotic Convergence"
+      link https://arxiv.org/html/2306.13979v1 "TVDO: Tchebycheff Value-Decomposition Optimization for Multi-Agent Reinforcement Learning"
+      link https://arxiv.org/html/2304.12653v4 "Partially Observable Mean Field Multi-Agent Reinforcement Learning Based on Graph–Attention"
       link https://ojs.aaai.org/index.php/AAAI/article/view/39340/43301 "Beyond Monotonicity: Revisiting Factorization Principles in Multi-Agent Q-Learning"
       link https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=4601&context=sis_research "Scalable greedy algorithms for task/resource constrained multi-agent stochastic planning"
       link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
@@ -859,6 +870,12 @@ la fraicheur est explicite, jamais supposee.
 
     linkRadio = component 'Communications embarquées' {
       link https://www.youtube.com/watch?v=bmLE9BT76Pc "I Built a $40,000 Military Drone for $120.07"
+      link https://www.ccom.unh.edu/resources/research-vessels/asv-drix "ASV DriX - Center for Coastal and Ocean Mapping"
+      link https://acrs-aars.org/proceeding/ACRS2020/d8u61h.pdf "SWARM-BASED UNMANNED AERIAL VEHICLES – ROLES AND FUTURE POTENTIALS"
+      link https://www.techscience.com/cmc/v72n1/46864/html "QoS in FANET Business and Swarm Data"
+      link https://doi.org/10.3390/drones7030161 "FANET Routing Protocol Analysis for Multi-UAV-Based Reconnaissance Mobility Models"
+      link https://arxiv.org/pdf/2303.09419 "A Performance Study on the Throughput and Latency of Zenoh, MQTT, Kafka, and DDS"
+      link https://doi.org/10.1051/itmconf/20246401002 "Flying Ad-Hoc Networks (FANETs): Review of Communications, Challenges, Applications, Future direction and Open Research Topics"
       technology 'Radios heterogenes (LoRa / 802.11 mesh / lien dedie)'
       description '''
 Gestion du lien radio : decouverte de voisins, mesh/relais,
@@ -945,6 +962,7 @@ Relais de communication inter-plateformes et vers le C2, store-and-forward.
 
     fusion = component 'Fusion tactique' {
       #mission-critical
+      link https://doi.org/10.3390/s23104643 "Survey on the Developments of Unmanned Marine Vehicles: Intelligence and Cooperation"
       technology 'Fusion tactique multi-plateformes'
       description '''
 Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la perte d'un agent.
@@ -977,6 +995,7 @@ Pistes consolidees, deconfliction locale, carte locale partagee. Detecte la pert
 
     coordinator = component 'Coordination locale' {
       #mission-critical
+      link https://proceedings.neurips.cc/paper_files/paper/2022/file/bd31bfd4caa85bffe07a35568182cdfa-Supplemental-Conference.pdf "Multiagent Q-learning with Sub-Team Coordination"
       link https://ojs.aaai.org/index.php/AAAI/article/view/17344/17151 "Lifelong Multi-Agent Path Finding in Large-Scale Warehouses"
       technology 'Coordination de proximite'
       description '''
@@ -1126,6 +1145,7 @@ validation des actions critiques. Seul chemin d'autorisation humaine.
 
     planner = component 'Planification de mission' {
       #mission-critical
+      link https://arxiv.org/pdf/2005.07371 "Lifelong Multi-Agent Path Finding in Large-Scale Warehouses"
       technology '(Re)planification + allocation globale'
       description '''
 Generation de plans embarquables VERSIONNES et signes.
@@ -1343,6 +1363,7 @@ Analyse post-mission, metriques de performance, detection d'anomalies a posterio
 
     modelRegistry = component 'Registre des modèles' {
       #cloudOnly
+      link https://arxiv.org/html/2306.09537 "QuadSwarm: A Modular Multi-Quadrotor Simulator for Deep Reinforcement Learning with Direct Thrust Control"
       technology 'Registre de modeles'
       description '''
 Versionnement des modeles (perception, allocation) et des configurations.
