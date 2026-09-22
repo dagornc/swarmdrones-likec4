@@ -1,0 +1,54 @@
+// =============================================================================
+//  Liens issus des propositions d'impact VALIDEES (apply_proposals.py)
+//
+//  Fichier GENERE — ne pas editer a la main.
+//  L'insertion de ces liens dans les vues du modele reste un acte manuel.
+//  Genere le 2026-09-22T12:25:11.869778+00:00
+// =============================================================================
+
+model {
+  // P-2026-09-22-128 -> onboard.mission
+  // Research on Cross-domain Unmanned Swarm Cooperative Anti-submarine Search Method
+  // link https://dc-china-simulation.researchcommons.org/journal/vol36/iss4/3/
+
+  // P-2026-09-22-130 -> onboard.autopilot
+  // Cooperative Swarm Optimisation of Unmanned Surface Vehicles- by Yogang Singh
+  // link https://pearl.plymouth.ac.uk/secam-theses/244/
+
+  // P-2026-09-22-134 -> onboard.perception
+  // Integrating a Digital Twin Concept in the Zero Emission Sea Transporter (ZEST) Project for Sustainab
+  // link https://arxiv.org/pdf/2408.02277
+
+  // P-2026-09-22-135 -> onboard.perception
+  // Centralization vs. decentralization in multi-robot coverage- Ground robots under UAV supervision - a
+  // link https://arxiv.org/html/2408.06553v1
+
+  // P-2026-09-22-138 -> onboard.perception
+  // Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursui
+  // link https://www.mdpi.com/2504-446X/8/8/415
+
+  // P-2026-09-22-139 -> onboard.mission
+  // A Heterogeneous Multi-Robot System for Autonomous Object Retrieval in Challenging GNSS-denied Mariti
+  // link https://www.authorea.com/doi/10.22541/au.172457058.83855084
+
+  // P-2026-09-22-141 -> onboard.mission
+  // Escaping Local Minima- Hybrid Artificial Potential Field with Wall-Follower for Decentralized Multi-
+  // link https://arxiv.org/html/2409.10332v1
+
+  // P-2026-09-22-147 -> onboard.mission
+  // Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning - 
+  // link https://arxiv.org/html/2410.18495v2
+
+  // P-2026-09-22-155 -> onboard.mission
+  // An Organizationally-Oriented Approach to Enhancing Explainability and Control in Multi-Agent Reinfor
+  // link https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1968.pdf
+
+  // P-2026-09-22-160 -> onboard.autopilot
+  // HMARL-CBF – Hierarchical Multi-Agent Reinforcement Learning with Control Barrier Functions for Safet
+  // link https://proceedings.neurips.cc/paper_files/paper/2025/file/76486c7eb6056f12e7ce3addced61650-Paper-Conference.pdf
+
+  // P-2026-09-22-165 -> onboard.safety
+  // AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer
+  // link https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-2921c86a-b3bc-453e-bab8-1df7f6cad79f/c/PMRes_2025_4-97-106.pdf
+
+}

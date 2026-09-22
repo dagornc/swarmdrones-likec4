@@ -62,6 +62,87 @@ model {
   }
 
   // ===========================================================================
+  //  1bis. SOURCES PRIMAIRES AJOUTEES — ingestion corpus du 2026-09-22
+  //
+  //  Provenance : analyse d impact automatique (analyze_impact.py), puis
+  //  TRI MANUEL des propositions. Les entrees de presse, communiques
+  //  commerciaux, fiches produit et pages institutionnelles ont ete
+  //  REJETEES : elles n ont pas de contenu architectural exploitable.
+  //
+  //  STATUT : 'A CONSULTER' — ces sources sont referencees par le corpus
+  //  mais n ont PAS encore ete lues ligne a ligne pour en extraire un
+  //  verdict. Ne pas les traiter comme des preuves etablies : la regle
+  //  de mission E08 reste « pas de lecture, pas de verdict ».
+  // ===========================================================================
+
+  srcCrossDomainASW = specDoc 'Cross-domain Unmanned Swarm Cooperative Anti-submarine Search (2024)' {
+    #science
+    link https://doi.org/10.16182/j.issn1004731x.joss.23-0073 "Research on Cross-domain Unmanned Swarm Cooperative Anti-submarine Search Method"
+    description 'Recherche cooperative anti-sous-marine multi-domaine. Pertinent pour la coordination de mission heterogene.'
+    metadata { nature 'article de revue'; corpus '#128'; statut 'A CONSULTER' }
+  }
+  srcSwarmUSV = specDoc 'Singh — Cooperative Swarm Optimisation of Unmanned Surface Vehicles (these)' {
+    #science
+    link https://doi.org/10.24382/1174 "Cooperative Swarm Optimisation of Unmanned Surface Vehicles"
+    description 'These de doctorat (Plymouth). Optimisation par essaim appliquee aux USV. Cadre methodologique transposable.'
+    metadata { nature 'these de doctorat'; corpus '#130'; statut 'A CONSULTER' }
+  }
+  srcDigitalTwinZEST = specDoc 'Digital Twin Concept in the Zero Emission Sea Transporter (2024)' {
+    #science
+    link https://arxiv.org/abs/2408.02277 "Integrating a Digital Twin Concept in the Zero Emission Sea Transporter (ZEST) Project"
+    description 'Jumeau numerique applique a une plateforme maritime autonome. Pertinent pour la perception et le modele de monde.'
+    metadata { arxiv '2408.02277'; annee '2024'; nature 'preprint'; corpus '#134'; statut 'A CONSULTER' }
+  }
+  srcCoverageCentral = specDoc 'Centralization vs decentralization in multi-robot coverage (2024)' {
+    #science
+    link https://arxiv.org/abs/2408.06553 "Centralization vs. Decentralization in Multi-Robot Coverage"
+    description 'Comparaison empirique centralise vs decentralise sur la couverture. Eclaire directement le choix d architecture.'
+    metadata { arxiv '2408.06553'; annee '2024'; nature 'preprint'; corpus '#135'; statut 'A CONSULTER' }
+  }
+  srcCBFMultiFixed = specDoc 'CBF-Based Collision Avoidance for Multi-Fixed-Wing UAV Pursuit (2024)' {
+    #science
+    link https://doi.org/10.3390/drones8080415 "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursuit"
+    description 'CBF appliquees a l evitement de collision multi-UAV a voilure fixe. Complementaire de srcCAHCBF.'
+    metadata { doi '10.3390/drones8080415'; annee '2024'; nature 'article de revue'; corpus '#138'; statut 'A CONSULTER' }
+  }
+  srcHeteroRetrieval = specDoc 'Heterogeneous Multi-Robot System for Object Retrieval in GNSS-denied Maritime (2024)' {
+    #science
+    link https://doi.org/10.22541/au.172457058.83855084 "A Heterogeneous Multi-Robot System for Autonomous Object Retrieval in Challenging GNSS-denied Maritime Environments"
+    description 'Systeme heterogene (aeriens + surface) en environnement GNSS-denied. Proche du scenario SWARM-3D.'
+    metadata { doi '10.22541/au.172457058.83855084'; annee '2024'; nature 'preprint'; corpus '#139'; statut 'A CONSULTER' }
+  }
+  srcAPFWall = specDoc 'Hybrid Artificial Potential Field with Wall-Follower (2024)' {
+    #science
+    link https://arxiv.org/abs/2409.10332 "Escaping Local Minima: Hybrid Artificial Potential Field with Wall-Follower for Decentralized Multi-Robot Navigation"
+    description 'Traitement explicite des minima locaux du champ de potentiel. Repond a une faiblesse connue de l APF classique.'
+    metadata { arxiv '2409.10332'; annee '2024'; nature 'preprint'; corpus '#141'; statut 'A CONSULTER' }
+  }
+  srcFormationRL = specDoc 'Multi-UAV Formation Control with Obstacle Avoidance via RL (2024)' {
+    #science
+    link https://arxiv.org/abs/2410.18495 "Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning"
+    description 'Controle de formation par apprentissage par renforcement, obstacles statiques et dynamiques.'
+    metadata { arxiv '2410.18495'; annee '2024'; nature 'preprint'; corpus '#147'; statut 'A CONSULTER' }
+  }
+  srcExplainableMARL = specDoc 'Organizationally-Oriented Explainability and Control in MARL (AAMAS 2025)' {
+    #science
+    link https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1968.pdf "An Organizationally-Oriented Approach to Enhancing Explainability and Control in Multi-Agent Reinforcement Learning"
+    description 'Explicabilite et controle humain dans les systemes multi-agents. Pertinent pour la supervision C2.'
+    metadata { nature 'acte de conference'; annee '2025'; corpus '#155'; statut 'A CONSULTER' }
+  }
+  srcHMARLCBF = specDoc 'HMARL-CBF — Hierarchical MARL with Control Barrier Functions (NeurIPS 2025)' {
+    #science
+    link https://proceedings.neurips.cc/paper_files/paper/2025/file/76486c7eb6056f12e7ce3addced61650-Paper-Conference.pdf "HMARL-CBF: Hierarchical Multi-Agent Reinforcement Learning with Control Barrier Functions for Safe Multi-Robot Navigation"
+    description 'Hierarchie MARL + CBF pour la navigation sure. Combine apprentissage et garanties de surete.'
+    metadata { nature 'acte de conference'; annee '2025'; corpus '#160'; statut 'A CONSULTER' }
+  }
+  srcAUVFaultDiag = specDoc 'AUV Fault Diagnosis via Multidimensional Temporal Classification Transformer (2025)' {
+    #science
+    link https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-2921c86a-b3bc-453e-bab8-1df7f6cad79f/c/PMRes_2025_4-97-106.pdf "AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer"
+    description 'Diagnostic de panne par transformer temporel. Pertinent pour la surete et la detection de defaillance.'
+    metadata { nature 'article de revue'; annee '2025'; corpus '#165'; statut 'A CONSULTER'; confiance '0.4 — a verifier' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
