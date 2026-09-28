@@ -2,6 +2,7 @@
   "$schema": "https://likec4.dev/schemas/config.json",
   "name": "swarmdrones",
   "title": "SwarmDrones — Architecture logicielle, essaim de 30 drones heterogenes",
+  "exclude": ["point4/**"],
   "metadata": {
     "owner": "SwarmDrones — architecture systeme",
     "domain": "Essaim de drones heterogenes (UAV-R, UAV-F, USV)",
