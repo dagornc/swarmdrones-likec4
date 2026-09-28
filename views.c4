@@ -886,9 +886,10 @@ views {
 
       SPEC-13-LIKE (2026-09-28) : 13 specifications detaillees v1 (PDF)
       publiees (spec<X>) + 13 portages Rust publics (src<X> ->
-      dagornc/alg-<slug>). Parmi les 13 PDF, 7 sont VALIDES et 6 sont
-      REJETES par leur rapport de validation mais pousses malgre rejet
-      (commit e137723) — leur carte specDoc porte statut 'REJETEE'.
+      dagornc/alg-<slug>). Re-validation independante 2026-09-28 :
+      11/13 CONFORMES (>=16/20), 2/13 PUBLIABLES SOUS RESERVE
+      (leader_election 15/20, nav_gnss_degrade 14/20). Chaque specDoc
+      porte sa note reelle lue dans validation_<slug>_v1.md.
       La tracabilite SysML v2 vit dans algorithmSysmlTraceability.
     '''
     include algTaskAllocation, algConsensus, algFormationControl, algLeaderElection
@@ -1059,9 +1060,10 @@ views {
 
       ETAT MESURE (2026-09-28) : les 15 algorithmes portent une
       specification detaillee PDF (specTaskAllocation, specConsensus +
-      13 v1 SPEC-13). Parmi les 13 v1, 7 sont VALIDEES et 6 sont REJETEES
-      par leur rapport de validation mais poussees malgre rejet (commit
-      e137723) — le rejet est NOMME sur chaque specDoc (statut 'REJETEE').
+      13 v1 SPEC-13). Re-validation independante des 13 v1 : 11 CONFORMES
+      (>=16/20), 2 PUBLIABLES SOUS RESERVE (leader_election 15/20,
+      nav_gnss_degrade 14/20) — chaque specDoc porte sa note reelle lue
+      dans validation_<slug>_v1.md.
       Les 15 portent aussi une spec SysML v2 (cf algorithmSysmlTraceability).
 
       Aucun arc n est invente : seules les relations deja presentes dans
