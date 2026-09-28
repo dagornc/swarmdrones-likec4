@@ -1933,7 +1933,6 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   algTaskAllocation -[exposed-to]-> blindspotAM9 'ne couvre pas l energie'
   algTaskAllocation -[exposed-to]-> blindspotAM10 'ne couvre pas le handoff'
   algConsensus -[exposed-to]-> blindspotAM6 'ne couvre pas l horloge'
-  algSafetyRules -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
   algConsensus -[exposed-to]-> blindspotAM12 'agent defaillant non couvert'
   algPerceptionFusion -[exposed-to]-> blindspotAM14 'P_d/P_fa non quantifies'
 
@@ -1947,20 +1946,15 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   // B.2 — navigation GNSS degradee
   algNavigationGNSSDegrade -[uses]-> msgPositionUpdate 'mesure de position consommee par EKF/VIO'
   algNavigationGNSSDegrade -[uses]-> scn05 'bascule VIO en GNSS degrade'
-  sciGnssDegraded -[evidences]-> algNavigationGNSSDegrade 'famille sourcee (SCI-5)'
 
   // B.5 — planification waypoints + MPC
-  algPathPlanning -[uses]-> msgTrajectoryProposal 'negociation de trajectoire'
-  algPathPlanning -[uses]-> scn01 'plan embarque sans C2'
-
+  // (liens uses de algPathPlanning declares dans algorithms.c4 — pas de doublon)
   // B.6 — evitement de collision (CBF)
   algCollisionAvoidance -[uses]-> msgCollisionAlert 'declencheur sense-and-avoid'
   algCollisionAvoidance -[uses]-> scn06 'evitement de collision'
   algCollisionAvoidance -[exposed-to]-> blindspotAM5 'preuve a 30 agents non etablie (SCI-2)'
-  sciCbf -[evidences]-> algCollisionAvoidance 'verdict CBF (SCI-2)'
 
   // B.7 — surete embarquee (regles + CBF)
-  algSafetyRules -[uses]-> msgCollisionAlert 'declencheur de la voie de surete'
   algSafetyRules -[uses]-> scn02 'surete autonome sans lien'
   sciCbf -[evidences]-> algSafetyRules 'CBF en renfort (SCI-2)'
 

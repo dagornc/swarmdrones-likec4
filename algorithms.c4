@@ -486,6 +486,31 @@ model {
   algSafetyRules -[uses]-> msgCollisionAlert 'alerte consommee par la voie de surete'
   algSafetyRules -[exposed-to]-> blindspotAM5 'validation d echelle non couverte'
 
+  // === LIKEC4-ALGO-LINKS (carte t_f5a50f47) — LIENS `uses` MANQUANTS ===========
+  //  6 algorithmes n'avaient AUCUN lien `uses` sortant vers un message, alors que
+  //  leur metadonnee `relatedMessages` declare explicitement ces dependances.
+  //  On materialise ici les paires declarees et manquantes (source de verite :
+  //  `relatedMessages` de chaque carte d algorithme — aucun lien invente).
+  // ===========================================================================
+
+  algTaskAllocation -[uses]-> msgTaskBid 'enchere emise par l agent'
+  algTaskAllocation -[uses]-> msgTaskAssignment 'attribution recue'
+  algTaskAllocation -[uses]-> msgConsensusVote 'votes echangees pendant les encheres'
+  algTaskAllocation -[uses]-> msgHeartbeat 'vivacite du voisinage'
+
+  algConsensus -[uses]-> msgConsensusVote 'vote echange entre agents'
+
+  algFormationControl -[uses]-> msgFormationState 'etat de formation maintenu'
+  algFormationControl -[uses]-> msgPositionUpdate 'mesure de position consommee'
+
+  algPerceptionFusion -[uses]-> msgPositionUpdate 'mesure de position fusionnee'
+  algPerceptionFusion -[uses]-> msgNeighborState 'etats des voisins fusionnes'
+
+  algHealthMonitoring -[uses]-> msgHeartbeat 'battement de vivacite surveille'
+  algHealthMonitoring -[uses]-> msgFailureNotification 'defaillance signalee'
+
+  algEnergyAware -[uses]-> msgMissionCommand 'commande de mission arbitree'
+
   // === E26 — LIENS ALGORITHMES <-> COMPOSANTS + SPECIFICATIONS DETAILLEES ===
   // 1. Element de type specDoc : stocke les liens vers les
   //    differentes versions du document de specification detaillee.
