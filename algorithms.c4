@@ -681,18 +681,18 @@ model {
     }
   }
 
-  specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v1)' {
+  specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v2)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v1.pdf "Specification detaillee Election de leader v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v2.pdf "Specification detaillee Election de leader v2 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_LEADER_ELECTION.sysml "Specification SysML v2 (ALG_LEADER_ELECTION.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIABLE SOUS RESERVE — 15/20 (validation_leader_election_v1.md, reprise apres rejet initial puis re-validation independante mathematique ; 2 defauts MAJEURS, reserves ouvertes).'
+    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v2 renforcee, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : RENFORCEE — v2 corrige les 2 defauts MAJEURS de la v1 (15/20) : ajout d une source primaire publiee (SwarmRaft, IEEE IoT Journal, DOI 10.1109/JIOT.2025.3645453) et formalisation etendue (10 exigences fonctionnelles, 6 non-fonctionnelles, 4 proprietes de surete dont unicite du leader en TLA+, 3 proprietes de vivacite). La v1 (15/20, PUBLIABLE SOUS RESERVE) reste archivee localement. La specification SysML v2 associee vit dans sysml/ALG_LEADER_ELECTION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_LEADER_ELECTION'
-      versions '1 (v1)'
-      versionCourante 'v1 (2026-09-28)'
+      versions '1 (v1, archivee), 2 (v2, courante)'
+      versionCourante 'v2 (2026-09-28)'
       nature 'specification genie logiciel interne'
       statut 'PUBLIE'
-      validation 'PUBLIABLE SOUS RESERVE — 15/20 (validation_leader_election_v1.md, 2 defauts MAJEURS) ; publiee'
+      validation 'RENFORCEE — v2 (corrige les 2 defauts MAJEURS de la v1 15/20 : source primaire publiee SwarmRaft DOI 10.1109/JIOT.2025.3645453 + formalisation etendue) ; publiee'
       sysml 'sysml/ALG_LEADER_ELECTION.sysml — porte par sysml.c4'
     }
   }
@@ -713,18 +713,18 @@ model {
     }
   }
 
-  specNavigationGNSSDegrade = specDoc 'Specification detaillee — ALG_NAV_GNSS_DEGRADE (v1)' {
+  specNavigationGNSSDegrade = specDoc 'Specification detaillee — ALG_NAV_GNSS_DEGRADE (v2)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf "Specification detaillee Navigation sous GNSS degrade v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v2.pdf "Specification detaillee Navigation sous GNSS degrade v2 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_NAV_GNSS_DEGRADE.sysml "Specification SysML v2 (ALG_NAV_GNSS_DEGRADE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIABLE SOUS RESERVE — 14/20 (validation_nav_gnss_degrade_v1.md, validation independante mathematique, 2 defauts MAJEURS). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v2 renforcee, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : RENFORCEE — v2 corrige les 2 defauts MAJEURS de la v1 (14/20) : passage de 1/3 a 9 sources primaires recentes (dont 3 DOI verifies : 10.33012/2025.20360, 10.33012/navi.629, 10.3390/drones10010049) et formalisation complete (matrices EKF, CUSUM/CVS/CPI/EWMA, fusion CI, rejet chi2, MDS-MAP). La v1 (14/20, PUBLIABLE SOUS RESERVE) reste archivee localement. La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_NAV_GNSS_DEGRADE'
-      versions '1 (v1)'
-      versionCourante 'v1 (2026-09-28)'
+      versions '1 (v1, archivee), 2 (v2, courante)'
+      versionCourante 'v2 (2026-09-28)'
       nature 'specification genie logiciel interne'
       statut 'PUBLIE'
-      validation 'PUBLIABLE SOUS RESERVE — 14/20 (validation_nav_gnss_degrade_v1.md, 2 defauts MAJEURS)'
+      validation 'RENFORCEE — v2 (corrige les 2 defauts MAJEURS de la v1 14/20 : 9 sources primaires dont 3 DOI verifies + formalisation EKF/CUSUM complete) ; publiee'
       sysml 'sysml/ALG_NAV_GNSS_DEGRADE.sysml — porte par sysml.c4'
     }
   }
@@ -911,7 +911,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_LEADER_ELECTION_v1.pdf (PUBLIE — PUBLIABLE SOUS RESERVE 15/20)'
+      specPdf 'Spec_ALG_LEADER_ELECTION_v2.pdf (PUBLIE — RENFORCEE v2, corrige les defauts de la v1 15/20)'
     }
   }
   srcPerceptionFusion = sourceCode 'alg-perception-fusion — portage Rust de ALG_PERCEPTION_FUSION' {
@@ -951,7 +951,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf (PUBLIE — PUBLIABLE SOUS RESERVE 14/20)'
+      specPdf 'Spec_ALG_NAV_GNSS_DEGRADE_v2.pdf (PUBLIE — RENFORCEE v2, corrige les defauts de la v1 14/20)'
     }
   }
   srcCollisionAvoidance = sourceCode 'alg-collision-avoidance — portage Rust de ALG_COLLISION_AVOIDANCE' {
