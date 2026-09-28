@@ -31,6 +31,18 @@ python3 tools/export/export_scene.py          # écrit export/scene.json + viewe
 python3 tools/export/export_scene.py --check  # vérifie l'artefact (INV-4, 30+1, cohérence des copies)
 ```
 
+## Publication du modèle (serveur LikeC4)
+
+> ⚠ **Piège opérationnel** — le viewer LikeC4 sert `public/` depuis un
+> **instantané pris au démarrage du conteneur**. Ajouter un fichier après le
+> démarrage (→ fallback HTML SPA) ou modifier un fichier déjà publié (→ ancienne
+> version) ne change **rien** côté servi. Le **HMR est inopérant** sur le modèle
+> compilé (`/@id/likec4:plugin/swarmdrones/model.js`) : après toute modification
+> d'un fichier `.c4`, **seul `docker restart likec4` publie la nouvelle version**.
+> Détection d'écart disque ↔ servi : `./sync_likec4.sh --drift` (sort en code 1
+> si divergence). Cloudflare ajoute par ailleurs un cache transitoire
+> (`max-age=14400`).
+
 ## La chaîne consommateur (exécutable et falsifiable)
 
 Le modèle est consommé par un **viewer 3D** et par des **assets Blender**.
