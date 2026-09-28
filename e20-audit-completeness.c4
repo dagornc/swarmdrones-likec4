@@ -425,6 +425,11 @@ model {
   sciEnergyTaskAlloc -[evidences]-> algTaskAllocation 'variante energy-aware de CBBA'
   sciHeteroFormation -[evidences]-> algFormationControl 'source la formation'
 
+  // --- Constats SCI-12/13/14 : fondations des algorithmes de surete et de planification ---
+  sciLeaderElection -[evidences]-> algLeaderElection 'fondations Raft/Bully/Paxos (essaim mobile 30 non prouve)'
+  sciSafetyRules -[evidences]-> algSafetyRules 'fondations CBF + socle normatif ACAS X / EASA-FAA'
+  sciPathPlanning -[evidences]-> algPathPlanning 'MPC tube-based source (N=30 conditionnel)'
+
   // --- Constats qui etayent les algorithmes NOUVEAUX ---
   sciEventTriggered -[evidences]-> algEventTriggeredComm 'algorithme ajoute'
   sciCoopLocalization -[evidences]-> algCooperativeLocalization 'algorithme ajoute'

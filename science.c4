@@ -105,11 +105,11 @@ model {
     description 'CBF appliquees a l evitement de collision multi-UAV a voilure fixe. Complementaire de srcCAHCBF.'
     metadata { doi '10.3390/drones8080415'; annee '2024'; nature 'article de revue'; corpus '#138'; statut 'A CONSULTER' }
   }
-  srcHeteroRetrieval = specDoc 'Heterogeneous Multi-Robot System for Object Retrieval in GNSS-denied Maritime (2024)' {
+  srcHeteroRetrieval = specDoc 'Chen, Irfan, Yu et al. (2025) — Heterogeneous Multirobot System for Object Retrieval in GNSS-Denied Maritime, J. Field Robotics' {
     #science
-    link https://doi.org/10.22541/au.172457058.83855084 "A Heterogeneous Multi-Robot System for Autonomous Object Retrieval in Challenging GNSS-denied Maritime Environments"
-    description 'Systeme heterogene (aeriens + surface) en environnement GNSS-denied. Proche du scenario SWARM-3D.'
-    metadata { doi '10.22541/au.172457058.83855084'; annee '2024'; nature 'preprint'; corpus '#139'; statut 'A CONSULTER' }
+    link https://doi.org/10.1002/rob.70011 "A Heterogeneous Multirobot System for Autonomous Object Retrieval in Challenging GNSS-Denied Maritime Environment"
+    description 'Systeme heterogene (aeriens + surface) en environnement GNSS-denied. Proche du scenario SWARM-3D. NOTE : le DOI precedent (10.22541/au.172457058.83855084) etait le preprint Authorea, MORT (404, absent de Crossref) ; reference remplacee par la version publiee dans Journal of Field Robotics (2025).'
+    metadata { doi '10.1002/rob.70011'; annee '2025'; nature 'article de revue'; statut 'CORRIGEE (preprint mort -> version publiee — verifie Crossref 2026-09-28)' }
   }
   srcAPFWall = specDoc 'Hybrid Artificial Potential Field with Wall-Follower (2024)' {
     #science
@@ -180,11 +180,11 @@ model {
     description 'Theorie des CBF pour systemes non lineaires : controle sur par QP, CBF exponentielle, garanties ISS. Fondation mathematique de l evitement par paire et des regles de surete embarquees.'
     metadata { doi '10.23919/ECC.2019.8796023'; annee '2019'; nature 'acte de conference'; statut 'REPERTORIEE (titre+DOI — research_safety_rules_v1.md)' }
   }
-  srcCBFSwarm = specDoc 'Wang et al. (2022) — Safety-Critical CBF for drone swarms, RA-L' {
+  srcCBFSwarm = specDoc 'Wang, Ames, Egerstedt (2016) — Safety barrier certificates for heterogeneous multi-robot systems, ACC' {
     #science
-    link https://doi.org/10.1109/LRA.2022.3145678 "Safety-Critical Control of Drone Swarms via Control Barrier Functions"
-    description 'CBF pour essaims de drones (30+ agents en simulation, 10 drones sur materiel Intel Aero), implementation decentralisee, geofencing CBF, resolution QP sous 1ms embarquee.'
-    metadata { doi '10.1109/LRA.2022.3145678'; annee '2022'; nature 'article de revue'; statut 'REPERTORIEE (titre+DOI — research_safety_rules_v1.md)' }
+    link https://doi.org/10.1109/ACC.2016.7526486 "Safety barrier certificates for heterogeneous multi-robot systems"
+    description 'Certificats de barriere de surete pour systemes multi-robots heterogenes : CBF decentralisees, resolution QP embarquee, garanties de surete formelles. Fondation de l evitement par paire et des regles de surete embarquees. NOTE : le DOI precedent (10.1109/LRA.2022.3145678) etait MORT (404, absent de Crossref) ; reference remplacee par la source canonique de Wang, Ames et Egerstedt.'
+    metadata { doi '10.1109/ACC.2016.7526486'; annee '2016'; nature 'acte de conference'; statut 'CORRIGEE (DOI mort remplace — verifie Crossref 2026-09-28)' }
   }
   srcDMPCTube = specDoc 'Dai, Liao, Chen (2026) — Tube-based DMPC, Drones 10(3):177' {
     #science
@@ -388,8 +388,8 @@ model {
       source. La fondation est documentee :
         - CBF (10.23919/ECC.2019.8796023) : theorie mathematique (QP,
           forward invariance, ISS) ;
-        - CBF multi-drones (10.1109/LRA.2022.3145678) : 30+ agents en
-          simulation, 10 drones sur materiel, geofencing CBF, QP <1ms.
+        - CBF multi-robots (10.1109/ACC.2016.7526486) : certificats de barriere
+          de surete, CBF decentralisees, QP embarque ;
 
       SOCLE NORMATIF (sans DOI, cite par la spec) : ACAS X (MIT Lincoln
       Lab) pour le detect-and-avoid, EASA AMC/GM Part-UAS et FAA AC 90-117

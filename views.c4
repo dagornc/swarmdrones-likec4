@@ -1299,7 +1299,7 @@ views {
 
       Lecture : le systeme enseigne aussi ses propres limites.
     '''
-    include sciCbba, sciCbf, sciCrdt, sciEkf
+    include sciCbba, sciCbf, sciCrdt, sciEkf, sciLeaderElection, sciSafetyRules, sciPathPlanning
     autoLayout LeftRight
   }
 
@@ -1311,8 +1311,8 @@ views {
       remonte a sa source primaire, ou a l absence de source.
     '''
     include srcCBBA, srcCBBA24, srcDegraded30, srcCAHCBF, srcCRDT, srcKilobot, srcUUV
-    include sciCbba, sciCbf, sciCrdt, sciEkf
-    include algTaskAllocation, algCollisionAvoidance, algConsensus, algPerceptionFusion
+    include sciCbba, sciCbf, sciCrdt, sciEkf, sciLeaderElection, sciSafetyRules, sciPathPlanning
+    include algTaskAllocation, algCollisionAvoidance, algConsensus, algPerceptionFusion, algLeaderElection, algSafetyRules, algPathPlanning
     autoLayout LeftRight
   }
 
