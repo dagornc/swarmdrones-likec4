@@ -647,7 +647,538 @@ model {
   // algFaultTolerantControlAlloc : onboard.health
   onboard.health -[implements]-> algFaultTolerantControlAlloc 'etat de sante des actionneurs'
 
+  // ===========================================================================
+  //  G. SPEC-13-LIKE (carte t_06cd10ec) — LIAISON DES ARTEFACTS SOEURS
+  //
+  //  Specs PDF : 13 PDF v1 dans specification/ (SPEC-13-PUBLISH t_79a5637b +
+  //    complement e137723). 7 VALIDEES ; 6 REJETEES par leur rapport de
+  //    validation (2-6/20, defauts BLOQUANTS) mais poussees quand meme par le
+  //    commit e137723, CONTRE l exclusion decidee par SPEC-13-PUBLISH.
+  //    Le lien est reel, la carte specDoc porte le statut REJETEE : aucun
+  //    rejet n est masque (cf specDoc.*.validation).
+  //
+  //  SysML v2 (SYSML-15, t_d671a500) : relations algX -[documentedBy]-> sysmlX
+  //    deja portees par sysml.c4 — NON dupliquees ici (cf note parente).
+  //
+  //  Portages Rust (RUST-13, t_8ed8aa02) : 13 depots publics dagornc/alg-<slug>.
+  //    Metadonnees (parite/tests/limites) lues dans les README reels des depots,
+  //    verifiees le 2026-09-28. Aucune valeur inventee.
+  // ===========================================================================
+
+  specFormationControl = specDoc 'Specification detaillee — ALG_FORMATION_CONTROL (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FORMATION_CONTROL_v1.pdf "Specification detaillee Controle de formation v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FORMATION_CONTROL.sysml "Specification SysML v2 (ALG_FORMATION_CONTROL.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_FORMATION_CONTROL (Controle de formation), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FORMATION_CONTROL.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_FORMATION_CONTROL'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_FORMATION_CONTROL.sysml — porte par sysml.c4'
+    }
+  }
+
+  specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v1.pdf "Specification detaillee Election de leader v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_LEADER_ELECTION.sysml "Specification SysML v2 (ALG_LEADER_ELECTION.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 5/20, 3 defauts BLOQUANTS (validation_leader_election_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_LEADER_ELECTION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_LEADER_ELECTION'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 5/20, 3 defauts BLOQUANTS (validation_leader_election_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_LEADER_ELECTION.sysml — porte par sysml.c4'
+    }
+  }
+
+  specPerceptionFusion = specDoc 'Specification detaillee — ALG_PERCEPTION_FUSION (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PERCEPTION_FUSION_v1.pdf "Specification detaillee Fusion multi-capteurs (EKF/UKF) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PERCEPTION_FUSION.sysml "Specification SysML v2 (ALG_PERCEPTION_FUSION.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_PERCEPTION_FUSION (Fusion multi-capteurs (EKF/UKF)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PERCEPTION_FUSION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_PERCEPTION_FUSION'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_PERCEPTION_FUSION.sysml — porte par sysml.c4'
+    }
+  }
+
+  specNavigationGNSSDegrade = specDoc 'Specification detaillee — ALG_NAV_GNSS_DEGRADE (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf "Specification detaillee Navigation sous GNSS degrade v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_NAV_GNSS_DEGRADE.sysml "Specification SysML v2 (ALG_NAV_GNSS_DEGRADE.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_NAV_GNSS_DEGRADE'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_NAV_GNSS_DEGRADE.sysml — porte par sysml.c4'
+    }
+  }
+
+  specCollisionAvoidance = specDoc 'Specification detaillee — ALG_COLLISION_AVOIDANCE (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COLLISION_AVOIDANCE_v1.pdf "Specification detaillee Evitement de collision (CBF) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COLLISION_AVOIDANCE.sysml "Specification SysML v2 (ALG_COLLISION_AVOIDANCE.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_COLLISION_AVOIDANCE (Evitement de collision (CBF)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COLLISION_AVOIDANCE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_COLLISION_AVOIDANCE.sysml — porte par sysml.c4'
+    }
+  }
+
+  specSafetyRules = specDoc 'Specification detaillee — ALG_SAFETY_RULES (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_SAFETY_RULES_v1.pdf "Specification detaillee Surete par regles pre-approuvees v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_SAFETY_RULES.sysml "Specification SysML v2 (ALG_SAFETY_RULES.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_SAFETY_RULES (Surete par regles pre-approuvees), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 5/20, 2 defauts BLOQUANTS (validation_safety_rules_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_SAFETY_RULES.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_SAFETY_RULES'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 5/20, 2 defauts BLOQUANTS (validation_safety_rules_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_SAFETY_RULES.sysml — porte par sysml.c4'
+    }
+  }
+
+  specPathPlanning = specDoc 'Specification detaillee — ALG_PATH_PLANNING (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PATH_PLANNING_v1.pdf "Specification detaillee Planification de trajectoire (waypoints + MPC) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PATH_PLANNING.sysml "Specification SysML v2 (ALG_PATH_PLANNING.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_PATH_PLANNING (Planification de trajectoire (waypoints + MPC)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PATH_PLANNING.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_PATH_PLANNING'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_PATH_PLANNING.sysml — porte par sysml.c4'
+    }
+  }
+
+  specHealthMonitoring = specDoc 'Specification detaillee — ALG_HEALTH_MONITORING (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_HEALTH_MONITORING_v1.pdf "Specification detaillee Surveillance d etat et detection de faute v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_HEALTH_MONITORING.sysml "Specification SysML v2 (ALG_HEALTH_MONITORING.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_HEALTH_MONITORING (Surveillance d etat et detection de faute), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 4/20, 3 defauts BLOQUANTS (validation_health_monitoring_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_HEALTH_MONITORING.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_HEALTH_MONITORING'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 4/20, 3 defauts BLOQUANTS (validation_health_monitoring_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_HEALTH_MONITORING.sysml — porte par sysml.c4'
+    }
+  }
+
+  specEnergyAware = specDoc 'Specification detaillee — ALG_ENERGY_AWARE (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_ENERGY_AWARE_v1.pdf "Specification detaillee Planification sensible a l energie v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_ENERGY_AWARE.sysml "Specification SysML v2 (ALG_ENERGY_AWARE.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_ENERGY_AWARE (Planification sensible a l energie), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 4/20, 2 defauts BLOQUANTS (validation_energy_aware_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_ENERGY_AWARE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_ENERGY_AWARE'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 4/20, 2 defauts BLOQUANTS (validation_energy_aware_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_ENERGY_AWARE.sysml — porte par sysml.c4'
+    }
+  }
+
+  specEventTriggeredComm = specDoc 'Specification detaillee — ALG_EVENT_TRIGGERED_COMM (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf "Specification detaillee Communication declenchee par evenement v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_EVENT_TRIGGERED_COMM.sysml "Specification SysML v2 (ALG_EVENT_TRIGGERED_COMM.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_EVENT_TRIGGERED_COMM (Communication declenchee par evenement), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 3/20, 3 defauts BLOQUANTS (validation_event_triggered_comm_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_EVENT_TRIGGERED_COMM.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_EVENT_TRIGGERED_COMM'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 3/20, 3 defauts BLOQUANTS (validation_event_triggered_comm_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_EVENT_TRIGGERED_COMM.sysml — porte par sysml.c4'
+    }
+  }
+
+  specCooperativeLocalization = specDoc 'Specification detaillee — ALG_COOPERATIVE_LOCALIZATION (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COOPERATIVE_LOCALIZATION_v1.pdf "Specification detaillee Localisation cooperative inter-agents v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COOPERATIVE_LOCALIZATION.sysml "Specification SysML v2 (ALG_COOPERATIVE_LOCALIZATION.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_COOPERATIVE_LOCALIZATION (Localisation cooperative inter-agents), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COOPERATIVE_LOCALIZATION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_COOPERATIVE_LOCALIZATION'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_COOPERATIVE_LOCALIZATION.sysml — porte par sysml.c4'
+    }
+  }
+
+  specFaultTolerantControlAlloc = specDoc 'Specification detaillee — ALG_FAULT_TOLERANT_CONTROL_ALLOC (v1)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FAULT_TOLERANT_CONTROL_ALLOC_v1.pdf "Specification detaillee Allocation de commande tolerante aux fautes v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml "Specification SysML v2 (ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_FAULT_TOLERANT_CONTROL_ALLOC (Allocation de commande tolerante aux fautes), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_FAULT_TOLERANT_CONTROL_ALLOC'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      sysml 'sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml — porte par sysml.c4'
+    }
+  }
+
+  specJammingResilientMode = specDoc 'Specification detaillee — ALG_JAMMING_RESILIENT_MODE (v1 — REJETEE par validation)' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf "Specification detaillee Mode double cooperatif/autonome sous brouillage v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_JAMMING_RESILIENT_MODE.sysml "Specification SysML v2 (ALG_JAMMING_RESILIENT_MODE.sysml) — relation documentedBy portee par sysml.c4"
+    description 'Document de specification detaillee de l algorithme ALG_JAMMING_RESILIENT_MODE (Mode double cooperatif/autonome sous brouillage), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 6/20, 3 defauts BLOQUANTS (validation_jamming_resilient_mode_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_JAMMING_RESILIENT_MODE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    metadata {
+      algorithme 'ALG_JAMMING_RESILIENT_MODE'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-09-28)'
+      nature 'specification genie logiciel interne'
+      statut 'REJETEE (publiee malgre rejet)'
+      validation 'REJETEE — 6/20, 3 defauts BLOQUANTS (validation_jamming_resilient_mode_v1.md) ; publiee malgre rejet par le commit e137723'
+      sysml 'sysml/ALG_JAMMING_RESILIENT_MODE.sysml — porte par sysml.c4'
+    }
+  }
+
+
+  srcFormationControl = sourceCode 'alg-formation-control — portage Rust de ALG_FORMATION_CONTROL' {
+    #source-code
+    link https://github.com/dagornc/alg-formation-control "Depot GitHub alg-formation-control — code source du portage Rust (formation_control_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_FORMATION_CONTROL (crate/binaire formation_control_rs). Le code vit dans le depot public https://github.com/dagornc/alg-formation-control, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_formation_control.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_FORMATION_CONTROL'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-formation-control'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit Rust/Python — 200/200 comparaisons, 0 ecart (50 graines x 4 scenarios)'
+      tests '10/10 (5 unitaires + 5 integration)'
+      limites 'modele cinematique 2D sans dynamique de vol ; algorithme source idea/conceptual (evidenceLevel NONE) — implementation de reference simplifiee, pas de validation operationnelle'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_FORMATION_CONTROL_v1.pdf (PUBLIE)'
+    }
+  }
+  srcLeaderElection = sourceCode 'alg-leader-election — portage Rust de ALG_LEADER_ELECTION' {
+    #source-code
+    link https://github.com/dagornc/alg-leader-election "Depot GitHub alg-leader-election — code source du portage Rust (leader_election_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_LEADER_ELECTION (crate/binaire leader_election_rs). Le code vit dans le depot public https://github.com/dagornc/alg-leader-election, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_leader_election.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_LEADER_ELECTION'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-leader-election'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 300/300 comparaisons, 0 ecart (50 graines x 6 scenarios)'
+      tests '9/9 (4 unitaires RNG + 5 integration)'
+      limites 'reference simplifiee : aucune preuve de surete/vivacite asynchrone, detecteur de perte suppose fiable, une partition peut produire plusieurs leaders (expose par la metrique double_leader)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_LEADER_ELECTION_v1.pdf — REJETEE par validation (cf specDoc specLeaderElection) ; publiee malgre rejet'
+    }
+  }
+  srcPerceptionFusion = sourceCode 'alg-perception-fusion — portage Rust de ALG_PERCEPTION_FUSION' {
+    #source-code
+    link https://github.com/dagornc/alg-perception-fusion "Depot GitHub alg-perception-fusion — code source du portage Rust (perception_fusion_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_PERCEPTION_FUSION (crate/binaire perception_fusion_rs). Le code vit dans le depot public https://github.com/dagornc/alg-perception-fusion, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_perception_fusion.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_PERCEPTION_FUSION'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-perception-fusion'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 200 comparaisons, 0 ecart (50 graines x 4 scenarios x 80 pas)'
+      tests '12/12 (6 unitaires + 6 integration)'
+      limites 'EKF reduit (equivaut a un filtre de Kalman) ; pas d UKF/filtre particulaire/attitude 3D ; GAP-4 ouvert (fusion hierarchique a 100+ plateformes)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_PERCEPTION_FUSION_v1.pdf (PUBLIE)'
+    }
+  }
+  srcNavigationGNSSDegrade = sourceCode 'alg-nav-gnss-degrade — portage Rust de ALG_NAV_GNSS_DEGRADE' {
+    #source-code
+    link https://github.com/dagornc/alg-nav-gnss-degrade "Depot GitHub alg-nav-gnss-degrade — code source du portage Rust (nav_gnss_degrade_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_NAV_GNSS_DEGRADE (crate/binaire nav_gnss_degrade_rs). Le code vit dans le depot public https://github.com/dagornc/alg-nav-gnss-degrade, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_nav_gnss_degrade.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_NAV_GNSS_DEGRADE'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-nav-gnss-degrade'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 250 comparaisons, 0 ecart (50 graines x 5 scenarios)'
+      tests '13/13'
+      limites 'pas de matrices de covariance, d attitude 3D ni de biais estimes ; CSV arrondi a 9 decimales ; pas de commande physique de retour (RTL)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf (PUBLIE)'
+    }
+  }
+  srcCollisionAvoidance = sourceCode 'alg-collision-avoidance — portage Rust de ALG_COLLISION_AVOIDANCE' {
+    #source-code
+    link https://github.com/dagornc/alg-collision-avoidance "Depot GitHub alg-collision-avoidance — code source du portage Rust (collision_avoidance_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_COLLISION_AVOIDANCE (crate/binaire collision_avoidance_rs). Le code vit dans le depot public https://github.com/dagornc/alg-collision-avoidance, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_collision_avoidance.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-collision-avoidance'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 150/150 comparaisons, 0 ecart (50 graines x 3 scenarios)'
+      tests '10/10 (4 unitaires RNG + 6 integration/invariants)'
+      limites 'pas de dynamique quadrirotor, de retard, d incertitude ni d obstacles statiques ; projections sequentielles (pas de QP CBF global) ; absence de collision verifiee sur 50 graines nominales seulement'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_COLLISION_AVOIDANCE_v1.pdf (PUBLIE)'
+    }
+  }
+  srcSafetyRules = sourceCode 'alg-safety-rules — portage Rust de ALG_SAFETY_RULES' {
+    #source-code
+    link https://github.com/dagornc/alg-safety-rules "Depot GitHub alg-safety-rules — code source du portage Rust (safety_rules_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_SAFETY_RULES (crate/binaire safety_rules_rs). Le code vit dans le depot public https://github.com/dagornc/alg-safety-rules, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_safety_rules.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_SAFETY_RULES'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-safety-rules'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 900 comparaisons, 0 ecart (100 graines x 9 scenarios)'
+      tests '13/13 (4 unitaires RNG + 9 integration)'
+      limites 'validation Monte-Carlo adversarial N>=1000 NON faite ; pas d essai HIL/SIL ; garde CBF scalaire conservatrice (pas de QP complet) ; colonne fausse_alerte a 0 (meme verite terrain que les seuils)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_SAFETY_RULES_v1.pdf — REJETEE par validation (cf specDoc specSafetyRules) ; publiee malgre rejet'
+    }
+  }
+  srcPathPlanning = sourceCode 'alg-path-planning — portage Rust de ALG_PATH_PLANNING' {
+    #source-code
+    link https://github.com/dagornc/alg-path-planning "Depot GitHub alg-path-planning — code source du portage Rust (path_planning_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_PATH_PLANNING (crate/binaire path_planning_rs). Le code vit dans le depot public https://github.com/dagornc/alg-path-planning, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_path_planning.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_PATH_PLANNING'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-path-planning'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 250 comparaisons, 0 ecart (50 graines x 5 scenarios)'
+      tests '13/13 Rust + 3/3 reference Python'
+      limites 'variante A* grille 4-connexe uniquement ; pas de MPC/RRT*/CBS ni de dynamique continue ; temps de calcul mesure par proxy (noeuds developpes)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_PATH_PLANNING_v1.pdf (PUBLIE)'
+    }
+  }
+  srcHealthMonitoring = sourceCode 'alg-health-monitoring — portage Rust de ALG_HEALTH_MONITORING' {
+    #source-code
+    link https://github.com/dagornc/alg-health-monitoring "Depot GitHub alg-health-monitoring — code source du portage Rust (health_monitoring_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_HEALTH_MONITORING (crate/binaire health_monitoring_rs). Le code vit dans le depot public https://github.com/dagornc/alg-health-monitoring, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_health_monitoring.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_HEALTH_MONITORING'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-health-monitoring'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 250 comparaisons, 0 ecart (50 graines x 5 scenarios)'
+      tests '13/13 (6 unitaires + 7 integration)'
+      limites 'modele de reference simplifie, non calibre sur journaux de vol ni capteur reel ; faux negatifs non caracterises ; statut experimental (non validated)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_HEALTH_MONITORING_v1.pdf — REJETEE par validation (cf specDoc specHealthMonitoring) ; publiee malgre rejet'
+    }
+  }
+  srcEnergyAware = sourceCode 'alg-energy-aware — portage Rust de ALG_ENERGY_AWARE' {
+    #source-code
+    link https://github.com/dagornc/alg-energy-aware "Depot GitHub alg-energy-aware — code source du portage Rust (energy_aware_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_ENERGY_AWARE (crate/binaire energy_aware_rs). Le code vit dans le depot public https://github.com/dagornc/alg-energy-aware, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_energy_aware.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_ENERGY_AWARE'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-energy-aware'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 300/300 comparaisons, 0 ecart (50 graines x 6 scenarios)'
+      tests '7/7 (4 RNG + 3 integration/CLI)'
+      limites 'cout energetique lineaire non calibre sur vehicule reel ; pas d aerodynamique/vent/vieillissement batterie ; pas d optimisation combinatoire multi-taches'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_ENERGY_AWARE_v1.pdf — REJETEE par validation (cf specDoc specEnergyAware) ; publiee malgre rejet'
+    }
+  }
+  srcEventTriggeredComm = sourceCode 'alg-event-triggered-comm — portage Rust de ALG_EVENT_TRIGGERED_COMM' {
+    #source-code
+    link https://github.com/dagornc/alg-event-triggered-comm "Depot GitHub alg-event-triggered-comm — code source du portage Rust (event_triggered_comm_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_EVENT_TRIGGERED_COMM (crate/binaire event_triggered_comm_rs). Le code vit dans le depot public https://github.com/dagornc/alg-event-triggered-comm, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_event_triggered_comm.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_EVENT_TRIGGERED_COMM'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-event-triggered-comm'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 200/200, 0 ecart (50 graines x 4 scenarios)'
+      tests '13/13 (4 RNG + 2 CLI + 7 integration)'
+      limites 'implementation conceptuelle : pas de radio/SITL/HITL ; zones scalaires (pas 2D/3D) ; latence = modele discret de service, pas un modem reel'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf — REJETEE par validation (cf specDoc specEventTriggeredComm) ; publiee malgre rejet'
+    }
+  }
+  srcCooperativeLocalization = sourceCode 'alg-cooperative-localization — portage Rust de ALG_COOPERATIVE_LOCALIZATION' {
+    #source-code
+    link https://github.com/dagornc/alg-cooperative-localization "Depot GitHub alg-cooperative-localization — code source du portage Rust (cooperative_localization_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_COOPERATIVE_LOCALIZATION (crate/binaire cooperative_localization_rs). Le code vit dans le depot public https://github.com/dagornc/alg-cooperative-localization, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_cooperative_localization.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_COOPERATIVE_LOCALIZATION'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-cooperative-localization'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 200 comparaisons, 0 ecart (50 graines x 4 scenarios)'
+      tests '15/15'
+      limites 'pas de ST-DCL complet ni d EKF/UKF distribue ; repere commun suppose (ambiguite TOF/TDOA non modelisee) ; graphe deterministe de 8 agents ; GAP-6 ouvert'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_COOPERATIVE_LOCALIZATION_v1.pdf (PUBLIE)'
+    }
+  }
+  srcFaultTolerantControlAlloc = sourceCode 'alg-fault-tolerant-control-alloc — portage Rust de ALG_FAULT_TOLERANT_CONTROL_ALLOC' {
+    #source-code
+    link https://github.com/dagornc/alg-fault-tolerant-control-alloc "Depot GitHub alg-fault-tolerant-control-alloc — code source du portage Rust (fault_tolerant_control_alloc_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_FAULT_TOLERANT_CONTROL_ALLOC (crate/binaire fault_tolerant_control_alloc_rs). Le code vit dans le depot public https://github.com/dagornc/alg-fault-tolerant-control-alloc, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_fault_tolerant_control_alloc.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_FAULT_TOLERANT_CONTROL_ALLOC'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-fault-tolerant-control-alloc'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 250/250, 0 ecart (5 scenarios x 50 graines)'
+      tests '12/12 (4 RNG + 8 integration) + clippy -D warnings OK'
+      limites 'variante pseudo-inverse ponderee + projection de saturation ; pas d allocation hybride ni saturation azimuth ; pas de HITL ; la faute est supposee detectee en amont (ALG_HEALTH_MONITORING)'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_FAULT_TOLERANT_CONTROL_ALLOC_v1.pdf (PUBLIE)'
+    }
+  }
+  srcJammingResilientMode = sourceCode 'alg-jamming-resilient-mode — portage Rust de ALG_JAMMING_RESILIENT_MODE' {
+    #source-code
+    link https://github.com/dagornc/alg-jamming-resilient-mode "Depot GitHub alg-jamming-resilient-mode — code source du portage Rust (jamming_resilient_mode_rs)"
+    link https://github.com/dagornc/SwarmDrones "Depot principal SwarmDrones — agregateur de la solution A"
+    description 'Portage Rust de l algorithme ALG_JAMMING_RESILIENT_MODE (crate/binaire jamming_resilient_mode_rs). Le code vit dans le depot public https://github.com/dagornc/alg-jamming-resilient-mode, reference depuis le depot principal https://github.com/dagornc/SwarmDrones. Parite bit-a-bit verifiee avec la reference Python normative reference/sim_jamming_resilient_mode.py (socle RUST-13, RNG MT19937 compatible CPython). Ce depot est une IMPLEMENTATION DE REFERENCE SIMPLIFIEE : la parite Rust/Python prouve que les deux simulateurs calculent la meme chose, elle ne valide pas scientifiquement l algorithme, sa stabilite formelle ni son aptitude au vol reel. Structure : Cargo.toml, src/{rng,sim,lib,main}.rs, tests/parite.rs, reference/*.py, verify_parite_rust.py, LICENSE (MIT).'
+    metadata {
+      algorithme 'ALG_JAMMING_RESILIENT_MODE'
+      langage 'Rust (edition 2024, zero dependance externe)'
+      depot 'https://github.com/dagornc/alg-jamming-resilient-mode'
+      depotPrincipal 'https://github.com/dagornc/SwarmDrones'
+      integration 'depot dedie public autonome — NON rattache en submodule de SwarmDrones (constate 2026-09-28)'
+      parite 'bit-a-bit — 250/250, 0 ecart (50 graines x 5 scenarios)'
+      tests '14/14'
+      limites 'modele conceptuel discret de supervision : pas de RF, reseau, dynamique de vol ni HOCBF ; profils de brouillage synthetiques ; GAP-5 ouvert ; pas d attestation TPM'
+      licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
+      nature 'portage de reference (implementation simplifiee)'
+      statut 'PUBLIE'
+      specPdf 'Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf — REJETEE par validation (cf specDoc specJammingResilientMode) ; publiee malgre rejet'
+    }
+  }
+
+  // --- Relations SPEC-13-LIKE ---
+  // algorithm -[documentedBy]-> specDoc PDF (13) ;
+  // sourceCode -[implements]-> algorithm (13) ;
+  // sourceCode -[documentedBy]-> specDoc PDF (13).
+
+  algFormationControl -[documentedBy]-> specFormationControl 'specification detaillee v1 (PDF)'
+  algLeaderElection -[documentedBy]-> specLeaderElection 'specification detaillee v1 (PDF)'
+  algPerceptionFusion -[documentedBy]-> specPerceptionFusion 'specification detaillee v1 (PDF)'
+  algNavigationGNSSDegrade -[documentedBy]-> specNavigationGNSSDegrade 'specification detaillee v1 (PDF)'
+  algCollisionAvoidance -[documentedBy]-> specCollisionAvoidance 'specification detaillee v1 (PDF)'
+  algSafetyRules -[documentedBy]-> specSafetyRules 'specification detaillee v1 (PDF)'
+  algPathPlanning -[documentedBy]-> specPathPlanning 'specification detaillee v1 (PDF)'
+  algHealthMonitoring -[documentedBy]-> specHealthMonitoring 'specification detaillee v1 (PDF)'
+  algEnergyAware -[documentedBy]-> specEnergyAware 'specification detaillee v1 (PDF)'
+  algEventTriggeredComm -[documentedBy]-> specEventTriggeredComm 'specification detaillee v1 (PDF)'
+  algCooperativeLocalization -[documentedBy]-> specCooperativeLocalization 'specification detaillee v1 (PDF)'
+  algFaultTolerantControlAlloc -[documentedBy]-> specFaultTolerantControlAlloc 'specification detaillee v1 (PDF)'
+  algJammingResilientMode -[documentedBy]-> specJammingResilientMode 'specification detaillee v1 (PDF)'
+
+  srcFormationControl -[implements]-> algFormationControl 'portage Rust (parite bit-a-bit)'
+  srcLeaderElection -[implements]-> algLeaderElection 'portage Rust (parite bit-a-bit)'
+  srcPerceptionFusion -[implements]-> algPerceptionFusion 'portage Rust (parite bit-a-bit)'
+  srcNavigationGNSSDegrade -[implements]-> algNavigationGNSSDegrade 'portage Rust (parite bit-a-bit)'
+  srcCollisionAvoidance -[implements]-> algCollisionAvoidance 'portage Rust (parite bit-a-bit)'
+  srcSafetyRules -[implements]-> algSafetyRules 'portage Rust (parite bit-a-bit)'
+  srcPathPlanning -[implements]-> algPathPlanning 'portage Rust (parite bit-a-bit)'
+  srcHealthMonitoring -[implements]-> algHealthMonitoring 'portage Rust (parite bit-a-bit)'
+  srcEnergyAware -[implements]-> algEnergyAware 'portage Rust (parite bit-a-bit)'
+  srcEventTriggeredComm -[implements]-> algEventTriggeredComm 'portage Rust (parite bit-a-bit)'
+  srcCooperativeLocalization -[implements]-> algCooperativeLocalization 'portage Rust (parite bit-a-bit)'
+  srcFaultTolerantControlAlloc -[implements]-> algFaultTolerantControlAlloc 'portage Rust (parite bit-a-bit)'
+  srcJammingResilientMode -[implements]-> algJammingResilientMode 'portage Rust (parite bit-a-bit)'
+
+  srcFormationControl -[documentedBy]-> specFormationControl 'specification detaillee v1 (PDF)'
+  srcLeaderElection -[documentedBy]-> specLeaderElection 'specification detaillee v1 (PDF)'
+  srcPerceptionFusion -[documentedBy]-> specPerceptionFusion 'specification detaillee v1 (PDF)'
+  srcNavigationGNSSDegrade -[documentedBy]-> specNavigationGNSSDegrade 'specification detaillee v1 (PDF)'
+  srcCollisionAvoidance -[documentedBy]-> specCollisionAvoidance 'specification detaillee v1 (PDF)'
+  srcSafetyRules -[documentedBy]-> specSafetyRules 'specification detaillee v1 (PDF)'
+  srcPathPlanning -[documentedBy]-> specPathPlanning 'specification detaillee v1 (PDF)'
+  srcHealthMonitoring -[documentedBy]-> specHealthMonitoring 'specification detaillee v1 (PDF)'
+  srcEnergyAware -[documentedBy]-> specEnergyAware 'specification detaillee v1 (PDF)'
+  srcEventTriggeredComm -[documentedBy]-> specEventTriggeredComm 'specification detaillee v1 (PDF)'
+  srcCooperativeLocalization -[documentedBy]-> specCooperativeLocalization 'specification detaillee v1 (PDF)'
+  srcFaultTolerantControlAlloc -[documentedBy]-> specFaultTolerantControlAlloc 'specification detaillee v1 (PDF)'
+  srcJammingResilientMode -[documentedBy]-> specJammingResilientMode 'specification detaillee v1 (PDF)'
 }
-
-
-
