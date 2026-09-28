@@ -1,0 +1,288 @@
+// =============================================================================
+//  SYSML-15 — SPECIFICATIONS SysML v2 DES 15 ALGORITHMES (carte t_d671a500)
+//
+//  Fichier purement ADDITIF : aucun identifiant, relation ni vue existant
+//  n'est modifie. Les fiches `algorithm` (les 15) ne sont PAS touchees.
+//
+//  Decision de conception (orchestrateur) : LikeC4 n'est PAS SysML v2.
+//  Les specs SysML v2 vivent dans des fichiers .sysml reels (dossier sysml/),
+//  un par algorithme. LikeC4 les REFERENCE via des elements specDoc + une
+//  relation `documentedBy`, et expose la tracabilite dans la vue
+//  `algorithmSysmlTraceability`.
+//
+//  Validation (honnete) :
+//    - syntaxe LikeC4 : docker exec likec4 likec4 validate /data -> Valid
+//    - syntaxe SysML v2 : parseur structurel maison (sysml/validate_sysml.py),
+//      15/15. AUCUN validateur OMG SysML v2 n'est installe (documente).
+// =============================================================================
+
+model {
+
+  // ===========================================================================
+  //  specDoc SysML v2 — un element par algorithme, pointant vers le fichier
+  //  .sysml correspondant (depot dagornc/swarmdrones-likec4, dossier sysml/).
+  // ===========================================================================
+
+  sysmlTaskAllocation = specDoc 'Specification SysML v2 — ALG_TASK_ALLOCATION' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_TASK_ALLOCATION.sysml "Source SysML v2 (sysml/ALG_TASK_ALLOCATION.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Allocation de taches distribuee (CBBA v3). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algTaskAllocation.'
+    metadata {
+      algorithme 'ALG_TASK_ALLOCATION'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_TASK_ALLOCATION.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlConsensus = specDoc 'Specification SysML v2 — ALG_CONSENSUS' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_CONSENSUS.sysml "Source SysML v2 (sysml/ALG_CONSENSUS.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Consensus distribue (CRDT semi-treillis). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algConsensus.'
+    metadata {
+      algorithme 'ALG_CONSENSUS'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_CONSENSUS.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlFormationControl = specDoc 'Specification SysML v2 — ALG_FORMATION_CONTROL' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FORMATION_CONTROL.sysml "Source SysML v2 (sysml/ALG_FORMATION_CONTROL.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Controle de formation. Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algFormationControl.'
+    metadata {
+      algorithme 'ALG_FORMATION_CONTROL'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_FORMATION_CONTROL.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlLeaderElection = specDoc 'Specification SysML v2 — ALG_LEADER_ELECTION' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_LEADER_ELECTION.sysml "Source SysML v2 (sysml/ALG_LEADER_ELECTION.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Election de leader (reconfiguration apres perte). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algLeaderElection.'
+    metadata {
+      algorithme 'ALG_LEADER_ELECTION'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_LEADER_ELECTION.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlPerceptionFusion = specDoc 'Specification SysML v2 — ALG_PERCEPTION_FUSION' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PERCEPTION_FUSION.sysml "Source SysML v2 (sysml/ALG_PERCEPTION_FUSION.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Fusion multi-capteurs (EKF/UKF). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algPerceptionFusion.'
+    metadata {
+      algorithme 'ALG_PERCEPTION_FUSION'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_PERCEPTION_FUSION.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlNavigationGNSSDegrade = specDoc 'Specification SysML v2 — ALG_NAV_GNSS_DEGRADE' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_NAV_GNSS_DEGRADE.sysml "Source SysML v2 (sysml/ALG_NAV_GNSS_DEGRADE.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Navigation sous GNSS degrade. Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algNavigationGNSSDegrade.'
+    metadata {
+      algorithme 'ALG_NAV_GNSS_DEGRADE'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_NAV_GNSS_DEGRADE.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlCollisionAvoidance = specDoc 'Specification SysML v2 — ALG_COLLISION_AVOIDANCE' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COLLISION_AVOIDANCE.sysml "Source SysML v2 (sysml/ALG_COLLISION_AVOIDANCE.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Evitement de collision (Control Barrier Functions). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algCollisionAvoidance.'
+    metadata {
+      algorithme 'ALG_COLLISION_AVOIDANCE'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_COLLISION_AVOIDANCE.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlSafetyRules = specDoc 'Specification SysML v2 — ALG_SAFETY_RULES' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_SAFETY_RULES.sysml "Source SysML v2 (sysml/ALG_SAFETY_RULES.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Surete par regles pre-approuvees. Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algSafetyRules.'
+    metadata {
+      algorithme 'ALG_SAFETY_RULES'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_SAFETY_RULES.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlPathPlanning = specDoc 'Specification SysML v2 — ALG_PATH_PLANNING' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PATH_PLANNING.sysml "Source SysML v2 (sysml/ALG_PATH_PLANNING.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Planification de trajectoire (waypoints + MPC). Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algPathPlanning.'
+    metadata {
+      algorithme 'ALG_PATH_PLANNING'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_PATH_PLANNING.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlHealthMonitoring = specDoc 'Specification SysML v2 — ALG_HEALTH_MONITORING' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_HEALTH_MONITORING.sysml "Source SysML v2 (sysml/ALG_HEALTH_MONITORING.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Surveillance d etat et detection de faute. Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algHealthMonitoring.'
+    metadata {
+      algorithme 'ALG_HEALTH_MONITORING'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_HEALTH_MONITORING.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlEnergyAware = specDoc 'Specification SysML v2 — ALG_ENERGY_AWARE' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_ENERGY_AWARE.sysml "Source SysML v2 (sysml/ALG_ENERGY_AWARE.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Planification sensible a l energie. Constructeurs : part def, action def, requirement def, interface def. Transcrite de algorithms.c4 :: algEnergyAware.'
+    metadata {
+      algorithme 'ALG_ENERGY_AWARE'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_ENERGY_AWARE.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlEventTriggeredComm = specDoc 'Specification SysML v2 — ALG_EVENT_TRIGGERED_COMM' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_EVENT_TRIGGERED_COMM.sysml "Source SysML v2 (sysml/ALG_EVENT_TRIGGERED_COMM.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Communication declenchee par evenement. Constructeurs : part def, action def, requirement def, interface def. Transcrite de e20-audit-completeness.c4 :: algEventTriggeredComm.'
+    metadata {
+      algorithme 'ALG_EVENT_TRIGGERED_COMM'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_EVENT_TRIGGERED_COMM.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlCooperativeLocalization = specDoc 'Specification SysML v2 — ALG_COOPERATIVE_LOCALIZATION' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COOPERATIVE_LOCALIZATION.sysml "Source SysML v2 (sysml/ALG_COOPERATIVE_LOCALIZATION.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Localisation cooperative inter-agents. Constructeurs : part def, action def, requirement def, interface def. Transcrite de e20-audit-completeness.c4 :: algCooperativeLocalization.'
+    metadata {
+      algorithme 'ALG_COOPERATIVE_LOCALIZATION'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_COOPERATIVE_LOCALIZATION.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlFaultTolerantControlAlloc = specDoc 'Specification SysML v2 — ALG_FAULT_TOLERANT_CONTROL_ALLOC' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml "Source SysML v2 (sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Allocation de commande tolerante aux fautes. Constructeurs : part def, action def, requirement def, interface def. Transcrite de e20-audit-completeness.c4 :: algFaultTolerantControlAlloc.'
+    metadata {
+      algorithme 'ALG_FAULT_TOLERANT_CONTROL_ALLOC'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  sysmlJammingResilientMode = specDoc 'Specification SysML v2 — ALG_JAMMING_RESILIENT_MODE' {
+    #source-doc
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_JAMMING_RESILIENT_MODE.sysml "Source SysML v2 (sysml/ALG_JAMMING_RESILIENT_MODE.sysml)"
+    description 'Specification SysML v2 (notation textuelle OMG) — Mode double cooperatif/autonome sous brouillage. Constructeurs : part def, action def, requirement def, interface def. Transcrite de e20-audit-completeness.c4 :: algJammingResilientMode.'
+    metadata {
+      algorithme 'ALG_JAMMING_RESILIENT_MODE'
+      format 'SysML v2 (OMG, notation textuelle)'
+      fichier 'sysml/ALG_JAMMING_RESILIENT_MODE.sysml'
+      validation 'structurelle maison (sysml/validate_sysml.py) — aucun validateur OMG installe'
+    }
+  }
+
+  // ===========================================================================
+  //  Relations : algorithme -[documentedBy]-> specification SysML v2
+  // ===========================================================================
+
+  algTaskAllocation -[documentedBy]-> sysmlTaskAllocation 'specification SysML v2'
+  algConsensus -[documentedBy]-> sysmlConsensus 'specification SysML v2'
+  algFormationControl -[documentedBy]-> sysmlFormationControl 'specification SysML v2'
+  algLeaderElection -[documentedBy]-> sysmlLeaderElection 'specification SysML v2'
+  algPerceptionFusion -[documentedBy]-> sysmlPerceptionFusion 'specification SysML v2'
+  algNavigationGNSSDegrade -[documentedBy]-> sysmlNavigationGNSSDegrade 'specification SysML v2'
+  algCollisionAvoidance -[documentedBy]-> sysmlCollisionAvoidance 'specification SysML v2'
+  algSafetyRules -[documentedBy]-> sysmlSafetyRules 'specification SysML v2'
+  algPathPlanning -[documentedBy]-> sysmlPathPlanning 'specification SysML v2'
+  algHealthMonitoring -[documentedBy]-> sysmlHealthMonitoring 'specification SysML v2'
+  algEnergyAware -[documentedBy]-> sysmlEnergyAware 'specification SysML v2'
+  algEventTriggeredComm -[documentedBy]-> sysmlEventTriggeredComm 'specification SysML v2'
+  algCooperativeLocalization -[documentedBy]-> sysmlCooperativeLocalization 'specification SysML v2'
+  algFaultTolerantControlAlloc -[documentedBy]-> sysmlFaultTolerantControlAlloc 'specification SysML v2'
+  algJammingResilientMode -[documentedBy]-> sysmlJammingResilientMode 'specification SysML v2'
+
+}
+
+views {
+
+  // ===========================================================================
+  //  SYSML-15 — TRACABILITE ALGORITHME -> SPECIFICATION SysML v2
+  //  Projection (sens reel du metamodele) : algorithm -[documentedBy]-> specDoc
+  //  Aucun arc n'est invente : seules les relations ci-dessus sont projetees.
+  //  ETAT : 15/15 algorithmes references par une spec SysML v2.
+  // ===========================================================================
+
+  view algorithmSysmlTraceability {
+    title '04 · Algorithmique \/ Traçabilite algorithme -> specification SysML v2'
+    description '''
+      Lecture : « ou est la specification SysML v2 de cet algorithme ? »
+
+      Chemin projete (sens reel du metamodele) :
+        chaque algorithme est documente par sa specDoc SysML v2 (documentedBy).
+
+      Chaque specDoc reference le fichier sysml/<ALG_ID>.sysml du depot
+      dagornc/swarmdrones-likec4 (notation textuelle OMG).
+
+      ETAT MESURE : 15/15 algorithmes portent une specification SysML v2.
+      VALIDATION : syntaxe LikeC4 = likec4 validate (outil reel) ; syntaxe
+      SysML v2 = parseur structurel maison uniquement (aucun validateur OMG
+      installe — la conformite OMG reste a etablir avec SysIDE).
+
+      Complement : algorithmSpecTraceability (specifications PDF detaillees).
+    '''
+    include algTaskAllocation
+    include algConsensus
+    include algFormationControl
+    include algLeaderElection
+    include algPerceptionFusion
+    include algNavigationGNSSDegrade
+    include algCollisionAvoidance
+    include algSafetyRules
+    include algPathPlanning
+    include algHealthMonitoring
+    include algEnergyAware
+    include algEventTriggeredComm
+    include algCooperativeLocalization
+    include algFaultTolerantControlAlloc
+    include algJammingResilientMode
+    include sysmlTaskAllocation
+    include sysmlConsensus
+    include sysmlFormationControl
+    include sysmlLeaderElection
+    include sysmlPerceptionFusion
+    include sysmlNavigationGNSSDegrade
+    include sysmlCollisionAvoidance
+    include sysmlSafetyRules
+    include sysmlPathPlanning
+    include sysmlHealthMonitoring
+    include sysmlEnergyAware
+    include sysmlEventTriggeredComm
+    include sysmlCooperativeLocalization
+    include sysmlFaultTolerantControlAlloc
+    include sysmlJammingResilientMode
+    global style lectureZones
+    autoLayout LeftRight
+  }
+}
