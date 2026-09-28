@@ -667,9 +667,9 @@ model {
 
   specFormationControl = specDoc 'Specification detaillee — ALG_FORMATION_CONTROL (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FORMATION_CONTROL_v1.pdf "Specification detaillee Controle de formation v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FORMATION_CONTROL_v1.pdf "Specification detaillee Controle de formation v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FORMATION_CONTROL.sysml "Specification SysML v2 (ALG_FORMATION_CONTROL.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_FORMATION_CONTROL (Controle de formation), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FORMATION_CONTROL.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_FORMATION_CONTROL (Controle de formation), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FORMATION_CONTROL.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_FORMATION_CONTROL'
       versions '1 (v1)'
@@ -683,9 +683,9 @@ model {
 
   specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v1.pdf "Specification detaillee Election de leader v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v1.pdf "Specification detaillee Election de leader v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_LEADER_ELECTION.sysml "Specification SysML v2 (ALG_LEADER_ELECTION.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 5/20, 3 defauts BLOQUANTS (validation_leader_election_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_LEADER_ELECTION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 20/20 (validation_leader_election_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_LEADER_ELECTION'
       versions '1 (v1)'
@@ -699,9 +699,9 @@ model {
 
   specPerceptionFusion = specDoc 'Specification detaillee — ALG_PERCEPTION_FUSION (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PERCEPTION_FUSION_v1.pdf "Specification detaillee Fusion multi-capteurs (EKF/UKF) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PERCEPTION_FUSION_v1.pdf "Specification detaillee Fusion multi-capteurs (EKF/UKF) v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PERCEPTION_FUSION.sysml "Specification SysML v2 (ALG_PERCEPTION_FUSION.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_PERCEPTION_FUSION (Fusion multi-capteurs (EKF/UKF)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PERCEPTION_FUSION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_PERCEPTION_FUSION (Fusion multi-capteurs (EKF/UKF)), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PERCEPTION_FUSION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_PERCEPTION_FUSION'
       versions '1 (v1)'
@@ -715,9 +715,9 @@ model {
 
   specNavigationGNSSDegrade = specDoc 'Specification detaillee — ALG_NAV_GNSS_DEGRADE (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf "Specification detaillee Navigation sous GNSS degrade v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf "Specification detaillee Navigation sous GNSS degrade v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_NAV_GNSS_DEGRADE.sysml "Specification SysML v2 (ALG_NAV_GNSS_DEGRADE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_NAV_GNSS_DEGRADE'
       versions '1 (v1)'
@@ -731,9 +731,9 @@ model {
 
   specCollisionAvoidance = specDoc 'Specification detaillee — ALG_COLLISION_AVOIDANCE (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COLLISION_AVOIDANCE_v1.pdf "Specification detaillee Evitement de collision (CBF) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COLLISION_AVOIDANCE_v1.pdf "Specification detaillee Evitement de collision (CBF) v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COLLISION_AVOIDANCE.sysml "Specification SysML v2 (ALG_COLLISION_AVOIDANCE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_COLLISION_AVOIDANCE (Evitement de collision (CBF)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COLLISION_AVOIDANCE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_COLLISION_AVOIDANCE (Evitement de collision (CBF)), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COLLISION_AVOIDANCE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_COLLISION_AVOIDANCE'
       versions '1 (v1)'
@@ -747,9 +747,9 @@ model {
 
   specSafetyRules = specDoc 'Specification detaillee — ALG_SAFETY_RULES (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_SAFETY_RULES_v1.pdf "Specification detaillee Surete par regles pre-approuvees v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_SAFETY_RULES_v1.pdf "Specification detaillee Surete par regles pre-approuvees v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_SAFETY_RULES.sysml "Specification SysML v2 (ALG_SAFETY_RULES.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_SAFETY_RULES (Surete par regles pre-approuvees), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 5/20, 2 defauts BLOQUANTS (validation_safety_rules_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_SAFETY_RULES.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_SAFETY_RULES (Surete par regles pre-approuvees), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 17/20 (validation_safety_rules_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_SAFETY_RULES'
       versions '1 (v1)'
@@ -763,9 +763,9 @@ model {
 
   specPathPlanning = specDoc 'Specification detaillee — ALG_PATH_PLANNING (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PATH_PLANNING_v1.pdf "Specification detaillee Planification de trajectoire (waypoints + MPC) v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_PATH_PLANNING_v1.pdf "Specification detaillee Planification de trajectoire (waypoints + MPC) v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_PATH_PLANNING.sysml "Specification SysML v2 (ALG_PATH_PLANNING.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_PATH_PLANNING (Planification de trajectoire (waypoints + MPC)), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PATH_PLANNING.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_PATH_PLANNING (Planification de trajectoire (waypoints + MPC)), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_PATH_PLANNING.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_PATH_PLANNING'
       versions '1 (v1)'
@@ -779,9 +779,9 @@ model {
 
   specHealthMonitoring = specDoc 'Specification detaillee — ALG_HEALTH_MONITORING (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_HEALTH_MONITORING_v1.pdf "Specification detaillee Surveillance d etat et detection de faute v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_HEALTH_MONITORING_v1.pdf "Specification detaillee Surveillance d etat et detection de faute v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_HEALTH_MONITORING.sysml "Specification SysML v2 (ALG_HEALTH_MONITORING.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_HEALTH_MONITORING (Surveillance d etat et detection de faute), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 4/20, 3 defauts BLOQUANTS (validation_health_monitoring_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_HEALTH_MONITORING.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_HEALTH_MONITORING (Surveillance d etat et detection de faute), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 20/20 (validation_health_monitoring_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_HEALTH_MONITORING'
       versions '1 (v1)'
@@ -795,9 +795,9 @@ model {
 
   specEnergyAware = specDoc 'Specification detaillee — ALG_ENERGY_AWARE (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_ENERGY_AWARE_v1.pdf "Specification detaillee Planification sensible a l energie v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_ENERGY_AWARE_v1.pdf "Specification detaillee Planification sensible a l energie v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_ENERGY_AWARE.sysml "Specification SysML v2 (ALG_ENERGY_AWARE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_ENERGY_AWARE (Planification sensible a l energie), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 4/20, 2 defauts BLOQUANTS (validation_energy_aware_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_ENERGY_AWARE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_ENERGY_AWARE (Planification sensible a l energie), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 20/20 (validation_energy_aware_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_ENERGY_AWARE'
       versions '1 (v1)'
@@ -811,9 +811,9 @@ model {
 
   specEventTriggeredComm = specDoc 'Specification detaillee — ALG_EVENT_TRIGGERED_COMM (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf "Specification detaillee Communication declenchee par evenement v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf "Specification detaillee Communication declenchee par evenement v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_EVENT_TRIGGERED_COMM.sysml "Specification SysML v2 (ALG_EVENT_TRIGGERED_COMM.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_EVENT_TRIGGERED_COMM (Communication declenchee par evenement), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 3/20, 3 defauts BLOQUANTS (validation_event_triggered_comm_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_EVENT_TRIGGERED_COMM.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_EVENT_TRIGGERED_COMM (Communication declenchee par evenement), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 17/20 (validation_event_triggered_comm_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_EVENT_TRIGGERED_COMM'
       versions '1 (v1)'
@@ -827,9 +827,9 @@ model {
 
   specCooperativeLocalization = specDoc 'Specification detaillee — ALG_COOPERATIVE_LOCALIZATION (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COOPERATIVE_LOCALIZATION_v1.pdf "Specification detaillee Localisation cooperative inter-agents v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_COOPERATIVE_LOCALIZATION_v1.pdf "Specification detaillee Localisation cooperative inter-agents v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_COOPERATIVE_LOCALIZATION.sysml "Specification SysML v2 (ALG_COOPERATIVE_LOCALIZATION.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_COOPERATIVE_LOCALIZATION (Localisation cooperative inter-agents), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COOPERATIVE_LOCALIZATION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_COOPERATIVE_LOCALIZATION (Localisation cooperative inter-agents), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_COOPERATIVE_LOCALIZATION.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_COOPERATIVE_LOCALIZATION'
       versions '1 (v1)'
@@ -843,9 +843,9 @@ model {
 
   specFaultTolerantControlAlloc = specDoc 'Specification detaillee — ALG_FAULT_TOLERANT_CONTROL_ALLOC (v1)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FAULT_TOLERANT_CONTROL_ALLOC_v1.pdf "Specification detaillee Allocation de commande tolerante aux fautes v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_FAULT_TOLERANT_CONTROL_ALLOC_v1.pdf "Specification detaillee Allocation de commande tolerante aux fautes v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml "Specification SysML v2 (ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_FAULT_TOLERANT_CONTROL_ALLOC (Allocation de commande tolerante aux fautes), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_FAULT_TOLERANT_CONTROL_ALLOC (Allocation de commande tolerante aux fautes), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_FAULT_TOLERANT_CONTROL_ALLOC.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_FAULT_TOLERANT_CONTROL_ALLOC'
       versions '1 (v1)'
@@ -859,9 +859,9 @@ model {
 
   specJammingResilientMode = specDoc 'Specification detaillee — ALG_JAMMING_RESILIENT_MODE (v1 — REJETEE par validation)' {
     #source-doc
-    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf "Specification detaillee Mode double cooperatif/autonome sous brouillage v1 (PDF) — depot PRIVE dagornc/swarmdrones-likec4 (specification/)"
+    link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf "Specification detaillee Mode double cooperatif/autonome sous brouillage v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_JAMMING_RESILIENT_MODE.sysml "Specification SysML v2 (ALG_JAMMING_RESILIENT_MODE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_JAMMING_RESILIENT_MODE (Mode double cooperatif/autonome sous brouillage), version v1, dans le depot PRIVE dagornc/swarmdrones-likec4 (specification/). Validation : REJETEE — 6/20, 3 defauts BLOQUANTS (validation_jamming_resilient_mode_v1.md) ; publiee malgre rejet par le commit e137723. La specification SysML v2 associee vit dans sysml/ALG_JAMMING_RESILIENT_MODE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_JAMMING_RESILIENT_MODE (Mode double cooperatif/autonome sous brouillage), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 20/20 (validation_jamming_resilient_mode_v1.md, reprise apres rejet initial).'
     metadata {
       algorithme 'ALG_JAMMING_RESILIENT_MODE'
       versions '1 (v1)'
