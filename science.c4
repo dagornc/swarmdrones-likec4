@@ -158,9 +158,9 @@ model {
 
   srcRaft = specDoc 'Ongaro, Ousterhout (2014) — Raft, USENIX ATC' {
     #science
-    link https://doi.org/10.1145/2627470.2627476 "In Search of an Understandable Consensus Algorithm"
+    link https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro "In Search of an Understandable Consensus Algorithm (USENIX ATC 2014)"
     description 'Algorithme de consensus Raft : election de leader par termes, votes et heartbeats, replication de journal, surete et vivacite prouvees. Fondation de l election de leader et du consensus du modele.'
-    metadata { doi '10.1145/2627470.2627476'; annee '2014'; nature 'acte de conference'; statut 'REPERTORIEE (titre+DOI — research_leader_election_v1.md)' }
+    metadata { doi '10.5555/2643634.2643666'; annee '2014'; nature 'acte de conference'; statut 'REPERTORIEE (titre+DOI — research_leader_election_v1.md)' }
   }
   srcBully = specDoc 'Garcia-Molina (1982) — Bully algorithm, IEEE T-Comp.' {
     #science
@@ -354,11 +354,11 @@ model {
 
   sciLeaderElection = finding 'SCI-12 — Election de leader : fondations solides, essaim mobile non prouve' {
     #science
-    link https://doi.org/10.1145/2627470.2627476 "In Search of an Understandable Consensus Algorithm"
+    link https://www.usenix.org/conference/atc14/technical-sessions/presentation/ongaro "In Search of an Understandable Consensus Algorithm (USENIX ATC 2014)"
     description '''
       ALG_LEADER_ELECTION portait « aucune source verifiee ». Les FONDATIONS
       sont solides et prouvees :
-        - Raft (10.1145/2627470.2627476) : election par termes, votes et
+        - Raft (USENIX ATC 2014, 10.5555/2643634.2643666) : election par termes, votes et
           heartbeats, surete et vivacite prouvees ;
         - Bully (10.1109/TC.1982.1675885) : election par priorite,
           complexite en messages bornee ;
