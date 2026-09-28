@@ -143,6 +143,99 @@ model {
   }
 
   // ===========================================================================
+  //  1ter. SOURCES PRIMAIRES AJOUTEES — rattachement SPEC-13 (2026-09-28)
+  //
+  //  Provenance : recherche documentaire des 13 specs (research_*.md,
+  //  profil mathematique, methode Dream-RSI). Rattachement des algorithmes
+  //  ALG_LEADER_ELECTION, ALG_SAFETY_RULES et ALG_PATH_PLANNING qui ne
+  //  portaient encore AUCUN verdict scientifique.
+  //
+  //  REGLE D HONNETETE (invariant INV-5) : le statut dit exactement qui a
+  //  lu quoi. « CONSULTEE (spec) » = article lu par le profil mathematique
+  //  et consigne dans le research_*.md ; « REPERTORIEE » = titre+DOI cites
+  //  par la spec, non relus ligne a ligne par l architecte.
+  // ===========================================================================
+
+  srcRaft = specDoc 'Ongaro, Ousterhout (2014) — Raft, USENIX ATC' {
+    #science
+    link https://doi.org/10.1145/2627470.2627476 "In Search of an Understandable Consensus Algorithm"
+    description 'Algorithme de consensus Raft : election de leader par termes, votes et heartbeats, replication de journal, surete et vivacite prouvees. Fondation de l election de leader et du consensus du modele.'
+    metadata { doi '10.1145/2627470.2627476'; annee '2014'; nature 'acte de conference'; statut 'REPERTORIEE (titre+DOI — research_leader_election_v1.md)' }
+  }
+  srcBully = specDoc 'Garcia-Molina (1982) — Bully algorithm, IEEE T-Comp.' {
+    #science
+    link https://doi.org/10.1109/TC.1982.1675885 "Elections in a Distributed Computing System"
+    description 'Algorithme d election Bully : election par plus haute priorite, analyse de complexite en messages, modele de fautes (crash, omission). Fondation de l election par priorite (sante, connectivite, criticite).'
+    metadata { doi '10.1109/TC.1982.1675885'; annee '1982'; nature 'article de revue'; statut 'REPERTORIEE (titre+DOI — research_leader_election_v1.md)' }
+  }
+  srcPaxos = specDoc 'Lamport (1998) — The Part-Time Parliament (Paxos)' {
+    #science
+    link https://doi.org/10.1145/279227.279229 "The Part-Time Parliament"
+    description 'Consensus Paxos : preuves de surete (pas deux leaders pour un meme terme) et de vivacite sous synchronie partielle. Fondation theorique de Raft et de l unicite du leader.'
+    metadata { doi '10.1145/279227.279229'; annee '1998'; nature 'article de revue'; statut 'REPERTORIEE (titre+DOI — research_leader_election_v1.md)' }
+  }
+  srcCBFTheory = specDoc 'Ames et al. (2019) — Control Barrier Functions, ECC' {
+    #science
+    link https://doi.org/10.23919/ECC.2019.8796023 "Control Barrier Functions: Theory and Applications"
+    description 'Theorie des CBF pour systemes non lineaires : controle sur par QP, CBF exponentielle, garanties ISS. Fondation mathematique de l evitement par paire et des regles de surete embarquees.'
+    metadata { doi '10.23919/ECC.2019.8796023'; annee '2019'; nature 'acte de conference'; statut 'REPERTORIEE (titre+DOI — research_safety_rules_v1.md)' }
+  }
+  srcCBFSwarm = specDoc 'Wang et al. (2022) — Safety-Critical CBF for drone swarms, RA-L' {
+    #science
+    link https://doi.org/10.1109/LRA.2022.3145678 "Safety-Critical Control of Drone Swarms via Control Barrier Functions"
+    description 'CBF pour essaims de drones (30+ agents en simulation, 10 drones sur materiel Intel Aero), implementation decentralisee, geofencing CBF, resolution QP sous 1ms embarquee.'
+    metadata { doi '10.1109/LRA.2022.3145678'; annee '2022'; nature 'article de revue'; statut 'REPERTORIEE (titre+DOI — research_safety_rules_v1.md)' }
+  }
+  srcDMPCTube = specDoc 'Dai, Liao, Chen (2026) — Tube-based DMPC, Drones 10(3):177' {
+    #science
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
+    description 'MPC distribue tube-based : reconstruction elastique du tube, evitement risk-aware, QP condense, faisabilite recursive prouvee (K >= vmax/(amax·h)). Simulation 10-12 agents, materiel 3-4 quadrotors. Fondation de ALG_PATH_PLANNING.'
+    metadata { doi '10.3390/drones10030177'; annee '2026'; nature 'article de revue'; statut 'CONSULTEE (spec — research_path_planning_v1.md, lue integralement)' }
+  }
+  srcImpedanceDiffusion = specDoc 'Batool et al. (2026) — ImpedanceDiffusion, arXiv:2603.09031' {
+    #science
+    link https://arxiv.org/abs/2603.09031 "ImpedanceDiffusion: Diffusion-Based Global Path Planning for UAV Swarm Navigation with Generative Impedance Control"
+    description 'Planification globale par diffusion (top-view long horizon + FPV court horizon), APF reactive + impedance variable, zero-shot sim-to-real sur Crazyflie 2.1 (92% de succes sur 100 runs). Preprint.'
+    metadata { arxiv '2603.09031'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
+  }
+  srcDiff4D = specDoc 'Li et al. (2026) — Diffusion 4D + DNMPC, arXiv:2606.31197' {
+    #science
+    link https://arxiv.org/abs/2606.31197 "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms"
+    description 'Prediction de trajectoire 4D decouplee par dimension + raffinement par diffusion, DNMPC en boucle fermee. Erreur de suivi <0.07m, 34 FPS. Preprint.'
+    metadata { arxiv '2606.31197'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
+  }
+  srcPathMedUAV = specDoc 'Scientific Reports (2026) — Benchmark path planning UAV medical' {
+    #science
+    link https://doi.org/10.1038/s41598-026-70043-1 "A comparative study of path planning algorithms for low-altitude emergency medical UAVs considering task priorities"
+    description 'Benchmark comparatif de 7 algorithmes de planification (MILP, metaheuristiques, PPO) sur 6 scenarios de stress. PPO robuste en replanning (0.4s, >95% de satisfaction). Mono-agent, extrapolation multi-agent a qualifier.'
+    metadata { doi '10.1038/s41598-026-70043-1'; annee '2026'; nature 'article de revue'; statut 'CONSULTEE (spec — research_path_planning_v1.md, abstract + structure)' }
+  }
+  srcVAPF = specDoc 'Machines 13(7):600 (2026) — VAPF + RL (TD3)' {
+    #science
+    link https://doi.org/10.3390/machines13070600 "Addressing Local Minima in Path Planning for Drones with Reinforcement Learning-Based Vortex Artificial Potential Fields"
+    description 'Champ potentiel vortex (VAPF) + TD3 pour briser les minima locaux : succes 0.985, 5 minima locaux, 94 virages secs. Mono-drone, essaim non couvert.'
+    metadata { doi '10.3390/machines13070600'; annee '2026'; nature 'article de revue'; statut 'CONSULTEE (spec — research_path_planning_v1.md, lue partiellement)' }
+  }
+  srcHRLMPC = specDoc 'Studt, Schildbach (2025) — RL hierarchique + MPC, arXiv:2509.15799' {
+    #science
+    link https://arxiv.org/abs/2509.15799 "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control"
+    description 'RL haut niveau (selection de region d interet) + MPC bas niveau (faisabilite dynamique et surete). Surpasse le RL de bout en bout et le shielding RL. Benchmark 2 agents (predateur-proie). Preprint.'
+    metadata { arxiv '2509.15799'; annee '2025'; nature 'preprint'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
+  }
+  srcSwarmGPT = specDoc 'Schuck et al. (2024) — SwarmGPT, RA-L' {
+    #science
+    link https://arxiv.org/abs/2412.08428 "SwarmGPT: Combining Large Language Models with Safe Motion Planning for Drone Swarm Choreography"
+    description 'LLM pour la choregraphie haut niveau + filtre de surete pour le plan de mouvement. Motion primitives : 85% de succes a 10 drones, ~65% a 200 drones (simulation).'
+    metadata { arxiv '2412.08428'; annee '2024'; nature 'preprint (accepte RA-L)'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
+  }
+  srcAccelMPC = specDoc 'Grillo, Plancher (2026) — AccelMPC, arXiv:2609.09380' {
+    #science
+    link https://arxiv.org/abs/2609.09380 "AccelMPC: High-Rate, Low-Power FPGA-Accelerated Model Predictive Control for Tiny Drones"
+    description 'MPC accelere FPGA (ADMM co-design) : 1 kHz, >20k variables, 15.6x plus rapide. Option d acceleration materielle pour l execution embarquee. Preprint.'
+    metadata { arxiv '2609.09380'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -259,6 +352,93 @@ model {
     }
   }
 
+  sciLeaderElection = finding 'SCI-12 — Election de leader : fondations solides, essaim mobile non prouve' {
+    #science
+    link https://doi.org/10.1145/2627470.2627476 "In Search of an Understandable Consensus Algorithm"
+    description '''
+      ALG_LEADER_ELECTION portait « aucune source verifiee ». Les FONDATIONS
+      sont solides et prouvees :
+        - Raft (10.1145/2627470.2627476) : election par termes, votes et
+          heartbeats, surete et vivacite prouvees ;
+        - Bully (10.1109/TC.1982.1675885) : election par priorite,
+          complexite en messages bornee ;
+        - Paxos (10.1145/279227.279229) : unicite du leader prouvee (pas
+          deux leaders pour un meme terme).
+
+      LIMITE NON LEVEE : aucune source primaire ne prouve l election de
+      leader sur un essaim de 30 drones MOBILES (topologie changeante,
+      partitions). Le manuscrit « Adaptive Leader Election for Mobile Drone
+      Swarms » (Dagorn, ICRA 2024) est « in preparation » — NON publiable
+      comme source. La reference etcd (Raft en production) est une
+      implementation, pas un article scientifique.
+    '''
+    metadata {
+      verdict 'SUPPORTED (fondations) / CONDITIONAL (essaim mobile 30)'
+      niveau_preuve 'HIGH (theorie) / LOW (application essaim)'
+      source 'srcRaft, srcBully, srcPaxos'
+      correction_modele 'algLeaderElection : evidence « aucune source » remplacee ; fondations sourcees, essaim 30 reste un trou'
+    }
+  }
+
+  sciSafetyRules = finding 'SCI-13 — Surete par regles : CBF source + socle normatif, composition floue non prouvee' {
+    #science
+    link https://doi.org/10.23919/ECC.2019.8796023 "Control Barrier Functions: Theory and Applications"
+    description '''
+      ALG_SAFETY_RULES reposait sur un evidence « MEDIUM (repris) » sans
+      source. La fondation est documentee :
+        - CBF (10.23919/ECC.2019.8796023) : theorie mathematique (QP,
+          forward invariance, ISS) ;
+        - CBF multi-drones (10.1109/LRA.2022.3145678) : 30+ agents en
+          simulation, 10 drones sur materiel, geofencing CBF, QP <1ms.
+
+      SOCLE NORMATIF (sans DOI, cite par la spec) : ACAS X (MIT Lincoln
+      Lab) pour le detect-and-avoid, EASA AMC/GM Part-UAS et FAA AC 90-117
+      pour le geofencing, le lost-link et la separation BVLOS.
+
+      LIMITE NON LEVEE : la composition CBF + logique floue contextuelle
+      (regles pre-approuvees) n est pas verifiee formellement (systeme
+      hybride). Le manuscrit Dagorn (AIAA 2024) est « submitted » — non
+      publiable comme source.
+    '''
+    metadata {
+      verdict 'SUPPORTED (fondations CBF + normatif) / CONDITIONAL (composition floue)'
+      niveau_preuve 'HIGH (CBF) / MEDIUM (essaim) / NORMATIF (ACAS X, EASA/FAA)'
+      source 'srcCBFTheory, srcCBFSwarm'
+      correction_modele 'algSafetyRules : evidence sourcee ; ACAS X et EASA/FAA references comme socle normatif sans DOI'
+    }
+  }
+
+  sciPathPlanning = finding 'SCI-14 — Planification de trajectoire : MPC tube-based source, N=30 conditionnel' {
+    #science
+    link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
+    description '''
+      ALG_PATH_PLANNING portait un evidence « MEDIUM (repris) » sans source.
+      La famille est abondamment documentee par la spec :
+        - DMPC tube-based (10.3390/drones10030177) : faisabilite recursive
+          PROUVEE (K >= vmax/(amax·h)), QP condense, 10-12 agents simules +
+          3-4 quadrotors ;
+        - planification globale par diffusion (arXiv:2603.09031,
+          arXiv:2606.31197) : empirique, zero-shot sim-to-real limite ;
+        - benchmark comparatif (10.1038/s41598-026-70043-1) : PPO robuste en
+          replanning mais mono-agent ;
+        - VAPF+RL (10.3390/machines13070600) : minima locaux traites,
+          mono-drone ;
+        - RL hierarchique + MPC (arXiv:2509.15799), SwarmGPT
+          (arXiv:2412.08428), AccelMPC FPGA (arXiv:2609.09380).
+
+      LIMITE NON LEVEE : aucune source ne valide N=30 en vol reel, ni la
+      convergence globale sous partition persistante. La source S5
+      (amphibious UAV PSO, 10.1007/s44443-026-00976-0) est exclue : non
+      verifiee (echec de lecture) dans la spec.
+    '''
+    metadata {
+      verdict 'SUPPORTED (MPC tube-based) / CONDITIONAL (N=30, partition)'
+      niveau_preuve 'HIGH (MPC tube-based) / MEDIUM (variantes empiriques)'
+      source 'srcDMPCTube, srcImpedanceDiffusion, srcDiff4D, srcPathMedUAV, srcVAPF, srcHRLMPC, srcSwarmGPT, srcAccelMPC'
+      correction_modele 'algPathPlanning : evidence sourcee ; variantes diffusion/RL positionnees comme empiriques'
+    }
+  }
+
   // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
@@ -283,6 +463,21 @@ model {
     #science
     description 'Avec budget de communication explicite et metrique de derive de consensus. Aucun article trouve.'
     metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciEkf'; priorite 'moyenne' }
+  }
+  gap7 = finding 'GAP-7 — Election de leader sur 30 drones mobiles sous partition' {
+    #science
+    description 'Mesurer : temps d election, taux de double leader, convergence sous topologie changeante. Manuscrit Dagorn « in preparation » non publiable. Aucun article primaire trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'manuscrit non public, aucun article trouve dans le corpus swarmdrone'; impact 'sciLeaderElection'; priorite 'haute' }
+  }
+  gap8 = finding 'GAP-8 — Verification formelle de la composition CBF + regles floues' {
+    #science
+    description 'Prouver la surete du systeme hybride (CBF + logique floue contextuelle + watchdog). Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciSafetyRules'; priorite 'moyenne' }
+  }
+  gap9 = finding 'GAP-9 — Planification multi-agent a N=30 sous partition et brouillage' {
+    #science
+    description 'Mesurer la faisabilite recursive DMPC et la convergence sous partition persistante a N=30. Les sources plafonnent a 10-12 agents simules. Aucun article trouve.'
+    metadata { statut 'AUCUN ARTICLE TROUVE'; evidence 'aucun article trouve dans le corpus swarmdrone'; impact 'sciPathPlanning'; priorite 'haute' }
   }
 
   // ===========================================================================
@@ -314,4 +509,29 @@ model {
   sciCrdt -[exposes]-> riskR4 'split-brain'
   sciEkf -[exposes]-> riskR8 'fusion degradee en densite'
   sciEkf -[exposes]-> h3 'GNSS degradable'
+
+  // --- Rattachements SPEC-13 (2026-09-28) : verdicts -> sources ---
+  sciLeaderElection -[uses]-> srcRaft 'election par termes/votes'
+  sciLeaderElection -[uses]-> srcBully 'election par priorite'
+  sciLeaderElection -[uses]-> srcPaxos 'unicite du leader'
+  sciSafetyRules -[uses]-> srcCBFTheory 'fondation CBF'
+  sciSafetyRules -[uses]-> srcCBFSwarm 'essaim 30+ (simulation) / 10 drones (materiel)'
+  sciPathPlanning -[uses]-> srcDMPCTube 'fondation MPC tube-based'
+  sciPathPlanning -[uses]-> srcImpedanceDiffusion 'planification globale par diffusion'
+  sciPathPlanning -[uses]-> srcDiff4D 'prediction 4D + DNMPC'
+  sciPathPlanning -[uses]-> srcPathMedUAV 'benchmark comparatif'
+  sciPathPlanning -[uses]-> srcVAPF 'minima locaux'
+  sciPathPlanning -[uses]-> srcHRLMPC 'RL hierarchique + MPC'
+  sciPathPlanning -[uses]-> srcSwarmGPT 'LLM + filtre de surete'
+  sciPathPlanning -[uses]-> srcAccelMPC 'acceleration FPGA'
+
+  // --- Verdicts -> algorithmes ---
+  sciLeaderElection -[evidences]-> algLeaderElection 'fondations sourcees'
+  sciSafetyRules -[evidences]-> algSafetyRules 'fondations CBF + normatif'
+  sciPathPlanning -[evidences]-> algPathPlanning 'MPC tube-based source'
+
+  // --- Gaps exposes par les constats ---
+  gap7 -[exposes]-> sciLeaderElection 'doute a lever'
+  gap8 -[exposes]-> sciSafetyRules 'doute a lever'
+  gap9 -[exposes]-> sciPathPlanning 'doute a lever'
 }

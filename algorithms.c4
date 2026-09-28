@@ -173,12 +173,12 @@ model {
       repository 'TBD'
       version 'TBD'
       maturity 'TBD'
-      evidence 'aucune source verifiee'
+      evidence 'SCI-12 : fondations Raft/Bully/Paxos sourcees (SUPPORTED) / essaim mobile 30 CONDITIONAL'
       metrics 'temps d election, taux de double leader, messages echanges'
-      references 'aucune source verifiee dans cette session'
+      references 'srcRaft, srcBully, srcPaxos — REPERTORIEES (cf science.c4)'
       relatedComponents 'onboard.mission, edge.coordinator'
       relatedMessages 'MSG_HEARTBEAT, MSG_FAILURE_NOTIFICATION'
-      evidenceLevel 'NONE'
+      evidenceLevel 'MEDIUM'
       maturityLevel 'TBD'
     }
   }
@@ -325,9 +325,9 @@ model {
       repository 'TBD'
       version 'TBD'
       maturity 'mature (repris du modele existant)'
-      evidence 'MEDIUM (repris du modele existant)'
+      evidence 'SCI-13 : CBF + socle normatif sources (SUPPORTED) / composition floue CONDITIONAL'
       metrics 'declenchements corrects, fausses alertes, temps de reaction'
-      references 'aucune source verifiee dans cette session'
+      references 'srcCBFTheory, srcCBFSwarm — REPERTORIEES ; ACAS X, EASA/FAA (normatif)'
       relatedComponents 'onboard.safety, onboard.autopilot'
       relatedMessages 'MSG_COLLISION_ALERT, MSG_FAILURE_NOTIFICATION'
       tbd 'validation Monte-Carlo adversarial NON faite (repris du modele)'
@@ -365,9 +365,9 @@ model {
       repository 'TBD'
       version 'TBD'
       maturity 'mature (repris du modele existant)'
-      evidence 'MEDIUM (repris du modele existant)'
+      evidence 'SCI-14 : MPC tube-based source (SUPPORTED) / N=30 CONDITIONAL'
       metrics 'temps de calcul, faisabilite, energie consommee, ecart a l optimal'
-      references 'aucune source verifiee dans cette session'
+      references 'srcDMPCTube, srcImpedanceDiffusion, srcDiff4D, srcPathMedUAV, srcVAPF, srcHRLMPC, srcSwarmGPT, srcAccelMPC — cf science.c4'
       relatedComponents 'onboard.mission, c2.planner, edge.coordinator'
       relatedMessages 'MSG_TRAJECTORY_PROPOSAL, MSG_TRAJECTORY_UPDATE'
       variantes 'waypoints, MPC, A*, RRT*, CBS/ECBS multi-agents'
@@ -651,11 +651,11 @@ model {
   //  G. SPEC-13-LIKE (carte t_06cd10ec) — LIAISON DES ARTEFACTS SOEURS
   //
   //  Specs PDF : 13 PDF v1 dans specification/ (SPEC-13-PUBLISH t_79a5637b +
-  //    complement e137723). 7 VALIDEES ; 6 REJETEES par leur rapport de
-  //    validation (2-6/20, defauts BLOQUANTS) mais poussees quand meme par le
-  //    commit e137723, CONTRE l exclusion decidee par SPEC-13-PUBLISH.
-  //    Le lien est reel, la carte specDoc porte le statut REJETEE : aucun
-  //    rejet n est masque (cf specDoc.*.validation).
+  //    complement e137723, puis remplacement des 6 rejetees par les versions
+  //    reproduites — commit 06ba275). Re-validation independante 2026-09-28 :
+  //    11/13 CONFORMES (>=16/20) ; 2/13 PUBLIABLES SOUS RESERVE
+  //    (leader_election 15/20, nav_gnss_degrade 14/20 — 2 defauts MAJEURS
+  //    chacun). Aucune note inventee : lue dans validation_<slug>_v1.md.
   //
   //  SysML v2 (SYSML-15, t_d671a500) : relations algX -[documentedBy]-> sysmlX
   //    deja portees par sysml.c4 — NON dupliquees ici (cf note parente).
@@ -681,18 +681,18 @@ model {
     }
   }
 
-  specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v1 — REJETEE par validation)' {
+  specLeaderElection = specDoc 'Specification detaillee — ALG_LEADER_ELECTION (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_LEADER_ELECTION_v1.pdf "Specification detaillee Election de leader v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_LEADER_ELECTION.sysml "Specification SysML v2 (ALG_LEADER_ELECTION.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : CONFORME — 20/20 (validation_leader_election_v1.md, reprise apres rejet initial).'
+    description 'Document de specification detaillee de l algorithme ALG_LEADER_ELECTION (Election de leader), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIABLE SOUS RESERVE — 15/20 (validation_leader_election_v1.md, reprise apres rejet initial puis re-validation independante mathematique ; 2 defauts MAJEURS, reserves ouvertes).'
     metadata {
       algorithme 'ALG_LEADER_ELECTION'
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 5/20, 3 defauts BLOQUANTS (validation_leader_election_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'PUBLIABLE SOUS RESERVE — 15/20 (validation_leader_election_v1.md, 2 defauts MAJEURS) ; publiee'
       sysml 'sysml/ALG_LEADER_ELECTION.sysml — porte par sysml.c4'
     }
   }
@@ -717,14 +717,14 @@ model {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf "Specification detaillee Navigation sous GNSS degrade v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_NAV_GNSS_DEGRADE.sysml "Specification SysML v2 (ALG_NAV_GNSS_DEGRADE.sysml) — relation documentedBy portee par sysml.c4"
-    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
+    description 'Document de specification detaillee de l algorithme ALG_NAV_GNSS_DEGRADE (Navigation sous GNSS degrade), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Validation : PUBLIABLE SOUS RESERVE — 14/20 (validation_nav_gnss_degrade_v1.md, validation independante mathematique, 2 defauts MAJEURS). La specification SysML v2 associee vit dans sysml/ALG_NAV_GNSS_DEGRADE.sysml et est referencee par l element specDoc sysml* de sysml.c4 (relation documentedBy deja presente — non dupliquee ici).'
     metadata {
       algorithme 'ALG_NAV_GNSS_DEGRADE'
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
       statut 'PUBLIE'
-      validation 'PUBLIEE — conforme (SPEC-13-PUBLISH, t_79a5637b)'
+      validation 'PUBLIABLE SOUS RESERVE — 14/20 (validation_nav_gnss_degrade_v1.md, 2 defauts MAJEURS)'
       sysml 'sysml/ALG_NAV_GNSS_DEGRADE.sysml — porte par sysml.c4'
     }
   }
@@ -745,7 +745,7 @@ model {
     }
   }
 
-  specSafetyRules = specDoc 'Specification detaillee — ALG_SAFETY_RULES (v1 — REJETEE par validation)' {
+  specSafetyRules = specDoc 'Specification detaillee — ALG_SAFETY_RULES (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_SAFETY_RULES_v1.pdf "Specification detaillee Surete par regles pre-approuvees v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_SAFETY_RULES.sysml "Specification SysML v2 (ALG_SAFETY_RULES.sysml) — relation documentedBy portee par sysml.c4"
@@ -755,8 +755,8 @@ model {
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 5/20, 2 defauts BLOQUANTS (validation_safety_rules_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'CONFORME — 17/20 (validation_safety_rules_v1.md, reprise apres rejet initial)'
       sysml 'sysml/ALG_SAFETY_RULES.sysml — porte par sysml.c4'
     }
   }
@@ -777,7 +777,7 @@ model {
     }
   }
 
-  specHealthMonitoring = specDoc 'Specification detaillee — ALG_HEALTH_MONITORING (v1 — REJETEE par validation)' {
+  specHealthMonitoring = specDoc 'Specification detaillee — ALG_HEALTH_MONITORING (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_HEALTH_MONITORING_v1.pdf "Specification detaillee Surveillance d etat et detection de faute v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_HEALTH_MONITORING.sysml "Specification SysML v2 (ALG_HEALTH_MONITORING.sysml) — relation documentedBy portee par sysml.c4"
@@ -787,13 +787,13 @@ model {
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 4/20, 3 defauts BLOQUANTS (validation_health_monitoring_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'CONFORME — 20/20 (validation_health_monitoring_v1.md, reprise apres rejet initial)'
       sysml 'sysml/ALG_HEALTH_MONITORING.sysml — porte par sysml.c4'
     }
   }
 
-  specEnergyAware = specDoc 'Specification detaillee — ALG_ENERGY_AWARE (v1 — REJETEE par validation)' {
+  specEnergyAware = specDoc 'Specification detaillee — ALG_ENERGY_AWARE (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_ENERGY_AWARE_v1.pdf "Specification detaillee Planification sensible a l energie v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_ENERGY_AWARE.sysml "Specification SysML v2 (ALG_ENERGY_AWARE.sysml) — relation documentedBy portee par sysml.c4"
@@ -803,13 +803,13 @@ model {
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 4/20, 2 defauts BLOQUANTS (validation_energy_aware_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'CONFORME — 20/20 (validation_energy_aware_v1.md, reprise apres rejet initial)'
       sysml 'sysml/ALG_ENERGY_AWARE.sysml — porte par sysml.c4'
     }
   }
 
-  specEventTriggeredComm = specDoc 'Specification detaillee — ALG_EVENT_TRIGGERED_COMM (v1 — REJETEE par validation)' {
+  specEventTriggeredComm = specDoc 'Specification detaillee — ALG_EVENT_TRIGGERED_COMM (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf "Specification detaillee Communication declenchee par evenement v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_EVENT_TRIGGERED_COMM.sysml "Specification SysML v2 (ALG_EVENT_TRIGGERED_COMM.sysml) — relation documentedBy portee par sysml.c4"
@@ -819,8 +819,8 @@ model {
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 3/20, 3 defauts BLOQUANTS (validation_event_triggered_comm_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'CONFORME — 17/20 (validation_event_triggered_comm_v1.md, reprise apres rejet initial)'
       sysml 'sysml/ALG_EVENT_TRIGGERED_COMM.sysml — porte par sysml.c4'
     }
   }
@@ -857,7 +857,7 @@ model {
     }
   }
 
-  specJammingResilientMode = specDoc 'Specification detaillee — ALG_JAMMING_RESILIENT_MODE (v1 — REJETEE par validation)' {
+  specJammingResilientMode = specDoc 'Specification detaillee — ALG_JAMMING_RESILIENT_MODE (v1)' {
     #source-doc
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/specification/Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf "Specification detaillee Mode double cooperatif/autonome sous brouillage v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
     link https://github.com/dagornc/swarmdrones-likec4/blob/master/sysml/ALG_JAMMING_RESILIENT_MODE.sysml "Specification SysML v2 (ALG_JAMMING_RESILIENT_MODE.sysml) — relation documentedBy portee par sysml.c4"
@@ -867,8 +867,8 @@ model {
       versions '1 (v1)'
       versionCourante 'v1 (2026-09-28)'
       nature 'specification genie logiciel interne'
-      statut 'REJETEE (publiee malgre rejet)'
-      validation 'REJETEE — 6/20, 3 defauts BLOQUANTS (validation_jamming_resilient_mode_v1.md) ; publiee malgre rejet par le commit e137723'
+      statut 'PUBLIE'
+      validation 'CONFORME — 20/20 (validation_jamming_resilient_mode_v1.md, reprise apres rejet initial)'
       sysml 'sysml/ALG_JAMMING_RESILIENT_MODE.sysml — porte par sysml.c4'
     }
   }
@@ -911,7 +911,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_LEADER_ELECTION_v1.pdf — REJETEE par validation (cf specDoc specLeaderElection) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_LEADER_ELECTION_v1.pdf (PUBLIE — PUBLIABLE SOUS RESERVE 15/20)'
     }
   }
   srcPerceptionFusion = sourceCode 'alg-perception-fusion — portage Rust de ALG_PERCEPTION_FUSION' {
@@ -951,7 +951,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf (PUBLIE)'
+      specPdf 'Spec_ALG_NAV_GNSS_DEGRADE_v1.pdf (PUBLIE — PUBLIABLE SOUS RESERVE 14/20)'
     }
   }
   srcCollisionAvoidance = sourceCode 'alg-collision-avoidance — portage Rust de ALG_COLLISION_AVOIDANCE' {
@@ -991,7 +991,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_SAFETY_RULES_v1.pdf — REJETEE par validation (cf specDoc specSafetyRules) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_SAFETY_RULES_v1.pdf (PUBLIE — CONFORME 17/20)'
     }
   }
   srcPathPlanning = sourceCode 'alg-path-planning — portage Rust de ALG_PATH_PLANNING' {
@@ -1031,7 +1031,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_HEALTH_MONITORING_v1.pdf — REJETEE par validation (cf specDoc specHealthMonitoring) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_HEALTH_MONITORING_v1.pdf (PUBLIE — CONFORME 20/20)'
     }
   }
   srcEnergyAware = sourceCode 'alg-energy-aware — portage Rust de ALG_ENERGY_AWARE' {
@@ -1051,7 +1051,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_ENERGY_AWARE_v1.pdf — REJETEE par validation (cf specDoc specEnergyAware) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_ENERGY_AWARE_v1.pdf (PUBLIE — CONFORME 20/20)'
     }
   }
   srcEventTriggeredComm = sourceCode 'alg-event-triggered-comm — portage Rust de ALG_EVENT_TRIGGERED_COMM' {
@@ -1071,7 +1071,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf — REJETEE par validation (cf specDoc specEventTriggeredComm) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_EVENT_TRIGGERED_COMM_v1.pdf (PUBLIE — CONFORME 17/20)'
     }
   }
   srcCooperativeLocalization = sourceCode 'alg-cooperative-localization — portage Rust de ALG_COOPERATIVE_LOCALIZATION' {
@@ -1131,7 +1131,7 @@ model {
       licence 'MIT — Copyright (c) 2026 Christophe Dagorn'
       nature 'portage de reference (implementation simplifiee)'
       statut 'PUBLIE'
-      specPdf 'Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf — REJETEE par validation (cf specDoc specJammingResilientMode) ; publiee malgre rejet'
+      specPdf 'Spec_ALG_JAMMING_RESILIENT_MODE_v1.pdf (PUBLIE — CONFORME 20/20)'
     }
   }
 
