@@ -569,6 +569,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT08 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 8 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcEGOSwarm = specDoc 'EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments (2020)' {
+    #science
+    link https://arxiv.org/abs/2011.04183 "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments"
+    description '''
+      Navigation d essaim de quadrirotors entierement autonome et decentralisee en environnement encombre inconnu, en ressources embarquees uniquement : planification locale par optimisation NON LINEAIRE (le risque de collision est une penalite), generation de trajectoires topologiques legere pour echapper aux minima locaux, trajectoires sures et dynamiquement realisables en quelques millisecondes, correction de la derive de localisation relative par detection d agents dans les images de profondeur. Valide en simulation ET en conditions reelles.
+    '''
+    metadata { arxiv '2011.04183'; annee '2020'; nature 'preprint (IEEE RA-L 2021)'; corpus '915'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1305,6 +1322,19 @@ sciCertFeedbackPath = finding 'SCI-45 — Certificat a risque borne entre alloca
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT08 (2026-09-29)
+  // ===========================================================================
+
+sciEGOSwarm = finding 'SCI-48 — Planification locale distribuee + evitement sans infrastructure' {
+    #science
+    link https://arxiv.org/abs/2011.04183 "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments"
+    description '''
+      srcEGOSwarm apporte une planification de trajectoire locale GRADIENT-BASED (algPathPlanning) et un evitement par penalite de collision dans l optimisation (algCollisionAvoidance), 100% embarque et decentralise — le regime nominal du modele (autonomie bord, liens minimaux). Complement de SCI-14 (MPC tube-based) : ici l approche optimisation non lineaire + generation topologique, avec preuve par le reel (pas seulement simulation). VERDICT : SUPPORTED pour le mecanisme (planification locale + evitement embarques) ; CONDITIONAL — essaim homogene de quadrirotors, a transposer a la flotte heterogene N=30.
+    '''
+    metadata { verdict 'SUPPORTED (planification locale + evitement embarques, preuve par le reel) / CONDITIONAL (homogene)'; niveau_preuve 'HAUTE'; source 'srcEGOSwarm'; correction_modele 'algPathPlanning + algCollisionAvoidance : planification locale distribuee et evitement par optimisation non lineaire, valides sur essaim reel' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1509,4 +1539,9 @@ sciCertFeedbackPath = finding 'SCI-45 — Certificat a risque borne entre alloca
   sciOnboardSLAMNano -[uses]-> srcOnboardSLAMNano 'source primaire'
   sciUltraLightPlanner -[evidences]-> algPathPlanning 'planification scalable par primitives de mouvement'
   sciUltraLightPlanner -[uses]-> srcUltraLightPlanner 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT08 (2026-09-29) ---
+// --- Relations du lot ---
+  sciEGOSwarm -[evidences]-> algPathPlanning 'planification locale par optimisation non lineaire'
+  sciEGOSwarm -[evidences]-> algCollisionAvoidance 'risque de collision penalise dans l optimisation'
+  sciEGOSwarm -[uses]-> srcEGOSwarm 'source primaire'
 }

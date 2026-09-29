@@ -349,3 +349,45 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 376 | LLM-Centric Agentic AI for UAV Swarms- Architecture, Enabling Technolo | paradigme-exclu — LLM agentique pour essaim UAV (LAUS) |
 | 437 | The Evolving Landscape of Unmanned Aircraft Systems- A Review of Curre | non-primaire — revue du paysage UAS (défis et scénarios futurs) |
 
+
+---
+
+## LOT 8 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 915 | EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System | algPathPlanning + algCollisionAvoidance | srcEGOSwarm | SCI-48 |
+
+### ECARTEE (24)
+| # | Titre | Raison |
+|---|-------|--------|
+| 586 | Fleets Need a Context Plane- Rethinking Cooperative Perception for Aut | pas-algorithme-canonique — partage de features pour perception coopérative (bande passante), pas un des 15 algos |
+| 592 | Evaluating Multimodal LLMs as Generalist Vision-Language-Action Agents | paradigme-exclu — MLLM comme agent de contrôle de drone (DroneCATS) |
+| 600 | Quantum-Based k-Coverage Optimization for UAV-Aided Search and Rescue  | pas-algorithme-canonique — optimisation quantique QUBO pour k-couverture RF |
+| 601 | KSG-Net- Key-Sparse and Global-Context Learning for Maritime 3D Ship D | hors-perimetre — détection 3D de navires maritime (perception mono-capteur), pas d essaim |
+| 604 | From Multi-Fisheye Sensing to Panoramic Perception- A Parallax-Aware O | pas-algorithme-canonique — plateforme caméra fisheye panoramique embarquée |
+| 606 | Advancing Accessible Underwater Robotics- The Mini-Girona I-AUV at RAM | hors-perimetre — plateforme I-AUV sous-marine (Mini-Girona) |
+| 607 | Evaluating Graph Neural Networks for Change-Criticality Classification | paradigme-exclu — GNN pour classification de cartes marines (ENC), hors essaim |
+| 610 | Air-Ground Collaborative Vision-and-Language Navigation via Shared Bir | paradigme-exclu — navigation air-sol par VLM (AGC-VLN) |
+| 620 | DroneGround- Open-Vocabulary Drone Payload Characterization Using Synt | pas-algorithme-canonique — caractérisation de charge utile par vision-langage (détection) |
+| 621 | Learning to Fly- Stable Vision-Guided UAV Servoing with Compact Target | paradigme-exclu — asservissement visuel par RL (politique apprise) |
+| 624 | EgoSIS- From Factorized Visual Ego-Transitions to Motion-Canonical Spa | pas-algorithme-canonique — réponse visuelle à questions vidéo (EgoSIS), perception seule |
+| 631 | Multi-Agent Reinforcement Learning for Autonomous UAV Exploration in W | paradigme-exclu — MARL/DRL pour surveillance de feux de forêt (politique apprise) |
+| 632 | Coastal Environment Generation with HoloOcean - arXiv | pas-algorithme-canonique — génération d environnement de simulation côtière (HoloOcean) |
+| 913 | SwarmNxt- Open-source Software-Hardware Platform for Fast and Agile Ae | pas-algorithme-canonique — plateforme matérielle/logicielle d essaim (SwarmNxt) |
+| 918 | AttentionSwarm- Reinforcement Learning with Attention Control Barier F | paradigme-exclu — AttentionSwarm = CBF + attention + RL (politique apprise) |
+| 932 | DETERRENCE BY ASSETS- HOW UAV LOCALIZATION UNDER SAUDI VISION 2030 RES | hors-perimetre — analyse géopolitique de localisation de drones (Vision 2030) |
+| 938 | Model Predictive Control for Multimodal Intelligent Transportation Sys | non-primaire — revue MPC inter-domaines (transport) |
+| 941 | An Omnidirectional Perception Framework for Distributed Unmanned Syste | non-verifiable — abstract non vérifié (DOI chapitre Springer), contenu primaire non lisible |
+| 951 | Visual perception for autonomous surface vehicles in complex waterway  | non-primaire — revue de perception visuelle pour véhicules de surface en voies navigables |
+| 975 | Space & Defense Volume 17 No. 1 Whole issue - DOI | hors-perimetre — numéro complet de revue Space & Defense (politique spatiale) |
+| 978 | Autonomous UAVs in Critical Infrastructure Inspection- Empirical Evalu | pas-algorithme-canonique — évaluation empirique d inspection d infrastructures (application) |
+| 980 | Algorithms in Battle- AI, International Relations, and Future Warfare  | hors-perimetre — analyse géopolitique IA et guerre (relations internationales) |
+| 982 | Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex | pas-algorithme-canonique — atterrissage d essaim par UWB + optimisation convexe (abstract non vérifié) |
+| 985 | Lightweight UAV aerial small object detection based on YOLOv12 via att | pas-algorithme-canonique — détection de petits objets YOLOv12 (modèle de détection) |
+
+## Validation lot 8
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 48

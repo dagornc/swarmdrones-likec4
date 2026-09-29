@@ -1,0 +1,165 @@
+{
+ "lot_label": "LOT 8 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees",
+ "rattachees": [
+  {
+   "src": "srcEGOSwarm",
+   "title": "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments (2020)",
+   "link_title": "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments",
+   "description": "Navigation d essaim de quadrirotors entierement autonome et decentralisee en environnement encombre inconnu, en ressources embarquees uniquement : planification locale par optimisation NON LINEAIRE (le risque de collision est une penalite), generation de trajectoires topologiques legere pour echapper aux minima locaux, trajectoires sures et dynamiquement realisables en quelques millisecondes, correction de la derive de localisation relative par detection d agents dans les images de profondeur. Valide en simulation ET en conditions reelles.",
+   "metadata": {
+    "arxiv": "2011.04183",
+    "annee": "2020",
+    "nature": "preprint (IEEE RA-L 2021)",
+    "corpus": "915",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciEGOSwarm",
+    "title": "SCI-48 — Planification locale distribuee + evitement sans infrastructure",
+    "link_title": "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments",
+    "description": "srcEGOSwarm apporte une planification de trajectoire locale GRADIENT-BASED (algPathPlanning) et un evitement par penalite de collision dans l optimisation (algCollisionAvoidance), 100% embarque et decentralise — le regime nominal du modele (autonomie bord, liens minimaux). Complement de SCI-14 (MPC tube-based) : ici l approche optimisation non lineaire + generation topologique, avec preuve par le reel (pas seulement simulation). VERDICT : SUPPORTED pour le mecanisme (planification locale + evitement embarques) ; CONDITIONAL — essaim homogene de quadrirotors, a transposer a la flotte heterogene N=30.",
+    "metadata": {
+     "verdict": "SUPPORTED (planification locale + evitement embarques, preuve par le reel) / CONDITIONAL (homogene)",
+     "niveau_preuve": "HAUTE",
+     "source": "srcEGOSwarm",
+     "correction_modele": "algPathPlanning + algCollisionAvoidance : planification locale distribuee et evitement par optimisation non lineaire, valides sur essaim reel"
+    },
+    "link_arxiv": "2011.04183"
+   },
+   "algs": [
+    [
+     "algPathPlanning",
+     "planification locale par optimisation non lineaire"
+    ],
+    [
+     "algCollisionAvoidance",
+     "risque de collision penalise dans l optimisation"
+    ]
+   ],
+   "link_arxiv": "2011.04183"
+  }
+ ],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 586,
+   "title": "Fleets Need a Context Plane- Rethinking Cooperative Perception for Autonomous Drones - arXiv",
+   "reason": "pas-algorithme-canonique — partage de features pour perception coopérative (bande passante), pas un des 15 algos"
+  },
+  {
+   "number": 592,
+   "title": "Evaluating Multimodal LLMs as Generalist Vision-Language-Action Agents for Drone Control- Commanding, Approaching, Tracking and Searching - arXiv",
+   "reason": "paradigme-exclu — MLLM comme agent de contrôle de drone (DroneCATS)"
+  },
+  {
+   "number": 600,
+   "title": "Quantum-Based k-Coverage Optimization for UAV-Aided Search and Rescue Missions - arXiv",
+   "reason": "pas-algorithme-canonique — optimisation quantique QUBO pour k-couverture RF"
+  },
+  {
+   "number": 601,
+   "title": "KSG-Net- Key-Sparse and Global-Context Learning for Maritime 3D Ship Detection - arXiv",
+   "reason": "hors-perimetre — détection 3D de navires maritime (perception mono-capteur), pas d essaim"
+  },
+  {
+   "number": 604,
+   "title": "From Multi-Fisheye Sensing to Panoramic Perception- A Parallax-Aware Onboard Platform for Ultra-Low-Altitude UAVs - arXiv",
+   "reason": "pas-algorithme-canonique — plateforme caméra fisheye panoramique embarquée"
+  },
+  {
+   "number": 606,
+   "title": "Advancing Accessible Underwater Robotics- The Mini-Girona I-AUV at RAMI 2025 - arXiv",
+   "reason": "hors-perimetre — plateforme I-AUV sous-marine (Mini-Girona)"
+  },
+  {
+   "number": 607,
+   "title": "Evaluating Graph Neural Networks for Change-Criticality Classification in Maritime Navigation Charts - arXiv",
+   "reason": "paradigme-exclu — GNN pour classification de cartes marines (ENC), hors essaim"
+  },
+  {
+   "number": 610,
+   "title": "Air-Ground Collaborative Vision-and-Language Navigation via Shared Bird's-Eye Maps - arXiv",
+   "reason": "paradigme-exclu — navigation air-sol par VLM (AGC-VLN)"
+  },
+  {
+   "number": 620,
+   "title": "DroneGround- Open-Vocabulary Drone Payload Characterization Using Synthetic Data and Grounded Vision-Language Models - arXiv",
+   "reason": "pas-algorithme-canonique — caractérisation de charge utile par vision-langage (détection)"
+  },
+  {
+   "number": 621,
+   "title": "Learning to Fly- Stable Vision-Guided UAV Servoing with Compact Target-Centric Cues and Reinforcement Learning - arXiv",
+   "reason": "paradigme-exclu — asservissement visuel par RL (politique apprise)"
+  },
+  {
+   "number": 624,
+   "title": "EgoSIS- From Factorized Visual Ego-Transitions to Motion-Canonical Spatial Evidence for UAV Reasoning - arXiv",
+   "reason": "pas-algorithme-canonique — réponse visuelle à questions vidéo (EgoSIS), perception seule"
+  },
+  {
+   "number": 631,
+   "title": "Multi-Agent Reinforcement Learning for Autonomous UAV Exploration in Wildfire Response - arXiv",
+   "reason": "paradigme-exclu — MARL/DRL pour surveillance de feux de forêt (politique apprise)"
+  },
+  {
+   "number": 632,
+   "title": "Coastal Environment Generation with HoloOcean - arXiv",
+   "reason": "pas-algorithme-canonique — génération d environnement de simulation côtière (HoloOcean)"
+  },
+  {
+   "number": 913,
+   "title": "SwarmNxt- Open-source Software-Hardware Platform for Fast and Agile Aerial Swarms - arXiv",
+   "reason": "pas-algorithme-canonique — plateforme matérielle/logicielle d essaim (SwarmNxt)"
+  },
+  {
+   "number": 918,
+   "title": "AttentionSwarm- Reinforcement Learning with Attention Control Barier Function for Crazyflie Drones in Dynamic Environments - arXiv",
+   "reason": "paradigme-exclu — AttentionSwarm = CBF + attention + RL (politique apprise)"
+  },
+  {
+   "number": 932,
+   "title": "DETERRENCE BY ASSETS- HOW UAV LOCALIZATION UNDER SAUDI VISION 2030 RESHAPES GULF SECURITY ARCHITECTURE - DOI",
+   "reason": "hors-perimetre — analyse géopolitique de localisation de drones (Vision 2030)"
+  },
+  {
+   "number": 938,
+   "title": "Model Predictive Control for Multimodal Intelligent Transportation Systems- A Cross-Domain Review of Ground, Rail, Low-Altitude, and Marine Applicatio - DOI",
+   "reason": "non-primaire — revue MPC inter-domaines (transport)"
+  },
+  {
+   "number": 941,
+   "title": "An Omnidirectional Perception Framework for Distributed Unmanned Systems - DOI",
+   "reason": "non-verifiable — abstract non vérifié (DOI chapitre Springer), contenu primaire non lisible"
+  },
+  {
+   "number": 951,
+   "title": "Visual perception for autonomous surface vehicles in complex waterway environments- A review - DOI",
+   "reason": "non-primaire — revue de perception visuelle pour véhicules de surface en voies navigables"
+  },
+  {
+   "number": 975,
+   "title": "Space & Defense Volume 17 No. 1 Whole issue - DOI",
+   "reason": "hors-perimetre — numéro complet de revue Space & Defense (politique spatiale)"
+  },
+  {
+   "number": 978,
+   "title": "Autonomous UAVs in Critical Infrastructure Inspection- Empirical Evaluation, Reporting Standard, and Implications for Strategic Decisions - DOI",
+   "reason": "pas-algorithme-canonique — évaluation empirique d inspection d infrastructures (application)"
+  },
+  {
+   "number": 980,
+   "title": "Algorithms in Battle- AI, International Relations, and Future Warfare - DOI",
+   "reason": "hors-perimetre — analyse géopolitique IA et guerre (relations internationales)"
+  },
+  {
+   "number": 982,
+   "title": "Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex Optimization - DOI",
+   "reason": "pas-algorithme-canonique — atterrissage d essaim par UWB + optimisation convexe (abstract non vérifié)"
+  },
+  {
+   "number": 985,
+   "title": "Lightweight UAV aerial small object detection based on YOLOv12 via attentional scale sequence fusion - DOI",
+   "reason": "pas-algorithme-canonique — détection de petits objets YOLOv12 (modèle de détection)"
+  }
+ ]
+}
