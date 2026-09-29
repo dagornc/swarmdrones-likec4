@@ -64,7 +64,7 @@ model {
       evidence 'MEDIUM — CONDITIONNEL (cf SCI-1) : convergence prouvee sous comms ideales ; convergence locale sous partition (HYPOTHESE) ; robustesse au retrait seulement EMPIRIQUE'
       metrics 'makespan, qualite d allocation, temps de convergence, messages echanges, taux de completion sous partition'
       references 'Choi 2009 ; Bi 2024 (N=8 reel) ; DOI 10.70322/dav.2025.10016 (N=30 SIMULATION) — CONSULTEES'
-      relatedComponents 'onboard.taskAuction, edge.coordinator, onboard.resilience'
+      relatedComponents 'onboard.taskAuction, edge.coordinator, onboard.linkRadio (resilience partition — arbitrage 2026-09-28, ex-onboard.resilience fantome)'
       relatedMessages 'MSG_TASK_BID, MSG_TASK_ASSIGNMENT, MSG_CONSENSUS_VOTE, MSG_HEARTBEAT'
       variantes 'CBBA, PI-CBBA, ACBBA, ED-CBBA v3, TLC-CBBA, CLAC-CBBA, ET-PBBA'
       tbd 'GAP-1 : convergence globale sous partition persistante (locale prouvee, globale HYPOTHESE) ; GAP-2 : N=30 reel non demontre ; GAP-7 : biais appris et DMG'
@@ -639,8 +639,20 @@ model {
   //     On materialise ici le sens composant -> algorithme (`implements`),
   //     conforme au metamodele, pour les paires declarees et manquantes.
   //     `onboard.resilience` (declare par algTaskAllocation) n'existe pas comme
-  //     composant : lien fantome, NON materialise — a arbitrer cote modele.
+  //     composant : lien fantome. ARBITRE le 2026-09-28 — materialise vers
+  //     `onboard.linkRadio`, composant reel qui porte la resilience a la
+  //     partition (cf. bloc ci-dessous). Aucun composant invente.
   // ===========================================================================
+
+  // algTaskAllocation : onboard.taskAuction, edge.coordinator, onboard.resilience
+  // onboard.resilience n'existe pas comme composant (lien fantome declare par
+  // la metadonnee relatedComponents). Arbitrage 2026-09-28 : la fonction de
+  // resilience a la partition (heartbeat/quorum, degradation/re-fusion) est
+  // portee par onboard.linkRadio — « lien intermittent par defaut (H2),
+  // jamais une dependance », modes nominal/autonome, store-and-forward.
+  // On materialise donc le lien vers le composant reel, sans inventer de
+  // composant onboard.resilience.
+  onboard.linkRadio -[implements]-> algTaskAllocation 'resilience a la partition (heartbeat/quorum, degradation/re-fusion)'
 
   // algCollisionAvoidance : onboard.perception, onboard.autopilot
   onboard.perception -[implements]-> algCollisionAvoidance 'detection d obstacles en amont'

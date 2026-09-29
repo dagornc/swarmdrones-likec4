@@ -178,12 +178,23 @@ def check_a3_reserved(files):
     return out
 
 
+def strip_descriptions(src):
+    """Retire le contenu des blocs de description (''' ... ''').
+
+    Les descriptions LikeC4 contiennent du texte explicatif qui peut
+    ressembler a des relations (ex. « component -[implements]-> algorithm »).
+    Sans ce nettoyage, l'audit A4 produit des faux positifs.
+    """
+    return re.sub(r"'''.*?'''", "''''''", src, flags=re.S)
+
+
 def check_a4_dangling(files, decl):
     """Relations pointant vers un id inexistant."""
     known = set(decl.keys())
     shorts = {fqn.split('.')[-1] for fqn in known}
     out = []
     for fname, src in files.items():
+        src = strip_descriptions(src)
         for m in re.finditer(
                 r"^\s*([a-zA-Z][A-Za-z0-9_.]*)\s*-\[[a-zA-Z]+\]->\s*([a-zA-Z][A-Za-z0-9_.]*)",
                 src, re.M):
