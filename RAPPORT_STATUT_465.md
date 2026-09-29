@@ -391,3 +391,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 48
+
+---
+
+## LOT 9 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1023 | A hierarchical navigation decision-making method for UAV swarms in unk | algPathPlanning + algCollisionAvoidance | srcHierNavDecision | SCI-49 |
+
+### DEJA_RATTACHEE (déjà statués — pas de doublon)
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 1037 | A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environmen | srcSlamSurvey | SCI-5 |
+
+### ECARTEE (23)
+| # | Titre | Raison |
+|---|-------|--------|
+| 986 | An improved RT-DETR algorithm for small-object detection in UAV aerial | pas-algorithme-canonique — détection de petits objets RT-DETR (modèle de détection) |
+| 988 | Overview of Recent Advances in Cooperative Optimized Navigation of Mul | non-primaire — revue de navigation coopérative optimisée multi-USV |
+| 994 | AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision  | hors-perimetre — occupation BEV sous-marine monoculaire (AquaBEV), sonar |
+| 999 | Ocean-aware deep learning for civilian maritime object detection and t | non-primaire — revue de détection/suivi maritime par deep learning |
+| 1001 | Adaptive Localization for Underwater Nodes in Uncertain Environments-  | hors-perimetre — localisation de nœuds sous-marins par RL multi-étapes |
+| 1004 | An Integrated IoT–AI–UAV Swarm Architecture for Intelligent Autonomous | non-primaire — architecture de référence IoT-AI-UAV pour sécurité aéroportuaire (review) |
+| 1005 | Automated monitoring and geometric quantification of mining-induced gr | hors-perimetre — quantification de fissures minières par imagerie UAV (application géotechnique) |
+| 1013 | Editorial- Advanced integration of large language models for autonomou | non-primaire — éditorial sur l intégration de LLM dans les systèmes autonomes |
+| 1016 | Active sonar-based perception and wall following for AUV operations in | hors-perimetre — perception sonar active et suivi de paroi pour AUV |
+| 1031 | An Efficient and Lightweight YOLO-based Framework for Real-time Insula | pas-algorithme-canonique — détection de défauts d isolateurs YOLO (application réseau électrique) |
+| 1034 | Vision-Based Perception of UAV Targets Under Synthetic Fog- A Task-Ori | pas-algorithme-canonique — évaluation de perception sous brouillard synthétique (détection) |
+| 1038 | GMD-YOLO26- A Lightweight Detector with Cooperative Three-Stage Featur | pas-algorithme-canonique — détection de petits objets GMD-YOLO26 (modèle de détection) |
+| 1039 | Autonomous navigation and active perception with complex articulated A | hors-perimetre — navigation et perception active d AUV articulés |
+| 1155 | AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision  | doublon — même article que #994 (AquaBEV, arXiv 2609.04411) |
+| 1168 | How do LLMs Evaluate Perceived Moral Agency- Investigating Moral Decis | hors-perimetre — étude HCI sur l agence morale perçue des LLM |
+| 1208 | One Model, Two Worlds- Bidirectional Sonar-Optical Translation - arXiv | hors-perimetre — traduction sonar-optique bidirectionnelle (perception sous-marine) |
+| 1210 | Adapting Vision Foundation Models to Acoustics for Pose-Free 3D Sonar  | hors-perimetre — adaptation de modèles de fondation visuels au sonar 3D |
+| 1243 | KODAMA- Multimodal Digital Twin Reconstruction for Urban RF Propagatio | pas-algorithme-canonique — jumeau numérique de propagation RF (KODAMA) |
+| 1262 | Mini-Batch Risk-Averse Deep Q-Learning- A Robot Navigation Case Study  | paradigme-exclu — DQN averse au risque (RL, politique apprise) |
+| 1266 | Dual-Layer Semantic-Spatial Belief Mapping for Aerial Object Goal Navi | paradigme-exclu — navigation par croyance sémantique VLM (AeroBelief) |
+| 1300 | An Autonomous GeoAI Agent for Arctic Eco-Navigation - arXiv | hors-perimetre — routage arctique multi-critères (agent GeoAI, navire seul) |
+| 1301 | Experimental Validation of Combined Imaging and Vibration Mitigation f | pas-algorithme-canonique — imagerie et atténuation de vibrations pour HAPS (plateforme) |
+| 1305 | Adaptive Distributed Physical-Layer Authentication and Attack Detectio | pas-algorithme-canonique — authentification couche physique 6G par méta-apprentissage |
+
+## Validation lot 9
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 49

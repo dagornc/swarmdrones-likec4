@@ -1,0 +1,167 @@
+{
+ "lot_label": "LOT 9 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 1 deja rattachees / 23 ecartees",
+ "rattachees": [
+  {
+   "src": "srcHierNavDecision",
+   "title": "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments (2026)",
+   "link_title": "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments",
+   "description": "Cadre de decision de navigation HIERARCHIQUE pour essaims de UAV en environnement inconnu contraint en communication : decomposition en module de planification GLOBALE (couche haute) et module de navigation autonome + evitement d obstacles (couche basse), pour des UAV sans communication. PLOS ONE 2026.",
+   "metadata": {
+    "doi": "10.1371/journal.pone.0339225",
+    "annee": "2026",
+    "nature": "article de revue (PLOS ONE)",
+    "corpus": "1023",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciHierNavDecision",
+    "title": "SCI-49 — Decision de navigation hierarchique en environnement contraint en communication",
+    "link_title": "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments",
+    "description": "srcHierNavDecision structure la planification (algPathPlanning) en deux couches (globale + locale avec evitement, algCollisionAvoidance) sous CONTRAINTE DE COMMUNICATION — le regime degrade du modele (liens limites). Complement de SCI-14 : ici la decomposition hierarchique explicite pour UAV SANS communication. VERDICT : SUPPORTED pour le mecanisme (decomposition hierarchique globale/locale) ; CONDITIONAL — validation a confirmer dans le corps (simulation), non-communication totale a reconcilier avec le regime nominal.",
+    "metadata": {
+     "verdict": "SUPPORTED (navigation hierarchique globale/locale) / CONDITIONAL (sans communication, simulation)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcHierNavDecision",
+     "correction_modele": "algPathPlanning + algCollisionAvoidance : decomposition hierarchique globale/locale sourcee"
+    },
+    "link_doi": "10.1371/journal.pone.0339225"
+   },
+   "algs": [
+    [
+     "algPathPlanning",
+     "planification globale hierarchique"
+    ],
+    [
+     "algCollisionAvoidance",
+     "evitement d obstacles de la couche basse"
+    ]
+   ],
+   "link_doi": "10.1371/journal.pone.0339225"
+  }
+ ],
+ "deja": [
+  {
+   "number": 1037,
+   "title": "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments - DOI",
+   "existing_src": "srcSlamSurvey",
+   "existing_finding": "SCI-5"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 986,
+   "title": "An improved RT-DETR algorithm for small-object detection in UAV aerial images - DOI",
+   "reason": "pas-algorithme-canonique — détection de petits objets RT-DETR (modèle de détection)"
+  },
+  {
+   "number": 988,
+   "title": "Overview of Recent Advances in Cooperative Optimized Navigation of Multiple Unmanned Surface Vehicles - DOI",
+   "reason": "non-primaire — revue de navigation coopérative optimisée multi-USV"
+  },
+  {
+   "number": 994,
+   "title": "AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision - DOI",
+   "reason": "hors-perimetre — occupation BEV sous-marine monoculaire (AquaBEV), sonar"
+  },
+  {
+   "number": 999,
+   "title": "Ocean-aware deep learning for civilian maritime object detection and tracking in complex ocean environments- a comprehensive review - DOI",
+   "reason": "non-primaire — revue de détection/suivi maritime par deep learning"
+  },
+  {
+   "number": 1001,
+   "title": "Adaptive Localization for Underwater Nodes in Uncertain Environments- A Geometric Topology Perception-Enhanced Multi-Stage Reinforcement Learning Stra - DOI",
+   "reason": "hors-perimetre — localisation de nœuds sous-marins par RL multi-étapes"
+  },
+  {
+   "number": 1004,
+   "title": "An Integrated IoT–AI–UAV Swarm Architecture for Intelligent Autonomous Airport Security - DOI",
+   "reason": "non-primaire — architecture de référence IoT-AI-UAV pour sécurité aéroportuaire (review)"
+  },
+  {
+   "number": 1005,
+   "title": "Automated monitoring and geometric quantification of mining-induced ground fissures via UAV imagery based on MDE-UNet - DOI",
+   "reason": "hors-perimetre — quantification de fissures minières par imagerie UAV (application géotechnique)"
+  },
+  {
+   "number": 1013,
+   "title": "Editorial- Advanced integration of large language models for autonomous systems and critical decision support - DOI",
+   "reason": "non-primaire — éditorial sur l intégration de LLM dans les systèmes autonomes"
+  },
+  {
+   "number": 1016,
+   "title": "Active sonar-based perception and wall following for AUV operations in enclosed waters - DOI",
+   "reason": "hors-perimetre — perception sonar active et suivi de paroi pour AUV"
+  },
+  {
+   "number": 1031,
+   "title": "An Efficient and Lightweight YOLO-based Framework for Real-time Insulator Defect Detection on Embedded Platforms - DOI",
+   "reason": "pas-algorithme-canonique — détection de défauts d isolateurs YOLO (application réseau électrique)"
+  },
+  {
+   "number": 1034,
+   "title": "Vision-Based Perception of UAV Targets Under Synthetic Fog- A Task-Oriented Evaluation - DOI",
+   "reason": "pas-algorithme-canonique — évaluation de perception sous brouillard synthétique (détection)"
+  },
+  {
+   "number": 1038,
+   "title": "GMD-YOLO26- A Lightweight Detector with Cooperative Three-Stage Feature Processing for UAVs - DOI",
+   "reason": "pas-algorithme-canonique — détection de petits objets GMD-YOLO26 (modèle de détection)"
+  },
+  {
+   "number": 1039,
+   "title": "Autonomous navigation and active perception with complex articulated AUVs - DOI",
+   "reason": "hors-perimetre — navigation et perception active d AUV articulés"
+  },
+  {
+   "number": 1155,
+   "title": "AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision - arXiv",
+   "reason": "doublon — même article que #994 (AquaBEV, arXiv 2609.04411)"
+  },
+  {
+   "number": 1168,
+   "title": "How do LLMs Evaluate Perceived Moral Agency- Investigating Moral Decision-Making in Human-Artificial Agents Interactions - arXiv",
+   "reason": "hors-perimetre — étude HCI sur l agence morale perçue des LLM"
+  },
+  {
+   "number": 1208,
+   "title": "One Model, Two Worlds- Bidirectional Sonar-Optical Translation - arXiv",
+   "reason": "hors-perimetre — traduction sonar-optique bidirectionnelle (perception sous-marine)"
+  },
+  {
+   "number": 1210,
+   "title": "Adapting Vision Foundation Models to Acoustics for Pose-Free 3D Sonar Reconstruction - arXiv",
+   "reason": "hors-perimetre — adaptation de modèles de fondation visuels au sonar 3D"
+  },
+  {
+   "number": 1243,
+   "title": "KODAMA- Multimodal Digital Twin Reconstruction for Urban RF Propagation Modelling - arXiv",
+   "reason": "pas-algorithme-canonique — jumeau numérique de propagation RF (KODAMA)"
+  },
+  {
+   "number": 1262,
+   "title": "Mini-Batch Risk-Averse Deep Q-Learning- A Robot Navigation Case Study - arXiv",
+   "reason": "paradigme-exclu — DQN averse au risque (RL, politique apprise)"
+  },
+  {
+   "number": 1266,
+   "title": "Dual-Layer Semantic-Spatial Belief Mapping for Aerial Object Goal Navigation - arXiv",
+   "reason": "paradigme-exclu — navigation par croyance sémantique VLM (AeroBelief)"
+  },
+  {
+   "number": 1300,
+   "title": "An Autonomous GeoAI Agent for Arctic Eco-Navigation - arXiv",
+   "reason": "hors-perimetre — routage arctique multi-critères (agent GeoAI, navire seul)"
+  },
+  {
+   "number": 1301,
+   "title": "Experimental Validation of Combined Imaging and Vibration Mitigation for High-Altitude Platforms - arXiv",
+   "reason": "pas-algorithme-canonique — imagerie et atténuation de vibrations pour HAPS (plateforme)"
+  },
+  {
+   "number": 1305,
+   "title": "Adaptive Distributed Physical-Layer Authentication and Attack Detection in 6G Non-Terrestrial Networks via Causal Meta-Learning - arXiv",
+   "reason": "pas-algorithme-canonique — authentification couche physique 6G par méta-apprentissage"
+  }
+ ]
+}

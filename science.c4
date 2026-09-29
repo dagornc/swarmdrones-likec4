@@ -586,6 +586,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT09 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 9 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 1 deja rattachees / 23 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcHierNavDecision = specDoc 'A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments (2026)' {
+    #science
+    link https://doi.org/10.1371/journal.pone.0339225 "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments"
+    description '''
+      Cadre de decision de navigation HIERARCHIQUE pour essaims de UAV en environnement inconnu contraint en communication : decomposition en module de planification GLOBALE (couche haute) et module de navigation autonome + evitement d obstacles (couche basse), pour des UAV sans communication. PLOS ONE 2026.
+    '''
+    metadata { doi '10.1371/journal.pone.0339225'; annee '2026'; nature 'article de revue (PLOS ONE)'; corpus '1023'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1335,6 +1352,19 @@ sciEGOSwarm = finding 'SCI-48 — Planification locale distribuee + evitement sa
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT09 (2026-09-29)
+  // ===========================================================================
+
+sciHierNavDecision = finding 'SCI-49 — Decision de navigation hierarchique en environnement contraint en communication' {
+    #science
+    link https://doi.org/10.1371/journal.pone.0339225 "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments"
+    description '''
+      srcHierNavDecision structure la planification (algPathPlanning) en deux couches (globale + locale avec evitement, algCollisionAvoidance) sous CONTRAINTE DE COMMUNICATION — le regime degrade du modele (liens limites). Complement de SCI-14 : ici la decomposition hierarchique explicite pour UAV SANS communication. VERDICT : SUPPORTED pour le mecanisme (decomposition hierarchique globale/locale) ; CONDITIONAL — validation a confirmer dans le corps (simulation), non-communication totale a reconcilier avec le regime nominal.
+    '''
+    metadata { verdict 'SUPPORTED (navigation hierarchique globale/locale) / CONDITIONAL (sans communication, simulation)'; niveau_preuve 'MEDIUM'; source 'srcHierNavDecision'; correction_modele 'algPathPlanning + algCollisionAvoidance : decomposition hierarchique globale/locale sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1544,4 +1574,9 @@ sciEGOSwarm = finding 'SCI-48 — Planification locale distribuee + evitement sa
   sciEGOSwarm -[evidences]-> algPathPlanning 'planification locale par optimisation non lineaire'
   sciEGOSwarm -[evidences]-> algCollisionAvoidance 'risque de collision penalise dans l optimisation'
   sciEGOSwarm -[uses]-> srcEGOSwarm 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT09 (2026-09-29) ---
+// --- Relations du lot ---
+  sciHierNavDecision -[evidences]-> algPathPlanning 'planification globale hierarchique'
+  sciHierNavDecision -[evidences]-> algCollisionAvoidance 'evitement d obstacles de la couche basse'
+  sciHierNavDecision -[uses]-> srcHierNavDecision 'source primaire'
 }
