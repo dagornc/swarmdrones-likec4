@@ -603,6 +603,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT10 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 10 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcGRFSwarmOptCtrl = specDoc 'Distributed Stochastic Optimal Control for Pattern-Oriented Swarms (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.12959 "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms"
+    description '''
+      Cadre de commande optimale stochastique fonde sur les champs aleatoires gaussiens (GRF) etendu au domaine temporel : la coordination collective est formulee comme une inference bayesienne, permettant a l essaim d absorber l incertitude environnementale, de satisfaire des contraintes non convexes et de reconcilier des dynamiques heterogenes. Module d evitement de collision conscient de l incertitude et de la surete sous mouvement stochastique des obstacles (transformee unscented pour propager l incertitude des obstacles dynamiques et des voisins).
+    '''
+    metadata { arxiv '2609.12959'; annee '2026'; nature 'preprint'; corpus '1401'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1365,6 +1382,19 @@ sciHierNavDecision = finding 'SCI-49 — Decision de navigation hierarchique en 
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT10 (2026-09-29)
+  // ===========================================================================
+
+sciGRFSwarmOptCtrl = finding 'SCI-50 — Coordination par commande optimale stochastique pour essaims a motif' {
+    #science
+    link https://arxiv.org/abs/2609.12959 "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms"
+    description '''
+      srcGRFSwarmOptCtrl apporte une coordination d essaims orientes motifs/formations (algFormationControl) par commande optimale stochastique GRF, avec evitement de collision incertain et sure (algCollisionAvoidance). Complement de SCI-11 (formation heterogene) : ici l incertitude environnementale et l heterogeneite dynamique absorbees par inference bayesienne. VERDICT : SUPPORTED pour le mecanisme (coordination probabiliste + evitement incertain) ; CONDITIONAL — validation theorique/simulation, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (coordination de motifs + evitement incertain) / CONDITIONAL (simulation)'; niveau_preuve 'MEDIUM'; source 'srcGRFSwarmOptCtrl'; correction_modele 'algFormationControl + algCollisionAvoidance : coordination de motifs par commande optimale stochastique' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1579,4 +1609,9 @@ sciHierNavDecision = finding 'SCI-49 — Decision de navigation hierarchique en 
   sciHierNavDecision -[evidences]-> algPathPlanning 'planification globale hierarchique'
   sciHierNavDecision -[evidences]-> algCollisionAvoidance 'evitement d obstacles de la couche basse'
   sciHierNavDecision -[uses]-> srcHierNavDecision 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT10 (2026-09-29) ---
+// --- Relations du lot ---
+  sciGRFSwarmOptCtrl -[evidences]-> algFormationControl 'coordination d essaims orientes motifs'
+  sciGRFSwarmOptCtrl -[evidences]-> algCollisionAvoidance 'evitement conscient de l incertitude sous obstacles stochastiques'
+  sciGRFSwarmOptCtrl -[uses]-> srcGRFSwarmOptCtrl 'source primaire'
 }

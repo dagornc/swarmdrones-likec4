@@ -437,3 +437,45 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 49
+
+---
+
+## LOT 10 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1401 | Distributed Stochastic Optimal Control for Pattern-Oriented Swarms (20 | algFormationControl + algCollisionAvoidance | srcGRFSwarmOptCtrl | SCI-50 |
+
+### ECARTEE (24)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1321 | ScopeMamba-YOLO- Widening the Perceptual Scope Inward and Outward for  | pas-algorithme-canonique — détection petits objets ScopeMamba-YOLO (modèle de détection) |
+| 1323 | Distributed ToA Localization of Acoustic Sources with Unknown Time of  | hors-perimetre — localisation distribuée de sources acoustiques SOUS-MARINES (ToA) |
+| 1350 | HGSQ- Heatmap-Guided Sparse Query Detector for Real-Time Aerial Small  | pas-algorithme-canonique — détecteur HGSQ (détection aérienne) |
+| 1363 | EVPeriscope- Extended Perception across Aerial and Ground Vehicles wit | pas-algorithme-canonique — suivi d hélices par caméra événementielle (perception) |
+| 1381 | PATH- Continuous Target Sensing among Autonomous Cooperative Drones -  | pas-algorithme-canonique — handoff de cible entre UAV (PATH), mécanisme de perception |
+| 1396 | Parameter Sensitivity Analysis for Aerial LiDAR-Inertial Odometries in | pas-algorithme-canonique — analyse de sensibilité de paramètres LIO/SLAM (réglage) |
+| 1423 | Quantum-Gated LiteSSD- A Parameter-Efficient Lightweight Hybrid Quantu | hors-perimetre — détection sonar quantique (LiteSSD), perception sous-marine |
+| 1426 | SafePG- Safe and Globally Optimal Reinforcement Learning with Hard Con | paradigme-exclu — RL avec contraintes dures (SafePG, politique apprise) |
+| 1441 | PRI-Net- A Lightweight Multimodal Framework for 3D UAV Localization -  | pas-algorithme-canonique — localisation UAV par fusion multimodale profonde (réseau) |
+| 1444 | Language-Grounded Semantic Target Navigation for Autonomous Surface Ve | paradigme-exclu — navigation ASV guidée par langage + PPO |
+| 1445 | Small Object Detection in Drone Aerial Imagery with LAF-YOLOv10 - arXi | pas-algorithme-canonique — détection petits objets LAF-YOLOv10 |
+| 1452 | An Adaptive Fixed-Time Line-of-Sight Guidance Scheme for 3D Path Follo | hors-perimetre — guidage LOS à temps fixe pour AUV sous-marins |
+| 1476 | Volumetric Harmonic Field Navigation for Quadrotors - arXiv | deja-couvert — navigation mono-quadrirotor par champ harmonique, famille planification déjà sourcée (SCI-14) |
+| 1481 | DuctAM- A Duct-Assisted Quadrotor-Based Aerial Manipulator Enabling Hi | pas-algorithme-canonique — manipulateur aérien à soufflantes (DuctAM), plateforme |
+| 1513 | Waggle Dance Inspired Motion Communication for Multiple UAVs in MuJoCo | pas-algorithme-canonique — communication par mouvement (danse des abeilles) en simulation |
+| 1524 | TIO-Former- Ultra-Lightweight 6-Directional ToF-Inertial Odometry for  | pas-algorithme-canonique — odométrie ToF-inertielle pour nano-UAV (TIO-Former), matériel |
+| 1541 | Set-membership localization of intermittent RF sources using a fleet o | pas-algorithme-canonique — localisation de sources RF par flotte (set-membership) |
+| 1546 | Multi-Session Multimodal Underwater Mapping with Acoustic and Optical  | hors-perimetre — cartographie sous-marine multimodale multi-sessions (factor graph) |
+| 1552 | Characterizing Refraction-Induced Ranging Bias in Underwater Collabora | hors-perimetre — biais de télémétrie par réfraction en localisation sous-marine |
+| 1559 | Multi-View Mixture-of-Experts with Vision-Language Reranking for Cross | pas-algorithme-canonique — géo-localisation cross-view (MVLGeo), perception |
+| 1566 | Understanding Dynamic Scenes at Gigapixel Scale- Wide-Area Spatio-Temp | pas-algorithme-canonique — dataset gigapixel de perception spatio-temporelle (HARD) |
+| 1578 | UAVs Meet Embodied Intelligence- Bridging Human Intents and Flying Dyn | non-primaire — cadre 5+5 d intelligence incarnée UAV (position paper) |
+| 1587 | From Pixels to Semantics- Edge AI for UAV-Based Critical Infrastructur | non-primaire — catégorisation d architectures d inspection par edge AI (survey) |
+| 1588 | VLM-MPPI- Grounding Natural Language in Behaviorally Diverse Trajector | paradigme-exclu — navigation par VLM + MPPI (sélection de trajectoire par VLM) |
+
+## Validation lot 10
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 50
