@@ -547,3 +547,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 2195 | Online Material-Labeled Environment Reconstruction via Bayesian Multip | pas-algorithme-canonique — reconstruction d environnement ISAC (attribution multipath) |
 | 2196 | Custom PX4 firmware for autonomous hybrid aerial-marine missions - DOI | doublon — même article que #1692 (Custom PX4 firmware, arXiv 2609.20691) |
 
+
+---
+
+## LOT 13 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 2305 | Path deviation control for multi-UAV cooperative task execution based  | algPathPlanning | srcPathDeviationCtrl | SCI-51 |
+
+### DEJA_RATTACHEE (déjà statués — pas de doublon)
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 135 | Centralization vs. decentralization in multi-robot coverage- Ground ro | srcCoverageCentral | SCI-20 |
+
+### ECARTEE (23)
+| # | Titre | Raison |
+|---|-------|--------|
+| 2201 | Motion-Guided Multi-Offset Detector-Native ReID Readout for Efficient  | pas-algorithme-canonique — ReID par détection multi-offset (suivi, perception) |
+| 2202 | Large Language Model-Driven Autonomous UAV Systems- Technical Evolutio | non-primaire — revue des systèmes UAV pilotés par LLM |
+| 2218 | Lost in Tracking Translation- A Comprehensive Analysis of Visual SLAM  | pas-algorithme-canonique — analyse de tracking visuel SLAM en XR/IoT |
+| 2252 | Complex 3D structure and crack reconstruction by an online hybrid ster | hors-perimetre — reconstruction de fissures par photogrammétrie (génie civil) |
+| 2253 | General Collaborative Intelligence- Architecting Cognition for Resilie | doublon — même article que #2071 (General Collaborative Intelligence) |
+| 2254 | HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identif | doublon — même article que #1654 (HEROIC, arXiv 2609.19803) |
+| 2257 | Application of the W-shaped process for a Reinforcement Learning use c | pas-algorithme-canonique — application du processus W (certification EASA) à un cas RL |
+| 2261 | MAG-YOLO- A Multi-Scale Anisotropic Gating-Aware Network for UAV-Based | hors-perimetre — détection de dégradation de chaussée MAG-YOLO (application) |
+| 2264 | Demining and revitalising war-affected landscapes in Ukraine- multi-ac | hors-perimetre — gouvernance du déminage en Ukraine (politique) |
+| 2265 | Optimal base station selection for GNSS-denied UAV localization - DOI | pas-algorithme-canonique — placement optimisé de stations de base pour localisation GNSS-denied (déploiement) |
+| 2270 | Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-L | doublon — même article que #2145 (Odometry-Aided FLS mapping, arXiv 2609.24195) |
+| 2271 | Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Netw | doublon — même article que #2166 (Agentic AI UAV Networks, arXiv 2609.24664) |
+| 2273 | Perception-Aware Communication Middleware for Distributed Visual Perce | doublon — même article que #2178 (Perception-Aware Middleware, arXiv 2609.24964) |
+| 2282 | M ultimodal P erception F usion for C ooperative M ulti-UAV N etworks  | non-primaire — synthèse comparative de fusion de perception multi-UAV |
+| 2283 | A Robust Visual SLAM Framework Integrating Multi-Scale Feature Extract | deja-couvert — famille SLAM visuel déjà sourcée par SCI-5 (srcSlamSurvey) |
+| 2285 | Insulator Defect Detection Based on Multi-Scale Perception and Context | hors-perimetre — détection de défauts d isolateurs (SACANet), application réseau |
+| 2292 | LHR-YOLO- A SAR small-target ship detection method based on improved Y | hors-perimetre — détection de navires SAR (LHR-YOLO), perception maritime |
+| 2297 | LDF-Net- a transformer-based lightweight detail fusion network for UAV | pas-algorithme-canonique — détection de véhicules de chantier LDF-Net |
+| 2299 | UCD-Where2comm- ground-prior-guided communication-efficient collaborat | pas-algorithme-canonique — détection 3D collaborative multi-UAV (UCD-Where2comm) |
+| 377 | Federated Lightweight Intrusion Detection in Drone Swarms with Knowled | pas-algorithme-canonique — détection d intrusion fédérée (sécurité réseau), pas un des 15 algos |
+| 595 | UAV Thermal Imagery for Inert Ordnance Screening- Multi Campaign Datas | hors-perimetre — détection de munitions par imagerie thermique (déminage) |
+| 596 | Evidential Deep Learning for Multi-Modal Anti-UAV Detection - arXiv | pas-algorithme-canonique — détection anti-UAV par deep learning évidentiel (perception) |
+| 605 | RGB-to-IR image translation for infrared vehicle detection in unseen U | pas-algorithme-canonique — traduction RGB→IR pour détection (modèle génératif) |
+
+## Validation lot 13
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 51

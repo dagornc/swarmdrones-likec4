@@ -1,0 +1,163 @@
+{
+ "lot_label": "LOT 13 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 1 deja rattachees / 23 ecartees",
+ "rattachees": [
+  {
+   "src": "srcPathDeviationCtrl",
+   "title": "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction (2026)",
+   "link_title": "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction",
+   "description": "Controle de deviation de trajectoire pour taches cooperatives multi-UAV : carte locale 3D LiDAR, modelisation globale par ORB-SLAM3 + cartographie cooperative multi-agents, A* AMELIORE (contraintes de rayon de virage, vitesse, distance de securite) pour la prediction de trajectoire, correction temps reel par PID flou, boucle fermee perception-planification-controle.",
+   "metadata": {
+    "doi": "10.21595/jme.2026.25171",
+    "annee": "2026",
+    "nature": "article de revue (J. Measurements in Engineering)",
+    "corpus": "2305",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciPathDeviationCtrl",
+    "title": "SCI-51 — Controle de deviation par A* ameliore + cartographie cooperative",
+    "link_title": "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction",
+    "description": "srcPathDeviationCtrl joint la planification par A* AMELIORE (algPathPlanning, contraintes de rayon/vitesse/securite) et la cartographie cooperative multi-agents (SLAM), en boucle fermee perception-planification-controle. Complement de SCI-14 : ici la correction temps reel de deviation (PID flou) sous contraintes cinematiques. VERDICT : SUPPORTED pour le mecanisme (A* contraint + correction temps reel) ; CONDITIONAL — validation a confirmer, echelle multi-UAV modeste.",
+    "metadata": {
+     "verdict": "SUPPORTED (A* contraint + correction temps reel) / CONDITIONAL (echelle)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcPathDeviationCtrl",
+     "correction_modele": "algPathPlanning : planification A* contrainte + correction de deviation temps reel"
+    },
+    "link_doi": "10.21595/jme.2026.25171"
+   },
+   "algs": [
+    [
+     "algPathPlanning",
+     "A* ameliore sous contraintes cinematiques"
+    ]
+   ],
+   "link_doi": "10.21595/jme.2026.25171"
+  }
+ ],
+ "deja": [
+  {
+   "number": 135,
+   "title": "Centralization vs. decentralization in multi-robot coverage- Ground robots under UAV supervision - a",
+   "existing_src": "srcCoverageCentral",
+   "existing_finding": "SCI-20"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 2201,
+   "title": "Motion-Guided Multi-Offset Detector-Native ReID Readout for Efficient UAV Multi-Object Tracking - DOI",
+   "reason": "pas-algorithme-canonique — ReID par détection multi-offset (suivi, perception)"
+  },
+  {
+   "number": 2202,
+   "title": "Large Language Model-Driven Autonomous UAV Systems- Technical Evolution, Core Architectures, and Critical Challenges - DOI",
+   "reason": "non-primaire — revue des systèmes UAV pilotés par LLM"
+  },
+  {
+   "number": 2218,
+   "title": "Lost in Tracking Translation- A Comprehensive Analysis of Visual SLAM in Human-Centered XR and IoT Ecosystems - DOI",
+   "reason": "pas-algorithme-canonique — analyse de tracking visuel SLAM en XR/IoT"
+  },
+  {
+   "number": 2252,
+   "title": "Complex 3D structure and crack reconstruction by an online hybrid stereo photogrammetry approach - DOI",
+   "reason": "hors-perimetre — reconstruction de fissures par photogrammétrie (génie civil)"
+  },
+  {
+   "number": 2253,
+   "title": "General Collaborative Intelligence- Architecting Cognition for Resilient Multi-Agent Ecosystems - DOI",
+   "reason": "doublon — même article que #2071 (General Collaborative Intelligence)"
+  },
+  {
+   "number": 2254,
+   "title": "HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identification and Cross-Robot Collaboration - DOI",
+   "reason": "doublon — même article que #1654 (HEROIC, arXiv 2609.19803)"
+  },
+  {
+   "number": 2257,
+   "title": "Application of the W-shaped process for a Reinforcement Learning use case on drone navigation - DOI",
+   "reason": "pas-algorithme-canonique — application du processus W (certification EASA) à un cas RL"
+  },
+  {
+   "number": 2261,
+   "title": "MAG-YOLO- A Multi-Scale Anisotropic Gating-Aware Network for UAV-Based Pavement Distress Detection - DOI",
+   "reason": "hors-perimetre — détection de dégradation de chaussée MAG-YOLO (application)"
+  },
+  {
+   "number": 2264,
+   "title": "Demining and revitalising war-affected landscapes in Ukraine- multi-actor governance responses - DOI",
+   "reason": "hors-perimetre — gouvernance du déminage en Ukraine (politique)"
+  },
+  {
+   "number": 2265,
+   "title": "Optimal base station selection for GNSS-denied UAV localization - DOI",
+   "reason": "pas-algorithme-canonique — placement optimisé de stations de base pour localisation GNSS-denied (déploiement)"
+  },
+  {
+   "number": 2270,
+   "title": "Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-Looking Sonar - DOI",
+   "reason": "doublon — même article que #2145 (Odometry-Aided FLS mapping, arXiv 2609.24195)"
+  },
+  {
+   "number": 2271,
+   "title": "Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Networks - DOI",
+   "reason": "doublon — même article que #2166 (Agentic AI UAV Networks, arXiv 2609.24664)"
+  },
+  {
+   "number": 2273,
+   "title": "Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms - DOI",
+   "reason": "doublon — même article que #2178 (Perception-Aware Middleware, arXiv 2609.24964)"
+  },
+  {
+   "number": 2282,
+   "title": "M ultimodal P erception F usion for C ooperative M ulti-UAV N etworks - DOI",
+   "reason": "non-primaire — synthèse comparative de fusion de perception multi-UAV"
+  },
+  {
+   "number": 2283,
+   "title": "A Robust Visual SLAM Framework Integrating Multi-Scale Feature Extraction and Adaptive EKF - DOI",
+   "reason": "deja-couvert — famille SLAM visuel déjà sourcée par SCI-5 (srcSlamSurvey)"
+  },
+  {
+   "number": 2285,
+   "title": "Insulator Defect Detection Based on Multi-Scale Perception and Context-Guided Feature Aggregation - DOI",
+   "reason": "hors-perimetre — détection de défauts d isolateurs (SACANet), application réseau"
+  },
+  {
+   "number": 2292,
+   "title": "LHR-YOLO- A SAR small-target ship detection method based on improved YOLO11 - DOI",
+   "reason": "hors-perimetre — détection de navires SAR (LHR-YOLO), perception maritime"
+  },
+  {
+   "number": 2297,
+   "title": "LDF-Net- a transformer-based lightweight detail fusion network for UAV engineering vehicle detection - DOI",
+   "reason": "pas-algorithme-canonique — détection de véhicules de chantier LDF-Net"
+  },
+  {
+   "number": 2299,
+   "title": "UCD-Where2comm- ground-prior-guided communication-efficient collaborative 3D object detection for multi-UAV swarms - DOI",
+   "reason": "pas-algorithme-canonique — détection 3D collaborative multi-UAV (UCD-Where2comm)"
+  },
+  {
+   "number": 377,
+   "title": "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation",
+   "reason": "pas-algorithme-canonique — détection d intrusion fédérée (sécurité réseau), pas un des 15 algos"
+  },
+  {
+   "number": 595,
+   "title": "UAV Thermal Imagery for Inert Ordnance Screening- Multi Campaign Dataset Development,Object Detection, and Practical Recommendations - arXiv",
+   "reason": "hors-perimetre — détection de munitions par imagerie thermique (déminage)"
+  },
+  {
+   "number": 596,
+   "title": "Evidential Deep Learning for Multi-Modal Anti-UAV Detection - arXiv",
+   "reason": "pas-algorithme-canonique — détection anti-UAV par deep learning évidentiel (perception)"
+  },
+  {
+   "number": 605,
+   "title": "RGB-to-IR image translation for infrared vehicle detection in unseen UAV domains - arXiv",
+   "reason": "pas-algorithme-canonique — traduction RGB→IR pour détection (modèle génératif)"
+  }
+ ]
+}

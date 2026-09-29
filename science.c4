@@ -620,6 +620,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT13 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 13 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 1 deja rattachees / 23 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcPathDeviationCtrl = specDoc 'Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction (2026)' {
+    #science
+    link https://doi.org/10.21595/jme.2026.25171 "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction"
+    description '''
+      Controle de deviation de trajectoire pour taches cooperatives multi-UAV : carte locale 3D LiDAR, modelisation globale par ORB-SLAM3 + cartographie cooperative multi-agents, A* AMELIORE (contraintes de rayon de virage, vitesse, distance de securite) pour la prediction de trajectoire, correction temps reel par PID flou, boucle fermee perception-planification-controle.
+    '''
+    metadata { doi '10.21595/jme.2026.25171'; annee '2026'; nature 'article de revue (J. Measurements in Engineering)'; corpus '2305'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1395,6 +1412,19 @@ sciGRFSwarmOptCtrl = finding 'SCI-50 — Coordination par commande optimale stoc
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT13 (2026-09-29)
+  // ===========================================================================
+
+sciPathDeviationCtrl = finding 'SCI-51 — Controle de deviation par A* ameliore + cartographie cooperative' {
+    #science
+    link https://doi.org/10.21595/jme.2026.25171 "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction"
+    description '''
+      srcPathDeviationCtrl joint la planification par A* AMELIORE (algPathPlanning, contraintes de rayon/vitesse/securite) et la cartographie cooperative multi-agents (SLAM), en boucle fermee perception-planification-controle. Complement de SCI-14 : ici la correction temps reel de deviation (PID flou) sous contraintes cinematiques. VERDICT : SUPPORTED pour le mecanisme (A* contraint + correction temps reel) ; CONDITIONAL — validation a confirmer, echelle multi-UAV modeste.
+    '''
+    metadata { verdict 'SUPPORTED (A* contraint + correction temps reel) / CONDITIONAL (echelle)'; niveau_preuve 'MEDIUM'; source 'srcPathDeviationCtrl'; correction_modele 'algPathPlanning : planification A* contrainte + correction de deviation temps reel' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1614,4 +1644,8 @@ sciGRFSwarmOptCtrl = finding 'SCI-50 — Coordination par commande optimale stoc
   sciGRFSwarmOptCtrl -[evidences]-> algFormationControl 'coordination d essaims orientes motifs'
   sciGRFSwarmOptCtrl -[evidences]-> algCollisionAvoidance 'evitement conscient de l incertitude sous obstacles stochastiques'
   sciGRFSwarmOptCtrl -[uses]-> srcGRFSwarmOptCtrl 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT13 (2026-09-29) ---
+// --- Relations du lot ---
+  sciPathDeviationCtrl -[evidences]-> algPathPlanning 'A* ameliore sous contraintes cinematiques'
+  sciPathDeviationCtrl -[uses]-> srcPathDeviationCtrl 'source primaire'
 }
