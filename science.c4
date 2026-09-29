@@ -126,14 +126,39 @@ model {
   srcExplainableMARL = specDoc 'Organizationally-Oriented Explainability and Control in MARL (AAMAS 2025)' {
     #science
     link https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1968.pdf "An Organizationally-Oriented Approach to Enhancing Explainability and Control in Multi-Agent Reinforcement Learning"
-    description 'Explicabilite et controle humain dans les systemes multi-agents. Pertinent pour la supervision C2.'
-    metadata { nature 'acte de conference'; annee '2025'; corpus '#155'; statut 'A CONSULTER' }
+    description '''
+      ECARTEE (lue integralement, 2026-09-29). MOISE+MARL integre des roles
+      et missions organisationnels (modele MOISE+) dans un MARL Dec-POMDP
+      pour contraindre et expliquer l apprentissage : guides de contrainte
+      (masquage d actions, shaping de recompense) + methode TEMM d inference
+      de roles/missions implicites. AUCUN algorithme du modele n est de la
+      coordination MARL APPRISE : la cooperation est portee par CBBA,
+      Raft/CRDT, CBF-QP et MPC, tous deterministes et non appris.
+      L explicabilite du modele (CAP_OBSERVE) = telemetrie / jumeau numerique
+      / rejeu, pas l explication de politiques apprises. Benchmarks
+      generiques (Predator-Prey, Overcooked, Warehouse, Cyber-Defense),
+      simulation uniquement. Apport organisationnel hors paradigme du modele :
+      ne vaut pas rattachement a un algorithme.
+    '''
+    metadata { nature 'acte de conference'; annee '2025'; corpus '#155'; statut 'ECARTEE' }
   }
   srcHMARLCBF = specDoc 'HMARL-CBF — Hierarchical MARL with Control Barrier Functions (NeurIPS 2025)' {
     #science
     link https://proceedings.neurips.cc/paper_files/paper/2025/file/76486c7eb6056f12e7ce3addced61650-Paper-Conference.pdf "HMARL-CBF: Hierarchical Multi-Agent Reinforcement Learning with Control Barrier Functions for Safe Multi-Robot Navigation"
-    description 'Hierarchie MARL + CBF pour la navigation sure. Combine apprentissage et garanties de surete.'
-    metadata { nature 'acte de conference'; annee '2025'; corpus '#160'; statut 'A CONSULTER' }
+    description '''
+      ECARTEE (lue integralement, 2026-09-29). HMARL-CBF apprend des
+      politiques de surete : MARL hierarchique a competences (haut niveau
+      cooperatif + bas niveau CBF), garantie pointwise-in-time pendant
+      l entrainement ET l execution, valide sur METADRIVE (trafic routier)
+      en SIMULATION uniquement (>=95% de succes). Le modele EXCLUT les
+      politiques de surete apprises : algSafetyRules = regles PRE-APPROUVEES
+      deterministes + watchdog, algCollisionAvoidance = CBF-QP deterministe
+      « couche non negociable ». Domaine routier (pas aerien/maritime),
+      aucun materiel reel, ne leve ni GAP-2 (N=30 reel) ni GAP-8 (composition
+      floue+CBF). Confirmation generique « CBF comme filtre sous politique
+      hierarchique apprise » : ne vaut pas rattachement.
+    '''
+    metadata { nature 'acte de conference'; annee '2025'; corpus '#160'; statut 'ECARTEE' }
   }
   srcAUVFaultDiag = specDoc 'AUV Fault Diagnosis via Multidimensional Temporal Classification Transformer (2025)' {
     #science
