@@ -278,6 +278,12 @@ model {
     description 'MPC accelere FPGA (ADMM co-design) : 1 kHz, >20k variables, 15.6x plus rapide. Option d acceleration materielle pour l execution embarquee. Preprint.'
     metadata { arxiv '2609.09380'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (spec — research_path_planning_v1.md)' }
   }
+  srcCompass = specDoc 'Vatnsdal et al. (2026) — COMPASS, arXiv:2609.28247' {
+    #science
+    link https://arxiv.org/abs/2609.28247 "Controlling Collectives of AI Agents in Reasoning Space with Spatial Transformers"
+    description 'Architecture multi-robot DECENTRALISEE : un spatial transformer (MAST) agrege des messages multi-sauts du graphe de communication en un token de feedback appris, reinjecte dans le raisonnement d un LLM GELE (Qwen3-1.7B par defaut) a 1 Hz ; boucle de controle a 10 Hz. Flocking commande en langage naturel (rose des vents, reperes numeriques, consignes vagues). Entraine N=32/64, evalue jusqu a N=1024 en SIMULATION (16x l echelle d entrainement). AUCUN robot physique. Preprint non relu par les pairs.'
+    metadata { arxiv '2609.28247'; annee '2026'; nature 'preprint'; corpus '#2433'; statut 'CONSULTEE (PDF lu integralement)' ; confiance 'VERIFIEE — metadata arXiv 200, texte integral extrait' }
+  }
 
   // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
@@ -729,6 +735,56 @@ model {
     }
   }
 
+  sciCompass = finding 'SCI-23 — Flocking commande en langage : formation et consensus appris via spatial transformer' {
+    #science
+    link https://arxiv.org/abs/2609.28247 "Controlling Collectives of AI Agents in Reasoning Space with Spatial Transformers"
+    description '''
+      COMPASS documente une architecture decentralisee de flocking
+      commande en langage naturel, ou un spatial transformer (MAST)
+      agrege des messages multi-sauts en un token de feedback appris,
+      reinjecte dans le raisonnement d un LLM gele (Qwen3-1.7B).
+
+      CE QUI EST DOCUMENTE pour le modele :
+        - algFormationControl : COMPASS produit des « cohesive flocking
+          formations » commandees en langage (rose des vents, reperes
+          numeriques, consignes vagues type « ou habite le Pere Noel »).
+          Famille formation/flocking par APPRENTISSAGE (imitation d un
+          oracle a champs de potentiel), mecanisme distinct de la
+          formation RL (SCI-18) et des potentiels classiques (SCI-22).
+        - algConsensus : la section III s intitule litteralement
+          « Training for Consensus ». L agregation multi-sauts de MAST
+          fait converger cap et vitesse (consensus distribue) : erreur
+          de cap 2.79 deg a N=8 -> 0.34 deg a N=1024, variance de
+          vitesse (consensus) en decroissance. MECANISME : consensus
+          APPRIS (spatial transformer), pas la famille CRDT/Raft/Paxos
+          ancree par SCI-3.
+
+      LIMITES NON LEVEES :
+        - VALIDATION : SIMULATION pure (integrateur double, dt=0.1 s),
+          AUCUN robot physique. Ne leve donc PAS GAP-2 (materiel reel).
+        - TACHE : flocking directionnel uniquement, pas d allocation de
+          taches (aucun CBBA/encheres), pas de planification waypoints.
+        - SOURCE : preprint arXiv, non relu par les pairs.
+        - FLEET : essaim homogene SIMULE ; la flotte cible SWARM-3D est
+          heterogene (UAV-R/F + USV). Transposition non demontree.
+
+      CE QUE COMPASS NE SOUTIENT PAS (verdict ECARTE, non rattache) :
+        - algTaskAllocation : l arbitrage centralise/decentralise de
+          l article porte sur le CONTROLE du flock, pas sur l allocation
+          de taches. Aucun mecanisme d encheres ni de MRTA.
+        - algEventTriggeredComm : la communication est PERIODIQUE
+          (feedback 1 Hz, boucle 10 Hz), pas declenchee par evenement.
+        - algCollisionAvoidance (CBF) : l evitement est APPRIS par
+          imitation de l expert (terme de repulsion), PAS une CBF.
+    '''
+    metadata {
+      verdict 'SUPPORTED (formation/flocking + consensus appris multi-sauts) / CONDITIONAL (simulation seule, preprint, flotte homogene)'
+      niveau_preuve 'MEDIUM (mecanisme) / LOW (transposition flotte SWARM-3D)'
+      source 'srcCompass'
+      correction_modele 'algFormationControl : flocking commande en langage source (apprentissage, complement des SCI-18/22) ; algConsensus : consensus distribue appris par agregation multi-sauts (complement de SCI-3 CRDT) ; algTaskAllocation / algEventTriggeredComm / algCollisionAvoidance : NON rattaches (verdict ECARTE argumente)'
+    }
+  }
+
   // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
@@ -850,4 +906,9 @@ model {
   sciSwarmUSV -[uses]-> srcSwarmUSV 'these lue (Plymouth 2019)'
   sciSwarmUSV -[evidences]-> algFormationControl 'agregation decentralisee par potentiels'
   sciSwarmUSV -[evidences]-> algPathPlanning 'planification optimale A* avec marge de securite'
+
+  // --- Rattachement SCI-23 (2026-09-29, carte t_7260a06a) : COMPASS arXiv:2609.28247 ---
+  sciCompass -[uses]-> srcCompass 'source primaire lue (arXiv preprint)'
+  sciCompass -[evidences]-> algFormationControl 'flocking cohesif commande en langage (apprentissage)'
+  sciCompass -[evidences]-> algConsensus 'consensus distribue appris par agregation multi-sauts'
 }
