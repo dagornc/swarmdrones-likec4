@@ -1,0 +1,132 @@
+{
+ "lot_label": "LOT 12 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 0 deja rattachees / 25 ecartees",
+ "rattachees": [],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 1818,
+   "title": "Multi-omics and artificial intelligence for climate-resilient and nutrient-enriched food crops- advances, applications and future perspectives - DOI",
+   "reason": "hors-perimetre — multi-omique et IA pour cultures (agriculture)"
+  },
+  {
+   "number": 1819,
+   "title": "A Multi-Sensor Fusion-Based Remaining Useful Life Prediction Model for UAV Engines - DOI",
+   "reason": "pas-algorithme-canonique — prédiction de durée de vie moteur UAV par réseau de neurones (RUL composant)"
+  },
+  {
+   "number": 1820,
+   "title": "Data Collection and Analysis Empowered with AI for Robotized Olive Oil Precision Farming - DOI",
+   "reason": "hors-perimetre — oléiculture de précision robotisée (agriculture)"
+  },
+  {
+   "number": 1822,
+   "title": "Understanding and exploiting fundamental modality advantage in frame and event hybrid visual data - DOI",
+   "reason": "pas-algorithme-canonique — dataset MAD-Drone (modalités RGB/événement)"
+  },
+  {
+   "number": 1823,
+   "title": "Application Research of Intelligent Inspection Technology Based on Multi-Source Data Fusion in Digital Power Grid Construction - DOI",
+   "reason": "pas-algorithme-canonique — inspection de réseau électrique par fusion multi-sources (application)"
+  },
+  {
+   "number": 2050,
+   "title": "AquaWorld- Structure-Consistent Underwater World Generation for Robot Simulation - arXiv",
+   "reason": "hors-perimetre — génération de mondes sous-marins (AquaWorld, simulation)"
+  },
+  {
+   "number": 2071,
+   "title": "General Collaborative Intelligence- Architecting Cognition for Resilient Multi-Agent Ecosystems - arXiv",
+   "reason": "non-primaire — revue d intelligence collaborative multi-agents (taxonomie)"
+  },
+  {
+   "number": 2075,
+   "title": "M3GA-Wild- A Large-Scale Dataset and Benchmark for Multi-Modal Multi-session Ground-to-Aerial Place Recognition in Forests - arXiv",
+   "reason": "hors-perimetre — dataset forestier de place recognition (M3GA-Wild)"
+  },
+  {
+   "number": 2077,
+   "title": "HDMamba-YOLO- Efficient State-Space Perception and Local Spatial Reconstruction for UAV Small Object - arXiv",
+   "reason": "pas-algorithme-canonique — détection petits objets HDMamba-YOLO"
+  },
+  {
+   "number": 2081,
+   "title": "AquaCap- A Training-Free Underwater Embodied Agent with Code-as-Policy - arXiv",
+   "reason": "hors-perimetre — agent incarné sous-marin code-as-policy (AquaCap)"
+  },
+  {
+   "number": 2093,
+   "title": "RiverVLN- Phase-Grounded Temporal Vision--Language Navigation for Unmanned Surface Vehicles - arXiv",
+   "reason": "paradigme-exclu — navigation fluviale USV par VLM (RiverVLN)"
+  },
+  {
+   "number": 2107,
+   "title": "Spiking Neural Network Actor-Critic Proximal Policy Optimization Control for Autonomous UAV Navigation Through Constrained Openings in Civil Infrastru - arXiv",
+   "reason": "paradigme-exclu — PPO à réseaux de neurones impulsionnels (politique apprise)"
+  },
+  {
+   "number": 2113,
+   "title": "PhysAI-Bench- A Benchmark for LLM-Based Agentic Decision-Making in Autonomous UAV-Centric Physical AI - arXiv",
+   "reason": "paradigme-exclu — benchmark de prise de décision agentique LLM (PhysAI-Bench)"
+  },
+  {
+   "number": 2119,
+   "title": "Structured World-State Reasoning for Agentic Robotic Search - arXiv",
+   "reason": "paradigme-exclu — recherche robotique par raisonnement LLM (WORLDS)"
+  },
+  {
+   "number": 2125,
+   "title": "FinsSim- A Reality-Aligned Integrated Simulation Platform for Underwater Robot Learning - arXiv",
+   "reason": "hors-perimetre — plateforme de simulation de robots sous-marins (FinsSim)"
+  },
+  {
+   "number": 2133,
+   "title": "AquaOrbit- Sim-to-Real Reinforcement Learning for Underwater Target Orbiting under Intermittent Visual Feedback - arXiv",
+   "reason": "hors-perimetre — orbite de cible sous-marine par RL (AquaOrbit)"
+  },
+  {
+   "number": 2145,
+   "title": "Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-Looking Sonar - arXiv",
+   "reason": "hors-perimetre — cartographie temps réel par sonar FLS (sous-marin)"
+  },
+  {
+   "number": 2146,
+   "title": "Audio-based UAV Localization with Adaptive Temporal Correspondence via Reinforcement Learning - arXiv",
+   "reason": "paradigme-exclu — localisation audio de UAV par RL"
+  },
+  {
+   "number": 2166,
+   "title": "Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Networks - arXiv",
+   "reason": "paradigme-exclu — réseaux UAV auto-organisés par agentic AI (LLM)"
+  },
+  {
+   "number": 2178,
+   "title": "Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms - arXiv",
+   "reason": "pas-algorithme-canonique — middleware de communication orienté perception (couche réseau)"
+  },
+  {
+   "number": 2185,
+   "title": "TIO-Former- Ultra-Lightweight 6-Directional ToF-Inertial Odometry for Nano-UAVs via a Streaming Causal Transformer - DOI",
+   "reason": "doublon — même article que #1524 (TIO-Former, arXiv 2609.17198)"
+  },
+  {
+   "number": 2191,
+   "title": "AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into Distributed, Adaptive Swarm Execution - DOI",
+   "reason": "doublon — même article que #1596 (AeroWeaver, arXiv 2609.18520)"
+  },
+  {
+   "number": 2193,
+   "title": "AURORA- A Natural Language-Driven Agentic Framework for Understanding, Reasoning, and Orchestrating Reliable Air-Ground Co-Simulation - DOI",
+   "reason": "doublon — même article que #1635 (AURORA, arXiv 2609.19527)"
+  },
+  {
+   "number": 2195,
+   "title": "Online Material-Labeled Environment Reconstruction via Bayesian Multipath Attribution for Low-Altitude ISAC - DOI",
+   "reason": "pas-algorithme-canonique — reconstruction d environnement ISAC (attribution multipath)"
+  },
+  {
+   "number": 2196,
+   "title": "Custom PX4 firmware for autonomous hybrid aerial-marine missions - DOI",
+   "reason": "doublon — même article que #1692 (Custom PX4 firmware, arXiv 2609.20691)"
+  }
+ ]
+}

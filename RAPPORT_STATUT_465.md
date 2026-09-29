@@ -513,3 +513,37 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 1811 | UAV-LiteDet- A Lightweight Small Object Detection Network for Low-Alti | pas-algorithme-canonique — détection petits objets UAV-LiteDet |
 | 1814 | A Multi-UAV Cooperative Navigation Method Based on Policy Decompositio | paradigme-exclu — GS-MADDPG = GNN + MADDPG pour navigation coopérative |
 
+
+---
+
+## LOT 12 (2026-09-29)
+
+### ECARTEE (25)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1818 | Multi-omics and artificial intelligence for climate-resilient and nutr | hors-perimetre — multi-omique et IA pour cultures (agriculture) |
+| 1819 | A Multi-Sensor Fusion-Based Remaining Useful Life Prediction Model for | pas-algorithme-canonique — prédiction de durée de vie moteur UAV par réseau de neurones (RUL composant) |
+| 1820 | Data Collection and Analysis Empowered with AI for Robotized Olive Oil | hors-perimetre — oléiculture de précision robotisée (agriculture) |
+| 1822 | Understanding and exploiting fundamental modality advantage in frame a | pas-algorithme-canonique — dataset MAD-Drone (modalités RGB/événement) |
+| 1823 | Application Research of Intelligent Inspection Technology Based on Mul | pas-algorithme-canonique — inspection de réseau électrique par fusion multi-sources (application) |
+| 2050 | AquaWorld- Structure-Consistent Underwater World Generation for Robot  | hors-perimetre — génération de mondes sous-marins (AquaWorld, simulation) |
+| 2071 | General Collaborative Intelligence- Architecting Cognition for Resilie | non-primaire — revue d intelligence collaborative multi-agents (taxonomie) |
+| 2075 | M3GA-Wild- A Large-Scale Dataset and Benchmark for Multi-Modal Multi-s | hors-perimetre — dataset forestier de place recognition (M3GA-Wild) |
+| 2077 | HDMamba-YOLO- Efficient State-Space Perception and Local Spatial Recon | pas-algorithme-canonique — détection petits objets HDMamba-YOLO |
+| 2081 | AquaCap- A Training-Free Underwater Embodied Agent with Code-as-Policy | hors-perimetre — agent incarné sous-marin code-as-policy (AquaCap) |
+| 2093 | RiverVLN- Phase-Grounded Temporal Vision--Language Navigation for Unma | paradigme-exclu — navigation fluviale USV par VLM (RiverVLN) |
+| 2107 | Spiking Neural Network Actor-Critic Proximal Policy Optimization Contr | paradigme-exclu — PPO à réseaux de neurones impulsionnels (politique apprise) |
+| 2113 | PhysAI-Bench- A Benchmark for LLM-Based Agentic Decision-Making in Aut | paradigme-exclu — benchmark de prise de décision agentique LLM (PhysAI-Bench) |
+| 2119 | Structured World-State Reasoning for Agentic Robotic Search - arXiv | paradigme-exclu — recherche robotique par raisonnement LLM (WORLDS) |
+| 2125 | FinsSim- A Reality-Aligned Integrated Simulation Platform for Underwat | hors-perimetre — plateforme de simulation de robots sous-marins (FinsSim) |
+| 2133 | AquaOrbit- Sim-to-Real Reinforcement Learning for Underwater Target Or | hors-perimetre — orbite de cible sous-marine par RL (AquaOrbit) |
+| 2145 | Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-L | hors-perimetre — cartographie temps réel par sonar FLS (sous-marin) |
+| 2146 | Audio-based UAV Localization with Adaptive Temporal Correspondence via | paradigme-exclu — localisation audio de UAV par RL |
+| 2166 | Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Netw | paradigme-exclu — réseaux UAV auto-organisés par agentic AI (LLM) |
+| 2178 | Perception-Aware Communication Middleware for Distributed Visual Perce | pas-algorithme-canonique — middleware de communication orienté perception (couche réseau) |
+| 2185 | TIO-Former- Ultra-Lightweight 6-Directional ToF-Inertial Odometry for  | doublon — même article que #1524 (TIO-Former, arXiv 2609.17198) |
+| 2191 | AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into D | doublon — même article que #1596 (AeroWeaver, arXiv 2609.18520) |
+| 2193 | AURORA- A Natural Language-Driven Agentic Framework for Understanding, | doublon — même article que #1635 (AURORA, arXiv 2609.19527) |
+| 2195 | Online Material-Labeled Environment Reconstruction via Bayesian Multip | pas-algorithme-canonique — reconstruction d environnement ISAC (attribution multipath) |
+| 2196 | Custom PX4 firmware for autonomous hybrid aerial-marine missions - DOI | doublon — même article que #1692 (Custom PX4 firmware, arXiv 2609.20691) |
+
