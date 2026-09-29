@@ -1,0 +1,192 @@
+{
+ "lot_label": "LOT 16 (2026-09-29, carte t_529dfd75) — 2 nouveaux verdicts / 2 deja rattachees / 21 ecartees",
+ "rattachees": [
+  {
+   "src": "srcGossipADMM",
+   "title": "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization (2026)",
+   "link_title": "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization",
+   "description": "Analyse de l ADMM consensus LINEARISE pour problemes multi-agents NON CONVEXES heterogenes (lissite, geometrie de gradient, delai de communication differents). Trois scalaires (dissimilarite de gradient, dispersion de Lipschitz, dispersion de delai) bornent un voisinage de stationnarite pour le gossip uniforme. HA-ADMM (Heterogeneity-Adaptive Asynchronous ADMM) approxime la moyenne augmentee par un mix push-sum pondere, active les agents sous delais bornes, et met a jour chaque penalite par une regle residuelle.",
+   "metadata": {
+    "doi": "10.21203/rs.3.rs-10877139/v1",
+    "annee": "2026",
+    "nature": "preprint (Research Square)",
+    "corpus": "1025",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciGossipADMM",
+    "title": "SCI-53 — Consensus gossip ADMM sous heterogeneite non convexe",
+    "link_title": "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization",
+    "description": "srcGossipADMM documente le CONSENSUS distribue (algConsensus) par gossip ADMM linearise + push-sum, avec preuve de convergence vers un voisinage de stationnarite sous heterogeneite (lissite, delai). Complement de la famille consensus du modele : ici la robustesse a l HETEROGENEITE et au delai. VERDICT : SUPPORTED pour le mecanisme (consensus gossip sous delai/heterogeneite) ; CONDITIONAL — optimisation multi-agents generique (pas de dynamique UAV), transposition a la flotte a valider.",
+    "metadata": {
+     "verdict": "SUPPORTED (consensus gossip sous heterogeneite) / CONDITIONAL (optimisation generique)",
+     "niveau_preuve": "MEDIUM-HAUTE",
+     "source": "srcGossipADMM",
+     "correction_modele": "algConsensus : consensus gossip ADMM robuste a l heterogeneite et au delai"
+    },
+    "link_doi": "10.21203/rs.3.rs-10877139/v1"
+   },
+   "algs": [
+    [
+     "algConsensus",
+     "consensus distribue gossip ADMM + push-sum"
+    ]
+   ],
+   "link_doi": "10.21203/rs.3.rs-10877139/v1"
+  },
+  {
+   "src": "srcConflictPredictDMPC",
+   "title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control (2026)",
+   "link_title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control",
+   "description": "Dans le DMPC de plusieurs drones pour l evitement de collision, l horizon de prediction FIXE force un compromis (court = reaction tardive, long = cout super-lineaire). Horizon VARIABLE predictif de conflit, fixe localement par chaque drone : extrapolation des lignes de vol des voisins, test contre la sienne via des entonnoirs de confiance qui se retrecissent avec la portee de prediction, temps-au-conflit en forme fermee ; l horizon est le plus petit couvrant le conflit predit le plus lointain (minimal en ciel degage).",
+   "metadata": {
+    "arxiv": "2609.13270",
+    "annee": "2026",
+    "nature": "preprint",
+    "corpus": "1257",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciConflictPredictDMPC",
+    "title": "SCI-54 — Horizon predictif de conflit variable en DMPC multi-drones",
+    "link_title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control",
+    "description": "srcConflictPredictDMPC ameliore l evitement de collision distribue (algCollisionAvoidance) en rendant l horizon de prediction ADAPTATIF au conflit predit, sans changer le DMPC lui-meme. Complement de SCI-14/SCI-29 (DMPC) : ici le cout de calcul borne par l horizon minimal admissible. VERDICT : SUPPORTED pour le mecanisme (horizon variable predictif) ; CONDITIONAL — simulation, echelle a confronter a N=30.",
+    "metadata": {
+     "verdict": "SUPPORTED (horizon predictif variable) / CONDITIONAL (simulation)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcConflictPredictDMPC",
+     "correction_modele": "algCollisionAvoidance : horizon de prediction adaptatif au conflit (cout borne)"
+    },
+    "link_arxiv": "2609.13270"
+   },
+   "algs": [
+    [
+     "algCollisionAvoidance",
+     "horizon predictif de conflit variable"
+    ]
+   ],
+   "link_arxiv": "2609.13270"
+  }
+ ],
+ "deja": [
+  {
+   "number": 1003,
+   "title": "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking - DOI",
+   "existing_src": "srcZeroTrust",
+   "existing_finding": "SCI-9"
+  },
+  {
+   "number": 1024,
+   "title": "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR) - DOI",
+   "existing_src": "srcQAR",
+   "existing_finding": "SCI-6"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 987,
+   "title": "Obstacle-aware multi-UAV scheduling for plant-protection operations using an enhanced walrus optimizer - DOI",
+   "reason": "deja-couvert — allocation de tâches par métaheuristique, famille déjà sourcée par CBBA (SCI-10)"
+  },
+  {
+   "number": 1007,
+   "title": "Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communications - DOI",
+   "reason": "paradigme-exclu — AutoResearch par agents LLM"
+  },
+  {
+   "number": 1012,
+   "title": "Multi-Objective Path Optimization for Truck–Drone Collaborative Delivery Based on Subspace Contribution-Driven Adaptive Resource Allocation - DOI",
+   "reason": "pas-algorithme-canonique — routage camion-drone multi-objectifs (logistique)"
+  },
+  {
+   "number": 1018,
+   "title": "Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Dataset and Agentic Method - DOI",
+   "reason": "doublon — même article que #622 (Air-Ground Object Search, arXiv 2609.08402)"
+  },
+  {
+   "number": 1028,
+   "title": "Design and Development of an Uncrewed Surface Vessel (USV) for Hydrographic Survey - DOI",
+   "reason": "pas-algorithme-canonique — conception de plateforme USV hydrographique"
+  },
+  {
+   "number": 1030,
+   "title": "Current Progress on Control Strategies for Underwater Soft Robots- A Comprehensive Review - DOI",
+   "reason": "non-primaire — revue de stratégies de contrôle pour robots mous sous-marins"
+  },
+  {
+   "number": 1033,
+   "title": "A Learnable Sparse Attention Graph Architecture for Heterogeneous Multi-UAV Air-to-Ground Mission Planning - DOI",
+   "reason": "paradigme-exclu — SAGA = GNN + MAPPO pour planification de mission (politique apprise)"
+  },
+  {
+   "number": 1035,
+   "title": "Comparative analysis of UAV simulation platforms- challenges, opportunities, and future directions - DOI",
+   "reason": "non-primaire — méta-revue de plateformes de simulation UAV"
+  },
+  {
+   "number": 1148,
+   "title": "GzDRL- Reproducible and Scalable Deep Reinforcement Learning with Gazebo - arXiv",
+   "reason": "pas-algorithme-canonique — framework GzDRL de RL avec Gazebo (outillage)"
+  },
+  {
+   "number": 1157,
+   "title": "Continual Field-Adaptive Models (CFAMs) for Post-Deployment Physical AI - arXiv",
+   "reason": "paradigme-exclu — apprentissage continu post-déploiement (CFAM)"
+  },
+  {
+   "number": 1190,
+   "title": "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking - arXiv",
+   "reason": "doublon — même article que #1003 (Practical Zero-Trust, arXiv 2609.05741)"
+  },
+  {
+   "number": 1191,
+   "title": "AAMBERS-UAV- Acquisition-Aware Multimodal Backbone Evaluation and Ranking for UAV Weedy Rice Segmentation - arXiv",
+   "reason": "hors-perimetre — segmentation de riz adventice (agriculture)"
+  },
+  {
+   "number": 1199,
+   "title": "FALCON-S- Fixed-wing ground-effect Aerodynamics Simulator and Flight Control Learning Suite - arXiv",
+   "reason": "pas-algorithme-canonique — simulateur FALCON-S d aérodynamique (outillage)"
+  },
+  {
+   "number": 1204,
+   "title": "Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communications - arXiv",
+   "reason": "doublon — même article que #1007 (LLM AutoResearch, arXiv 2609.06174)"
+  },
+  {
+   "number": 1239,
+   "title": "Robust Decentralized Federated Distillation via Multi-Modality Knowledge Collaboration - arXiv",
+   "reason": "pas-algorithme-canonique — distillation fédérée décentralisée (apprentissage distribué)"
+  },
+  {
+   "number": 1252,
+   "title": "Anti-Gravity Walking by a Flying Humanoid Robot via Thrust-Rate Input Whole-Body Model Predictive Control - arXiv",
+   "reason": "hors-perimetre — marche anti-gravité d humanoïde volant (robotique humanoïde)"
+  },
+  {
+   "number": 1342,
+   "title": "Quantifying the Reality Gap for RL-Based UAV Placement at mmWave and Sub-THz - arXiv",
+   "reason": "paradigme-exclu — placement UAV par RL (quantification du reality gap)"
+  },
+  {
+   "number": 1349,
+   "title": "3D Euler-Angle Orientation Control for Two-Ray Fading Mitigation in Maritime Air-to-Sea Communications - arXiv",
+   "reason": "pas-algorithme-canonique — orientation 3D contre l évanouissement deux-rayons (PHY)"
+  },
+  {
+   "number": 1354,
+   "title": "Contact-Aware Incremental Model Predictive Control for an Underactuated Aerial Manipulator - arXiv",
+   "reason": "pas-algorithme-canonique — MPC de manipulateur aérien en contact (manipulation)"
+  },
+  {
+   "number": 1358,
+   "title": "Understanding Operator Attitudes Toward AI-Supported Decision Making in Maritime Operations - arXiv",
+   "reason": "hors-perimetre — étude d attitudes d opérateurs maritimes (HCI)"
+  },
+  {
+   "number": 1360,
+   "title": "Acoustic-based Guidance for Automatic Docking of Holonomic AUVs - arXiv",
+   "reason": "hors-perimetre — amarrage acoustique d AUV (sous-marin)"
+  }
+ ]
+}

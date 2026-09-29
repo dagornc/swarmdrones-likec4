@@ -654,6 +654,32 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT16 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 16 (2026-09-29, carte t_529dfd75) — 2 nouveaux verdicts / 2 deja rattachees / 21 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcGossipADMM = specDoc 'Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization (2026)' {
+    #science
+    link https://doi.org/10.21203/rs.3.rs-10877139/v1 "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization"
+    description '''
+      Analyse de l ADMM consensus LINEARISE pour problemes multi-agents NON CONVEXES heterogenes (lissite, geometrie de gradient, delai de communication differents). Trois scalaires (dissimilarite de gradient, dispersion de Lipschitz, dispersion de delai) bornent un voisinage de stationnarite pour le gossip uniforme. HA-ADMM (Heterogeneity-Adaptive Asynchronous ADMM) approxime la moyenne augmentee par un mix push-sum pondere, active les agents sous delais bornes, et met a jour chaque penalite par une regle residuelle.
+    '''
+    metadata { doi '10.21203/rs.3.rs-10877139/v1'; annee '2026'; nature 'preprint (Research Square)'; corpus '1025'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcConflictPredictDMPC = specDoc 'Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.13270 "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control"
+    description '''
+      Dans le DMPC de plusieurs drones pour l evitement de collision, l horizon de prediction FIXE force un compromis (court = reaction tardive, long = cout super-lineaire). Horizon VARIABLE predictif de conflit, fixe localement par chaque drone : extrapolation des lignes de vol des voisins, test contre la sienne via des entonnoirs de confiance qui se retrecissent avec la portee de prediction, temps-au-conflit en forme fermee ; l horizon est le plus petit couvrant le conflit predit le plus lointain (minimal en ciel degage).
+    '''
+    metadata { arxiv '2609.13270'; annee '2026'; nature 'preprint'; corpus '1257'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1455,6 +1481,28 @@ sciRHCRMAPF = finding 'SCI-52 — Resolution de collisions a horizon roulant pou
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT16 (2026-09-29)
+  // ===========================================================================
+
+sciGossipADMM = finding 'SCI-53 — Consensus gossip ADMM sous heterogeneite non convexe' {
+    #science
+    link https://doi.org/10.21203/rs.3.rs-10877139/v1 "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization"
+    description '''
+      srcGossipADMM documente le CONSENSUS distribue (algConsensus) par gossip ADMM linearise + push-sum, avec preuve de convergence vers un voisinage de stationnarite sous heterogeneite (lissite, delai). Complement de la famille consensus du modele : ici la robustesse a l HETEROGENEITE et au delai. VERDICT : SUPPORTED pour le mecanisme (consensus gossip sous delai/heterogeneite) ; CONDITIONAL — optimisation multi-agents generique (pas de dynamique UAV), transposition a la flotte a valider.
+    '''
+    metadata { verdict 'SUPPORTED (consensus gossip sous heterogeneite) / CONDITIONAL (optimisation generique)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcGossipADMM'; correction_modele 'algConsensus : consensus gossip ADMM robuste a l heterogeneite et au delai' }
+  }
+
+  sciConflictPredictDMPC = finding 'SCI-54 — Horizon predictif de conflit variable en DMPC multi-drones' {
+    #science
+    link https://arxiv.org/abs/2609.13270 "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control"
+    description '''
+      srcConflictPredictDMPC ameliore l evitement de collision distribue (algCollisionAvoidance) en rendant l horizon de prediction ADAPTATIF au conflit predit, sans changer le DMPC lui-meme. Complement de SCI-14/SCI-29 (DMPC) : ici le cout de calcul borne par l horizon minimal admissible. VERDICT : SUPPORTED pour le mecanisme (horizon variable predictif) ; CONDITIONAL — simulation, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (horizon predictif variable) / CONDITIONAL (simulation)'; niveau_preuve 'MEDIUM'; source 'srcConflictPredictDMPC'; correction_modele 'algCollisionAvoidance : horizon de prediction adaptatif au conflit (cout borne)' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1683,4 +1731,10 @@ sciRHCRMAPF = finding 'SCI-52 — Resolution de collisions a horizon roulant pou
   sciRHCRMAPF -[evidences]-> algPathPlanning 'planification multi-agents a objectifs continus'
   sciRHCRMAPF -[evidences]-> algCollisionAvoidance 'resolution de collisions bornee a l horizon'
   sciRHCRMAPF -[uses]-> srcRHCRMAPF 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT16 (2026-09-29) ---
+// --- Relations du lot ---
+  sciGossipADMM -[evidences]-> algConsensus 'consensus distribue gossip ADMM + push-sum'
+  sciGossipADMM -[uses]-> srcGossipADMM 'source primaire'
+  sciConflictPredictDMPC -[evidences]-> algCollisionAvoidance 'horizon predictif de conflit variable'
+  sciConflictPredictDMPC -[uses]-> srcConflictPredictDMPC 'source primaire'
 }

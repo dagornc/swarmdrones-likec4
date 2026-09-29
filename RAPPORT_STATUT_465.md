@@ -673,3 +673,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 981 | Internet of Things–Enabled Sensing and Unmanned Aerial Vehicle Applica | non-primaire — revue bibliométrique IoT+UAV pour séismes |
 | 984 | Multi-agent Reinforcement Learning for Vehicular Task Offloading in Mu | paradigme-exclu — MARL pour offloading véhiculaire (politique apprise) |
 
+
+---
+
+## LOT 16 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1025 | Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous N | algConsensus | srcGossipADMM | SCI-53 |
+| 1257 | Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model | algCollisionAvoidance | srcConflictPredictDMPC | SCI-54 |
+
+### DEJA_RATTACHEE (déjà statués — pas de doublon)
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 1003 | Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware  | srcZeroTrust | SCI-9 |
+| 1024 | A QoS-Constrained and Utility-Driven Routing Framework with Mobility-P | srcQAR | SCI-6 |
+
+### ECARTEE (21)
+| # | Titre | Raison |
+|---|-------|--------|
+| 987 | Obstacle-aware multi-UAV scheduling for plant-protection operations us | deja-couvert — allocation de tâches par métaheuristique, famille déjà sourcée par CBBA (SCI-10) |
+| 1007 | Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communi | paradigme-exclu — AutoResearch par agents LLM |
+| 1012 | Multi-Objective Path Optimization for Truck–Drone Collaborative Delive | pas-algorithme-canonique — routage camion-drone multi-objectifs (logistique) |
+| 1018 | Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Data | doublon — même article que #622 (Air-Ground Object Search, arXiv 2609.08402) |
+| 1028 | Design and Development of an Uncrewed Surface Vessel (USV) for Hydrogr | pas-algorithme-canonique — conception de plateforme USV hydrographique |
+| 1030 | Current Progress on Control Strategies for Underwater Soft Robots- A C | non-primaire — revue de stratégies de contrôle pour robots mous sous-marins |
+| 1033 | A Learnable Sparse Attention Graph Architecture for Heterogeneous Mult | paradigme-exclu — SAGA = GNN + MAPPO pour planification de mission (politique apprise) |
+| 1035 | Comparative analysis of UAV simulation platforms- challenges, opportun | non-primaire — méta-revue de plateformes de simulation UAV |
+| 1148 | GzDRL- Reproducible and Scalable Deep Reinforcement Learning with Gaze | pas-algorithme-canonique — framework GzDRL de RL avec Gazebo (outillage) |
+| 1157 | Continual Field-Adaptive Models (CFAMs) for Post-Deployment Physical A | paradigme-exclu — apprentissage continu post-déploiement (CFAM) |
+| 1190 | Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware  | doublon — même article que #1003 (Practical Zero-Trust, arXiv 2609.05741) |
+| 1191 | AAMBERS-UAV- Acquisition-Aware Multimodal Backbone Evaluation and Rank | hors-perimetre — segmentation de riz adventice (agriculture) |
+| 1199 | FALCON-S- Fixed-wing ground-effect Aerodynamics Simulator and Flight C | pas-algorithme-canonique — simulateur FALCON-S d aérodynamique (outillage) |
+| 1204 | Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communi | doublon — même article que #1007 (LLM AutoResearch, arXiv 2609.06174) |
+| 1239 | Robust Decentralized Federated Distillation via Multi-Modality Knowled | pas-algorithme-canonique — distillation fédérée décentralisée (apprentissage distribué) |
+| 1252 | Anti-Gravity Walking by a Flying Humanoid Robot via Thrust-Rate Input  | hors-perimetre — marche anti-gravité d humanoïde volant (robotique humanoïde) |
+| 1342 | Quantifying the Reality Gap for RL-Based UAV Placement at mmWave and S | paradigme-exclu — placement UAV par RL (quantification du reality gap) |
+| 1349 | 3D Euler-Angle Orientation Control for Two-Ray Fading Mitigation in Ma | pas-algorithme-canonique — orientation 3D contre l évanouissement deux-rayons (PHY) |
+| 1354 | Contact-Aware Incremental Model Predictive Control for an Underactuate | pas-algorithme-canonique — MPC de manipulateur aérien en contact (manipulation) |
+| 1358 | Understanding Operator Attitudes Toward AI-Supported Decision Making i | hors-perimetre — étude d attitudes d opérateurs maritimes (HCI) |
+| 1360 | Acoustic-based Guidance for Automatic Docking of Holonomic AUVs - arXi | hors-perimetre — amarrage acoustique d AUV (sous-marin) |
+
+## Validation lot 16
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 54
