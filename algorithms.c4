@@ -1207,12 +1207,13 @@ model {
   srcFaultTolerantControlAlloc -[implements]-> algFaultTolerantControlAlloc 'portage Rust (parite bit-a-bit)'
   srcJammingResilientMode -[implements]-> algJammingResilientMode 'portage Rust (parite bit-a-bit)'
 
-  // Source bibliographique LUE et CORRIGEE (preprint mort -> version publiee,
-  // verifiee Crossref 2026-09-28). Elle documente le scenario heterogene
-  // aeriens+surface en GNSS-denied, proche de SWARM-3D : elle ECLAIRE la
-  // navigation degradee et la localisation cooperative, sans les implementer.
-  srcHeteroRetrieval -[evidences]-> algNavigationGNSSDegrade 'scenario heterogene GNSS-denied (source lue, non implementee)'
-  srcHeteroRetrieval -[evidences]-> algCooperativeLocalization 'retrieval cooperatif multi-robots (source lue, non implementee)'
+  // srcHeteroRetrieval (specDoc scientifique, science.c4) n est PLUS rattachee
+  // directement : elle passe desormais par le constat sciHeteroRetrieval
+  // (SCI-15) selon le patron « source -> constat -> algorithme » en DEUX sauts
+  // (le seul cas du modele a faire exception a ete corrige). Voir science.c4 :
+  //   sciHeteroRetrieval -[uses]-> srcHeteroRetrieval
+  //   sciHeteroRetrieval -[evidences]-> algNavigationGNSSDegrade
+  //   sciHeteroRetrieval -[evidences]-> algCooperativeLocalization
 
   srcFormationControl -[documentedBy]-> specFormationControl 'specification detaillee v1 (PDF)'
   srcLeaderElection -[documentedBy]-> specLeaderElection 'specification detaillee v1 (PDF)'

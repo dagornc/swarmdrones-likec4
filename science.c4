@@ -439,6 +439,35 @@ model {
     }
   }
 
+  sciHeteroRetrieval = finding 'SCI-15 — Recuperation d objets en GNSS-denied : scenario heterogene aeriens+surface' {
+    #science
+    link https://doi.org/10.1002/rob.70011 "A Heterogeneous Multirobot System for Autonomous Object Retrieval in Challenging GNSS-Denied Maritime Environment"
+    description '''
+      srcHeteroRetrieval etait le SEUL cas du modele a rattacher une source
+      scientifique DIRECTEMENT a deux algorithmes, sans constat intermediaire
+      (patron « source -> constat -> algorithme » rompu). Ce constat retablit
+      la chaine en DEUX sauts.
+
+      CE QUI EST DOCUMENTE : un systeme multi-robot HETEROGENE (aerien +
+      surface) realisant la recuperation autonome d objets en environnement
+      maritime SANS GNSS — Journal of Field Robotics (2025). C est le scenario
+      publie le plus proche de SWARM-3D (flotte heterogene, GNSS-denied).
+
+      PORTEE : la source ECLAIRE la navigation sous GNSS degrade
+      (algNavigationGNSSDegrade) et la localisation cooperative multi-robots
+      (algCooperativeLocalization), SANS les implementer.
+
+      LIMITE NON LEVEE : un seul article, lu mais non implemente ; aucune
+      validation de l echelle SWARM-3D (30 plateformes) n est apportee.
+    '''
+    metadata {
+      verdict 'SUPPORTED (scenario heterogene GNSS-denied) / CONDITIONAL (transposition a 30)'
+      niveau_preuve 'MEDIUM'
+      source 'srcHeteroRetrieval'
+      correction_modele 'rattachement direct source->algorithme remplace par la chaine source->constat->algorithme'
+    }
+  }
+
   // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
@@ -534,4 +563,9 @@ model {
   gap7 -[exposes]-> sciLeaderElection 'doute a lever'
   gap8 -[exposes]-> sciSafetyRules 'doute a lever'
   gap9 -[exposes]-> sciPathPlanning 'doute a lever'
+
+  // --- Rattachement SCI-15 (2026-09-29) : source -> constat -> algorithmes ---
+  sciHeteroRetrieval -[uses]-> srcHeteroRetrieval 'source primaire lue (JFR 2025)'
+  sciHeteroRetrieval -[evidences]-> algNavigationGNSSDegrade 'scenario heterogene GNSS-denied'
+  sciHeteroRetrieval -[evidences]-> algCooperativeLocalization 'retrieval cooperatif multi-robots'
 }
