@@ -24,6 +24,19 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 4   | 25       | 2 findings | 2 | 21 | SCI-40..41 |
 | 5   | 25       | 3 findings | 2 | 20 | SCI-42..44 |
 | 6   | 25       | 3 findings | 2 (1 rattachee + 1 ecartee) | 20 | SCI-45..47 |
+| 7   | 25       | 0 | 3 | 22 | — |
+| 8   | 25       | 1 findings | 0 | 24 | SCI-48 |
+| 9   | 25       | 1 findings | 1 | 23 | SCI-49 |
+| 10  | 25       | 1 findings | 0 | 24 | SCI-50 |
+| 11  | 25       | 0 | 0 | 25 | — |
+| 12  | 25       | 0 | 0 | 25 | — |
+| 13  | 25       | 1 findings | 1 | 23 | SCI-51 |
+| 14  | 25       | 1 findings | 0 | 24 | SCI-52 |
+| 15  | 25       | 0 | 1 | 24 | — |
+| 16  | 25       | 2 findings | 2 | 21 | SCI-53..54 |
+| 17  | 25       | 0 | 0 | 25 | — |
+| 18  | 25       | 1 findings | 0 | 24 | SCI-55 |
+| 19  | 15       | 0 | 0 | 15 | — |
 
 ---
 
@@ -298,3 +311,41 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 ## Validation lot 6
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - SCI jusqu'a 47
+
+---
+
+## LOT 7 (2026-09-29)
+
+### DEJA_RATTACHEE (déjà statués — pas de doublon)
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 212 | Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent | srcHRLMPC | SCI-14 |
+| 315 | Safe Swarm Navigation in Constrained Environments- A Dynamic Tube-Base | srcDMPCTube | SCI-14 |
+| 356 | Diffusion-based 4D Trajectory Prediction and Distributed Control for U | srcDiff4D | SCI-14 |
+
+### ECARTEE (22)
+| # | Titre | Raison |
+|---|-------|--------|
+| 217 | Curriculum-Based Iterative Self-Play for Scalable Multi-Drone Racing - | paradigme-exclu — CRUISE = curriculum self-play (RL), politique apprise de course, pas un des 15 algos |
+| 236 | A Comprehensive Review of Path-Planning Algorithms for Multi-UAV Swarm | non-primaire — revue complete d algorithmes de planification de chemin multi-UAV |
+| 239 | MultiUAV-Plat- An LLM-Oriented Platform, Benchmark and Framework for M | paradigme-exclu — plateforme LLM (MultiUAV-Plat), orchestration par LLM |
+| 240 | Autonomous Navigation at the Nano-Scale- Algorithms, Architectures, an | non-primaire — survol/tutoriel navigation nano-UAV (matériel + architectures), pas une source primaire d algorithme |
+| 246 | Agentic AI Meets Edge Computing in Autonomous UAV Swarms - arXiv | paradigme-exclu — agentic AI + LLM (LangGraph) pour essaim UAV |
+| 249 | Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR | paradigme-exclu — navigation collective par LiDAR + DRL (politique apprise) |
+| 261 | Integrated Sensing, Communication and Control enabled Agile UAV Swarm  | pas-algorithme-canonique — ISCC (sensing/communication/contrôle intégrés), couche réseau |
+| 277 | DTVIRM-Swarm- A Distributed and Tightly Integrated Visual-Inertial ... | deja-couvert — famille VI-odométrie/SLAM déjà sourcée par SCI-5 (srcSlamSurvey) |
+| 290 | Learning-Based Multi-Robot Active SLAM- A Conceptual Framework and Sur | non-primaire — survey/framework conceptuel de SLAM actif multi-robots |
+| 291 | Curriculum Reinforcement Learning for Quadrotor Racing with Random Obs | paradigme-exclu — curriculum RL pour course de quadrirotors (politique apprise) |
+| 293 | Learning Agile Quadrotor Flight in the Real World - arXiv | paradigme-exclu — vol agile appris (RL, apprentissage résiduel de dynamique) |
+| 312 | A Classification of Heterogeneity in Uncrewed Vehicle Swarms and the E | non-primaire — classification/taxonomie de l hétérogénéité des essaims, pas une source primaire |
+| 314 | Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Ai | hors-perimetre — suivi de cible multi-AUV sous-marins (diffusion MARL), hors flotte aérien+surface |
+| 317 | APF-Driven Lightweight UAV Swarm Trajectory Optimization in GNSS-Denie | deja-couvert — famille APF (champ de potentiel) déjà sourcée par srcVAPF (#200) |
+| 328 | Multi-Agent Reinforcement Learning for Multi-UAV Pursuit with Full Pla | paradigme-exclu — MARL pour poursuite multi-UAV (politique apprise) |
+| 337 | Say the Mission, Execute the Swarm- Agent-Enhanced LLM Reasoning in th | paradigme-exclu — exécution de mission par LLM (Web-of-Drones, MCP) |
+| 338 | Secure UAV Swarms in Low-Altitude Wireless Networks- Challenges and So | non-primaire — article défis+solutions sécurité réseau (position paper), pas une source primaire d algorithme |
+| 340 | Cooperative UAV Swarm Communication Networks for Rapid Disaster Assess | pas-algorithme-canonique — réseaux de communication d essaim en GPS-denied (couche réseau) |
+| 351 | Autonomous Cooperative Drone Swarms for Countering Drones via Multi-Ag | paradigme-exclu — MADRL de contre-mesure de drones (politique apprise) |
+| 375 | Dec-MARVEL- Decentralized Multi-Agent Exploration without Communicatio | paradigme-exclu — Dec-MARVEL = exploration MARL décentralisée sans communication |
+| 376 | LLM-Centric Agentic AI for UAV Swarms- Architecture, Enabling Technolo | paradigme-exclu — LLM agentique pour essaim UAV (LAUS) |
+| 437 | The Evolving Landscape of Unmanned Aircraft Systems- A Review of Curre | non-primaire — revue du paysage UAS (défis et scénarios futurs) |
+

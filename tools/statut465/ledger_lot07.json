@@ -1,0 +1,136 @@
+{
+ "lot_label": "LOT 7 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 3 deja rattachees / 22 ecartees",
+ "rattachees": [],
+ "deja": [
+  {
+   "number": 212,
+   "title": "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control - arXiv",
+   "existing_src": "srcHRLMPC",
+   "existing_finding": "SCI-14"
+  },
+  {
+   "number": 315,
+   "title": "Safe Swarm Navigation in Constrained Environments- A Dynamic Tube-Based Distributed MPC Approach - M",
+   "existing_src": "srcDMPCTube",
+   "existing_finding": "SCI-14"
+  },
+  {
+   "number": 356,
+   "title": "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms - arXiv",
+   "existing_src": "srcDiff4D",
+   "existing_finding": "SCI-14"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 217,
+   "title": "Curriculum-Based Iterative Self-Play for Scalable Multi-Drone Racing - arXiv",
+   "reason": "paradigme-exclu — CRUISE = curriculum self-play (RL), politique apprise de course, pas un des 15 algos"
+  },
+  {
+   "number": 236,
+   "title": "A Comprehensive Review of Path-Planning Algorithms for Multi-UAV Swarms - MDPI",
+   "reason": "non-primaire — revue complete d algorithmes de planification de chemin multi-UAV"
+  },
+  {
+   "number": 239,
+   "title": "MultiUAV-Plat- An LLM-Oriented Platform, Benchmark and Framework for Multi-UAV Collaborative Task Pl",
+   "reason": "paradigme-exclu — plateforme LLM (MultiUAV-Plat), orchestration par LLM"
+  },
+  {
+   "number": 240,
+   "title": "Autonomous Navigation at the Nano-Scale- Algorithms, Architectures, and Constraints",
+   "reason": "non-primaire — survol/tutoriel navigation nano-UAV (matériel + architectures), pas une source primaire d algorithme"
+  },
+  {
+   "number": 246,
+   "title": "Agentic AI Meets Edge Computing in Autonomous UAV Swarms - arXiv",
+   "reason": "paradigme-exclu — agentic AI + LLM (LangGraph) pour essaim UAV"
+  },
+  {
+   "number": 249,
+   "title": "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Lear",
+   "reason": "paradigme-exclu — navigation collective par LiDAR + DRL (politique apprise)"
+  },
+  {
+   "number": 261,
+   "title": "Integrated Sensing, Communication and Control enabled Agile UAV Swarm - arXiv",
+   "reason": "pas-algorithme-canonique — ISCC (sensing/communication/contrôle intégrés), couche réseau"
+  },
+  {
+   "number": 277,
+   "title": "DTVIRM-Swarm- A Distributed and Tightly Integrated Visual-Inertial ...",
+   "reason": "deja-couvert — famille VI-odométrie/SLAM déjà sourcée par SCI-5 (srcSlamSurvey)"
+  },
+  {
+   "number": 290,
+   "title": "Learning-Based Multi-Robot Active SLAM- A Conceptual Framework and Survey - MDPI",
+   "reason": "non-primaire — survey/framework conceptuel de SLAM actif multi-robots"
+  },
+  {
+   "number": 291,
+   "title": "Curriculum Reinforcement Learning for Quadrotor Racing with Random Obstacles - arXiv",
+   "reason": "paradigme-exclu — curriculum RL pour course de quadrirotors (politique apprise)"
+  },
+  {
+   "number": 293,
+   "title": "Learning Agile Quadrotor Flight in the Real World - arXiv",
+   "reason": "paradigme-exclu — vol agile appris (RL, apprentissage résiduel de dynamique)"
+  },
+  {
+   "number": 312,
+   "title": "A Classification of Heterogeneity in Uncrewed Vehicle Swarms and the Effects of Its Inclusion on Ove",
+   "reason": "non-primaire — classification/taxonomie de l hétérogénéité des essaims, pas une source primaire"
+  },
+  {
+   "number": 314,
+   "title": "Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Aided Multi-Agent Reinforcement ",
+   "reason": "hors-perimetre — suivi de cible multi-AUV sous-marins (diffusion MARL), hors flotte aérien+surface"
+  },
+  {
+   "number": 317,
+   "title": "APF-Driven Lightweight UAV Swarm Trajectory Optimization in GNSS-Denied Air–Terrestrial Navigation -",
+   "reason": "deja-couvert — famille APF (champ de potentiel) déjà sourcée par srcVAPF (#200)"
+  },
+  {
+   "number": 328,
+   "title": "Multi-Agent Reinforcement Learning for Multi-UAV Pursuit with Full Planar Motion and a Limited Detec",
+   "reason": "paradigme-exclu — MARL pour poursuite multi-UAV (politique apprise)"
+  },
+  {
+   "number": 337,
+   "title": "Say the Mission, Execute the Swarm- Agent-Enhanced LLM Reasoning in the Web-of-DronesThis paper has ",
+   "reason": "paradigme-exclu — exécution de mission par LLM (Web-of-Drones, MCP)"
+  },
+  {
+   "number": 338,
+   "title": "Secure UAV Swarms in Low-Altitude Wireless Networks- Challenges and Solutions - arXiv",
+   "reason": "non-primaire — article défis+solutions sécurité réseau (position paper), pas une source primaire d algorithme"
+  },
+  {
+   "number": 340,
+   "title": "Cooperative UAV Swarm Communication Networks for Rapid Disaster Assessment in GPS-Denied Environment",
+   "reason": "pas-algorithme-canonique — réseaux de communication d essaim en GPS-denied (couche réseau)"
+  },
+  {
+   "number": 351,
+   "title": "Autonomous Cooperative Drone Swarms for Countering Drones via Multi-Agent Deep Reinforcement Learnin",
+   "reason": "paradigme-exclu — MADRL de contre-mesure de drones (politique apprise)"
+  },
+  {
+   "number": 375,
+   "title": "Dec-MARVEL- Decentralized Multi-Agent Exploration without Communication under Budget Constraints - a",
+   "reason": "paradigme-exclu — Dec-MARVEL = exploration MARL décentralisée sans communication"
+  },
+  {
+   "number": 376,
+   "title": "LLM-Centric Agentic AI for UAV Swarms- Architecture, Enabling Technologies, and Open Problems - arXi",
+   "reason": "paradigme-exclu — LLM agentique pour essaim UAV (LAUS)"
+  },
+  {
+   "number": 437,
+   "title": "The Evolving Landscape of Unmanned Aircraft Systems- A Review of Current Challenges and Future Scena",
+   "reason": "non-primaire — revue du paysage UAS (défis et scénarios futurs)"
+  }
+ ]
+}
