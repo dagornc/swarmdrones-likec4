@@ -1,0 +1,132 @@
+{
+ "lot_label": "LOT 17 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 0 deja rattachees / 25 ecartees",
+ "rattachees": [],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 1383,
+   "title": "Aligned Radiometric RGB-Thermal Fusion for UAV Facade Anomaly Screening - arXiv",
+   "reason": "pas-algorithme-canonique — fusion RGB-thermique pour inspection de façade (perception)"
+  },
+  {
+   "number": 1411,
+   "title": "YOLO12-MambaScan- An Efficient Object Detector with High-Frequency Enhancement and State-Space Modeling - arXiv",
+   "reason": "pas-algorithme-canonique — détection YOLO12-MambaScan (modèle de détection)"
+  },
+  {
+   "number": 1412,
+   "title": "UniqueShip- Mitigating Data Leakage in Acoustic Ship Classification Benchmark Datasets - arXiv",
+   "reason": "hors-perimetre — dataset de classification acoustique de navires (UniqueShip)"
+  },
+  {
+   "number": 1422,
+   "title": "Towards a Connected Heterogeneous All-Medium Integrated Network (CHAIN) for Converged Connectivity Across Land, Sea, Air, and Space - arXiv",
+   "reason": "pas-algorithme-canonique — réseau intégré toutes-milieux (CHAIN, communications)"
+  },
+  {
+   "number": 1442,
+   "title": "Collaborative Computation and Migration in Multi-UAV Networks with Semantic Communication - arXiv",
+   "reason": "pas-algorithme-canonique — calcul collaboratif + migration en MEC multi-UAV (réseau)"
+  },
+  {
+   "number": 1487,
+   "title": "Racing in Volume with Flow Ensembles - arXiv",
+   "reason": "pas-algorithme-canonique — reconstruction 4D en streaming (FastFlowGS)"
+  },
+  {
+   "number": 1547,
+   "title": "Open-source emulation-based test environment to settle O-RAN-compliant trials - arXiv",
+   "reason": "pas-algorithme-canonique — environnement de test O-RAN par émulation (réseau)"
+  },
+  {
+   "number": 1548,
+   "title": "The Operable Pareto Front- Distilling Offline Search into Run-Time Control for Multi-Objective UAV Edge-Computing Scheduling - arXiv",
+   "reason": "paradigme-exclu — Decision Transformer pour ordonnancement MEC (politique apprise)"
+  },
+  {
+   "number": 1551,
+   "title": "GeoCueFormer- Geometry-Guided Wavelet Representation and Prediction-Cued Dual-Stage Decoder for Underwater Semantic Segmentation - arXiv",
+   "reason": "hors-perimetre — segmentation sémantique sous-marine (GeoCueFormer)"
+  },
+  {
+   "number": 1560,
+   "title": "Prior Evolution and Task Alignment for Aerial Grasping - arXiv",
+   "reason": "pas-algorithme-canonique — saisie aérienne par optimisation de trajectoire (manipulation)"
+  },
+  {
+   "number": 1573,
+   "title": "Indicators of resilience for autonomous control systems - arXiv",
+   "reason": "pas-algorithme-canonique — indicateurs de résilience génériques (théorie du contrôle)"
+  },
+  {
+   "number": 1576,
+   "title": "ULOHA- An Underwater Bimanual Robot System for Robot Learning - arXiv",
+   "reason": "hors-perimetre — plateforme bimanuelle sous-marine (ULOHA)"
+  },
+  {
+   "number": 1592,
+   "title": "Real-Time Bounded Catenary Solver for UAV Tether Modeling - arXiv",
+   "reason": "pas-algorithme-canonique — solveur de caténaire pour câble d UAV (mécanique)"
+  },
+  {
+   "number": 1633,
+   "title": "Proxifield- Decentralized Multi-Agent Communication through Semantic Proximity - arXiv",
+   "reason": "paradigme-exclu — protocole multi-agents par proximité sémantique LLM (Proxifield)"
+  },
+  {
+   "number": 1637,
+   "title": "Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low-Altitude Wireless Networks - arXiv",
+   "reason": "paradigme-exclu — réseau basse altitude par LLM + MARL hiérarchique"
+  },
+  {
+   "number": 1667,
+   "title": "Foldable Antenna Array in Space-Air-Ground Integrated Networks- Architectures and Applications - arXiv",
+   "reason": "pas-algorithme-canonique — antennes repliables SAGIN (matériel réseau)"
+  },
+  {
+   "number": 1676,
+   "title": "Integrated Guidance and Control of a Mother-Child UAV-UGV System for Cooperative Missions - arXiv",
+   "reason": "pas-algorithme-canonique — récupération aérienne mère-enfant (appontage)"
+  },
+  {
+   "number": 1683,
+   "title": "A Simulation Platform for AUV Fault Recovery- Exploring LLM-Based Diagnostic Strategies - arXiv",
+   "reason": "hors-perimetre — récupération de fautes d AUV par LLM (sous-marin)"
+  },
+  {
+   "number": 1693,
+   "title": "HOPHY- A Hierarchical Hypergraph Representation for Off-Road Path and Mission Planning - arXiv",
+   "reason": "hors-perimetre — planification de chemin hors-route UGV (terrestre)"
+  },
+  {
+   "number": 1715,
+   "title": "Dynamic Modeling and LQR Control of a Single Coaxial Drone with 2DOF Thrust Vectoring Mechanism - arXiv",
+   "reason": "pas-algorithme-canonique — modélisation et LQR d un drone coaxial MONO"
+  },
+  {
+   "number": 1719,
+   "title": "Same World, Different Knowledge- When Isolated Audits Misjudge World-Model Repairs - arXiv",
+   "reason": "pas-algorithme-canonique — audit de world model (méthodologie)"
+  },
+  {
+   "number": 1740,
+   "title": "MarineCraft- Enabling Rapid Prototyping of Underwater Robots via Modular Construction - arXiv",
+   "reason": "hors-perimetre — kit modulaire de robots sous-marins (MarineCraft, matériel)"
+  },
+  {
+   "number": 1751,
+   "title": "Tilt as a Certified Resource- Preserving Motor Wrench-Rate Authority on Articulated Multirotors - arXiv",
+   "reason": "pas-algorithme-canonique — allocation d effort sur multirotors articulés (commande bas niveau)"
+  },
+  {
+   "number": 1754,
+   "title": "RAYA- Learning Where and When to Intervene for Robot Recovery - arXiv",
+   "reason": "paradigme-exclu — récupération par marge de récupérabilité apprise (RAYA)"
+  },
+  {
+   "number": 1784,
+   "title": "WITHDRAWN- A physics-informed neural network surrogate for multi-band reflection-loss prediction of carbon-fiber-reinforced polymer - Ti-6Al-4V ELI ra - DOI",
+   "reason": "non-verifiable — preprint RETRACTÉ (WITHDRAWN), non évaluable"
+  }
+ ]
+}

@@ -719,3 +719,37 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 54
+
+---
+
+## LOT 17 (2026-09-29)
+
+### ECARTEE (25)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1383 | Aligned Radiometric RGB-Thermal Fusion for UAV Facade Anomaly Screenin | pas-algorithme-canonique — fusion RGB-thermique pour inspection de façade (perception) |
+| 1411 | YOLO12-MambaScan- An Efficient Object Detector with High-Frequency Enh | pas-algorithme-canonique — détection YOLO12-MambaScan (modèle de détection) |
+| 1412 | UniqueShip- Mitigating Data Leakage in Acoustic Ship Classification Be | hors-perimetre — dataset de classification acoustique de navires (UniqueShip) |
+| 1422 | Towards a Connected Heterogeneous All-Medium Integrated Network (CHAIN | pas-algorithme-canonique — réseau intégré toutes-milieux (CHAIN, communications) |
+| 1442 | Collaborative Computation and Migration in Multi-UAV Networks with Sem | pas-algorithme-canonique — calcul collaboratif + migration en MEC multi-UAV (réseau) |
+| 1487 | Racing in Volume with Flow Ensembles - arXiv | pas-algorithme-canonique — reconstruction 4D en streaming (FastFlowGS) |
+| 1547 | Open-source emulation-based test environment to settle O-RAN-compliant | pas-algorithme-canonique — environnement de test O-RAN par émulation (réseau) |
+| 1548 | The Operable Pareto Front- Distilling Offline Search into Run-Time Con | paradigme-exclu — Decision Transformer pour ordonnancement MEC (politique apprise) |
+| 1551 | GeoCueFormer- Geometry-Guided Wavelet Representation and Prediction-Cu | hors-perimetre — segmentation sémantique sous-marine (GeoCueFormer) |
+| 1560 | Prior Evolution and Task Alignment for Aerial Grasping - arXiv | pas-algorithme-canonique — saisie aérienne par optimisation de trajectoire (manipulation) |
+| 1573 | Indicators of resilience for autonomous control systems - arXiv | pas-algorithme-canonique — indicateurs de résilience génériques (théorie du contrôle) |
+| 1576 | ULOHA- An Underwater Bimanual Robot System for Robot Learning - arXiv | hors-perimetre — plateforme bimanuelle sous-marine (ULOHA) |
+| 1592 | Real-Time Bounded Catenary Solver for UAV Tether Modeling - arXiv | pas-algorithme-canonique — solveur de caténaire pour câble d UAV (mécanique) |
+| 1633 | Proxifield- Decentralized Multi-Agent Communication through Semantic P | paradigme-exclu — protocole multi-agents par proximité sémantique LLM (Proxifield) |
+| 1637 | Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low | paradigme-exclu — réseau basse altitude par LLM + MARL hiérarchique |
+| 1667 | Foldable Antenna Array in Space-Air-Ground Integrated Networks- Archit | pas-algorithme-canonique — antennes repliables SAGIN (matériel réseau) |
+| 1676 | Integrated Guidance and Control of a Mother-Child UAV-UGV System for C | pas-algorithme-canonique — récupération aérienne mère-enfant (appontage) |
+| 1683 | A Simulation Platform for AUV Fault Recovery- Exploring LLM-Based Diag | hors-perimetre — récupération de fautes d AUV par LLM (sous-marin) |
+| 1693 | HOPHY- A Hierarchical Hypergraph Representation for Off-Road Path and  | hors-perimetre — planification de chemin hors-route UGV (terrestre) |
+| 1715 | Dynamic Modeling and LQR Control of a Single Coaxial Drone with 2DOF T | pas-algorithme-canonique — modélisation et LQR d un drone coaxial MONO |
+| 1719 | Same World, Different Knowledge- When Isolated Audits Misjudge World-M | pas-algorithme-canonique — audit de world model (méthodologie) |
+| 1740 | MarineCraft- Enabling Rapid Prototyping of Underwater Robots via Modul | hors-perimetre — kit modulaire de robots sous-marins (MarineCraft, matériel) |
+| 1751 | Tilt as a Certified Resource- Preserving Motor Wrench-Rate Authority o | pas-algorithme-canonique — allocation d effort sur multirotors articulés (commande bas niveau) |
+| 1754 | RAYA- Learning Where and When to Intervene for Robot Recovery - arXiv | paradigme-exclu — récupération par marge de récupérabilité apprise (RAYA) |
+| 1784 | WITHDRAWN- A physics-informed neural network surrogate for multi-band  | non-verifiable — preprint RETRACTÉ (WITHDRAWN), non évaluable |
+
