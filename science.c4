@@ -101,9 +101,9 @@ model {
   }
   srcCBFMultiFixed = specDoc 'CBF-Based Collision Avoidance for Multi-Fixed-Wing UAV Pursuit (2024)' {
     #science
-    link https://doi.org/10.3390/drones8080415 "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursuit"
-    description 'CBF appliquees a l evitement de collision multi-UAV a voilure fixe. Complementaire de srcCAHCBF.'
-    metadata { doi '10.3390/drones8080415'; annee '2024'; nature 'article de revue'; corpus '#138'; statut 'A CONSULTER' }
+    link https://doi.org/10.3390/drones8080415 "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursuit-Evasion Environment"
+    description 'CBF d ordre superieur (HOCBF) pour l evitement de collision multi-UAV a voilure fixe en poursuite-evasion n-sur-n / n-sur-1 (Lv, Peng, Ma — NUDT, Drones 8(8):415). Contraintes HOCBF multiples fusionnees en une contrainte lineaire, resolution QP en forme fermee (guidage nominal + terme d evitement). SIMULATION 2D uniquement, aucun materiel reel. Complementaire de srcCAHCBF (multirotors).'
+    metadata { doi '10.3390/drones8080415'; annee '2024'; nature 'article de revue'; corpus '#138'; statut 'CONSULTEE (Crossref + abstract, 2026-09-29)' }
   }
   srcHeteroRetrieval = specDoc 'Chen, Irfan, Yu et al. (2025) — Heterogeneous Multirobot System for Object Retrieval in GNSS-Denied Maritime, J. Field Robotics' {
     #science
@@ -114,14 +114,14 @@ model {
   srcAPFWall = specDoc 'Hybrid Artificial Potential Field with Wall-Follower (2024)' {
     #science
     link https://arxiv.org/abs/2409.10332 "Escaping Local Minima: Hybrid Artificial Potential Field with Wall-Follower for Decentralized Multi-Robot Navigation"
-    description 'Traitement explicite des minima locaux du champ de potentiel. Repond a une faiblesse connue de l APF classique.'
-    metadata { arxiv '2409.10332'; annee '2024'; nature 'preprint'; corpus '#141'; statut 'A CONSULTER' }
+    description 'APF hybride + comportement de suivi de mur (wall-follower) pour echapper aux minima locaux en navigation decentralisee multi-robots, SANS carte et SANS communication (capteurs et etat locaux seulement). Deux commutations APF<->WF : a base de regles, ou encodeur entraine sur demonstrations d experts. Obstacles non convexes ET dynamiques (dont les autres robots). Taux de succes nettement superieur a l etat de l art. Multi-robots generique 2D, transposition UAV a qualifier.'
+    metadata { arxiv '2409.10332'; annee '2024'; nature 'preprint'; corpus '#141'; statut 'CONSULTEE (abstract arXiv, 2026-09-29)' }
   }
   srcFormationRL = specDoc 'Multi-UAV Formation Control with Obstacle Avoidance via RL (2024)' {
     #science
     link https://arxiv.org/abs/2410.18495 "Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning"
-    description 'Controle de formation par apprentissage par renforcement, obstacles statiques et dynamiques.'
-    metadata { arxiv '2410.18495'; annee '2024'; nature 'preprint'; corpus '#147'; statut 'A CONSULTER' }
+    description 'Controle de formation multi-UAV avec evitement d obstacles statiques et dynamiques par RL en deux etapes : (1) recherche de fonction de recompense (vol dirige, evitement, maintien de formation, deploiement zero-shot) ; (2) curriculum learning + encodeur d observation par attention. Valide en SIMULATION ET en environnement REEL ; surpasse les baselines planification et RL (taux sans collision, maintien de formation). arXiv v2 (2025-03-01).'
+    metadata { arxiv '2410.18495'; annee '2024'; nature 'preprint'; corpus '#147'; statut 'CONSULTEE (abstract arXiv, 2026-09-29)' }
   }
   srcExplainableMARL = specDoc 'Organizationally-Oriented Explainability and Control in MARL (AAMAS 2025)' {
     #science
@@ -493,6 +493,88 @@ model {
     }
   }
 
+  sciCbfFixedWing = finding 'SCI-16 — CBF d ordre superieur (HOCBF) pour evitement en poursuite-evasion voilure fixe' {
+    #science
+    link https://doi.org/10.3390/drones8080415 "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursuit-Evasion Environment"
+    description '''
+      srcCBFMultiFixed (Lv, Peng, Ma — NUDT, Drones 8(8):415) apporte une
+      variante precise de l evitement par CBF, complementaire de srcCAHCBF :
+
+        - HOCBF (high-order CBF) sur modele 2D multi-UAV voilure fixe en
+          poursuite-evasion n-sur-n et n-sur-1 ;
+        - contraintes HOCBF multiples fusionnees en UNE contrainte lineaire,
+          resolution par QP avec solution en forme fermee (guidage nominal
+          + terme d evitement) ;
+        - maintien au-dessus de la distance minimale de securite tout en
+          atteignant la cible.
+
+      VERDICT : SUPPORTED pour la MECANIQUE HOCBF/QP sur voilure fixe ;
+      CONDITIONAL pour l echelle SWARM-3D — SIMULATION 2D uniquement,
+      aucun materiel reel, nombre de poursuivants non reporte dans l abstract.
+    '''
+    metadata {
+      verdict 'SUPPORTED (HOCBF/QP voilure fixe) / CONDITIONAL (simulation 2D, N non reporte)'
+      niveau_preuve 'MEDIUM'
+      source 'srcCBFMultiFixed'
+      correction_modele 'algCollisionAvoidance : variante CBF voilure fixe sourcee (complement de srcCAHCBF multirotors)'
+    }
+  }
+
+  sciApfWallFollower = finding 'SCI-17 — APF + suivi de mur : echapper aux minima locaux sans carte ni lien' {
+    #science
+    link https://arxiv.org/abs/2409.10332 "Escaping Local Minima: Hybrid Artificial Potential Field with Wall-Follower for Decentralized Multi-Robot Navigation"
+    description '''
+      srcAPFWall traite la faiblesse connue de l APF classique (minima
+      locaux) pour la navigation decentralisee multi-robots :
+
+        - comportement de suivi de mur (wall-follower) insere dans l APF ;
+        - deux commutations APF <-> WF : a base de regles, ou encodeur
+          entraine sur demonstrations d experts ;
+        - fonctionne sans carte et sans communication, capteurs et etat
+          locaux seulement ; obstacles non convexes ET dynamiques (dont
+          autres robots) ;
+        - taux de succes nettement superieur a l etat de l art.
+
+      VERDICT : SUPPORTED pour la MECANIQUE (variante « champs de
+      potentiel » de algCollisionAvoidance, reactive et sans lien) ;
+      CONDITIONAL pour la transposition UAV — source multi-robots
+      generique 2D (suivi de mur oriente sol), pas de voilure fixe.
+    '''
+    metadata {
+      verdict 'SUPPORTED (mecanique APF+WF) / CONDITIONAL (transposition UAV 2D->3D)'
+      niveau_preuve 'MEDIUM'
+      source 'srcAPFWall'
+      correction_modele 'algCollisionAvoidance : variante champs de potentiel documentee contre les minima locaux'
+    }
+  }
+
+  sciFormationRL = finding 'SCI-18 — Formation multi-UAV par RL : evitement d obstacles, valide sim + reel' {
+    #science
+    link https://arxiv.org/abs/2410.18495 "Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning"
+    description '''
+      srcFormationRL (Xie et al., arXiv:2410.18495, v2 2025-03-01) apporte
+      une methode de formation validee en SIMULATION ET en REEL :
+
+        - pipeline RL deux etapes : (1) recherche de fonction de recompense
+          equilibrant vol dirige, evitement d obstacles, maintien de
+          formation et deploiement zero-shot ; (2) curriculum learning
+          pour accelerer l entrainement sur scenarios complexes ;
+        - encodeur d observation par attention pour le maintien de formation
+          et l adaptation a la densite d obstacles ;
+        - surpasse les baselines planification et RL (taux sans collision,
+          maintien de formation) sur obstacles statiques, dynamiques et mixtes.
+
+      VERDICT : SUPPORTED (sim + reel) ; CONDITIONAL pour l echelle SWARM-3D
+      (nombre d UAV et voilure fixe non reportes dans l abstract).
+    '''
+    metadata {
+      verdict 'SUPPORTED (sim + reel) / CONDITIONAL (echelle N=30, voilure fixe)'
+      niveau_preuve 'HIGH (validation reelle) / MEDIUM (echelle)'
+      source 'srcFormationRL'
+      correction_modele 'algFormationControl : methode RL formation+evitement sourcee (complement de SCI-11 heterogene UAV-USV)'
+    }
+  }
+
   // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
@@ -593,4 +675,12 @@ model {
   sciHeteroRetrieval -[uses]-> srcHeteroRetrieval 'source primaire lue (JFR 2025)'
   sciHeteroRetrieval -[evidences]-> algNavigationGNSSDegrade 'scenario heterogene GNSS-denied'
   sciHeteroRetrieval -[evidences]-> algCooperativeLocalization 'retrieval cooperatif multi-robots'
+
+  // --- Rattachements COLLISION & FORMATION (2026-09-29, carte t_5514113a) ---
+  sciCbfFixedWing -[uses]-> srcCBFMultiFixed 'HOCBF voilure fixe'
+  sciApfWallFollower -[uses]-> srcAPFWall 'APF + suivi de mur'
+  sciFormationRL -[uses]-> srcFormationRL 'formation RL + evitement'
+  sciCbfFixedWing -[evidences]-> algCollisionAvoidance 'variante CBF voilure fixe (sim 2D)'
+  sciApfWallFollower -[evidences]-> algCollisionAvoidance 'variante champs de potentiel anti-minima'
+  sciFormationRL -[evidences]-> algFormationControl 'formation RL + evitement (sim + reel)'
 }
