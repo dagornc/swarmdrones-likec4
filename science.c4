@@ -637,6 +637,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT14 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 14 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcRHCRMAPF = specDoc 'Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding (2021)' {
+    #science
+    link https://arxiv.org/abs/2005.07371 "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding"
+    description '''
+      Variante LIFELONG du Multi-Agent Path Finding (MAPF) : les agents sont engages en continu sur de nouveaux objectifs. Cadre RHCR (Rolling-Horizon Collision Resolution) qui decompose le probleme en instances MAPF fenetrees, resolvant les collisions uniquement dans un horizon borne et ignorant celles au-dela, pour produire des plans souples adaptes a l arrivee continue d objectifs. Evalue jusqu a 1 000 agents (38.9% des cases vides).
+    '''
+    metadata { arxiv '2005.07371'; annee '2021'; nature 'article de revue (arXiv 2005.07371)'; corpus '66'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1425,6 +1442,19 @@ sciPathDeviationCtrl = finding 'SCI-51 — Controle de deviation par A* ameliore
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT14 (2026-09-29)
+  // ===========================================================================
+
+sciRHCRMAPF = finding 'SCI-52 — Resolution de collisions a horizon roulant pour MAPF lifelong' {
+    #science
+    link https://arxiv.org/abs/2005.07371 "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding"
+    description '''
+      srcRHCRMAPF formalise le couplage planification multi-agents (algPathPlanning) et resolution de collisions (algCollisionAvoidance) sous ARRIVEE CONTINUE de taches — le regime lifelong du modele. Complement de SCI-14 (MPC) : ici la fenetre glissante qui borne la resolution de collisions a l horizon utile, preuve d echelle jusqu a 1 000 agents (simulation). VERDICT : SUPPORTED pour le mecanisme (horizon roulant + resolution de collisions) ; CONDITIONAL — MAPF au sol (entrepots), transposition aerienne a valider.
+    '''
+    metadata { verdict 'SUPPORTED (resolution de collisions a horizon roulant) / CONDITIONAL (MAPF terrestre, transposition aerienne)'; niveau_preuve 'MEDIUM'; source 'srcRHCRMAPF'; correction_modele 'algPathPlanning + algCollisionAvoidance : resolution de collisions a horizon roulant sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1648,4 +1678,9 @@ sciPathDeviationCtrl = finding 'SCI-51 — Controle de deviation par A* ameliore
 // --- Relations du lot ---
   sciPathDeviationCtrl -[evidences]-> algPathPlanning 'A* ameliore sous contraintes cinematiques'
   sciPathDeviationCtrl -[uses]-> srcPathDeviationCtrl 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT14 (2026-09-29) ---
+// --- Relations du lot ---
+  sciRHCRMAPF -[evidences]-> algPathPlanning 'planification multi-agents a objectifs continus'
+  sciRHCRMAPF -[evidences]-> algCollisionAvoidance 'resolution de collisions bornee a l horizon'
+  sciRHCRMAPF -[uses]-> srcRHCRMAPF 'source primaire'
 }

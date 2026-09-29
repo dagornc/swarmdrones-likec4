@@ -1,0 +1,165 @@
+{
+ "lot_label": "LOT 14 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees",
+ "rattachees": [
+  {
+   "src": "srcRHCRMAPF",
+   "title": "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding (2021)",
+   "link_title": "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding",
+   "description": "Variante LIFELONG du Multi-Agent Path Finding (MAPF) : les agents sont engages en continu sur de nouveaux objectifs. Cadre RHCR (Rolling-Horizon Collision Resolution) qui decompose le probleme en instances MAPF fenetrees, resolvant les collisions uniquement dans un horizon borne et ignorant celles au-dela, pour produire des plans souples adaptes a l arrivee continue d objectifs. Evalue jusqu a 1 000 agents (38.9% des cases vides).",
+   "metadata": {
+    "arxiv": "2005.07371",
+    "annee": "2021",
+    "nature": "article de revue (arXiv 2005.07371)",
+    "corpus": "66",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciRHCRMAPF",
+    "title": "SCI-52 — Resolution de collisions a horizon roulant pour MAPF lifelong",
+    "link_title": "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding",
+    "description": "srcRHCRMAPF formalise le couplage planification multi-agents (algPathPlanning) et resolution de collisions (algCollisionAvoidance) sous ARRIVEE CONTINUE de taches — le regime lifelong du modele. Complement de SCI-14 (MPC) : ici la fenetre glissante qui borne la resolution de collisions a l horizon utile, preuve d echelle jusqu a 1 000 agents (simulation). VERDICT : SUPPORTED pour le mecanisme (horizon roulant + resolution de collisions) ; CONDITIONAL — MAPF au sol (entrepots), transposition aerienne a valider.",
+    "metadata": {
+     "verdict": "SUPPORTED (resolution de collisions a horizon roulant) / CONDITIONAL (MAPF terrestre, transposition aerienne)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcRHCRMAPF",
+     "correction_modele": "algPathPlanning + algCollisionAvoidance : resolution de collisions a horizon roulant sourcee"
+    },
+    "link_arxiv": "2005.07371"
+   },
+   "algs": [
+    [
+     "algPathPlanning",
+     "planification multi-agents a objectifs continus"
+    ],
+    [
+     "algCollisionAvoidance",
+     "resolution de collisions bornee a l horizon"
+    ]
+   ],
+   "link_arxiv": "2005.07371"
+  }
+ ],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 955,
+   "title": "Distributed self-organizing control for cross-domain unmanned swarm multi-target tracking under constrained communication - DOI",
+   "reason": "non-verifiable — abstract non vérifié (Elsevier AST), contenu primaire non lisible"
+  },
+  {
+   "number": 960,
+   "title": "Toward resilient multi-modal drone detection in cluttered environments- A systems survey of EO-IR, radar, acoustic, LiDAR and RF modalities - DOI",
+   "reason": "non-primaire — survey de détection de drones multi-modalités"
+  },
+  {
+   "number": 992,
+   "title": "Adaptive quadcopter model predictive control using remote monocular vision - DOI",
+   "reason": "pas-algorithme-canonique — MPC adaptatif de quadrirotor MONO par vision monoculaire distante"
+  },
+  {
+   "number": 1000,
+   "title": "Task-Guided Multi-UAV Cooperative Multi-Target Tracking with Gaussian Process-Based Value Correction - DOI",
+   "reason": "paradigme-exclu — HGP-MAPPO = MAPPO multi-cibles (politique apprise)"
+  },
+  {
+   "number": 1019,
+   "title": "Detection of flowering in pineapple (Ananas comosus) using deep learning and drone technology - DOI",
+   "reason": "hors-perimetre — détection de floraison d ananas (agriculture)"
+  },
+  {
+   "number": 1020,
+   "title": "Future Integrated Network of Sensing, Computing, and Communication- Low-Altitude Economy under High-Speed Trajectory Tracking Dominated by General Art - DOI",
+   "reason": "non-primaire — revue LLM + 6G ISCC pour économie basse altitude"
+  },
+  {
+   "number": 1516,
+   "title": "Search-Based Metamorphic Testing of Vision-Language Models in Autonomous Underwater Robotic Software - arXiv",
+   "reason": "hors-perimetre — test métamorphique de VLM pour robots sous-marins"
+  },
+  {
+   "number": 1783,
+   "title": "MSEV-DETR- Aerial UAV small object detection model based on multi-scale edge enhancement and variance modulation - DOI",
+   "reason": "pas-algorithme-canonique — détection petits objets MSEV-DETR"
+  },
+  {
+   "number": 2181,
+   "title": "Integrated Airframe Digital Twin Framework for Fatigue Tracking of Unmanned Aerial Vehicles - DOI",
+   "reason": "pas-algorithme-canonique — jumeau numérique de fatigue structurelle d aéronef (application)"
+  },
+  {
+   "number": 2187,
+   "title": "Low-Cost UAV-Based Wildfire Smoke Detection - DOI",
+   "reason": "pas-algorithme-canonique — détection de fumée de feu de forêt (application)"
+  },
+  {
+   "number": 2197,
+   "title": "Tracking 3D forest density dynamics in a mixed temperate forest using occlusion-aware voxel transmittance and consistent multi-temporal UAV-LiDAR - DOI",
+   "reason": "hors-perimetre — dynamique de densité forestière par UAV-LiDAR (foresterie)"
+  },
+  {
+   "number": 2277,
+   "title": "PCR-Validated Comparative Deep Learning Analysis of CNN and YOLO Models for UAV-Based multi-spectral Detection of Sugarcane White Leaf Disease (WLD) - DOI",
+   "reason": "hors-perimetre — détection de maladie de canne à sucre (agriculture)"
+  },
+  {
+   "number": 2298,
+   "title": "Deployment-oriented benchmark for automated UAV-based facade defect detection - DOI",
+   "reason": "hors-perimetre — benchmark de détection de défauts de façade (inspection)"
+  },
+  {
+   "number": 59,
+   "title": "Online Trajectory Optimization Using Inexact Gradient Feedback for Time-Varying Environments - arXiv",
+   "reason": "non-verifiable — abstract non extrait (arXiv 2001.00685), contenu primaire non lisible"
+  },
+  {
+   "number": 93,
+   "title": "Partially Observable Mean Field Multi-Agent Reinforcement Learning Based on Graph–Attention - arXiv",
+   "reason": "paradigme-exclu — MARL champ moyen + graph-attention (politique apprise + GNN)"
+  },
+  {
+   "number": 96,
+   "title": "QuadSwarm- A Modular Multi-Quadrotor Simulator for Deep Reinforcement Learning with Direct Thrust Co",
+   "reason": "pas-algorithme-canonique — simulateur QuadSwarm pour RL (outillage)"
+  },
+  {
+   "number": 174,
+   "title": "Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Under High-Speed Condition - MDP",
+   "reason": "hors-perimetre — modélisation de câble USV-UUV (mécanique marine)"
+  },
+  {
+   "number": 235,
+   "title": "Scalable Pursuit–Evasion Game for Multi-Fixed-Wing UAV Based on Dynamic Target Assignment and Hierar",
+   "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible"
+  },
+  {
+   "number": 313,
+   "title": "Enhancing Drone Light Shows Performances- Optimal Allocation and Trajectories for Swarm Drone Format",
+   "reason": "non-verifiable — abstract = sommaire HTML, contenu primaire non lisible"
+  },
+  {
+   "number": 316,
+   "title": "Research on Integrated Decision-Control Cooperative Target Assignment for Cross-Domain Unmanned Syst",
+   "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible"
+  },
+  {
+   "number": 333,
+   "title": "Measurement-Informed Latency Limits for Real-Time UAV Swarm ...",
+   "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible"
+  },
+  {
+   "number": 353,
+   "title": "Hierarchical Reinforcement Learning for Large-Scale Heterogeneous UAV Mission Planning via MCTS and ",
+   "reason": "paradigme-exclu — RL hiérarchique + MCTS pour planification de mission (politique apprise)"
+  },
+  {
+   "number": 358,
+   "title": "[2606.21206] Local Conformity-Based Evolutionary Game Modeling of UAV Swarm Under Byzantine Attack -",
+   "reason": "pas-algorithme-canonique — modélisation par jeu évolutionnaire sous attaque byzantine (théorie des jeux)"
+  },
+  {
+   "number": 364,
+   "title": "A Review of Reinforcement Learning for Multirotor UAVs from a Hierarchical Control Perspective- Biom",
+   "reason": "non-primaire — revue RL pour multirotors (perspective contrôle hiérarchique)"
+  }
+ ]
+}

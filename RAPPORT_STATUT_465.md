@@ -593,3 +593,45 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 51
+
+---
+
+## LOT 14 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 66 | Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Fin | algPathPlanning + algCollisionAvoidance | srcRHCRMAPF | SCI-52 |
+
+### ECARTEE (24)
+| # | Titre | Raison |
+|---|-------|--------|
+| 955 | Distributed self-organizing control for cross-domain unmanned swarm mu | non-verifiable — abstract non vérifié (Elsevier AST), contenu primaire non lisible |
+| 960 | Toward resilient multi-modal drone detection in cluttered environments | non-primaire — survey de détection de drones multi-modalités |
+| 992 | Adaptive quadcopter model predictive control using remote monocular vi | pas-algorithme-canonique — MPC adaptatif de quadrirotor MONO par vision monoculaire distante |
+| 1000 | Task-Guided Multi-UAV Cooperative Multi-Target Tracking with Gaussian  | paradigme-exclu — HGP-MAPPO = MAPPO multi-cibles (politique apprise) |
+| 1019 | Detection of flowering in pineapple (Ananas comosus) using deep learni | hors-perimetre — détection de floraison d ananas (agriculture) |
+| 1020 | Future Integrated Network of Sensing, Computing, and Communication- Lo | non-primaire — revue LLM + 6G ISCC pour économie basse altitude |
+| 1516 | Search-Based Metamorphic Testing of Vision-Language Models in Autonomo | hors-perimetre — test métamorphique de VLM pour robots sous-marins |
+| 1783 | MSEV-DETR- Aerial UAV small object detection model based on multi-scal | pas-algorithme-canonique — détection petits objets MSEV-DETR |
+| 2181 | Integrated Airframe Digital Twin Framework for Fatigue Tracking of Unm | pas-algorithme-canonique — jumeau numérique de fatigue structurelle d aéronef (application) |
+| 2187 | Low-Cost UAV-Based Wildfire Smoke Detection - DOI | pas-algorithme-canonique — détection de fumée de feu de forêt (application) |
+| 2197 | Tracking 3D forest density dynamics in a mixed temperate forest using  | hors-perimetre — dynamique de densité forestière par UAV-LiDAR (foresterie) |
+| 2277 | PCR-Validated Comparative Deep Learning Analysis of CNN and YOLO Model | hors-perimetre — détection de maladie de canne à sucre (agriculture) |
+| 2298 | Deployment-oriented benchmark for automated UAV-based facade defect de | hors-perimetre — benchmark de détection de défauts de façade (inspection) |
+| 59 | Online Trajectory Optimization Using Inexact Gradient Feedback for Tim | non-verifiable — abstract non extrait (arXiv 2001.00685), contenu primaire non lisible |
+| 93 | Partially Observable Mean Field Multi-Agent Reinforcement Learning Bas | paradigme-exclu — MARL champ moyen + graph-attention (politique apprise + GNN) |
+| 96 | QuadSwarm- A Modular Multi-Quadrotor Simulator for Deep Reinforcement  | pas-algorithme-canonique — simulateur QuadSwarm pour RL (outillage) |
+| 174 | Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Un | hors-perimetre — modélisation de câble USV-UUV (mécanique marine) |
+| 235 | Scalable Pursuit–Evasion Game for Multi-Fixed-Wing UAV Based on Dynami | non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible |
+| 313 | Enhancing Drone Light Shows Performances- Optimal Allocation and Traje | non-verifiable — abstract = sommaire HTML, contenu primaire non lisible |
+| 316 | Research on Integrated Decision-Control Cooperative Target Assignment  | non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible |
+| 333 | Measurement-Informed Latency Limits for Real-Time UAV Swarm ... | non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible |
+| 353 | Hierarchical Reinforcement Learning for Large-Scale Heterogeneous UAV  | paradigme-exclu — RL hiérarchique + MCTS pour planification de mission (politique apprise) |
+| 358 | [2606.21206] Local Conformity-Based Evolutionary Game Modeling of UAV  | pas-algorithme-canonique — modélisation par jeu évolutionnaire sous attaque byzantine (théorie des jeux) |
+| 364 | A Review of Reinforcement Learning for Multirotor UAVs from a Hierarch | non-primaire — revue RL pour multirotors (perspective contrôle hiérarchique) |
+
+## Validation lot 14
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 52
