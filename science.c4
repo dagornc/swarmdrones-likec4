@@ -473,6 +473,32 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_3f3134cc LOT04 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 4 (2026-09-29, carte t_3f3134cc) — 2 nouveaux verdicts / 2 deja rattachees / 21 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcCommFreeCoord = specDoc 'Perception-Aware Communication-Free Multi-UAV Coordination in the Wild (2026)' {
+    #science
+    link https://arxiv.org/abs/2603.08379 "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild"
+    description '''
+      Coordination multi-UAV SANS COMMUNICATION fondee sur la perception locale : chaque agent calcule un ensemble de zones et une fonction de densite, puis un controleur bas niveau. Simulations mono/multi-robots ET resultats experimentaux en environnement reel (CTU Prague, groupe M. Saska). Preuve directe du principe du modele « le contrat de mission est embarque ; le lien est un bonus ».
+    '''
+    metadata { arxiv '2603.08379'; annee '2026'; nature 'preprint'; corpus '310'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcConsensusPF = specDoc 'A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.09066 "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels"
+    description '''
+      Filtre particulaire a CONSENSUS distribue pour le suivi de cible maritime : chaque agent maintient une estimation independante exploitant les communications OPPORTUNISTES ; augmentation du filtre particulaire qui etale strategiquement les particules en l absence de mise a jour informative (contre la sur-confiance locale). Demontre sur USV (surface, dans le perimetre) en environnement lacustre reel.
+    '''
+    metadata { arxiv '2609.09066'; annee '2026'; nature 'preprint'; corpus '625'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1127,6 +1153,28 @@ sciFECBF = finding 'SCI-36 — CBF decentralise a faisabilite renforcee (FECBF) 
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc LOT04 (2026-09-29)
+  // ===========================================================================
+
+sciCommFreeCoord = finding 'SCI-40 — Coordination multi-UAV sans communication par perception locale' {
+    #science
+    link https://arxiv.org/abs/2603.08379 "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild"
+    description '''
+      srcCommFreeCoord est une PREUVE EMPIRIQUE (simulation + reel) que la coordination sure multi-UAV peut se passer de lien : la densite de perception locale suffit a eviter les collisions. Fonde l exigence centrale du modele (le lien est un bonus, pas une dependance) et algCollisionAvoidance en regime sans communication. VERDICT : SUPPORTED pour le mecanisme (evitement sans communication, essais reels) ; CONDITIONAL — echelle de l essaim a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (evitement sans communication, reel) / CONDITIONAL (echelle N=30)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcCommFreeCoord'; correction_modele 'algCollisionAvoidance + algSafetyRules : coordination sure sans lien sourcee' }
+  }
+
+  sciConsensusPF = finding 'SCI-41 — Filtre particulaire a consensus distribue pour le suivi de cible (USV)' {
+    #science
+    link https://arxiv.org/abs/2609.09066 "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels"
+    description '''
+      srcConsensusPF joint le consensus distribue (algConsensus, communications opportunistes) et la fusion de perception pour le suivi de cible (algPerceptionFusion) sur USV reels en lac. Le traitement de la sur-confiance locale en l absence de donnees est directement pertinent pour le regime « lien intermittent » du modele. VERDICT : SUPPORTED pour le mecanisme (consensus PF, essai lac) ; CONDITIONAL — echelle du nombre de cibles/agents a confronter au scenario SWARM-3D.
+    '''
+    metadata { verdict 'SUPPORTED (consensus PF distribue, USV reels) / CONDITIONAL (echelle)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcConsensusPF'; correction_modele 'algConsensus + algPerceptionFusion : consensus sur filtrage particulaire source' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1304,4 +1352,12 @@ sciFECBF = finding 'SCI-36 — CBF decentralise a faisabilite renforcee (FECBF) 
   sciHamiltonianFormation -[evidences]-> algFormationControl 'formation 3D sur terrain non plat (potentiel RK)'
   sciHamiltonianFormation -[evidences]-> algEnergyAware 'conservation d energie par dynamique hamiltonienne'
   sciHamiltonianFormation -[uses]-> srcHamiltonianFormation 'source primaire'
+  // --- Rattachements carte t_3f3134cc LOT04 (2026-09-29) ---
+// --- Relations du lot ---
+  sciCommFreeCoord -[evidences]-> algCollisionAvoidance 'evitement par perception locale sans communication'
+  sciCommFreeCoord -[evidences]-> algSafetyRules 'coordination sure en regime sans lien'
+  sciCommFreeCoord -[uses]-> srcCommFreeCoord 'source primaire'
+  sciConsensusPF -[evidences]-> algConsensus 'consensus distribue sur estimation (filtre particulaire)'
+  sciConsensusPF -[evidences]-> algPerceptionFusion 'suivi de cible par fusion distribuee'
+  sciConsensusPF -[uses]-> srcConsensusPF 'source primaire'
 }

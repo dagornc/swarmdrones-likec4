@@ -21,6 +21,7 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 1   | 25       | 9 (8 findings + 1 complétion SCI-8) | 5 | 11 | SCI-24..31 |
 | 2   | 25       | 5 (4 findings + 1 complétion SCI-6) | 2 | 18 | SCI-32..35 |
 | 3   | 25       | 4 findings | 4 | 17 | SCI-36..39 |
+| 4   | 25       | 2 findings | 2 | 21 | SCI-40..41 |
 
 ---
 
@@ -157,3 +158,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 ## Validation lot 3
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - 50 specDocs / 36 findings, 0 doublon, SCI jusqu'à 39
+
+
+---
+
+## LOT 4 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 310 | Perception-aware communication-free multi-UAV coordination | algCollisionAvoidance + algSafetyRules | srcCommFreeCoord | SCI-40 |
+| 625 | Distributed consensus particle filter target tracking (USV) | algConsensus + algPerceptionFusion | srcConsensusPF | SCI-41 |
+
+### DEJA_RATTACHEE
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 961 | Heterogeneous UAV-USV formation | srcHeteroUAVUSV | SCI-11 |
+| 205 | SwarmRaft consensus GNSS-degraded | srcSwarmRaft | SCI-5 |
+
+### ECARTEE (21)
+| # | Titre | Raison |
+|---|-------|--------|
+| 930 | i-MADSAC formation multi-target tracking | paradigme-exclu — MADRL appris |
+| 1159 | Information-guided safe RL gas localization | pas-algorithme-canonique — RL appris |
+| 1274 | AirAnchor aerial VLN | pas-algorithme-canonique — VLN mono-drone |
+| 1803 | FALCON-MASAC MARL + CBF shield | paradigme-exclu — MARL appris |
+| 2175 | Range-aided SLAM init (AUV) | hors-perimetre — AUV |
+| 2206 | Fixed-time tracking multi-AUV | hors-perimetre — AUV |
+| 2258 | Coverage path planning AUV | hors-perimetre — AUV |
+| 225 | Scaling swarm coordination GNNs | paradigme-exclu — GNN appris |
+| 228 | Clustered consensus bundle (CBBA) | deja-couvert — CBBA SCI-1 |
+| 279 | Load-aware adaptive CBBA | deja-couvert — CBBA SCI-1 |
+| 954 | Hierarchical optimal consensus path planning | non-verifiable |
+| 935 | Agricultural CPS multi-robot | hors-perimetre — agriculture |
+| 945 | Semantic control manifolds LLM | pas-algorithme-canonique — LLM appris |
+| 971 | SoC-embedded GNN task allocation | paradigme-exclu — GNN appris |
+| 997 | T-CARE temporal coordination RL | paradigme-exclu — RL appris |
+| 998 | Large-scale swarm coordination survey | non-primaire — survey |
+| 1009 | ATAC k-truss agentic AI | pas-algorithme-canonique — framework IA |
+| 1015 | Swarm UAV control strategies (chapter) | non-primaire — chapitre de livre |
+| 2290 | Internet of Sentience TGA (chapter) | non-primaire — chapitre |
+| 79 | Centralized task allocation constraint table | paradigme-exclu — allocation centralisee |
+| 104 | Multi-task trajectory prediction | pas-algorithme-canonique — prediction apprise |
+
+## Validation lot 4
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- SCI jusqu'a 41
