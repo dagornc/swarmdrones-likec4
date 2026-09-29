@@ -59,7 +59,7 @@ model {
       implementationStatus 'implemented'
       repository 'https://github.com/dagornc/alg-task-allocation'
       sourceDocs 'Choi/Brunet/How 2009 IEEE T-RO ; Bi et al. 2024 DOI 10.3390/drones8080345 ; Sao et al. 2025 arXiv 2509.06481'
-      version 'v3 (spec SWARM-SPEC-ALG-001-V3, 2026-09-18)'
+      version 'v4 (spec SWARM-SPEC-ALG-001-V4, 2026-09-20)'
       maturity 'mature-en-labo (repris du modele existant)'
       evidence 'MEDIUM — CONDITIONNEL (cf SCI-1) : convergence prouvee sous comms ideales ; convergence locale sous partition (HYPOTHESE) ; robustesse au retrait seulement EMPIRIQUE'
       metrics 'makespan, qualite d allocation, temps de convergence, messages echanges, taux de completion sous partition'
@@ -97,7 +97,7 @@ model {
       executionMode 'conceptual'
       implementationStatus 'implemented'
       repository 'https://github.com/dagornc/alg-consensus'
-      version 'v5.0 (spec SWARM-SPEC-ALG-002, 2026-09-19)'
+      version 'v7.0 (spec SWARM-SPEC-ALG-002, 2026-09-28) — moteur protocole_v6, Rust v6'
       maturity 'mature (repris du modele : coordination CRDT/LWW)'
       evidence 'HIGH (theorie CRDT prouvee) / LOW (application essaim drones) — cf SCI-3'
       metrics 'temps de convergence, ecart residuel, nombre de messages'
@@ -1206,6 +1206,13 @@ model {
   srcCooperativeLocalization -[implements]-> algCooperativeLocalization 'portage Rust (parite bit-a-bit)'
   srcFaultTolerantControlAlloc -[implements]-> algFaultTolerantControlAlloc 'portage Rust (parite bit-a-bit)'
   srcJammingResilientMode -[implements]-> algJammingResilientMode 'portage Rust (parite bit-a-bit)'
+
+  // Source bibliographique LUE et CORRIGEE (preprint mort -> version publiee,
+  // verifiee Crossref 2026-09-28). Elle documente le scenario heterogene
+  // aeriens+surface en GNSS-denied, proche de SWARM-3D : elle ECLAIRE la
+  // navigation degradee et la localisation cooperative, sans les implementer.
+  srcHeteroRetrieval -[evidences]-> algNavigationGNSSDegrade 'scenario heterogene GNSS-denied (source lue, non implementee)'
+  srcHeteroRetrieval -[evidences]-> algCooperativeLocalization 'retrieval cooperatif multi-robots (source lue, non implementee)'
 
   srcFormationControl -[documentedBy]-> specFormationControl 'specification detaillee v1 (PDF)'
   srcLeaderElection -[documentedBy]-> specLeaderElection 'specification detaillee v1 (PDF)'

@@ -18,13 +18,16 @@ autonomes (26 aériens + 4 de surface), destiné à alimenter un
 
 ```bash
 # Validation (obligatoire avant toute livraison)
-docker exec likec4 likec4 validate /data          # attendu : ✓ Valid (14 files)
+docker exec likec4 likec4 validate /data          # attendu : ✓ Valid (20 files)
 
 # Qualité : 11 critères calculés, score /100 (cible ≥ 90)
-python3 tools/qa/quality_gate.py                  # attendu : 97/100 — GATE: PASS
+python3 tools/qa/quality_gate.py                  # attendu : 99/100 — GATE: PASS
 
 # Intégrité : 7 contrôles que la syntaxe ne voit pas
 python3 tools/qa/integrity_check.py               # attendu : 7/7 OK
+
+# Cohérence modèle <-> code : le modèle dit-il la vérité sur les dépôts ?
+python3 tools/qa/check_model_code_consistency.py  # attendu : 15/15, FAIL=0 WARN=0
 
 # Artefact pour le moteur 3D
 python3 tools/export/export_scene.py          # écrit export/scene.json + viewer/scene.json
@@ -96,20 +99,20 @@ classe inexistante, quand on falsifie une copie de `scene.json`, le test
 
 | Mesure | Départ (E00) | Maintenant |
 |---|---|---|
-| Score qualité | 31/100 | **97/100** |
-| Éléments | 97 | **285** |
-| Relations typées | 239 (0 typée) | **544 (27 kinds)** |
-| Vues | 22 (5 mortes) | **48 (0 morte)** |
-| Fichiers `.c4` | 2 | **14** |
+| Score qualité | 31/100 | **99/100** |
+| Éléments | 97 | **405** |
+| Relations typées | 239 (0 typée) | **777 (31 kinds)** |
+| Vues | 22 (5 mortes) | **70 (0 morte)** |
+| Fichiers `.c4` | 2 | **20** |
 
 ## Carte des fichiers du modèle
 
 - **`architecture.c4`** (~1630 l.) — architecture fonctionnelle et logique d'origine. Le socle. **Non réécrit.**
-- **`metamodel.c4`** — le métamodèle : 38 kinds d'éléments, 27+ kinds de relations, tags et couleurs. **Le contrat de forme du modèle.**
+- **`metamodel.c4`** — le métamétamodèle : 55 kinds d'éléments, 31 kinds de relations utilisés, tags et couleurs. **Le contrat de forme du modèle.**
 - **`hardware.c4`** — drone de référence : capteurs, actionneurs, nœuds de calcul, radios.
-- **`messages.c4`** — 13 messages objets, canaux, protocoles, criticité.
-- **`algorithms.c4`** — 18 algorithmes, 15+ champs chacun (entrées, sorties, hypothèses, verdict).
-- **`facts.c4`** — 7 faits sourcés (fiches matérielles).
+- **`messages.c4`** — 13 messages objets, canaux, protocoles, criticité (18 au total dans le modèle, avec `hzip.c4` et `e20`).
+- **`algorithms.c4`** — 15 algorithmes canoniques, 15+ champs chacun (entrées, sorties, hypothèses, verdict).
+- **`facts.c4`** — 6 fiches factuelles sourcées (`factSheet`), matérielles.
 - **`decisions_hw.c4`** — décisions matérielles DE-05..DE-10, **ancrées sur les éléments qu'elles bloquent**.
 - **`functional.c4`** — 8 capacités, 19 fonctions, traçabilité `realizes`.
 - **`deployment.c4`** — chaîne complète Algorithme→Composant→Runtime→Nœud.
@@ -150,7 +153,7 @@ Détail complet : [`docs/world-model-spec.md`](docs/world-model-spec.md) et
 ## Documentation
 
 - [`docs/audit-likec4.md`](docs/audit-likec4.md) — audit initial (31/100)
-- [`docs/qa-report.md`](docs/qa-report.md) — validation globale (97/100)
+- [`docs/qa-report.md`](docs/qa-report.md) — validation globale (99/100)
 - [`docs/metamodel.md`](docs/metamodel.md) — contrat de forme
 - [`docs/relations-typing.md`](docs/relations-typing.md) — typage des 239 arcs
 - [`docs/functional.md`](docs/functional.md) — capacités et fonctions

@@ -53,9 +53,27 @@ def check_orphans(model):
         seen.add(r["target"]["model"])
     # on ignore les elements de contrat/rendu, naturellement portes par metadata
     exempt = {"renderRule"}
-    orphan = [k for k, v in els.items() if k not in seen and v["kind"] not in exempt]
+
+    # Les sources bibliographiques NON LUES (statut 'A CONSULTER') n'ont pas de
+    # verdict, donc pas de rattachement : c'est CONFORME a la regle du modele
+    # "pas de lecture, pas de verdict". Les compter comme orphelins produit un
+    # faux positif qui banalise le FAIL — et masquerait un vrai orphelin.
+    def is_unread_source(v):
+        md = v.get("metadata") or {}
+        statut = str(md.get("statut", "")).upper()
+        return v["kind"] == "specDoc" and "A CONSULTER" in statut
+
+    orphan = [k for k, v in els.items()
+              if k not in seen
+              and v["kind"] not in exempt
+              and not is_unread_source(v)]
+    unread = [k for k, v in els.items()
+              if k not in seen and is_unread_source(v)]
+    detail = f"{len(orphan)} orphelins" + (f" : {orphan[:6]}" if orphan else "")
+    if unread:
+        detail += f" ({len(unread)} sources 'A CONSULTER' exemptees — conforme)"
     return {"id": "I-2", "nom": "Elements orphelins", "ok": not orphan,
-            "detail": f"{len(orphan)} orphelins" + (f" : {orphan[:6]}" if orphan else "")}
+            "detail": detail}
 
 
 def check_chain(model):
