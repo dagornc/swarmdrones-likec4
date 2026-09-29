@@ -1,0 +1,165 @@
+{
+ "lot_label": "LOT 18 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees",
+ "rattachees": [
+  {
+   "src": "srcAgileTargetCapture",
+   "title": "Agile target capture with UAV swarm in dense environments (2026)",
+   "link_title": "Agile target capture with UAV swarm in dense environments",
+   "description": "Capture agile de cibles mobiles par essaim de UAV en environnement dense : optimisation de graphe de poses a fenetre glissante + prediction de trajectoire pour estimer/predire la trajectoire 3D de la cible agile, extension de centre de masse virtuel pour optimiser des formations de capture circulaires non uniformes (enclos compact + evitement d obstacles), coordination de champ de vision et de lacet par optimisation multi-contraintes.",
+   "metadata": {
+    "doi": "10.20517/ir.2026.27",
+    "annee": "2026",
+    "nature": "article de revue (Intelligence & Robotics)",
+    "corpus": "1827",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciAgileTargetCapture",
+    "title": "SCI-55 — Capture de cible par formation circulaire + evitement en essaim",
+    "link_title": "Agile target capture with UAV swarm in dense environments",
+    "description": "srcAgileTargetCapture apporte une formation de capture (algFormationControl, formations circulaires non uniformes autour d une cible mobile) couplee a l evitement d obstacles (algCollisionAvoidance) et a la prediction de trajectoire, en environnement dense. Complement de SCI-11/SCI-50 : ici la formation orientee CAPTURE avec coordination de champ de vision. VERDICT : SUPPORTED pour le mecanisme (formation de capture + evitement) ; CONDITIONAL — validation a confirmer, scenario securite frontaliere.",
+    "metadata": {
+     "verdict": "SUPPORTED (formation de capture + evitement) / CONDITIONAL (scenario, validation a confirmer)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcAgileTargetCapture",
+     "correction_modele": "algFormationControl + algCollisionAvoidance : formation de capture circulaire + evitement sourcee"
+    },
+    "link_doi": "10.20517/ir.2026.27"
+   },
+   "algs": [
+    [
+     "algFormationControl",
+     "formations de capture circulaires non uniformes"
+    ],
+    [
+     "algCollisionAvoidance",
+     "evitement d obstacles en environnement dense"
+    ]
+   ],
+   "link_doi": "10.20517/ir.2026.27"
+  }
+ ],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 1787,
+   "title": "Contact-Aware Incremental Model Predictive Control for an Underactuated Aerial Manipulator - DOI",
+   "reason": "doublon — même article que #1354 (Contact-Aware Incremental MPC, arXiv 2609.11661)"
+  },
+  {
+   "number": 1788,
+   "title": "Semantic Fidelity for Intelligent 6G Communication- A Taxonomic Deep Dive into Knowledge-Driven Architectures, Benchmarks, and Challenges - DOI",
+   "reason": "non-primaire — revue PRISMA de communication sémantique 6G"
+  },
+  {
+   "number": 1791,
+   "title": "A Large-Scale AIS Dataset from Finnish Water - DOI",
+   "reason": "pas-algorithme-canonique — dataset AIS maritime (données)"
+  },
+  {
+   "number": 1794,
+   "title": "Collaborative Computation and Migration in Multi-UAV Networks with Semantic Communication - DOI",
+   "reason": "doublon — même article que #1442 (Collaborative Computation, arXiv 2609.14476)"
+  },
+  {
+   "number": 1812,
+   "title": "REMP- A transformer with role-specific experts and multi-scale positional encoding for autonomous multi-UAV air combat - DOI",
+   "reason": "paradigme-exclu — transformer à experts pour combat aérien multi-UAV (REMP, politique apprise)"
+  },
+  {
+   "number": 1821,
+   "title": "Privacy‐Preserving Data‐Driven Distributed MPC for Heterogeneous Nonlinear Multi‐Agent Systems - DOI",
+   "reason": "deja-couvert — DMPC distribué de coordination, famille déjà couverte par SCI-14/SCI-29/SCI-45"
+  },
+  {
+   "number": 1824,
+   "title": "Frequency-diverse structured light for turbulence-resilient optical acoustic sensing - DOI",
+   "reason": "pas-algorithme-canonique — détection acoustique optique structurée (sous-marin, PHY)"
+  },
+  {
+   "number": 1825,
+   "title": "Frequency-diverse structured light for turbulence-resilient optical acoustic sensing - DOI",
+   "reason": "doublon — même article que #1824 (Frequency-diverse structured light, DOI .v1)"
+  },
+  {
+   "number": 1831,
+   "title": "Joint Spectrum and Power Allocation in Dynamic UAV Ad-Hoc Networks- A Counterfactual Multi-agent Reinforcement Learning Approach - DOI",
+   "reason": "paradigme-exclu — MARL contrefactuel pour allocation spectrale (politique apprise)"
+  },
+  {
+   "number": 2044,
+   "title": "Characterizing Wildlife Response to Biomimetic and Conventional Underwater Vehicles - arXiv",
+   "reason": "hors-perimetre — réponse de la faune aux AUV biomimétiques (écologie)"
+  },
+  {
+   "number": 2054,
+   "title": "TiamiTwin- A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements - arXiv",
+   "reason": "pas-algorithme-canonique — jumeau numérique ISAC bistatique (TiamiTwin, réseau)"
+  },
+  {
+   "number": 2063,
+   "title": "AoI-Driven Hierarchical Learning for Cooperative Resource Sharing in Multi-Operator UAV Networks - arXiv",
+   "reason": "paradigme-exclu — DRL hiérarchique pour partage de ressources (AoI, politique apprise)"
+  },
+  {
+   "number": 2076,
+   "title": "VDGS- Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction - arXiv",
+   "reason": "pas-algorithme-canonique — reconstruction de scène 3D Gaussian Splatting (VDGS)"
+  },
+  {
+   "number": 2084,
+   "title": "Orientation-Aware Control and Trajectory Design for Aerial RIS-Assisted Wireless Communications - arXiv",
+   "reason": "pas-algorithme-canonique — contrôle orienté de RIS aérienne (réseau)"
+  },
+  {
+   "number": 2109,
+   "title": "Reassessing Global Gradient-Norm Imbalance in BLIP Fine-Tuning Across Physical Domains - arXiv",
+   "reason": "pas-algorithme-canonique — fine-tuning de BLIP (modèle vision-langage)"
+  },
+  {
+   "number": 2110,
+   "title": "WOLF- World Model Guided LiDAR Exploration with Predictive Frontiers - arXiv",
+   "reason": "paradigme-exclu — exploration LiDAR par world model (WOLF)"
+  },
+  {
+   "number": 2173,
+   "title": "Toward a foundation model for forest point clouds - arXiv",
+   "reason": "hors-perimetre — modèle de fondation pour nuages de points forestiers (foresterie)"
+  },
+  {
+   "number": 2186,
+   "title": "Pinching Antennas for Next-Generation Wireless Communications- A Network Perspective - DOI",
+   "reason": "pas-algorithme-canonique — antennes pinçables (tutoriel réseau)"
+  },
+  {
+   "number": 2189,
+   "title": "Multi-History-Weighted Projection-Adaptive Jacobian Control for Close-Range UAV Visual Servoing near Overhead Ground Wires - DOI",
+   "reason": "pas-algorithme-canonique — asservissement visuel proche de lignes électriques (application)"
+  },
+  {
+   "number": 2190,
+   "title": "The Operable Pareto Front- Distilling Offline Search into Run-Time Control for Multi-Objective UAV Edge-Computing Scheduling - DOI",
+   "reason": "doublon — même article que #1548 (Operable Pareto Front, arXiv 2609.17992)"
+  },
+  {
+   "number": 2194,
+   "title": "Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low-Altitude Wireless Networks - DOI",
+   "reason": "doublon — même article que #1637 (Agentic AI Networking, arXiv 2609.19538)"
+  },
+  {
+   "number": 2198,
+   "title": "Internet of things-based wireless communication system for smart ocean monitoring systems - DOI",
+   "reason": "hors-perimetre — monitoring océanique par IoT (réseau de capteurs)"
+  },
+  {
+   "number": 2204,
+   "title": "Experimental Demonstration of Multi-Link Optical Camera Communication Using Denoising Autoencoders for IoT Applications - DOI",
+   "reason": "pas-algorithme-canonique — communication optique par caméra (OCC, réseau)"
+  },
+  {
+   "number": 2215,
+   "title": "Foldable Antenna Array in Space-Air-Ground Integrated Networks- Architectures and Applications - DOI",
+   "reason": "doublon — même article que #1667 (Foldable Antenna Array, arXiv 2609.20011)"
+  }
+ ]
+}

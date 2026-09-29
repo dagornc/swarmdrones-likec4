@@ -680,6 +680,23 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 LOT18 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 18 (2026-09-29, carte t_529dfd75) — 1 nouveaux verdicts / 0 deja rattachees / 24 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcAgileTargetCapture = specDoc 'Agile target capture with UAV swarm in dense environments (2026)' {
+    #science
+    link https://doi.org/10.20517/ir.2026.27 "Agile target capture with UAV swarm in dense environments"
+    description '''
+      Capture agile de cibles mobiles par essaim de UAV en environnement dense : optimisation de graphe de poses a fenetre glissante + prediction de trajectoire pour estimer/predire la trajectoire 3D de la cible agile, extension de centre de masse virtuel pour optimiser des formations de capture circulaires non uniformes (enclos compact + evitement d obstacles), coordination de champ de vision et de lacet par optimisation multi-contraintes.
+    '''
+    metadata { doi '10.20517/ir.2026.27'; annee '2026'; nature 'article de revue (Intelligence & Robotics)'; corpus '1827'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1503,6 +1520,19 @@ sciGossipADMM = finding 'SCI-53 — Consensus gossip ADMM sous heterogeneite non
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 LOT18 (2026-09-29)
+  // ===========================================================================
+
+sciAgileTargetCapture = finding 'SCI-55 — Capture de cible par formation circulaire + evitement en essaim' {
+    #science
+    link https://doi.org/10.20517/ir.2026.27 "Agile target capture with UAV swarm in dense environments"
+    description '''
+      srcAgileTargetCapture apporte une formation de capture (algFormationControl, formations circulaires non uniformes autour d une cible mobile) couplee a l evitement d obstacles (algCollisionAvoidance) et a la prediction de trajectoire, en environnement dense. Complement de SCI-11/SCI-50 : ici la formation orientee CAPTURE avec coordination de champ de vision. VERDICT : SUPPORTED pour le mecanisme (formation de capture + evitement) ; CONDITIONAL — validation a confirmer, scenario securite frontaliere.
+    '''
+    metadata { verdict 'SUPPORTED (formation de capture + evitement) / CONDITIONAL (scenario, validation a confirmer)'; niveau_preuve 'MEDIUM'; source 'srcAgileTargetCapture'; correction_modele 'algFormationControl + algCollisionAvoidance : formation de capture circulaire + evitement sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1737,4 +1767,9 @@ sciGossipADMM = finding 'SCI-53 — Consensus gossip ADMM sous heterogeneite non
   sciGossipADMM -[uses]-> srcGossipADMM 'source primaire'
   sciConflictPredictDMPC -[evidences]-> algCollisionAvoidance 'horizon predictif de conflit variable'
   sciConflictPredictDMPC -[uses]-> srcConflictPredictDMPC 'source primaire'
+  // --- Rattachements carte t_529dfd75 LOT18 (2026-09-29) ---
+// --- Relations du lot ---
+  sciAgileTargetCapture -[evidences]-> algFormationControl 'formations de capture circulaires non uniformes'
+  sciAgileTargetCapture -[evidences]-> algCollisionAvoidance 'evitement d obstacles en environnement dense'
+  sciAgileTargetCapture -[uses]-> srcAgileTargetCapture 'source primaire'
 }

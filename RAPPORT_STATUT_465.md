@@ -753,3 +753,45 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 1754 | RAYA- Learning Where and When to Intervene for Robot Recovery - arXiv | paradigme-exclu — récupération par marge de récupérabilité apprise (RAYA) |
 | 1784 | WITHDRAWN- A physics-informed neural network surrogate for multi-band  | non-verifiable — preprint RETRACTÉ (WITHDRAWN), non évaluable |
 
+
+---
+
+## LOT 18 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1827 | Agile target capture with UAV swarm in dense environments (2026) | algFormationControl + algCollisionAvoidance | srcAgileTargetCapture | SCI-55 |
+
+### ECARTEE (24)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1787 | Contact-Aware Incremental Model Predictive Control for an Underactuate | doublon — même article que #1354 (Contact-Aware Incremental MPC, arXiv 2609.11661) |
+| 1788 | Semantic Fidelity for Intelligent 6G Communication- A Taxonomic Deep D | non-primaire — revue PRISMA de communication sémantique 6G |
+| 1791 | A Large-Scale AIS Dataset from Finnish Water - DOI | pas-algorithme-canonique — dataset AIS maritime (données) |
+| 1794 | Collaborative Computation and Migration in Multi-UAV Networks with Sem | doublon — même article que #1442 (Collaborative Computation, arXiv 2609.14476) |
+| 1812 | REMP- A transformer with role-specific experts and multi-scale positio | paradigme-exclu — transformer à experts pour combat aérien multi-UAV (REMP, politique apprise) |
+| 1821 | Privacy‐Preserving Data‐Driven Distributed MPC for Heterogeneous Nonli | deja-couvert — DMPC distribué de coordination, famille déjà couverte par SCI-14/SCI-29/SCI-45 |
+| 1824 | Frequency-diverse structured light for turbulence-resilient optical ac | pas-algorithme-canonique — détection acoustique optique structurée (sous-marin, PHY) |
+| 1825 | Frequency-diverse structured light for turbulence-resilient optical ac | doublon — même article que #1824 (Frequency-diverse structured light, DOI .v1) |
+| 1831 | Joint Spectrum and Power Allocation in Dynamic UAV Ad-Hoc Networks- A  | paradigme-exclu — MARL contrefactuel pour allocation spectrale (politique apprise) |
+| 2044 | Characterizing Wildlife Response to Biomimetic and Conventional Underw | hors-perimetre — réponse de la faune aux AUV biomimétiques (écologie) |
+| 2054 | TiamiTwin- A Digital Twin for Bistatic ISAC Drone Sensing, Validated A | pas-algorithme-canonique — jumeau numérique ISAC bistatique (TiamiTwin, réseau) |
+| 2063 | AoI-Driven Hierarchical Learning for Cooperative Resource Sharing in M | paradigme-exclu — DRL hiérarchique pour partage de ressources (AoI, politique apprise) |
+| 2076 | VDGS- Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial S | pas-algorithme-canonique — reconstruction de scène 3D Gaussian Splatting (VDGS) |
+| 2084 | Orientation-Aware Control and Trajectory Design for Aerial RIS-Assiste | pas-algorithme-canonique — contrôle orienté de RIS aérienne (réseau) |
+| 2109 | Reassessing Global Gradient-Norm Imbalance in BLIP Fine-Tuning Across  | pas-algorithme-canonique — fine-tuning de BLIP (modèle vision-langage) |
+| 2110 | WOLF- World Model Guided LiDAR Exploration with Predictive Frontiers - | paradigme-exclu — exploration LiDAR par world model (WOLF) |
+| 2173 | Toward a foundation model for forest point clouds - arXiv | hors-perimetre — modèle de fondation pour nuages de points forestiers (foresterie) |
+| 2186 | Pinching Antennas for Next-Generation Wireless Communications- A Netwo | pas-algorithme-canonique — antennes pinçables (tutoriel réseau) |
+| 2189 | Multi-History-Weighted Projection-Adaptive Jacobian Control for Close- | pas-algorithme-canonique — asservissement visuel proche de lignes électriques (application) |
+| 2190 | The Operable Pareto Front- Distilling Offline Search into Run-Time Con | doublon — même article que #1548 (Operable Pareto Front, arXiv 2609.17992) |
+| 2194 | Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low | doublon — même article que #1637 (Agentic AI Networking, arXiv 2609.19538) |
+| 2198 | Internet of things-based wireless communication system for smart ocean | hors-perimetre — monitoring océanique par IoT (réseau de capteurs) |
+| 2204 | Experimental Demonstration of Multi-Link Optical Camera Communication  | pas-algorithme-canonique — communication optique par caméra (OCC, réseau) |
+| 2215 | Foldable Antenna Array in Space-Air-Ground Integrated Networks- Archit | doublon — même article que #1667 (Foldable Antenna Array, arXiv 2609.20011) |
+
+## Validation lot 18
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
+- SCI jusqu'à 55
