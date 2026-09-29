@@ -23,6 +23,7 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 3   | 25       | 4 findings | 4 | 17 | SCI-36..39 |
 | 4   | 25       | 2 findings | 2 | 21 | SCI-40..41 |
 | 5   | 25       | 3 findings | 2 | 20 | SCI-42..44 |
+| 6   | 25       | 3 findings | 2 (1 rattachee + 1 ecartee) | 20 | SCI-45..47 |
 
 ---
 
@@ -251,3 +252,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 ## Validation lot 5
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - SCI jusqu'a 44
+
+
+---
+
+## LOT 6 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1796 | Risk-bounded certificate feedback allocation->path planning | algPathPlanning + algSafetyRules | srcCertFeedbackPath | SCI-45 |
+| 105 | Fully onboard SLAM distributed mapping nano-drones | algNavigationGNSSDegrade + algPerceptionFusion | srcOnboardSLAMNano | SCI-46 |
+| 177 | Ultra-lightweight scalable planner large aerial swarms | algPathPlanning | srcUltraLightPlanner | SCI-47 |
+
+### DEJA
+| # | Titre | specDoc existant | Statut |
+|---|-------|------------------|--------|
+| 996 | Comparative path planning medical UAV | srcPathMedUAV | RATTACHEE (SCI-14) |
+| 134 | ZEST digital twin | srcDigitalTwinZEST | DEJA ECARTEE (statut ECARTEE) |
+
+### ECARTEE (20)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1042 | MSCEGWO 3D trajectory | deja-couvert — SCI-14 |
+| 1491 | UDAV VLM waypoint planner | pas-algorithme-canonique — VLM appris |
+| 1498 | LAMDE WSN path planning | pas-algorithme-canonique — optimisation apprise |
+| 1793 | UCA-PPO USV path planning | paradigme-exclu — PPO appris |
+| 1801 | NSGA-II + BOA bank-to-turn | deja-couvert — SCI-14 |
+| 1815 | DPC-MOEA simultaneous arrival | deja-couvert — SCI-14 |
+| 1829 | NMCS Monte Carlo trajectory | deja-couvert — SCI-14 |
+| 1830 | R*WOA whale + RRT* | deja-couvert — SCI-14 |
+| 2279 | RL-JSO group-level path planning | paradigme-exclu — RL appris |
+| 2287 | MI-PSO-Adaptive waypoint | deja-couvert — SCI-14 |
+| 2294 | SA-ALNS-2OPT container yard | deja-couvert — SCI-14 |
+| 89 | FANET routing protocol | pas-algorithme-canonique — routage FANET |
+| 94 | Survey unmanned marine vehicles | non-primaire — survey |
+| 181 | AttentionSwarm RL + CBF | paradigme-exclu — RL appris |
+| 190 | Depth Transfer sim-to-real | paradigme-exclu — RL + sim2real |
+| 191 | Movable antenna wireless | pas-algorithme-canonique — réseau sans fil |
+| 195 | Cryptography underwater acoustic review | non-primaire — revue UUV |
+| 197 | MARL coral reef collection | hors-perimetre — collecte corail MARL |
+| 201 | MAPPO+BCTD target tracking | paradigme-exclu — MAPPO appris |
+| 202 | RL interception prioritization | paradigme-exclu — RL appris |
+
+## Validation lot 6
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- SCI jusqu'a 47
