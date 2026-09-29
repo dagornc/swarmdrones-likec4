@@ -1,0 +1,132 @@
+{
+ "lot_label": "LOT 11 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 0 deja rattachees / 25 ecartees",
+ "rattachees": [],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 1596,
+   "title": "AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into Distributed, Adaptive Swarm Execution - arXiv",
+   "reason": "paradigme-exclu — AeroWeaver = harnais d agents LLM pour essaim"
+  },
+  {
+   "number": 1609,
+   "title": "Body-Motion Control of a Simulated Aerial Swarm from a First-Person View - arXiv",
+   "reason": "pas-algorithme-canonique — téléopération par mouvement corporel (interface HCI)"
+  },
+  {
+   "number": 1610,
+   "title": "SOL-SLAM- Inverse Compositional Gauss-Newton Direct Registration for Fast Sonar-Only Local SLAM - arXiv",
+   "reason": "hors-perimetre — SLAM local sonar seul (SOL-SLAM), sous-marin"
+  },
+  {
+   "number": 1635,
+   "title": "AURORA- A Natural Language-Driven Agentic Framework for Understanding, Reasoning, and Orchestrating Reliable Air-Ground Co-Simulation - arXiv",
+   "reason": "paradigme-exclu — AURORA = génération de scénarios par LLM agentique"
+  },
+  {
+   "number": 1639,
+   "title": "PerSeM- Persistent Semantic Memory for Long-Horizon Open-Vocabulary UAV Mapping - arXiv",
+   "reason": "pas-algorithme-canonique — mémoire sémantique persistante pour cartographie (PerSeM)"
+  },
+  {
+   "number": 1648,
+   "title": "Towards Active Cross-View Object Geo-Localization - arXiv",
+   "reason": "pas-algorithme-canonique — géo-localisation cross-view active (ActiveGeo)"
+  },
+  {
+   "number": 1652,
+   "title": "Equivariant Filter Design for Acoustic and Depth Aided Inertial Navigation Systems - arXiv",
+   "reason": "hors-perimetre — filtre équivariant pour navigation inertielle AUV"
+  },
+  {
+   "number": 1654,
+   "title": "HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identification and Cross-Robot Collaboration - arXiv",
+   "reason": "paradigme-exclu — coordination multi-agents en langage naturel uniquement (HEROIC)"
+  },
+  {
+   "number": 1657,
+   "title": "TADreamer- Zero-Shot Language-Guided 3D Navigation for Terrestrial-Aerial Bimodal Robots via Video Imagination - arXiv",
+   "reason": "paradigme-exclu — navigation 3D par imagination vidéo VLM (TADreamer)"
+  },
+  {
+   "number": 1660,
+   "title": "Socialized UAV Cross-Task Learning- Towards Cross-Granularity Collaboration through Hierarchical Interaction - arXiv",
+   "reason": "pas-algorithme-canonique — benchmark d apprentissage inter-tâches (CrossUAV)"
+  },
+  {
+   "number": 1685,
+   "title": "RTK-Vision PPO for Autonomous Micro UAV Recovery on an Airborne Carrier - arXiv",
+   "reason": "paradigme-exclu — récupération micro-UAV par PPO (RTK-Vision)"
+  },
+  {
+   "number": 1691,
+   "title": "Towards Scaling Marine Perception with Synthetic Data - arXiv",
+   "reason": "hors-perimetre — génération de données synthétiques pour perception sous-marine"
+  },
+  {
+   "number": 1692,
+   "title": "Custom PX4 firmware for autonomous hybrid aerial-marine missions - arXiv",
+   "reason": "pas-algorithme-canonique — firmware PX4 pour missions hybrides aérien-marin"
+  },
+  {
+   "number": 1695,
+   "title": "Underwater Visual Target Tracking with Target-Specific Depth Estimation and Adaptive Model-Fusion Predictive Control - arXiv",
+   "reason": "hors-perimetre — suivi visuel sous-marin par MPC (AUV)"
+  },
+  {
+   "number": 1703,
+   "title": "ASGARD- Action-Space Guard for UAV Resilience via Reinforcement Learning - arXiv",
+   "reason": "paradigme-exclu — garde d espace d action pour RL (ASGARD, politique apprise)"
+  },
+  {
+   "number": 1706,
+   "title": "Project SCOUT- Interceptor Drone for Perimeter Defense - arXiv",
+   "reason": "pas-algorithme-canonique — interception anti-UAV (Project SCOUT), perception embarquée"
+  },
+  {
+   "number": 1708,
+   "title": "Towards Effective Visual-Inertial SLAM with Passive-Only Sensors for Low-Cost Autonomous Underwater Vehicles - arXiv",
+   "reason": "hors-perimetre — VI-SLAM pour AUV low-cost"
+  },
+  {
+   "number": 1714,
+   "title": "LoRA Enhanced Contrastive Learning with SAS Vision Transformers - arXiv",
+   "reason": "hors-perimetre — reconnaissance de cibles sonar SAS (LoRA ViT)"
+  },
+  {
+   "number": 1781,
+   "title": "Multi-source UAV remote sensing for cotton Verticillium wilt resistance grading using TPAC-Net - DOI",
+   "reason": "hors-perimetre — notation de résistance du coton par imagerie UAV (agriculture)"
+  },
+  {
+   "number": 1790,
+   "title": "Parameter Sensitivity Analysis for Aerial LiDAR-Inertial Odometries in low-altitude flights - DOI",
+   "reason": "doublon — même article que #1396 (Parameter Sensitivity LIO, arXiv 2609.12837)"
+  },
+  {
+   "number": 1792,
+   "title": "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms - DOI",
+   "reason": "doublon — même article que #1401 (Distributed Stochastic Optimal Control, arXiv 2609.12959)"
+  },
+  {
+   "number": 1799,
+   "title": "Bridging the Scale Gap- A Multi-Scale Feature Enhancement Framework for UAV Aerial Image Object Detection - DOI",
+   "reason": "pas-algorithme-canonique — détection petits objets MSF-DETR"
+  },
+  {
+   "number": 1805,
+   "title": "Resource-Aware Small-UAV Perception under Annotation and Compute Constraints - DOI",
+   "reason": "non-verifiable — abstract non vérifié (preprint), contenu primaire non lisible"
+  },
+  {
+   "number": 1811,
+   "title": "UAV-LiteDet- A Lightweight Small Object Detection Network for Low-Altitude UAV Scenarios - DOI",
+   "reason": "pas-algorithme-canonique — détection petits objets UAV-LiteDet"
+  },
+  {
+   "number": 1814,
+   "title": "A Multi-UAV Cooperative Navigation Method Based on Policy Decomposition Structure - DOI",
+   "reason": "paradigme-exclu — GS-MADDPG = GNN + MADDPG pour navigation coopérative"
+  }
+ ]
+}

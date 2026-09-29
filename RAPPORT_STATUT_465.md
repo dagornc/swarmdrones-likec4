@@ -479,3 +479,37 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 50
+
+---
+
+## LOT 11 (2026-09-29)
+
+### ECARTEE (25)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1596 | AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into D | paradigme-exclu — AeroWeaver = harnais d agents LLM pour essaim |
+| 1609 | Body-Motion Control of a Simulated Aerial Swarm from a First-Person Vi | pas-algorithme-canonique — téléopération par mouvement corporel (interface HCI) |
+| 1610 | SOL-SLAM- Inverse Compositional Gauss-Newton Direct Registration for F | hors-perimetre — SLAM local sonar seul (SOL-SLAM), sous-marin |
+| 1635 | AURORA- A Natural Language-Driven Agentic Framework for Understanding, | paradigme-exclu — AURORA = génération de scénarios par LLM agentique |
+| 1639 | PerSeM- Persistent Semantic Memory for Long-Horizon Open-Vocabulary UA | pas-algorithme-canonique — mémoire sémantique persistante pour cartographie (PerSeM) |
+| 1648 | Towards Active Cross-View Object Geo-Localization - arXiv | pas-algorithme-canonique — géo-localisation cross-view active (ActiveGeo) |
+| 1652 | Equivariant Filter Design for Acoustic and Depth Aided Inertial Naviga | hors-perimetre — filtre équivariant pour navigation inertielle AUV |
+| 1654 | HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identif | paradigme-exclu — coordination multi-agents en langage naturel uniquement (HEROIC) |
+| 1657 | TADreamer- Zero-Shot Language-Guided 3D Navigation for Terrestrial-Aer | paradigme-exclu — navigation 3D par imagination vidéo VLM (TADreamer) |
+| 1660 | Socialized UAV Cross-Task Learning- Towards Cross-Granularity Collabor | pas-algorithme-canonique — benchmark d apprentissage inter-tâches (CrossUAV) |
+| 1685 | RTK-Vision PPO for Autonomous Micro UAV Recovery on an Airborne Carrie | paradigme-exclu — récupération micro-UAV par PPO (RTK-Vision) |
+| 1691 | Towards Scaling Marine Perception with Synthetic Data - arXiv | hors-perimetre — génération de données synthétiques pour perception sous-marine |
+| 1692 | Custom PX4 firmware for autonomous hybrid aerial-marine missions - arX | pas-algorithme-canonique — firmware PX4 pour missions hybrides aérien-marin |
+| 1695 | Underwater Visual Target Tracking with Target-Specific Depth Estimatio | hors-perimetre — suivi visuel sous-marin par MPC (AUV) |
+| 1703 | ASGARD- Action-Space Guard for UAV Resilience via Reinforcement Learni | paradigme-exclu — garde d espace d action pour RL (ASGARD, politique apprise) |
+| 1706 | Project SCOUT- Interceptor Drone for Perimeter Defense - arXiv | pas-algorithme-canonique — interception anti-UAV (Project SCOUT), perception embarquée |
+| 1708 | Towards Effective Visual-Inertial SLAM with Passive-Only Sensors for L | hors-perimetre — VI-SLAM pour AUV low-cost |
+| 1714 | LoRA Enhanced Contrastive Learning with SAS Vision Transformers - arXi | hors-perimetre — reconnaissance de cibles sonar SAS (LoRA ViT) |
+| 1781 | Multi-source UAV remote sensing for cotton Verticillium wilt resistanc | hors-perimetre — notation de résistance du coton par imagerie UAV (agriculture) |
+| 1790 | Parameter Sensitivity Analysis for Aerial LiDAR-Inertial Odometries in | doublon — même article que #1396 (Parameter Sensitivity LIO, arXiv 2609.12837) |
+| 1792 | Distributed Stochastic Optimal Control for Pattern-Oriented Swarms - D | doublon — même article que #1401 (Distributed Stochastic Optimal Control, arXiv 2609.12959) |
+| 1799 | Bridging the Scale Gap- A Multi-Scale Feature Enhancement Framework fo | pas-algorithme-canonique — détection petits objets MSF-DETR |
+| 1805 | Resource-Aware Small-UAV Perception under Annotation and Compute Const | non-verifiable — abstract non vérifié (preprint), contenu primaire non lisible |
+| 1811 | UAV-LiteDet- A Lightweight Small Object Detection Network for Low-Alti | pas-algorithme-canonique — détection petits objets UAV-LiteDet |
+| 1814 | A Multi-UAV Cooperative Navigation Method Based on Policy Decompositio | paradigme-exclu — GS-MADDPG = GNN + MADDPG pour navigation coopérative |
+
