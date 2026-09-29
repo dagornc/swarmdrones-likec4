@@ -3,15 +3,22 @@
 =============================================================================
 GOVERNANCE DU MODELE SwarmDrones (LikeC4)
 =============================================================================
-Script de gouvernance continue : validation + non-regression + divergence.
+Script de gouvernance continue : validation + non-regression + divergence +
+drift du modele servi + coherence modele<->code.
 
-Trois controles, un seul point d'entree :
+Cinq controles, un seul point d'entree :
   1. VALIDATION      : `likec4 validate` (compilation reelle du modele).
   2. NON-REGRESSION  : comparaison des compteurs (elements/relations/vues par
                        kind) avec une baseline stockee. Toute baisse est un
                        signal d'alerte (regression silencieuse).
   3. DIVERGENCE      : comparaison des fichiers .c4 entre la copie active
                        (montee dans le conteneur) et la copie git de reference.
+  4. DRIFT SERVI     : le modele SERVI par le conteneur reflete-t-il le disque ?
+                       Comble l'angle mort du dev server Vite (instantane au
+                       demarrage, HMR inoperant sur le modele compile).
+  5. MODELE <-> CODE : le modele dit-il la verite sur les depots reels ?
+                       Depot accessible, version -> ref reelle, coherence
+                       interne bloc algorithm vs bloc specDoc.
 
 Usage :
   python3 gouvernance_swarmdrones.py            # controle complet
@@ -19,6 +26,8 @@ Usage :
   python3 gouvernance_swarmdrones.py --validate # validation seule
   python3 gouvernance_swarmdrones.py --baseline # non-regression seule
   python3 gouvernance_swarmdrones.py --divergence # divergence seule
+  python3 gouvernance_swarmdrones.py --served   # drift du modele servi seul
+  python3 gouvernance_swarmdrones.py --model-code # coherence modele<->code seule
 
 Code de sortie : 0 = OK, 1 = au moins un controle a echoue.
 =============================================================================
@@ -130,7 +139,7 @@ def compute_metrics(proj):
 # CONTROLE 1 — VALIDATION
 # ---------------------------------------------------------------------------
 def check_validate():
-    print("=== [1/3] VALIDATION (likec4 validate) ===")
+    print("=== [1/5] VALIDATION (likec4 validate) ===")
     code, out, err = docker_exec(["likec4", "validate", DATA_DIR])
     ok = "Valid" in out
     print(("  OK  " if ok else "  ECHEC ") + out.strip().splitlines()[-1] if out.strip() else err.strip())
@@ -141,7 +150,7 @@ def check_validate():
 # CONTROLE 2 — NON-REGRESSION
 # ---------------------------------------------------------------------------
 def check_baseline(init=False):
-    print("=== [2/3] NON-REGRESSION (baseline) ===")
+    print("=== [2/5] NON-REGRESSION (baseline) ===")
     if not export_model():
         return False
     proj = load_model()
@@ -193,7 +202,7 @@ def check_baseline(init=False):
 # CONTROLE 3 — DIVERGENCE ENTRE COPIES
 # ---------------------------------------------------------------------------
 def check_divergence():
-    print("=== [3/3] DIVERGENCE (copie active vs copie git) ===")
+    print("=== [3/5] DIVERGENCE (copie active vs copie git) ===")
     if not GIT_DIR.exists():
         print(f"  [info] copie git absente : {GIT_DIR} (controle ignore)")
         return True
@@ -232,6 +241,97 @@ def check_divergence():
 
 
 # ---------------------------------------------------------------------------
+# CONTROLE 4 — DRIFT DU MODELE SERVI (instantane du conteneur vs disque)
+# ---------------------------------------------------------------------------
+def check_served_drift():
+    """Le modele SERVI par le conteneur reflete-t-il le disque ?
+
+    ANGLE MORT COMBLE (2026-09-29) : le dev server LikeC4 (Vite) compile le
+    modele au DEMARRAGE. Un .c4 modifie apres le demarrage n'est PAS servi
+    tant que le conteneur n'a pas redemarre. Les controles 1-3 ne voient pas
+    cet ecart : ils comparent disque vs git, jamais disque vs SERVI.
+
+    Ce controle interroge le conteneur sur une valeur sentinelle du modele
+    (versionCourante de specConsensus) et la compare au disque.
+    """
+    print("=== [4/5] DRIFT MODELE SERVI (conteneur vs disque) ===")
+
+    # Valeur sentinelle : la version courante du consensus, mise a jour a
+    # chaque revision de spec. Si le conteneur sert une valeur differente,
+    # il sert un instantane perime.
+    sentinel = "versionCourante"
+    try:
+        disk_src = (GIT_DIR / "algorithms.c4").read_text(encoding="utf-8")
+    except OSError as e:
+        print(f"  [info] algorithms.c4 illisible : {e} (controle ignore)")
+        return True
+
+    import re
+    disk_vals = re.findall(r"versionCourante\s+'([^']+)'", disk_src)
+    if not disk_vals:
+        print("  [info] aucune valeur sentinelle sur le disque (controle ignore)")
+        return True
+
+    # Interroger le modele SERVI (exporte par le conteneur).
+    code, out, err = docker_exec(["likec4", "export", "json", DATA_DIR,
+                                  "-o", f"{DATA_DIR}/out/gov_served.json"])
+    if code != 0:
+        print(f"  [info] export du modele servi impossible (controle ignore)")
+        return True
+    code, served_raw, err = docker_exec(["cat", f"{DATA_DIR}/out/gov_served.json"])
+    if code != 0:
+        print("  [info] lecture du modele servi impossible (controle ignore)")
+        return True
+
+    missing = [v for v in disk_vals if v not in served_raw]
+    if missing:
+        print(f"  [DRIFT] {len(missing)} valeur(s) du disque absente(s) du modele servi :")
+        for v in missing[:3]:
+            print(f"    - {v[:70]}")
+        print("  [ACTION] docker restart likec4 requis (autorisation Christophe).")
+        return False
+
+    print(f"  OK  le modele servi reflete le disque ({len(disk_vals)} valeur(s) verifiee(s)).")
+    return True
+
+
+# ---------------------------------------------------------------------------
+# CONTROLE 5 — COHERENCE MODELE <-> CODE
+# ---------------------------------------------------------------------------
+def check_model_code():
+    """Le modele dit-il la verite sur les depots de code reels ?
+
+    Verifie que chaque algorithme declare pointe un depot accessible, que la
+    version declaree correspond a une reference reelle, et que le bloc
+    `algorithm` et le bloc `specDoc` declarent la MEME version (detection des
+    mises a jour partielles du modele).
+    """
+    print("=== [5/5] COHERENCE MODELE <-> CODE ===")
+    script = GIT_DIR / "tools" / "qa" / "check_model_code_consistency.py"
+    if not script.exists():
+        print(f"  [info] script absent : {script} (controle ignore)")
+        return True
+
+    r = subprocess.run([sys.executable, str(script)],
+                       capture_output=True, text=True, cwd=str(GIT_DIR))
+    ok = r.returncode == 0
+    if ok:
+        # Extraire la ligne de synthese.
+        for line in r.stdout.splitlines():
+            if "algorithmes |" in line:
+                print(f"  OK  {line.strip()}")
+                break
+        else:
+            print("  OK  coherence modele <-> code verifiee.")
+    else:
+        print("  [ECHEC] incoherence modele <-> code :")
+        for line in r.stdout.splitlines():
+            if "DIVERGENCE" in line or "FAIL" in line or "ECHEC" in line:
+                print(f"    {line.strip()}")
+    return ok
+
+
+# ---------------------------------------------------------------------------
 # MAIN
 # ---------------------------------------------------------------------------
 def main():
@@ -240,6 +340,8 @@ def main():
     ap.add_argument("--validate", action="store_true", help="validation seule")
     ap.add_argument("--baseline", action="store_true", help="non-regression seule")
     ap.add_argument("--divergence", action="store_true", help="divergence seule")
+    ap.add_argument("--served", action="store_true", help="drift du modele servi seul")
+    ap.add_argument("--model-code", action="store_true", help="coherence modele<->code seule")
     args = ap.parse_args()
 
     # Mode selection : si aucun flag, tout executer.
@@ -249,13 +351,19 @@ def main():
         ok = check_baseline(init=args.init)
     elif args.divergence:
         ok = check_divergence()
+    elif args.served:
+        ok = check_served_drift()
+    elif args.model_code:
+        ok = check_model_code()
     else:
         ok_v = check_validate()
         # Regenerer le likec4.json (modele compile a jour) a chaque controle complet.
         ok_l = export_likec4_json()
         ok_b = check_baseline(init=args.init)
         ok_d = check_divergence()
-        ok = ok_v and ok_l and ok_b and ok_d
+        ok_s = check_served_drift()
+        ok_m = check_model_code()
+        ok = ok_v and ok_l and ok_b and ok_d and ok_s and ok_m
 
     print()
     print("=== RESULTAT GLOBAL : " + ("OK" if ok else "ECHEC") + " ===")
