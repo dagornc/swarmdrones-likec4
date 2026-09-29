@@ -286,6 +286,96 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES PRIMAIRES AJOUTEES — carte t_3f3134cc LOT 1 (2026-09-29)
+  //           15 articles direct + A-primary-candidate RATTACHES
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 1 (2026-09-29, carte t_3f3134cc) — 8 nouveaux verdicts / 1 completion SCI-8 / 5 deja rattachees / 11 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcBeliefAdaptiveEKF = specDoc 'Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.14806 "Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments"
+    description '''
+      Autonomie en ligne adaptative par croyance pour quadrirotor en environnement urbain : EKF augmente d un modele de CONFIANCE GNSS latent (belief state) qui module la ponderation des mesures et le biais multipath, mis a jour en ligne par les signaux de coherence de l EKF ; gestion des mesures out-of-sequence avec latence. Adaptation proactive et stable de la confiance capteur SANS connaissance prealable ni entrainement hors-ligne. Valide en simulation.
+    '''
+    metadata { arxiv '2609.14806'; annee '2026'; nature 'preprint'; corpus '1454'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcMultiUAVCL = specDoc 'Multi-UAV Adaptive Cooperative Localization Method Against Hybrid Abnormal Measurements (2026)' {
+    #science
+    link https://doi.org/10.3390/drones10090681 "Multi-UAV Adaptive Cooperative Localization Method Against Hybrid Abnormal Measurements"
+    description '''
+      Localisation cooperative multi-UAV ADAPTATIVE face aux mesures anormales hybrides (delais aleatoires + pertes intermittentes) en scenario de communication faible : diagnostic horodate de la classe d etat du canal (normal/delaye/perdu), filtrage augmente multi-pas pour paquets retardes, reconstruction de mesure virtuelle GWO-GRU pour pertes totales. En simulation 4 UAV avec blackout de 10 s, reduction RMSE de 69-75%.
+    '''
+    metadata { doi '10.3390/drones10090681'; annee '2026'; nature 'article de revue (Drones)'; corpus '1782'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcRotorFailQSF = specDoc 'Quasi-Static Fault-Tolerant Feedback Control of a Quadrotor under Rotor Failure with Provable Safety Guarantees (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.23918 "Quasi-Static Fault-Tolerant Feedback Control of a Quadrotor under Rotor Failure with Provable Safety Guarantees"
+    description '''
+      Loi de commande non lineaire pour quadrirotor sous panne d un rotor, garantissant la stabilisation par feedback quasi-statique (QSF) : caracterisation et stabilisation de la variete de dynamique nulle (path-following manifold). La stabilite garantit l invariance de trajectoire : un UAV au rotor defaillant reste sur la trajectoire malgre la panne, avec convergence exponentielle locale. Garanties de SECURITE PROUVEES, validees numeriquement.
+    '''
+    metadata { arxiv '2609.23918'; annee '2026'; nature 'preprint'; corpus '2124'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcMetaPolicySpoof = specDoc 'Meta policy switching for resilient UAV navigation in adversarial airspace (2026)' {
+    #science
+    link https://doi.org/10.1016/j.ins.2026.124096 "Meta policy switching for resilient UAV navigation in adversarial airspace"
+    description '''
+      Navigation UAV resiliente sous brouillage GNSS (spoofing) qui biaise les estimations et induit un decalage de distribution entre entrainement et deploiement : meta-apprentissage de commutation de politique pour s adapter a des caracteristiques de spoofing INEDITES sans reentrainement couteux. Information Sciences 2026. Note : vecteur adversaire distinct du brouillage de COMMUNICATION de SCI-9 (ADMOS) — ici le GNSS lui-meme est spoofe.
+    '''
+    metadata { doi '10.1016/j.ins.2026.124096'; annee '2026'; nature 'article de revue (Information Sciences)'; corpus '995'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcFormationCBF = specDoc 'Formation Control for UAVs Considering Safety Constraints Based on Control Barrier Functions with Switched Trajectories and Switching Communication Topologies (2026)' {
+    #science
+    link https://doi.org/10.3390/s26051477 "Formation Control for UAVs Considering Safety Constraints Based on CBF with Switched Trajectories and Switching Communication Topologies"
+    description '''
+      Controle de formation de UAV sous contraintes de SECURITE par CBF, avec trajectoires commutees ET topologies de communication commutantes : combine le maintien de formation et le respect de contraintes de surete (CBF) sous topologie variable. Sensors 26(5):1477, MDPI.
+    '''
+    metadata { doi '10.3390/s26051477'; annee '2026'; nature 'article de revue (Sensors)'; corpus '307'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcDMPCSafetyZones = specDoc 'Distributed Model Predictive Control with Adaptive Safety Zones for Multi-Fleet Drone Operations (2026)' {
+    #science
+    link https://arxiv.org/abs/2606.20651 "Distributed Model Predictive Control with Adaptive Safety Zones for Multi-Fleet Drone Operations"
+    description '''
+      DMPC avec zones de SECURITE ADAPTATIVES pour operations multi-flottes de drones : rayon de securite adaptatif, formulation MPC distribuee avec schema iteratif, analyse de stabilite et de faisabilite (debit dans passages etroits, deadlock, cout de calcul). Multi-drones urbains.
+    '''
+    metadata { arxiv '2606.20651'; annee '2026'; nature 'preprint'; corpus '357'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcTrajMECDisaster = specDoc 'Integrated Trajectory Planning, MEC Offloading, and Safety Coordination for Multi-UAV Disaster Response (2026)' {
+    #science
+    link https://doi.org/10.3390/s26175544 "Integrated Trajectory Planning, MEC Offloading, and Safety Coordination for Multi-UAV Disaster Response"
+    description '''
+      Cadre multi-UAV structurant la mission en couches spatiale, temporelle et de surete : formulation 3D-TSPN (Travelling Salesman with Neighbourhoods) pour la collecte de donnees en regions de detection, algorithme genetique Age-of-Information (AoI) pour la sequence de visite, RRT pour l evitement d obstacles. Scenario de reponse catastrophe.
+    '''
+    metadata { doi '10.3390/s26175544'; annee '2026'; nature 'article de revue (Sensors)'; corpus '936'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcEscapeCBF = specDoc 'Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.17292 "Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits"
+    description '''
+      CBF « escape-aware » : une CBF d etat seul certifie des etats dont AUCUNE echappatoire n est atteignable a temps quand la reorientation est bornee par le taux de roulis/tangage (body-rate limit). Caracterise en forme fermee l ecart de certification (proportionnel a la vitesse de fermeture, inverse du body-rate), definit une barriere d echappement sur l etat AUGMENTE (etat + commande precedente), avec inverse analytique pour la vitesse de fermeture maximale certifiable.
+    '''
+    metadata { arxiv '2609.17292'; annee '2026'; nature 'preprint'; corpus '1528'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcUSVFormationFTC = specDoc 'Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults (2026)' {
+    #science
+    link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
+    description '''
+      Controle de formation multi-USV tolerant aux fautes d actionneurs : reseaux de neurones adaptatifs + controle inverse optimal en temps fini. Combine maintien de formation ET tolerance aux fautes d actionneurs pour systemes multi-USV (surface, dans le perimetre). Ocean Engineering 2026. Cette source etait deja CITEE textuellement par SCI-8 (sciFaultTolerantCtrl) sans specDoc propre — ce lot cree le specDoc et le rattache.
+    '''
+    metadata { doi '10.1016/j.oceaneng.2026.127355'; annee '2026'; nature 'article de revue (Ocean Engineering)'; corpus '965'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -786,6 +876,82 @@ model {
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc LOT 1 (2026-09-29)
+  // ===========================================================================
+
+sciBeliefGNSS = finding 'SCI-24 — EKF a confiance GNSS adaptative sous degradation urbaine' {
+    #science
+    link https://arxiv.org/abs/2609.14806 "Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments"
+    description '''
+      srcBeliefAdaptiveEKF traite la fusion GNSS-IMU sous erreurs NON STATIONNAIRES (multipath, blocage, latence) en adaptant en ligne la CONFIANCE accordee au GNSS, au lieu du simple reglage reactif de covariance. Mecanisme complementaire de la famille SCI-5 (qui etablit la pluralite des modalites) : ici la robustesse vient de la CONFIANCE LATENTE, pas d une modalite supplementaire. VERDICT : SUPPORTED pour le mecanisme (confiance latente + out-of-sequence) ; CONDITIONAL — quadrirotor seul (non essaim), validation en simulation, a transposer a la flotte heterogene N=30.
+    '''
+    metadata { verdict 'SUPPORTED (fusion EKF adaptative sous GNSS degrade) / CONDITIONAL (mono-UAV, simulation)'; niveau_preuve 'MEDIUM'; source 'srcBeliefAdaptiveEKF'; correction_modele 'algNavigationGNSSDegrade : adaptation de confiance GNSS sourcee (complement de SCI-5)' }
+  }
+
+  sciMultiUAVCL = finding 'SCI-25 — Localisation cooperative multi-UAV robuste aux delais et pertes' {
+    #science
+    link https://doi.org/10.3390/drones10090681 "Multi-UAV Adaptive Cooperative Localization Method Against Hybrid Abnormal Measurements"
+    description '''
+      srcMultiUAVCL traite la fragilite de la localisation cooperative sous lien DEGRADE (delais + pertes), regime nominal du modele (lien = bonus, pas dependance). Complement de SCI-7 (famille CL) : ici la robustesse aux MESURES ANORMALES. Diagnostic de canal + filtrage augmente + reconstruction GRU. VERDICT : SUPPORTED pour le mecanisme (robustesse aux mesures anormales) ; CONDITIONAL — N=4 UAV simules, reconstruction par reseau GRU (composante apprise, a qualifier vis-a-vis du paradigme deterministe du modele).
+    '''
+    metadata { verdict 'SUPPORTED (robustesse delais/pertes) / CONDITIONAL (N=4, composante GRU apprise)'; niveau_preuve 'MEDIUM'; source 'srcMultiUAVCL'; correction_modele 'algCooperativeLocalization : robustesse aux delais/pertes sourcee (complement de SCI-7)' }
+  }
+
+  sciRotorFailQSF = finding 'SCI-26 — Feedback quasi-statique sous panne rotor avec securite prouvee' {
+    #science
+    link https://arxiv.org/abs/2609.23918 "Quasi-Static Fault-Tolerant Feedback Control of a Quadrotor under Rotor Failure with Provable Safety Guarantees"
+    description '''
+      srcRotorFailQSF joint la tolerance aux fautes (algFaultTolerantControlAlloc, panne d actionneur rotor) et la SECURITE PROUVEE (algSafetyRules, invariance de trajectoire sous panne). Complement de SCI-8 (qui documente l allocation tolérante au niveau actuateur) : ici la combinaison reallocation + GARANTIE FORMELLE de surete. VERDICT : SUPPORTED pour le mecanisme (QSF + invariance de trajectoire) ; CONDITIONAL — mono-quadrirotor, validation numerique, transposition a la flotte N=30 et aux UAV-F non prevue par l article.
+    '''
+    metadata { verdict 'SUPPORTED (FTC + securite prouvee sous panne rotor) / CONDITIONAL (mono-UAV, numerique)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcRotorFailQSF'; correction_modele 'algFaultTolerantControlAlloc + algSafetyRules : invariance de trajectoire sous panne, garantie formelle' }
+  }
+
+  sciMetaPolicySpoof = finding 'SCI-27 — Commutation meta de politique sous spoofing GNSS' {
+    #science
+    link https://doi.org/10.1016/j.ins.2026.124096 "Meta policy switching for resilient UAV navigation in adversarial airspace"
+    description '''
+      srcMetaPolicySpoof traite un regime adversarial DISTINCT de SCI-9 : le SPOOFING GNSS systematique (biais de navigation), alors que SCI-9 couvre le brouillage de communication. Adaptation par meta-commutation de politique sans reentrainement. VERDICT : SUPPORTED pour le mecanisme (commutation meta sous spoofing inedit) ; CONDITIONAL — politique APPRISE (paradigme RL), a reconcilier avec le paradigme deterministe du modele ; mono-UAV.
+    '''
+    metadata { verdict 'SUPPORTED (resilience spoofing GNSS) / CONDITIONAL (politique apprise, mono-UAV)'; niveau_preuve 'MEDIUM'; source 'srcMetaPolicySpoof'; correction_modele 'algJammingResilientMode : adaptation a un spoofing GNSS inedit (complement de SCI-9)' }
+  }
+
+  sciFormationCBF = finding 'SCI-28 — Formation de UAV avec contraintes de securite CBF sous topologie commutante' {
+    #science
+    link https://doi.org/10.3390/s26051477 "Formation Control for UAVs Considering Safety Constraints Based on CBF with Switched Trajectories and Switching Communication Topologies"
+    description '''
+      srcFormationCBF joint formation (algFormationControl) et surete par CBF (algSafetyRules) SOUS TOPOLOGIE COMMUTANTE — le regime exact du modele (liens intermittents, partition). Complement de SCI-11 (formation heterogene) : ici la contrainte de surete sous topologie variable. VERDICT : SUPPORTED pour le mecanisme (CBF + formation sous topologie variable) ; CONDITIONAL — validation a confirmer dans le corps (echelle N, sim/reel non detaillee dans l abstract).
+    '''
+    metadata { verdict 'SUPPORTED (formation + CBF sous topologie variable) / CONDITIONAL (validation a confirmer)'; niveau_preuve 'MEDIUM'; source 'srcFormationCBF'; correction_modele 'algFormationControl + algSafetyRules : formation sure sous topologie commutante' }
+  }
+
+  sciDMPCSafetyZones = finding 'SCI-29 — DMPC avec zones de securite adaptatives multi-flottes' {
+    #science
+    link https://arxiv.org/abs/2606.20651 "Distributed Model Predictive Control with Adaptive Safety Zones for Multi-Fleet Drone Operations"
+    description '''
+      srcDMPCSafetyZones apporte l evitement par zones de securite adaptatives (algCollisionAvoidance) fonde sur une planification DMPC (algPathPlanning) pour flottes multiples. Complement de SCI-14 (MPC tube-based) : ici le rayon de securite ADAPTATIF et l arbitrage debit/deadlock. VERDICT : SUPPORTED pour le mecanisme (rayon adaptatif + DMPC distribue) ; CONDITIONAL — analyse theorique + simulation, echelle flotte a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (evitement par zone adaptative + DMPC) / CONDITIONAL (echelle flotte)'; niveau_preuve 'MEDIUM'; source 'srcDMPCSafetyZones'; correction_modele 'algCollisionAvoidance + algPathPlanning : zones de securite adaptatives sourcees' }
+  }
+
+  sciTrajMECDisaster = finding 'SCI-30 — Planification 3D-TSPN + RRT pour la collecte multi-UAV' {
+    #science
+    link https://doi.org/10.3390/s26175544 "Integrated Trajectory Planning, MEC Offloading, and Safety Coordination for Multi-UAV Disaster Response"
+    description '''
+      srcTrajMECDisaster apporte une planification de trajectoire multi-UAV (algPathPlanning) par 3D-TSPN + GA AoI + RRT, integree a une couche de surete. Complement de SCI-14 (MPC, benchmark) : ici la formulation TSPN pour la collecte de donnees multi-UAV. VERDICT : SUPPORTED pour le mecanisme (3D-TSPN/RRT) ; CONDITIONAL — partie MEC offloading hors perimetre algorithme du modele, scenario catastrophe a transposer a la mission SWARM-3D.
+    '''
+    metadata { verdict 'SUPPORTED (planification 3D-TSPN + RRT) / CONDITIONAL (transposition mission)'; niveau_preuve 'MEDIUM'; source 'srcTrajMECDisaster'; correction_modele 'algPathPlanning : planification 3D-TSPN + RRT sourcee' }
+  }
+
+  sciEscapeCBF = finding 'SCI-31 — CBF « escape-aware » sous limites de taux de rotation' {
+    #science
+    link https://arxiv.org/abs/2609.17292 "Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits"
+    description '''
+      srcEscapeCBF corrige une faille des CBF d etat pour quadrirotors (algSafetyRules / algCollisionAvoidance) : un certificat d etat seul ignore que la reorientation est bornee, donc peut certifier des etats non evacables. Complement de SCI-13 (fondations CBF) et SCI-16 (HOCBF) : ici la barriere sur l etat AUGMENTE (etat + commande precedente). VERDICT : SUPPORTED pour le mecanisme (CBF augmentee, inverse analytique) ; CONDITIONAL — mono-quadrirotor, a transposer a la flotte et aux CBF-QP du modele.
+    '''
+    metadata { verdict 'SUPPORTED (CBF augmentee sous limite de taux) / CONDITIONAL (mono-UAV)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcEscapeCBF'; correction_modele 'algSafetyRules + algCollisionAvoidance : CBF sur etat augmente (input-aware)' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -911,4 +1077,27 @@ model {
   sciCompass -[uses]-> srcCompass 'source primaire lue (arXiv preprint)'
   sciCompass -[evidences]-> algFormationControl 'flocking cohesif commande en langage (apprentissage)'
   sciCompass -[evidences]-> algConsensus 'consensus distribue appris par agregation multi-sauts'
+  // --- Rattachements carte t_3f3134cc LOT 1 (2026-09-29) : 15 sources RATTACHEES ---
+// --- Relations du lot ---
+  sciBeliefGNSS -[evidences]-> algNavigationGNSSDegrade 'fusion GNSS-IMU adaptative sous erreurs non stationnaires'
+  sciBeliefGNSS -[uses]-> srcBeliefAdaptiveEKF 'source primaire'
+  sciMultiUAVCL -[evidences]-> algCooperativeLocalization 'robustesse aux delais et pertes de mesure'
+  sciMultiUAVCL -[uses]-> srcMultiUAVCL 'source primaire'
+  sciRotorFailQSF -[evidences]-> algFaultTolerantControlAlloc 'reallocation sous panne de rotor'
+  sciRotorFailQSF -[evidences]-> algSafetyRules 'securite prouvee : invariance de trajectoire sous panne'
+  sciRotorFailQSF -[uses]-> srcRotorFailQSF 'source primaire'
+  sciMetaPolicySpoof -[evidences]-> algJammingResilientMode 'resilience au spoofing GNSS'
+  sciMetaPolicySpoof -[uses]-> srcMetaPolicySpoof 'source primaire'
+  sciFormationCBF -[evidences]-> algFormationControl 'maintien de formation sous topologie commutante'
+  sciFormationCBF -[evidences]-> algSafetyRules 'contraintes de securite CBF'
+  sciFormationCBF -[uses]-> srcFormationCBF 'source primaire'
+  sciDMPCSafetyZones -[evidences]-> algCollisionAvoidance 'zones de securite adaptatives entre flottes'
+  sciDMPCSafetyZones -[evidences]-> algPathPlanning 'MPC distribue iteratif'
+  sciDMPCSafetyZones -[uses]-> srcDMPCSafetyZones 'source primaire'
+  sciTrajMECDisaster -[evidences]-> algPathPlanning 'planification 3D-TSPN + RRT'
+  sciTrajMECDisaster -[uses]-> srcTrajMECDisaster 'source primaire'
+  sciEscapeCBF -[evidences]-> algSafetyRules 'certificat de securite corrige sous limites d actionneur'
+  sciEscapeCBF -[evidences]-> algCollisionAvoidance 'evitement certifie sous limites de reorientation'
+  sciEscapeCBF -[uses]-> srcEscapeCBF 'source primaire'
+  sciFaultTolerantCtrl -[uses]-> srcUSVFormationFTC 'formation multi-USV tolerante aux fautes d actionneurs (citee par SCI-8)'
 }
