@@ -1,0 +1,134 @@
+{
+ "lot_label": "LOT 15 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 1 deja rattachees / 24 ecartees",
+ "rattachees": [],
+ "deja": [
+  {
+   "number": 626,
+   "title": "AccelMPC- High-Rate, Low-Power FPGA-Accelerated Model Predictive Control for Tiny Drones - arXiv",
+   "existing_src": "srcAccelMPC",
+   "existing_finding": "SCI-14"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 434,
+   "title": "White paper- A perspective on civilian-to-defence research transfer to SDD - arXiv",
+   "reason": "hors-perimetre — livre blanc sur le transfert civil→défense (politique)"
+  },
+  {
+   "number": 588,
+   "title": "Connectivity-Aware Graph Extension for Decentralized Multi-Robot Exploration - arXiv",
+   "reason": "deja-couvert — famille exploration/couverture déjà sourcée par srcCoverageCentral (#135)"
+  },
+  {
+   "number": 589,
+   "title": "Residual Kalman Dynamics for Event-Based UAV Forecasting - arXiv",
+   "reason": "pas-algorithme-canonique — prévision de bounding-box par Kalman résiduel (perception)"
+  },
+  {
+   "number": 590,
+   "title": "Multimodal RGB-Infrared Combination for UAV-Based Wildfire Segmentation- A Comparative Study on FLAME3 - arXiv",
+   "reason": "pas-algorithme-canonique — segmentation de feux par fusion RGB-IR (perception)"
+  },
+  {
+   "number": 591,
+   "title": "Autonomous robotic bridging using distributed swarm control without inter-agent communication - arXiv",
+   "reason": "pas-algorithme-canonique — assemblage de pont flottant par essaim USV (application génie)"
+  },
+  {
+   "number": 613,
+   "title": "SDN-Orchestrated Dual-Path 5G-SATCOM Maritime Communications for Carrier Strike Groups - arXiv",
+   "reason": "pas-algorithme-canonique — orchestration SDN 5G-SATCOM maritime (réseau)"
+  },
+  {
+   "number": 618,
+   "title": "SMaRT-Tug- Structured Multi-Agent Reinforcement Learning for Physics-Based Tugboat-Barge Collaborative Manipulation - arXiv",
+   "reason": "hors-perimetre — MARL pour remorqueurs maritimes (manipulation de barges)"
+  },
+  {
+   "number": 622,
+   "title": "Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Dataset and Agentic Method - arXiv",
+   "reason": "paradigme-exclu — recherche d objet air-sol par VLM agentique (AGOS)"
+  },
+  {
+   "number": 627,
+   "title": "Decision Transformer for UAV-Mounted RIS-Assisted Dynamic D2D Communications - arXiv",
+   "reason": "paradigme-exclu — Decision Transformer pour communications RIS (politique apprise)"
+  },
+  {
+   "number": 629,
+   "title": "Future-Aware Flow Planning for Safe UAV Target Following - arXiv",
+   "reason": "pas-algorithme-canonique — suivi de cible mono-UAV par planification de flux (future-aware)"
+  },
+  {
+   "number": 933,
+   "title": "Deep Learning-Driven Throughput Prediction in 5G for UAV-Assisted Emergency Response - DOI",
+   "reason": "pas-algorithme-canonique — prédiction de débit 5G pour déploiement UAV (réseau)"
+  },
+  {
+   "number": 934,
+   "title": "Efficient Exploration-Enabled Multi-Agent Reinforcement Learning for Multi-UAV Cooperative Target Search - DOI",
+   "reason": "paradigme-exclu — AEQMIX = MARL pour recherche de cibles (politique apprise)"
+  },
+  {
+   "number": 939,
+   "title": "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operati - DOI",
+   "reason": "pas-algorithme-canonique — C2 d essaim USV avec jumeau numérique (couche commandement)"
+  },
+  {
+   "number": 948,
+   "title": "Joint UAV activation and placement for post-disaster wireless restoration via a hybrid quantum-inspired evolutionary framework - DOI",
+   "reason": "pas-algorithme-canonique — placement de UAV comme stations de base (déploiement réseau)"
+  },
+  {
+   "number": 949,
+   "title": "Rating-aware graded security offloading and cost optimization for UAV-assisted MEC networks - DOI",
+   "reason": "pas-algorithme-canonique — offloading sécurisé en MEC assistée par UAV (réseau)"
+  },
+  {
+   "number": 950,
+   "title": "Privacy-preserving techniques in UAV networks- A systematic literature review of methods, tools, and future directions - DOI",
+   "reason": "non-primaire — revue systématique de techniques de préservation de vie privée (SLR)"
+  },
+  {
+   "number": 962,
+   "title": "Online parameter identification and dynamic model reconstruction for AUV based on adaptive extended Kalman filter and prediction error method - DOI",
+   "reason": "hors-perimetre — identification de paramètres d AUV (sous-marin)"
+  },
+  {
+   "number": 967,
+   "title": "Terminal-offloading-aware AUV–USV cooperative inspection routing under ocean-current and acoustic communication constraints - DOI",
+   "reason": "hors-perimetre — routage d inspection AUV-USV sous contraintes acoustiques (sous-marin)"
+  },
+  {
+   "number": 969,
+   "title": "A Digital Twin-Enabled Simulation Framework for Multi-Objective Optimization and Control of Risk-Aware, Low-Carbon, and Resilient Truck–Drone Routing - DOI",
+   "reason": "pas-algorithme-canonique — routage camion-drone par jumeau numérique (logistique)"
+  },
+  {
+   "number": 973,
+   "title": "Hybrid IRSNOMA Framework for Turbulence Resilient Underwater Visible Light Communication - DOI",
+   "reason": "hors-perimetre — communication optique visible sous-marine (IRSNOMA)"
+  },
+  {
+   "number": 976,
+   "title": "A Q-learning-based intelligent handover framework for Li-Fi-RF-enabled VANET and FANET networks using IEEE 802.11p - DOI",
+   "reason": "pas-algorithme-canonique — handover Q-learning VANET/FANET (réseau)"
+  },
+  {
+   "number": 979,
+   "title": "Analysis of the Economic Efficiency of UAV Delivery of Medical and Small-Sized Cargo- A Case Study of the East Kazakhstan Region - DOI",
+   "reason": "hors-perimetre — analyse économique de livraison médicale par UAV (logistique)"
+  },
+  {
+   "number": 981,
+   "title": "Internet of Things–Enabled Sensing and Unmanned Aerial Vehicle Applications for Earthquake Preparedness and Real-Time Response - DOI",
+   "reason": "non-primaire — revue bibliométrique IoT+UAV pour séismes"
+  },
+  {
+   "number": 984,
+   "title": "Multi-agent Reinforcement Learning for Vehicular Task Offloading in Multi-UAV-Assisted Edge Computing - DOI",
+   "reason": "paradigme-exclu — MARL pour offloading véhiculaire (politique apprise)"
+  }
+ ]
+}

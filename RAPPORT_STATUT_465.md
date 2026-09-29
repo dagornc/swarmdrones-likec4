@@ -635,3 +635,41 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 52
+
+---
+
+## LOT 15 (2026-09-29)
+
+### DEJA_RATTACHEE (déjà statués — pas de doublon)
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 626 | AccelMPC- High-Rate, Low-Power FPGA-Accelerated Model Predictive Contr | srcAccelMPC | SCI-14 |
+
+### ECARTEE (24)
+| # | Titre | Raison |
+|---|-------|--------|
+| 434 | White paper- A perspective on civilian-to-defence research transfer to | hors-perimetre — livre blanc sur le transfert civil→défense (politique) |
+| 588 | Connectivity-Aware Graph Extension for Decentralized Multi-Robot Explo | deja-couvert — famille exploration/couverture déjà sourcée par srcCoverageCentral (#135) |
+| 589 | Residual Kalman Dynamics for Event-Based UAV Forecasting - arXiv | pas-algorithme-canonique — prévision de bounding-box par Kalman résiduel (perception) |
+| 590 | Multimodal RGB-Infrared Combination for UAV-Based Wildfire Segmentatio | pas-algorithme-canonique — segmentation de feux par fusion RGB-IR (perception) |
+| 591 | Autonomous robotic bridging using distributed swarm control without in | pas-algorithme-canonique — assemblage de pont flottant par essaim USV (application génie) |
+| 613 | SDN-Orchestrated Dual-Path 5G-SATCOM Maritime Communications for Carri | pas-algorithme-canonique — orchestration SDN 5G-SATCOM maritime (réseau) |
+| 618 | SMaRT-Tug- Structured Multi-Agent Reinforcement Learning for Physics-B | hors-perimetre — MARL pour remorqueurs maritimes (manipulation de barges) |
+| 622 | Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Data | paradigme-exclu — recherche d objet air-sol par VLM agentique (AGOS) |
+| 627 | Decision Transformer for UAV-Mounted RIS-Assisted Dynamic D2D Communic | paradigme-exclu — Decision Transformer pour communications RIS (politique apprise) |
+| 629 | Future-Aware Flow Planning for Safe UAV Target Following - arXiv | pas-algorithme-canonique — suivi de cible mono-UAV par planification de flux (future-aware) |
+| 933 | Deep Learning-Driven Throughput Prediction in 5G for UAV-Assisted Emer | pas-algorithme-canonique — prédiction de débit 5G pour déploiement UAV (réseau) |
+| 934 | Efficient Exploration-Enabled Multi-Agent Reinforcement Learning for M | paradigme-exclu — AEQMIX = MARL pour recherche de cibles (politique apprise) |
+| 939 | Design and Development of a Command and Control System for an Unmanned | pas-algorithme-canonique — C2 d essaim USV avec jumeau numérique (couche commandement) |
+| 948 | Joint UAV activation and placement for post-disaster wireless restorat | pas-algorithme-canonique — placement de UAV comme stations de base (déploiement réseau) |
+| 949 | Rating-aware graded security offloading and cost optimization for UAV- | pas-algorithme-canonique — offloading sécurisé en MEC assistée par UAV (réseau) |
+| 950 | Privacy-preserving techniques in UAV networks- A systematic literature | non-primaire — revue systématique de techniques de préservation de vie privée (SLR) |
+| 962 | Online parameter identification and dynamic model reconstruction for A | hors-perimetre — identification de paramètres d AUV (sous-marin) |
+| 967 | Terminal-offloading-aware AUV–USV cooperative inspection routing under | hors-perimetre — routage d inspection AUV-USV sous contraintes acoustiques (sous-marin) |
+| 969 | A Digital Twin-Enabled Simulation Framework for Multi-Objective Optimi | pas-algorithme-canonique — routage camion-drone par jumeau numérique (logistique) |
+| 973 | Hybrid IRSNOMA Framework for Turbulence Resilient Underwater Visible L | hors-perimetre — communication optique visible sous-marine (IRSNOMA) |
+| 976 | A Q-learning-based intelligent handover framework for Li-Fi-RF-enabled | pas-algorithme-canonique — handover Q-learning VANET/FANET (réseau) |
+| 979 | Analysis of the Economic Efficiency of UAV Delivery of Medical and Sma | hors-perimetre — analyse économique de livraison médicale par UAV (logistique) |
+| 981 | Internet of Things–Enabled Sensing and Unmanned Aerial Vehicle Applica | non-primaire — revue bibliométrique IoT+UAV pour séismes |
+| 984 | Multi-agent Reinforcement Learning for Vehicular Task Offloading in Mu | paradigme-exclu — MARL pour offloading véhiculaire (politique apprise) |
+
