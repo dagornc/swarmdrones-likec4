@@ -22,6 +22,7 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 2   | 25       | 5 (4 findings + 1 complétion SCI-6) | 2 | 18 | SCI-32..35 |
 | 3   | 25       | 4 findings | 4 | 17 | SCI-36..39 |
 | 4   | 25       | 2 findings | 2 | 21 | SCI-40..41 |
+| 5   | 25       | 3 findings | 2 | 20 | SCI-42..44 |
 
 ---
 
@@ -204,3 +205,49 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 ## Validation lot 4
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - SCI jusqu'a 41
+
+
+---
+
+## LOT 5 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 211 | Event-Driven CBBA (reduced communication) | algTaskAllocation + algEventTriggeredComm | srcEventDrivenCBBA | SCI-42 |
+| 1590 | CC-OPI online distributed task allocation under comm constraints | algTaskAllocation | srcCCOPI | SCI-43 |
+| 2278 | Assignment-Preserving Replanning (APR) | algTaskAllocation | srcAPR | SCI-44 |
+
+### DEJA_RATTACHEE
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 200 | Vortex APF local minima | srcVAPF | SCI-14 |
+| 311 | ImpedanceDiffusion path planning | srcImpedanceDiffusion | SCI-14 |
+
+### ECARTEE (20)
+| # | Titre | Raison |
+|---|-------|--------|
+| 937 | Multi-threaded best-first search allocation | non-verifiable |
+| 943 | Allocation collaborative + precedence | non-verifiable |
+| 956 | Coalition auction ISAC | pas-algorithme-canonique — ISAC |
+| 957 | UAV crowd counting (media) | pas-algorithme-canonique — comptage de foule |
+| 959 | Homogeneous vs heterogeneous allocation | non-verifiable (facteurs humains) |
+| 1010 | Survival-probability clustering allocation | non-verifiable |
+| 1029 | Chaos + adaptive GA allocation | non-verifiable |
+| 1032 | ViTDrone explainable ViT steering | paradigme-exclu — perception apprise ViT |
+| 1040 | Helicopter rescue NSGA-II scheduling | hors-perimetre — hélicoptères |
+| 1757 | AgenticSwarm semantic allocation | pas-algorithme-canonique — framework LLM |
+| 1797 | DPP-GCMARL patrol MEC | paradigme-exclu — MARL + MEC |
+| 1800 | Marine UAV task assignment (metaheuristiques) | deja-couvert — SCI-1/SCI-14 |
+| 2115 | FlockDiffusion diffusion allocation | paradigme-exclu — diffusion apprise |
+| 2192 | CC-OPI (doublon #1590) | doublon |
+| 2263 | FlockDiffusion (doublon #2115) | doublon |
+| 2289 | Pattern-aware assignment multi-AUV | hors-perimetre — AUV |
+| 912 | Trajectory + resource MEC (MADRL) | paradigme-exclu — MADRL + MEC |
+| 931 | USV path planning A*+DWA | deja-couvert — SCI-14 |
+| 947 | Amphibious UAV simultaneous arrival (PSO) | deja-couvert — SCI-14 |
+| 977 | MSGSO 3D path planning | deja-couvert — SCI-14 |
+
+## Validation lot 5
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- SCI jusqu'a 44

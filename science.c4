@@ -499,6 +499,41 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_3f3134cc LOT05 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 5 (2026-09-29, carte t_3f3134cc) — 3 nouveaux verdicts / 2 deja rattachees / 20 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcEventDrivenCBBA = specDoc 'Event Driven CBBA with Reduced Communication (2025)' {
+    #science
+    link https://arxiv.org/abs/2509.06481 "Event Driven CBBA with Reduced Communication"
+    description '''
+      CBBA declenche par evenement pour reduire la communication : le CBBA classique exige une communication continue (congestion, pertes). Mecanisme de communication event-driven qui maintient la convergence ET les bornes de performance du CBBA — qualite de solution EGALE a CBBA prouvee theoriquement, validee par simulations Monte-Carlo sur tailles de flotte et portees variables.
+    '''
+    metadata { arxiv '2509.06481'; annee '2025'; nature 'preprint'; corpus '211'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcCCOPI = specDoc 'CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.19208 "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints"
+    description '''
+      Allocation de taches distribuee en ligne SOUS CONTRAINTE DE COMMUNICATION : quand la portee courte fragmente l essaim en ilots d information transitoires, le paradigme « allouer-puis-executer » (consensus global avant tout mouvement) s effondre. CC-OPI entrelace la NEGOCIATION de taches et l EXECUTION physique : replanification seulement aux evenements physiques/topologiques discrets, metriques de cout adaptees aux topologies dynamiques (penalite de localite spatiale, urgence deadline-aware), verrou d etat non-preemptif.
+    '''
+    metadata { arxiv '2609.19208'; annee '2026'; nature 'preprint'; corpus '1590'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcAPR = specDoc 'Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems (2026)' {
+    #science
+    link https://doi.org/10.3390/app16199414 "Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems"
+    description '''
+      Replanification PRESERVANT L AFFECTATION (APR) pour l allocation dynamique : au lieu du replanning global (qui casse des affectations encore valides), APR herite l etat operationnel, partitionne les taches inachevees en directement affectees / initialement non affectees, protege les affectations valides et la structure de route, puis ne libere que les taches protegees en conflit si la faisabilite ne peut etre retablie. Evaluee contre repair constructif, replanning partiel et deux methodes globales.
+    '''
+    metadata { doi '10.3390/app16199414'; annee '2026'; nature 'article de revue (Applied Sciences)'; corpus '2278'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1175,6 +1210,36 @@ sciCommFreeCoord = finding 'SCI-40 — Coordination multi-UAV sans communication
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc LOT05 (2026-09-29)
+  // ===========================================================================
+
+sciEventDrivenCBBA = finding 'SCI-42 — CBBA declenche par evenement a communication reduite' {
+    #science
+    link https://arxiv.org/abs/2509.06481 "Event Driven CBBA with Reduced Communication"
+    description '''
+      srcEventDrivenCBBA resout le couplage CBBA (algTaskAllocation) x budget de communication (algEventTriggeredComm) : declencher les encheres sur evenement conserve les bornes de qualite de CBBA tout en reduisant le trafic — exactement le regime du modele (lien intermittent, N=30). Complement de SCI-1 (CBBA nominal) et de SCI-6 (event-triggered generique). VERDICT : SUPPORTED pour le mecanisme (CBBA event-driven, bornes conservees) ; CONDITIONAL — simulation Monte-Carlo, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (CBBA event-driven, bornes conservees) / CONDITIONAL (simulation, echelle)'; niveau_preuve 'MEDIUM'; source 'srcEventDrivenCBBA'; correction_modele 'algTaskAllocation + algEventTriggeredComm : CBBA sous budget de communication source' }
+  }
+
+  sciCCOPI = finding 'SCI-43 — Allocation en ligne entrelacee a l execution sous connectivite intermittente' {
+    #science
+    link https://arxiv.org/abs/2609.19208 "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints"
+    description '''
+      srcCCOPI traite le cas ou le consensus GLOBAL avant mouvement (postulat de CBBA) devient irrealisable sous connectivite intermittente : l allocation est entrelacee a l execution. Directement pertinent pour algTaskAllocation sous partition (risque R-4 du modele). VERDICT : SUPPORTED pour le mecanisme (allocation online + verrou d etat) ; CONDITIONAL — simulation, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (allocation online sous contrainte de communication) / CONDITIONAL (simulation, echelle)'; niveau_preuve 'MEDIUM'; source 'srcCCOPI'; correction_modele 'algTaskAllocation : allocation entrelacee a l execution sous partition sourcee' }
+  }
+
+  sciAPR = finding 'SCI-44 — Replanification preservant l affectation en allocation dynamique' {
+    #science
+    description '''
+      srcAPR apporte la REPARATION INCREMENTALE de l allocation dynamique (algTaskAllocation) : proteger les affectations valides lors d un evenement (nouvelle tache, panne UAV, fenetre temporelle) evite les perturbations en cascade du replanning global — pertinent pour la stabilite de mission du modele. VERDICT : SUPPORTED pour le mecanisme (reparation preservant l affectation) ; CONDITIONAL — validation a confirmer dans le corps (simulation).
+    '''
+    metadata { verdict 'SUPPORTED (replanification preservant l affectation) / CONDITIONAL (validation)'; niveau_preuve 'MEDIUM'; source 'srcAPR'; correction_modele 'algTaskAllocation : reparation incrementale de l allocation sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1360,4 +1425,13 @@ sciCommFreeCoord = finding 'SCI-40 — Coordination multi-UAV sans communication
   sciConsensusPF -[evidences]-> algConsensus 'consensus distribue sur estimation (filtre particulaire)'
   sciConsensusPF -[evidences]-> algPerceptionFusion 'suivi de cible par fusion distribuee'
   sciConsensusPF -[uses]-> srcConsensusPF 'source primaire'
+  // --- Rattachements carte t_3f3134cc LOT05 (2026-09-29) ---
+// --- Relations du lot ---
+  sciEventDrivenCBBA -[evidences]-> algTaskAllocation 'CBBA declenche par evenement, bornes conservees'
+  sciEventDrivenCBBA -[evidences]-> algEventTriggeredComm 'communication d enchere sur evenement'
+  sciEventDrivenCBBA -[uses]-> srcEventDrivenCBBA 'source primaire'
+  sciCCOPI -[evidences]-> algTaskAllocation 'allocation en ligne sous ilots de communication transitoires'
+  sciCCOPI -[uses]-> srcCCOPI 'source primaire'
+  sciAPR -[evidences]-> algTaskAllocation 'replanification incrementale preservant les affectations valides'
+  sciAPR -[uses]-> srcAPR 'source primaire'
 }
