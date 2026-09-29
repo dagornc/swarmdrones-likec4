@@ -21,7 +21,9 @@ Scripts réutilisables pour poursuivre la campagne (lots restants 7-19).
 - La validation ne couvre que la syntaxe : vérifier I-1/I-2 via export JSON (lc_final_integrity.py).
 
 ## État au 2026-09-29
-- 150/465 statués (lots 1-6, commits debd594..66cc2f2).
-- 26 RATTACHEE (SCI-24..47 + 2 complétions SCI-6/SCI-8), 17 DEJA_RATTACHEE, 1 DEJA_ECARTEE (#134), 106 ECARTEE.
-- Ledger consolidé : ledger_statut_465.json.
-- Le push vers GitHub échoue dans la session architecte (gh non authentifié) — passer par l'orchestrateur/Christophe.
+- 465/465 statués (lots 1-19, commits debd594..HEAD).
+- Lots 1-6 (carte t_3f3134cc) : 150 statués — 26 RATTACHEE (SCI-24..47 + 2 complétions SCI-6/SCI-8), 17 DEJA_RATTACHEE, 1 DEJA_ECARTEE (#134), 106 ECARTEE.
+- Lots 7-19 (carte t_529dfd75) : 315 statués — 8 RATTACHEE (SCI-48..55), 8 DEJA_RATTACHEE, 299 ECARTEE (dont 23 doublons intra-corpus).
+- Total consolidé : 406 ECARTEE, 34 RATTACHEE, 25 DEJA_RATTACHEE (ledger_statut_465.json).
+- SCI max : 55 (SCI-55 capture de cible). science.c4 : 119 specDocs + 64 findings.
+- Le push vers GitHub échoue dans la session architecte (gh non authentifié) — passer par l'orchestrateur/Christophe. La publication du modèle servi exige `docker restart likec4` (autorisation Christophe).

@@ -1,5 +1,5 @@
 import json
-model = json.load(open('/tmp/lc_v7/out/qa.json'))
+model = json.load(open('/tmp/lc_v7/likec4.json'))
 proj = model[0] if isinstance(model, list) else model
 els = proj['elements']; rels = proj['relations']
 

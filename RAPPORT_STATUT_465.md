@@ -1,4 +1,4 @@
-# RAPPORT — Statut des 465 articles « direct + A-primary-candidate » (carte t_3f3134cc)
+# RAPPORT — Statut des 465 articles « direct + A-primary-candidate » (cartes t_3f3134cc + t_529dfd75)
 
 Campagne d'arbitrage du corpus de veille : 465 articles `scope.level == "direct"` ET `trust == "A-primary-candidate"`.
 Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc + finding + evidences) ou `ECARTEE` (raison documentée), ou `DEJA_RATTACHEE` (déjà statué par une carte antérieure).
@@ -819,3 +819,17 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | 2302 | A Proposed UAV-BIM-Integrated Earned Value Management Framework with a | hors-perimetre — EVM intégré UAV-BIM pour construction (gestion de projet) |
 | 2304 | A physics-aware digital twin for correcting moisture-induced material  | hors-perimetre — jumeau numérique de capteurs PM2.5 (calibration environnementale) |
 
+
+---
+## Bilan final (465/465)
+
+| Statut | Effectif |
+|--------|----------|
+| RATTACHEE | 34 (26 lots 1-6 + 8 lots 7-19) |
+| DEJA_RATTACHEE | 25 (17 + 8) |
+| ECARTEE | 406 (106 + 1 deja-ecartee + 299) |
+
+- SCI créés : SCI-24..55 (32 nouveaux findings + 2 complétions SCI-6/SCI-8).
+- Lots 7-19 : 8 RATTACHEE (SCI-48..55), 8 DEJA_RATTACHEE, 299 ECARTEE dont 23 doublons intra-corpus.
+- science.c4 : 119 specDocs + 64 findings ; likec4 validate ✓ Valid après chaque lot ; intégrité I-1/I-2/I-7 propres.
+- Campagne terminée : les 465 articles « direct + A-primary-candidate » ont un statut explicite et traçable.

@@ -1,5 +1,27 @@
 [
  {
+  "number": 59,
+  "title": "Online Trajectory Optimization Using Inexact Gradient Feedback for Time-Varying Environments - arXiv",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non extrait (arXiv 2001.00685), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 66,
+  "title": "arXiv-2005.07371v2 [cs.AI] 12 Mar 2021",
+  "status": "RATTACHEE",
+  "specdoc": "srcRHCRMAPF",
+  "finding": "sciRHCRMAPF",
+  "algs": [
+   "algPathPlanning",
+   "algCollisionAvoidance"
+  ],
+  "lot": 14
+ },
+ {
   "number": 79,
   "title": "Centralized Task Allocation and Alignment Based on Constraint Table and Alignment Rules",
   "status": "ECARTEE",
@@ -20,6 +42,16 @@
   "lot": 6
  },
  {
+  "number": 93,
+  "title": "Partially Observable Mean Field Multi-Agent Reinforcement Learning Based on Graph–Attention - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MARL champ moyen + graph-attention (politique apprise + GNN)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
   "number": 94,
   "title": "Survey on the Developments of Unmanned Marine Vehicles- Intelligence and Cooperation",
   "status": "ECARTEE",
@@ -28,6 +60,16 @@
   "finding": "",
   "algs": [],
   "lot": 6
+ },
+ {
+  "number": 96,
+  "title": "QuadSwarm- A Modular Multi-Quadrotor Simulator for Deep Reinforcement Learning with Direct Thrust Co",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — simulateur QuadSwarm pour RL (outillage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
  },
  {
   "number": 104,
@@ -80,6 +122,15 @@
   "lot": 6
  },
  {
+  "number": 135,
+  "title": "Centralization vs. decentralization in multi-robot coverage- Ground robots under UAV supervision - a",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcCoverageCentral",
+  "finding": "SCI-20",
+  "algs": [],
+  "lot": 13
+ },
+ {
   "number": 138,
   "title": "Control Barrier Function-Based Collision Avoidance Guidance Strategy for Multi-Fixed-Wing UAV Pursui",
   "status": "DEJA_RATTACHEE",
@@ -96,6 +147,16 @@
   "finding": "SCI-18",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 174,
+  "title": "Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Under High-Speed Condition - MDP",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — modélisation de câble USV-UUV (mécanique marine)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
  },
  {
   "number": 177,
@@ -209,6 +270,25 @@
   "lot": 5
  },
  {
+  "number": 212,
+  "title": "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control - arXiv",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcHRLMPC",
+  "finding": "SCI-14",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 217,
+  "title": "Curriculum-Based Iterative Self-Play for Scalable Multi-Drone Racing - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — CRUISE = curriculum self-play (RL), politique apprise de course, pas un des 15 algos",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
   "number": 221,
   "title": "Enabling Cooperative Autonomy in UUV Clusters- A Survey of Robust State Estimation and Information F",
   "status": "DEJA_RATTACHEE",
@@ -236,6 +316,86 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 235,
+  "title": "Scalable Pursuit–Evasion Game for Multi-Fixed-Wing UAV Based on Dynamic Target Assignment and Hierar",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 236,
+  "title": "A Comprehensive Review of Path-Planning Algorithms for Multi-UAV Swarms - MDPI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue complete d algorithmes de planification de chemin multi-UAV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 239,
+  "title": "MultiUAV-Plat- An LLM-Oriented Platform, Benchmark and Framework for Multi-UAV Collaborative Task Pl",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — plateforme LLM (MultiUAV-Plat), orchestration par LLM",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 240,
+  "title": "Autonomous Navigation at the Nano-Scale- Algorithms, Architectures, and Constraints",
+  "status": "ECARTEE",
+  "reason": "non-primaire — survol/tutoriel navigation nano-UAV (matériel + architectures), pas une source primaire d algorithme",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 246,
+  "title": "Agentic AI Meets Edge Computing in Autonomous UAV Swarms - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — agentic AI + LLM (LangGraph) pour essaim UAV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 249,
+  "title": "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Lear",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation collective par LiDAR + DRL (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 261,
+  "title": "Integrated Sensing, Communication and Control enabled Agile UAV Swarm - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — ISCC (sensing/communication/contrôle intégrés), couche réseau",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 277,
+  "title": "DTVIRM-Swarm- A Distributed and Tightly Integrated Visual-Inertial ...",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — famille VI-odométrie/SLAM déjà sourcée par SCI-5 (srcSlamSurvey)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
  },
  {
   "number": 279,
@@ -269,6 +429,26 @@
   "lot": 1
  },
  {
+  "number": 290,
+  "title": "Learning-Based Multi-Robot Active SLAM- A Conceptual Framework and Survey - MDPI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — survey/framework conceptuel de SLAM actif multi-robots",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 291,
+  "title": "Curriculum Reinforcement Learning for Quadrotor Racing with Random Obstacles - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — curriculum RL pour course de quadrirotors (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
   "number": 292,
   "title": "High-Speed Vision-Based Flight in Clutter with Safety-Shielded Reinforcement Learning",
   "status": "ECARTEE",
@@ -277,6 +457,16 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 293,
+  "title": "Learning Agile Quadrotor Flight in the Real World - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — vol agile appris (RL, apprentissage résiduel de dynamique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
  },
  {
   "number": 302,
@@ -334,6 +524,65 @@
   "lot": 5
  },
  {
+  "number": 312,
+  "title": "A Classification of Heterogeneity in Uncrewed Vehicle Swarms and the Effects of Its Inclusion on Ove",
+  "status": "ECARTEE",
+  "reason": "non-primaire — classification/taxonomie de l hétérogénéité des essaims, pas une source primaire",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 313,
+  "title": "Enhancing Drone Light Shows Performances- Optimal Allocation and Trajectories for Swarm Drone Format",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract = sommaire HTML, contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 314,
+  "title": "Multi-AUV Cooperative Target Tracking Based on Supervised Diffusion-Aided Multi-Agent Reinforcement ",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — suivi de cible multi-AUV sous-marins (diffusion MARL), hors flotte aérien+surface",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 315,
+  "title": "Safe Swarm Navigation in Constrained Environments- A Dynamic Tube-Based Distributed MPC Approach - M",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcDMPCTube",
+  "finding": "SCI-14",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 316,
+  "title": "Research on Integrated Decision-Control Cooperative Target Assignment for Cross-Domain Unmanned Syst",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 317,
+  "title": "APF-Driven Lightweight UAV Swarm Trajectory Optimization in GNSS-Denied Air–Terrestrial Navigation -",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — famille APF (champ de potentiel) déjà sourcée par srcVAPF (#200)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
   "number": 322,
   "title": "Adaptive Event-Triggered-Based Consensus Control for QUAV Formation System with External Disturbance",
   "status": "RATTACHEE",
@@ -346,6 +595,26 @@
   "lot": 2
  },
  {
+  "number": 328,
+  "title": "Multi-Agent Reinforcement Learning for Multi-UAV Pursuit with Full Planar Motion and a Limited Detec",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MARL pour poursuite multi-UAV (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 333,
+  "title": "Measurement-Informed Latency Limits for Real-Time UAV Swarm ...",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non extrait (MDPI), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
   "number": 335,
   "title": "Dynamic Event-Triggered Consensus Algorithm for Economic Dispatch in Microgrids - MDPI",
   "status": "ECARTEE",
@@ -354,6 +623,65 @@
   "finding": "",
   "algs": [],
   "lot": 2
+ },
+ {
+  "number": 337,
+  "title": "Say the Mission, Execute the Swarm- Agent-Enhanced LLM Reasoning in the Web-of-DronesThis paper has ",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — exécution de mission par LLM (Web-of-Drones, MCP)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 338,
+  "title": "Secure UAV Swarms in Low-Altitude Wireless Networks- Challenges and Solutions - arXiv",
+  "status": "ECARTEE",
+  "reason": "non-primaire — article défis+solutions sécurité réseau (position paper), pas une source primaire d algorithme",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 340,
+  "title": "Cooperative UAV Swarm Communication Networks for Rapid Disaster Assessment in GPS-Denied Environment",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — réseaux de communication d essaim en GPS-denied (couche réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 351,
+  "title": "Autonomous Cooperative Drone Swarms for Countering Drones via Multi-Agent Deep Reinforcement Learnin",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MADRL de contre-mesure de drones (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 353,
+  "title": "Hierarchical Reinforcement Learning for Large-Scale Heterogeneous UAV Mission Planning via MCTS and ",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — RL hiérarchique + MCTS pour planification de mission (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 356,
+  "title": "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms - arXiv",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcDiff4D",
+  "finding": "SCI-14",
+  "algs": [],
+  "lot": 7
  },
  {
   "number": 357,
@@ -368,6 +696,26 @@
   "lot": 1
  },
  {
+  "number": 358,
+  "title": "[2606.21206] Local Conformity-Based Evolutionary Game Modeling of UAV Swarm Under Byzantine Attack -",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — modélisation par jeu évolutionnaire sous attaque byzantine (théorie des jeux)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 364,
+  "title": "A Review of Reinforcement Learning for Multirotor UAVs from a Hierarchical Control Perspective- Biom",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue RL pour multirotors (perspective contrôle hiérarchique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
   "number": 371,
   "title": "Dynamic Event-Triggered Consensus Formation Control Method for Multi-Leader UAVs with Communication ",
   "status": "RATTACHEE",
@@ -378,6 +726,36 @@
    "algEventTriggeredComm"
   ],
   "lot": 2
+ },
+ {
+  "number": 375,
+  "title": "Dec-MARVEL- Decentralized Multi-Agent Exploration without Communication under Budget Constraints - a",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — Dec-MARVEL = exploration MARL décentralisée sans communication",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 376,
+  "title": "LLM-Centric Agentic AI for UAV Swarms- Architecture, Enabling Technologies, and Open Problems - arXi",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — LLM agentique pour essaim UAV (LAUS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 377,
+  "title": "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection d intrusion fédérée (sécurité réseau), pas un des 15 algos",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
  },
  {
   "number": 378,
@@ -410,6 +788,86 @@
   "lot": 3
  },
  {
+  "number": 434,
+  "title": "White paper- A perspective on civilian-to-defence research transfer to SDD - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — livre blanc sur le transfert civil→défense (politique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 437,
+  "title": "The Evolving Landscape of Unmanned Aircraft Systems- A Review of Current Challenges and Future Scena",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue du paysage UAS (défis et scénarios futurs)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 7
+ },
+ {
+  "number": 586,
+  "title": "Fleets Need a Context Plane- Rethinking Cooperative Perception for Autonomous Drones - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — partage de features pour perception coopérative (bande passante), pas un des 15 algos",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 588,
+  "title": "Connectivity-Aware Graph Extension for Decentralized Multi-Robot Exploration - arXiv",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — famille exploration/couverture déjà sourcée par srcCoverageCentral (#135)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 589,
+  "title": "Residual Kalman Dynamics for Event-Based UAV Forecasting - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — prévision de bounding-box par Kalman résiduel (perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 590,
+  "title": "Multimodal RGB-Infrared Combination for UAV-Based Wildfire Segmentation- A Comparative Study on FLAME3 - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — segmentation de feux par fusion RGB-IR (perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 591,
+  "title": "Autonomous robotic bridging using distributed swarm control without inter-agent communication - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — assemblage de pont flottant par essaim USV (application génie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 592,
+  "title": "Evaluating Multimodal LLMs as Generalist Vision-Language-Action Agents for Drone Control- Commanding, Approaching, Tracking and Searching - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MLLM comme agent de contrôle de drone (DroneCATS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
   "number": 593,
   "title": "Vision-Based Leader-Follower Formation Control for Cooperative UAVs in GPS-Degraded Environments - arXiv",
   "status": "DEJA_RATTACHEE",
@@ -431,6 +889,26 @@
   "lot": 3
  },
  {
+  "number": 595,
+  "title": "UAV Thermal Imagery for Inert Ordnance Screening- Multi Campaign Dataset Development,Object Detection, and Practical Recommendations - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de munitions par imagerie thermique (déminage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 596,
+  "title": "Evidential Deep Learning for Multi-Modal Anti-UAV Detection - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection anti-UAV par deep learning évidentiel (perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
   "number": 597,
   "title": "Curriculum-Guided Reinforcement Learning for Energy-Efficient UAV-ISAC in Post-Disaster Search-and-Rescue Operations - arXiv",
   "status": "ECARTEE",
@@ -441,6 +919,86 @@
   "lot": 2
  },
  {
+  "number": 600,
+  "title": "Quantum-Based k-Coverage Optimization for UAV-Aided Search and Rescue Missions - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — optimisation quantique QUBO pour k-couverture RF",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 601,
+  "title": "KSG-Net- Key-Sparse and Global-Context Learning for Maritime 3D Ship Detection - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection 3D de navires maritime (perception mono-capteur), pas d essaim",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 604,
+  "title": "From Multi-Fisheye Sensing to Panoramic Perception- A Parallax-Aware Onboard Platform for Ultra-Low-Altitude UAVs - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — plateforme caméra fisheye panoramique embarquée",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 605,
+  "title": "RGB-to-IR image translation for infrared vehicle detection in unseen UAV domains - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — traduction RGB→IR pour détection (modèle génératif)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 606,
+  "title": "Advancing Accessible Underwater Robotics- The Mini-Girona I-AUV at RAMI 2025 - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — plateforme I-AUV sous-marine (Mini-Girona)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 607,
+  "title": "Evaluating Graph Neural Networks for Change-Criticality Classification in Maritime Navigation Charts - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — GNN pour classification de cartes marines (ENC), hors essaim",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 610,
+  "title": "Air-Ground Collaborative Vision-and-Language Navigation via Shared Bird's-Eye Maps - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation air-sol par VLM (AGC-VLN)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 613,
+  "title": "SDN-Orchestrated Dual-Path 5G-SATCOM Maritime Communications for Carrier Strike Groups - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — orchestration SDN 5G-SATCOM maritime (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
   "number": 614,
   "title": "SeaCausal-FL- Federated Fuzzy Causal Learning for Maritime IoT Fault Diagnosis and Counterfactual Reasoning - arXiv",
   "status": "ECARTEE",
@@ -449,6 +1007,56 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 618,
+  "title": "SMaRT-Tug- Structured Multi-Agent Reinforcement Learning for Physics-Based Tugboat-Barge Collaborative Manipulation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — MARL pour remorqueurs maritimes (manipulation de barges)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 620,
+  "title": "DroneGround- Open-Vocabulary Drone Payload Characterization Using Synthetic Data and Grounded Vision-Language Models - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — caractérisation de charge utile par vision-langage (détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 621,
+  "title": "Learning to Fly- Stable Vision-Guided UAV Servoing with Compact Target-Centric Cues and Reinforcement Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — asservissement visuel par RL (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 622,
+  "title": "Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Dataset and Agentic Method - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — recherche d objet air-sol par VLM agentique (AGOS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 624,
+  "title": "EgoSIS- From Factorized Visual Ego-Transitions to Motion-Canonical Spatial Evidence for UAV Reasoning - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — réponse visuelle à questions vidéo (EgoSIS), perception seule",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
  },
  {
   "number": 625,
@@ -463,6 +1071,55 @@
   "lot": 4
  },
  {
+  "number": 626,
+  "title": "AccelMPC- High-Rate, Low-Power FPGA-Accelerated Model Predictive Control for Tiny Drones - arXiv",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcAccelMPC",
+  "finding": "SCI-14",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 627,
+  "title": "Decision Transformer for UAV-Mounted RIS-Assisted Dynamic D2D Communications - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — Decision Transformer pour communications RIS (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 629,
+  "title": "Future-Aware Flow Planning for Safe UAV Target Following - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — suivi de cible mono-UAV par planification de flux (future-aware)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 631,
+  "title": "Multi-Agent Reinforcement Learning for Autonomous UAV Exploration in Wildfire Response - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MARL/DRL pour surveillance de feux de forêt (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 632,
+  "title": "Coastal Environment Generation with HoloOcean - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — génération d environnement de simulation côtière (HoloOcean)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
   "number": 912,
   "title": "Distributed Trajectory Planning and Resource Allocation for Dynamic Multi-UAV Collaborative Computing - arXiv",
   "status": "ECARTEE",
@@ -473,6 +1130,16 @@
   "lot": 5
  },
  {
+  "number": 913,
+  "title": "SwarmNxt- Open-source Software-Hardware Platform for Fast and Agile Aerial Swarms - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — plateforme matérielle/logicielle d essaim (SwarmNxt)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
   "number": 914,
   "title": "GCBF+- A Neural Graph Control Barrier Function Framework for Distributed Safe Multi-Agent Control - arXiv",
   "status": "ECARTEE",
@@ -481,6 +1148,18 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 915,
+  "title": "EGO-Swarm- A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments - arXiv",
+  "status": "RATTACHEE",
+  "specdoc": "srcEGOSwarm",
+  "finding": "sciEGOSwarm",
+  "algs": [
+   "algPathPlanning",
+   "algCollisionAvoidance"
+  ],
+  "lot": 8
  },
  {
   "number": 916,
@@ -500,6 +1179,16 @@
   "finding": "SCI-18",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 918,
+  "title": "AttentionSwarm- Reinforcement Learning with Attention Control Barier Function for Crazyflie Drones in Dynamic Environments - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — AttentionSwarm = CBF + attention + RL (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
  },
  {
   "number": 919,
@@ -541,6 +1230,36 @@
   "lot": 5
  },
  {
+  "number": 932,
+  "title": "DETERRENCE BY ASSETS- HOW UAV LOCALIZATION UNDER SAUDI VISION 2030 RESHAPES GULF SECURITY ARCHITECTURE - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — analyse géopolitique de localisation de drones (Vision 2030)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 933,
+  "title": "Deep Learning-Driven Throughput Prediction in 5G for UAV-Assisted Emergency Response - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — prédiction de débit 5G pour déploiement UAV (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 934,
+  "title": "Efficient Exploration-Enabled Multi-Agent Reinforcement Learning for Multi-UAV Cooperative Target Search - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — AEQMIX = MARL pour recherche de cibles (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
   "number": 935,
   "title": "Agricultural Cyber-Physical Systems- Research Progress in Perception-Driven Multi-Robot Coordination and Logistics in Unstructured Environments - DOI",
   "status": "ECARTEE",
@@ -570,6 +1289,36 @@
   "finding": "",
   "algs": [],
   "lot": 5
+ },
+ {
+  "number": 938,
+  "title": "Model Predictive Control for Multimodal Intelligent Transportation Systems- A Cross-Domain Review of Ground, Rail, Low-Altitude, and Marine Applicatio - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue MPC inter-domaines (transport)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 939,
+  "title": "Design and Development of a Command and Control System for an Unmanned Surface Vehicle Swarm with Digital Twin-Based Validation and Real-World Operati - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — C2 d essaim USV avec jumeau numérique (couche commandement)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 941,
+  "title": "An Omnidirectional Perception Framework for Distributed Unmanned Systems - DOI",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non vérifié (DOI chapitre Springer), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
  },
  {
   "number": 943,
@@ -602,6 +1351,46 @@
   "lot": 5
  },
  {
+  "number": 948,
+  "title": "Joint UAV activation and placement for post-disaster wireless restoration via a hybrid quantum-inspired evolutionary framework - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — placement de UAV comme stations de base (déploiement réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 949,
+  "title": "Rating-aware graded security offloading and cost optimization for UAV-assisted MEC networks - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — offloading sécurisé en MEC assistée par UAV (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 950,
+  "title": "Privacy-preserving techniques in UAV networks- A systematic literature review of methods, tools, and future directions - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue systématique de techniques de préservation de vie privée (SLR)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 951,
+  "title": "Visual perception for autonomous surface vehicles in complex waterway environments- A review - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue de perception visuelle pour véhicules de surface en voies navigables",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
   "number": 954,
   "title": "Hierarchical optimal consensus for economically efficient path planning in multi-UAV - DOI",
   "status": "ECARTEE",
@@ -610,6 +1399,16 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 955,
+  "title": "Distributed self-organizing control for cross-domain unmanned swarm multi-target tracking under constrained communication - DOI",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non vérifié (Elsevier AST), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
  },
  {
   "number": 956,
@@ -652,6 +1451,16 @@
   "lot": 5
  },
  {
+  "number": 960,
+  "title": "Toward resilient multi-modal drone detection in cluttered environments- A systems survey of EO-IR, radar, acoustic, LiDAR and RF modalities - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — survey de détection de drones multi-modalités",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
   "number": 961,
   "title": "Robust formation control of heterogeneous UAV-USV multi-agent systems- An actor-critic enhanced hyperbolic sliding mode approach with dynamic event-tr - DOI",
   "status": "DEJA_RATTACHEE",
@@ -659,6 +1468,16 @@
   "finding": "SCI-11",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 962,
+  "title": "Online parameter identification and dynamic model reconstruction for AUV based on adaptive extended Kalman filter and prediction error method - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — identification de paramètres d AUV (sous-marin)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
  },
  {
   "number": 963,
@@ -699,6 +1518,16 @@
   "lot": 1
  },
  {
+  "number": 967,
+  "title": "Terminal-offloading-aware AUV–USV cooperative inspection routing under ocean-current and acoustic communication constraints - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — routage d inspection AUV-USV sous contraintes acoustiques (sous-marin)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
   "number": 968,
   "title": "Event-triggered practical prescribed-time distributed optimal formation control of heterogeneous multi-USVs Under intermittent communication - DOI",
   "status": "RATTACHEE",
@@ -706,6 +1535,16 @@
   "finding": "sciEventTriggered (completion)",
   "algs": [],
   "lot": 2
+ },
+ {
+  "number": 969,
+  "title": "A Digital Twin-Enabled Simulation Framework for Multi-Objective Optimization and Control of Risk-Aware, Low-Carbon, and Resilient Truck–Drone Routing - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — routage camion-drone par jumeau numérique (logistique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
  },
  {
   "number": 971,
@@ -727,6 +1566,36 @@
   "lot": 1
  },
  {
+  "number": 973,
+  "title": "Hybrid IRSNOMA Framework for Turbulence Resilient Underwater Visible Light Communication - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — communication optique visible sous-marine (IRSNOMA)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 975,
+  "title": "Space & Defense Volume 17 No. 1 Whole issue - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — numéro complet de revue Space & Defense (politique spatiale)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 976,
+  "title": "A Q-learning-based intelligent handover framework for Li-Fi-RF-enabled VANET and FANET networks using IEEE 802.11p - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — handover Q-learning VANET/FANET (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
   "number": 977,
   "title": "MSGSO- A Multi-Strategy Glider Snake Optimizer for Global Optimization and 3D UAV Path Planning - DOI",
   "status": "ECARTEE",
@@ -737,6 +1606,106 @@
   "lot": 5
  },
  {
+  "number": 978,
+  "title": "Autonomous UAVs in Critical Infrastructure Inspection- Empirical Evaluation, Reporting Standard, and Implications for Strategic Decisions - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — évaluation empirique d inspection d infrastructures (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 979,
+  "title": "Analysis of the Economic Efficiency of UAV Delivery of Medical and Small-Sized Cargo- A Case Study of the East Kazakhstan Region - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — analyse économique de livraison médicale par UAV (logistique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 980,
+  "title": "Algorithms in Battle- AI, International Relations, and Future Warfare - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — analyse géopolitique IA et guerre (relations internationales)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 981,
+  "title": "Internet of Things–Enabled Sensing and Unmanned Aerial Vehicle Applications for Earthquake Preparedness and Real-Time Response - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue bibliométrique IoT+UAV pour séismes",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 982,
+  "title": "Landing of an Aerial Robot Swarm via UWB-Based Localization and Convex Optimization - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — atterrissage d essaim par UWB + optimisation convexe (abstract non vérifié)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 984,
+  "title": "Multi-agent Reinforcement Learning for Vehicular Task Offloading in Multi-UAV-Assisted Edge Computing - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MARL pour offloading véhiculaire (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 15
+ },
+ {
+  "number": 985,
+  "title": "Lightweight UAV aerial small object detection based on YOLOv12 via attentional scale sequence fusion - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de petits objets YOLOv12 (modèle de détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 8
+ },
+ {
+  "number": 986,
+  "title": "An improved RT-DETR algorithm for small-object detection in UAV aerial images - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de petits objets RT-DETR (modèle de détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 987,
+  "title": "Obstacle-aware multi-UAV scheduling for plant-protection operations using an enhanced walrus optimizer - DOI",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — allocation de tâches par métaheuristique, famille déjà sourcée par CBBA (SCI-10)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 988,
+  "title": "Overview of Recent Advances in Cooperative Optimized Navigation of Multiple Unmanned Surface Vehicles - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue de navigation coopérative optimisée multi-USV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
   "number": 991,
   "title": "Task offloading optimization in multi-UAV-enabled MEC networks with ground interference - DOI",
   "status": "ECARTEE",
@@ -745,6 +1714,26 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 992,
+  "title": "Adaptive quadcopter model predictive control using remote monocular vision - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — MPC adaptatif de quadrirotor MONO par vision monoculaire distante",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 994,
+  "title": "AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — occupation BEV sous-marine monoculaire (AquaBEV), sonar",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
  },
  {
   "number": 995,
@@ -787,6 +1776,36 @@
   "lot": 4
  },
  {
+  "number": 999,
+  "title": "Ocean-aware deep learning for civilian maritime object detection and tracking in complex ocean environments- a comprehensive review - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue de détection/suivi maritime par deep learning",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1000,
+  "title": "Task-Guided Multi-UAV Cooperative Multi-Target Tracking with Gaussian Process-Based Value Correction - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — HGP-MAPPO = MAPPO multi-cibles (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 1001,
+  "title": "Adaptive Localization for Underwater Nodes in Uncertain Environments- A Geometric Topology Perception-Enhanced Multi-Stage Reinforcement Learning Stra - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — localisation de nœuds sous-marins par RL multi-étapes",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
   "number": 1002,
   "title": "Hybrid DeepMUSIC-Assisted Cooperative Multi-Agent Deep Reinforcement Learning for Intelligent Spectrum Allocation and Interference Management in Multi - DOI",
   "status": "ECARTEE",
@@ -795,6 +1814,45 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 1003,
+  "title": "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking - DOI",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcZeroTrust",
+  "finding": "SCI-9",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1004,
+  "title": "An Integrated IoT–AI–UAV Swarm Architecture for Intelligent Autonomous Airport Security - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — architecture de référence IoT-AI-UAV pour sécurité aéroportuaire (review)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1005,
+  "title": "Automated monitoring and geometric quantification of mining-induced ground fissures via UAV imagery based on MDE-UNet - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — quantification de fissures minières par imagerie UAV (application géotechnique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1007,
+  "title": "Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communications - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — AutoResearch par agents LLM",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
  },
  {
   "number": 1009,
@@ -817,6 +1875,26 @@
   "lot": 5
  },
  {
+  "number": 1012,
+  "title": "Multi-Objective Path Optimization for Truck–Drone Collaborative Delivery Based on Subspace Contribution-Driven Adaptive Resource Allocation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — routage camion-drone multi-objectifs (logistique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1013,
+  "title": "Editorial- Advanced integration of large language models for autonomous systems and critical decision support - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — éditorial sur l intégration de LLM dans les systèmes autonomes",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
   "number": 1015,
   "title": "Control Strategies for Cooperative Swarm UAV Systems- Coordination, Stability and Real-World Deployment - DOI",
   "status": "ECARTEE",
@@ -825,6 +1903,46 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 1016,
+  "title": "Active sonar-based perception and wall following for AUV operations in enclosed waters - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — perception sonar active et suivi de paroi pour AUV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1018,
+  "title": "Towards Embodied Air-Ground Cooperative Object Search- Benchmark, Dataset and Agentic Method - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #622 (Air-Ground Object Search, arXiv 2609.08402)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1019,
+  "title": "Detection of flowering in pineapple (Ananas comosus) using deep learning and drone technology - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de floraison d ananas (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 1020,
+  "title": "Future Integrated Network of Sensing, Computing, and Communication- Low-Altitude Economy under High-Speed Trajectory Tracking Dominated by General Art - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue LLM + 6G ISCC pour économie basse altitude",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
  },
  {
   "number": 1021,
@@ -847,6 +1965,38 @@
   "lot": 1
  },
  {
+  "number": 1023,
+  "title": "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments - DOI",
+  "status": "RATTACHEE",
+  "specdoc": "srcHierNavDecision",
+  "finding": "sciHierNavDecision",
+  "algs": [
+   "algPathPlanning",
+   "algCollisionAvoidance"
+  ],
+  "lot": 9
+ },
+ {
+  "number": 1024,
+  "title": "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR) - DOI",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcQAR",
+  "finding": "SCI-6",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1025,
+  "title": "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization - DOI",
+  "status": "RATTACHEE",
+  "specdoc": "srcGossipADMM",
+  "finding": "sciGossipADMM",
+  "algs": [
+   "algConsensus"
+  ],
+  "lot": 16
+ },
+ {
   "number": 1026,
   "title": "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation - DOI",
   "status": "DEJA_RATTACHEE",
@@ -854,6 +2004,16 @@
   "finding": "SCI-6 + SCI-10",
   "algs": [],
   "lot": 2
+ },
+ {
+  "number": 1028,
+  "title": "Design and Development of an Uncrewed Surface Vessel (USV) for Hydrographic Survey - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — conception de plateforme USV hydrographique",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
  },
  {
   "number": 1029,
@@ -866,6 +2026,26 @@
   "lot": 5
  },
  {
+  "number": 1030,
+  "title": "Current Progress on Control Strategies for Underwater Soft Robots- A Comprehensive Review - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue de stratégies de contrôle pour robots mous sous-marins",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1031,
+  "title": "An Efficient and Lightweight YOLO-based Framework for Real-time Insulator Defect Detection on Embedded Platforms - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de défauts d isolateurs YOLO (application réseau électrique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
   "number": 1032,
   "title": "Explainable and cyber-resilient vision transformers for joint steering and collision-avoidance perception in autonomous drone navigation- a multi-task - DOI",
   "status": "ECARTEE",
@@ -874,6 +2054,65 @@
   "finding": "",
   "algs": [],
   "lot": 5
+ },
+ {
+  "number": 1033,
+  "title": "A Learnable Sparse Attention Graph Architecture for Heterogeneous Multi-UAV Air-to-Ground Mission Planning - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — SAGA = GNN + MAPPO pour planification de mission (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1034,
+  "title": "Vision-Based Perception of UAV Targets Under Synthetic Fog- A Task-Oriented Evaluation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — évaluation de perception sous brouillard synthétique (détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1035,
+  "title": "Comparative analysis of UAV simulation platforms- challenges, opportunities, and future directions - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — méta-revue de plateformes de simulation UAV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1037,
+  "title": "A Sensor-Centric Survey of SLAM and Odometry for GPS-Denied Environments - DOI",
+  "status": "DEJA_RATTACHEE",
+  "specdoc": "srcSlamSurvey",
+  "finding": "SCI-5",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1038,
+  "title": "GMD-YOLO26- A Lightweight Detector with Cooperative Three-Stage Feature Processing for UAVs - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de petits objets GMD-YOLO26 (modèle de détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1039,
+  "title": "Autonomous navigation and active perception with complex articulated AUVs - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — navigation et perception active d AUV articulés",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
  },
  {
   "number": 1040,
@@ -906,6 +2145,36 @@
   "lot": 2
  },
  {
+  "number": 1148,
+  "title": "GzDRL- Reproducible and Scalable Deep Reinforcement Learning with Gazebo - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — framework GzDRL de RL avec Gazebo (outillage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1155,
+  "title": "AquaBEV- Monocular Underwater BEV Occupancy with 3D Sonar Supervision - arXiv",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #994 (AquaBEV, arXiv 2609.04411)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1157,
+  "title": "Continual Field-Adaptive Models (CFAMs) for Post-Deployment Physical AI - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — apprentissage continu post-déploiement (CFAM)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
   "number": 1159,
   "title": "Information-Guided Safe Reinforcement Learning for Autonomous Gas Source Localization using sUAS - arXiv",
   "status": "ECARTEE",
@@ -914,6 +2183,137 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 1168,
+  "title": "How do LLMs Evaluate Perceived Moral Agency- Investigating Moral Decision-Making in Human-Artificial Agents Interactions - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — étude HCI sur l agence morale perçue des LLM",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1190,
+  "title": "Practical Zero-Trust for Mission-Critical Robotic Fleets via Hardware Attestation and Packet Timing Watermarking - arXiv",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1003 (Practical Zero-Trust, arXiv 2609.05741)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1191,
+  "title": "AAMBERS-UAV- Acquisition-Aware Multimodal Backbone Evaluation and Ranking for UAV Weedy Rice Segmentation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — segmentation de riz adventice (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1199,
+  "title": "FALCON-S- Fixed-wing ground-effect Aerodynamics Simulator and Flight Control Learning Suite - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — simulateur FALCON-S d aérodynamique (outillage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1204,
+  "title": "Exploiting LLM Agents for Trustworthy AutoResearch in Wireless Communications - arXiv",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1007 (LLM AutoResearch, arXiv 2609.06174)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1208,
+  "title": "One Model, Two Worlds- Bidirectional Sonar-Optical Translation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — traduction sonar-optique bidirectionnelle (perception sous-marine)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1210,
+  "title": "Adapting Vision Foundation Models to Acoustics for Pose-Free 3D Sonar Reconstruction - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — adaptation de modèles de fondation visuels au sonar 3D",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1239,
+  "title": "Robust Decentralized Federated Distillation via Multi-Modality Knowledge Collaboration - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — distillation fédérée décentralisée (apprentissage distribué)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1243,
+  "title": "KODAMA- Multimodal Digital Twin Reconstruction for Urban RF Propagation Modelling - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — jumeau numérique de propagation RF (KODAMA)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1252,
+  "title": "Anti-Gravity Walking by a Flying Humanoid Robot via Thrust-Rate Input Whole-Body Model Predictive Control - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — marche anti-gravité d humanoïde volant (robotique humanoïde)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1257,
+  "title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control - arXiv",
+  "status": "RATTACHEE",
+  "specdoc": "srcConflictPredictDMPC",
+  "finding": "sciConflictPredictDMPC",
+  "algs": [
+   "algCollisionAvoidance"
+  ],
+  "lot": 16
+ },
+ {
+  "number": 1262,
+  "title": "Mini-Batch Risk-Averse Deep Q-Learning- A Robot Navigation Case Study - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — DQN averse au risque (RL, politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1266,
+  "title": "Dual-Layer Semantic-Spatial Belief Mapping for Aerial Object Goal Navigation - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation par croyance sémantique VLM (AeroBelief)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
  },
  {
   "number": 1274,
@@ -926,6 +2326,96 @@
   "lot": 4
  },
  {
+  "number": 1300,
+  "title": "An Autonomous GeoAI Agent for Arctic Eco-Navigation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — routage arctique multi-critères (agent GeoAI, navire seul)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1301,
+  "title": "Experimental Validation of Combined Imaging and Vibration Mitigation for High-Altitude Platforms - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — imagerie et atténuation de vibrations pour HAPS (plateforme)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1305,
+  "title": "Adaptive Distributed Physical-Layer Authentication and Attack Detection in 6G Non-Terrestrial Networks via Causal Meta-Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — authentification couche physique 6G par méta-apprentissage",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 9
+ },
+ {
+  "number": 1321,
+  "title": "ScopeMamba-YOLO- Widening the Perceptual Scope Inward and Outward for Small Object Detection in Remote Sensing Imagery - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets ScopeMamba-YOLO (modèle de détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1323,
+  "title": "Distributed ToA Localization of Acoustic Sources with Unknown Time of Emission via Operator Splitting - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — localisation distribuée de sources acoustiques SOUS-MARINES (ToA)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1342,
+  "title": "Quantifying the Reality Gap for RL-Based UAV Placement at mmWave and Sub-THz - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — placement UAV par RL (quantification du reality gap)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1349,
+  "title": "3D Euler-Angle Orientation Control for Two-Ray Fading Mitigation in Maritime Air-to-Sea Communications - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — orientation 3D contre l évanouissement deux-rayons (PHY)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1350,
+  "title": "HGSQ- Heatmap-Guided Sparse Query Detector for Real-Time Aerial Small Object Detection - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détecteur HGSQ (détection aérienne)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1354,
+  "title": "Contact-Aware Incremental Model Predictive Control for an Underactuated Aerial Manipulator - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — MPC de manipulateur aérien en contact (manipulation)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
   "number": 1355,
   "title": "Unmanned Aerial Vehicle Propagation Channel over Vegetation and Lake Areas- First- and Second-Order Statistical Analysis - arXiv",
   "status": "ECARTEE",
@@ -934,6 +2424,56 @@
   "finding": "",
   "algs": [],
   "lot": 2
+ },
+ {
+  "number": 1358,
+  "title": "Understanding Operator Attitudes Toward AI-Supported Decision Making in Maritime Operations - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — étude d attitudes d opérateurs maritimes (HCI)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1360,
+  "title": "Acoustic-based Guidance for Automatic Docking of Holonomic AUVs - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — amarrage acoustique d AUV (sous-marin)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 16
+ },
+ {
+  "number": 1363,
+  "title": "EVPeriscope- Extended Perception across Aerial and Ground Vehicles with Event-based Propeller Tracking - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — suivi d hélices par caméra événementielle (perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1381,
+  "title": "PATH- Continuous Target Sensing among Autonomous Cooperative Drones - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — handoff de cible entre UAV (PATH), mécanisme de perception",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1383,
+  "title": "Aligned Radiometric RGB-Thermal Fusion for UAV Facade Anomaly Screening - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — fusion RGB-thermique pour inspection de façade (perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
  },
  {
   "number": 1393,
@@ -946,6 +2486,78 @@
   "lot": 1
  },
  {
+  "number": 1396,
+  "title": "Parameter Sensitivity Analysis for Aerial LiDAR-Inertial Odometries in low-altitude flights - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — analyse de sensibilité de paramètres LIO/SLAM (réglage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1401,
+  "title": "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms - arXiv",
+  "status": "RATTACHEE",
+  "specdoc": "srcGRFSwarmOptCtrl",
+  "finding": "sciGRFSwarmOptCtrl",
+  "algs": [
+   "algFormationControl",
+   "algCollisionAvoidance"
+  ],
+  "lot": 10
+ },
+ {
+  "number": 1411,
+  "title": "YOLO12-MambaScan- An Efficient Object Detector with High-Frequency Enhancement and State-Space Modeling - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection YOLO12-MambaScan (modèle de détection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1412,
+  "title": "UniqueShip- Mitigating Data Leakage in Acoustic Ship Classification Benchmark Datasets - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — dataset de classification acoustique de navires (UniqueShip)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1422,
+  "title": "Towards a Connected Heterogeneous All-Medium Integrated Network (CHAIN) for Converged Connectivity Across Land, Sea, Air, and Space - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — réseau intégré toutes-milieux (CHAIN, communications)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1423,
+  "title": "Quantum-Gated LiteSSD- A Parameter-Efficient Lightweight Hybrid Quantum-Classical Framework for Forward-Looking Sonar Object Detection - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection sonar quantique (LiteSSD), perception sous-marine",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1426,
+  "title": "SafePG- Safe and Globally Optimal Reinforcement Learning with Hard Constraints - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — RL avec contraintes dures (SafePG, politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
   "number": 1439,
   "title": "Learning-Based Dynamic Obstacle Avoidance for a UAV Using Only Three Range Sensors - arXiv",
   "status": "ECARTEE",
@@ -954,6 +2566,56 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 1441,
+  "title": "PRI-Net- A Lightweight Multimodal Framework for 3D UAV Localization - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — localisation UAV par fusion multimodale profonde (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1442,
+  "title": "Collaborative Computation and Migration in Multi-UAV Networks with Semantic Communication - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — calcul collaboratif + migration en MEC multi-UAV (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1444,
+  "title": "Language-Grounded Semantic Target Navigation for Autonomous Surface Vehicles - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation ASV guidée par langage + PPO",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1445,
+  "title": "Small Object Detection in Drone Aerial Imagery with LAF-YOLOv10 - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets LAF-YOLOv10",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1452,
+  "title": "An Adaptive Fixed-Time Line-of-Sight Guidance Scheme for 3D Path Following of Underwater Vehicles- Theory and Experiment - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — guidage LOS à temps fixe pour AUV sous-marins",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
  },
  {
   "number": 1454,
@@ -975,6 +2637,36 @@
   "finding": "",
   "algs": [],
   "lot": 2
+ },
+ {
+  "number": 1476,
+  "title": "Volumetric Harmonic Field Navigation for Quadrotors - arXiv",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — navigation mono-quadrirotor par champ harmonique, famille planification déjà sourcée (SCI-14)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1481,
+  "title": "DuctAM- A Duct-Assisted Quadrotor-Based Aerial Manipulator Enabling High-Force Push-and-Pull Interactions - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — manipulateur aérien à soufflantes (DuctAM), plateforme",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1487,
+  "title": "Racing in Volume with Flow Ensembles - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — reconstruction 4D en streaming (FastFlowGS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
  },
  {
   "number": 1491,
@@ -1007,6 +2699,36 @@
   "lot": 2
  },
  {
+  "number": 1513,
+  "title": "Waggle Dance Inspired Motion Communication for Multiple UAVs in MuJoCo - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — communication par mouvement (danse des abeilles) en simulation",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1516,
+  "title": "Search-Based Metamorphic Testing of Vision-Language Models in Autonomous Underwater Robotic Software - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — test métamorphique de VLM pour robots sous-marins",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 1524,
+  "title": "TIO-Former- Ultra-Lightweight 6-Directional ToF-Inertial Odometry for Nano-UAVs via a Streaming Causal Transformer - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — odométrie ToF-inertielle pour nano-UAV (TIO-Former), matériel",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
   "number": 1528,
   "title": "Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits - arXiv",
   "status": "RATTACHEE",
@@ -1029,6 +2751,146 @@
   "lot": 2
  },
  {
+  "number": 1541,
+  "title": "Set-membership localization of intermittent RF sources using a fleet of collaborating UAVs - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — localisation de sources RF par flotte (set-membership)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1546,
+  "title": "Multi-Session Multimodal Underwater Mapping with Acoustic and Optical Imaging - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — cartographie sous-marine multimodale multi-sessions (factor graph)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1547,
+  "title": "Open-source emulation-based test environment to settle O-RAN-compliant trials - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — environnement de test O-RAN par émulation (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1548,
+  "title": "The Operable Pareto Front- Distilling Offline Search into Run-Time Control for Multi-Objective UAV Edge-Computing Scheduling - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — Decision Transformer pour ordonnancement MEC (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1551,
+  "title": "GeoCueFormer- Geometry-Guided Wavelet Representation and Prediction-Cued Dual-Stage Decoder for Underwater Semantic Segmentation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — segmentation sémantique sous-marine (GeoCueFormer)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1552,
+  "title": "Characterizing Refraction-Induced Ranging Bias in Underwater Collaborative Localization - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — biais de télémétrie par réfraction en localisation sous-marine",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1559,
+  "title": "Multi-View Mixture-of-Experts with Vision-Language Reranking for Cross-View Object Geo-Localization - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — géo-localisation cross-view (MVLGeo), perception",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1560,
+  "title": "Prior Evolution and Task Alignment for Aerial Grasping - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — saisie aérienne par optimisation de trajectoire (manipulation)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1566,
+  "title": "Understanding Dynamic Scenes at Gigapixel Scale- Wide-Area Spatio-Temporal Perception from UAVs - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — dataset gigapixel de perception spatio-temporelle (HARD)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1573,
+  "title": "Indicators of resilience for autonomous control systems - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — indicateurs de résilience génériques (théorie du contrôle)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1576,
+  "title": "ULOHA- An Underwater Bimanual Robot System for Robot Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — plateforme bimanuelle sous-marine (ULOHA)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1578,
+  "title": "UAVs Meet Embodied Intelligence- Bridging Human Intents and Flying Dynamics Via Harnessing Physical-Digital AI Agents - arXiv",
+  "status": "ECARTEE",
+  "reason": "non-primaire — cadre 5+5 d intelligence incarnée UAV (position paper)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1587,
+  "title": "From Pixels to Semantics- Edge AI for UAV-Based Critical Infrastructure Inspection - arXiv",
+  "status": "ECARTEE",
+  "reason": "non-primaire — catégorisation d architectures d inspection par edge AI (survey)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
+  "number": 1588,
+  "title": "VLM-MPPI- Grounding Natural Language in Behaviorally Diverse Trajectories for Aerial Navigation - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation par VLM + MPPI (sélection de trajectoire par VLM)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 10
+ },
+ {
   "number": 1590,
   "title": "CC-OPI- Online Distributed Task Allocation for UAV Swarms under Communication Constraints - arXiv",
   "status": "RATTACHEE",
@@ -1038,6 +2900,46 @@
    "algTaskAllocation"
   ],
   "lot": 5
+ },
+ {
+  "number": 1592,
+  "title": "Real-Time Bounded Catenary Solver for UAV Tether Modeling - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — solveur de caténaire pour câble d UAV (mécanique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1596,
+  "title": "AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into Distributed, Adaptive Swarm Execution - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — AeroWeaver = harnais d agents LLM pour essaim",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1609,
+  "title": "Body-Motion Control of a Simulated Aerial Swarm from a First-Person View - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — téléopération par mouvement corporel (interface HCI)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1610,
+  "title": "SOL-SLAM- Inverse Compositional Gauss-Newton Direct Registration for Fast Sonar-Only Local SLAM - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — SLAM local sonar seul (SOL-SLAM), sous-marin",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
  },
  {
   "number": 1622,
@@ -1052,6 +2954,176 @@
   "lot": 2
  },
  {
+  "number": 1633,
+  "title": "Proxifield- Decentralized Multi-Agent Communication through Semantic Proximity - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — protocole multi-agents par proximité sémantique LLM (Proxifield)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1635,
+  "title": "AURORA- A Natural Language-Driven Agentic Framework for Understanding, Reasoning, and Orchestrating Reliable Air-Ground Co-Simulation - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — AURORA = génération de scénarios par LLM agentique",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1637,
+  "title": "Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low-Altitude Wireless Networks - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — réseau basse altitude par LLM + MARL hiérarchique",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1639,
+  "title": "PerSeM- Persistent Semantic Memory for Long-Horizon Open-Vocabulary UAV Mapping - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — mémoire sémantique persistante pour cartographie (PerSeM)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1648,
+  "title": "Towards Active Cross-View Object Geo-Localization - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — géo-localisation cross-view active (ActiveGeo)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1652,
+  "title": "Equivariant Filter Design for Acoustic and Depth Aided Inertial Navigation Systems - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — filtre équivariant pour navigation inertielle AUV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1654,
+  "title": "HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identification and Cross-Robot Collaboration - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — coordination multi-agents en langage naturel uniquement (HEROIC)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1657,
+  "title": "TADreamer- Zero-Shot Language-Guided 3D Navigation for Terrestrial-Aerial Bimodal Robots via Video Imagination - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation 3D par imagination vidéo VLM (TADreamer)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1660,
+  "title": "Socialized UAV Cross-Task Learning- Towards Cross-Granularity Collaboration through Hierarchical Interaction - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — benchmark d apprentissage inter-tâches (CrossUAV)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1667,
+  "title": "Foldable Antenna Array in Space-Air-Ground Integrated Networks- Architectures and Applications - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — antennes repliables SAGIN (matériel réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1676,
+  "title": "Integrated Guidance and Control of a Mother-Child UAV-UGV System for Cooperative Missions - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — récupération aérienne mère-enfant (appontage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1683,
+  "title": "A Simulation Platform for AUV Fault Recovery- Exploring LLM-Based Diagnostic Strategies - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — récupération de fautes d AUV par LLM (sous-marin)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1685,
+  "title": "RTK-Vision PPO for Autonomous Micro UAV Recovery on an Airborne Carrier - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — récupération micro-UAV par PPO (RTK-Vision)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1691,
+  "title": "Towards Scaling Marine Perception with Synthetic Data - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — génération de données synthétiques pour perception sous-marine",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1692,
+  "title": "Custom PX4 firmware for autonomous hybrid aerial-marine missions - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — firmware PX4 pour missions hybrides aérien-marin",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1693,
+  "title": "HOPHY- A Hierarchical Hypergraph Representation for Off-Road Path and Mission Planning - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — planification de chemin hors-route UGV (terrestre)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1695,
+  "title": "Underwater Visual Target Tracking with Target-Specific Depth Estimation and Adaptive Model-Fusion Predictive Control - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — suivi visuel sous-marin par MPC (AUV)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
   "number": 1700,
   "title": "AeRove- A Compact Bimodal Aerial-Terrestrial Drone with Rapid Bistable Reconfiguration for Close-Range Pipeline Inspection - arXiv",
   "status": "ECARTEE",
@@ -1060,6 +3132,96 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 1703,
+  "title": "ASGARD- Action-Space Guard for UAV Resilience via Reinforcement Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — garde d espace d action pour RL (ASGARD, politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1706,
+  "title": "Project SCOUT- Interceptor Drone for Perimeter Defense - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — interception anti-UAV (Project SCOUT), perception embarquée",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1708,
+  "title": "Towards Effective Visual-Inertial SLAM with Passive-Only Sensors for Low-Cost Autonomous Underwater Vehicles - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — VI-SLAM pour AUV low-cost",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1714,
+  "title": "LoRA Enhanced Contrastive Learning with SAS Vision Transformers - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — reconnaissance de cibles sonar SAS (LoRA ViT)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1715,
+  "title": "Dynamic Modeling and LQR Control of a Single Coaxial Drone with 2DOF Thrust Vectoring Mechanism - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — modélisation et LQR d un drone coaxial MONO",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1719,
+  "title": "Same World, Different Knowledge- When Isolated Audits Misjudge World-Model Repairs - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — audit de world model (méthodologie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1740,
+  "title": "MarineCraft- Enabling Rapid Prototyping of Underwater Robots via Modular Construction - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — kit modulaire de robots sous-marins (MarineCraft, matériel)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1751,
+  "title": "Tilt as a Certified Resource- Preserving Motor Wrench-Rate Authority on Articulated Multirotors - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — allocation d effort sur multirotors articulés (commande bas niveau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
+ },
+ {
+  "number": 1754,
+  "title": "RAYA- Learning Where and When to Intervene for Robot Recovery - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — récupération par marge de récupérabilité apprise (RAYA)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
  },
  {
   "number": 1757,
@@ -1072,6 +3234,16 @@
   "lot": 5
  },
  {
+  "number": 1781,
+  "title": "Multi-source UAV remote sensing for cotton Verticillium wilt resistance grading using TPAC-Net - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — notation de résistance du coton par imagerie UAV (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
   "number": 1782,
   "title": "Multi-UAV Adaptive Cooperative Localization Method Against Hybrid Abnormal Measurements - DOI",
   "status": "RATTACHEE",
@@ -1081,6 +3253,26 @@
    "algCooperativeLocalization"
   ],
   "lot": 1
+ },
+ {
+  "number": 1783,
+  "title": "MSEV-DETR- Aerial UAV small object detection model based on multi-scale edge enhancement and variance modulation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets MSEV-DETR",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 1784,
+  "title": "WITHDRAWN- A physics-informed neural network surrogate for multi-band reflection-loss prediction of carbon-fiber-reinforced polymer - Ti-6Al-4V ELI ra - DOI",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — preprint RETRACTÉ (WITHDRAWN), non évaluable",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 17
  },
  {
   "number": 1785,
@@ -1103,6 +3295,26 @@
   "lot": 2
  },
  {
+  "number": 1787,
+  "title": "Contact-Aware Incremental Model Predictive Control for an Underactuated Aerial Manipulator - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1354 (Contact-Aware Incremental MPC, arXiv 2609.11661)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1788,
+  "title": "Semantic Fidelity for Intelligent 6G Communication- A Taxonomic Deep Dive into Knowledge-Driven Architectures, Benchmarks, and Challenges - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue PRISMA de communication sémantique 6G",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
   "number": 1789,
   "title": "RF Energy Harvesting-Enabled UAV-Assisted FANET- A Multi-Objective Osprey Optimization Framework for Sustainable Clustering and Energy Management - DOI",
   "status": "ECARTEE",
@@ -1113,6 +3325,36 @@
   "lot": 2
  },
  {
+  "number": 1790,
+  "title": "Parameter Sensitivity Analysis for Aerial LiDAR-Inertial Odometries in low-altitude flights - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1396 (Parameter Sensitivity LIO, arXiv 2609.12837)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1791,
+  "title": "A Large-Scale AIS Dataset from Finnish Water - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — dataset AIS maritime (données)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1792,
+  "title": "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1401 (Distributed Stochastic Optimal Control, arXiv 2609.12959)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
   "number": 1793,
   "title": "UCA-PPO- USV Path Planning for Moving Underwater Target Tracking with Passive Acoustic Observations and Position Priors - DOI",
   "status": "ECARTEE",
@@ -1121,6 +3363,16 @@
   "finding": "",
   "algs": [],
   "lot": 6
+ },
+ {
+  "number": 1794,
+  "title": "Collaborative Computation and Migration in Multi-UAV Networks with Semantic Communication - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1442 (Collaborative Computation, arXiv 2609.14476)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
  },
  {
   "number": 1796,
@@ -1143,6 +3395,16 @@
   "finding": "",
   "algs": [],
   "lot": 5
+ },
+ {
+  "number": 1799,
+  "title": "Bridging the Scale Gap- A Multi-Scale Feature Enhancement Framework for UAV Aerial Image Object Detection - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets MSF-DETR",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
  },
  {
   "number": 1800,
@@ -1175,6 +3437,16 @@
   "lot": 4
  },
  {
+  "number": 1805,
+  "title": "Resource-Aware Small-UAV Perception under Annotation and Compute Constraints - DOI",
+  "status": "ECARTEE",
+  "reason": "non-verifiable — abstract non vérifié (preprint), contenu primaire non lisible",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
   "number": 1809,
   "title": "GEMS-DQN- A Global-Enhanced Multi-Agent Scheduling Deep Q-Network for Collaborative Charging Decision Optimization in Multiple UAV Systems - DOI",
   "status": "ECARTEE",
@@ -1195,6 +3467,36 @@
   "lot": 2
  },
  {
+  "number": 1811,
+  "title": "UAV-LiteDet- A Lightweight Small Object Detection Network for Low-Altitude UAV Scenarios - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets UAV-LiteDet",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
+  "number": 1812,
+  "title": "REMP- A transformer with role-specific experts and multi-scale positional encoding for autonomous multi-UAV air combat - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — transformer à experts pour combat aérien multi-UAV (REMP, politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1814,
+  "title": "A Multi-UAV Cooperative Navigation Method Based on Policy Decomposition Structure - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — GS-MADDPG = GNN + MADDPG pour navigation coopérative",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 11
+ },
+ {
   "number": 1815,
   "title": "Simultaneous arrival path planning for multi-UAVs with communication maintenance constraints - DOI",
   "status": "ECARTEE",
@@ -1213,6 +3515,98 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 1818,
+  "title": "Multi-omics and artificial intelligence for climate-resilient and nutrient-enriched food crops- advances, applications and future perspectives - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — multi-omique et IA pour cultures (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 1819,
+  "title": "A Multi-Sensor Fusion-Based Remaining Useful Life Prediction Model for UAV Engines - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — prédiction de durée de vie moteur UAV par réseau de neurones (RUL composant)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 1820,
+  "title": "Data Collection and Analysis Empowered with AI for Robotized Olive Oil Precision Farming - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — oléiculture de précision robotisée (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 1821,
+  "title": "Privacy‐Preserving Data‐Driven Distributed MPC for Heterogeneous Nonlinear Multi‐Agent Systems - DOI",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — DMPC distribué de coordination, famille déjà couverte par SCI-14/SCI-29/SCI-45",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1822,
+  "title": "Understanding and exploiting fundamental modality advantage in frame and event hybrid visual data - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — dataset MAD-Drone (modalités RGB/événement)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 1823,
+  "title": "Application Research of Intelligent Inspection Technology Based on Multi-Source Data Fusion in Digital Power Grid Construction - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — inspection de réseau électrique par fusion multi-sources (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 1824,
+  "title": "Frequency-diverse structured light for turbulence-resilient optical acoustic sensing - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection acoustique optique structurée (sous-marin, PHY)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1825,
+  "title": "Frequency-diverse structured light for turbulence-resilient optical acoustic sensing - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1824 (Frequency-diverse structured light, DOI .v1)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 1827,
+  "title": "Agile target capture with UAV swarm in dense environments - DOI",
+  "status": "RATTACHEE",
+  "specdoc": "srcAgileTargetCapture",
+  "finding": "sciAgileTargetCapture",
+  "algs": [
+   "algFormationControl",
+   "algCollisionAvoidance"
+  ],
+  "lot": 18
  },
  {
   "number": 1828,
@@ -1245,6 +3639,16 @@
   "lot": 6
  },
  {
+  "number": 1831,
+  "title": "Joint Spectrum and Power Allocation in Dynamic UAV Ad-Hoc Networks- A Counterfactual Multi-agent Reinforcement Learning Approach - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — MARL contrefactuel pour allocation spectrale (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
   "number": 2030,
   "title": "Toward Mission-Critical ISAC- Reliable Energy-Aware Coordination in UAV Swarms - arXiv",
   "status": "ECARTEE",
@@ -1253,6 +3657,106 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 2044,
+  "title": "Characterizing Wildlife Response to Biomimetic and Conventional Underwater Vehicles - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — réponse de la faune aux AUV biomimétiques (écologie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2050,
+  "title": "AquaWorld- Structure-Consistent Underwater World Generation for Robot Simulation - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — génération de mondes sous-marins (AquaWorld, simulation)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2054,
+  "title": "TiamiTwin- A Digital Twin for Bistatic ISAC Drone Sensing, Validated Against Measurements - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — jumeau numérique ISAC bistatique (TiamiTwin, réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2063,
+  "title": "AoI-Driven Hierarchical Learning for Cooperative Resource Sharing in Multi-Operator UAV Networks - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — DRL hiérarchique pour partage de ressources (AoI, politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2071,
+  "title": "General Collaborative Intelligence- Architecting Cognition for Resilient Multi-Agent Ecosystems - arXiv",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue d intelligence collaborative multi-agents (taxonomie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2075,
+  "title": "M3GA-Wild- A Large-Scale Dataset and Benchmark for Multi-Modal Multi-session Ground-to-Aerial Place Recognition in Forests - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — dataset forestier de place recognition (M3GA-Wild)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2076,
+  "title": "VDGS- Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — reconstruction de scène 3D Gaussian Splatting (VDGS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2077,
+  "title": "HDMamba-YOLO- Efficient State-Space Perception and Local Spatial Reconstruction for UAV Small Object - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection petits objets HDMamba-YOLO",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2081,
+  "title": "AquaCap- A Training-Free Underwater Embodied Agent with Code-as-Policy - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — agent incarné sous-marin code-as-policy (AquaCap)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2084,
+  "title": "Orientation-Aware Control and Trajectory Design for Aerial RIS-Assisted Wireless Communications - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — contrôle orienté de RIS aérienne (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
  },
  {
   "number": 2087,
@@ -1265,6 +3769,56 @@
   "lot": 3
  },
  {
+  "number": 2093,
+  "title": "RiverVLN- Phase-Grounded Temporal Vision--Language Navigation for Unmanned Surface Vehicles - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — navigation fluviale USV par VLM (RiverVLN)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2107,
+  "title": "Spiking Neural Network Actor-Critic Proximal Policy Optimization Control for Autonomous UAV Navigation Through Constrained Openings in Civil Infrastru - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — PPO à réseaux de neurones impulsionnels (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2109,
+  "title": "Reassessing Global Gradient-Norm Imbalance in BLIP Fine-Tuning Across Physical Domains - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — fine-tuning de BLIP (modèle vision-langage)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2110,
+  "title": "WOLF- World Model Guided LiDAR Exploration with Predictive Frontiers - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — exploration LiDAR par world model (WOLF)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2113,
+  "title": "PhysAI-Bench- A Benchmark for LLM-Based Agentic Decision-Making in Autonomous UAV-Centric Physical AI - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — benchmark de prise de décision agentique LLM (PhysAI-Bench)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
   "number": 2115,
   "title": "FlockDiffusion- Assignment-Conditioned Diffusion for Multi-Drone Task Allocation and Completion - arXiv",
   "status": "ECARTEE",
@@ -1273,6 +3827,16 @@
   "finding": "",
   "algs": [],
   "lot": 5
+ },
+ {
+  "number": 2119,
+  "title": "Structured World-State Reasoning for Agentic Robotic Search - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — recherche robotique par raisonnement LLM (WORLDS)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
  },
  {
   "number": 2124,
@@ -1285,6 +3849,46 @@
    "algSafetyRules"
   ],
   "lot": 1
+ },
+ {
+  "number": 2125,
+  "title": "FinsSim- A Reality-Aligned Integrated Simulation Platform for Underwater Robot Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — plateforme de simulation de robots sous-marins (FinsSim)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2133,
+  "title": "AquaOrbit- Sim-to-Real Reinforcement Learning for Underwater Target Orbiting under Intermittent Visual Feedback - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — orbite de cible sous-marine par RL (AquaOrbit)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2145,
+  "title": "Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-Looking Sonar - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — cartographie temps réel par sonar FLS (sous-marin)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2146,
+  "title": "Audio-based UAV Localization with Adaptive Temporal Correspondence via Reinforcement Learning - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — localisation audio de UAV par RL",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
  },
  {
   "number": 2150,
@@ -1307,6 +3911,26 @@
   "lot": 3
  },
  {
+  "number": 2166,
+  "title": "Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Networks - arXiv",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — réseaux UAV auto-organisés par agentic AI (LLM)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2173,
+  "title": "Toward a foundation model for forest point clouds - arXiv",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — modèle de fondation pour nuages de points forestiers (foresterie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
   "number": 2175,
   "title": "Range-Aided SLAM Initialization Exploiting Accurate Heading Information - arXiv",
   "status": "ECARTEE",
@@ -1315,6 +3939,16 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 2178,
+  "title": "Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms - arXiv",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — middleware de communication orienté perception (couche réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
  },
  {
   "number": 2180,
@@ -1327,6 +3961,16 @@
   "lot": 2
  },
  {
+  "number": 2181,
+  "title": "Integrated Airframe Digital Twin Framework for Fatigue Tracking of Unmanned Aerial Vehicles - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — jumeau numérique de fatigue structurelle d aéronef (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
   "number": 2183,
   "title": "Anti-Jamming and Secure Communication for UAV Swarms in Contested Environments- A Systematic Review - DOI",
   "status": "ECARTEE",
@@ -1335,6 +3979,66 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 2185,
+  "title": "TIO-Former- Ultra-Lightweight 6-Directional ToF-Inertial Odometry for Nano-UAVs via a Streaming Causal Transformer - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1524 (TIO-Former, arXiv 2609.17198)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2186,
+  "title": "Pinching Antennas for Next-Generation Wireless Communications- A Network Perspective - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — antennes pinçables (tutoriel réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2187,
+  "title": "Low-Cost UAV-Based Wildfire Smoke Detection - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de fumée de feu de forêt (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 2189,
+  "title": "Multi-History-Weighted Projection-Adaptive Jacobian Control for Close-Range UAV Visual Servoing near Overhead Ground Wires - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — asservissement visuel proche de lignes électriques (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2190,
+  "title": "The Operable Pareto Front- Distilling Offline Search into Run-Time Control for Multi-Objective UAV Edge-Computing Scheduling - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1548 (Operable Pareto Front, arXiv 2609.17992)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2191,
+  "title": "AeroWeaver- An Embodied-Agent Harness for Weaving Aerial Skills into Distributed, Adaptive Swarm Execution - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1596 (AeroWeaver, arXiv 2609.18520)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
  },
  {
   "number": 2192,
@@ -1347,6 +4051,66 @@
   "lot": 5
  },
  {
+  "number": 2193,
+  "title": "AURORA- A Natural Language-Driven Agentic Framework for Understanding, Reasoning, and Orchestrating Reliable Air-Ground Co-Simulation - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1635 (AURORA, arXiv 2609.19527)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2194,
+  "title": "Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low-Altitude Wireless Networks - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1637 (Agentic AI Networking, arXiv 2609.19538)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2195,
+  "title": "Online Material-Labeled Environment Reconstruction via Bayesian Multipath Attribution for Low-Altitude ISAC - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — reconstruction d environnement ISAC (attribution multipath)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2196,
+  "title": "Custom PX4 firmware for autonomous hybrid aerial-marine missions - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1692 (Custom PX4 firmware, arXiv 2609.20691)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 12
+ },
+ {
+  "number": 2197,
+  "title": "Tracking 3D forest density dynamics in a mixed temperate forest using occlusion-aware voxel transmittance and consistent multi-temporal UAV-LiDAR - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — dynamique de densité forestière par UAV-LiDAR (foresterie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 2198,
+  "title": "Internet of things-based wireless communication system for smart ocean monitoring systems - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — monitoring océanique par IoT (réseau de capteurs)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
   "number": 2200,
   "title": "EH-SWADS- energy-harvesting smart weather-aware drone sink for agricultural WSNs - DOI",
   "status": "ECARTEE",
@@ -1355,6 +4119,36 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 2201,
+  "title": "Motion-Guided Multi-Offset Detector-Native ReID Readout for Efficient UAV Multi-Object Tracking - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — ReID par détection multi-offset (suivi, perception)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2202,
+  "title": "Large Language Model-Driven Autonomous UAV Systems- Technical Evolution, Core Architectures, and Critical Challenges - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — revue des systèmes UAV pilotés par LLM",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2204,
+  "title": "Experimental Demonstration of Multi-Link Optical Camera Communication Using Denoising Autoencoders for IoT Applications - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — communication optique par caméra (OCC, réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
  },
  {
   "number": 2206,
@@ -1367,6 +4161,26 @@
   "lot": 4
  },
  {
+  "number": 2215,
+  "title": "Foldable Antenna Array in Space-Air-Ground Integrated Networks- Architectures and Applications - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1667 (Foldable Antenna Array, arXiv 2609.20011)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 18
+ },
+ {
+  "number": 2216,
+  "title": "Integrated Guidance and Control of a Mother-Child UAV-UGV System for Cooperative Missions - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1676 (Mother-Child UAV-UGV, arXiv 2609.20540)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
   "number": 2217,
   "title": "Research on cooperative sensing and interference analysis of low-altitude perception base station networking for 6G air-ground integration - DOI",
   "status": "ECARTEE",
@@ -1375,6 +4189,26 @@
   "finding": "",
   "algs": [],
   "lot": 1
+ },
+ {
+  "number": 2218,
+  "title": "Lost in Tracking Translation- A Comprehensive Analysis of Visual SLAM in Human-Centered XR and IoT Ecosystems - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — analyse de tracking visuel SLAM en XR/IoT",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2219,
+  "title": "Joint Optimization of Offloading, Phase-Shift, Trajectory and Resource Allocation in Priority-Aware IRS-Assisted UAV-MEC Systems - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — optimisation conjointe offloading/trajectoire en MEC IRS (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
  },
  {
   "number": 2251,
@@ -1387,6 +4221,56 @@
   "lot": 3
  },
  {
+  "number": 2252,
+  "title": "Complex 3D structure and crack reconstruction by an online hybrid stereo photogrammetry approach - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — reconstruction de fissures par photogrammétrie (génie civil)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2253,
+  "title": "General Collaborative Intelligence- Architecting Cognition for Resilient Multi-Agent Ecosystems - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #2071 (General Collaborative Intelligence)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2254,
+  "title": "HEROIC- Heterogeneous Evidential Reasoning for Open-Vocabulary Identification and Cross-Robot Collaboration - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #1654 (HEROIC, arXiv 2609.19803)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2256,
+  "title": "Hybrid and multimodal underwater communication architectures for subsea operations- A survey and design perspective - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — survey d architectures de communication sous-marine",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2257,
+  "title": "Application of the W-shaped process for a Reinforcement Learning use case on drone navigation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — application du processus W (certification EASA) à un cas RL",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
   "number": 2258,
   "title": "Collaborative Coverage Path Planning for AUV Formations- Dual-Layer PSO-Voronoi Partitioning for Time-Based Load Balancing Combined with BINN - DOI",
   "status": "ECARTEE",
@@ -1395,6 +4279,36 @@
   "finding": "",
   "algs": [],
   "lot": 4
+ },
+ {
+  "number": 2259,
+  "title": "A Multi-Objective Decision-Support Framework for Sustainable and Resilient Mid- to Long-Range UAV Cargo Supply Chains Under Demand and Climatic Uncert - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — conception de chaîne logistique de cargo UAV (logistique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2260,
+  "title": "Orientation-Aware Control and Trajectory Design for Aerial RIS-Assisted Wireless Communications - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #2084 (Orientation-Aware ARIS, arXiv 2609.23157)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2261,
+  "title": "MAG-YOLO- A Multi-Scale Anisotropic Gating-Aware Network for UAV-Based Pavement Distress Detection - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de dégradation de chaussée MAG-YOLO (application)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
  },
  {
   "number": 2262,
@@ -1417,6 +4331,76 @@
   "lot": 5
  },
  {
+  "number": 2264,
+  "title": "Demining and revitalising war-affected landscapes in Ukraine- multi-actor governance responses - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — gouvernance du déminage en Ukraine (politique)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2265,
+  "title": "Optimal base station selection for GNSS-denied UAV localization - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — placement optimisé de stations de base pour localisation GNSS-denied (déploiement)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2266,
+  "title": "Graph-assisted on-policy reinforcement learning for fair multi-UAV trajectory optimization in IoT networks - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — GNN-SARSA pour trajectoire de UAV-BS (GNN + RL)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2269,
+  "title": "From Ideal Motion to Flight-Executable Communications- LLM-Evolved Multi-UAV Deployment for Cell-Free Massive MIMO - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — déploiement multi-UAV par LLM (CF-mMIMO)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2270,
+  "title": "Odometry-Aided Real-Time Mapping for Underwater Robots Using Forward-Looking Sonar - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #2145 (Odometry-Aided FLS mapping, arXiv 2609.24195)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2271,
+  "title": "Agentic AI Enabling Autonomous, Self-Organizing, and Evolving UAV Networks - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #2166 (Agentic AI UAV Networks, arXiv 2609.24664)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2273,
+  "title": "Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms - DOI",
+  "status": "ECARTEE",
+  "reason": "doublon — même article que #2178 (Perception-Aware Middleware, arXiv 2609.24964)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
   "number": 2274,
   "title": "A systematic review and Zero Trust governance framework for agentic UAV robotics in public safety - DOI",
   "status": "ECARTEE",
@@ -1435,6 +4419,16 @@
   "finding": "",
   "algs": [],
   "lot": 3
+ },
+ {
+  "number": 2277,
+  "title": "PCR-Validated Comparative Deep Learning Analysis of CNN and YOLO Models for UAV-Based multi-spectral Detection of Sugarcane White Leaf Disease (WLD) - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de maladie de canne à sucre (agriculture)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
  },
  {
   "number": 2278,
@@ -1458,6 +4452,66 @@
   "lot": 6
  },
  {
+  "number": 2280,
+  "title": "Multi-Drone Network Management for Disaster Communication Restoration- Architecture, Implementation, and Field Validation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — gestion de réseau multi-drones pour restauration de communication",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2281,
+  "title": "AI-Enabled Wireless Propagation Modeling and Radio Environment Maps for 5G Aerial Wireless Networks - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — modélisation de propagation sans fil par IA (REM)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2282,
+  "title": "M ultimodal P erception F usion for C ooperative M ulti-UAV N etworks - DOI",
+  "status": "ECARTEE",
+  "reason": "non-primaire — synthèse comparative de fusion de perception multi-UAV",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2283,
+  "title": "A Robust Visual SLAM Framework Integrating Multi-Scale Feature Extraction and Adaptive EKF - DOI",
+  "status": "ECARTEE",
+  "reason": "deja-couvert — famille SLAM visuel déjà sourcée par SCI-5 (srcSlamSurvey)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2285,
+  "title": "Insulator Defect Detection Based on Multi-Scale Perception and Context-Guided Feature Aggregation - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de défauts d isolateurs (SACANet), application réseau",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2286,
+  "title": "A MARL Simulation Benchmark and Systematic Evaluation for Multi-UAV Cooperative 3D Voxel Coverage - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — benchmark MARL de couverture 3D (QMIX)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
   "number": 2287,
   "title": "Robust Adaptive Particle Swarm Optimization for High-Level Waypoint Planning in UAV-Swarm Active Source Seeking - DOI",
   "status": "ECARTEE",
@@ -1466,6 +4520,16 @@
   "finding": "",
   "algs": [],
   "lot": 6
+ },
+ {
+  "number": 2288,
+  "title": "Failure-Aware Cognitive Spectrum Handoff for UAV Command-and-Control Links- Calibrated Sensing, Transactional Recovery, and Multi-Band Evaluation - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — handoff de spectre cognitif (réseau)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
  },
  {
   "number": 2289,
@@ -1488,6 +4552,16 @@
   "lot": 4
  },
  {
+  "number": 2292,
+  "title": "LHR-YOLO- A SAR small-target ship detection method based on improved YOLO11 - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — détection de navires SAR (LHR-YOLO), perception maritime",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
   "number": 2293,
   "title": "Certified-Robust Multi-Objective UAV Routing for Military Resupply under Nonlinear Energy Dynamics- An Adaptive Physics-Informed Approach - DOI",
   "status": "RATTACHEE",
@@ -1508,6 +4582,87 @@
   "finding": "",
   "algs": [],
   "lot": 6
+ },
+ {
+  "number": 2295,
+  "title": "Three-Dimensional Surface Area Estimation from UAV-Derived Digital Surface Models- A Multi-Scale Benchmark of Discretization Methods and a Sector-Adap - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — estimation de surface 3D par DSM (géomorphologie)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2297,
+  "title": "LDF-Net- a transformer-based lightweight detail fusion network for UAV engineering vehicle detection - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection de véhicules de chantier LDF-Net",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2298,
+  "title": "Deployment-oriented benchmark for automated UAV-based facade defect detection - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — benchmark de détection de défauts de façade (inspection)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 14
+ },
+ {
+  "number": 2299,
+  "title": "UCD-Where2comm- ground-prior-guided communication-efficient collaborative 3D object detection for multi-UAV swarms - DOI",
+  "status": "ECARTEE",
+  "reason": "pas-algorithme-canonique — détection 3D collaborative multi-UAV (UCD-Where2comm)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 13
+ },
+ {
+  "number": 2301,
+  "title": "Hierarchical Multi-Agent Reinforcement Learning for Cooperative Wildfire Suppression with Amphibious Firefighting UAVs - DOI",
+  "status": "ECARTEE",
+  "reason": "paradigme-exclu — H-MAPPO-LSTM pour suppression de feux (politique apprise)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2302,
+  "title": "A Proposed UAV-BIM-Integrated Earned Value Management Framework with a Climate-Adjusted Schedule Performance Index for High-Rise Construction Project - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — EVM intégré UAV-BIM pour construction (gestion de projet)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2304,
+  "title": "A physics-aware digital twin for correcting moisture-induced material artifacts in PM2.5 sensors - DOI",
+  "status": "ECARTEE",
+  "reason": "hors-perimetre — jumeau numérique de capteurs PM2.5 (calibration environnementale)",
+  "specdoc": "",
+  "finding": "",
+  "algs": [],
+  "lot": 19
+ },
+ {
+  "number": 2305,
+  "title": "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction - DOI",
+  "status": "RATTACHEE",
+  "specdoc": "srcPathDeviationCtrl",
+  "finding": "sciPathDeviationCtrl",
+  "algs": [
+   "algPathPlanning"
+  ],
+  "lot": 13
  },
  {
   "number": 2306,

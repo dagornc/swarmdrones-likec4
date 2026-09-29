@@ -16,7 +16,7 @@ def insert_before(t, marker, block):
 m2 = '  // ===========================================================================\n  //  2. VERDICTS'
 banner_spec = (
     "  // ===========================================================================\n"
-    f"  //  1quater. SOURCES AJOUTEES — carte t_3f3134cc {prefix.upper()} (2026-09-29)\n"
+    f"  //  1quater. SOURCES AJOUTEES — carte t_529dfd75 {prefix.upper()} (2026-09-29)\n"
     "  // ===========================================================================\n\n"
 )
 txt = insert_before(txt, m2, banner_spec + spec)
@@ -24,7 +24,7 @@ txt = insert_before(txt, m2, banner_spec + spec)
 m3 = '  // ===========================================================================\n  //  3. TROUS DE BENCHMARK'
 banner_find = (
     "  // ===========================================================================\n"
-    f"  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc {prefix.upper()} (2026-09-29)\n"
+    f"  //  2bis. VERDICTS AJOUTES — carte t_529dfd75 {prefix.upper()} (2026-09-29)\n"
     "  // ===========================================================================\n\n"
 )
 txt = insert_before(txt, m3, banner_find + find)
@@ -32,7 +32,7 @@ txt = insert_before(txt, m3, banner_find + find)
 last = txt.rstrip()
 assert last.endswith('}'), 'file does not end with }'
 i = last.rfind('}')
-banner_rel = f"  // --- Rattachements carte t_3f3134cc {prefix.upper()} (2026-09-29) ---\n"
+banner_rel = f"  // --- Rattachements carte t_529dfd75 {prefix.upper()} (2026-09-29) ---\n"
 txt = last[:i] + banner_rel + rels + '\n' + last[i:]
 
 open(BASE, 'w', encoding='utf-8').write(txt)

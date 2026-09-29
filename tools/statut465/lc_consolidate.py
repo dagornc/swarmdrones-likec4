@@ -5,7 +5,7 @@ catalog = json.load(open(CAT))
 by_num = {a['number']: a for a in catalog}
 
 consolidated = []
-for i in range(1, 7):
+for i in range(1, 20):
     lp = f'/tmp/ledger_lot{i:02d}.json'
     if not os.path.exists(lp):
         continue
