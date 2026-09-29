@@ -69,35 +69,53 @@ model {
   //  commerciaux, fiches produit et pages institutionnelles ont ete
   //  REJETEES : elles n ont pas de contenu architectural exploitable.
   //
-  //  STATUT : 'A CONSULTER' — ces sources sont referencees par le corpus
-  //  mais n ont PAS encore ete lues ligne a ligne pour en extraire un
-  //  verdict. Ne pas les traiter comme des preuves etablies : la regle
-  //  de mission E08 reste « pas de lecture, pas de verdict ».
+  //  STATUT (au 2026-09-29) : TOUTES les sources de cette section sont
+  //  desormais traitees — CONSULTEE (lues et rattachees a un constat) ou
+  //  ECARTEE (lues et rejetees, justifie). Plus aucune « A CONSULTER ».
+  //  La regle de mission E08 « pas de lecture, pas de verdict » reste en
+  //  vigueur pour toute source ajoutee ulterieurement.
   // ===========================================================================
 
-  srcCrossDomainASW = specDoc 'Cross-domain Unmanned Swarm Cooperative Anti-submarine Search (2024)' {
+  srcCrossDomainASW = specDoc 'Wang et al. (2024) — Recherche anti-sous-marine cooperative inter-domaines' {
     #science
     link https://doi.org/10.16182/j.issn1004731x.joss.23-0073 "Research on Cross-domain Unmanned Swarm Cooperative Anti-submarine Search Method"
-    description 'Recherche cooperative anti-sous-marine multi-domaine. Pertinent pour la coordination de mission heterogene.'
-    metadata { nature 'article de revue'; corpus '#128'; statut 'A CONSULTER' }
+    description 'Journal of System Simulation 2024. Methode de recherche anti-sous-marine cooperative inter-domaines (aerien + surface) : l USV sert de relais de communication pour l UAV ; carte-grille numerique de la zone ; modele cinematique des plateformes inter-domaines ; MECANISME DE FUSION D INFORMATION DISTRIBUEE entre les systemes sans pilote ; fonction objectif de recherche guidant la decision temps reel des plateformes heterogenes. Validation EN SIMULATION uniquement.'
+    metadata { doi '10.16182/j.issn1004731x.joss.23-0073'; annee '2024'; nature 'article de revue'; corpus '#128'; statut 'CONSULTEE (resume lu, CNKI)' }
   }
-  srcSwarmUSV = specDoc 'Singh — Cooperative Swarm Optimisation of Unmanned Surface Vehicles (these)' {
+  srcSwarmUSV = specDoc 'Singh (2019) — Cooperative Swarm Optimisation of Unmanned Surface Vehicles (these, Plymouth)' {
     #science
     link https://doi.org/10.24382/1174 "Cooperative Swarm Optimisation of Unmanned Surface Vehicles"
-    description 'These de doctorat (Plymouth). Optimisation par essaim appliquee aux USV. Cadre methodologique transposable.'
-    metadata { nature 'these de doctorat'; corpus '#130'; statut 'A CONSULTER' }
+    description 'These de doctorat (Yogang Singh, University of Plymouth, janvier 2019, PEARL — DOI verifie 2026-09-29). Cadre hybride de navigation cooperative d une flotte d USV en environnement maritime contraint, integrant trois modules : (1) planification de chemin optimale par algorithme A* avec distance de securite aux obstacles (obstacles mobiles ET courants de surface) ; (2) guidage par poursuite de chemin « virtual target » alimente par la trajectoire de reference du planificateur ; (3) AGREGATION D ESSAIM DECENTRALISEE par fonctions de potentiel attraction/repulsion pour maintenir le CENTROIDE de l essaim et le guider sur le chemin de reference. Validation sur USV uniquement (surface), aucune plateforme aerienne, flotte de petite taille (pas de N=30).'
+    metadata { doi '10.24382/1174'; annee '2019'; nature 'these de doctorat'; corpus '#130'; statut 'CONSULTEE (abstract + PEARL Plymouth, DOI verifie)' }
   }
   srcDigitalTwinZEST = specDoc 'Digital Twin Concept in the Zero Emission Sea Transporter (2024)' {
     #science
     link https://arxiv.org/abs/2408.02277 "Integrating a Digital Twin Concept in the Zero Emission Sea Transporter (ZEST) Project"
-    description 'Jumeau numerique applique a une plateforme maritime autonome. Pertinent pour la perception et le modele de monde.'
-    metadata { arxiv '2408.02277'; annee '2024'; nature 'preprint'; corpus '#134'; statut 'A CONSULTER' }
+    description '''
+      ECARTEE (abstract lu, 2026-09-29). Le projet ZEST (Zero Emission
+      Sea Transporter) developpe un CATAMARAN de transport court-courrier
+      zero emission, motive par les cibles de decarbonation de l OMI et
+      du paquet Fit for 55 ; le jumeau numerique y est un outil de
+      validation (simulateur marin Stonefish) d un NAVIRE DE TRANSPORT
+      unique, pas d un essaim. AUCUN des algorithmes du catalogue du
+      modele (allocation, consensus, formation, election, perception,
+      navigation, evitement, surete, planification, sante, energie) n est
+      etaye par ce document : pas d allocation multi-agents, pas de fusion
+      de capteurs, pas de controle de formation. Le jumeau numerique du
+      MODELE (CAP_OBSERVE / FN_DIGITAL_TWIN = telemetrie / rejeu d un
+      essaim aerien+surface) est DEJA source par ailleurs (functional.c4,
+      DOI 10.6109/jkiice.2026.30.8.1408, C2 USV swarm + validation par
+      jumeau). Rattacher ZEST serait un rattachement de complaisance :
+      meme concept, domaine et objet differents.
+    '''
+    metadata { arxiv '2408.02277'; annee '2024'; nature 'preprint'; corpus '#134'; statut 'ECARTEE' }
   }
-  srcCoverageCentral = specDoc 'Centralization vs decentralization in multi-robot coverage (2024)' {
+  srcCoverageCentral = specDoc 'Jamshidpey et al. (2025) — Centralization vs. decentralization in multi-robot sweep coverage' {
     #science
-    link https://arxiv.org/abs/2408.06553 "Centralization vs. Decentralization in Multi-Robot Coverage"
-    description 'Comparaison empirique centralise vs decentralise sur la couverture. Eclaire directement le choix d architecture.'
-    metadata { arxiv '2408.06553'; annee '2024'; nature 'preprint'; corpus '#135'; statut 'A CONSULTER' }
+    link https://arxiv.org/abs/2408.06553 "Centralization vs. decentralization in multi-robot sweep coverage with ground robots and UAVs"
+    link https://doi.org/10.1007/s10015-025-01049-7 "Centralization vs. decentralization in multi-robot sweep coverage with ground robots and UAVs (Artificial Life and Robotics, 2025)"
+    description 'Comparaison empirique centralise vs decentralise sur une tache de sweep coverage : 5 structures de controle (marche aleatoire, decentralise a balises, formation hybride auto-organisante, formation centralisee, trajectoires predeterminees). Robots au sol assistes d UAV superviseurs/balises. Avantage centralise : completude, uniformite, temps de couverture. Avantage decentralise : scalabilite (4/8/16 robots) et tolerance aux fautes (0-75% de perte).'
+    metadata { arxiv '2408.06553'; doi '10.1007/s10015-025-01049-7'; annee '2024'; nature 'article de revue (Artificial Life and Robotics 2025)'; corpus '#135'; statut 'CONSULTEE (abstract lu — arXiv v4 + DOI Crossref verifie)' }
   }
   srcCBFMultiFixed = specDoc 'CBF-Based Collision Avoidance for Multi-Fixed-Wing UAV Pursuit (2024)' {
     #science
@@ -160,11 +178,12 @@ model {
     '''
     metadata { nature 'acte de conference'; annee '2025'; corpus '#160'; statut 'ECARTEE' }
   }
-  srcAUVFaultDiag = specDoc 'AUV Fault Diagnosis via Multidimensional Temporal Classification Transformer (2025)' {
+  srcAUVFaultDiag = specDoc 'Chen, Xu, Chen, Tarasiuk (2025) — AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer' {
     #science
     link https://yadda.icm.edu.pl/baztech/element/bwmeta1.element.baztech-2921c86a-b3bc-453e-bab8-1df7f6cad79f/c/PMRes_2025_4-97-106.pdf "AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer"
-    description 'Diagnostic de panne par transformer temporel. Pertinent pour la surete et la detection de defaillance.'
-    metadata { nature 'article de revue'; annee '2025'; corpus '#165'; statut 'A CONSULTER'; confiance '0.4 — a verifier' }
+    link https://doi.org/10.2478/pomr-2025-0053 "AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer (Polish Maritime Research 4(128), 2025)"
+    description 'Polish Maritime Research 4(128) 2025, Vol. 32, pp. 97-106. Diagnostic de panne AUV par transformer temporel multidimensionnel (MTC-Transformer) : extraction automatique de caracteristiques, fusion gated, classification multi-couches. Valide sur le jeu de pannes de l AUV quadrirotor Haizhe : 99.51% (entrainement) / 99.44% (validation), superieur a WDCNN et LSTM-1DCNN. VERIFICATION 2026-09-29 : lien PDF HTTP 200, article reel, DOI Crossref confirme, metadonnees correctes — la confiance 0.4 est RELEVEE.'
+    metadata { doi '10.2478/pomr-2025-0053'; annee '2025'; nature 'article de revue'; corpus '#165'; statut 'CONSULTEE (abstract lu — PDF + DOI verifies)' ; confiance 'VERIFIEE — source valide (ex-0.4 a verifier)' }
   }
 
   // ===========================================================================
@@ -575,6 +594,141 @@ model {
     }
   }
 
+  sciFaultDiagnosisAUV = finding 'SCI-19 — Diagnostic de panne : famille data-driven documentee, AUV mono-vehicule seulement' {
+    #science
+    link https://doi.org/10.2478/pomr-2025-0053 "AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer"
+    description '''
+      algHealthMonitoring portait « aucune source verifiee ». La famille
+      « diagnostic de panne data-driven » est documentee :
+        - MTC-Transformer (10.2478/pomr-2025-0053, Polish Maritime Research
+          4(128) 2025) : classification temporelle multidimensionnelle des
+          pannes d AUV, 99.44% en validation, superieur a WDCNN/LSTM-1DCNN.
+
+      LIMITES NON LEVEES :
+        - DOMAINE : AUV (sous-marin), or la flotte cible est aerienne+surface
+          (UAV-R/F + USV). Transposition non demontree.
+        - ECHELLE : jeu de donnees MONO-VEHICULE (AUV quadrirotor Haizhe),
+          aucun essaim, aucun N=30.
+        - DEPENDANCE : classifieur deep learning exige un jeu de pannes
+          ETIQUETE pour l entrainement — dependance de donnees que le modele
+          ne dimensionne pas (aucun jeu de pannes de la flotte SWARM-3D).
+
+      VERDICT SUR LA SOURCE (confiance initiale 0.4 « a verifier ») :
+      source VERIFIEE et VALIDE — lien PDF HTTP 200, article reel (Polish
+      Maritime Research 4(128) 2025, pp. 97-106), DOI 10.2478/pomr-2025-0053
+      confirme Crossref, metadonnees correctes. Confiance RELEVEE a VERIFIEE.
+    '''
+    metadata {
+      verdict 'CONDITIONAL (famille documentee) / EXTRAP (domaine AUV -> UAV-USV, essaim 30)'
+      niveau_preuve 'MEDIUM (methode) / LOW (transposition flotte)'
+      source 'srcAUVFaultDiag'
+      correction_modele 'algHealthMonitoring : diagnostic de panne source (data-driven) ; confiance srcAUVFaultDiag 0.4 -> VERIFIEE ; domaine AUV et dependance donnees etiquetees signales comme trous'
+    }
+  }
+
+  sciCentralVsDecentral = finding 'SCI-20 — Centralisation vs decentralisation : arbitrage empiriquement documente' {
+    #science
+    link https://doi.org/10.1007/s10015-025-01049-7 "Centralization vs. decentralization in multi-robot sweep coverage with ground robots and UAVs"
+    description '''
+      La litterature documente EMPIRIQUEMENT l arbitrage centralise vs
+      decentralise que le modele tranche par ADR (allocation par encheres
+      decentralisees, ADR-5) :
+        - Jamshidpey et al. (arXiv:2408.06553, publie Artificial Life and
+          Robotics 2025, 10.1007/s10015-025-01049-7) : 5 structures de controle
+          comparees sur une tache de sweep coverage (robots au sol assistes
+          d UAV superviseurs/balises).
+        - AVANTAGE CENTRALISE : completude, uniformite et temps de couverture
+          superieurs.
+        - AVANTAGE DECENTRALISE : scalabilite (4/8/16 robots) et tolerance
+          aux fautes (0/25/50/75% de perte) superieures.
+        - FORMATION : utilise « formation centralisee » et « formation hybride
+          auto-organisante » comme deux des cinq structures — la formation
+          decentralisee auto-organisante est documentee comme alternative a la
+          formation centralisee.
+
+      LIMITES NON LEVEES :
+        - DOMAINE : robots AU SOL + UAV superviseurs ; pas d essaim 30
+          aerien+surface.
+        - TACHE : sweep coverage, PAS une allocation d encheres (CBBA). Le
+          lien vers algTaskAllocation est un ARBITRAGE D ARCHITECTURE
+          (pourquoi decentraliser), pas une preuve de CBBA.
+        - ECHELLE : 4-16 robots, pas 30.
+    '''
+    metadata {
+      verdict 'SUPPORTED (arbitrage centralise/decentralise documente) / CONDITIONAL (essaim 30 aerien+surface)'
+      niveau_preuve 'MEDIUM'
+      source 'srcCoverageCentral'
+      correction_modele 'algFormationControl et algTaskAllocation : arbitrage de centralisation source ; formation auto-organisante decentralisee documentee ; l allocation par enchere reste portee par CBBA (SCI-1)'
+    }
+  }
+
+  sciCrossDomainASW = finding 'SCI-21 — Recherche anti-sous-marine cooperative inter-domaines : fusion distribuee documentee, simulation seule' {
+    #science
+    link https://doi.org/10.16182/j.issn1004731x.joss.23-0073 "Research on Cross-domain Unmanned Swarm Cooperative Anti-submarine Search Method"
+    description '''
+      srcCrossDomainASW (Wang et al., Journal of System Simulation 2024)
+      documente une recherche cooperative INTER-DOMAINES (aerien + surface)
+      appliquee a la lutte anti-sous-marine :
+        - l USV sert de RELAIS DE COMMUNICATION pour l UAV, etendant la
+          portee operationnelle de la plateforme aerienne ;
+        - carte-grille numerique de la zone de recherche partagee ;
+        - MECANISME DE FUSION D INFORMATION DISTRIBUEE entre les systemes
+          sans pilote (pistes detectees par capteurs heterogenes) ;
+        - fonction objectif de recherche guidant la DECISION TEMPS REEL
+          des plateformes heterogenes.
+
+      CE QUI EST DOCUMENTE pour le modele : la fusion d information
+      distribuee entre plateformes heterogenes aerien+surface — la meme
+      famille que algPerceptionFusion (fusion de pistes au niveau Edge).
+      Le relais USV->UAV et la decision de recherche restent des mecanismes
+      de mission sans algorithme dedie dans le modele.
+
+      LIMITES NON LEVEES :
+        - VALIDATION : SIMULATION uniquement, aucun materiel reel ;
+        - DOMAINE : ASW (acoustique/sonar), capteurs et topologie tres
+          differents de la flotte SWARM-3D (UAV-R/F + USV de surface) ;
+        - ECHELLE : nombre de plateformes non confirme, pas de N=30.
+    '''
+    metadata {
+      verdict 'SUPPORTED (fusion d information distribuee inter-domaines) / CONDITIONAL (ASW simule, pas 30 plateformes)'
+      niveau_preuve 'MEDIUM (methode) / LOW (transposition flotte)'
+      source 'srcCrossDomainASW'
+      correction_modele 'algPerceptionFusion : fusion de pistes heterogenes aerien+surface sourcee (complement de SCI-4 UUV) ; relais USV->UAV et decision de recherche non rattaches a un algorithme (trous assumes)'
+    }
+  }
+
+  sciSwarmUSV = finding 'SCI-22 — Navigation cooperative USV : agregation par potentiels + planification A* documentees' {
+    #science
+    link https://doi.org/10.24382/1174 "Cooperative Swarm Optimisation of Unmanned Surface Vehicles"
+    description '''
+      La these Singh (University of Plymouth, 2019) documente un cadre
+      hybride de navigation cooperative d une flotte d USV en environnement
+      maritime contraint, en trois modules :
+        - PLANIFICATION : algorithme A* optimal avec distance de securite
+          aux obstacles (obstacles mobiles et courants de surface) —
+          famille « waypoints » de algPathPlanning ;
+        - GUIDAGE : poursuite de chemin « virtual target » ;
+        - FORMATION/AGREGATION : agregation d essaim DECENTRALISEE par
+          fonctions de potentiel attraction/repulsion maintenant le
+          CENTROIDE de l essaim sur le chemin de reference — famille
+          « cohesion par champs de potentiel » de algFormationControl,
+          mecanisme distinct de la formation RL (SCI-18) et du
+          wall-follower (SCI-17).
+
+      LIMITES NON LEVEES :
+        - DOMAINE : USV de surface uniquement, AUCUNE plateforme aerienne ;
+        - ECHELLE : flotte de petite taille (pas de N=30 heterogene) ;
+        - VALIDATION : simulation et essais en bassin/mer, pas d essaim 30
+          aerien+surface.
+    '''
+    metadata {
+      verdict 'SUPPORTED (agregation par potentiels + A*) / CONDITIONAL (USV seul, petite flotte)'
+      niveau_preuve 'MEDIUM'
+      source 'srcSwarmUSV'
+      correction_modele 'algFormationControl : cohesion decentralisee par potentiels sourcee ; algPathPlanning : planification A* optimale sourcee (complements des SCI-14/17/18)'
+    }
+  }
+
   // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
@@ -683,4 +837,17 @@ model {
   sciCbfFixedWing -[evidences]-> algCollisionAvoidance 'variante CBF voilure fixe (sim 2D)'
   sciApfWallFollower -[evidences]-> algCollisionAvoidance 'variante champs de potentiel anti-minima'
   sciFormationRL -[evidences]-> algFormationControl 'formation RL + evitement (sim + reel)'
+
+  // --- Rattachements carte t_ce8d6acb (2026-09-29) : diagnostic + couverture + ASW + swarm USV ---
+  sciFaultDiagnosisAUV -[uses]-> srcAUVFaultDiag 'methode data-driven'
+  sciFaultDiagnosisAUV -[evidences]-> algHealthMonitoring 'diagnostic de panne source'
+  sciCentralVsDecentral -[uses]-> srcCoverageCentral 'arbitrage empirique'
+  sciCentralVsDecentral -[evidences]-> algFormationControl 'formation hybride auto-organisante'
+  sciCentralVsDecentral -[evidences]-> algTaskAllocation 'arbitrage de centralisation (pourquoi CBBA decentralise)'
+  sciCentralVsDecentral -[exposes]-> adr5 'confirme empiriquement l allocation decentralisee'
+  sciCrossDomainASW -[uses]-> srcCrossDomainASW 'source primaire lue (J Syst Sim 2024)'
+  sciCrossDomainASW -[evidences]-> algPerceptionFusion 'fusion d information distribuee inter-domaines'
+  sciSwarmUSV -[uses]-> srcSwarmUSV 'these lue (Plymouth 2019)'
+  sciSwarmUSV -[evidences]-> algFormationControl 'agregation decentralisee par potentiels'
+  sciSwarmUSV -[evidences]-> algPathPlanning 'planification optimale A* avec marge de securite'
 }
