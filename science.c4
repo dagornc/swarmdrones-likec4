@@ -429,6 +429,50 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_3f3134cc LOT03 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 3 (2026-09-29, carte t_3f3134cc) — 4 nouveaux verdicts / 4 deja rattachees / 17 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcFECBF = specDoc 'A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance (2026)' {
+    #science
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
+    description '''
+      CBF a faisabilite renforcee (FECBF) pour l evitement de collision multi-UAV dense : la faisabilite du QP CBF est compromise par l incompatibilite INTERNE entre plusieurs contraintes CBF. Condition suffisante de compatibilite interne, puis contrainte de consistance de signe integree a un QP CBF DECENTRALISE (estimations pire cas + variables d ecart). Reduit fortement l infaisabilite et ameliore l evitement en scenario dense ; robuste au delai temporel ; experiences REELES.
+    '''
+    metadata { arxiv '2603.13103'; annee '2026'; nature 'preprint'; corpus '309'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcTriSAR = specDoc 'TriSAR: Task Coordination and Collision Avoidance for Aerial Robot Teams in Disaster Response (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.01731 "TriSAR: Task Coordination and Collision Avoidance for Aerial Robot Teams in Disaster Response"
+    description '''
+      Systeme de coordination a 5 UAV en simulation Gazebo d un environnement urbain endommage par seisme : plan factoriel 2x2 comparant deux strategies d allocation de taches (algorithme genetique vs allocation gloutonne) avec evitement de collision reactif active/desactive. 30 episodes stochastiques, 5 UAV / 8 cibles. La repulsion elimine les violations de seuil de collision (Mann-Whitney) ; caracterise les contributions individuelles et combinees des couches de coordination.
+    '''
+    metadata { arxiv '2609.01731'; annee '2026'; nature 'preprint'; corpus '594'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcPeukertRouting = specDoc 'Certified-Robust Multi-Objective UAV Routing for Military Resupply under Nonlinear Energy Dynamics (2026)' {
+    #science
+    link https://doi.org/10.21203/rs.3.rs-10941530/v1 "Certified-Robust Multi-Objective UAV Routing for Military Resupply under Nonlinear Energy Dynamics"
+    description '''
+      Routage robuste tri-objectif (duree, risque sous ensemble d incertitude budgetise, deficit d energie terminal) pour resupply militaire : l energie de batterie suit la LOI DE PEUKERT (depletion NON lineaire) au lieu d un cout lineaire. PINN adaptatif (trunk partage, tete d affectation + tete d energie) entraine contre le residu de la loi de Peukert. Preprint Research Square (non relu par les pairs).
+    '''
+    metadata { doi '10.21203/rs.3.rs-10941530/v1'; annee '2026'; nature 'preprint (Research Square)'; corpus '2293'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcHamiltonianFormation = specDoc 'Energy-Conserving Swarm Formation Control Using Pure Hamiltonian Mechanics and Active Braking (2026)' {
+    #science
+    link https://doi.org/10.21203/rs.3.rs-10520167/v1 "Energy-Conserving Swarm Formation Control Using Pure Hamiltonian Mechanics and Active Braking"
+    description '''
+      Formation d essaim 3D conservant l energie sur terrains non plats : potentiel de navigation Rimon-Koditschek (RK) modifie (mise a l echelle verticale anisotrope) embarque dans un cadre dynamique pseudo-Hamiltonien, gradients de potentiel mappes en profils d acceleration lisses ; freinage actif pour preserver l integrite de l essaim. Surmonte les minima locaux des champs de potentiel classiques. Preprint Research Square.
+    '''
+    metadata { doi '10.21203/rs.3.rs-10520167/v1'; annee '2026'; nature 'preprint (Research Square)'; corpus '2306'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1045,6 +1089,44 @@ sciCBFQuadFeasibility = finding 'SCI-32 — Faisabilite et singularite des CBF d
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc LOT03 (2026-09-29)
+  // ===========================================================================
+
+sciFECBF = finding 'SCI-36 — CBF decentralise a faisabilite renforcee (FECBF) en essaim dense' {
+    #science
+    link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
+    description '''
+      srcFECBF traite la FAISABILITE du QP CBF DECENTRALISE en essaim dense — complement de SCI-32 (faisabilite des CBF d ordre superieur, torque-aware) : ici la contrainte de consistance de signe leve l incompatibilite entre contraintes CBF concurrentes. Directement pertinent pour algCollisionAvoidance (CBF-QP decentralise) et algSafetyRules (garantie maintenue). VERDICT : SUPPORTED pour le mecanisme (FECBF decentralise, essais reels) ; CONDITIONAL — echelle de l essaim reel a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (FECBF decentralise, essais reels) / CONDITIONAL (echelle N=30)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcFECBF'; correction_modele 'algCollisionAvoidance + algSafetyRules : faisabilite du QP CBF decentralise sourcee' }
+  }
+
+  sciTriSAR = finding 'SCI-37 — Coordination taches + evitement : contributions croisees mesurees (TriSAR)' {
+    #science
+    link https://arxiv.org/abs/2609.01731 "TriSAR: Task Coordination and Collision Avoidance for Aerial Robot Teams in Disaster Response"
+    description '''
+      srcTriSAR apporte une PREUVE EXPERIMENTALE (plan factoriel 2x2, 30 episodes) de la contribution croisee entre allocation de taches (algTaskAllocation : GA vs glouton) et evitement reactif (algCollisionAvoidance : repulsion). Source rare qui MESURE l interaction des deux couches au lieu de les supposer independantes. VERDICT : SUPPORTED pour le mecanisme (interaction allocation x evitement) ; CONDITIONAL — simulation Gazebo (5 UAV), pas de vol reel.
+    '''
+    metadata { verdict 'SUPPORTED (interaction allocation x evitement mesuree) / CONDITIONAL (simulation 5 UAV)'; niveau_preuve 'MEDIUM'; source 'srcTriSAR'; correction_modele 'algTaskAllocation + algCollisionAvoidance : contribution croisee des couches sourcee' }
+  }
+
+  sciPeukertRouting = finding 'SCI-38 — Routage robuste sous depletion d energie non lineaire (loi de Peukert)' {
+    #science
+    description '''
+      srcPeukertRouting apporte a algEnergyAware un modele de depletion de batterie PLUS REALISTE (loi de Peukert, non lineaire) que le cout lineaire suppose par le modele — pertinent pour le dimensionnement de la capacite batterie (DE-07) et l allocation de mission. VERDICT : SUPPORTED pour le mecanisme (routage robuste + Peukert) ; CONDITIONAL — preprint non relu par les pairs, composante PINN apprise, routage mono-mission (pas un essaim).
+    '''
+    metadata { verdict 'SUPPORTED (routage robuste + Peukert) / CONDITIONAL (preprint, PINN appris, mono-mission)'; niveau_preuve 'LOW-MEDIUM'; source 'srcPeukertRouting'; correction_modele 'algEnergyAware + algPathPlanning : depletion de batterie non lineaire (Peukert) sourcee' }
+  }
+
+  sciHamiltonianFormation = finding 'SCI-39 — Formation d essaim 3D conservant l energie (mecanique hamiltonienne)' {
+    #science
+    description '''
+      srcHamiltonianFormation joint la formation (algFormationControl) et la CONSERVATION D ENERGIE (algEnergyAware) par mecanique hamiltonienne + potentiel RK — une variante energetiquement motivee des champs de potentiel deja sources (SCI-17). VERDICT : SUPPORTED pour le mecanisme (formation 3D conservant l energie, anti-minima locaux) ; CONDITIONAL — preprint non relu, validation a verifier (terrain non plat), transposition a N=30 a confirmer.
+    '''
+    metadata { verdict 'SUPPORTED (formation hamiltonienne conservant l energie) / CONDITIONAL (preprint, validation)'; niveau_preuve 'LOW-MEDIUM'; source 'srcHamiltonianFormation'; correction_modele 'algFormationControl + algEnergyAware : formation 3D conservant l energie sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1208,4 +1290,18 @@ sciCBFQuadFeasibility = finding 'SCI-32 — Faisabilite et singularite des CBF d
   sciMultiLeaderDelay -[evidences]-> algEventTriggeredComm 'declenchement dynamique sous delai de communication'
   sciMultiLeaderDelay -[uses]-> srcMultiLeaderDelay 'source primaire'
   sciEventTriggered -[uses]-> srcETFormUSV 'formation event-triggered multi-USV sous communication intermittente (completude SCI-6)'
+  // --- Rattachements carte t_3f3134cc LOT03 (2026-09-29) ---
+// --- Relations du lot ---
+  sciFECBF -[evidences]-> algCollisionAvoidance 'evitement multi-UAV dense par QP CBF decentralise'
+  sciFECBF -[evidences]-> algSafetyRules 'faisabilite du certificat de surete en essaim dense'
+  sciFECBF -[uses]-> srcFECBF 'source primaire'
+  sciTriSAR -[evidences]-> algTaskAllocation 'allocation GA vs gloutonne (comparaison controlee)'
+  sciTriSAR -[evidences]-> algCollisionAvoidance 'evitement reactif (repulsion) actif/desactive'
+  sciTriSAR -[uses]-> srcTriSAR 'source primaire'
+  sciPeukertRouting -[evidences]-> algEnergyAware 'depletion de batterie non lineaire (loi de Peukert)'
+  sciPeukertRouting -[evidences]-> algPathPlanning 'routage robuste multi-objectif'
+  sciPeukertRouting -[uses]-> srcPeukertRouting 'source primaire'
+  sciHamiltonianFormation -[evidences]-> algFormationControl 'formation 3D sur terrain non plat (potentiel RK)'
+  sciHamiltonianFormation -[evidences]-> algEnergyAware 'conservation d energie par dynamique hamiltonienne'
+  sciHamiltonianFormation -[uses]-> srcHamiltonianFormation 'source primaire'
 }

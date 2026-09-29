@@ -20,6 +20,7 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 |-----|----------|----------------------|----------------|---------|-----------|
 | 1   | 25       | 9 (8 findings + 1 complétion SCI-8) | 5 | 11 | SCI-24..31 |
 | 2   | 25       | 5 (4 findings + 1 complétion SCI-6) | 2 | 18 | SCI-32..35 |
+| 3   | 25       | 4 findings | 4 | 17 | SCI-36..39 |
 
 ---
 
@@ -111,3 +112,48 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 ## Validation lot 2
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 : 0 arc cassé ; I-2 : 0 orphelin (export JSON du clone, 441 éléments / 832 relations)
+
+---
+
+## LOT 3 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 309 | Feasibility-Enhanced CBF (FECBF) multi-UAV collision avoidance | algCollisionAvoidance + algSafetyRules | srcFECBF | SCI-36 |
+| 594 | TriSAR task coordination + collision avoidance (5 UAV) | algTaskAllocation + algCollisionAvoidance | srcTriSAR | SCI-37 |
+| 2293 | Robust multi-objective UAV routing (Peukert battery) | algEnergyAware + algPathPlanning | srcPeukertRouting | SCI-38 |
+| 2306 | Energy-conserving swarm formation (Hamiltonian + RK) | algFormationControl + algEnergyAware | srcHamiltonianFormation | SCI-39 |
+
+### DEJA_RATTACHEE
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 138 | CBF multi-fixed-wing pursuit | srcCBFMultiFixed | SCI-16 |
+| 147 | Multi-UAV formation RL | srcFormationRL | SCI-18 |
+| 917 | Multi-UAV formation RL (doublon de #147) | srcFormationRL | SCI-18 |
+| 221 | UUV cooperative autonomy survey | srcUUV | SCI-4 |
+
+### ECARTEE (17)
+| # | Titre | Raison |
+|---|-------|--------|
+| 2030 | Mission-critical ISAC + WPT | pas-algorithme-canonique — ISAC / transfert d'énergie sans fil |
+| 2154 | D2D aerial-ground networks | pas-algorithme-canonique — D2D cellulaire |
+| 2200 | EH-SWADS agricultural WSN | hors-perimetre — WSN agricole |
+| 2276 | AUV battery temperature (LSTNet) | hors-perimetre — batterie AUV |
+| 383 | Graph-attention MARL safe separation | paradigme-exclu — politique MARL apprise |
+| 378 | Hybrid APF + ST-Transformer AUV path planning | hors-perimetre — AUV sous-marins |
+| 964 | Tether-aware avoidance USV-HROV | hors-perimetre — HROV sous-marin remorqué |
+| 1439 | Obstacle avoidance 3 range sensors (PPO) | paradigme-exclu — politique DRL apprise |
+| 1817 | Lyapunov trajectory UAV relay (EET) | deja-couvert — APF déjà couvert SCI-14/srcVAPF |
+| 1828 | Multi-sensor fusion obstacle avoidance | non-verifiable — résumé non vérifié par l'éditeur |
+| 2087 | Paying for Space (VCG incentive) | paradigme-exclu — mécanisme d'incitation économique |
+| 2262 | Paying for Space (DOI, doublon #2087) | doublon |
+| 2251 | MATLAB-Simulink benchmark framework | non-primaire — framework de benchmark |
+| 380 | MADRL end-to-end formation | deja-couvert — formation RL couverte SCI-18 |
+| 914 | GCBF+ neural graph CBF | paradigme-exclu — certificat CBF appris par GNN |
+| 916 | End-to-end DRL swarm collision avoidance | paradigme-exclu — politique DRL apprise |
+| 919 | FECBF (doublon de #309) | doublon |
+
+## Validation lot 3
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- 50 specDocs / 36 findings, 0 doublon, SCI jusqu'à 39
