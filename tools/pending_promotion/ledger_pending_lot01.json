@@ -1,0 +1,231 @@
+{
+ "lot_label": "PENDING LOT 01 (2026-09-29, carte t_1ce6f331) — 5 rattachees / 1 specdoc_only (completion SCI-29) / 3 deja rattachees / 36 ecartees",
+ "rattachees": [
+  {
+   "src": "srcHETCEnergyAware",
+   "title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones (IMAV 2025)",
+   "link_title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones",
+   "description": "Controle hybride declenche par evenement (HETC) pour micro-drones en reseau : un timer de surete fixe (borne Zeno) combine a un seuil ajustable reagissant a l etat du drone, pour equilibrer communication, performance et energie. Valide en simulation 6-DOF quadrotor sur 4 trajectoires (suivi rectiligne/courbe, vol stationnaire) : reduction de la frequence de communication ET de l energie totale.",
+   "metadata": {
+    "annee": "2025",
+    "nature": "acte de conference (IMAV 2025)",
+    "corpus": "168",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciHETCEnergyAware",
+    "title": "SCI-56 — Controle hybride event-triggered energy-aware pour micro-drones",
+    "link_title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones",
+    "description": "srcHETCEnergyAware documente le couplage algEventTriggeredComm x algEnergyAware : le declenchement hybride (timer de surete + seuil adaptatif) reduit a la fois le trafic de communication et la consommation d energie, sans sacrifier la surete. Complement de SCI-6 (event-triggered generique) : ici l angle energie ET la borne Zeno par timer fixe. VERDICT : SUPPORTED pour le mecanisme (HETC energy-aware) ; CONDITIONAL — simulation 6-DOF, echelle a confronter a N=30.",
+    "metadata": {
+     "verdict": "SUPPORTED (HETC energy-aware) / CONDITIONAL (simulation)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcHETCEnergyAware",
+     "correction_modele": "algEventTriggeredComm + algEnergyAware : declenchement hybride (timer de surete + seuil adaptatif) reduisant trafic et energie"
+    },
+    "link_url": "https://www.imavs.org/papers/2025/15.pdf"
+   },
+   "algs": [
+    ["algEventTriggeredComm", "declenchement hybride (timer fixe + seuil adaptatif)"],
+    ["algEnergyAware", "reduction conjointe de la frequence de communication et de l energie"]
+   ],
+   "link_url": "https://www.imavs.org/papers/2025/15.pdf"
+  },
+  {
+   "src": "srcJumpPointSwarm",
+   "title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm (2025)",
+   "link_title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm",
+   "description": "Planification de trajectoire multi-UAV par algorithme Jump Point Search ameliore : detection geometrique de collision pour optimiser la recherche, fenetre dynamique (DWA) pour contraindre le domaine de vol, et champs de collision pour la planification collaborative. Resultats : erreur de controle minimale en X/Y/Z, 1002 ms et 17.85 m en planification statique multi-obstacles, evitement et re-planification valides sur grille 29x29 m.",
+   "metadata": {
+    "annee": "2025",
+    "nature": "article (IJACSA vol.16 n4)",
+    "corpus": "172",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciJumpPointSwarm",
+    "title": "SCI-57 — Planification de trajectoire multi-UAV par Jump Point Search ameliore",
+    "link_title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm",
+    "description": "srcJumpPointSwarm documente algPathPlanning par JPS ameliore + fenetre dynamique + champs de collision pour la planification collaborative d essaim, avec evitement d obstacles et re-planification face aux minima locaux. Complement de la famille path planning (A*/RRT/RHCR) : ici JPS ameliore a cout borne. VERDICT : SUPPORTED pour le mecanisme (JPS + DWA + champs de collision) ; CONDITIONAL — simulation sur grille 29x29 m, echelle a confronter.",
+    "metadata": {
+     "verdict": "SUPPORTED (JPS ameliore + DWA) / CONDITIONAL (simulation)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcJumpPointSwarm",
+     "correction_modele": "algPathPlanning : JPS ameliore + fenetre dynamique + champs de collision (collaboratif)"
+    },
+    "link_url": "https://thesai.org/Downloads/Volume16No4/Paper_26-Path_Planning_Technology_for_Unmanned_Aerial_Vehicle_Swarm.pdf"
+   },
+   "algs": [
+    ["algPathPlanning", "Jump Point Search ameliore + fenetre dynamique + champs de collision"]
+   ],
+   "link_url": "https://thesai.org/Downloads/Volume16No4/Paper_26-Path_Planning_Technology_for_Unmanned_Aerial_Vehicle_Swarm.pdf"
+  },
+  {
+   "src": "srcBioEventCollision",
+   "title": "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments (2025)",
+   "link_title": "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments",
+   "description": "Detection d obstacles dynamiques par camera evenementielle (neuromorphique) inspiree du paradigme temporel de la vision biologique : le mecanisme de reponse biologique aux objets en approche permet la perception et l identification de menaces de collision. Valide simulation + reel, 97 % de taux de succes en detection d obstacles en exterieur.",
+   "metadata": {
+    "doi": "10.1049/csy2.70006",
+    "annee": "2025",
+    "nature": "article (IET Cyber-Systems and Robotics)",
+    "corpus": "183",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciBioEventCollision",
+    "title": "SCI-58 — Detection de collision neuromorphique par camera evenementielle",
+    "link_title": "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments",
+    "description": "srcBioEventCollision documente le front-end de PERCEPTION d algCollisionAvoidance : detection temps-reel d obstacles dynamiques par camera evenementielle bioinspiree (97 % en reel), alimentant l evitement. Complement de la famille collision avoidance (CBF/collision cone) : ici le capteur et la detection, pas la loi d evitement. VERDICT : SUPPORTED pour le mecanisme (detection neuromorphique de menace de collision) ; CONDITIONAL — mono-capteur, integration a la boucle d evitement a valider.",
+    "metadata": {
+     "verdict": "SUPPORTED (detection neuromorphique) / CONDITIONAL (mono-capteur)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcBioEventCollision",
+     "correction_modele": "algCollisionAvoidance : front-end de detection de collision par camera evenementielle (97 % reel)"
+    },
+    "link_doi": "10.1049/csy2.70006"
+   },
+   "algs": [
+    ["algCollisionAvoidance", "detection bioinspiree de menaces de collision (camera evenementielle)"]
+   ],
+   "link_doi": "10.1049/csy2.70006"
+  },
+  {
+   "src": "srcIC3BF",
+   "title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs (2025)",
+   "link_title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs",
+   "description": "C3BF ameliore (IC3BF) pour l evitement de collision d UAV sous obstacles dynamiques sans violer les limites d actionneurs : rayon de relaxation temps-variant qui relache partiellement les contraintes de surete du C3BF, formule comme CBF avec dynamique auxiliaire stabilisee par CLF. Reduit le conservatisme du C3BF, trajectoires plus lisses, commande plus faible.",
+   "metadata": {
+    "doi": "10.1109/YAC66630.2025.11150122",
+    "annee": "2025",
+    "nature": "article de conference (IEEE YAC 2025)",
+    "corpus": "194",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciIC3BF",
+    "title": "SCI-59 — Collision cone CBF ameliore avec rayon de relaxation temps-variant",
+    "link_title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs",
+    "description": "srcIC3BF documente algCollisionAvoidance + algSafetyRules : le rayon de relaxation temps-variant resout le conflit contraintes de surete / limites d actionneurs (optimisation insoluble), en relachant partiellement le C3BF sous stabilisation CLF. Complement de la famille CBF (SCI-28/SCI-31) : ici la gestion des limites d actionneurs. VERDICT : SUPPORTED pour le mecanisme (IC3BF temps-variant) ; CONDITIONAL — simulation, validation en vol a confirmer.",
+    "metadata": {
+     "verdict": "SUPPORTED (IC3BF temps-variant) / CONDITIONAL (simulation)",
+     "niveau_preuve": "MEDIUM",
+     "source": "srcIC3BF",
+     "correction_modele": "algCollisionAvoidance + algSafetyRules : relaxation temps-variante du C3BF sous limites d actionneurs"
+    },
+    "link_doi": "10.1109/YAC66630.2025.11150122"
+   },
+   "algs": [
+    ["algCollisionAvoidance", "collision cone CBF ameliore (IC3BF)"],
+    ["algSafetyRules", "relaxation sure des contraintes sous limites d actionneurs (CLF)"]
+   ],
+   "link_doi": "10.1109/YAC66630.2025.11150122"
+  },
+  {
+   "src": "srcDelayStability",
+   "title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law (2025)",
+   "link_title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law",
+   "description": "Critere de stabilite dependant du retard pour le suivi de trajectoire d essaims d UAV a voilure fixe sous retour de commande retarde : combinaison Routh-Hurwitz + equation caracteristique transcendante, identification d un seuil de retard critique au-dela duquel le suivi devient instable. Simulations numeriques confirmant la perte de stabilite quand le retard augmente.",
+   "metadata": {
+    "doi": "10.3390/axioms14070519",
+    "annee": "2025",
+    "nature": "article (Axioms 14(7):519)",
+    "corpus": "198",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "finding": {
+    "id": "sciDelayStability",
+    "title": "SCI-60 — Critere de stabilite sous retard pour la formation d essaim a voilure fixe",
+    "link_title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law",
+    "description": "srcDelayStability documente algFormationControl sous l angle de la STABILITE : critere dependant du retard (Routh-Hurwitz + equation transcendante) avec seuil de retard critique pour le maintien de formation. Complement de la famille formation sous retard (srcMultiLeaderDelay) : ici la preuve de stabilite formelle, pas le declenchement. VERDICT : SUPPORTED pour le mecanisme (critere de stabilite sous retard) ; CONDITIONAL — analyse theorique, transposition au controleur embarque a valider.",
+    "metadata": {
+     "verdict": "SUPPORTED (critere de stabilite sous retard) / CONDITIONAL (theorique)",
+     "niveau_preuve": "MEDIUM-HAUTE",
+     "source": "srcDelayStability",
+     "correction_modele": "algFormationControl : seuil de retard critique pour la stabilite du suivi de formation"
+    },
+    "link_doi": "10.3390/axioms14070519"
+   },
+   "algs": [
+    ["algFormationControl", "critere de stabilite dependant du retard (Routh-Hurwitz + equation transcendante)"]
+   ],
+   "link_doi": "10.3390/axioms14070519"
+  }
+ ],
+ "specdoc_only": [
+  {
+   "src": "srcDMPCFormationEval",
+   "title": "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swarm (2025)",
+   "link_title": "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swarm",
+   "link_doi": "10.3390/drones9050366",
+   "description": "DMPC pour la formation d UAV en environnement obstrue : fonction de cout de formation ajustant positions et vitesses relatives, fonction d evitement d obstacles pour une formation sure, et metriques d evaluation de la capacite cooperative de l essaim en plusieurs dimensions.",
+   "metadata": {
+    "doi": "10.3390/drones9050366",
+    "annee": "2025",
+    "nature": "article (Drones 9(5):366)",
+    "corpus": "193",
+    "statut": "CONSULTEE (abstract lu, 2026-09-29)"
+   },
+   "target_finding": "sciDMPCSafetyZones",
+   "note": "complete SCI-29 (DMPC formation + evitement) — apport : metriques d evaluation de capacite cooperative"
+  }
+ ],
+ "deja": [
+  {
+   "number": 177,
+   "title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms - arXiv (2502.16887)",
+   "existing_src": "srcUltraLightPlanner",
+   "existing_finding": "sciUltraLightPlanner"
+  },
+  {
+   "number": 200,
+   "title": "Addressing Local Minima in Path Planning for Drones with RL-Based Vortex Artificial Potential Field (10.3390/machines13070600)",
+   "existing_src": "srcVAPF",
+   "existing_finding": "sciPathPlanning"
+  },
+  {
+   "number": 205,
+   "title": "SwarmRaft - Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments (arXiv 2508.00622)",
+   "existing_src": "srcSwarmRaft",
+   "existing_finding": "sciGnssDegraded"
+  }
+ ],
+ "ecartees": [
+  {"number": 126, "title": "Tomorrow's Seascape: DoD's Replicator sUSV Element Begins to Take Shape - Defense Security Monitor", "reason": "non-primaire — actualite/presse (blog Defense Security Monitor)"},
+  {"number": 129, "title": "NATO selects Anduril's Lattice platform for next-gen air command and control - The Jerusalem Post", "reason": "non-primaire — actualite (Jerusalem Post)"},
+  {"number": 131, "title": "Thales UAS100 Long-Range Drone System Meets EASA Design Verification Report Milestone - UAS Vision", "reason": "non-primaire — actualite produit (UAS Vision)"},
+  {"number": 132, "title": "Exail, RTsys and ABYSSA join forces for ocean floor mapping with AUVs", "reason": "non-primaire — communique d entreprise (Exail)"},
+  {"number": 137, "title": "Strengthening UAS Security with Lessons from the Paris Olympics - IDGA", "reason": "non-primaire — actualite (IDGA)"},
+  {"number": 154, "title": "A Survey on UAV Control with Multi-Agent Reinforcement Learning - OUCI (10.3390/drones9070484)", "reason": "non-primaire — survey MARL, pas une source primaire"},
+  {"number": 158, "title": "AI-enabled control system helps autonomous drones stay on target in uncertain environments - MIT", "reason": "non-primaire — actualite (MIT news)"},
+  {"number": 166, "title": "CARTEL: Consensus Adapting Real-Time and Efficient Logging (10.1109/RTSS66672.2025.00044)", "reason": "pas-algorithme-canonique — consensus pour journalisation temps reel (RTSS), hors essaim de drones"},
+  {"number": 167, "title": "Drones & Swarms - NOKOV Motion Capture", "reason": "non-primaire — page produit (motion capture)"},
+  {"number": 169, "title": "Installing Gazebo with ROS — Gazebo jetty documentation", "reason": "non-primaire — documentation logicielle (Gazebo)"},
+  {"number": 170, "title": "NATO advances maritime innovation and readiness through Exercise Dynamic Messenger 2025", "reason": "non-primaire — actualite (NATO)"},
+  {"number": 171, "title": "Nemyx - Auterion", "reason": "non-primaire — page produit (Auterion)"},
+  {"number": 173, "title": "AI Drone Swarm Coordination: 20 Advances (2026) - Yenra", "reason": "non-primaire — blog de veille (Yenra)"},
+  {"number": 174, "title": "Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Under High-Speed (10.3390/jmse13010125)", "reason": "pas-algorithme-canonique — modelisation hydrodynamique du cable USV-UUV, pas un algorithme"},
+  {"number": 175, "title": "A Comprehensive Review of Next-Gen UAV Swarm Robotics: Optimisation Techniques (10.32604/iasc.2025.060364)", "reason": "non-primaire — revue, pas une source primaire"},
+  {"number": 178, "title": "A machine-learning enabled digital-twin framework for tactical drone-swarm design (10.1016/j.cma.2025.117999)", "reason": "pas-algorithme-canonique — jumeau numerique de conception (dynamique multicorps + ML)"},
+  {"number": 179, "title": "American USV Builders Anticipate Mass Demand from U.S. Navy - Defense Security Monitor", "reason": "non-primaire — actualite (Defense Security Monitor)"},
+  {"number": 180, "title": "FANET and MANET, a Support and Composition Relationship (10.32604/cmc.2025.056400)", "reason": "pas-algorithme-canonique — architecture reseau FANET/MANET, pas un des 15 algorithmes"},
+  {"number": 181, "title": "AttentionSwarm: Reinforcement Learning with Attention Control Barrier Function for Crazyflie (arXiv 2503.07376)", "reason": "paradigme-exclu — politique MARL apprise + CBF attention"},
+  {"number": 182, "title": "gym-pybullet-drones download - SourceForge.net", "reason": "non-primaire — page de telechargement logiciel (gym-pybullet-drones)"},
+  {"number": 184, "title": "Rise of U-space: Revolutionizing Drone Management in Europe - VisionSpace", "reason": "non-primaire — article de veille (VisionSpace)"},
+  {"number": 185, "title": "US Navy receives first Dive LD drone submarine - CT.gov", "reason": "non-primaire — actualite (CT.gov)"},
+  {"number": 186, "title": "Anduril unveils new torpedo that can be launched by underwater drones - DefenseScoop", "reason": "non-primaire — actualite (DefenseScoop)"},
+  {"number": 188, "title": "Un Bouclier de Securite Dynamique pour un Apprentissage par Renforcement (arXiv 2412.04153)", "reason": "paradigme-exclu — safe RL, politique apprise"},
+  {"number": 189, "title": "Deadlock-free, safe, and decentralized multi-robot navigation in social mini-games via discrete-time CBF (10.1007/s10514-025-10194-8)", "reason": "hors-perimetre — robots terrestres en environnement social (portes/intersections), hors flotte aerien+surface"},
+  {"number": 190, "title": "Depth Transfer: Learning to See Like a Simulator for Real-World Drone Navigation (arXiv 2505.12428)", "reason": "paradigme-exclu — politique RL apprise pour evitement (sim-to-real)"},
+  {"number": 191, "title": "Wireless Communication for Low-Altitude Economy with UAV Swarm Enabled Two-Level Movable Antenna (arXiv 2505.22286)", "reason": "pas-algorithme-canonique — optimisation reseau/antennes mobiles (PHY)"},
+  {"number": 192, "title": "FPV Drone Swarms in Asymmetric Warfare: Tactical Innovations and Ethical Challenges", "reason": "pas-algorithme-canonique — analyse tactique/ethique de guerre FPV, pas un algorithme"},
+  {"number": 195, "title": "Cryptography-Based Secure Underwater Acoustic Communication for UUVs: A Review (10.3390/electronics14122415)", "reason": "non-primaire — revue de cryptographie pour UUV"},
+  {"number": 196, "title": "Swarm Intelligence Archives - Andres Andreu", "reason": "non-primaire — blog (archive de tags)"},
+  {"number": 197, "title": "Multi-agent Reinforcement Learning for Robotized Coral Reef Sample Collection (arXiv 2507.16941)", "reason": "hors-perimetre — UUV de collecte de coraux (sous-marin), politique MARL"},
+  {"number": 199, "title": "Advancing UAV swarm autonomy with ARCog-NET for task allocation, path planning, and formation control", "reason": "pas-algorithme-canonique — architecture cognitive Edge-Fog-Cloud (ARCog-NET), pas un algorithme"},
+  {"number": 201, "title": "Collaborative Target Tracking Algorithm for Multi-Agent Based on MAPPO and BCTD (10.3390/drones9080521)", "reason": "paradigme-exclu — MAPPO (politique MARL apprise)"},
+  {"number": 202, "title": "Reinforcement Learning for Decision-Level Interception Prioritization in Drone Swarm Defense (arXiv 2508.00641)", "reason": "paradigme-exclu — politique RL apprise pour priorisation d interception"},
+  {"number": 203, "title": "A Taxonomy of Hierarchical Multi-Agent Systems: Design Patterns, Coordination Mechanisms (arXiv 2508.12683)", "reason": "non-primaire — taxonomie/review de HMAS, pas de source primaire"},
+  {"number": 204, "title": "OM2P: Offline Multi-Agent Mean-Flow Policy (arXiv 2508.06269)", "reason": "paradigme-exclu — politique MARL hors-ligne (diffusion/mean-flow)"}
+ ]
+}
