@@ -1,0 +1,90 @@
+{
+  "lot_label": "LOT 5 (2026-09-29, carte t_3f3134cc) — 3 nouveaux verdicts / 2 deja rattachees / 20 ecartees",
+  "rattachees": [
+    {
+      "src": "srcEventDrivenCBBA",
+      "title": "Event Driven CBBA with Reduced Communication (2025)",
+      "link_arxiv": "2509.06481",
+      "link_title": "Event Driven CBBA with Reduced Communication",
+      "description": "CBBA declenche par evenement pour reduire la communication : le CBBA classique exige une communication continue (congestion, pertes). Mecanisme de communication event-driven qui maintient la convergence ET les bornes de performance du CBBA — qualite de solution EGALE a CBBA prouvee theoriquement, validee par simulations Monte-Carlo sur tailles de flotte et portees variables.",
+      "metadata": { "arxiv": "2509.06481", "annee": "2025", "nature": "preprint", "corpus": "211", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciEventDrivenCBBA",
+        "title": "SCI-42 — CBBA declenche par evenement a communication reduite",
+        "link_arxiv": "2509.06481",
+        "link_title": "Event Driven CBBA with Reduced Communication",
+        "description": "srcEventDrivenCBBA resout le couplage CBBA (algTaskAllocation) x budget de communication (algEventTriggeredComm) : declencher les encheres sur evenement conserve les bornes de qualite de CBBA tout en reduisant le trafic — exactement le regime du modele (lien intermittent, N=30). Complement de SCI-1 (CBBA nominal) et de SCI-6 (event-triggered generique). VERDICT : SUPPORTED pour le mecanisme (CBBA event-driven, bornes conservees) ; CONDITIONAL — simulation Monte-Carlo, echelle a confronter a N=30.",
+        "metadata": { "verdict": "SUPPORTED (CBBA event-driven, bornes conservees) / CONDITIONAL (simulation, echelle)", "niveau_preuve": "MEDIUM", "source": "srcEventDrivenCBBA", "correction_modele": "algTaskAllocation + algEventTriggeredComm : CBBA sous budget de communication source" }
+      },
+      "algs": [
+        ["algTaskAllocation", "CBBA declenche par evenement, bornes conservees"],
+        ["algEventTriggeredComm", "communication d enchere sur evenement"]
+      ]
+    },
+    {
+      "src": "srcCCOPI",
+      "title": "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints (2026)",
+      "link_arxiv": "2609.19208",
+      "link_title": "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints",
+      "description": "Allocation de taches distribuee en ligne SOUS CONTRAINTE DE COMMUNICATION : quand la portee courte fragmente l essaim en ilots d information transitoires, le paradigme « allouer-puis-executer » (consensus global avant tout mouvement) s effondre. CC-OPI entrelace la NEGOCIATION de taches et l EXECUTION physique : replanification seulement aux evenements physiques/topologiques discrets, metriques de cout adaptees aux topologies dynamiques (penalite de localite spatiale, urgence deadline-aware), verrou d etat non-preemptif.",
+      "metadata": { "arxiv": "2609.19208", "annee": "2026", "nature": "preprint", "corpus": "1590", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciCCOPI",
+        "title": "SCI-43 — Allocation en ligne entrelacee a l execution sous connectivite intermittente",
+        "link_arxiv": "2609.19208",
+        "link_title": "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints",
+        "description": "srcCCOPI traite le cas ou le consensus GLOBAL avant mouvement (postulat de CBBA) devient irrealisable sous connectivite intermittente : l allocation est entrelacee a l execution. Directement pertinent pour algTaskAllocation sous partition (risque R-4 du modele). VERDICT : SUPPORTED pour le mecanisme (allocation online + verrou d etat) ; CONDITIONAL — simulation, echelle a confronter a N=30.",
+        "metadata": { "verdict": "SUPPORTED (allocation online sous contrainte de communication) / CONDITIONAL (simulation, echelle)", "niveau_preuve": "MEDIUM", "source": "srcCCOPI", "correction_modele": "algTaskAllocation : allocation entrelacee a l execution sous partition sourcee" }
+      },
+      "algs": [
+        ["algTaskAllocation", "allocation en ligne sous ilots de communication transitoires"]
+      ]
+    },
+    {
+      "src": "srcAPR",
+      "title": "Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems (2026)",
+      "link_doi": "10.3390/app16199414",
+      "link_title": "Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems",
+      "description": "Replanification PRESERVANT L AFFECTATION (APR) pour l allocation dynamique : au lieu du replanning global (qui casse des affectations encore valides), APR herite l etat operationnel, partitionne les taches inachevees en directement affectees / initialement non affectees, protege les affectations valides et la structure de route, puis ne libere que les taches protegees en conflit si la faisabilite ne peut etre retablie. Evaluee contre repair constructif, replanning partiel et deux methodes globales.",
+      "metadata": { "doi": "10.3390/app16199414", "annee": "2026", "nature": "article de revue (Applied Sciences)", "corpus": "2278", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciAPR",
+        "title": "SCI-44 — Replanification preservant l affectation en allocation dynamique",
+        "link_arxiv": "",
+        "link_title": "Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems",
+        "description": "srcAPR apporte la REPARATION INCREMENTALE de l allocation dynamique (algTaskAllocation) : proteger les affectations valides lors d un evenement (nouvelle tache, panne UAV, fenetre temporelle) evite les perturbations en cascade du replanning global — pertinent pour la stabilite de mission du modele. VERDICT : SUPPORTED pour le mecanisme (reparation preservant l affectation) ; CONDITIONAL — validation a confirmer dans le corps (simulation).",
+        "metadata": { "verdict": "SUPPORTED (replanification preservant l affectation) / CONDITIONAL (validation)", "niveau_preuve": "MEDIUM", "source": "srcAPR", "correction_modele": "algTaskAllocation : reparation incrementale de l allocation sourcee" }
+      },
+      "algs": [
+        ["algTaskAllocation", "replanification incrementale preservant les affectations valides"]
+      ]
+    }
+  ],
+  "specdoc_only": [],
+  "deja": [
+    { "number": 200, "title": "Vortex APF local minima path planning", "existing_src": "srcVAPF", "existing_finding": "SCI-14" },
+    { "number": 311, "title": "ImpedanceDiffusion global path planning", "existing_src": "srcImpedanceDiffusion", "existing_finding": "SCI-14" }
+  ],
+  "ecartees": [
+    { "number": 937, "title": "Multi-threaded best-first search task allocation", "reason": "non-verifiable — resume non verifie" },
+    { "number": 943, "title": "Task allocation collaborative + precedence constraints", "reason": "non-verifiable — resume non verifie" },
+    { "number": 956, "title": "Coalition-based auction ISAC resource allocation", "reason": "pas-algorithme-canonique — ISAC" },
+    { "number": 957, "title": "UAV crowd counting and localization (media)", "reason": "pas-algorithme-canonique — comptage de foule" },
+    { "number": 959, "title": "Homogeneous vs heterogeneous allocation multi-operator", "reason": "non-verifiable — resume non verifie (facteurs humains)" },
+    { "number": 1010, "title": "Survival probability-weighted clustering task allocation", "reason": "non-verifiable — resume non verifie" },
+    { "number": 1029, "title": "Chaos theory + adaptive GA task allocation", "reason": "non-verifiable — resume non verifie" },
+    { "number": 1032, "title": "ViTDrone explainable ViT steering + collision avoidance", "reason": "paradigme-exclu — perception apprise ViT, mono-drone" },
+    { "number": 1040, "title": "Helicopter medical rescue NSGA-II scheduling", "reason": "hors-perimetre — ordonnancement d helicopteres, pas d essaim de drones" },
+    { "number": 1757, "title": "AgenticSwarm semantic perception + adaptive allocation", "reason": "pas-algorithme-canonique — framework agentique LLM" },
+    { "number": 1797, "title": "DPP-GCMARL deadline-paced patrol MEC", "reason": "paradigme-exclu — MARL appris + MEC" },
+    { "number": 1800, "title": "Task assignment + path planning marine UAV (metaheuristiques)", "reason": "deja-couvert — allocation/planification deja sourcees (SCI-1/SCI-14)" },
+    { "number": 2115, "title": "FlockDiffusion diffusion task allocation", "reason": "paradigme-exclu — diffusion apprise" },
+    { "number": 2192, "title": "CC-OPI (DOI, doublon de #1590)", "reason": "doublon" },
+    { "number": 2263, "title": "FlockDiffusion (DOI, doublon de #2115)", "reason": "doublon" },
+    { "number": 2289, "title": "Pattern-aware task assignment multi-AUV", "reason": "hors-perimetre — AUV sous-marins" },
+    { "number": 912, "title": "Distributed trajectory + resource allocation MEC (MADRL)", "reason": "paradigme-exclu — MADRL appris + MEC" },
+    { "number": 931, "title": "USV path planning A*+DWA (ROS)", "reason": "deja-couvert — planification A*/DWA classique couverte SCI-14" },
+    { "number": 947, "title": "NEL_MSCPSO amphibious UAV simultaneous arrival", "reason": "deja-couvert — planification PSO couverte SCI-14" },
+    { "number": 977, "title": "MSGSO glider snake optimizer 3D path planning", "reason": "deja-couvert — metaheuristique de planification couverte SCI-14" }
+  ]
+}

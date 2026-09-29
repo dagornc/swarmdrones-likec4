@@ -1,0 +1,73 @@
+{
+  "lot_label": "LOT 4 (2026-09-29, carte t_3f3134cc) — 2 nouveaux verdicts / 2 deja rattachees / 21 ecartees",
+  "rattachees": [
+    {
+      "src": "srcCommFreeCoord",
+      "title": "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild (2026)",
+      "link_arxiv": "2603.08379",
+      "link_title": "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild",
+      "description": "Coordination multi-UAV SANS COMMUNICATION fondee sur la perception locale : chaque agent calcule un ensemble de zones et une fonction de densite, puis un controleur bas niveau. Simulations mono/multi-robots ET resultats experimentaux en environnement reel (CTU Prague, groupe M. Saska). Preuve directe du principe du modele « le contrat de mission est embarque ; le lien est un bonus ».",
+      "metadata": { "arxiv": "2603.08379", "annee": "2026", "nature": "preprint", "corpus": "310", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciCommFreeCoord",
+        "title": "SCI-40 — Coordination multi-UAV sans communication par perception locale",
+        "link_arxiv": "2603.08379",
+        "link_title": "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild",
+        "description": "srcCommFreeCoord est une PREUVE EMPIRIQUE (simulation + reel) que la coordination sure multi-UAV peut se passer de lien : la densite de perception locale suffit a eviter les collisions. Fonde l exigence centrale du modele (le lien est un bonus, pas une dependance) et algCollisionAvoidance en regime sans communication. VERDICT : SUPPORTED pour le mecanisme (evitement sans communication, essais reels) ; CONDITIONAL — echelle de l essaim a confronter a N=30.",
+        "metadata": { "verdict": "SUPPORTED (evitement sans communication, reel) / CONDITIONAL (echelle N=30)", "niveau_preuve": "MEDIUM-HAUTE", "source": "srcCommFreeCoord", "correction_modele": "algCollisionAvoidance + algSafetyRules : coordination sure sans lien sourcee" }
+      },
+      "algs": [
+        ["algCollisionAvoidance", "evitement par perception locale sans communication"],
+        ["algSafetyRules", "coordination sure en regime sans lien"]
+      ]
+    },
+    {
+      "src": "srcConsensusPF",
+      "title": "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels (2026)",
+      "link_arxiv": "2609.09066",
+      "link_title": "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels",
+      "description": "Filtre particulaire a CONSENSUS distribue pour le suivi de cible maritime : chaque agent maintient une estimation independante exploitant les communications OPPORTUNISTES ; augmentation du filtre particulaire qui etale strategiquement les particules en l absence de mise a jour informative (contre la sur-confiance locale). Demontre sur USV (surface, dans le perimetre) en environnement lacustre reel.",
+      "metadata": { "arxiv": "2609.09066", "annee": "2026", "nature": "preprint", "corpus": "625", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciConsensusPF",
+        "title": "SCI-41 — Filtre particulaire a consensus distribue pour le suivi de cible (USV)",
+        "link_arxiv": "2609.09066",
+        "link_title": "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels",
+        "description": "srcConsensusPF joint le consensus distribue (algConsensus, communications opportunistes) et la fusion de perception pour le suivi de cible (algPerceptionFusion) sur USV reels en lac. Le traitement de la sur-confiance locale en l absence de donnees est directement pertinent pour le regime « lien intermittent » du modele. VERDICT : SUPPORTED pour le mecanisme (consensus PF, essai lac) ; CONDITIONAL — echelle du nombre de cibles/agents a confronter au scenario SWARM-3D.",
+        "metadata": { "verdict": "SUPPORTED (consensus PF distribue, USV reels) / CONDITIONAL (echelle)", "niveau_preuve": "MEDIUM-HAUTE", "source": "srcConsensusPF", "correction_modele": "algConsensus + algPerceptionFusion : consensus sur filtrage particulaire source" }
+      },
+      "algs": [
+        ["algConsensus", "consensus distribue sur estimation (filtre particulaire)"],
+        ["algPerceptionFusion", "suivi de cible par fusion distribuee"]
+      ]
+    }
+  ],
+  "specdoc_only": [],
+  "deja": [
+    { "number": 961, "title": "Robust heterogeneous UAV-USV formation (sliding mode + ET)", "existing_src": "srcHeteroUAVUSV", "existing_finding": "SCI-11" },
+    { "number": 205, "title": "SwarmRaft consensus in GNSS-degraded", "existing_src": "srcSwarmRaft", "existing_finding": "SCI-5" }
+  ],
+  "ecartees": [
+    { "number": 930, "title": "i-MADSAC UAV formation multi-target tracking", "reason": "paradigme-exclu — politique MADRL apprise" },
+    { "number": 1159, "title": "Information-guided safe RL gas source localization", "reason": "pas-algorithme-canonique — localisation de source de gaz, RL appris" },
+    { "number": 1274, "title": "AirAnchor zero-shot aerial vision-language navigation", "reason": "pas-algorithme-canonique — navigation VLN zero-shot mono-drone" },
+    { "number": 1803, "title": "FALCON-MASAC safe multi-UAV formation (MARL + CBF shield)", "reason": "paradigme-exclu — politique MARL apprise (cf. HMARL-CBF)" },
+    { "number": 2175, "title": "Range-aided SLAM initialization (AUV heading)", "reason": "hors-perimetre — AUV sous-marins" },
+    { "number": 2206, "title": "Fixed-time trajectory tracking multi-AUV formation", "reason": "hors-perimetre — AUV sous-marins" },
+    { "number": 2258, "title": "Coverage path planning AUV (PSO-Voronoi)", "reason": "hors-perimetre — AUV sous-marins" },
+    { "number": 225, "title": "Scaling swarm coordination with GNNs", "reason": "paradigme-exclu — coordination apprise par GNN" },
+    { "number": 228, "title": "Two-level clustered consensus-based bundle algorithm", "reason": "deja-couvert — CBBA deja source (SCI-1)" },
+    { "number": 279, "title": "Centrality-driven load-aware adaptive CBBA", "reason": "deja-couvert — CBBA deja source (SCI-1)" },
+    { "number": 954, "title": "Hierarchical optimal consensus path planning multi-UAV", "reason": "non-verifiable — resume non verifie par l editeur" },
+    { "number": 935, "title": "Agricultural Cyber-Physical Systems multi-robot coordination", "reason": "hors-perimetre — agriculture (robotique agricole), pas l essaim SWARM-3D" },
+    { "number": 945, "title": "Implicit semantic control manifolds multi-UAV (LLM translator)", "reason": "pas-algorithme-canonique — communication semantique LLM apprise" },
+    { "number": 971, "title": "Edge intelligence SoC-embedded GNN task allocation", "reason": "paradigme-exclu — allocation apprise GNN (deploiement SoC)" },
+    { "number": 997, "title": "T-CARE temporal coordination RL multi-UAV navigation", "reason": "paradigme-exclu — politique RL apprise" },
+    { "number": 998, "title": "Large-scale UAV swarm coordination (spatiotemporal survey)", "reason": "non-primaire — survey" },
+    { "number": 1009, "title": "ATAC k-truss agentic AI swarm coordination", "reason": "pas-algorithme-canonique — framework IA agentique / topologie graphe" },
+    { "number": 1015, "title": "Control strategies for cooperative swarm UAV (InTechOpen chapter)", "reason": "non-primaire — chapitre de livre / revue de methodes" },
+    { "number": 2290, "title": "Internet of Sentience TGA framework (InTechOpen chapter)", "reason": "non-primaire — chapitre / framework conceptuel" },
+    { "number": 79, "title": "Centralized task allocation via constraint table", "reason": "paradigme-exclu — allocation CENTRALISEE, modele decentralise" },
+    { "number": 104, "title": "Multi-task learning drone state identification + trajectory prediction", "reason": "pas-algorithme-canonique — prediction de trajectoire apprise" }
+  ]
+}

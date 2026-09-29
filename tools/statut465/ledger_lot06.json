@@ -1,0 +1,91 @@
+{
+  "lot_label": "LOT 6 (2026-09-29, carte t_3f3134cc) — 3 nouveaux verdicts / 2 deja (1 rattachee + 1 ecartee) / 20 ecartees",
+  "rattachees": [
+    {
+      "src": "srcCertFeedbackPath",
+      "title": "Risk-Bounded Certificate Feedback for Allocation-Guided Cooperative Path Planning of Dynamic Multi-UAV Missions (2026)",
+      "link_doi": "10.3390/drones10090696",
+      "link_title": "Risk-Bounded Certificate Feedback for Allocation-Guided Cooperative Path Planning of Dynamic Multi-UAV Missions",
+      "description": "Planification cooperative de trajectoire guidee par l allocation, avec CERTIFICAT a risque borne : le planificateur recoit des paquets de taches ordonnes de l allocateur, verifie obstacles statiques, fenetres d obstacles mobiles, separation inter-UAV minimale, echeances, budget de risque et proxy d energie ; genere des segments de chemin ponderes par le risque, repare les conflits temporels (attente + detours), et retourne un certificat (executabilite, cout, exposition au risque, energie, ou raison d echec). Comparaison de boucles de retour (aucune / contextuelle / typage de panne / quantitative / combinee) en charge moyenne et forte.",
+      "metadata": { "doi": "10.3390/drones10090696", "annee": "2026", "nature": "article de revue (Drones)", "corpus": "1796", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciCertFeedbackPath",
+        "title": "SCI-45 — Certificat a risque borne entre allocation et planification multi-UAV",
+        "link_doi": "10.3390/drones10090696",
+        "link_title": "Risk-Bounded Certificate Feedback for Allocation-Guided Cooperative Path Planning of Dynamic Multi-UAV Missions",
+        "description": "srcCertFeedbackPath formalise l INTERFACE entre allocation (algTaskAllocation, ordre de taches) et planification (algPathPlanning) via un CERTIFICAT a risque borne — exactement la boucle que le modele sous-entend sans la preciser (AD-xx : allocation -> planification). VERDICT : SUPPORTED pour le mecanisme (certificat de faisabilite risque-borne) ; CONDITIONAL — simulation, echelle a confronter a N=30.",
+        "metadata": { "verdict": "SUPPORTED (certificat risque-borne allocation->planification) / CONDITIONAL (simulation)", "niveau_preuve": "MEDIUM", "source": "srcCertFeedbackPath", "correction_modele": "algPathPlanning + algSafetyRules : interface allocation/planification par certificat risque-borne sourcee" }
+      },
+      "algs": [
+        ["algPathPlanning", "planification cooperative guidee par l allocation"],
+        ["algSafetyRules", "budget de risque et separation inter-UAV certifies"]
+      ]
+    },
+    {
+      "src": "srcOnboardSLAMNano",
+      "title": "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones (2024)",
+      "link_doi": "10.1109/JIOT.2024.3367451",
+      "link_title": "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones",
+      "description": "SLAM entierement embarque pour cartographie DISTRIBUEE par un essaim de nano-drones (Crazyflie + deck ToF) : estimation d etat embarque, frames de scan, ICP, SLAM simultane et exploration autonome, avec couche de coordination d essaim (messages, coordination de mission, scalabilite). Resultats SLAM/cartographie sur plusieurs experiences reelles.",
+      "metadata": { "doi": "10.1109/JIOT.2024.3367451", "annee": "2024", "nature": "article de revue (IEEE J-IoT)", "corpus": "105", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciOnboardSLAMNano",
+        "title": "SCI-46 — SLAM embarque et cartographie distribuee par essaim de nano-drones",
+        "link_arxiv": "",
+        "link_title": "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones",
+        "description": "srcOnboardSLAMNano apporte la preuve MATERIELLE d une navigation sans GNSS (SLAM embarquee, algNavigationGNSSDegrade) et d une cartographie DISTRIBUEE multi-agents (algPerceptionFusion) sur essaim REEL de nano-drones. VERDICT : SUPPORTED pour le mecanisme (SLAM embarquee + mapping distribue, reel) ; CONDITIONAL — nano-drones (Crazyflie) vs plateformes SWARM-3D, echelle a transposer.",
+        "metadata": { "verdict": "SUPPORTED (SLAM embarque + mapping distribue, reel) / CONDITIONAL (nano-drones)", "niveau_preuve": "MEDIUM-HAUTE", "source": "srcOnboardSLAMNano", "correction_modele": "algNavigationGNSSDegrade + algPerceptionFusion : SLAM embarque distribue sourcee" }
+      },
+      "algs": [
+        ["algNavigationGNSSDegrade", "SLAM embarque sans GNSS"],
+        ["algPerceptionFusion", "cartographie distribuee multi-agents"]
+      ]
+    },
+    {
+      "src": "srcUltraLightPlanner",
+      "title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms (2025)",
+      "link_arxiv": "2502.16887",
+      "link_title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms",
+      "description": "Planificateur ULTRA-LEGER et scalable pour essaims aeriens de grande taille : bibliotheque de primitives de mouvement temps-optimales (generation de chemins, parametrisation, ensembles controlables), verification de collision rapide (relations d occupation spatio-temporelles hors-ligne + verification robot-obstacle et robot-robot en ligne), replanification locale en ligne (repere aligne vitesse, selection de trajectoire, horizon fuyant).",
+      "metadata": { "arxiv": "2502.16887", "annee": "2025", "nature": "preprint", "corpus": "177", "statut": "CONSULTEE (abstract lu, 2026-09-29)" },
+      "finding": {
+        "id": "sciUltraLightPlanner",
+        "title": "SCI-47 — Planificateur ultra-leger scalable pour grands essaims",
+        "link_arxiv": "2502.16887",
+        "link_title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms",
+        "description": "srcUltraLightPlanner traite la SCALABILITE de la planification (algPathPlanning) vers de grands essaims : primitives de mouvement pre-calculees + verification de collision rapide, sur-mesure pour l echelle SWARM-3D (N=30 et au-dela). VERDICT : SUPPORTED pour le mecanisme (primitives + collision checking rapide) ; CONDITIONAL — validation a confronter a la flotte heterogene du modele.",
+        "metadata": { "verdict": "SUPPORTED (planification scalable grands essaims) / CONDITIONAL (flotte heterogene)", "niveau_preuve": "MEDIUM", "source": "srcUltraLightPlanner", "correction_modele": "algPathPlanning : planification scalable par primitives de mouvement sourcee" }
+      },
+      "algs": [
+        ["algPathPlanning", "planification scalable par primitives de mouvement"]
+      ]
+    }
+  ],
+  "specdoc_only": [],
+  "deja": [
+    { "number": 996, "title": "Comparative path planning low-altitude medical UAV", "existing_src": "srcPathMedUAV", "existing_finding": "SCI-14" },
+    { "number": 134, "title": "ZEST digital twin sea transporter", "existing_src": "srcDigitalTwinZEST", "existing_finding": "DEJA ECARTEE (statut ECARTEE dans science.c4)" }
+  ],
+  "ecartees": [
+    { "number": 1042, "title": "MSCEGWO 3D trajectory (GWO variant)", "reason": "deja-couvert — planification couverte SCI-14" },
+    { "number": 1491, "title": "UDAV uncertainty-driven VLM waypoint planner", "reason": "pas-algorithme-canonique — VLM appris" },
+    { "number": 1498, "title": "LAMDE learning-to-optimize WSN path planning", "reason": "pas-algorithme-canonique — optimisation apprise (WSN)" },
+    { "number": 1793, "title": "UCA-PPO USV path planning underwater tracking", "reason": "paradigme-exclu — politique PPO apprise" },
+    { "number": 1801, "title": "NSGA-II + BOA bank-to-turn path planning", "reason": "deja-couvert — planification couverte SCI-14" },
+    { "number": 1815, "title": "DPC-MOEA simultaneous arrival + comm maintenance", "reason": "deja-couvert — planification MOEA couverte SCI-14" },
+    { "number": 1829, "title": "NMCS nested Monte Carlo trajectory planning", "reason": "deja-couvert — planification couverte SCI-14" },
+    { "number": 1830, "title": "R*WOA whale optimization + RRT*", "reason": "deja-couvert — planification couverte SCI-14" },
+    { "number": 2279, "title": "RL-JSO group-level heterogeneous path planning", "reason": "paradigme-exclu — RL appris" },
+    { "number": 2287, "title": "MI-PSO-Adaptive waypoint planning source seeking", "reason": "deja-couvert — planification PSO couverte SCI-14" },
+    { "number": 2294, "title": "SA-ALNS-2OPT container yard inspection routing", "reason": "deja-couvert — planification couverte SCI-14" },
+    { "number": 89, "title": "FANET routing protocol analysis", "reason": "pas-algorithme-canonique — routage FANET" },
+    { "number": 94, "title": "Survey unmanned marine vehicles intelligence/cooperation", "reason": "non-primaire — survey" },
+    { "number": 181, "title": "AttentionSwarm RL + attention CBF (Crazyflie)", "reason": "paradigme-exclu — politique RL apprise" },
+    { "number": 190, "title": "Depth Transfer sim-to-real drone navigation", "reason": "paradigme-exclu — RL + sim-to-real" },
+    { "number": 191, "title": "Movable antenna system wireless (low-altitude)", "reason": "pas-algorithme-canonique — reseau sans fil" },
+    { "number": 195, "title": "Cryptography underwater acoustic UUV review", "reason": "non-primaire — revue (UUV)" },
+    { "number": 197, "title": "MARL coral reef sample collection", "reason": "hors-perimetre — collecte corail, MARL" },
+    { "number": 201, "title": "Collaborative target tracking MAPPO+BCTD", "reason": "paradigme-exclu — MAPPO appris" },
+    { "number": 202, "title": "RL interception prioritization swarm defense", "reason": "paradigme-exclu — RL appris" }
+  ]
+}
