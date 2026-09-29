@@ -19,6 +19,7 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 | Lot | Articles | RATTACHEE (nouveaux) | DEJA_RATTACHEE | ECARTEE | SCI créés |
 |-----|----------|----------------------|----------------|---------|-----------|
 | 1   | 25       | 9 (8 findings + 1 complétion SCI-8) | 5 | 11 | SCI-24..31 |
+| 2   | 25       | 5 (4 findings + 1 complétion SCI-6) | 2 | 18 | SCI-32..35 |
 
 ---
 
@@ -65,3 +66,48 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 (vérifié sur export JSON du clone)
 - Intégrité active 7/7 (baseline) : TOUS OK ; cohérence interne C-4 : OK (l'accès dépôts Rust FAIL=15 est pré-existant — `gh` non authentifié, indépendant de cette carte)
+
+---
+
+## LOT 2 (2026-09-29)
+
+### RATTACHEE (nouveaux verdicts)
+| # | Titre | Alg(s) | specDoc | Finding |
+|---|-------|--------|---------|---------|
+| 1622 | Feasibility & Singularity in High-Order Safety-Critical Control (quadrotor teams) | algCollisionAvoidance + algSafetyRules | srcCBFQuadFeasibility | SCI-32 |
+| 282 | Dynamic Event-Triggered UAV swarm adaptive target enclosing | algFormationControl + algEventTriggeredComm | srcTargetEnclosing | SCI-33 |
+| 322 | Adaptive ET consensus QUAV formation (disturbances + state constraints) | algFormationControl + algEventTriggeredComm | srcQUAVConsensusCstr | SCI-34 |
+| 371 | Dynamic ET consensus formation multi-leader (delay) | algFormationControl + algEventTriggeredComm | srcMultiLeaderDelay | SCI-35 |
+| 968 | Event-triggered prescribed-time formation heterogeneous multi-USVs | algEventTriggeredComm | srcETFormUSV | complétion SCI-6 (specDoc ajouté, rattaché à sciEventTriggered) |
+
+### DEJA_RATTACHEE
+| # | Titre | specDoc existant | Finding existant |
+|---|-------|------------------|------------------|
+| 121 | Adaptive Event-Triggered Consensus | srcEventTrigConsensus (e20) | SCI-6 |
+| 1026 | ET-PBBA event-triggered bid assignment | srcETPBBA (e20) | SCI-6 + SCI-10 |
+
+### ECARTEE (18)
+| # | Titre | Raison |
+|---|-------|--------|
+| 1538 | CALOS safety layer for DRL | paradigme-exclu — couche sûreté pour politique apprise |
+| 1810 | XS-ABILITY nuclear multi-robot fleet | hors-perimetre — décontamination nucléaire, robots terrestres |
+| 2274 | Zero Trust governance review | non-primaire — revue systématique |
+| 335 | ET consensus economic dispatch microgrids | hors-perimetre — microgrids |
+| 958 | Digital twin neural bandit relay selection | pas-algorithme-canonique — relais radio |
+| 1355 | UAV propagation channel vegetation/lake | pas-algorithme-canonique — canal radio |
+| 1512 | AeroLat latent semantic communication | pas-algorithme-canonique — comm sémantique |
+| 2150 | AnalogDepth FPV depth | pas-algorithme-canonique — pipeline perception mono |
+| 2180 | Observer-based ET formation multi-AUV | hors-perimetre — AUV sous-marins |
+| 302 | AUV swarm energy-aware federated meta-transfer | hors-perimetre — AUV sous-marins |
+| 597 | Curriculum RL energy-efficient UAV-ISAC | pas-algorithme-canonique — ISAC appris |
+| 1021 | 3D user clustering MIMO-NOMA | pas-algorithme-canonique — cellulaire |
+| 1044 | Energy-efficient secured UAV IoT architecture | pas-algorithme-canonique — réseau IoT |
+| 1471 | Monopedal hopping quadcopter RL | pas-algorithme-canonique — locomotion mono |
+| 1785 | Sensing-communication co-optimization ISAC | pas-algorithme-canonique — ISAC |
+| 1786 | POGS-QMIX persistent coverage | deja-couvert — énergie/allocation déjà couverte SCI-10 |
+| 1789 | RF energy harvesting FANET clustering | pas-algorithme-canonique — FANET |
+| 1809 | GEMS-DQN charging scheduling | pas-algorithme-canonique — ordonnancement charge appris |
+
+## Validation lot 2
+- `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
+- Intégrité I-1 : 0 arc cassé ; I-2 : 0 orphelin (export JSON du clone, 441 éléments / 832 relations)

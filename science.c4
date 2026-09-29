@@ -376,6 +376,59 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_3f3134cc LOT02 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  LOT 2 (2026-09-29, carte t_3f3134cc) — 4 nouveaux verdicts / 1 completion SCI-6 / 2 deja rattachees / 18 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcCBFQuadFeasibility = specDoc 'Feasibility and Singularity in High-Order Safety-Critical Control for Quadrotor UAVs (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.19362 "Feasibility and Singularity in High-Order Safety-Critical Control for Quadrotor UAVs"
+    description '''
+      Controle surete d ordre superieur pour EQUIPES de quadrirotors sous entrees bornees et contraintes d evitement deux-a-deux : caracterise la perte d efficacite de poussee quand le deplacement relatif est orthogonal aux directions de poussee, et l infaisabilite conjointe sous bornes partagees. Extension dynamique torque-aware expose les couples d attitude dans une barriere du 4e ordre ; processus gaussiens apprennent le residu HOCBF. Sous hypotheses residu-borne + faisabilite persistante, le QP garantit l evitement et recupere l entree nominale.
+    '''
+    metadata { arxiv '2609.19362'; annee '2026'; nature 'preprint'; corpus '1622'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcTargetEnclosing = specDoc 'Dynamic Event-Triggered Control for UAV Swarm Adaptive Target Enclosing Mission (2026)' {
+    #science
+    link https://doi.org/10.3390/s26020655 "Dynamic Event-Triggered Control for Unmanned Aerial Vehicle Swarm Adaptive Target Enclosing Mission"
+    description '''
+      Encercllement adaptatif de cible par essaim UAV : description de formation par ensemble de parametres de transformation geometrique (translation/rotation/echelle), architecture cooperative decouplant suivi global et configuration d encercllement locale, et declenchement par evenement DYNAMIQUE a variables internes (ajustement en ligne des seuils). Stabilite et absence de Zeno prouvees par Lyapunov. Simulation : reduction forte de la frequence de communication a precision d encercllement conservee.
+    '''
+    metadata { doi '10.3390/s26020655'; annee '2026'; nature 'article de revue (Sensors)'; corpus '282'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcQUAVConsensusCstr = specDoc 'Adaptive Event-Triggered-Based Consensus Control for QUAV Formation with External Disturbances and State Constraints (2026)' {
+    #science
+    link https://doi.org/10.3390/aerospace13040308 "Adaptive Event-Triggered-Based Consensus Control for QUAV Formation System with External Disturbances and State Constraints"
+    description '''
+      Consensus de formation de QUAV avec perturbations externes et contraintes d etat : observateur d etat etendu a gain temporel (TGESO) contre l explosion initiale du peaking, fonction de Lyapunov barriere temporelle (TBLF) contre les contraintes d etat (roulis/tangage bornes), et mecanisme de declenchement adaptatif (AETM) pour reduire le trafic. Stabilite et bornitude prouvees ; comparaison simulee (AETM : 33% de declenchements vs 100% temps-continu).
+    '''
+    metadata { doi '10.3390/aerospace13040308'; annee '2026'; nature 'article de revue (Aerospace)'; corpus '322'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcMultiLeaderDelay = specDoc 'Dynamic Event-Triggered Consensus Formation Control Method for Multi-Leader UAVs with Communication Delay (2026)' {
+    #science
+    link https://doi.org/10.3390/machines14070715 "Dynamic Event-Triggered Consensus Formation Control Method for Multi-Leader UAVs with Communication Delay"
+    description '''
+      Formation par consensus de systemes multi-leaders du second ordre avec DELAI de communication : mecanisme de declenchement dynamique ajustant l instant de declenchement en temps reel, observateur d etat etendu, stabilite par Lyapunov + LMI, Zeno exclu. Evite la dependance a l information globale de la topologie. Simulation : reduction de frequence de communication et economie de ressources.
+    '''
+    metadata { doi '10.3390/machines14070715'; annee '2026'; nature 'article de revue (Machines)'; corpus '371'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcETFormUSV = specDoc 'Event-triggered practical prescribed-time distributed optimal formation control of heterogeneous multi-USVs under intermittent communication (2026)' {
+    #science
+    link https://doi.org/10.1016/j.oceaneng.2026.127430 "Event-triggered practical prescribed-time distributed optimal formation control of heterogeneous multi-USVs Under intermittent communication"
+    description '''
+      Formation optimale distribuee en temps prescrit de USV heterogenes sous communication INTERMITTENTE, declenchee par evenement. Le DOI etait deja cite en lien de algEventTriggeredComm (e20) sans specDoc propre — ce lot cree le specDoc et le rattache a SCI-6.
+    '''
+    metadata { doi '10.1016/j.oceaneng.2026.127430'; annee '2026'; nature 'article de revue (Ocean Engineering)'; corpus '968'; statut 'CONSULTEE (titre + DOI, lien algEventTriggeredComm existant)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -952,6 +1005,46 @@ sciBeliefGNSS = finding 'SCI-24 — EKF a confiance GNSS adaptative sous degrada
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_3f3134cc LOT02 (2026-09-29)
+  // ===========================================================================
+
+sciCBFQuadFeasibility = finding 'SCI-32 — Faisabilite et singularite des CBF d ordre superieur (equipes de quadrirotors)' {
+    #science
+    link https://arxiv.org/abs/2609.19362 "Feasibility and Singularity in High-Order Safety-Critical Control for Quadrotor UAVs"
+    description '''
+      srcCBFQuadFeasibility traite la FAISABILITE des CBF — le talon d Achille des filtres de surete CBF-QP du modele (algCollisionAvoidance / algSafetyRules) : quand une contrainte CBF devient singuliere ou conjointement infaisable, le QP n a plus de solution. L extension torque-aware + residu GP leve partiellement ce risque. VERDICT : SUPPORTED pour le mecanisme (analyse de faisabilite + extension 4e ordre) ; CONDITIONAL — mono-couple de quadrirotors, simulation ; la composante GP est apprise.
+    '''
+    metadata { verdict 'SUPPORTED (faisabilite CBF) / CONDITIONAL (composante GP apprise, simulation)'; niveau_preuve 'MEDIUM'; source 'srcCBFQuadFeasibility'; correction_modele 'algCollisionAvoidance + algSafetyRules : analyse de faisabilite/singularite des CBF sourcee' }
+  }
+
+  sciTargetEnclosing = finding 'SCI-33 — Encercllement de cible par formation a declenchement dynamique' {
+    #science
+    link https://doi.org/10.3390/s26020655 "Dynamic Event-Triggered Control for UAV Swarm Adaptive Target Enclosing Mission"
+    description '''
+      srcTargetEnclosing joint une formation TEMPS-VARIANTE (encercllement) a un declenchement par evenement DYNAMIQUE — complement de SCI-6 (qui couvre consensus/routage/allocation event-triggered, pas la formation). Le patron formation+commutation de configuration sous budget de communication est directement celui d algFormationControl + algEventTriggeredComm. VERDICT : SUPPORTED pour le mecanisme (formation temps-variante + declenchement dynamique, Zeno-free) ; CONDITIONAL — simulation 2D, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (formation temps-variante + ET dynamique) / CONDITIONAL (simulation, echelle)'; niveau_preuve 'MEDIUM'; source 'srcTargetEnclosing'; correction_modele 'algFormationControl + algEventTriggeredComm : encercllement + declenchement dynamique source' }
+  }
+
+  sciQUAVConsensusCstr = finding 'SCI-34 — Consensus de formation QUAV sous contraintes d etat et perturbations' {
+    #science
+    link https://doi.org/10.3390/aerospace13040308 "Adaptive Event-Triggered-Based Consensus Control for QUAV Formation System with External Disturbances and State Constraints"
+    description '''
+      srcQUAVConsensusCstr joint la formation par consensus (algFormationControl) et le declenchement adaptatif (algEventTriggeredComm) SOUS CONTRAINTES D ETAT (TBLF) et perturbations (TGESO) — le regime reel du modele (etats bornes, vent/turbulence). VERDICT : SUPPORTED pour le mecanisme (TBLF + TGESO + AETM) ; CONDITIONAL — simulation, echelle formation a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (formation sous contraintes + AETM) / CONDITIONAL (simulation, echelle)'; niveau_preuve 'MEDIUM'; source 'srcQUAVConsensusCstr'; correction_modele 'algFormationControl + algEventTriggeredComm : formation contrainte + declenchement adaptatif source' }
+  }
+
+  sciMultiLeaderDelay = finding 'SCI-35 — Formation multi-leaders sous delai de communication et declenchement dynamique' {
+    #science
+    link https://doi.org/10.3390/machines14070715 "Dynamic Event-Triggered Consensus Formation Control Method for Multi-Leader UAVs with Communication Delay"
+    description '''
+      srcMultiLeaderDelay traite la formation multi-leaders (algFormationControl) sous DELAI de communication et declenchement dynamique (algEventTriggeredComm) — regime du modele ou le lien est intermitent ET retarde. VERDICT : SUPPORTED pour le mecanisme (formation multi-leaders sous delai, Zeno exclu) ; CONDITIONAL — simulation, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (formation multi-leaders sous delai) / CONDITIONAL (simulation, echelle)'; niveau_preuve 'MEDIUM'; source 'srcMultiLeaderDelay'; correction_modele 'algFormationControl + algEventTriggeredComm : formation multi-leaders sous delai sourcee' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1100,4 +1193,19 @@ sciBeliefGNSS = finding 'SCI-24 — EKF a confiance GNSS adaptative sous degrada
   sciEscapeCBF -[evidences]-> algCollisionAvoidance 'evitement certifie sous limites de reorientation'
   sciEscapeCBF -[uses]-> srcEscapeCBF 'source primaire'
   sciFaultTolerantCtrl -[uses]-> srcUSVFormationFTC 'formation multi-USV tolerante aux fautes d actionneurs (citee par SCI-8)'
+  // --- Rattachements carte t_3f3134cc LOT02 (2026-09-29) ---
+// --- Relations du lot ---
+  sciCBFQuadFeasibility -[evidences]-> algCollisionAvoidance 'evitement deux-a-deux par HOCBF sous bornes'
+  sciCBFQuadFeasibility -[evidences]-> algSafetyRules 'faisabilite et non-singularite des certificats de surete'
+  sciCBFQuadFeasibility -[uses]-> srcCBFQuadFeasibility 'source primaire'
+  sciTargetEnclosing -[evidences]-> algFormationControl 'formation temps-variante d encercllement'
+  sciTargetEnclosing -[evidences]-> algEventTriggeredComm 'declenchement par evenement dynamique (seuils adaptatifs)'
+  sciTargetEnclosing -[uses]-> srcTargetEnclosing 'source primaire'
+  sciQUAVConsensusCstr -[evidences]-> algFormationControl 'formation par consensus sous contraintes d etat'
+  sciQUAVConsensusCstr -[evidences]-> algEventTriggeredComm 'declenchement adaptatif (AETM)'
+  sciQUAVConsensusCstr -[uses]-> srcQUAVConsensusCstr 'source primaire'
+  sciMultiLeaderDelay -[evidences]-> algFormationControl 'formation multi-leaders'
+  sciMultiLeaderDelay -[evidences]-> algEventTriggeredComm 'declenchement dynamique sous delai de communication'
+  sciMultiLeaderDelay -[uses]-> srcMultiLeaderDelay 'source primaire'
+  sciEventTriggered -[uses]-> srcETFormUSV 'formation event-triggered multi-USV sous communication intermittente (completude SCI-6)'
 }
