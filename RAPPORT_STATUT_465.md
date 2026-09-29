@@ -795,3 +795,27 @@ Chaque article reçoit un statut explicite et traçable : `RATTACHEE` (specDoc +
 - `likec4 validate` sur clone propre `/tmp/lc_v7` : ✓ Valid (20 fichiers)
 - Intégrité I-1 (référentiel) : 0 arc cassé ; I-2 (orphelins) : 0 ; I-7 : tous findings sourcés
 - SCI jusqu'à 55
+
+---
+
+## LOT 19 (2026-09-29)
+
+### ECARTEE (15)
+| # | Titre | Raison |
+|---|-------|--------|
+| 2216 | Integrated Guidance and Control of a Mother-Child UAV-UGV System for C | doublon — même article que #1676 (Mother-Child UAV-UGV, arXiv 2609.20540) |
+| 2219 | Joint Optimization of Offloading, Phase-Shift, Trajectory and Resource | pas-algorithme-canonique — optimisation conjointe offloading/trajectoire en MEC IRS (réseau) |
+| 2256 | Hybrid and multimodal underwater communication architectures for subse | non-primaire — survey d architectures de communication sous-marine |
+| 2259 | A Multi-Objective Decision-Support Framework for Sustainable and Resil | pas-algorithme-canonique — conception de chaîne logistique de cargo UAV (logistique) |
+| 2260 | Orientation-Aware Control and Trajectory Design for Aerial RIS-Assiste | doublon — même article que #2084 (Orientation-Aware ARIS, arXiv 2609.23157) |
+| 2266 | Graph-assisted on-policy reinforcement learning for fair multi-UAV tra | paradigme-exclu — GNN-SARSA pour trajectoire de UAV-BS (GNN + RL) |
+| 2269 | From Ideal Motion to Flight-Executable Communications- LLM-Evolved Mul | paradigme-exclu — déploiement multi-UAV par LLM (CF-mMIMO) |
+| 2280 | Multi-Drone Network Management for Disaster Communication Restoration- | pas-algorithme-canonique — gestion de réseau multi-drones pour restauration de communication |
+| 2281 | AI-Enabled Wireless Propagation Modeling and Radio Environment Maps fo | pas-algorithme-canonique — modélisation de propagation sans fil par IA (REM) |
+| 2286 | A MARL Simulation Benchmark and Systematic Evaluation for Multi-UAV Co | paradigme-exclu — benchmark MARL de couverture 3D (QMIX) |
+| 2288 | Failure-Aware Cognitive Spectrum Handoff for UAV Command-and-Control L | pas-algorithme-canonique — handoff de spectre cognitif (réseau) |
+| 2295 | Three-Dimensional Surface Area Estimation from UAV-Derived Digital Sur | hors-perimetre — estimation de surface 3D par DSM (géomorphologie) |
+| 2301 | Hierarchical Multi-Agent Reinforcement Learning for Cooperative Wildfi | paradigme-exclu — H-MAPPO-LSTM pour suppression de feux (politique apprise) |
+| 2302 | A Proposed UAV-BIM-Integrated Earned Value Management Framework with a | hors-perimetre — EVM intégré UAV-BIM pour construction (gestion de projet) |
+| 2304 | A physics-aware digital twin for correcting moisture-induced material  | hors-perimetre — jumeau numérique de capteurs PM2.5 (calibration environnementale) |
+

@@ -1,0 +1,82 @@
+{
+ "lot_label": "LOT 19 (2026-09-29, carte t_529dfd75) — 0 nouveaux verdicts / 0 deja rattachees / 15 ecartees",
+ "rattachees": [],
+ "deja": [],
+ "ecartees": [
+  {
+   "number": 2216,
+   "title": "Integrated Guidance and Control of a Mother-Child UAV-UGV System for Cooperative Missions - DOI",
+   "reason": "doublon — même article que #1676 (Mother-Child UAV-UGV, arXiv 2609.20540)"
+  },
+  {
+   "number": 2219,
+   "title": "Joint Optimization of Offloading, Phase-Shift, Trajectory and Resource Allocation in Priority-Aware IRS-Assisted UAV-MEC Systems - DOI",
+   "reason": "pas-algorithme-canonique — optimisation conjointe offloading/trajectoire en MEC IRS (réseau)"
+  },
+  {
+   "number": 2256,
+   "title": "Hybrid and multimodal underwater communication architectures for subsea operations- A survey and design perspective - DOI",
+   "reason": "non-primaire — survey d architectures de communication sous-marine"
+  },
+  {
+   "number": 2259,
+   "title": "A Multi-Objective Decision-Support Framework for Sustainable and Resilient Mid- to Long-Range UAV Cargo Supply Chains Under Demand and Climatic Uncert - DOI",
+   "reason": "pas-algorithme-canonique — conception de chaîne logistique de cargo UAV (logistique)"
+  },
+  {
+   "number": 2260,
+   "title": "Orientation-Aware Control and Trajectory Design for Aerial RIS-Assisted Wireless Communications - DOI",
+   "reason": "doublon — même article que #2084 (Orientation-Aware ARIS, arXiv 2609.23157)"
+  },
+  {
+   "number": 2266,
+   "title": "Graph-assisted on-policy reinforcement learning for fair multi-UAV trajectory optimization in IoT networks - DOI",
+   "reason": "paradigme-exclu — GNN-SARSA pour trajectoire de UAV-BS (GNN + RL)"
+  },
+  {
+   "number": 2269,
+   "title": "From Ideal Motion to Flight-Executable Communications- LLM-Evolved Multi-UAV Deployment for Cell-Free Massive MIMO - DOI",
+   "reason": "paradigme-exclu — déploiement multi-UAV par LLM (CF-mMIMO)"
+  },
+  {
+   "number": 2280,
+   "title": "Multi-Drone Network Management for Disaster Communication Restoration- Architecture, Implementation, and Field Validation - DOI",
+   "reason": "pas-algorithme-canonique — gestion de réseau multi-drones pour restauration de communication"
+  },
+  {
+   "number": 2281,
+   "title": "AI-Enabled Wireless Propagation Modeling and Radio Environment Maps for 5G Aerial Wireless Networks - DOI",
+   "reason": "pas-algorithme-canonique — modélisation de propagation sans fil par IA (REM)"
+  },
+  {
+   "number": 2286,
+   "title": "A MARL Simulation Benchmark and Systematic Evaluation for Multi-UAV Cooperative 3D Voxel Coverage - DOI",
+   "reason": "paradigme-exclu — benchmark MARL de couverture 3D (QMIX)"
+  },
+  {
+   "number": 2288,
+   "title": "Failure-Aware Cognitive Spectrum Handoff for UAV Command-and-Control Links- Calibrated Sensing, Transactional Recovery, and Multi-Band Evaluation - DOI",
+   "reason": "pas-algorithme-canonique — handoff de spectre cognitif (réseau)"
+  },
+  {
+   "number": 2295,
+   "title": "Three-Dimensional Surface Area Estimation from UAV-Derived Digital Surface Models- A Multi-Scale Benchmark of Discretization Methods and a Sector-Adap - DOI",
+   "reason": "hors-perimetre — estimation de surface 3D par DSM (géomorphologie)"
+  },
+  {
+   "number": 2301,
+   "title": "Hierarchical Multi-Agent Reinforcement Learning for Cooperative Wildfire Suppression with Amphibious Firefighting UAVs - DOI",
+   "reason": "paradigme-exclu — H-MAPPO-LSTM pour suppression de feux (politique apprise)"
+  },
+  {
+   "number": 2302,
+   "title": "A Proposed UAV-BIM-Integrated Earned Value Management Framework with a Climate-Adjusted Schedule Performance Index for High-Rise Construction Project - DOI",
+   "reason": "hors-perimetre — EVM intégré UAV-BIM pour construction (gestion de projet)"
+  },
+  {
+   "number": 2304,
+   "title": "A physics-aware digital twin for correcting moisture-induced material artifacts in PM2.5 sensors - DOI",
+   "reason": "hors-perimetre — jumeau numérique de capteurs PM2.5 (calibration environnementale)"
+  }
+ ]
+}
