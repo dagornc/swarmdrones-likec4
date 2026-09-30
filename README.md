@@ -46,6 +46,40 @@ python3 tools/export/export_scene.py --check  # vérifie l'artefact (INV-4, 30+1
 > si divergence). Cloudflare ajoute par ailleurs un cache transitoire
 > (`max-age=14400`).
 
+## Synchronisation dépôt → copie servie (garde-fous)
+
+Le conteneur `likec4` monte `/docker/likec4/workspace` → `/data` (bind mount).
+Ce répertoire est une **copie**, pas un lien vers ce dépôt : toute édition du
+dépôt est invisible sur `likec4.breizh.ai` tant qu'elle n'est pas copiée.
+Trois mécanismes se complètent. **Aucun ne redémarre le conteneur** : le
+redémarrage reste un acte manuel soumis à l'autorisation explicite de
+Christophe.
+
+1. **`sync_likec4.sh`** — synchronise le dépôt vers la copie servie.
+   `--check` compare et **nomme** les fichiers divergents (`DIVERGENT x.c4` /
+   `MANQUANT x.c4`) ; `--drift` compare disque ↔ servi. À n'invoquer **sans**
+   `--no-restart` que si l'on dispose de l'autorisation de redémarrer.
+
+2. **Hook `post-commit` versionné** — après chaque commit touchant un `.c4`
+   ou `public/`, il synchronise (toujours avec `--no-restart`).
+   ```bash
+   ./tools/hooks/install.sh   # à lancer sur chaque clone neuf (idempotent)
+   ```
+   Le hook ne s'exécute qu'**après un commit réussi**. Un worker qui écrit des
+   `.c4` puis **crashe sans committer** ne le déclenche jamais : la copie
+   servie reste périmée. C'est l'incident du 2026-09-29 (12 blocs insérés dans
+   `science.c4` sans commit, copie servie en retard de 43 minutes).
+
+3. **Contrôle périodique `tools/hooks/check_likec4_sync.sh`** — le filet de
+   sécurité : il compare dépôt ↔ copie servie **indépendamment de tout commit**.
+   Silencieux quand tout est synchronisé (exit 0) ; sinon il alerte en
+   **nommant chaque fichier divergent** (exit 1). Appelé par le watchdog du
+   profil swarmdrone (`watchdog_derive_profil.sh`, cron 7 h). Il ne synchronise
+   rien et ne redémarre rien.
+   ```bash
+   ./tools/hooks/check_likec4_sync.sh   # silencieux si OK ; alerte + exit 1 sinon
+   ```
+
 ## La chaîne consommateur (exécutable et falsifiable)
 
 Le modèle est consommé par un **viewer 3D** et par des **assets Blender**.

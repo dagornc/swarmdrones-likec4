@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+# post-commit — Synchronise automatiquement le repo LikeC4 vers le répertoire servi
+# par le conteneur (likec4.breizh.ai) après chaque commit.
+#
+# SOURCE CANONIQUE VERSIONNÉE : tools/hooks/post-commit (ce fichier).
+#   Le hook vit dans .git/hooks/ (non versionné par git). Pour qu'un clone neuf
+#   récupère la synchronisation automatique, l'installer (idempotent) :
+#       ./tools/hooks/install.sh
+#   Vérifier l'identité : md5sum tools/hooks/post-commit .git/hooks/post-commit
+#
+# INSTALLÉ PAR : Hermès (2026-09-18), à la demande de Christophe.
+# RAISON : le conteneur likec4 monte /docker/likec4/workspace -> /data (bind mount).
+#          Le repo git est /home/hermesagent/workspace/swarmdrones_likec4.
+#          Sans synchronisation, toute édition du repo est INVISIBLE sur le site.
+#
+# COMPORTEMENT :
+#   - Ne bloque JAMAIS le commit (toujours exit 0) : un échec de sync est signalé
+#     mais ne doit pas invalider un commit déjà écrit.
+#   - Ne synchronise que si le commit touche des fichiers .c4 ou public/.
+#   - Sauvegarde horodatée + validation likec4 (délégué à sync_likec4.sh, TOUJOURS
+#     appelé avec --no-restart : JAMAIS de redémarrage automatique du conteneur).
+#   - Si un .c4 ou public/ a changé, le hook AFFICHE « docker restart likec4 requis
+#     (autorisation Christophe) » et s'arrête là : le redémarrage est un acte MANUEL
+#     soumis à l'autorisation explicite de Christophe (service en production
+#     likec4.breizh.ai). Le hook ne redémarre JAMAIS le conteneur.
+#
+# LIMITE DOCUMENTÉE (cas « worker qui écrit sans committer ») : ce hook ne
+#   s'exécute qu'après un commit RÉUSSI. Un worker qui écrit des .c4 puis crashe
+#   SANS committer ne le déclenche jamais : la copie servie reste périmée. Le
+#   filet de sécurité est le contrôle périodique tools/hooks/check_likec4_sync.sh
+#   (appelé par le watchdog du profil swarmdrone) — il compare dépôt ↔ copie
+#   servie indépendamment de tout commit. Ne pas compter sur ce hook seul.
+#
+# DÉSACTIVATION PONCTUELLE : LIKEC4_SKIP_SYNC=1 git commit ...
+# DÉSACTIVATION DURABLE : chmod -x .git/hooks/post-commit
+
+set -uo pipefail
+
+REPO="$(git rev-parse --show-toplevel 2>/dev/null || echo "")"
+SYNC="$REPO/sync_likec4.sh"
+LOG="$REPO/.git/likec4-sync.log"
+
+log() { printf '%s %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" >> "$LOG"; }
+
+# --- Garde-fous ---------------------------------------------------------------
+if [ "${LIKEC4_SKIP_SYNC:-0}" = "1" ]; then
+  log "SKIP (LIKEC4_SKIP_SYNC=1)"
+  exit 0
+fi
+
+if [ ! -x "$SYNC" ]; then
+  echo "post-commit: sync_likec4.sh introuvable ou non exécutable ($SYNC) — sync ignorée." >&2
+  log "ERREUR: $SYNC introuvable/non exécutable"
+  exit 0
+fi
+
+# --- Le commit touche-t-il des fichiers concernés ? ---------------------------
+CHANGED="$(git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null || true)"
+if ! printf '%s\n' "$CHANGED" | grep -qE '(^|/)public/|\.c4$'; then
+  log "SKIP (aucun .c4 ni public/ dans le commit)"
+  exit 0
+fi
+
+# --- Synchronisation ----------------------------------------------------------
+echo "post-commit: synchronisation LikeC4 -> répertoire servi (--no-restart)..."
+if OUT="$("$SYNC" --no-restart 2>&1)"; then
+  echo "$OUT" | sed 's/^/  /'
+  log "OK: $(printf '%s' "$OUT" | tail -1)"
+  # Signaler si un .c4 ou public/ a changé : restart MANUEL requis, soumis à autorisation.
+  NEED_RESTART=0
+  if printf '%s\n' "$CHANGED" | grep -qE '\.c4$'; then
+    NEED_RESTART=1
+  fi
+  if printf '%s\n' "$CHANGED" | grep -qE '(^|/)public/'; then
+    NEED_RESTART=1
+  fi
+  if [ "$NEED_RESTART" -eq 1 ]; then
+    echo "  ⚠ docker restart likec4 requis (autorisation Christophe) — redémarrage NON effectué automatiquement."
+    log "AVERTISSEMENT: restart requis (autorisation Christophe) — non effectué automatiquement"
+  fi
+else
+  echo "$OUT" | sed 's/^/  /' >&2
+  if printf '%s' "$OUT" | grep -q 'DIVERGENCE'; then
+    echo "post-commit: ⚠ DIVERGENCE public/ détectée — docker restart likec4 requis (autorisation Christophe)." >&2
+    log "DIVERGENCE-PUBLIC: écart disque vs servi détecté — restart requis (autorisation Christophe)"
+  else
+    echo "post-commit: ⚠ ÉCHEC de la synchronisation — le site peut être désynchronisé." >&2
+    echo "post-commit:   relancer manuellement : $SYNC" >&2
+    log "ECHEC: $(printf '%s' "$OUT" | tail -3 | tr '\n' ' ')"
+  fi
+fi
+
+# --- Audit du modèle (non bloquant) -------------------------------------------
+AUDIT="$REPO/audit_modele.py"
+if [ -f "$AUDIT" ]; then
+  if AOUT="$(python3 "$AUDIT" --quiet 2>&1)"; then
+    echo "post-commit: $AOUT"
+    log "AUDIT: $AOUT"
+  else
+    echo "post-commit: ⚠ AUDIT — anomalies critiques détectées :" >&2
+    echo "  $AOUT" >&2
+    echo "post-commit:   rapport complet : python3 $AUDIT" >&2
+    log "AUDIT-CRITIQUE: $AOUT"
+  fi
+fi
+
+# Toujours exit 0 : ne jamais invalider un commit déjà écrit.
+exit 0
