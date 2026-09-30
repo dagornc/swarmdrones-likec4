@@ -1644,9 +1644,9 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
 
   // ===========================================================================
   // LOT 3 — ÉLÉMENTS LOT 3 : LOGICIELS ET ALGORITHMES
-  // Source : swarm30_annexe_v1.md §A (logiciels) et §B (algorithmes),
-  //          IDs verifies dans mapping_ids_annexe_v1.md (camelCase),
-  //          licences verifiees dans verification_annexe_v1.md.
+  // Source : docs/sources/swarm30_annexe_v1.md §A (logiciels) et §B (algorithmes),
+  //          IDs verifies dans docs/sources/mapping_ids_annexe_v1.md (camelCase),
+  //          licences verifiees dans docs/sources/verification_annexe_v1.md.
   // Portee VOLONTAIREMENT limitee : AUCUNE relation, AUCUNE vue dans ce lot.
   // ===========================================================================
 
@@ -1740,7 +1740,7 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
 
   // ===========================================================================
   // LOT 3 — RISQUES (§D) ET ANGLES MORTS (§C)
-  // Source : swarm30_annexe_v1.md §C (16 angles morts) et §D (15 risques).
+  // Source : docs/sources/swarm30_annexe_v1.md §C (16 angles morts) et §D (15 risques).
   // Distinction : un RISQUE est un evenement redoute (P x I) ; un ANGLE MORT
   // est un trou de specification reconnu (pas encore un evenement).
   // Conventions LikeC4 respectees : ID sans point, metadata simple, PAS de tag
@@ -1961,7 +1961,7 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
 
   // ---------------------------------------------------------------------------
   // ACTION 1 : relations de tracabilite point 4 vers composants d architecture
-  // Source : relations_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
+  // Source : docs/sources/relations_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
   // ---------------------------------------------------------------------------
   // -- composant_vers_element (87)
   onboard.linkRadio -[exposed-to]-> riskR1 'point unique de saturation radio a 30 agents'
@@ -2074,7 +2074,7 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
 
 // ---------------------------------------------------------------------------
 // ACTION 2 : decisions en attente (arbitrages non tranches)
-// Source : decisions_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
+// Source : docs/sources/decisions_swarmdrone.md (profil swarmdrone) - verifie par l orchestrateur
 // Les ADR-1..5 existantes sont toutes 'acceptee' ; ces 4 decisions sont 'ouverte'
 // ---------------------------------------------------------------------------
 

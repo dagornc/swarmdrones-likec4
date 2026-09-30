@@ -10,7 +10,7 @@
 //  le rapport source proposait DE-04..DE-09, mais DE-04 etait DEJA
 //  attribue dans architecture.c4 L1523 a « Architecture radio a 30
 //  agents et mecanisme de priorite » (issu de AM-3, deja trace dans
-//  views.c4 et decisions_swarmdrone.md). Pour eviter deux decisions
+//  views.c4 et docs/sources/decisions_swarmdrone.md). Pour eviter deux decisions
 //  distinctes sous un meme identifiant, les decisions materielles de
 //  E05 sont numerotees DE-05..DE-10. Correspondance :
 //     rapport DE-04 (socle de vol)        -> DE-05

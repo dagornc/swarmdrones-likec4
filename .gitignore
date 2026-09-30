@@ -29,8 +29,7 @@ assets/preview.png
 # (timeouts Playwright, fichiers root-owned, includes dangereux). C'est la
 # connaissance qui a de la valeur, pas la sortie binaire.
 png/*.png
-point4/*.png
-point4/*.drawio
+export/point4_v1/*.png
 drawio/*.drawio
 
 # --- Outils / caches / secrets ---

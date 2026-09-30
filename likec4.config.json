@@ -1,14 +1,26 @@
 {
   "$schema": "https://likec4.dev/schemas/config.json",
   "name": "swarmdrones",
-  "title": "SwarmDrones — Architecture logicielle, essaim de 30 drones heterogenes",
-  "exclude": ["point4/**"],
+  "title": "SwarmDrones \u2014 Architecture logicielle, essaim de 30 drones heterogenes",
   "metadata": {
-    "owner": "SwarmDrones — architecture systeme",
+    "owner": "SwarmDrones \u2014 architecture systeme",
     "domain": "Essaim de drones heterogenes (UAV-R, UAV-F, USV)",
     "scope": "Onboard x30 / Edge 1..N / C2 / Cloud",
     "principe": "Le contrat de mission est embarque ; le lien est un bonus, pas une dependance.",
-    "source": "swarm30_arch.md (13 sections) — profil swarmdrone",
+    "source": "swarm30_arch.md (13 sections) \u2014 profil swarmdrone",
     "generated": "2026-09-14"
-  }
+  },
+  "exclude": [
+    "backup_v*/**",
+    "tools/**",
+    "export/**",
+    "docs/**",
+    "specification/**",
+    "sysml/**",
+    "public/**",
+    "viewer/**",
+    "assets/**",
+    "png/**",
+    "drawio/**"
+  ]
 }
