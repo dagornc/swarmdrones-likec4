@@ -1,0 +1,1321 @@
+{
+ "lot_label": "PENDING LOT 02 (2026-09-30, carte t_06092fce) — 64 propositions pending classees par nature de source : 35 scientifique / 2 technique / 27 presse-commercial ; verdicts : 0 RATTACHEE / 13 DEJA_RATTACHEE / 51 ECARTEE",
+ "classification": [
+  {
+   "number": 126,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Tomorrow's Seascape- DoD's Replicator sUSV Element Begins to Take Shape - Defense Security Monitor",
+   "url": "https://dsm.forecastinternational.com/2024/05/17/tomorrows-seascape-dods-replicator-susv-element-begins-to-take-shape/",
+   "host": "dsm.forecastinternational.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite/presse defense (dsm.forecastinternational.com)"
+  },
+  {
+   "number": 129,
+   "target": "onboard.linkRadio",
+   "confidence": 0.8,
+   "title": "NATO selects Anduril's Lattice platform for next-gen air command and control",
+   "url": "https://www.jpost.com/defense-and-tech/article-902057",
+   "host": "www.jpost.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite (presse generaliste) (www.jpost.com)"
+  },
+  {
+   "number": 131,
+   "target": "onboard.energy",
+   "confidence": 0.8,
+   "title": "Thales UAS100 Long-Range Drone System Meets EASA Design Verification Report Milestone - UAS Vision",
+   "url": "https://www.uasvision.com/2024/06/28/thales-uas100-long-range-drone-system-meets-easa-design-verification-report-milestone/",
+   "host": "www.uasvision.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite produit (www.uasvision.com)"
+  },
+  {
+   "number": 132,
+   "target": "onboard.sensorsHAL",
+   "confidence": 0.8,
+   "title": "Exail, RTsys and ABYSSA join forces for ocean floor mapping with AUVs",
+   "url": "https://www.exail.com/news/exail-rtsys-and-abyssa-join-forces-for-ocean-floor-mapping-with-auvs",
+   "host": "www.exail.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — communique d'entreprise (www.exail.com)"
+  },
+  {
+   "number": 137,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Strengthening UAS Security with Lessons from the Paris Olympics - IDGA",
+   "url": "https://www.idga.org/aviation/articles/strengthening-uas-security-with-lessons-from-paris-olympics",
+   "host": "www.idga.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — article de presse defense (www.idga.org)"
+  },
+  {
+   "number": 154,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "A Survey on UAV Control with Multi-Agent Reinforcement Learning - OUCI",
+   "url": "https://ouci.dntb.gov.ua/works/lxLLd1EL/",
+   "host": "ouci.dntb.gov.ua",
+   "dois": [
+    "10.1002/cpe.7995",
+    "10.1007/978-3-030-60990-0_12",
+    "10.1007/978-3-031-25549-6_6",
+    "10.1007/978-3-031-73125-9_31",
+    "10.1007/978-3-031-91813-1_16",
+    "10.1007/978-3-032-11900-1_20",
+    "10.1007/978-3-319-78605-6",
+    "10.1007/978-981-15-4095-0_4",
+    "10.1007/s00521-020-05097-x",
+    "10.1007/s10458-019-09421-1",
+    "10.1007/s10462-022-10299-x",
+    "10.1007/s10462-025-11472-8",
+    "10.1007/s11119-012-9274-5",
+    "10.1007/s12518-013-0120-x",
+    "10.1007/s40430-025-05693-9",
+    "10.1016/j.array.2024.100361",
+    "10.1016/j.ast.2019.105671",
+    "10.1016/j.automatica.2009.07.008",
+    "10.1016/j.cogr.2024.05.003",
+    "10.1016/j.engappai.2022.105321",
+    "10.1016/j.inffus.2024.102369",
+    "10.1016/j.isprsjprs.2014.02.013",
+    "10.1016/j.jfranklin.2024.106718",
+    "10.1016/j.multra.2024.100164",
+    "10.1016/j.neucom.2024.128370",
+    "10.1016/j.procs.2017.01.046",
+    "10.1029/2012EO250005",
+    "10.1038/nature14542",
+    "10.1038/s41598-021-94691-7",
+    "10.1038/s41598-024-72654-y",
+    "10.1038/s41598-025-00201-4",
+    "10.1063/1.5009234",
+    "10.1109/ACCESS.2019.2933454",
+    "10.1109/ACCESS.2019.2943253",
+    "10.1109/ACCESS.2022.3157626",
+    "10.1109/ACCESS.2023.3326101",
+    "10.1109/ICARA64554.2025.10977619",
+    "10.1109/IROS.2017.8202134",
+    "10.1109/IROS51168.2021.9635857",
+    "10.1109/JIOT.2020.3008299",
+    "10.1109/JIOT.2023.3283353",
+    "10.1109/RCAR.2018.8621739",
+    "10.1109/SIU55565.2022.9864769",
+    "10.1109/TCCN.2021.3130993",
+    "10.1109/TCOMM.2020.3017281",
+    "10.1109/TITS.2024.3358010",
+    "10.1109/TMC.2024.3382913",
+    "10.1109/TNN.1998.712192",
+    "10.1109/TNNLS.2023.3265358",
+    "10.1109/TOH.2019.2927338",
+    "10.1109/TRO.2018.2857475",
+    "10.1109/TVT.2020.3023733",
+    "10.1109/TVT.2021.3118446",
+    "10.1109/TVT.2022.3175592",
+    "10.1109/TWC.2022.3233436",
+    "10.1109/TWC.2025.3561271",
+    "10.1109/VR.2019.8797893",
+    "10.1139/dsa-2022-0031",
+    "10.1145/3301273",
+    "10.1145/3396864.3399701",
+    "10.1145/3469259.3470487",
+    "10.1186/s44147-025-00582-3",
+    "10.1515/9780691223087",
+    "10.20944/preprints202409.1091.v1",
+    "10.2139/ssrn.5088972",
+    "10.3390/app13084956",
+    "10.3390/app132111905",
+    "10.3390/asi8010009",
+    "10.3390/drones10010054",
+    "10.3390/drones10020079",
+    "10.3390/drones6120402",
+    "10.3390/drones8070320",
+    "10.3390/drones8080378",
+    "10.3390/drones8090516",
+    "10.3390/drones8100537",
+    "10.3390/drones8100582",
+    "10.3390/drones8110619",
+    "10.3390/drones9010026",
+    "10.3390/drones9070484",
+    "10.3390/drones9100668",
+    "10.3390/drones9110770",
+    "10.3390/electronics14040820",
+    "10.3390/electronics9030461",
+    "10.3390/logistics10070144",
+    "10.3390/machines12120868",
+    "10.3390/machines14020177",
+    "10.3390/robotics15010005",
+    "10.3390/s21093175",
+    "10.3390/s22166013",
+    "10.3390/s25185877",
+    "10.4236/ica.2016.74012"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "non-primaire — DOI 10.3390/drones9070484 (Drones, MDPI) — revue/survey MARL, pas une source primaire"
+  },
+  {
+   "number": 158,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "AI-enabled control system helps autonomous drones stay on target in uncertain environments - MIT Dep",
+   "url": "https://meche.mit.edu/news-media/ai-enabled-control-system-helps-autonomous-drones-stay-target-uncertain-environments",
+   "host": "meche.mit.edu",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite institutionnelle (MIT news) (meche.mit.edu)"
+  },
+  {
+   "number": 166,
+   "target": "onboard.linkRadio",
+   "confidence": 0.6,
+   "title": "CARTEL- Consensus Adapting Real-Time and Efficient Logging - DOI",
+   "url": "https://doi.org/10.1109/RTSS66672.2025.00044",
+   "host": "doi.org",
+   "dois": [
+    "10.1109/RTSS66672.2025.00044"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.1109/RTSS66672.2025.00044 (IEEE RTSS) — consensus pour journalisation temps reel, hors essaim de drones"
+  },
+  {
+   "number": 167,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "Drones & Swarms - NOKOV Motion Capture",
+   "url": "https://en.nokov.com/motion-capture-applications/robotics-engineering/drones-swarms.html",
+   "host": "en.nokov.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — page produit (motion capture) (en.nokov.com)"
+  },
+  {
+   "number": 168,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones - imavs.org",
+   "url": "https://www.imavs.org/papers/2025/15.pdf",
+   "host": "www.imavs.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI/URL IMAV 2025 (imavs.org/papers/2025/15.pdf)"
+  },
+  {
+   "number": 169,
+   "target": "onboard.mission",
+   "confidence": 0.6,
+   "title": "Installing Gazebo with ROS — Gazebo jetty documentation",
+   "url": "https://gazebosim.org/docs/latest/ros_installation/",
+   "host": "gazebosim.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "technique",
+   "justification": "source-technique-non-fondatrice — documentation logicielle officielle (Gazebo jetty, gazebosim.org)"
+  },
+  {
+   "number": 170,
+   "target": "onboard.mission",
+   "confidence": 0.4,
+   "title": "NATO advances maritime innovation and readiness through Exercise Dynamic Messenger 2025",
+   "url": "https://mc.nato.int/media-centre/news/2025/nato-advances-maritime-innovation-and-readiness-through-exercise-dynamic-messenger-2025",
+   "host": "mc.nato.int",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite (NATO) (mc.nato.int)"
+  },
+  {
+   "number": 171,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Nemyx - Auterion",
+   "url": "https://auterion.com/product/nemyx/",
+   "host": "auterion.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — page produit (Auterion Nemyx) (auterion.com)"
+  },
+  {
+   "number": 172,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm -",
+   "url": "https://thesai.org/Downloads/Volume16No4/Paper_26-Path_Planning_Technology_for_Unmanned_Aerial_Vehicle_Swarm.pdf",
+   "host": "thesai.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — URL IJACSA (thesai.org)"
+  },
+  {
+   "number": 173,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "AI Drone Swarm Coordination- 20 Advances (2026) - Yenra",
+   "url": "(source primaire : voir primary_id)",
+   "host": "",
+   "dois": [
+    "10.1186/s13638-024-02373-5",
+    "10.1186/s44147-025-00582-3"
+   ],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — blog de veille (URL absente, 2 DOI de references) (yenra (sans URL))"
+  },
+  {
+   "number": 174,
+   "target": "onboard.energy",
+   "confidence": 0.8,
+   "title": "Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Under High-Speed Condition - MDP",
+   "url": "https://www.mdpi.com/2077-1312/13/1/125",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/jmse13010125"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.3390/jmse13010125 (JMSE) — modelisation hydrodynamique du cable USV-UUV, pas un algorithme"
+  },
+  {
+   "number": 175,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "IASC - Free Full-Text - A Comprehensive Review of Next-Gen UAV Swarm Robotics- Optimisation Techniqu",
+   "url": "https://www.techscience.com/iasc/v40n1/59313/html",
+   "host": "www.techscience.com",
+   "dois": [
+    "10.32604/iasc.2025.060364"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "non-primaire — DOI 10.32604/iasc.2025.060364 (IASC) — revue, pas une source primaire"
+  },
+  {
+   "number": 177,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms - arXiv",
+   "url": "https://arxiv.org/html/2502.16887v1",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — arXiv 2502.16887"
+  },
+  {
+   "number": 178,
+   "target": "onboard.sensorsHAL",
+   "confidence": 0.8,
+   "title": "A machine-learning enabled digital-twin framework for tactical drone-swarm design - Multiphysics Sim",
+   "url": "https://msol.berkeley.edu/wp-content/uploads/2025/05/212.pdf",
+   "host": "msol.berkeley.edu",
+   "dois": [
+    "10.1016/j.cma.2025.117999"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.1016/j.cma.2025.117999 (CMAME) — jumeau numerique de conception (dynamique multicorps + ML)"
+  },
+  {
+   "number": 179,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "American USV Builders Anticipate Mass Demand from U.S. Navy - Defense Security Monitor",
+   "url": "https://dsm.forecastinternational.com/2025/02/27/american-usv-builders-anticipate-mass-demand-from-u-s-navy/",
+   "host": "dsm.forecastinternational.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite/presse defense (dsm.forecastinternational.com)"
+  },
+  {
+   "number": 180,
+   "target": "onboard.mission",
+   "confidence": 0.6,
+   "title": "FANET and MANET, a Support and Composition Relationship - SciOpen",
+   "url": "https://www.sciopen.com/article/10.32604/cmc.2025.056400",
+   "host": "www.sciopen.com",
+   "dois": [
+    "10.32604/cmc.2025.056400"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.32604/cmc.2025.056400 (CMC) — architecture reseau FANET/MANET, pas un des 15 algorithmes"
+  },
+  {
+   "number": 181,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "AttentionSwarm- Reinforcement Learning with Attention Control Barier Function for Crazyflie Drones i",
+   "url": "https://arxiv.org/html/2503.07376v1",
+   "host": "arxiv.org",
+   "dois": [
+    "10.1145/3564273"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2503.07376 — politique MARL apprise + CBF attention"
+  },
+  {
+   "number": 182,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "gym-pybullet-drones download - SourceForge.net",
+   "url": "https://sourceforge.net/projects/gym-pybullet-drones.mirror/",
+   "host": "sourceforge.net",
+   "dois": [],
+   "arxiv": [],
+   "classe": "technique",
+   "justification": "source-technique-non-fondatrice — page de telechargement d'un depot de code (gym-pybullet-drones, sourceforge.net)"
+  },
+  {
+   "number": 183,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "Bioinspired framework for real‐time collision detection with dynamic obstacles in cluttered outdoor",
+   "url": "https://digital-library.theiet.org/doi/full/10.1049/csy2.70006",
+   "host": "digital-library.theiet.org",
+   "dois": [
+    "10.1002/rob.21741",
+    "10.1007/978-3-319-23778-7_14",
+    "10.1007/978-3-319-29363-9_14",
+    "10.1016/b978-0-12-821377-3.00018-0",
+    "10.1016/j.cub.2013.08.015",
+    "10.1016/j.cub.2021.03.025",
+    "10.1016/j.neuroscience.2009.10.004",
+    "10.1017/s0952523810000313",
+    "10.1017/s0952523811000344",
+    "10.1038/eye.1992.28",
+    "10.1049/csy2.70006",
+    "10.1073/pnas.95.3.811",
+    "10.1109/ICCASM.2010.5620827",
+    "10.1109/JSEN.2021.3115016",
+    "10.1109/JSEN.2021.3138736",
+    "10.1109/JSEN.2023.3257329",
+    "10.1109/JSEN.2024.3351566",
+    "10.1109/TPAMI.2020.3008413",
+    "10.1109/access.2022.3154037",
+    "10.1109/iccv.2001.937651",
+    "10.1109/icidm51048.2020.9339646",
+    "10.1109/icra40945.2020.9196877",
+    "10.1109/infocom53939.2023.10229009",
+    "10.1109/iros.2018.8593805",
+    "10.1109/iros45743.2020.9340699",
+    "10.1109/lra.2022.3153904",
+    "10.1109/tro.2015.2463671",
+    "10.1126/scirobotics.aaz9712",
+    "10.1145/3469259.3470485",
+    "10.1145/3560905.3568515",
+    "10.1145/3570361.3613269",
+    "10.1152/jn.1998.80.3.1522",
+    "10.15607/rss.2019.xv.063",
+    "10.21105/joss.00205",
+    "10.31256/ka3gg8v",
+    "10.34133/research.0330"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.1049/csy2.70006"
+  },
+  {
+   "number": 184,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "Rise of U-space- Revolutionizing Drone Management in Europe - VisionSpace",
+   "url": "https://visionspace.com/rise-of-u-space-revolutionizing-drone-management-in-europe/",
+   "host": "visionspace.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — article de veille d'entreprise (visionspace.com)"
+  },
+  {
+   "number": 185,
+   "target": "onboard.autopilot",
+   "confidence": 0.6,
+   "title": "US Navy receives first Dive LD drone submarine - CT.gov",
+   "url": "https://portal.ct.gov/oma/in-the-news/2025-news/us-navy-receives-first-dive-ld-drone-submarine",
+   "host": "portal.ct.gov",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite gouvernementale (portal.ct.gov)"
+  },
+  {
+   "number": 186,
+   "target": "onboard.linkRadio",
+   "confidence": 0.8,
+   "title": "Anduril unveils new torpedo that can be launched by underwater drones - DefenseScoop",
+   "url": "https://defensescoop.com/2025/04/07/anduril-copperhead-torpedo-autonomous-underwater-vehicles/",
+   "host": "defensescoop.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite defense (defensescoop.com)"
+  },
+  {
+   "number": 188,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Un Bouclier de Sécurité Dynamique pour un Apprentissage par ...",
+   "url": "https://www.alphaxiv.org/fr/abs/2412.04153",
+   "host": "www.alphaxiv.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2412.04153 — safe RL, politique apprise (bouclier de surete)"
+  },
+  {
+   "number": 189,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Deadlock-free, safe, and decentralized multi-robot ... - Joydeep",
+   "url": "(source primaire : voir primary_id)",
+   "host": "",
+   "dois": [
+    "10.1007/s10514-025-10194-8"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "hors-perimetre — DOI 10.1007/s10514-025-10194-8 (Autonomous Robots) — robots terrestres en environnement social, hors flotte aerien+surface"
+  },
+  {
+   "number": 190,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "Depth Transfer- Learning to See Like a Simulator for Real-World Drone Navigation - arXiv",
+   "url": "https://arxiv.org/html/2505.12428v1",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2505.12428 — politique RL apprise (sim-to-real) pour l'evitement"
+  },
+  {
+   "number": 191,
+   "target": "onboard.energy",
+   "confidence": 0.8,
+   "title": "Wireless Communication for Low-Altitude Economy with UAV Swarm Enabled Two-Level Movable Antenna Sys",
+   "url": "https://arxiv.org/html/2505.22286v4",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — arXiv 2505.22286 — optimisation reseau/antennes mobiles (couche PHY)"
+  },
+  {
+   "number": 192,
+   "target": "onboard.linkRadio",
+   "confidence": 0.8,
+   "title": "FPV Drone Swarms in Asymmetric Warfare- Tactical Innovations and Ethical Challenges",
+   "url": "https://sciencepg.com/article/10.11648/j.advances.20250603.12",
+   "host": "sciencepg.com",
+   "dois": [
+    "10.1007/s11721-012-0075-2",
+    "10.1016/j.dt.2020.06.003",
+    "10.1017/S1816383112000732",
+    "10.1017/S181638311600001X",
+    "10.11648/j.advances.20250603.12",
+    "10.1609/aaai.v32i1.11794"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.11648/j.advances.20250603.12 (SciencePG, editeur predateur signale) — analyse tactique/ethique, pas un algorithme"
+  },
+  {
+   "number": 193,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swa",
+   "url": "https://ira.lib.polyu.edu.hk/bitstream/10397/115172/1/drones-09-00366.pdf",
+   "host": "ira.lib.polyu.edu.hk",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.3390/drones9050366"
+  },
+  {
+   "number": 194,
+   "target": "onboard.perception",
+   "confidence": 0.6,
+   "title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs - Beijing I",
+   "url": "https://pure.bit.edu.cn/en/publications/improved-collision-cone-control-barrier-functions-for-dynamic-obs/",
+   "host": "pure.bit.edu.cn",
+   "dois": [
+    "10.1109/YAC66630.2025.11150122"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.1109/YAC66630.2025.11150122"
+  },
+  {
+   "number": 195,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Cryptography-Based Secure Underwater Acoustic Communication for UUVs- A Review",
+   "url": "https://www.mdpi.com/2079-9292/14/12/2415",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/electronics14122415"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "non-primaire — DOI 10.3390/electronics14122415 (Electronics) — revue de cryptographie pour UUV, pas une source primaire"
+  },
+  {
+   "number": 196,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Swarm Intelligence Archives - Andres Andreu, CISSP, ISSAP, QTE",
+   "url": "https://andresandreu.tech/tag/swarm-intelligence/",
+   "host": "andresandreu.tech",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — blog personnel (andresandreu.tech)"
+  },
+  {
+   "number": 197,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Multi-agent Reinforcement Learning for Robotized Coral Reef Sample Collection - arXiv",
+   "url": "https://arxiv.org/pdf/2507.16941",
+   "host": "arxiv.org",
+   "dois": [
+    "10.1002/cjce.24508"
+   ],
+   "arxiv": [
+    "2507.16941"
+   ],
+   "classe": "scientifique",
+   "justification": "hors-perimetre — arXiv 2507.16941 — UUV de collecte de coraux, politique MARL, hors perimetre essaim"
+  },
+  {
+   "number": 198,
+   "target": "onboard.energy",
+   "confidence": 0.8,
+   "title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law",
+   "url": "DOI 10.3390/axioms14070519",
+   "host": "",
+   "dois": [
+    "10.3390/axioms14070519"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.3390/axioms14070519"
+  },
+  {
+   "number": 199,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Advancing UAV swarm autonomy with ARCog-NET for task allocation, path planning, and formation contro",
+   "url": "https://www.cambridge.org/core/journals/robotica/article/advancing-uav-swarm-autonomy-with-arcognet-for-task-allocation-path-planning-and-formation-control/50F1519DFB8BF595CE8321D0E946193F",
+   "host": "www.cambridge.org",
+   "dois": [
+    "10.1007/s43154-021-00063-4",
+    "10.1017/S0263574720000521",
+    "10.1017/S0263574725101914",
+    "10.1109/COMSNETS48256.2020.9027459",
+    "10.1109/IJCNN.2018.8489465",
+    "10.1109/ISIE.2017.8001437",
+    "10.1109/LARS/SBR/WRE59448.2023.10332986",
+    "10.1109/TNN.1998.712192",
+    "10.2118/205524-PA",
+    "10.21227/9xzy-fd09",
+    "10.7551/mitpress/13780.003.0014"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "pas-algorithme-canonique — DOI 10.1017/S0263574725101914 (Robotica) — architecture cognitive Edge-Fog-Cloud (ARCog-NET), pas un algorithme"
+  },
+  {
+   "number": 200,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Addressing Local Minima in Path Planning for Drones with Reinforcement Learning-Based Vortex Artific",
+   "url": "https://www.mdpi.com/2075-1702/13/7/600",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/machines13070600"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.3390/machines13070600"
+  },
+  {
+   "number": 201,
+   "target": "onboard.perception",
+   "confidence": 0.8,
+   "title": "Collaborative Target Tracking Algorithm for Multi-Agent Based on MAPPO and BCTD - MDPI",
+   "url": "https://www.mdpi.com/2504-446X/9/8/521",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/drones9080521"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — DOI 10.3390/drones9080521 (Drones) — MAPPO (politique MARL apprise)"
+  },
+  {
+   "number": 202,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Reinforcement Learning for Decision-Level Interception Prioritization in Drone Swarm Defense - arXiv",
+   "url": "https://arxiv.org/html/2508.00641v2",
+   "host": "arxiv.org",
+   "dois": [
+    "10.1007/s10489-022-03254-4",
+    "10.1007/s10489-024-05733-2",
+    "10.1109/TNNLS.2025.3564184",
+    "10.1109/tnnls.2025.3564184",
+    "10.32473/flairs.v35i.130584",
+    "10.3390/drones8100582",
+    "10.3390/s23218766"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2508.00641 — politique RL apprise pour priorisation d'interception"
+  },
+  {
+   "number": 203,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "A Taxonomy of Hierarchical Multi-Agent Systems- Design Patterns, Coordination Mechanisms, and Indust",
+   "url": "https://arxiv.org/html/2508.12683",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "non-primaire — arXiv 2508.12683 — taxonomie/review de HMAS, pas de source primaire"
+  },
+  {
+   "number": 204,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "OM2P- Offline Multi-Agent Mean-Flow Policy - arXiv",
+   "url": "https://arxiv.org/pdf/2508.06269",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [
+    "2508.06269"
+   ],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2508.06269 — politique MARL hors-ligne (diffusion/mean-flow)"
+  },
+  {
+   "number": 205,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "SwarmRaft- Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments -",
+   "url": "https://arxiv.org/html/2508.00622v2",
+   "host": "arxiv.org",
+   "dois": [
+    "10.23919/JCC.2023.00.006"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — arXiv 2508.00622"
+  },
+  {
+   "number": 206,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "DARPA christens USX-1 Defiant autonomous ship ahead of at-sea demonstrations",
+   "url": "https://defensescoop.com/2025/08/12/darpa-defiant-usv-navy-unmanned-surface-vessel-nomars-plans/",
+   "host": "defensescoop.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite defense (DARPA USX-1) (defensescoop.com)"
+  },
+  {
+   "number": 207,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "PX4 vs ArduPilot- Complete Comparison Guide for Drone Developers - ThinkRobotics.com",
+   "url": "https://thinkrobotics.com/blogs/learn/px4-vs-ardupilot-complete-comparison-guide-for-drone-developers",
+   "host": "thinkrobotics.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — blog comparatif (PX4 vs ArduPilot) (thinkrobotics.com)"
+  },
+  {
+   "number": 208,
+   "target": "algTaskAllocation",
+   "confidence": 0.6,
+   "title": "Swarm Intelligence Market Share and Growth Statistics 2035",
+   "url": "https://www.factmr.com/report/swarm-intelligence-market",
+   "host": "www.factmr.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — page marketing (etude de marche) (www.factmr.com)"
+  },
+  {
+   "number": 209,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "A Skeptic's View of the Hype Machine and Business Model of Neo-Defense Tech",
+   "url": "https://warontherocks.com/cogs-of-war/a-skeptics-view-of-the-hype-machine-and-business-model-of-neo-defense-tech/",
+   "host": "warontherocks.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — analyse/opinion defense (warontherocks.com)"
+  },
+  {
+   "number": 210,
+   "target": "onboard.mission",
+   "confidence": 0.8,
+   "title": "Dynamic Decoupling-Driven Cooperative Pursuit for Multi-UAV Systems- A Multi-Agent Reinforcement Lea",
+   "url": "(source primaire : voir primary_id)",
+   "host": "",
+   "dois": [
+    "10.32604/cmc.2025.067117"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — DOI 10.32604/cmc.2025.067117 (CMC) — poursuite cooperative par MARL"
+  },
+  {
+   "number": 211,
+   "target": "algTaskAllocation",
+   "confidence": 0.8,
+   "title": "Event Driven CBBA with Reduced Communication - arXiv",
+   "url": "https://arxiv.org/pdf/2509.06481",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [
+    "2509.06481"
+   ],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — arXiv 2509.06481"
+  },
+  {
+   "number": 212,
+   "target": "algSafetyRules",
+   "confidence": 0.8,
+   "title": "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control - arXiv",
+   "url": "https://arxiv.org/pdf/2509.15799",
+   "host": "arxiv.org",
+   "dois": [],
+   "arxiv": [
+    "2509.15799"
+   ],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — arXiv 2509.15799"
+  },
+  {
+   "number": 213,
+   "target": "onboard.autopilot",
+   "confidence": 0.8,
+   "title": "Auterion Launches Nemyx, Enabling Fully Coordinated Drone Swarms",
+   "url": "https://auterion.com/auterion-launches-nemyx-enabling-fully-coordinated-drone-swarms/",
+   "host": "auterion.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — communique produit (Auterion Nemyx) (auterion.com)"
+  },
+  {
+   "number": 214,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "DOD touts 'successful transition' for Replicator initiative — but questions linger - DefenseScoop",
+   "url": "https://defensescoop.com/2025/09/03/dod-replicator-drone-tech-transition-fielding-questions-linger/",
+   "host": "defensescoop.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite defense (Replicator) (defensescoop.com)"
+  },
+  {
+   "number": 215,
+   "target": "algTaskAllocation",
+   "confidence": 0.8,
+   "title": "Consensus-Based Bundle Algorithm (CBBA) - Emergent Mind",
+   "url": "https://www.emergentmind.com/topics/consensus-based-bundle-algorithm-cbba",
+   "host": "www.emergentmind.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — agregateur de veille documentaire (hub CBBA, emergentmind.com) — ni doc officielle ni depot (www.emergentmind.com)"
+  },
+  {
+   "number": 216,
+   "target": "edge.relay",
+   "confidence": 0.8,
+   "title": "Underwater glider swarm demonstrates persistent maritime surveillance and ASW barrier operations dur",
+   "url": "https://www.jasco.com/news/2025/underwater-glider-swarm-demonstrates-persistent-maritime-surveillance-and-asw-barrier-operations-during-nato-exercise-repmus/dynamic-messenger-25",
+   "host": "www.jasco.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — communique d'entreprise (www.jasco.com)"
+  },
+  {
+   "number": 217,
+   "target": "algFormationControl",
+   "confidence": 0.4,
+   "title": "Curriculum-Based Iterative Self-Play for Scalable Multi-Drone Racing - arXiv",
+   "url": "https://arxiv.org/pdf/2510.22570",
+   "host": "arxiv.org",
+   "dois": [
+    "10.1016/j.engappai.2025.110904",
+    "10.1016/j.engappai.2025.111322",
+    "10.5281/zenodo.17256943"
+   ],
+   "arxiv": [
+    "2510.22570"
+   ],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — arXiv 2510.22570 — CRUISE, methode d'entrainement RL self-play pour course de drones"
+  },
+  {
+   "number": 218,
+   "target": "algFormationControl",
+   "confidence": 0.4,
+   "title": "On emergent behaviour, visualising the Boids Algorithm - nuric Blog",
+   "url": "https://www.doc.ic.ac.uk/~nuric/posts/ai/boids/",
+   "host": "www.doc.ic.ac.uk",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — blog academique personnel (Boids) (www.doc.ic.ac.uk)"
+  },
+  {
+   "number": 219,
+   "target": "algCollisionAvoidance",
+   "confidence": 0.6,
+   "title": "SwarmGPT- Combining Large Language Models With Safe Motion Planning for Drone Swarm Choreography - t",
+   "url": "https://www.dynsyslab.org/wp-content/papercite-data/pdf/schuck-ral25.pdf",
+   "host": "www.dynsyslab.org",
+   "dois": [
+    "10.1109/LRA.2025.3619745"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.1109/LRA.2025.3619745 / arXiv 2412.08428"
+  },
+  {
+   "number": 220,
+   "target": "algCollisionAvoidance",
+   "confidence": 0.4,
+   "title": "Swarm Robotics- The Future of Part Handling in Smart Factories",
+   "url": "https://machinetoolnews.ai/swarm-robotics/",
+   "host": "machinetoolnews.ai",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite industrielle (machinetoolnews.ai)"
+  },
+  {
+   "number": 221,
+   "target": "algPerceptionFusion",
+   "confidence": 0.8,
+   "title": "Enabling Cooperative Autonomy in UUV Clusters- A Survey of Robust State Estimation and Information F",
+   "url": "https://www.mdpi.com/2504-446X/9/11/752",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/drones9110752"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "deja present dans science.c4 — DOI 10.3390/drones9110752"
+  },
+  {
+   "number": 223,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "Anduril showcases Anvil interceptor in new test footage - Defensehere",
+   "url": "https://defensehere.com/en/anduril-showcases-anvil-interceptor-in-new-test-footage/",
+   "host": "defensehere.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite defense (Anduril Anvil) (defensehere.com)"
+  },
+  {
+   "number": 224,
+   "target": "onboard.linkRadio",
+   "confidence": 0.8,
+   "title": "Kongsberg to separate maritime division in major restructuring - Naval Technology",
+   "url": "https://www.naval-technology.com/news/kongsberg-maritime-division-demerger/",
+   "host": "www.naval-technology.com",
+   "dois": [],
+   "arxiv": [],
+   "classe": "presse-commercial",
+   "justification": "source-non-scientifique — actualite (Kongsberg) (www.naval-technology.com)"
+  },
+  {
+   "number": 225,
+   "target": "algConsensus",
+   "confidence": 0.4,
+   "title": "Scaling Swarm Coordination with GNNs—How Far Can We Go-",
+   "url": "https://www.mdpi.com/2673-2688/6/11/282",
+   "host": "www.mdpi.com",
+   "dois": [
+    "10.3390/ai6110282"
+   ],
+   "arxiv": [],
+   "classe": "scientifique",
+   "justification": "paradigme-exclu — DOI 10.3390/ai6110282 (AI, MDPI) — coordination d'essaim apprise par GNN"
+  }
+ ],
+ "rattachees": [],
+ "specdoc_only": [],
+ "deja": [
+  {
+   "number": 168,
+   "title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones - imavs.org",
+   "existing_src": "srcHETCEnergyAware",
+   "existing_finding": "sciHETCEnergyAware"
+  },
+  {
+   "number": 172,
+   "title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm -",
+   "existing_src": "srcJumpPointSwarm",
+   "existing_finding": "sciJumpPointSwarm"
+  },
+  {
+   "number": 177,
+   "title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms - arXiv",
+   "existing_src": "srcUltraLightPlanner",
+   "existing_finding": "sciUltraLightPlanner"
+  },
+  {
+   "number": 183,
+   "title": "Bioinspired framework for real‐time collision detection with dynamic obstacles in cluttered outdoor",
+   "existing_src": "srcBioEventCollision",
+   "existing_finding": "sciBioEventCollision"
+  },
+  {
+   "number": 193,
+   "title": "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swa",
+   "existing_src": "srcDMPCFormationEval",
+   "existing_finding": "complete sciDMPCSafetyZones (SCI-29)"
+  },
+  {
+   "number": 194,
+   "title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs - Beijing I",
+   "existing_src": "srcIC3BF",
+   "existing_finding": "sciIC3BF"
+  },
+  {
+   "number": 198,
+   "title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law",
+   "existing_src": "srcDelayStability",
+   "existing_finding": "sciDelayStability"
+  },
+  {
+   "number": 200,
+   "title": "Addressing Local Minima in Path Planning for Drones with Reinforcement Learning-Based Vortex Artific",
+   "existing_src": "srcVAPF",
+   "existing_finding": "sciPathPlanning (citations VAPF)"
+  },
+  {
+   "number": 205,
+   "title": "SwarmRaft- Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments -",
+   "existing_src": "aucun (cité dans sciCrdt SCI-3)",
+   "existing_finding": "sciCrdt"
+  },
+  {
+   "number": 211,
+   "title": "Event Driven CBBA with Reduced Communication - arXiv",
+   "existing_src": "srcEventDrivenCBBA",
+   "existing_finding": "sciEventDrivenCBBA"
+  },
+  {
+   "number": 212,
+   "title": "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control - arXiv",
+   "existing_src": "srcHRLMPC",
+   "existing_finding": "sciPathPlanning (cite srcHRLMPC)"
+  },
+  {
+   "number": 219,
+   "title": "SwarmGPT- Combining Large Language Models With Safe Motion Planning for Drone Swarm Choreography - t",
+   "existing_src": "srcSwarmGPT",
+   "existing_finding": "sciPathPlanning (cite srcSwarmGPT)"
+  },
+  {
+   "number": 221,
+   "title": "Enabling Cooperative Autonomy in UUV Clusters- A Survey of Robust State Estimation and Information F",
+   "existing_src": "srcUUV",
+   "existing_finding": "sciEkf"
+  }
+ ],
+ "ecartees": [
+  {
+   "number": 126,
+   "title": "Tomorrow's Seascape- DoD's Replicator sUSV Element Begins to Take Shape - Defense Security Monitor",
+   "reason": "source-non-scientifique — actualite/presse defense (dsm.forecastinternational.com)"
+  },
+  {
+   "number": 129,
+   "title": "NATO selects Anduril's Lattice platform for next-gen air command and control",
+   "reason": "source-non-scientifique — actualite (presse generaliste) (www.jpost.com)"
+  },
+  {
+   "number": 131,
+   "title": "Thales UAS100 Long-Range Drone System Meets EASA Design Verification Report Milestone - UAS Vision",
+   "reason": "source-non-scientifique — actualite produit (www.uasvision.com)"
+  },
+  {
+   "number": 132,
+   "title": "Exail, RTsys and ABYSSA join forces for ocean floor mapping with AUVs",
+   "reason": "source-non-scientifique — communique d'entreprise (www.exail.com)"
+  },
+  {
+   "number": 137,
+   "title": "Strengthening UAS Security with Lessons from the Paris Olympics - IDGA",
+   "reason": "source-non-scientifique — article de presse defense (www.idga.org)"
+  },
+  {
+   "number": 154,
+   "title": "A Survey on UAV Control with Multi-Agent Reinforcement Learning - OUCI",
+   "reason": "non-primaire — DOI 10.3390/drones9070484 (Drones, MDPI) — revue/survey MARL, pas une source primaire"
+  },
+  {
+   "number": 158,
+   "title": "AI-enabled control system helps autonomous drones stay on target in uncertain environments - MIT Dep",
+   "reason": "source-non-scientifique — actualite institutionnelle (MIT news) (meche.mit.edu)"
+  },
+  {
+   "number": 166,
+   "title": "CARTEL- Consensus Adapting Real-Time and Efficient Logging - DOI",
+   "reason": "pas-algorithme-canonique — DOI 10.1109/RTSS66672.2025.00044 (IEEE RTSS) — consensus pour journalisation temps reel, hors essaim de drones"
+  },
+  {
+   "number": 167,
+   "title": "Drones & Swarms - NOKOV Motion Capture",
+   "reason": "source-non-scientifique — page produit (motion capture) (en.nokov.com)"
+  },
+  {
+   "number": 169,
+   "title": "Installing Gazebo with ROS — Gazebo jetty documentation",
+   "reason": "source-technique-non-fondatrice — documentation logicielle officielle (Gazebo jetty, gazebosim.org)"
+  },
+  {
+   "number": 170,
+   "title": "NATO advances maritime innovation and readiness through Exercise Dynamic Messenger 2025",
+   "reason": "source-non-scientifique — actualite (NATO) (mc.nato.int)"
+  },
+  {
+   "number": 171,
+   "title": "Nemyx - Auterion",
+   "reason": "source-non-scientifique — page produit (Auterion Nemyx) (auterion.com)"
+  },
+  {
+   "number": 173,
+   "title": "AI Drone Swarm Coordination- 20 Advances (2026) - Yenra",
+   "reason": "source-non-scientifique — blog de veille (URL absente, 2 DOI de references) (yenra (sans URL))"
+  },
+  {
+   "number": 174,
+   "title": "Dynamic Modeling and Analysis on the Cable Effect of USV-UUV System Under High-Speed Condition - MDP",
+   "reason": "pas-algorithme-canonique — DOI 10.3390/jmse13010125 (JMSE) — modelisation hydrodynamique du cable USV-UUV, pas un algorithme"
+  },
+  {
+   "number": 175,
+   "title": "IASC - Free Full-Text - A Comprehensive Review of Next-Gen UAV Swarm Robotics- Optimisation Techniqu",
+   "reason": "non-primaire — DOI 10.32604/iasc.2025.060364 (IASC) — revue, pas une source primaire"
+  },
+  {
+   "number": 178,
+   "title": "A machine-learning enabled digital-twin framework for tactical drone-swarm design - Multiphysics Sim",
+   "reason": "pas-algorithme-canonique — DOI 10.1016/j.cma.2025.117999 (CMAME) — jumeau numerique de conception (dynamique multicorps + ML)"
+  },
+  {
+   "number": 179,
+   "title": "American USV Builders Anticipate Mass Demand from U.S. Navy - Defense Security Monitor",
+   "reason": "source-non-scientifique — actualite/presse defense (dsm.forecastinternational.com)"
+  },
+  {
+   "number": 180,
+   "title": "FANET and MANET, a Support and Composition Relationship - SciOpen",
+   "reason": "pas-algorithme-canonique — DOI 10.32604/cmc.2025.056400 (CMC) — architecture reseau FANET/MANET, pas un des 15 algorithmes"
+  },
+  {
+   "number": 181,
+   "title": "AttentionSwarm- Reinforcement Learning with Attention Control Barier Function for Crazyflie Drones i",
+   "reason": "paradigme-exclu — arXiv 2503.07376 — politique MARL apprise + CBF attention"
+  },
+  {
+   "number": 182,
+   "title": "gym-pybullet-drones download - SourceForge.net",
+   "reason": "source-technique-non-fondatrice — page de telechargement d'un depot de code (gym-pybullet-drones, sourceforge.net)"
+  },
+  {
+   "number": 184,
+   "title": "Rise of U-space- Revolutionizing Drone Management in Europe - VisionSpace",
+   "reason": "source-non-scientifique — article de veille d'entreprise (visionspace.com)"
+  },
+  {
+   "number": 185,
+   "title": "US Navy receives first Dive LD drone submarine - CT.gov",
+   "reason": "source-non-scientifique — actualite gouvernementale (portal.ct.gov)"
+  },
+  {
+   "number": 186,
+   "title": "Anduril unveils new torpedo that can be launched by underwater drones - DefenseScoop",
+   "reason": "source-non-scientifique — actualite defense (defensescoop.com)"
+  },
+  {
+   "number": 188,
+   "title": "Un Bouclier de Sécurité Dynamique pour un Apprentissage par ...",
+   "reason": "paradigme-exclu — arXiv 2412.04153 — safe RL, politique apprise (bouclier de surete)"
+  },
+  {
+   "number": 189,
+   "title": "Deadlock-free, safe, and decentralized multi-robot ... - Joydeep",
+   "reason": "hors-perimetre — DOI 10.1007/s10514-025-10194-8 (Autonomous Robots) — robots terrestres en environnement social, hors flotte aerien+surface"
+  },
+  {
+   "number": 190,
+   "title": "Depth Transfer- Learning to See Like a Simulator for Real-World Drone Navigation - arXiv",
+   "reason": "paradigme-exclu — arXiv 2505.12428 — politique RL apprise (sim-to-real) pour l'evitement"
+  },
+  {
+   "number": 191,
+   "title": "Wireless Communication for Low-Altitude Economy with UAV Swarm Enabled Two-Level Movable Antenna Sys",
+   "reason": "pas-algorithme-canonique — arXiv 2505.22286 — optimisation reseau/antennes mobiles (couche PHY)"
+  },
+  {
+   "number": 192,
+   "title": "FPV Drone Swarms in Asymmetric Warfare- Tactical Innovations and Ethical Challenges",
+   "reason": "pas-algorithme-canonique — DOI 10.11648/j.advances.20250603.12 (SciencePG, editeur predateur signale) — analyse tactique/ethique, pas un algorithme"
+  },
+  {
+   "number": 195,
+   "title": "Cryptography-Based Secure Underwater Acoustic Communication for UUVs- A Review",
+   "reason": "non-primaire — DOI 10.3390/electronics14122415 (Electronics) — revue de cryptographie pour UUV, pas une source primaire"
+  },
+  {
+   "number": 196,
+   "title": "Swarm Intelligence Archives - Andres Andreu, CISSP, ISSAP, QTE",
+   "reason": "source-non-scientifique — blog personnel (andresandreu.tech)"
+  },
+  {
+   "number": 197,
+   "title": "Multi-agent Reinforcement Learning for Robotized Coral Reef Sample Collection - arXiv",
+   "reason": "hors-perimetre — arXiv 2507.16941 — UUV de collecte de coraux, politique MARL, hors perimetre essaim"
+  },
+  {
+   "number": 199,
+   "title": "Advancing UAV swarm autonomy with ARCog-NET for task allocation, path planning, and formation contro",
+   "reason": "pas-algorithme-canonique — DOI 10.1017/S0263574725101914 (Robotica) — architecture cognitive Edge-Fog-Cloud (ARCog-NET), pas un algorithme"
+  },
+  {
+   "number": 201,
+   "title": "Collaborative Target Tracking Algorithm for Multi-Agent Based on MAPPO and BCTD - MDPI",
+   "reason": "paradigme-exclu — DOI 10.3390/drones9080521 (Drones) — MAPPO (politique MARL apprise)"
+  },
+  {
+   "number": 202,
+   "title": "Reinforcement Learning for Decision-Level Interception Prioritization in Drone Swarm Defense - arXiv",
+   "reason": "paradigme-exclu — arXiv 2508.00641 — politique RL apprise pour priorisation d'interception"
+  },
+  {
+   "number": 203,
+   "title": "A Taxonomy of Hierarchical Multi-Agent Systems- Design Patterns, Coordination Mechanisms, and Indust",
+   "reason": "non-primaire — arXiv 2508.12683 — taxonomie/review de HMAS, pas de source primaire"
+  },
+  {
+   "number": 204,
+   "title": "OM2P- Offline Multi-Agent Mean-Flow Policy - arXiv",
+   "reason": "paradigme-exclu — arXiv 2508.06269 — politique MARL hors-ligne (diffusion/mean-flow)"
+  },
+  {
+   "number": 206,
+   "title": "DARPA christens USX-1 Defiant autonomous ship ahead of at-sea demonstrations",
+   "reason": "source-non-scientifique — actualite defense (DARPA USX-1) (defensescoop.com)"
+  },
+  {
+   "number": 207,
+   "title": "PX4 vs ArduPilot- Complete Comparison Guide for Drone Developers - ThinkRobotics.com",
+   "reason": "source-non-scientifique — blog comparatif (PX4 vs ArduPilot) (thinkrobotics.com)"
+  },
+  {
+   "number": 208,
+   "title": "Swarm Intelligence Market Share and Growth Statistics 2035",
+   "reason": "source-non-scientifique — page marketing (etude de marche) (www.factmr.com)"
+  },
+  {
+   "number": 209,
+   "title": "A Skeptic's View of the Hype Machine and Business Model of Neo-Defense Tech",
+   "reason": "source-non-scientifique — analyse/opinion defense (warontherocks.com)"
+  },
+  {
+   "number": 210,
+   "title": "Dynamic Decoupling-Driven Cooperative Pursuit for Multi-UAV Systems- A Multi-Agent Reinforcement Lea",
+   "reason": "paradigme-exclu — DOI 10.32604/cmc.2025.067117 (CMC) — poursuite cooperative par MARL"
+  },
+  {
+   "number": 213,
+   "title": "Auterion Launches Nemyx, Enabling Fully Coordinated Drone Swarms",
+   "reason": "source-non-scientifique — communique produit (Auterion Nemyx) (auterion.com)"
+  },
+  {
+   "number": 214,
+   "title": "DOD touts 'successful transition' for Replicator initiative — but questions linger - DefenseScoop",
+   "reason": "source-non-scientifique — actualite defense (Replicator) (defensescoop.com)"
+  },
+  {
+   "number": 215,
+   "title": "Consensus-Based Bundle Algorithm (CBBA) - Emergent Mind",
+   "reason": "source-non-scientifique — agregateur de veille documentaire (hub CBBA, emergentmind.com) — ni doc officielle ni depot (www.emergentmind.com)"
+  },
+  {
+   "number": 216,
+   "title": "Underwater glider swarm demonstrates persistent maritime surveillance and ASW barrier operations dur",
+   "reason": "source-non-scientifique — communique d'entreprise (www.jasco.com)"
+  },
+  {
+   "number": 217,
+   "title": "Curriculum-Based Iterative Self-Play for Scalable Multi-Drone Racing - arXiv",
+   "reason": "paradigme-exclu — arXiv 2510.22570 — CRUISE, methode d'entrainement RL self-play pour course de drones"
+  },
+  {
+   "number": 218,
+   "title": "On emergent behaviour, visualising the Boids Algorithm - nuric Blog",
+   "reason": "source-non-scientifique — blog academique personnel (Boids) (www.doc.ic.ac.uk)"
+  },
+  {
+   "number": 220,
+   "title": "Swarm Robotics- The Future of Part Handling in Smart Factories",
+   "reason": "source-non-scientifique — actualite industrielle (machinetoolnews.ai)"
+  },
+  {
+   "number": 223,
+   "title": "Anduril showcases Anvil interceptor in new test footage - Defensehere",
+   "reason": "source-non-scientifique — actualite defense (Anduril Anvil) (defensehere.com)"
+  },
+  {
+   "number": 224,
+   "title": "Kongsberg to separate maritime division in major restructuring - Naval Technology",
+   "reason": "source-non-scientifique — actualite (Kongsberg) (www.naval-technology.com)"
+  },
+  {
+   "number": 225,
+   "title": "Scaling Swarm Coordination with GNNs—How Far Can We Go-",
+   "reason": "paradigme-exclu — DOI 10.3390/ai6110282 (AI, MDPI) — coordination d'essaim apprise par GNN"
+  }
+ ]
+}
