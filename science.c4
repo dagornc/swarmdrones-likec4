@@ -1900,4 +1900,203 @@ sciAgileTargetCapture = finding 'SCI-55 — Capture de cible par formation circu
   sciDelayStability -[uses]-> srcDelayStability 'source primaire'
   sciDMPCSafetyZones -[uses]-> srcDMPCFormationEval 'complete SCI-29 (DMPC formation + evitement) — apport : metriques d evaluation de capacite cooperative'
 
+// =============================================================================
+//  RATTACHEMENT DES 16 SOURCES FONDATRICES (2026-09-30, carte C t_742d39d4)
+//  BLOCS A VALIDER — NON inseres dans science.c4.
+//  Validation humaine OBLIGATOIRE avant insertion (regle du projet).
+//
+//  Objet : rattacher les 16 sources fondatrices ingerees dans le corpus
+//  (carte A t_7e2b6f14, catalog.json 2434..2449) aux 15 algorithmes
+//  canoniques, patron 2 sauts : srcXXX -[uses]<- sciFinding -[evidences]-> algYYY.
+//
+//  Sur 16 sources :
+//    - 5 DEJA RATTACHEES (aucun bloc) : 2434 SwarmRaft (SCI-5 sciGnssDegraded),
+//      2435 Perception-Aware (SCI-40 sciCommFreeCoord), 2437 SLAM nano
+//      (SCI-46 sciOnboardSLAMNano), 2448 Couverture (SCI-20 sciCentralVsDecentral),
+//      2449 APF+WF (SCI-17 sciApfWallFollower). Detail dans le rapport.
+//    - 11 RATTACHEES ICI : SCI-61..SCI-71.
+//
+//  NOTE ANTI-DOUBLON : les 8 classiques (Khatib / PSO / Dimarogonas / Tseng /
+//  Akyildiz / Olfati-Saber / Hu-Yan / Reynolds) sont DEJA declarees comme
+//  `scientificPaper` (paperXXX) dans hzip.c4. On les REFERENCE (pas de
+//  re-declaration specDoc). Les 3 sources sans element (LiDAR DRL, formation
+//  retardee, IDS federe) recoivent ici leur specDoc.
+// =============================================================================
+
+  // ===========================================================================
+  //  A. SOURCES SANS ELEMENT EXISTANT — specDoc a creer
+  // ===========================================================================
+
+  srcLiDARDRLNav = specDoc 'Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based DRL (2026)' {
+    #science
+    link https://arxiv.org/abs/2601.13657 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Learning"
+    description '''
+      Controleur par apprentissage par renforcement profond (DRL) pour la navigation collective d un essaim d UAV en environnement SANS communication et SANS GNSS : cadre leader-follower IMPLICITE (seul le leader detient l objectif ; les suiveurs apprennent une politique a partir du seul LiDAR embarque, sans identification du leader). Clustering des points LiDAR + filtre de Kalman etendu pour le suivi stable des voisins, entrainement GPU dans Nvidia Isaac Sim. Valide en simulation ET en reel (essaim de 5 UAV, interieur et exterieur), transfert sim-to-real demontre.
+    '''
+    metadata { arxiv '2601.13657'; annee '2026'; nature 'preprint (arXiv cs.RO)'; corpus '2436'; statut 'CONSULTEE (PDF lu, 2026-09-30)' }
+  }
+
+  srcDelayFeedbackForm = specDoc 'Delay-Based Feedback Formation Control for UAVs with Feedforward Components (2023)' {
+    #science
+    link https://doi.org/10.1007/978-981-19-6613-2_660 "Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles with Feedforward Components"
+    description '''
+      Controle de formation de drones par retour retarde (delay-based feedback) complete par des composantes feedforward (Springer LNEE, chapitre 2023). Cite dans architecture.c4 comme reference du composant de pilotage automatique (autopilot). Pas d abstract Crossref disponible : la qualification repose sur le titre, les auteurs et la citation modele, non sur le texte integral.
+    '''
+    metadata { doi '10.1007/978-981-19-6613-2_660'; annee '2023'; nature 'chapitre d ouvrage (Springer LNEE)'; corpus '2438'; statut 'CONSULTEE (metadonnees Crossref, 2026-09-30)' }
+  }
+
+  srcFederatedIDS = specDoc 'Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation (2026)' {
+    #science
+    link https://arxiv.org/abs/2607.17025 "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation"
+    description '''
+      Systeme de detection d intrusion (IDS) par apprentissage federe LEGER pour essaims de drones : reseau de neurones profond (DNN) renforce par distillation de connaissances (KD) pour reduire la complexite du modele et les couts de communication/computation SANS sacrifier la detection. Evalue sur des Raspberry Pi 4 et un jeu de donnees de reseau de drones REEL : 98,6 % de precision de detection, cout de communication reduit d environ 70 % et charge de calcul de 29 %. Front-end de detection cyber alimentant le regime resilient sous brouillage/adversite.
+    '''
+    metadata { arxiv '2607.17025'; annee '2026'; nature 'preprint (arXiv cs.CR)'; corpus '2439'; statut 'CONSULTEE (PDF lu, 2026-09-30)' }
+  }
+
+  // ===========================================================================
+  //  B. VERDICTS — sciFinding SCI-61..SCI-71
+  // ===========================================================================
+
+  sciLiDARDRLNav = finding 'SCI-61 — Navigation collective sans communication par DRL LiDAR (leader-follower implicite)' {
+    #science
+    link https://arxiv.org/abs/2601.13657 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Learning"
+    description '''
+      srcLiDARDRLNav est une PREUVE EMPIRIQUE (simulation + reel, 5 UAV) que la navigation collective peut se passer a la fois de COMMUNICATION et de GNSS : leader-follower implicite ou les suiveurs emergent un comportement de flocking et d evitement d obstacles a partir du seul LiDAR. Etaye algNavigationGNSSDegrade (navigation collective sans GNSS), algFormationControl (flocking leader-follower) et algCollisionAvoidance (equilibre flocking/evitement appris). VERDICT : SUPPORTED pour le mecanisme (navigation collective communication-free, reel) ; CONDITIONAL — echelle 5 UAV a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (navigation collective sans communication, reel 5 UAV) / CONDITIONAL (echelle N=30)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcLiDARDRLNav'; correction_modele 'algNavigationGNSSDegrade + algFormationControl + algCollisionAvoidance : navigation collective DRL LiDAR sans communication sourcee' }
+  }
+
+  sciDelayFeedbackForm = finding 'SCI-62 — Controle de formation par retour retarde + composantes feedforward' {
+    #science
+    link https://doi.org/10.1007/978-981-19-6613-2_660 "Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles with Feedforward Components"
+    description '''
+      srcDelayFeedbackForm traite le maintien de formation (algFormationControl) sous retour RETARDE avec composantes feedforward — le regime retarde que le modele gere par ailleurs (cf SCI-35 srcMultiLeaderDelay, SCI-60 srcDelayStability). LIMITE DE QUALIFICATION : aucun abstract Crossref disponible ; le rattachement repose sur le titre, les auteurs et la citation modele (architecture.c4 autopilot), pas sur le texte integral. VERDICT : CONDITIONAL — a confirmer par lecture du chapitre avant consolidation.
+    '''
+    metadata { verdict 'CONDITIONAL (titre + citation modele, pas d abstract Crossref)'; niveau_preuve 'LOW'; source 'srcDelayFeedbackForm'; correction_modele 'algFormationControl : formation par retour retarde + feedforward (a confirmer par lecture)' }
+  }
+
+  sciFederatedIDS = finding 'SCI-63 — Detection d intrusion federee legere (knowledge distillation) pour essaims' {
+    #science
+    link https://arxiv.org/abs/2607.17025 "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation"
+    description '''
+      srcFederatedIDS documente le front-end de DETECTION CYBER d algJammingResilientMode : un IDS federe leger (DNN + knowledge distillation) detecte les intrusions reseau sur du materiel contraint (Raspberry Pi 4, 98,6 % de precision) a cout de communication/computation reduit — exactement le detecteur qui doit nourrir la bascule supervisee cooperatif/autonome sous brouillage. VERDICT : SUPPORTED pour le mecanisme (IDS federe leger, materiel reel) ; CONDITIONAL — integration a la boucle de bascule de mode non demontree, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (IDS federe leger, materiel reel) / CONDITIONAL (integration bascule de mode)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcFederatedIDS'; correction_modele 'algJammingResilientMode : detecteur d intrusion federe leger alimentant la bascule de mode sous adversite' }
+  }
+
+  sciKhatibAPF = finding 'SCI-64 — Champs de potentiel artificiels pour l evitement d obstacles temps reel' {
+    #science
+    link https://doi.org/10.1177/027836498600500106 "Real-Time Obstacle Avoidance for Manipulators and Mobile Robots"
+    description '''
+      paperKhatib1986 pose le FONDEMENT des champs de potentiel artificiels (APF) pour l evitement d obstacles en temps reel : la collision, traditionnellement un probleme de planification de haut niveau, est distribuee entre les niveaux de controle (operationnel/joint), etendue aux obstacles mobiles par champ temporel variant. Etaye algCollisionAvoidance (evitement reactif APF) et algPathPlanning (APF comme planification repartie entre niveaux). VERDICT : SUPPORTED pour le mecanisme (APF temps reel) ; CONDITIONAL — manipulateurs/robots mobiles 2D, transposition aerienne et minima locaux a qualifier (cf SCI-17 srcAPFWall pour l anti-minima).
+    '''
+    metadata { verdict 'SUPPORTED (APF temps reel) / CONDITIONAL (transposition aerienne)'; niveau_preuve 'MEDIUM'; source 'paperKhatib1986'; correction_modele 'algCollisionAvoidance + algPathPlanning : champs de potentiel artificiels sources' }
+  }
+
+  sciPSO = finding 'SCI-65 — Optimisation par essaim particulaire (PSO)' {
+    #science
+    link https://doi.org/10.1109/icnn.1995.488968 "Particle swarm optimization"
+    description '''
+      paperKennedy1995 introduit l optimisation par essaim particulaire (PSO, gBest/pBest) : metaheuristique d optimisation par population, GENERIQUE et sans gradient. Etaye algTaskAllocation (optimiseur d allocation de taches) et algPathPlanning (optimiseur de trajectoire) comme alternative d optimisation aux methodes exactes du modele. NOTE : le modele route deja PSO via la couche strategique H-Zip (hzipLayer2 -> algFormationControl/algConsensus) ; le rattachement direct aux algorithmes d allocation/planification est un AJOUT, pas un remplacement. VERDICT : CONDITIONAL — methode generique, application essaim a qualifier par cas d usage.
+    '''
+    metadata { verdict 'CONDITIONAL (metaheuristique generique, application a qualifier)'; niveau_preuve 'MEDIUM'; source 'paperKennedy1995'; correction_modele 'algTaskAllocation + algPathPlanning : optimiseur PSO alternatif source' }
+  }
+
+  sciEventTriggeredDimarogonas = finding 'SCI-66 — Controle evenementiel distribue pour systemes multi-agents' {
+    #science
+    link https://doi.org/10.1109/tac.2011.2174666 "Distributed Event-Triggered Control for Multi-Agent Systems"
+    description '''
+      paperDimarogonas2012 est le FONDEMENT THEORIQUE du controle evenementiel distribue : on ne transmet que si un seuil d erreur est franchi, bornant l erreur inter-evenements et garantissant l exclusion de Zeno. Etaye directement algEventTriggeredComm (politique d emission sur evenement, silence predictif, Trame D du protocole H-Zip). VERDICT : SUPPORTED pour le mecanisme (event-triggered distribue) ; CONDITIONAL — resultat theorique generique, transposition vol a valider.
+    '''
+    metadata { verdict 'SUPPORTED (event-triggered distribue) / CONDITIONAL (transposition vol)'; niveau_preuve 'MEDIUM-HAUTE'; source 'paperDimarogonas2012'; correction_modele 'algEventTriggeredComm : declenchement par franchissement de seuil source' }
+  }
+
+  sciBroadcastStorm = finding 'SCI-67 — Probleme de tempete de broadcast en reseau ad hoc mobile' {
+    #science
+    link https://doi.org/10.1023/a:1013763825347 "The Broadcast Storm Problem in a Mobile Ad Hoc Network"
+    description '''
+      paperTseng2002 formalise l effondrement du broadcast dans un reseau ad hoc au-dela d une densite critique (redondance, contention, collision) — la justification NEGATIVE du choix du modele de ne JAMAIS inonder le canal : communication parcimonieuse et hierarchique. Etaye algEventTriggeredComm (emettre sur evenement plutot que broadcast periodique). VERDICT : SUPPORTED pour le mecanisme (limite de densite du broadcast) ; CONDITIONAL — MANET terrestre, transposition aerienne a qualifier.
+    '''
+    metadata { verdict 'SUPPORTED (limite de densite du broadcast) / CONDITIONAL (MANET terrestre)'; niveau_preuve 'MEDIUM'; source 'paperTseng2002'; correction_modele 'algEventTriggeredComm : justification negative du broadcast periodique sourcee' }
+  }
+
+  sciAcousticConstraint = finding 'SCI-68 — Reseaux de capteurs acoustiques sous-marins : contrainte de debit' {
+    #science
+    link https://doi.org/10.1016/j.adhoc.2005.01.004 "Underwater acoustic sensor networks: research challenges"
+    description '''
+      paperAkyildiz2005 documente la contrainte de bande passante acoustique sous-marine (100 bit/s a quelques kbit/s) : le heartbeat global est impossible, la communication doit etre PARCIMONIEUSE. Etaye algEventTriggeredComm par TRANSFERT METHODOLOGIQUE (meme logique de rarefaction du canal, domaine acoustique -> radio). ATTENTION : survey de defis de recherche, aucune applicabilite drone demontree (flag transfer-candidate du corpus). L hypothese d un lien vers algCooperativeLocalization n est PAS retenue : la source ne fournit pas de mecanisme de localisation cooperative. VERDICT : CONDITIONAL / TRANSFERT — rattachement methodologique, a valider par Christophe (alternative : ecarter).
+    '''
+    metadata { verdict 'CONDITIONAL / TRANSFERT (contrainte de debit, survey sans applicabilite drone)'; niveau_preuve 'LOW'; source 'paperAkyildiz2005'; correction_modele 'algEventTriggeredComm : communication parcimonieuse sous contrainte de debit (transfert methodologique)' }
+  }
+
+  sciConsensusFramework = finding 'SCI-69 — Consensus et cooperation dans les systemes multi-agents en reseau' {
+    #science
+    link https://doi.org/10.1109/jproc.2006.887293 "Consensus and Cooperation in Networked Multi-Agent Systems"
+    description '''
+      paperOlfatiSaber2007 est le CADRE UNIFIE du consensus distribue en systemes multi-agents en reseau (algorithmes de consensus, graphes de communication, flocking/rendez-vous/formation par consensus). Etaye algConsensus (fondement du consensus d essaim) et algFormationControl (le consensus comme mecanisme de formation/flocking). VERDICT : SUPPORTED pour le mecanisme (consensus et cooperation en reseau) ; CONDITIONAL — cadre theorique, dynamique UAV a instancier.
+    '''
+    metadata { verdict 'SUPPORTED (consensus + flocking en reseau) / CONDITIONAL (instanciation UAV)'; niveau_preuve 'MEDIUM-HAUTE'; source 'paperOlfatiSaber2007'; correction_modele 'algConsensus + algFormationControl : cadre unifie consensus/flocking source' }
+  }
+
+  sciPacketLossStability = finding 'SCI-70 — Robustesse de stabilite des systemes commandes en reseau face aux pertes de paquets' {
+    #science
+    link https://doi.org/10.1016/j.automatica.2006.12.020 "Stability robustness of networked control systems with respect to packet loss"
+    description '''
+      paperHuYan2007 quantifie la robustesse de stabilite d un systeme commande en reseau sous pertes de paquets — la borne de perte admissible que le modele doit respecter pour que le consensus en reseau (algConsensus) reste stable en regime de lien intermittent. Justifie le comportement en perte des trames (H-Zip, Trame D). VERDICT : SUPPORTED pour le mecanisme (stabilite sous perte) ; CONDITIONAL — resultat NCS generique, transposition au consensus d essaim a valider.
+    '''
+    metadata { verdict 'SUPPORTED (stabilite sous perte de paquets) / CONDITIONAL (transposition consensus essaim)'; niveau_preuve 'MEDIUM'; source 'paperHuYan2007'; correction_modele 'algConsensus : robustesse de stabilite du consensus sous pertes de paquets sourcee' }
+  }
+
+  sciBoids = finding 'SCI-71 — Flocks, herds and schools : modele comportemental distribue (boids)' {
+    #science
+    link https://doi.org/10.1145/37402.37406 "Flocks, herds and schools: A distributed behavioral model"
+    description '''
+      paperReynolds1987 fonde les comportements collectifs DISTRIBUES : chaque acteur navigue par perception LOCALE et regles simples (separation, alignement, cohesion), sans autorite centrale. Ancetre conceptuel direct d algFormationControl (flocking) et de la regle de SEPARATION qui sous-tend l evitement local d algCollisionAvoidance. VERDICT : SUPPORTED pour le mecanisme (comportements distribues) ; CONDITIONAL — modele graphique (simulation), sans preuve de stabilite ni transposition vol.
+    '''
+    metadata { verdict 'SUPPORTED (comportements distribues separation/alignement/cohesion) / CONDITIONAL (modele graphique)'; niveau_preuve 'MEDIUM-HAUTE'; source 'paperReynolds1987'; correction_modele 'algFormationControl + algCollisionAvoidance : flocking distribue par regles locales source' }
+  }
+
+  // ===========================================================================
+  //  C. RELATIONS — patron 2 sauts (a inserer dans le bloc relations de science.c4)
+  // ===========================================================================
+
+  sciLiDARDRLNav -[evidences]-> algNavigationGNSSDegrade 'navigation collective sans GNSS ni communication (leader-follower implicite)'
+  sciLiDARDRLNav -[evidences]-> algFormationControl 'flocking emergent par DRL (leader-follower)'
+  sciLiDARDRLNav -[evidences]-> algCollisionAvoidance 'evitement d obstacles appris, equilibre flocking/evitement'
+  sciLiDARDRLNav -[uses]-> srcLiDARDRLNav 'source primaire'
+
+  sciDelayFeedbackForm -[evidences]-> algFormationControl 'maintien de formation par retour retarde + feedforward'
+  sciDelayFeedbackForm -[uses]-> srcDelayFeedbackForm 'source primaire'
+
+  sciFederatedIDS -[evidences]-> algJammingResilientMode 'detecteur d intrusion federe alimentant la bascule de mode sous adversite'
+  sciFederatedIDS -[uses]-> srcFederatedIDS 'source primaire'
+
+  sciKhatibAPF -[evidences]-> algCollisionAvoidance 'evitement reactif par champs de potentiel artificiels'
+  sciKhatibAPF -[evidences]-> algPathPlanning 'APF comme planification repartie entre niveaux de controle'
+  sciKhatibAPF -[uses]-> paperKhatib1986 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciPSO -[evidences]-> algTaskAllocation 'optimiseur PSO alternatif pour l allocation de taches'
+  sciPSO -[evidences]-> algPathPlanning 'optimiseur PSO alternatif pour la planification de trajectoire'
+  sciPSO -[uses]-> paperKennedy1995 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciEventTriggeredDimarogonas -[evidences]-> algEventTriggeredComm 'emission sur franchissement de seuil, borne d erreur inter-evenements'
+  sciEventTriggeredDimarogonas -[uses]-> paperDimarogonas2012 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciBroadcastStorm -[evidences]-> algEventTriggeredComm 'justification negative du broadcast periodique (tempete de broadcast)'
+  sciBroadcastStorm -[uses]-> paperTseng2002 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciAcousticConstraint -[evidences]-> algEventTriggeredComm 'communication parcimonieuse sous contrainte de debit (transfert methodologique)'
+  sciAcousticConstraint -[uses]-> paperAkyildiz2005 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciConsensusFramework -[evidences]-> algConsensus 'cadre unifie du consensus distribue en reseau'
+  sciConsensusFramework -[evidences]-> algFormationControl 'flocking/rendez-vous par consensus'
+  sciConsensusFramework -[uses]-> paperOlfatiSaber2007 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciPacketLossStability -[evidences]-> algConsensus 'robustesse de stabilite du consensus sous pertes de paquets'
+  sciPacketLossStability -[uses]-> paperHuYan2007 'source primaire (declarée scientificPaper dans hzip.c4)'
+
+  sciBoids -[evidences]-> algFormationControl 'flocking par regles locales (separation/alignement/cohesion)'
+  sciBoids -[evidences]-> algCollisionAvoidance 'regle de separation = evitement local'
+  sciBoids -[uses]-> paperReynolds1987 'source primaire (declarée scientificPaper dans hzip.c4)'
 }
