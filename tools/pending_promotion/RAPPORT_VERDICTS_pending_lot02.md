@@ -183,7 +183,7 @@ Tous les DOI primaires ont ete verifies par l'API Crossref et tous les identifia
 
 ## Decision attendue de Christophe
 
-1. Valider la classification (26 presse-commercial / 3 technique / 35 scientifique) et les 13 DEJA_RATTACHEE / 22 ECARTEE.
+1. Valider la classification (27 presse-commercial / 2 technique / 35 scientifique) et les 13 DEJA_RATTACHEE / 22 ECARTEE.
 2. Confirmer qu'aucun nouveau bloc n'est a inserer dans `science.c4` (0 RATTACHEE) ; `pending_lot02_additions.c4` est vide par construction.
 3. Autoriser le deploiement du filtre de qualite de source (`hermes profile update swarmdrone --yes`) pour corriger la cause racine (etage 3, implemente et teste par injection, en attente de deploiement).
 
