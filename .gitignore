@@ -3,7 +3,8 @@
 # Git rend cette pratique redondante : l'historique est desormais tenu par
 # les commits. Elles restent sur disque (archive ponctuelle) mais ne sont pas
 # versionnees : elles representeraient 4,2 Mo de doublons stricts.
-backup_v*/
+# Regroupees dans archive/backups/ le 2026-09-30 (nettoyage point4/).
+archive/
 
 # --- Sorties REGENERABLES du pipeline ---
 # Ces fichiers sont PRODUITS par le pipeline et verifiables par recalcul.

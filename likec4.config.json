@@ -11,7 +11,7 @@
     "generated": "2026-09-14"
   },
   "exclude": [
-    "backup_v*/**",
+    "archive/**",
     "tools/**",
     "export/**",
     "docs/**",
