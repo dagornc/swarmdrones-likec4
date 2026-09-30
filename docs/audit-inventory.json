@@ -1,17 +1,20 @@
 {
- "generatedAt": "2026-09-15T06:49:43.670928+00:00",
+ "generatedAt": "2026-09-30T21:03:50.252799+00:00",
  "projectId": "swarmdrones",
  "counts": {
-  "elements": 97,
-  "relations": 239,
-  "views": 22,
-  "tags": 23,
-  "elementKinds": 13,
-  "relationshipKinds": 14
+  "elements": 506,
+  "relations": 927,
+  "views": 70,
+  "tags": 39,
+  "elementKinds": 68,
+  "relationshipKinds": 46
  },
  "elementKindsUsed": {
+  "algorithm": 15,
+  "specDoc": 128,
+  "sourceCode": 16,
   "hypothesis": 5,
-  "decision": 9,
+  "decision": 16,
   "external": 2,
   "operator": 1,
   "platform": 1,
@@ -19,117 +22,674 @@
   "c2System": 1,
   "cloudSystem": 1,
   "software": 14,
-  "algorithm": 7,
   "risk": 15,
   "blindspot": 16,
-  "component": 24
+  "component": 24,
+  "runtime": 6,
+  "deploymentUnit": 5,
+  "system": 1,
+  "finding": 80,
+  "message": 18,
+  "factSheet": 6,
+  "capability": 8,
+  "function": 19,
+  "drone": 1,
+  "flightController": 1,
+  "companionComputer": 1,
+  "sensor": 6,
+  "actuator": 2,
+  "networkDevice": 2,
+  "computeNode": 1,
+  "protocol": 1,
+  "policy": 5,
+  "scientificPaper": 8,
+  "test": 4,
+  "channel": 4,
+  "scenario": 10,
+  "state": 16,
+  "interface": 7,
+  "application": 5,
+  "zoneSemantic": 6,
+  "worldEntity": 7,
+  "sceneCategory": 4,
+  "worldState": 10,
+  "renderRule": 6
  },
  "elementsByKind": {
+  "actuator": [
+   {
+    "id": "refDrone.propulsion",
+    "title": "HW_PROP — Propulsion",
+    "path": "refDrone.propulsion",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "evidence",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Actuator"
+   },
+   {
+    "id": "refDrone.servos",
+    "title": "HW_SRV — Actionneurs de mission",
+    "path": "refDrone.servos",
+    "parent": null,
+    "tags": [
+     "best-effort",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "evidence",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Actuator"
+   }
+  ],
   "algorithm": [
    {
-    "id": "AlgorithmsPerceptionFusionEKFUKF",
-    "title": "Perception et fusion (EKF/UKF local + pistes Edge)",
-    "path": "AlgorithmsPerceptionFusionEKFUKF",
+    "id": "algTaskAllocation",
+    "title": "ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA v3)",
+    "path": "algTaskAllocation",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "sourceDocs",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsNavigationGNSSDegradeEKFVIO",
-    "title": "Navigation GNSS degrade (EKF + bascule VIO)",
-    "path": "AlgorithmsNavigationGNSSDegradeEKFVIO",
+    "id": "algConsensus",
+    "title": "ALG_CONSENSUS — Consensus distribue",
+    "path": "algConsensus",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsTaskAllocationCBBA",
-    "title": "Allocation par encheres (CBBA)",
-    "path": "AlgorithmsTaskAllocationCBBA",
+    "id": "algFormationControl",
+    "title": "ALG_FORMATION_CONTROL — Controle de formation",
+    "path": "algFormationControl",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsCoordinationCRDTLWW",
-    "title": "Coordination sous partition (CRDT / LWW + horloges logiques)",
-    "path": "AlgorithmsCoordinationCRDTLWW",
+    "id": "algLeaderElection",
+    "title": "ALG_LEADER_ELECTION — Election de leader",
+    "path": "algLeaderElection",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsPlanificationWaypointsMPC",
-    "title": "Planification waypoints + MPC court horizon",
-    "path": "AlgorithmsPlanificationWaypointsMPC",
+    "id": "algPerceptionFusion",
+    "title": "ALG_PERCEPTION_FUSION — Fusion multi-capteurs (EKF/UKF)",
+    "path": "algPerceptionFusion",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsEvitementCollisionCBF",
-    "title": "Evitement de collision (Control Barrier Functions)",
-    "path": "AlgorithmsEvitementCollisionCBF",
+    "id": "algNavigationGNSSDegrade",
+    "title": "ALG_NAV_GNSS_DEGRADE — Navigation sous GNSS degrade",
+    "path": "algNavigationGNSSDegrade",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
    },
    {
-    "id": "AlgorithmsSureteReglesCBF",
-    "title": "Surete embarquee (regles pre-approuvees + CBF)",
-    "path": "AlgorithmsSureteReglesCBF",
+    "id": "algCollisionAvoidance",
+    "title": "ALG_COLLISION_AVOIDANCE — Evitement de collision (CBF)",
+    "path": "algCollisionAvoidance",
     "parent": null,
-    "tags": [],
+    "tags": [
+     "algorithm"
+    ],
     "metadataKeys": [
+     "category",
+     "contraintes",
      "evidence",
-     "fonction",
-     "maturite",
-     "robustesse_lien"
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
     ],
     "hasDescription": true,
     "notation": "Algorithme"
+   },
+   {
+    "id": "algSafetyRules",
+    "title": "ALG_SAFETY_RULES — Surete par regles pre-approuvees",
+    "path": "algSafetyRules",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algPathPlanning",
+    "title": "ALG_PATH_PLANNING — Planification de trajectoire (waypoints + MPC)",
+    "path": "algPathPlanning",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "variantes",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algHealthMonitoring",
+    "title": "ALG_HEALTH_MONITORING — Surveillance d etat et detection de faute",
+    "path": "algHealthMonitoring",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algEnergyAware",
+    "title": "ALG_ENERGY_AWARE — Planification sensible a l energie",
+    "path": "algEnergyAware",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algEventTriggeredComm",
+    "title": "ALG_EVENT_TRIGGERED_COMM — Communication declenchee par evenement",
+    "path": "algEventTriggeredComm",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algCooperativeLocalization",
+    "title": "ALG_COOPERATIVE_LOCALIZATION — Localisation cooperative inter-agents",
+    "path": "algCooperativeLocalization",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algFaultTolerantControlAlloc",
+    "title": "ALG_FAULT_TOLERANT_CONTROL_ALLOC — Allocation de commande tolérante aux fautes",
+    "path": "algFaultTolerantControlAlloc",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   },
+   {
+    "id": "algJammingResilientMode",
+    "title": "ALG_JAMMING_RESILIENT_MODE — Mode double coopératif/autonome sous brouillage",
+    "path": "algJammingResilientMode",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "category",
+     "contraintes",
+     "evidence",
+     "evidenceLevel",
+     "executionMode",
+     "hypotheses",
+     "implementationStatus",
+     "inputs",
+     "maturity",
+     "maturityLevel",
+     "metrics",
+     "outputs",
+     "parameters",
+     "purpose",
+     "references",
+     "relatedComponents",
+     "relatedMessages",
+     "repository",
+     "state",
+     "tbd",
+     "variantes",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Algorithme"
+   }
+  ],
+  "application": [
+   {
+    "id": "consSimulator",
+    "title": "Simulateur (consommateur)",
+    "path": "consSimulator",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consomme",
+     "fournit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Application"
+   },
+   {
+    "id": "consBlender",
+    "title": "Blender (consommateur)",
+    "path": "consBlender",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consomme",
+     "fournit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Application"
+   },
+   {
+    "id": "consWeb3D",
+    "title": "Moteur Web 3D (consommateur)",
+    "path": "consWeb3D",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consomme",
+     "fournit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Application"
+   },
+   {
+    "id": "consPedago",
+    "title": "Environnement pedagogique (consommateur)",
+    "path": "consPedago",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consomme",
+     "fournit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Application"
+   },
+   {
+    "id": "consTwin",
+    "title": "Jumeau numerique (consommateur)",
+    "path": "consTwin",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consomme",
+     "fournit",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Application"
    }
   ],
   "blindspot": [
@@ -374,6 +934,194 @@
     "notation": "C2 (supervision)"
    }
   ],
+  "capability": [
+   {
+    "id": "capFly",
+    "title": "CAP_FLY — Voler et se maintenir en vol",
+    "path": "capFly",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capPerceive",
+    "title": "CAP_PERCEIVE — Percevoir et se situer",
+    "path": "capPerceive",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capDecide",
+    "title": "CAP_DECIDE — Decider et reagir",
+    "path": "capDecide",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capCooperate",
+    "title": "CAP_COOPERATE — Cooperer en essaim",
+    "path": "capCooperate",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capCommunicate",
+    "title": "CAP_COMMUNICATE — Communiquer",
+    "path": "capCommunicate",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capSurvive",
+    "title": "CAP_SURVIVE — Survivre aux pannes",
+    "path": "capSurvive",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capObserve",
+    "title": "CAP_OBSERVE — Etre observe et expliquee",
+    "path": "capObserve",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   },
+   {
+    "id": "capCommand",
+    "title": "CAP_COMMAND — Etre commande",
+    "path": "capCommand",
+    "parent": null,
+    "tags": [
+     "capability"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "sans_lien"
+    ],
+    "hasDescription": true,
+    "notation": "Capability"
+   }
+  ],
+  "channel": [
+   {
+    "id": "chMesh",
+    "title": "CH_MESH — canal inter-agents",
+    "path": "chMesh",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "disponibilite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Channel"
+   },
+   {
+    "id": "chCommand",
+    "title": "CH_CMD — canal de commandement",
+    "path": "chCommand",
+    "parent": null,
+    "tags": [
+     "message",
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Channel"
+   },
+   {
+    "id": "chLocal",
+    "title": "CH_LOCAL — bus interne du drone",
+    "path": "chLocal",
+    "parent": null,
+    "tags": [
+     "message",
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Channel"
+   },
+   {
+    "id": "chCloud",
+    "title": "CH_CLOUD — canal montant differe",
+    "path": "chCloud",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Channel"
+   }
+  ],
   "cloudSystem": [
    {
     "id": "cloud",
@@ -390,10 +1138,32 @@
     "notation": "Cloud (hors boucle)"
    }
   ],
+  "companionComputer": [
+   {
+    "id": "refDrone.companion",
+    "title": "HW_COMPANION — Calcul de bord non temps reel",
+    "path": "refDrone.companion",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "evidence",
+     "role",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Companion Computer"
+   }
+  ],
   "component": [
    {
     "id": "onboard.sensorsHAL",
-    "title": "onboard.sensors-hal",
+    "title": "Interfaces capteurs",
     "path": "onboard.sensorsHAL",
     "parent": null,
     "tags": [
@@ -410,7 +1180,7 @@
    },
    {
     "id": "onboard.perception",
-    "title": "onboard.perception",
+    "title": "Perception et localisation",
     "path": "onboard.perception",
     "parent": null,
     "tags": [
@@ -427,7 +1197,7 @@
    },
    {
     "id": "onboard.autopilot",
-    "title": "onboard.autopilot",
+    "title": "Pilotage automatique",
     "path": "onboard.autopilot",
     "parent": null,
     "tags": [
@@ -445,7 +1215,7 @@
    },
    {
     "id": "onboard.safety",
-    "title": "onboard.safety",
+    "title": "Garde-fous de sûreté",
     "path": "onboard.safety",
     "parent": null,
     "tags": [
@@ -462,7 +1232,7 @@
    },
    {
     "id": "onboard.mission",
-    "title": "onboard.mission",
+    "title": "Exécution de mission",
     "path": "onboard.mission",
     "parent": null,
     "tags": [
@@ -480,7 +1250,7 @@
    },
    {
     "id": "onboard.taskAuction",
-    "title": "onboard.task-auction",
+    "title": "Allocation locale des tâches",
     "path": "onboard.taskAuction",
     "parent": null,
     "tags": [
@@ -497,7 +1267,7 @@
    },
    {
     "id": "onboard.health",
-    "title": "onboard.health",
+    "title": "Diagnostic de santé",
     "path": "onboard.health",
     "parent": null,
     "tags": [
@@ -513,7 +1283,7 @@
    },
    {
     "id": "onboard.energy",
-    "title": "onboard.energy",
+    "title": "Gestion de l’énergie",
     "path": "onboard.energy",
     "parent": null,
     "tags": [
@@ -529,7 +1299,7 @@
    },
    {
     "id": "onboard.telemetry",
-    "title": "onboard.telemetry",
+    "title": "Télémétrie priorisée",
     "path": "onboard.telemetry",
     "parent": null,
     "tags": [
@@ -546,7 +1316,7 @@
    },
    {
     "id": "onboard.linkRadio",
-    "title": "onboard.link",
+    "title": "Communications embarquées",
     "path": "onboard.linkRadio",
     "parent": null,
     "tags": [],
@@ -562,7 +1332,7 @@
    },
    {
     "id": "edge.relay",
-    "title": "edge.relay",
+    "title": "Relais de proximité",
     "path": "edge.relay",
     "parent": null,
     "tags": [
@@ -579,7 +1349,7 @@
    },
    {
     "id": "edge.fusion",
-    "title": "edge.fusion",
+    "title": "Fusion tactique",
     "path": "edge.fusion",
     "parent": null,
     "tags": [
@@ -595,7 +1365,7 @@
    },
    {
     "id": "edge.coordinator",
-    "title": "edge.coordinator",
+    "title": "Coordination locale",
     "path": "edge.coordinator",
     "parent": null,
     "tags": [
@@ -612,7 +1382,7 @@
    },
    {
     "id": "edge.cache",
-    "title": "edge.cache",
+    "title": "Cache de continuité",
     "path": "edge.cache",
     "parent": null,
     "tags": [
@@ -627,7 +1397,7 @@
    },
    {
     "id": "edge.gateway",
-    "title": "edge.gateway",
+    "title": "Passerelle de confiance",
     "path": "edge.gateway",
     "parent": null,
     "tags": [
@@ -643,7 +1413,7 @@
    },
    {
     "id": "c2.gcs",
-    "title": "c2.gcs",
+    "title": "Console opérateur",
     "path": "c2.gcs",
     "parent": null,
     "tags": [
@@ -659,7 +1429,7 @@
    },
    {
     "id": "c2.planner",
-    "title": "c2.planner",
+    "title": "Planification de mission",
     "path": "c2.planner",
     "parent": null,
     "tags": [
@@ -676,7 +1446,7 @@
    },
    {
     "id": "c2.auth",
-    "title": "c2.auth",
+    "title": "Autorisations et audit",
     "path": "c2.auth",
     "parent": null,
     "tags": [
@@ -692,7 +1462,7 @@
    },
    {
     "id": "c2.missionStore",
-    "title": "c2.mission-store",
+    "title": "Registre des missions",
     "path": "c2.missionStore",
     "parent": null,
     "tags": [
@@ -708,7 +1478,7 @@
    },
    {
     "id": "c2.alerting",
-    "title": "c2.alerting",
+    "title": "Notifications opérateur",
     "path": "c2.alerting",
     "parent": null,
     "tags": [
@@ -723,7 +1493,7 @@
    },
    {
     "id": "cloud.twin",
-    "title": "cloud.twin",
+    "title": "Jumeau numérique",
     "path": "cloud.twin",
     "parent": null,
     "tags": [
@@ -739,7 +1509,7 @@
    },
    {
     "id": "cloud.analytics",
-    "title": "cloud.analytics",
+    "title": "Analyse post-mission",
     "path": "cloud.analytics",
     "parent": null,
     "tags": [
@@ -755,7 +1525,7 @@
    },
    {
     "id": "cloud.modelRegistry",
-    "title": "cloud.model-registry",
+    "title": "Registre des modèles",
     "path": "cloud.modelRegistry",
     "parent": null,
     "tags": [
@@ -770,7 +1540,7 @@
    },
    {
     "id": "cloud.replayStore",
-    "title": "cloud.replay-store",
+    "title": "Journaux de rejeu",
     "path": "cloud.replayStore",
     "parent": null,
     "tags": [
@@ -783,6 +1553,26 @@
     ],
     "hasDescription": true,
     "notation": "Composant"
+   }
+  ],
+  "computeNode": [
+   {
+    "id": "refDrone.power",
+    "title": "HW_POWER — Energie et distribution",
+    "path": "refDrone.power",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "tbd",
+     "unite"
+    ],
+    "hasDescription": true,
+    "notation": "Compute Node"
    }
   ],
   "decision": [
@@ -929,6 +1719,266 @@
     ],
     "hasDescription": true,
     "notation": "ADR"
+   },
+   {
+    "id": "decVolSocle",
+    "title": "DE-05 — Socle de vol et niveau d assurance",
+    "path": "decVolSocle",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloque",
+     "critere",
+     "niveau_preuve",
+     "option_a",
+     "option_b",
+     "piege",
+     "porteur",
+     "prerequis",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decPartitionCalcul",
+    "title": "DE-06 — Partition calcul temps reel / non temps reel",
+    "path": "decPartitionCalcul",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloque",
+     "critere",
+     "niveau_preuve",
+     "option_a",
+     "option_b",
+     "option_c",
+     "porteur",
+     "prerequis",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decBandeRadio",
+    "title": "DE-07 — Bande et budget radio a 30 agents",
+    "path": "decBandeRadio",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloque",
+     "critere",
+     "niveau_preuve",
+     "option_a",
+     "option_b",
+     "option_c",
+     "porteur",
+     "prerequis",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decEnergie",
+    "title": "DE-08 — Budget energie et endurance par variante",
+    "path": "decEnergie",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloquant",
+     "bloque",
+     "niveau_preuve",
+     "porteur",
+     "prerequis",
+     "recommandation_producteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decImu",
+    "title": "DE-09 — Classe IMU et autonomie de navigation sans GNSS",
+    "path": "decImu",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloque",
+     "critere",
+     "lien",
+     "niveau_preuve",
+     "option_a",
+     "option_b",
+     "option_c",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decSae",
+    "title": "DE-10 — Architecture sense-and-avoid et portee cible",
+    "path": "decSae",
+    "parent": null,
+    "tags": [
+     "decision",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "bloque",
+     "critere",
+     "niveau_preuve",
+     "norme",
+     "option_a",
+     "option_b",
+     "option_c",
+     "porteur",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   },
+   {
+    "id": "decHzipProtocole",
+    "title": "HZIP-P1 — Cible du protocole H-Zip (depot source)",
+    "path": "decHzipProtocole",
+    "parent": null,
+    "tags": [
+     "decision"
+    ],
+    "metadataKeys": [
+     "critere",
+     "option_a",
+     "option_b",
+     "option_c",
+     "porteur",
+     "prerequis",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "ADR"
+   }
+  ],
+  "deploymentUnit": [
+   {
+    "id": "deplDroneRef",
+    "title": "INST_DRONE_REF — Instance type de plateforme",
+    "path": "deplDroneRef",
+    "parent": null,
+    "tags": [
+     "deployment",
+     "reference"
+    ],
+    "metadataKeys": [
+     "cardinalite_totale",
+     "coordonnees",
+     "instance_de",
+     "repartition",
+     "variante_ref"
+    ],
+    "hasDescription": true,
+    "notation": "Deployment Unit"
+   },
+   {
+    "id": "zoneOnboardDepl",
+    "title": "ZONE_ONBOARD — Embarque par plateforme",
+    "path": "zoneOnboardDepl",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "echelle",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Deployment Unit"
+   },
+   {
+    "id": "zoneEdgeDepl",
+    "title": "ZONE_EDGE — Coordination au sol",
+    "path": "zoneEdgeDepl",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "echelle",
+     "perte_toleree",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Deployment Unit"
+   },
+   {
+    "id": "zoneC2Depl",
+    "title": "ZONE_C2 — Poste de commandement",
+    "path": "zoneC2Depl",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "echelle",
+     "perte_toleree",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Deployment Unit"
+   },
+   {
+    "id": "zoneCloudDepl",
+    "title": "ZONE_CLOUD — Jumeau numerique",
+    "path": "zoneCloudDepl",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "echelle",
+     "perte_toleree",
+     "reseau_requis",
+     "role"
+    ],
+    "hasDescription": true,
+    "notation": "Deployment Unit"
+   }
+  ],
+  "drone": [
+   {
+    "id": "refDrone",
+    "title": "Drone de reference — UAV-R multirotor",
+    "path": "refDrone",
+    "parent": null,
+    "tags": [
+     "hardware",
+     "reference"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source",
+     "variantes"
+    ],
+    "hasDescription": true,
+    "notation": "Drone"
    }
   ],
   "edgeStation": [
@@ -975,6 +2025,1837 @@
     "metadataKeys": [],
     "hasDescription": true,
     "notation": "Externe"
+   }
+  ],
+  "factSheet": [
+   {
+    "id": "factFlightController",
+    "title": "FAIT — Controleur de vol (proposition de reference)",
+    "path": "factFlightController",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "evidence",
+     "piege",
+     "reste_ouvert",
+     "source",
+     "source2",
+     "source3",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   },
+   {
+    "id": "factCompanion",
+    "title": "FAIT — Calcul de bord (options)",
+    "path": "factCompanion",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "evidence",
+     "reste_ouvert",
+     "source",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   },
+   {
+    "id": "factRelativePerception",
+    "title": "FAIT_exp — Perception relative (UWB demontre en vol)",
+    "path": "factRelativePerception",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "extrapolation",
+     "reste_ouvert",
+     "source",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   },
+   {
+    "id": "factRadioLink",
+    "title": "FAIT — Liaison radio (options de bande)",
+    "path": "factRadioLink",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "limite",
+     "reste_ouvert",
+     "source",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   },
+   {
+    "id": "factSae",
+    "title": "FAIT — Sense-and-avoid (borne normative)",
+    "path": "factSae",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "requalification",
+     "source",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   },
+   {
+    "id": "factEnergy",
+    "title": "TBD — Energie (reste ouvert)",
+    "path": "factEnergy",
+    "parent": null,
+    "tags": [
+     "fact",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "applique_a",
+     "bloquant",
+     "evidence",
+     "source",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Fait"
+   }
+  ],
+  "finding": [
+   {
+    "id": "sciGnssDegraded",
+    "title": "SCI-5 — Navigation GNSS-degradee : famille sourcée, eclatée par modalite",
+    "path": "sciGnssDegraded",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEventTriggered",
+    "title": "SCI-6 — Communication intermittente : event-triggered + routage QoS",
+    "path": "sciEventTriggered",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCoopLocalization",
+    "title": "SCI-7 — Perception relative : localisation cooperative dediee",
+    "path": "sciCoopLocalization",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFaultTolerantCtrl",
+    "title": "SCI-8 — Tolerance aux pannes : allocation de commande tolérante (USV)",
+    "path": "sciFaultTolerantCtrl",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciJammingResilience",
+    "title": "SCI-9 — Cyber-resilience sous brouillage (aspect absent du modele)",
+    "path": "sciJammingResilience",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEnergyTaskAlloc",
+    "title": "SCI-10 — Energie : allocation energy-aware sourcee",
+    "path": "sciEnergyTaskAlloc",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciHeteroFormation",
+    "title": "SCI-11 — Formation heterogene UAV-USV : source exacte de la flotte",
+    "path": "sciHeteroFormation",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap5",
+    "title": "GAP-5 — Brouillage reel sur un essaim de 30 en vol",
+    "path": "gap5",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap6",
+    "title": "GAP-6 — Localisation cooperative a 30 plateformes en vol reel",
+    "path": "gap6",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCbba",
+    "title": "SCI-1 — CBBA converge sous retrait d agents / partition",
+    "path": "sciCbba",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "transfere_au_dela_de_30",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCbf",
+    "title": "SCI-2 — CBF : garanties a 30 agents en experience REELLE",
+    "path": "sciCbf",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "compromis",
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "transfere_au_dela_de",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCrdt",
+    "title": "SCI-3 — CRDT LWW converge sous partition reseau",
+    "path": "sciCrdt",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "transfere_au_dela_de",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEkf",
+    "title": "SCI-4 — EKF/UKF distribue cooperatif a ~30 plateformes",
+    "path": "sciEkf",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "transfere_au_dela_de",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciLeaderElection",
+    "title": "SCI-12 — Election de leader : fondations solides, essaim mobile non prouve",
+    "path": "sciLeaderElection",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciSafetyRules",
+    "title": "SCI-13 — Surete par regles : CBF source + socle normatif, composition floue non prouvee",
+    "path": "sciSafetyRules",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciPathPlanning",
+    "title": "SCI-14 — Planification de trajectoire : MPC tube-based source, N=30 conditionnel",
+    "path": "sciPathPlanning",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciHeteroRetrieval",
+    "title": "SCI-15 — Recuperation d objets en GNSS-denied : scenario heterogene aeriens+surface",
+    "path": "sciHeteroRetrieval",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCbfFixedWing",
+    "title": "SCI-16 — CBF d ordre superieur (HOCBF) pour evitement en poursuite-evasion voilure fixe",
+    "path": "sciCbfFixedWing",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciApfWallFollower",
+    "title": "SCI-17 — APF + suivi de mur : echapper aux minima locaux sans carte ni lien",
+    "path": "sciApfWallFollower",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFormationRL",
+    "title": "SCI-18 — Formation multi-UAV par RL : evitement d obstacles, valide sim + reel",
+    "path": "sciFormationRL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFaultDiagnosisAUV",
+    "title": "SCI-19 — Diagnostic de panne : famille data-driven documentee, AUV mono-vehicule seulement",
+    "path": "sciFaultDiagnosisAUV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCentralVsDecentral",
+    "title": "SCI-20 — Centralisation vs decentralisation : arbitrage empiriquement documente",
+    "path": "sciCentralVsDecentral",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCrossDomainASW",
+    "title": "SCI-21 — Recherche anti-sous-marine cooperative inter-domaines : fusion distribuee documentee, simulation seule",
+    "path": "sciCrossDomainASW",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciSwarmUSV",
+    "title": "SCI-22 — Navigation cooperative USV : agregation par potentiels + planification A* documentees",
+    "path": "sciSwarmUSV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCompass",
+    "title": "SCI-23 — Flocking commande en langage : formation et consensus appris via spatial transformer",
+    "path": "sciCompass",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciBeliefGNSS",
+    "title": "SCI-24 — EKF a confiance GNSS adaptative sous degradation urbaine",
+    "path": "sciBeliefGNSS",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciMultiUAVCL",
+    "title": "SCI-25 — Localisation cooperative multi-UAV robuste aux delais et pertes",
+    "path": "sciMultiUAVCL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciRotorFailQSF",
+    "title": "SCI-26 — Feedback quasi-statique sous panne rotor avec securite prouvee",
+    "path": "sciRotorFailQSF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciMetaPolicySpoof",
+    "title": "SCI-27 — Commutation meta de politique sous spoofing GNSS",
+    "path": "sciMetaPolicySpoof",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFormationCBF",
+    "title": "SCI-28 — Formation de UAV avec contraintes de securite CBF sous topologie commutante",
+    "path": "sciFormationCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciDMPCSafetyZones",
+    "title": "SCI-29 — DMPC avec zones de securite adaptatives multi-flottes",
+    "path": "sciDMPCSafetyZones",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciTrajMECDisaster",
+    "title": "SCI-30 — Planification 3D-TSPN + RRT pour la collecte multi-UAV",
+    "path": "sciTrajMECDisaster",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEscapeCBF",
+    "title": "SCI-31 — CBF « escape-aware » sous limites de taux de rotation",
+    "path": "sciEscapeCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCBFQuadFeasibility",
+    "title": "SCI-32 — Faisabilite et singularite des CBF d ordre superieur (equipes de quadrirotors)",
+    "path": "sciCBFQuadFeasibility",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciTargetEnclosing",
+    "title": "SCI-33 — Encercllement de cible par formation a declenchement dynamique",
+    "path": "sciTargetEnclosing",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciQUAVConsensusCstr",
+    "title": "SCI-34 — Consensus de formation QUAV sous contraintes d etat et perturbations",
+    "path": "sciQUAVConsensusCstr",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciMultiLeaderDelay",
+    "title": "SCI-35 — Formation multi-leaders sous delai de communication et declenchement dynamique",
+    "path": "sciMultiLeaderDelay",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFECBF",
+    "title": "SCI-36 — CBF decentralise a faisabilite renforcee (FECBF) en essaim dense",
+    "path": "sciFECBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciTriSAR",
+    "title": "SCI-37 — Coordination taches + evitement : contributions croisees mesurees (TriSAR)",
+    "path": "sciTriSAR",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciPeukertRouting",
+    "title": "SCI-38 — Routage robuste sous depletion d energie non lineaire (loi de Peukert)",
+    "path": "sciPeukertRouting",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciHamiltonianFormation",
+    "title": "SCI-39 — Formation d essaim 3D conservant l energie (mecanique hamiltonienne)",
+    "path": "sciHamiltonianFormation",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCommFreeCoord",
+    "title": "SCI-40 — Coordination multi-UAV sans communication par perception locale",
+    "path": "sciCommFreeCoord",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciConsensusPF",
+    "title": "SCI-41 — Filtre particulaire a consensus distribue pour le suivi de cible (USV)",
+    "path": "sciConsensusPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEventDrivenCBBA",
+    "title": "SCI-42 — CBBA declenche par evenement a communication reduite",
+    "path": "sciEventDrivenCBBA",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCCOPI",
+    "title": "SCI-43 — Allocation en ligne entrelacee a l execution sous connectivite intermittente",
+    "path": "sciCCOPI",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciAPR",
+    "title": "SCI-44 — Replanification preservant l affectation en allocation dynamique",
+    "path": "sciAPR",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciCertFeedbackPath",
+    "title": "SCI-45 — Certificat a risque borne entre allocation et planification multi-UAV",
+    "path": "sciCertFeedbackPath",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciOnboardSLAMNano",
+    "title": "SCI-46 — SLAM embarque et cartographie distribuee par essaim de nano-drones",
+    "path": "sciOnboardSLAMNano",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciUltraLightPlanner",
+    "title": "SCI-47 — Planificateur ultra-leger scalable pour grands essaims",
+    "path": "sciUltraLightPlanner",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEGOSwarm",
+    "title": "SCI-48 — Planification locale distribuee + evitement sans infrastructure",
+    "path": "sciEGOSwarm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciHierNavDecision",
+    "title": "SCI-49 — Decision de navigation hierarchique en environnement contraint en communication",
+    "path": "sciHierNavDecision",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciGRFSwarmOptCtrl",
+    "title": "SCI-50 — Coordination par commande optimale stochastique pour essaims a motif",
+    "path": "sciGRFSwarmOptCtrl",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciPathDeviationCtrl",
+    "title": "SCI-51 — Controle de deviation par A* ameliore + cartographie cooperative",
+    "path": "sciPathDeviationCtrl",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciRHCRMAPF",
+    "title": "SCI-52 — Resolution de collisions a horizon roulant pour MAPF lifelong",
+    "path": "sciRHCRMAPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciGossipADMM",
+    "title": "SCI-53 — Consensus gossip ADMM sous heterogeneite non convexe",
+    "path": "sciGossipADMM",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciConflictPredictDMPC",
+    "title": "SCI-54 — Horizon predictif de conflit variable en DMPC multi-drones",
+    "path": "sciConflictPredictDMPC",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciAgileTargetCapture",
+    "title": "SCI-55 — Capture de cible par formation circulaire + evitement en essaim",
+    "path": "sciAgileTargetCapture",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciHETCEnergyAware",
+    "title": "SCI-56 — Controle hybride event-triggered energy-aware pour micro-drones",
+    "path": "sciHETCEnergyAware",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciJumpPointSwarm",
+    "title": "SCI-57 — Planification de trajectoire multi-UAV par Jump Point Search ameliore",
+    "path": "sciJumpPointSwarm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciBioEventCollision",
+    "title": "SCI-58 — Detection de collision neuromorphique par camera evenementielle",
+    "path": "sciBioEventCollision",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciIC3BF",
+    "title": "SCI-59 — Collision cone CBF ameliore avec rayon de relaxation temps-variant",
+    "path": "sciIC3BF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciDelayStability",
+    "title": "SCI-60 — Critere de stabilite sous retard pour la formation d essaim a voilure fixe",
+    "path": "sciDelayStability",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap1",
+    "title": "GAP-1 — CBBA a 30 sous partition persistante + brouillage",
+    "path": "gap1",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap2",
+    "title": "GAP-2 — CBF heterogene au-dela de 30 en materiel reel",
+    "path": "gap2",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap3",
+    "title": "GAP-3 — CRDT (LWW + OR-Set) sur drones en vol, brouillage RF reel",
+    "path": "gap3",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap4",
+    "title": "GAP-4 — Fusion EKF/UKF hierarchique a >=100 plateformes",
+    "path": "gap4",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap7",
+    "title": "GAP-7 — Election de leader sur 30 drones mobiles sous partition",
+    "path": "gap7",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap8",
+    "title": "GAP-8 — Verification formelle de la composition CBF + regles floues",
+    "path": "gap8",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "gap9",
+    "title": "GAP-9 — Planification multi-agent a N=30 sous partition et brouillage",
+    "path": "gap9",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "evidence",
+     "impact",
+     "priorite",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciLiDARDRLNav",
+    "title": "SCI-61 — Navigation collective sans communication par DRL LiDAR (leader-follower implicite)",
+    "path": "sciLiDARDRLNav",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciDelayFeedbackForm",
+    "title": "SCI-62 — Controle de formation par retour retarde + composantes feedforward",
+    "path": "sciDelayFeedbackForm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciFederatedIDS",
+    "title": "SCI-63 — Detection d intrusion federee legere (knowledge distillation) pour essaims",
+    "path": "sciFederatedIDS",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciKhatibAPF",
+    "title": "SCI-64 — Champs de potentiel artificiels pour l evitement d obstacles temps reel",
+    "path": "sciKhatibAPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciPSO",
+    "title": "SCI-65 — Optimisation par essaim particulaire (PSO)",
+    "path": "sciPSO",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciEventTriggeredDimarogonas",
+    "title": "SCI-66 — Controle evenementiel distribue pour systemes multi-agents",
+    "path": "sciEventTriggeredDimarogonas",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciBroadcastStorm",
+    "title": "SCI-67 — Probleme de tempete de broadcast en reseau ad hoc mobile",
+    "path": "sciBroadcastStorm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciAcousticConstraint",
+    "title": "SCI-68 — Reseaux de capteurs acoustiques sous-marins : contrainte de debit",
+    "path": "sciAcousticConstraint",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciConsensusFramework",
+    "title": "SCI-69 — Consensus et cooperation dans les systemes multi-agents en reseau",
+    "path": "sciConsensusFramework",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciPacketLossStability",
+    "title": "SCI-70 — Robustesse de stabilite des systemes commandes en reseau face aux pertes de paquets",
+    "path": "sciPacketLossStability",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   },
+   {
+    "id": "sciBoids",
+    "title": "SCI-71 — Flocks, herds and schools : modele comportemental distribue (boids)",
+    "path": "sciBoids",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "correction_modele",
+     "niveau_preuve",
+     "source",
+     "verdict"
+    ],
+    "hasDescription": true,
+    "notation": "Finding"
+   }
+  ],
+  "flightController": [
+   {
+    "id": "refDrone.flightCtrl",
+    "title": "HW_FC — Controleur de vol (PX4)",
+    "path": "refDrone.flightCtrl",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "hardware",
+     "fact",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "alim",
+     "autonomie",
+     "criticite",
+     "decision",
+     "ethernet",
+     "evidence",
+     "frequence",
+     "io",
+     "masse",
+     "redondance",
+     "socle",
+     "source",
+     "source_fc",
+     "tbd",
+     "temp"
+    ],
+    "hasDescription": true,
+    "notation": "Flight Controller"
+   }
+  ],
+  "function": [
+   {
+    "id": "fnSensorAcquisition",
+    "title": "FN_SENSOR_ACQUISITION — Acquérir les mesures capteurs",
+    "path": "fnSensorAcquisition",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnStateEstimation",
+    "title": "FN_STATE_ESTIMATION — Estimer l etat de la plateforme",
+    "path": "fnStateEstimation",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnRelativeEstimation",
+    "title": "FN_RELATIVE_ESTIMATION — Estimer la position relative",
+    "path": "fnRelativeEstimation",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnNavigation",
+    "title": "FN_NAVIGATION — Se situer et naviguer",
+    "path": "fnNavigation",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnCollisionAvoidance",
+    "title": "FN_COLLISION_AVOIDANCE — Eviter les collisions",
+    "path": "fnCollisionAvoidance",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "criticite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnSafetyRules",
+    "title": "FN_SAFETY_RULES — Appliquer les regles pre-approuvees",
+    "path": "fnSafetyRules",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "propriete",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnFlightControl",
+    "title": "FN_FLIGHT_CONTROL — Tenir la boucle de vol",
+    "path": "fnFlightControl",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnTaskAllocation",
+    "title": "FN_TASK_ALLOCATION — Repartir les taches",
+    "path": "fnTaskAllocation",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnConsensus",
+    "title": "FN_CONSENSUS — Converger vers un etat commun",
+    "path": "fnConsensus",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnFormationControl",
+    "title": "FN_FORMATION_CONTROL — Tenir la formation",
+    "path": "fnFormationControl",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnPathPlanning",
+    "title": "FN_PATH_PLANNING — Planifier la trajectoire",
+    "path": "fnPathPlanning",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnReconfiguration",
+    "title": "FN_RECONFIGURATION — Se reconfigurer apres une perte",
+    "path": "fnReconfiguration",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnMeshCommunication",
+    "title": "FN_MESH_COMMUNICATION — Communiquer en maillage",
+    "path": "fnMeshCommunication",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnC2Link",
+    "title": "FN_C2_LINK — Lier au commandement",
+    "path": "fnC2Link",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "perte_toleree",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnHealthMonitoring",
+    "title": "FN_HEALTH_MONITORING — Surveiller la sante",
+    "path": "fnHealthMonitoring",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnEnergyManagement",
+    "title": "FN_ENERGY_MANAGEMENT — Gerer l energie",
+    "path": "fnEnergyManagement",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "algo",
+     "capacite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnTelemetry",
+    "title": "FN_TELEMETRY — Emettre la telemetrie",
+    "path": "fnTelemetry",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnDigitalTwin",
+    "title": "FN_DIGITAL_TWIN — Alimenter le jumeau numerique",
+    "path": "fnDigitalTwin",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "role",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
+   },
+   {
+    "id": "fnReplay",
+    "title": "FN_REPLAY — Rejouer une mission",
+    "path": "fnReplay",
+    "parent": null,
+    "tags": [
+     "function"
+    ],
+    "metadataKeys": [
+     "capacite",
+     "evidence",
+     "source",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Function"
    }
   ],
   "hypothesis": [
@@ -1065,6 +3946,527 @@
     "notation": "Hypothese (H*)"
    }
   ],
+  "interface": [
+   {
+    "id": "providesSemantics",
+    "title": "FOURNI par le modele : semantique",
+    "path": "providesSemantics",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "providesTopology",
+    "title": "FOURNI par le modele : topologie logique",
+    "path": "providesTopology",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "providesContracts",
+    "title": "FOURNI par le modele : contrats de comportement",
+    "path": "providesContracts",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "leftToConsumer",
+    "title": "LAISSE au consommateur : spatialisation",
+    "path": "leftToConsumer",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "leftToConsumer2",
+    "title": "LAISSE au consommateur : dynamique temporelle",
+    "path": "leftToConsumer2",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "leftToConsumer3",
+    "title": "LAISSE au consommateur : fidelite capteur",
+    "path": "leftToConsumer3",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Interface"
+   },
+   {
+    "id": "unknownCapability",
+    "title": "NON DEFINI — energie embarquee",
+    "path": "unknownCapability",
+    "parent": null,
+    "tags": [
+     "simulation",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "decision",
+     "impact",
+     "regle"
+    ],
+    "hasDescription": true,
+    "notation": "Interface"
+   }
+  ],
+  "message": [
+   {
+    "id": "msgLinkQuality",
+    "title": "MSG_LINK_QUALITY — qualite de lien / QoS",
+    "path": "msgLinkQuality",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "hzipFrameR",
+    "title": "TRAME R — reactive APF (4 octets)",
+    "path": "hzipFrameR",
+    "parent": null,
+    "tags": [
+     "message",
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "latence_cible",
+     "perte",
+     "producteur",
+     "schema",
+     "taille",
+     "trame"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "hzipFrameS",
+    "title": "TRAME S — strategique PSO (etat complet)",
+    "path": "hzipFrameS",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "latence_cible",
+     "perte",
+     "producteur",
+     "schema",
+     "taille",
+     "trame"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "hzipFrameD",
+    "title": "TRAME D — delta predictif (correction)",
+    "path": "hzipFrameD",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "latence_cible",
+     "perte",
+     "producteur",
+     "schema",
+     "taille",
+     "trame"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "hzipFrameH",
+    "title": "TRAME H — heartbeat de recadrage",
+    "path": "hzipFrameH",
+    "parent": null,
+    "tags": [
+     "message",
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "borne_erreur",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "latence_cible",
+     "perte",
+     "producteur",
+     "schema",
+     "taille",
+     "trame"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgDroneState",
+    "title": "MSG_DRONE_STATE — etat de drone",
+    "path": "msgDroneState",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "evidence",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgHeartbeat",
+    "title": "MSG_HEARTBEAT — battement de vivacite",
+    "path": "msgHeartbeat",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "evidence",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgPositionUpdate",
+    "title": "MSG_POSITION_UPDATE — mise a jour de position",
+    "path": "msgPositionUpdate",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgNeighborState",
+    "title": "MSG_NEIGHBOR_STATE — etat de voisinage",
+    "path": "msgNeighborState",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgTaskBid",
+    "title": "MSG_TASK_BID — enchere de tache",
+    "path": "msgTaskBid",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgTaskAssignment",
+    "title": "MSG_TASK_ASSIGNMENT — attribution de tache",
+    "path": "msgTaskAssignment",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgTrajectoryProposal",
+    "title": "MSG_TRAJECTORY_PROPOSAL — proposition de trajectoire",
+    "path": "msgTrajectoryProposal",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgTrajectoryUpdate",
+    "title": "MSG_TRAJECTORY_UPDATE — mise a jour de trajectoire",
+    "path": "msgTrajectoryUpdate",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgFormationState",
+    "title": "MSG_FORMATION_STATE — etat de la formation",
+    "path": "msgFormationState",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgCollisionAlert",
+    "title": "MSG_COLLISION_ALERT — alerte de collision",
+    "path": "msgCollisionAlert",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "latence_cible",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgMissionCommand",
+    "title": "MSG_MISSION_COMMAND — commande de mission",
+    "path": "msgMissionCommand",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "message"
+    ],
+    "metadataKeys": [
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema",
+     "securite"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgConsensusVote",
+    "title": "MSG_CONSENSUS_VOTE — vote de consensus",
+    "path": "msgConsensusVote",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   },
+   {
+    "id": "msgFailureNotification",
+    "title": "MSG_FAILURE_NOTIFICATION — notification de defaillance",
+    "path": "msgFailureNotification",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "message"
+    ],
+    "metadataKeys": [
+     "angle_mort",
+     "canal",
+     "consommateurs",
+     "criticite",
+     "frequence",
+     "perte",
+     "producteur",
+     "schema"
+    ],
+    "hasDescription": true,
+    "notation": "Message"
+   }
+  ],
+  "networkDevice": [
+   {
+    "id": "refDrone.radioLnk",
+    "title": "HW_RADIO — Lien radio principal",
+    "path": "refDrone.radioLnk",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "tbd",
+     "vulnerabilite"
+    ],
+    "hasDescription": true,
+    "notation": "NetworkDevice"
+   },
+   {
+    "id": "refDrone.netMesh",
+    "title": "HW_MESH — Maillage inter-agents",
+    "path": "refDrone.netMesh",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "NetworkDevice"
+   }
+  ],
   "operator": [
    {
     "id": "operator",
@@ -1091,6 +4493,236 @@
     ],
     "hasDescription": true,
     "notation": "Onboard (x30)"
+   }
+  ],
+  "policy": [
+   {
+    "id": "hzipLayer0",
+    "title": "H-Zip Couche 0 — prediction deterministe",
+    "path": "hzipLayer0",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "borne",
+     "couche",
+     "frequence",
+     "interdit",
+     "latence",
+     "mecanisme",
+     "source",
+     "tolerance"
+    ],
+    "hasDescription": true,
+    "notation": "Policy"
+   },
+   {
+    "id": "hzipLayer1",
+    "title": "H-Zip Couche 1 — reactive APF (anti-collision)",
+    "path": "hzipLayer1",
+    "parent": null,
+    "tags": [
+     "algorithm",
+     "safety-critical"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "couche",
+     "fondement",
+     "frequence",
+     "latence_cible",
+     "source",
+     "tolerance",
+     "trame"
+    ],
+    "hasDescription": true,
+    "notation": "Policy"
+   },
+   {
+    "id": "hzipLayer2",
+    "title": "H-Zip Couche 2 — strategique PSO (convergence)",
+    "path": "hzipLayer2",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "couche",
+     "fondement",
+     "frequence",
+     "latence_cible",
+     "ponderation",
+     "source",
+     "tolerance",
+     "trames"
+    ],
+    "hasDescription": true,
+    "notation": "Policy"
+   },
+   {
+    "id": "hzipLayer3",
+    "title": "H-Zip Couche 3 — cognitive (LLM, lecture seule)",
+    "path": "hzipLayer3",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "couche",
+     "frequence",
+     "interdit",
+     "latence_cible",
+     "modele",
+     "obligatoire",
+     "source",
+     "tolerance"
+    ],
+    "hasDescription": true,
+    "notation": "Policy"
+   },
+   {
+    "id": "hzipTopology",
+    "title": "H-Zip — topologie hierarchique (Hubs USV / terminaux)",
+    "path": "hzipTopology",
+    "parent": null,
+    "tags": [
+     "algorithm"
+    ],
+    "metadataKeys": [
+     "agregat",
+     "broadcast",
+     "fondement",
+     "hubs",
+     "source",
+     "spof",
+     "terminaux"
+    ],
+    "hasDescription": true,
+    "notation": "Policy"
+   }
+  ],
+  "protocol": [
+   {
+    "id": "hzip",
+    "title": "H-Zip v2.2 (Dream-Zip) — protocole de coordination d essaim heterogene",
+    "path": "hzip",
+    "parent": null,
+    "tags": [
+     "message"
+    ],
+    "metadataKeys": [
+     "contrainte",
+     "couches",
+     "documentNormatif",
+     "nature",
+     "portee",
+     "principe",
+     "source",
+     "statut",
+     "tbd",
+     "trames",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Protocol"
+   }
+  ],
+  "renderRule": [
+   {
+    "id": "ruleNoInventId",
+    "title": "REG-1 — Ne jamais inventer d identifiant",
+    "path": "ruleNoInventId",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
+   },
+   {
+    "id": "ruleNoInventEnergy",
+    "title": "REG-2 — Ne pas afficher de valeur d energie",
+    "path": "ruleNoInventEnergy",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
+   },
+   {
+    "id": "ruleNoInventRadio",
+    "title": "REG-3 — Ne pas afficher de portee radio chiffree",
+    "path": "ruleNoInventRadio",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
+   },
+   {
+    "id": "ruleNoInventRange",
+    "title": "REG-4 — Porter la limite N=30",
+    "path": "ruleNoInventRange",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
+   },
+   {
+    "id": "ruleNoInventCount",
+    "title": "REG-5 — 30 operationnels + 1 reference distincte",
+    "path": "ruleNoInventCount",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
+   },
+   {
+    "id": "ruleSemanticOnly",
+    "title": "REG-6 — Aucune position issue du modele semantique",
+    "path": "ruleSemanticOnly",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Rule"
    }
   ],
   "risk": [
@@ -1350,6 +4982,647 @@
     "notation": "Risque (R*)"
    }
   ],
+  "runtime": [
+   {
+    "id": "rtFlight",
+    "title": "RT_FLIGHT — Runtime de vol temps reel",
+    "path": "rtFlight",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "determinisme",
+     "noeud_hote",
+     "os",
+     "reseau_requis",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   },
+   {
+    "id": "rtCompanion",
+    "title": "RT_COMPANION — Runtime de calcul de bord",
+    "path": "rtCompanion",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "determinisme",
+     "noeud_hote",
+     "os",
+     "reseau_requis",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   },
+   {
+    "id": "rtSensorsHAL",
+    "title": "RT_SENSORS — Runtime capteurs / HAL",
+    "path": "rtSensorsHAL",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "noeud_hote",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   },
+   {
+    "id": "rtEdge",
+    "title": "RT_EDGE — Runtime de coordination Edge",
+    "path": "rtEdge",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "contrainte",
+     "criticite",
+     "noeud_hote",
+     "os",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   },
+   {
+    "id": "rtC2",
+    "title": "RT_C2 — Runtime de commandement",
+    "path": "rtC2",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "noeud_hote",
+     "os",
+     "reseau_requis"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   },
+   {
+    "id": "rtCloud",
+    "title": "RT_CLOUD — Runtime cloud (jumeau numerique)",
+    "path": "rtCloud",
+    "parent": null,
+    "tags": [
+     "deployment"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "noeud_hote",
+     "os",
+     "reseau_requis",
+     "role"
+    ],
+    "hasDescription": true,
+    "notation": "Runtime"
+   }
+  ],
+  "scenario": [
+   {
+    "id": "scn01",
+    "title": "SCN-01 — Mission nominale sans C2 ni cloud",
+    "path": "scn01",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "acteurs",
+     "capacites",
+     "critiques",
+     "invariants",
+     "resultat_attendu",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn02",
+    "title": "SCN-02 — Perte du lien de commandement",
+    "path": "scn02",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn03",
+    "title": "SCN-03 — Perte d un agent et reconfiguration",
+    "path": "scn03",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn04",
+    "title": "SCN-04 — Partition du reseau",
+    "path": "scn04",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "invariants",
+     "resultat_attendu",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn05",
+    "title": "SCN-05 — GNSS degrade / denied",
+    "path": "scn05",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn06",
+    "title": "SCN-06 — Evitement de collision",
+    "path": "scn06",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "messages",
+     "resultat_attendu"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn07",
+    "title": "SCN-07 — Saturation du spectre / budget radio",
+    "path": "scn07",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn08",
+    "title": "SCN-08 — Energie critique",
+    "path": "scn08",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn09",
+    "title": "SCN-09 — Charge dense et perception degradee",
+    "path": "scn09",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "declencheur",
+     "invariants",
+     "resultat_attendu"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   },
+   {
+    "id": "scn10",
+    "title": "SCN-10 — Perte du leader et reconfiguration a 30",
+    "path": "scn10",
+    "parent": null,
+    "tags": [
+     "scenario",
+     "hypothese"
+    ],
+    "metadataKeys": [
+     "algorithmes",
+     "capacites",
+     "critiques",
+     "echelle",
+     "invariants",
+     "resultat_attendu",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Scenario"
+   }
+  ],
+  "sceneCategory": [
+   {
+    "id": "catAerial",
+    "title": "Air",
+    "path": "catAerial",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "consiste_de"
+    ],
+    "hasDescription": true,
+    "notation": "Category"
+   },
+   {
+    "id": "catSurface",
+    "title": "Surface",
+    "path": "catSurface",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "consiste_de"
+    ],
+    "hasDescription": true,
+    "notation": "Category"
+   },
+   {
+    "id": "catCommand",
+    "title": "Commandement et observation",
+    "path": "catCommand",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "consiste_de"
+    ],
+    "hasDescription": true,
+    "notation": "Category"
+   },
+   {
+    "id": "catReference",
+    "title": "Reference",
+    "path": "catReference",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "consiste_de"
+    ],
+    "hasDescription": true,
+    "notation": "Category"
+   }
+  ],
+  "scientificPaper": [
+   {
+    "id": "paperKhatib1986",
+    "title": "Khatib 1986 — Real-Time Obstacle Avoidance (APF)",
+    "path": "paperKhatib1986",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperKennedy1995",
+    "title": "Kennedy & Eberhart 1995 — Particle Swarm Optimization",
+    "path": "paperKennedy1995",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "conference",
+     "doi",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperDimarogonas2012",
+    "title": "Dimarogonas et al. 2012 — Distributed Event-Triggered Control",
+    "path": "paperDimarogonas2012",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperTseng2002",
+    "title": "Tseng et al. 2002 — The Broadcast Storm Problem",
+    "path": "paperTseng2002",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperAkyildiz2005",
+    "title": "Akyildiz et al. 2005 — Underwater Acoustic Sensor Networks",
+    "path": "paperAkyildiz2005",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperOlfatiSaber2007",
+    "title": "Olfati-Saber et al. 2007 — Consensus and Cooperation",
+    "path": "paperOlfatiSaber2007",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperHuYan2007",
+    "title": "Hu & Yan 2007 — Stability Robustness under Packet Loss",
+    "path": "paperHuYan2007",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "doi",
+     "revue",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   },
+   {
+    "id": "paperReynolds1987",
+    "title": "Reynolds 1987 — Flocks, Herds and Schools",
+    "path": "paperReynolds1987",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "apport",
+     "auteurs",
+     "conference",
+     "doi",
+     "statut",
+     "usage"
+    ],
+    "hasDescription": true,
+    "notation": "Paper"
+   }
+  ],
+  "sensor": [
+   {
+    "id": "refDrone.imu",
+    "title": "HW_IMU — Centrale inertielle",
+    "path": "refDrone.imu",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "hardware",
+     "tbd"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   },
+   {
+    "id": "refDrone.gnss",
+    "title": "HW_GNSS — Positionnement satellite",
+    "path": "refDrone.gnss",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "frequence",
+     "source",
+     "vulnerabilite"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   },
+   {
+    "id": "refDrone.odometry",
+    "title": "HW_ODOM — Odometrie / barometre / magnetometre",
+    "path": "refDrone.odometry",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "limite"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   },
+   {
+    "id": "refDrone.perceptionRel",
+    "title": "HW_REL — Perception relative inter-agents",
+    "path": "refDrone.perceptionRel",
+    "parent": null,
+    "tags": [
+     "mission-critical",
+     "hardware",
+     "tbd",
+     "extrap"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   },
+   {
+    "id": "refDrone.saeSensor",
+    "title": "HW_SAE — Detection d obstacles (sense-and-avoid)",
+    "path": "refDrone.saeSensor",
+    "parent": null,
+    "tags": [
+     "safety-critical",
+     "hardware",
+     "tbd",
+     "extrap"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "delai_action",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   },
+   {
+    "id": "refDrone.healthSensor",
+    "title": "HW_HEALTH — Surveillance materielle",
+    "path": "refDrone.healthSensor",
+    "parent": null,
+    "tags": [
+     "best-effort",
+     "hardware"
+    ],
+    "metadataKeys": [
+     "criticite",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "Sensor"
+   }
+  ],
   "software": [
    {
     "id": "AutopilotPX4",
@@ -1561,19 +5834,3526 @@
     "hasDescription": true,
     "notation": "COTS / OSS"
    }
+  ],
+  "sourceCode": [
+   {
+    "id": "srcAlgTaskAllocation",
+    "title": "alg-task-allocation — portage Rust de ALG_TASK_ALLOCATION",
+    "path": "srcAlgTaskAllocation",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "performance",
+     "scenariosVerifies",
+     "statut",
+     "tests",
+     "variantes",
+     "versionsImplementation"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcConsensusRs",
+    "title": "consensus_rs — portage Rust de ALG_CONSENSUS",
+    "path": "srcConsensusRs",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "branches",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "nature",
+     "notesVersions",
+     "parite",
+     "performance",
+     "statut",
+     "tests",
+     "versionsImplementation"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcFormationControl",
+    "title": "alg-formation-control — portage Rust de ALG_FORMATION_CONTROL",
+    "path": "srcFormationControl",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcLeaderElection",
+    "title": "alg-leader-election — portage Rust de ALG_LEADER_ELECTION",
+    "path": "srcLeaderElection",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcPerceptionFusion",
+    "title": "alg-perception-fusion — portage Rust de ALG_PERCEPTION_FUSION",
+    "path": "srcPerceptionFusion",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcNavigationGNSSDegrade",
+    "title": "alg-nav-gnss-degrade — portage Rust de ALG_NAV_GNSS_DEGRADE",
+    "path": "srcNavigationGNSSDegrade",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcCollisionAvoidance",
+    "title": "alg-collision-avoidance — portage Rust de ALG_COLLISION_AVOIDANCE",
+    "path": "srcCollisionAvoidance",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcSafetyRules",
+    "title": "alg-safety-rules — portage Rust de ALG_SAFETY_RULES",
+    "path": "srcSafetyRules",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcPathPlanning",
+    "title": "alg-path-planning — portage Rust de ALG_PATH_PLANNING",
+    "path": "srcPathPlanning",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcHealthMonitoring",
+    "title": "alg-health-monitoring — portage Rust de ALG_HEALTH_MONITORING",
+    "path": "srcHealthMonitoring",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcEnergyAware",
+    "title": "alg-energy-aware — portage Rust de ALG_ENERGY_AWARE",
+    "path": "srcEnergyAware",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcEventTriggeredComm",
+    "title": "alg-event-triggered-comm — portage Rust de ALG_EVENT_TRIGGERED_COMM",
+    "path": "srcEventTriggeredComm",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcCooperativeLocalization",
+    "title": "alg-cooperative-localization — portage Rust de ALG_COOPERATIVE_LOCALIZATION",
+    "path": "srcCooperativeLocalization",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcFaultTolerantControlAlloc",
+    "title": "alg-fault-tolerant-control-alloc — portage Rust de ALG_FAULT_TOLERANT_CONTROL_ALLOC",
+    "path": "srcFaultTolerantControlAlloc",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcJammingResilientMode",
+    "title": "alg-jamming-resilient-mode — portage Rust de ALG_JAMMING_RESILIENT_MODE",
+    "path": "srcJammingResilientMode",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "licence",
+     "limites",
+     "nature",
+     "parite",
+     "specPdf",
+     "statut",
+     "tests"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   },
+   {
+    "id": "srcAlgProtocole",
+    "title": "alg-protocole — implementation de reference de H-Zip v2.2",
+    "path": "srcAlgProtocole",
+    "parent": null,
+    "tags": [
+     "source-code"
+    ],
+    "metadataKeys": [
+     "depot",
+     "depotPrincipal",
+     "integration",
+     "langage",
+     "nature",
+     "protocole",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "SourceCode"
+   }
+  ],
+  "specDoc": [
+   {
+    "id": "specTaskAllocation",
+    "title": "Specification detaillee — ALG_TASK_ALLOCATION (4 versions)",
+    "path": "specTaskAllocation",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specConsensus",
+    "title": "Specification detaillee — ALG_CONSENSUS (6 versions)",
+    "path": "specConsensus",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "notesValidation",
+     "statut",
+     "versionAnterieure",
+     "versionCourante",
+     "versionRejetee",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specFormationControl",
+    "title": "Specification detaillee — ALG_FORMATION_CONTROL (v1)",
+    "path": "specFormationControl",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specLeaderElection",
+    "title": "Specification detaillee — ALG_LEADER_ELECTION (v2)",
+    "path": "specLeaderElection",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specPerceptionFusion",
+    "title": "Specification detaillee — ALG_PERCEPTION_FUSION (v1)",
+    "path": "specPerceptionFusion",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specNavigationGNSSDegrade",
+    "title": "Specification detaillee — ALG_NAV_GNSS_DEGRADE (v2)",
+    "path": "specNavigationGNSSDegrade",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specCollisionAvoidance",
+    "title": "Specification detaillee — ALG_COLLISION_AVOIDANCE (v1)",
+    "path": "specCollisionAvoidance",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specSafetyRules",
+    "title": "Specification detaillee — ALG_SAFETY_RULES (v1)",
+    "path": "specSafetyRules",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specPathPlanning",
+    "title": "Specification detaillee — ALG_PATH_PLANNING (v1)",
+    "path": "specPathPlanning",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specHealthMonitoring",
+    "title": "Specification detaillee — ALG_HEALTH_MONITORING (v1)",
+    "path": "specHealthMonitoring",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specEnergyAware",
+    "title": "Specification detaillee — ALG_ENERGY_AWARE (v1)",
+    "path": "specEnergyAware",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specEventTriggeredComm",
+    "title": "Specification detaillee — ALG_EVENT_TRIGGERED_COMM (v1)",
+    "path": "specEventTriggeredComm",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specCooperativeLocalization",
+    "title": "Specification detaillee — ALG_COOPERATIVE_LOCALIZATION (v1)",
+    "path": "specCooperativeLocalization",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specFaultTolerantControlAlloc",
+    "title": "Specification detaillee — ALG_FAULT_TOLERANT_CONTROL_ALLOC (v1)",
+    "path": "specFaultTolerantControlAlloc",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specJammingResilientMode",
+    "title": "Specification detaillee — ALG_JAMMING_RESILIENT_MODE (v1)",
+    "path": "specJammingResilientMode",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "nature",
+     "statut",
+     "sysml",
+     "validation",
+     "versionCourante",
+     "versions"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcSwarmRaft",
+    "title": "Dev, Madhwal, Shevelo, Osinenko, Yanovich (2025) — SwarmRaft",
+    "path": "srcSwarmRaft",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcEventTrigConsensus",
+    "title": "MDPI Sensors 24(2):339 (2024) — Adaptive Event-Triggered Consensus",
+    "path": "srcEventTrigConsensus",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcETPBBA",
+    "title": "Cong, Li, Zhu, Wang (2026) — ET-PBBA, Drones 10(9):684",
+    "path": "srcETPBBA",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "n_reel",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcSTDCL",
+    "title": "Drones 10(1):69 (2026) — ST-DCL, localisation cooperative d essaims dynamiques",
+    "path": "srcSTDCL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcUSVCoopLoc",
+    "title": "Fu, Wen, Shen (2026) — Cooperative Localization of USV, IEEE T-IE",
+    "path": "srcUSVCoopLoc",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcFTCAllocUSV",
+    "title": "Thai, Bang, Ha, Kim, Youn (2026) — Fault-tolerant control allocation USV, Ocean Eng.",
+    "path": "srcFTCAllocUSV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcADMOS",
+    "title": "Hassan et al. (2026) — ADMOS, swarm control under communication jamming",
+    "path": "srcADMOS",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcZeroTrust",
+    "title": "Gonzales et al. (2026) — Zero-Trust for robotic fleets",
+    "path": "srcZeroTrust",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHeteroUAVUSV",
+    "title": "Zhang, Zhong, Song (2026) — Formation heterogene UAV-USV, ISA Trans.",
+    "path": "srcHeteroUAVUSV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcQAR",
+    "title": "IJETT 74(8) (2026) — QAR, QoS-aware FANET routing",
+    "path": "srcQAR",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcSlamSurvey",
+    "title": "Survey SLAM/odometry for GPS-denied environments",
+    "path": "srcSlamSurvey",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcVisFormGPSDeg",
+    "title": "Vision-Based Leader-Follower Formation in GPS-Degraded (2017/2026)",
+    "path": "srcVisFormGPSDeg",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "arxiv",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "specHzip",
+    "title": "Specification H-Zip v2.2 (Dream-Zip) — document normatif",
+    "path": "specHzip",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "bibliographie",
+     "date",
+     "figures",
+     "format",
+     "sections",
+     "statut",
+     "tableaux",
+     "titre",
+     "valeurs",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBBA",
+    "title": "Choi, Brunet, How (2009) — Consensus-Based Decentralized Auctions",
+    "path": "srcCBBA",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "corpus",
+     "nature",
+     "statut",
+     "type"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBBA24",
+    "title": "Bi et al. (2024) — Improved CBBA, Drones 8(8):345",
+    "path": "srcCBBA24",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "evidence",
+     "n_reel",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDegraded30",
+    "title": "Integrated Consensus Framework for a Degraded UAV Fleet (2025)",
+    "path": "srcDegraded30",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "evidence",
+     "n",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCAHCBF",
+    "title": "Kim et al. (2026) — CA-HCBF, arXiv:2604.13245",
+    "path": "srcCAHCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "evidence",
+     "n_reel",
+     "n_sim",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCRDT",
+    "title": "Shapiro, Preguica, Baquero, Zawirski (2011) — CRDT, INRIA RR-7687",
+    "path": "srcCRDT",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "evidence",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcKilobot",
+    "title": "Swarm Intelligence (2025) — Global coordinate system, up to 200 Kilobots",
+    "path": "srcKilobot",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "evidence",
+     "n_reel",
+     "nature"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcUUV",
+    "title": "Survey UUV Clusters — Robust State Estimation and Information Fusion",
+    "path": "srcUUV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCrossDomainASW",
+    "title": "Wang et al. (2024) — Recherche anti-sous-marine cooperative inter-domaines",
+    "path": "srcCrossDomainASW",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcSwarmUSV",
+    "title": "Singh (2019) — Cooperative Swarm Optimisation of Unmanned Surface Vehicles (these, Plymouth)",
+    "path": "srcSwarmUSV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDigitalTwinZEST",
+    "title": "Digital Twin Concept in the Zero Emission Sea Transporter (2024)",
+    "path": "srcDigitalTwinZEST",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCoverageCentral",
+    "title": "Jamshidpey et al. (2025) — Centralization vs. decentralization in multi-robot sweep coverage",
+    "path": "srcCoverageCentral",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBFMultiFixed",
+    "title": "CBF-Based Collision Avoidance for Multi-Fixed-Wing UAV Pursuit (2024)",
+    "path": "srcCBFMultiFixed",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHeteroRetrieval",
+    "title": "Chen, Irfan, Yu et al. (2025) — Heterogeneous Multirobot System for Object Retrieval in GNSS-Denied Maritime, J. Field Robotics",
+    "path": "srcHeteroRetrieval",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcAPFWall",
+    "title": "Hybrid Artificial Potential Field with Wall-Follower (2024)",
+    "path": "srcAPFWall",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcFormationRL",
+    "title": "Multi-UAV Formation Control with Obstacle Avoidance via RL (2024)",
+    "path": "srcFormationRL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcExplainableMARL",
+    "title": "Organizationally-Oriented Explainability and Control in MARL (AAMAS 2025)",
+    "path": "srcExplainableMARL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHMARLCBF",
+    "title": "HMARL-CBF — Hierarchical MARL with Control Barrier Functions (NeurIPS 2025)",
+    "path": "srcHMARLCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcAUVFaultDiag",
+    "title": "Chen, Xu, Chen, Tarasiuk (2025) — AUV Fault Diagnosis Based on Multidimensional Temporal Classification Transformer",
+    "path": "srcAUVFaultDiag",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "confiance",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcRaft",
+    "title": "Ongaro, Ousterhout (2014) — Raft, USENIX ATC",
+    "path": "srcRaft",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcBully",
+    "title": "Garcia-Molina (1982) — Bully algorithm, IEEE T-Comp.",
+    "path": "srcBully",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcPaxos",
+    "title": "Lamport (1998) — The Part-Time Parliament (Paxos)",
+    "path": "srcPaxos",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBFTheory",
+    "title": "Ames et al. (2019) — Control Barrier Functions, ECC",
+    "path": "srcCBFTheory",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBFSwarm",
+    "title": "Wang, Ames, Egerstedt (2016) — Safety barrier certificates for heterogeneous multi-robot systems, ACC",
+    "path": "srcCBFSwarm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDMPCTube",
+    "title": "Dai, Liao, Chen (2026) — Tube-based DMPC, Drones 10(3):177",
+    "path": "srcDMPCTube",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcImpedanceDiffusion",
+    "title": "Batool et al. (2026) — ImpedanceDiffusion, arXiv:2603.09031",
+    "path": "srcImpedanceDiffusion",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDiff4D",
+    "title": "Li et al. (2026) — Diffusion 4D + DNMPC, arXiv:2606.31197",
+    "path": "srcDiff4D",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcPathMedUAV",
+    "title": "Scientific Reports (2026) — Benchmark path planning UAV medical",
+    "path": "srcPathMedUAV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcVAPF",
+    "title": "Machines 13(7):600 (2026) — VAPF + RL (TD3)",
+    "path": "srcVAPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHRLMPC",
+    "title": "Studt, Schildbach (2025) — RL hierarchique + MPC, arXiv:2509.15799",
+    "path": "srcHRLMPC",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcSwarmGPT",
+    "title": "Schuck et al. (2024) — SwarmGPT, RA-L",
+    "path": "srcSwarmGPT",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcAccelMPC",
+    "title": "Grillo, Plancher (2026) — AccelMPC, arXiv:2609.09380",
+    "path": "srcAccelMPC",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCompass",
+    "title": "Vatnsdal et al. (2026) — COMPASS, arXiv:2609.28247",
+    "path": "srcCompass",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "confiance",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcBeliefAdaptiveEKF",
+    "title": "Belief-Adaptive Online Autonomy for Quadrotor UAV Navigation under GNSS Degradation in Urban Environments (2026)",
+    "path": "srcBeliefAdaptiveEKF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcMultiUAVCL",
+    "title": "Multi-UAV Adaptive Cooperative Localization Method Against Hybrid Abnormal Measurements (2026)",
+    "path": "srcMultiUAVCL",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcRotorFailQSF",
+    "title": "Quasi-Static Fault-Tolerant Feedback Control of a Quadrotor under Rotor Failure with Provable Safety Guarantees (2026)",
+    "path": "srcRotorFailQSF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcMetaPolicySpoof",
+    "title": "Meta policy switching for resilient UAV navigation in adversarial airspace (2026)",
+    "path": "srcMetaPolicySpoof",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcFormationCBF",
+    "title": "Formation Control for UAVs Considering Safety Constraints Based on Control Barrier Functions with Switched Trajectories and Switching Communication Topologies (2026)",
+    "path": "srcFormationCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDMPCSafetyZones",
+    "title": "Distributed Model Predictive Control with Adaptive Safety Zones for Multi-Fleet Drone Operations (2026)",
+    "path": "srcDMPCSafetyZones",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcTrajMECDisaster",
+    "title": "Integrated Trajectory Planning, MEC Offloading, and Safety Coordination for Multi-UAV Disaster Response (2026)",
+    "path": "srcTrajMECDisaster",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcEscapeCBF",
+    "title": "Escape-Aware Control Barrier Functions for Quadrotor Safety under Body-Rate Limits (2026)",
+    "path": "srcEscapeCBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcUSVFormationFTC",
+    "title": "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults (2026)",
+    "path": "srcUSVFormationFTC",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCBFQuadFeasibility",
+    "title": "Feasibility and Singularity in High-Order Safety-Critical Control for Quadrotor UAVs (2026)",
+    "path": "srcCBFQuadFeasibility",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcTargetEnclosing",
+    "title": "Dynamic Event-Triggered Control for UAV Swarm Adaptive Target Enclosing Mission (2026)",
+    "path": "srcTargetEnclosing",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcQUAVConsensusCstr",
+    "title": "Adaptive Event-Triggered-Based Consensus Control for QUAV Formation with External Disturbances and State Constraints (2026)",
+    "path": "srcQUAVConsensusCstr",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcMultiLeaderDelay",
+    "title": "Dynamic Event-Triggered Consensus Formation Control Method for Multi-Leader UAVs with Communication Delay (2026)",
+    "path": "srcMultiLeaderDelay",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcETFormUSV",
+    "title": "Event-triggered practical prescribed-time distributed optimal formation control of heterogeneous multi-USVs under intermittent communication (2026)",
+    "path": "srcETFormUSV",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcFECBF",
+    "title": "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance (2026)",
+    "path": "srcFECBF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcTriSAR",
+    "title": "TriSAR: Task Coordination and Collision Avoidance for Aerial Robot Teams in Disaster Response (2026)",
+    "path": "srcTriSAR",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcPeukertRouting",
+    "title": "Certified-Robust Multi-Objective UAV Routing for Military Resupply under Nonlinear Energy Dynamics (2026)",
+    "path": "srcPeukertRouting",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHamiltonianFormation",
+    "title": "Energy-Conserving Swarm Formation Control Using Pure Hamiltonian Mechanics and Active Braking (2026)",
+    "path": "srcHamiltonianFormation",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCommFreeCoord",
+    "title": "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild (2026)",
+    "path": "srcCommFreeCoord",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcConsensusPF",
+    "title": "A Distributed Consensus Particle Filter for Target Tracking using Autonomous Surface Vessels (2026)",
+    "path": "srcConsensusPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcEventDrivenCBBA",
+    "title": "Event Driven CBBA with Reduced Communication (2025)",
+    "path": "srcEventDrivenCBBA",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCCOPI",
+    "title": "CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints (2026)",
+    "path": "srcCCOPI",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcAPR",
+    "title": "Assignment-Preserving Replanning for Dynamic Task Allocation in Multi-UAV Systems (2026)",
+    "path": "srcAPR",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcCertFeedbackPath",
+    "title": "Risk-Bounded Certificate Feedback for Allocation-Guided Cooperative Path Planning of Dynamic Multi-UAV Missions (2026)",
+    "path": "srcCertFeedbackPath",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcOnboardSLAMNano",
+    "title": "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones (2024)",
+    "path": "srcOnboardSLAMNano",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcUltraLightPlanner",
+    "title": "An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms (2025)",
+    "path": "srcUltraLightPlanner",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcEGOSwarm",
+    "title": "EGO-Swarm: A Fully Autonomous and Decentralized Quadrotor Swarm System in Cluttered Environments (2020)",
+    "path": "srcEGOSwarm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHierNavDecision",
+    "title": "A hierarchical navigation decision-making method for UAV swarms in unknown communication-constrained environments (2026)",
+    "path": "srcHierNavDecision",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcGRFSwarmOptCtrl",
+    "title": "Distributed Stochastic Optimal Control for Pattern-Oriented Swarms (2026)",
+    "path": "srcGRFSwarmOptCtrl",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcPathDeviationCtrl",
+    "title": "Path deviation control for multi-UAV cooperative task execution based on laser vision guidance and trajectory prediction (2026)",
+    "path": "srcPathDeviationCtrl",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcRHCRMAPF",
+    "title": "Rolling-Horizon Collision Resolution for Lifelong Multi-Agent Path Finding (2021)",
+    "path": "srcRHCRMAPF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcGossipADMM",
+    "title": "Neighborhood Convergence of Linearized Gossip ADMM for Heterogeneous Nonconvex Multi-Agent Optimization (2026)",
+    "path": "srcGossipADMM",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcConflictPredictDMPC",
+    "title": "Conflict-Predictive Variable Horizons in Multi-Drone Distributed Model Predictive Control (2026)",
+    "path": "srcConflictPredictDMPC",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcAgileTargetCapture",
+    "title": "Agile target capture with UAV swarm in dense environments (2026)",
+    "path": "srcAgileTargetCapture",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcHETCEnergyAware",
+    "title": "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones (IMAV 2025)",
+    "path": "srcHETCEnergyAware",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcJumpPointSwarm",
+    "title": "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm (2025)",
+    "path": "srcJumpPointSwarm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcBioEventCollision",
+    "title": "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments (2025)",
+    "path": "srcBioEventCollision",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcIC3BF",
+    "title": "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs (2025)",
+    "path": "srcIC3BF",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDelayStability",
+    "title": "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law (2025)",
+    "path": "srcDelayStability",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDMPCFormationEval",
+    "title": "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swarm (2025)",
+    "path": "srcDMPCFormationEval",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcLiDARDRLNav",
+    "title": "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based DRL (2026)",
+    "path": "srcLiDARDRLNav",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcDelayFeedbackForm",
+    "title": "Delay-Based Feedback Formation Control for UAVs with Feedforward Components (2023)",
+    "path": "srcDelayFeedbackForm",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "corpus",
+     "doi",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "srcFederatedIDS",
+    "title": "Federated Lightweight Intrusion Detection in Drone Swarms with Knowledge Distillation (2026)",
+    "path": "srcFederatedIDS",
+    "parent": null,
+    "tags": [
+     "science"
+    ],
+    "metadataKeys": [
+     "annee",
+     "arxiv",
+     "corpus",
+     "nature",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "simContract",
+    "title": "Contrat de simulation (E10)",
+    "path": "simContract",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "consommateurs",
+     "producteur",
+     "statut",
+     "version"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "invNoC2",
+    "title": "INV-1 — La mission s accomplit sans C2 ni cloud",
+    "path": "invNoC2",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "invSafetyLocal",
+    "title": "INV-2 — La surete ne depend jamais du reseau",
+    "path": "invSafetyLocal",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "invScale30",
+    "title": "INV-3 — L echelle cible est 30, non prouvee a 30",
+    "path": "invScale30",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "invNo3DInModel",
+    "title": "INV-4 — Aucune donnee 3D dans le modele semantique",
+    "path": "invNo3DInModel",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "invEvidence",
+    "title": "INV-5 — Une affirmation non sourcee reste non sourcee",
+    "path": "invEvidence",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [
+     "source",
+     "test",
+     "verifiable"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "degLinkLoss",
+    "title": "DEG-1 — Perte de lien acceptee",
+    "path": "degLinkLoss",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "degGNSS",
+    "title": "DEG-2 — GNSS degradable",
+    "path": "degGNSS",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "degSpectrum",
+    "title": "DEG-3 — Saturation du spectre non dimensionnee",
+    "path": "degSpectrum",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "degPerception",
+    "title": "DEG-4 — Fausses pistes en densite",
+    "path": "degPerception",
+    "parent": null,
+    "tags": [
+     "simulation"
+    ],
+    "metadataKeys": [],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlTaskAllocation",
+    "title": "Specification SysML v2 — ALG_TASK_ALLOCATION",
+    "path": "sysmlTaskAllocation",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlConsensus",
+    "title": "Specification SysML v2 — ALG_CONSENSUS",
+    "path": "sysmlConsensus",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlFormationControl",
+    "title": "Specification SysML v2 — ALG_FORMATION_CONTROL",
+    "path": "sysmlFormationControl",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlLeaderElection",
+    "title": "Specification SysML v2 — ALG_LEADER_ELECTION",
+    "path": "sysmlLeaderElection",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlPerceptionFusion",
+    "title": "Specification SysML v2 — ALG_PERCEPTION_FUSION",
+    "path": "sysmlPerceptionFusion",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlNavigationGNSSDegrade",
+    "title": "Specification SysML v2 — ALG_NAV_GNSS_DEGRADE",
+    "path": "sysmlNavigationGNSSDegrade",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlCollisionAvoidance",
+    "title": "Specification SysML v2 — ALG_COLLISION_AVOIDANCE",
+    "path": "sysmlCollisionAvoidance",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlSafetyRules",
+    "title": "Specification SysML v2 — ALG_SAFETY_RULES",
+    "path": "sysmlSafetyRules",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlPathPlanning",
+    "title": "Specification SysML v2 — ALG_PATH_PLANNING",
+    "path": "sysmlPathPlanning",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlHealthMonitoring",
+    "title": "Specification SysML v2 — ALG_HEALTH_MONITORING",
+    "path": "sysmlHealthMonitoring",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlEnergyAware",
+    "title": "Specification SysML v2 — ALG_ENERGY_AWARE",
+    "path": "sysmlEnergyAware",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlEventTriggeredComm",
+    "title": "Specification SysML v2 — ALG_EVENT_TRIGGERED_COMM",
+    "path": "sysmlEventTriggeredComm",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlCooperativeLocalization",
+    "title": "Specification SysML v2 — ALG_COOPERATIVE_LOCALIZATION",
+    "path": "sysmlCooperativeLocalization",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlFaultTolerantControlAlloc",
+    "title": "Specification SysML v2 — ALG_FAULT_TOLERANT_CONTROL_ALLOC",
+    "path": "sysmlFaultTolerantControlAlloc",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   },
+   {
+    "id": "sysmlJammingResilientMode",
+    "title": "Specification SysML v2 — ALG_JAMMING_RESILIENT_MODE",
+    "path": "sysmlJammingResilientMode",
+    "parent": null,
+    "tags": [
+     "source-doc"
+    ],
+    "metadataKeys": [
+     "algorithme",
+     "fichier",
+     "format",
+     "validation"
+    ],
+    "hasDescription": true,
+    "notation": "Spec"
+   }
+  ],
+  "state": [
+   {
+    "id": "st0101",
+    "title": "SCN01.1 — Decollage sur plan embarque",
+    "path": "st0101",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "invariant",
+     "reseau",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0102",
+    "title": "SCN01.2 — Perception et estimation locales",
+    "path": "st0102",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "reseau",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0103",
+    "title": "SCN01.3 — Surete locale armee",
+    "path": "st0103",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "invariant",
+     "reseau",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0104",
+    "title": "SCN01.4 — Mission executee et terminee",
+    "path": "st0104",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "reseau",
+     "resultat",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0301",
+    "title": "SCN03.1 — Perte d un agent detectee",
+    "path": "st0301",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0302",
+    "title": "SCN03.2 — Alerte propagee",
+    "path": "st0302",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "canal",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0303",
+    "title": "SCN03.3 — Leader reélu si necessaire",
+    "path": "st0303",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "risque",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0304",
+    "title": "SCN03.4 — Charge redistribuee",
+    "path": "st0304",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0601",
+    "title": "SCN06.1 — Convergence detectee",
+    "path": "st0601",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0602",
+    "title": "SCN06.2 — Seuil de securite franchi",
+    "path": "st0602",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "delai",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0603",
+    "title": "SCN06.3 — Correction minimale appliquee",
+    "path": "st0603",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "algo",
+     "propriete",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st0604",
+    "title": "SCN06.4 — Separation retablie, mission reprise",
+    "path": "st0604",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "resultat",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st1001",
+    "title": "SCN10.1 — Leader perdu a pleine echelle",
+    "path": "st1001",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "echelle",
+     "limite",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st1002",
+    "title": "SCN10.2 — Detection et election distribuee",
+    "path": "st1002",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "algo",
+     "message",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st1003",
+    "title": "SCN10.3 — Surete locale maintenue pendant la reconfiguration",
+    "path": "st1003",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "acteur",
+     "invariant",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "st1004",
+    "title": "SCN10.4 — Nouveau leader, charge redistribuee",
+    "path": "st1004",
+    "parent": null,
+    "tags": [
+     "scenario"
+    ],
+    "metadataKeys": [
+     "algo",
+     "resultat",
+     "scenario",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   }
+  ],
+  "system": [
+   {
+    "id": "essaim",
+    "title": "Essaim SwarmDrones — systeme de systemes",
+    "path": "essaim",
+    "parent": null,
+    "tags": [],
+    "metadataKeys": [
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "System"
+   }
+  ],
+  "test": [
+   {
+    "id": "testHzipCrc",
+    "title": "TEST H-Zip — detection de corruption CRC-8",
+    "path": "testHzipCrc",
+    "parent": null,
+    "tags": [
+     "tbd"
+    ],
+    "metadataKeys": [
+     "cible",
+     "methode",
+     "statut",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Test"
+   },
+   {
+    "id": "testHzipLatence",
+    "title": "TEST H-Zip — latence de la couche reactive",
+    "path": "testHzipLatence",
+    "parent": null,
+    "tags": [
+     "tbd"
+    ],
+    "metadataKeys": [
+     "cible",
+     "methode",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "Test"
+   },
+   {
+    "id": "testHzipDivergence",
+    "title": "TEST H-Zip — borne de divergence du modele predictif",
+    "path": "testHzipDivergence",
+    "parent": null,
+    "tags": [
+     "tbd"
+    ],
+    "metadataKeys": [
+     "cible",
+     "methode",
+     "statut",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Test"
+   },
+   {
+    "id": "testHzipBande",
+    "title": "TEST H-Zip — budget de bande passante par noeud",
+    "path": "testHzipBande",
+    "parent": null,
+    "tags": [
+     "tbd"
+    ],
+    "metadataKeys": [
+     "cible",
+     "methode",
+     "statut",
+     "tbd"
+    ],
+    "hasDescription": true,
+    "notation": "Test"
+   }
+  ],
+  "worldEntity": [
+   {
+    "id": "entUavR",
+    "title": "UAV-R — Reconnaissance (x18)",
+    "path": "entUavR",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entUavF",
+    "title": "UAV-F — Multirotor (x8)",
+    "path": "entUavF",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entUsv",
+    "title": "USV — Surface (x4)",
+    "path": "entUsv",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entReference",
+    "title": "Drone de reference (x1)",
+    "path": "entReference",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "note",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entGroundStation",
+    "title": "Poste de commandement (x1)",
+    "path": "entGroundStation",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entEdgeNode",
+    "title": "Noeud Edge (x1)",
+    "path": "entEdgeNode",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   },
+   {
+    "id": "entTwin",
+    "title": "Jumeau numerique (x1)",
+    "path": "entTwin",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie_visuelle",
+     "domaine",
+     "id_likec4",
+     "nature",
+     "population",
+     "role_scene"
+    ],
+    "hasDescription": true,
+    "notation": "Entity"
+   }
+  ],
+  "worldState": [
+   {
+    "id": "stNominal",
+    "title": "ETAT — Nominal",
+    "path": "stNominal",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "reseau",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stLinkLost",
+    "title": "ETAT — Lien C2 perdu",
+    "path": "stLinkLost",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "invariant",
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stAgentLost",
+    "title": "ETAT — Agent perdu",
+    "path": "stAgentLost",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stPartition",
+    "title": "ETAT — Partition reseau",
+    "path": "stPartition",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stGnssDegraded",
+    "title": "ETAT — GNSS degrade",
+    "path": "stGnssDegraded",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stCollisionRisk",
+    "title": "ETAT — Risque de collision",
+    "path": "stCollisionRisk",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stSpectrumSat",
+    "title": "ETAT — Spectre sature",
+    "path": "stSpectrumSat",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "limite",
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stEnergyCritical",
+    "title": "ETAT — Energie critique",
+    "path": "stEnergyCritical",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario",
+     "statut"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stDense",
+    "title": "ETAT — Densite elevee",
+    "path": "stDense",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   },
+   {
+    "id": "stLeaderLost",
+    "title": "ETAT — Leader perdu a N=30",
+    "path": "stLeaderLost",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "rendu",
+     "scenario",
+     "source"
+    ],
+    "hasDescription": true,
+    "notation": "State"
+   }
+  ],
+  "zoneSemantic": [
+   {
+    "id": "zoneAir",
+    "title": "ZONE_AIR — Aerien",
+    "path": "zoneAir",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "densite",
+     "entites",
+     "risque"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   },
+   {
+    "id": "zoneSurface",
+    "title": "ZONE_SURFACE — Surface maritime",
+    "path": "zoneSurface",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "densite",
+     "entites",
+     "risque"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   },
+   {
+    "id": "zoneAllocation",
+    "title": "ZONE_ALLOCATION — Domaine de mission",
+    "path": "zoneAllocation",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "contrainte",
+     "entites"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   },
+   {
+    "id": "zoneCommsRelay",
+    "title": "ZONE_COMMS — Portee de communication",
+    "path": "zoneCommsRelay",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "entites",
+     "limite"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   },
+   {
+    "id": "zoneCommand",
+    "title": "ZONE_COMMAND — Perimetre C2",
+    "path": "zoneCommand",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "entites",
+     "limite"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   },
+   {
+    "id": "zoneCloud",
+    "title": "ZONE_CLOUD — Perimetre cloud",
+    "path": "zoneCloud",
+    "parent": null,
+    "tags": [
+     "world"
+    ],
+    "metadataKeys": [
+     "categorie",
+     "contrainte",
+     "entites"
+    ],
+    "hasDescription": true,
+    "notation": "Zone"
+   }
   ]
  },
  "relations": {
   "byKind": {
-   "NONE": 239
+   "uses": 198,
+   "implements": 46,
+   "exposed-to": 112,
+   "documentedBy": 47,
+   "runsOn": 30,
+   "radio": 3,
+   "flow": 40,
+   "command": 6,
+   "safety": 3,
+   "store": 7,
+   "sync": 1,
+   "async": 2,
+   "depend-on": 22,
+   "justifie": 33,
+   "derives-from": 21,
+   "implemented-by": 18,
+   "evidences": 122,
+   "deployedAs": 8,
+   "contains": 9,
+   "commands": 4,
+   "exposes": 53,
+   "publishes": 18,
+   "subscribes": 31,
+   "realizes": 42,
+   "produces": 4,
+   "validates": 4,
+   "triggers": 16,
+   "populates": 7,
+   "maps-to": 6,
+   "belongs-to": 7,
+   "constrains": 7
   },
   "untyped": [],
-  "total": 239
+  "total": 927
  },
  "views": [
   {
+   "id": "system-context",
+   "title": "03 · Architecture / 01 Contexte systeme (C4 L1) — Essaim SwarmDrones et son environnement",
+   "type": "element",
+   "nodes": 8,
+   "edges": 19,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmSysmlTraceability",
+   "title": "04 · Algorithmique / Traçabilite algorithme -> specification SysML v2",
+   "type": "element",
+   "nodes": 30,
+   "edges": 15,
+   "hasDescription": true
+  },
+  {
+   "id": "apprendre-capteur",
+   "title": "02 · Parcours / Chaînes de valeur / 1 — Du capteur à l’action",
+   "type": "dynamic",
+   "nodes": 5,
+   "edges": 5,
+   "hasDescription": true
+  },
+  {
+   "id": "apprendre-mission",
+   "title": "02 · Parcours / Chaînes de valeur / 2 — De l’intention au plan embarqué",
+   "type": "dynamic",
+   "nodes": 9,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "apprendre-telemetrie",
+   "title": "02 · Parcours / Chaînes de valeur / 3 — De la télémétrie à l’analyse",
+   "type": "dynamic",
+   "nodes": 8,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "lecture-surete",
+   "title": "99 · Compléments / 1 — Qui protège localement la plateforme ?",
+   "type": "element",
+   "nodes": 5,
+   "edges": 6,
+   "hasDescription": true
+  },
+  {
+   "id": "lecture-autorisation",
+   "title": "99 · Compléments / 2 — Qui autorise et qui garde la trace ?",
+   "type": "element",
+   "nodes": 6,
+   "edges": 5,
+   "hasDescription": true
+  },
+  {
+   "id": "lecture-autonomie",
+   "title": "99 · Compléments / 3 — Que reste-t-il sans liaison C2 ?",
+   "type": "element",
+   "nodes": 5,
+   "edges": 6,
+   "hasDescription": true
+  },
+  {
    "id": "index",
-   "title": "SwarmDrones — Paysage des zones de deploiement",
+   "title": "05 · Déploiement / SwarmDrones — Paysage des zones de deploiement",
    "type": "element",
    "nodes": 6,
    "edges": 8,
@@ -1581,7 +9361,7 @@
   },
   {
    "id": "contexte-amont",
-   "title": "Contexte amont — externes, Onboard (x30), Edge (1..N)",
+   "title": "03 · Architecture / Contexte amont — externes, Onboard (x30), Edge (1..N)",
    "type": "element",
    "nodes": 19,
    "edges": 30,
@@ -1589,7 +9369,7 @@
   },
   {
    "id": "contexte-aval",
-   "title": "Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)",
+   "title": "03 · Architecture / Contexte aval — Edge gateway, C2, Cloud (hors boucle de controle)",
    "type": "element",
    "nodes": 15,
    "edges": 14,
@@ -1597,7 +9377,15 @@
   },
   {
    "id": "contexte",
-   "title": "Contexte (synthese) — vue d'ensemble des zones",
+   "title": "03 · Architecture / Contexte (synthese) — vue d'ensemble des zones",
+   "type": "element",
+   "nodes": 6,
+   "edges": 8,
+   "hasDescription": true
+  },
+  {
+   "id": "conteneurs",
+   "title": "03 · Architecture / Conteneurs (niveau 2) — les 4 zones et leurs echanges",
    "type": "element",
    "nodes": 6,
    "edges": 8,
@@ -1605,15 +9393,15 @@
   },
   {
    "id": "paysage-criticite",
-   "title": "Paysage par criticite — safety / mission / best-effort / cloud",
+   "title": "99 · Compléments / Paysage par criticite — safety / mission / best-effort / cloud",
    "type": "element",
-   "nodes": 18,
-   "edges": 25,
+   "nodes": 38,
+   "edges": 46,
    "hasDescription": true
   },
   {
    "id": "zone-onboard",
-   "title": "Zone Onboard (x30) — surete, mission et lien",
+   "title": "03 · Architecture / Zones / Zone Onboard (x30) — surete, mission et lien",
    "type": "element",
    "nodes": 12,
    "edges": 21,
@@ -1621,7 +9409,7 @@
   },
   {
    "id": "zone-edge",
-   "title": "Zone Edge — relais, fusion, coordination (1..N)",
+   "title": "03 · Architecture / Zones / Zone Edge — relais, fusion, coordination (1..N)",
    "type": "element",
    "nodes": 12,
    "edges": 12,
@@ -1629,7 +9417,7 @@
   },
   {
    "id": "zone-c2",
-   "title": "Zone C2 / GCS — supervision et autorite humaine",
+   "title": "02 · Parcours / GCS — supervision et autorite humaine",
    "type": "element",
    "nodes": 11,
    "edges": 11,
@@ -1637,7 +9425,7 @@
   },
   {
    "id": "zone-cloud",
-   "title": "Zone Cloud — hors boucle de controle",
+   "title": "03 · Architecture / Zones / Zone Cloud — hors boucle de controle",
    "type": "element",
    "nodes": 9,
    "edges": 6,
@@ -1645,7 +9433,7 @@
   },
   {
    "id": "deploiement-30-plateformes",
-   "title": "Deploiement — 30 plateformes, N stations Edge, 1 C2, 1 cloud",
+   "title": "05 · Déploiement / Deploiement — 30 plateformes, N stations Edge, 1 C2, 1 cloud",
    "type": "deployment",
    "nodes": 41,
    "edges": 127,
@@ -1653,7 +9441,7 @@
   },
   {
    "id": "mission-nominale",
-   "title": "Mission nominale — INIT -> READY -> LAUNCH -> EXECUTE -> LAND -> DONE",
+   "title": "02 · Parcours / Séquence nominale — INIT -> READY -> LAUNCH -> EXECUTE",
    "type": "dynamic",
    "nodes": 23,
    "edges": 36,
@@ -1661,7 +9449,7 @@
   },
   {
    "id": "perte-de-lien",
-   "title": "Scenario degrade — perte de lien C2 + GNSS degrade",
+   "title": "02 · Parcours / Scenario degrade — perte de lien C2 + GNSS degrade",
    "type": "dynamic",
    "nodes": 16,
    "edges": 25,
@@ -1669,7 +9457,7 @@
   },
   {
    "id": "perte-de-lien-c2-operateur",
-   "title": "Perte de lien C2 — vue operateur (brief de quart)",
+   "title": "02 · Parcours / Perte de lien C2 — vue operateur (brief de quart)",
    "type": "dynamic",
    "nodes": 8,
    "edges": 18,
@@ -1677,15 +9465,15 @@
   },
   {
    "id": "hypotheses",
-   "title": "Hypotheses et impact — si une hypothese tombe, quoi revoir ?",
+   "title": "01 · Gouvernance / Hypotheses et impact — si une hypothese tombe, quoi revoir",
    "type": "element",
-   "nodes": 14,
-   "edges": 19,
+   "nodes": 18,
+   "edges": 23,
    "hasDescription": true
   },
   {
    "id": "decisions",
-   "title": "Decisions tranchees : ADR-1..5 et ce qu elles justifient",
+   "title": "01 · Gouvernance / Decisions tranchees : ADR-1..5 et ce qu'elles justifient",
    "type": "element",
    "nodes": 10,
    "edges": 13,
@@ -1693,7 +9481,7 @@
   },
   {
    "id": "decisionsOuvertes",
-   "title": "Decisions ouvertes : DE-01..04 appelees par les angles morts critiques",
+   "title": "01 · Gouvernance / Decisions ouvertes : DE-01..04 appelees par les angles morts",
    "type": "element",
    "nodes": 12,
    "edges": 8,
@@ -1701,7 +9489,7 @@
   },
   {
    "id": "tracabilite",
-   "title": "Tracabilite — couverture documentaire par zone",
+   "title": "07 · Sûreté / Tracabilite — couverture documentaire par zone",
    "type": "element",
    "nodes": 19,
    "edges": 35,
@@ -1709,7 +9497,7 @@
   },
   {
    "id": "techAutopilot",
-   "title": "Choix technologiques 1/3 — autopilotage & perception (§A)",
+   "title": "04 · Algorithmique / Autopilotage & perception",
    "type": "element",
    "nodes": 12,
    "edges": 15,
@@ -1717,7 +9505,7 @@
   },
   {
    "id": "techComms",
-   "title": "Choix technologiques 2/3 — communication & coordination (§A)",
+   "title": "04 · Algorithmique / Communication & coordination",
    "type": "element",
    "nodes": 18,
    "edges": 23,
@@ -1725,7 +9513,7 @@
   },
   {
    "id": "techData",
-   "title": "Choix technologiques 3/3 — données, observabilité & jumeau (§A)",
+   "title": "04 · Algorithmique / Données, observabilité & jumeau",
    "type": "element",
    "nodes": 12,
    "edges": 10,
@@ -1733,7 +9521,7 @@
   },
   {
    "id": "riskMatrix",
-   "title": "Matrice de risques — 15 risques (§D)",
+   "title": "01 · Gouvernance / Matrice de risques — 15 risques (§D)",
    "type": "element",
    "nodes": 22,
    "edges": 7,
@@ -1741,10 +9529,322 @@
   },
   {
    "id": "blindspotBySeverity",
-   "title": "Angles morts — 16 lacunes de specification (§C)",
+   "title": "01 · Gouvernance / Angles morts — 16 lacunes de specification (§C)",
    "type": "element",
    "nodes": 20,
    "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "hardwareArchitecture",
+   "title": "99 · Compléments / Architecture materielle — drone de reference",
+   "type": "element",
+   "nodes": 1,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "droneInternal",
+   "title": "05 · Déploiement / Drone de reference — vue interne (Architecture materielle)",
+   "type": "element",
+   "nodes": 13,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "communicationArchitecture",
+   "title": "03 · Architecture / Architecture de communication — canaux",
+   "type": "element",
+   "nodes": 14,
+   "edges": 5,
+   "hasDescription": true
+  },
+  {
+   "id": "messageArchitecture",
+   "title": "03 · Architecture / Architecture des messages — 13 messages, 0 orphelin",
+   "type": "element",
+   "nodes": 26,
+   "edges": 48,
+   "hasDescription": true
+  },
+  {
+   "id": "criticalMessages",
+   "title": "03 · Architecture / Messages critiques — voie de surete locale",
+   "type": "element",
+   "nodes": 6,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmCatalog",
+   "title": "04 · Algorithmique / Catalogue — 15 algorithmes, 15 specifications PDF et 16 portages source",
+   "type": "element",
+   "nodes": 46,
+   "edges": 45,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmSafety",
+   "title": "04 · Algorithmique / Chaine de sûreté",
+   "type": "element",
+   "nodes": 12,
+   "edges": 24,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmCoordination",
+   "title": "04 · Algorithmique / Chaine de coordination — algorithmes dependants du lien",
+   "type": "element",
+   "nodes": 13,
+   "edges": 23,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmHosting",
+   "title": "04 · Algorithmique / Algorithmes par composant d accueil — 15 algorithmes, 11 composants",
+   "type": "element",
+   "nodes": 29,
+   "edges": 68,
+   "hasDescription": true
+  },
+  {
+   "id": "algorithmSpecTraceability",
+   "title": "04 · Algorithmique / Traçabilite composant -> algorithme -> specification",
+   "type": "element",
+   "nodes": 43,
+   "edges": 78,
+   "hasDescription": true
+  },
+  {
+   "id": "deploymentChain",
+   "title": "05 · Déploiement / Chaine de deploiement — Algorithm -> Component -> Runtime",
+   "type": "element",
+   "nodes": 26,
+   "edges": 46,
+   "hasDescription": true
+  },
+  {
+   "id": "deploymentZones",
+   "title": "99 · Compléments / Zones de deploiement — embarque vs sol vs distant",
+   "type": "element",
+   "nodes": 12,
+   "edges": 11,
+   "hasDescription": true
+  },
+  {
+   "id": "capabilityMap",
+   "title": "03 · Architecture / Carte des capacites — 8 capacites, 19 fonctions",
+   "type": "element",
+   "nodes": 8,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "survivabilitySplit",
+   "title": "99 · Compléments / Frontiere avec lien / sans lien — ce qui vole sans reseau",
+   "type": "element",
+   "nodes": 10,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "observeChain",
+   "title": "04 · Algorithmique / Chaine d'observation — du drone au jumeau numerique",
+   "type": "element",
+   "nodes": 11,
+   "edges": 8,
+   "hasDescription": true
+  },
+  {
+   "id": "scenarioCatalogue",
+   "title": "02 · Parcours / Catalogue des scenarios — 10 scenarios",
+   "type": "element",
+   "nodes": 10,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "scenarioNominal",
+   "title": "02 · Parcours / Mission nominale — INIT -> READY -> LAUNCH -> EXECUTE",
+   "type": "element",
+   "nodes": 5,
+   "edges": 4,
+   "hasDescription": true
+  },
+  {
+   "id": "scenarioScaleChallenge",
+   "title": "02 · Parcours / SCN-10 — Perte du leader a N=30",
+   "type": "element",
+   "nodes": 5,
+   "edges": 4,
+   "hasDescription": true
+  },
+  {
+   "id": "scenarioRiskMapping",
+   "title": "99 · Compléments / Scenarios x risques — ce que chaque scenario teste",
+   "type": "element",
+   "nodes": 17,
+   "edges": 11,
+   "hasDescription": true
+  },
+  {
+   "id": "simulationBoundary",
+   "title": "01 · Gouvernance / Consommateurs du modele — ce que le modele fournit et ne fournit pas",
+   "type": "element",
+   "nodes": 8,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "consumerMap",
+   "title": "01 · Gouvernance / Consommateurs du modele — 5 cibles",
+   "type": "element",
+   "nodes": 6,
+   "edges": 5,
+   "hasDescription": true
+  },
+  {
+   "id": "invariantsView",
+   "title": "07 · Sûreté / 5 invariants verifiables du contrat",
+   "type": "element",
+   "nodes": 11,
+   "edges": 10,
+   "hasDescription": true
+  },
+  {
+   "id": "scienceVerdicts",
+   "title": "07 · Sûreté / Verdicts scientifiques — 4 affirmations decisives",
+   "type": "element",
+   "nodes": 7,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "scienceToAlgorithms",
+   "title": "99 · Compléments / Sources -> verdicts -> algorithmes concernes",
+   "type": "element",
+   "nodes": 21,
+   "edges": 15,
+   "hasDescription": true
+  },
+  {
+   "id": "benchmarkGaps",
+   "title": "07 · Sûreté / Trous de benchmark — ce qui n est PAS prouve",
+   "type": "element",
+   "nodes": 8,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "worldModelMap",
+   "title": "03 · Architecture / World Model — entites, zones et categories (AUCUNE 3D)",
+   "type": "element",
+   "nodes": 17,
+   "edges": 14,
+   "hasDescription": true
+  },
+  {
+   "id": "renderRules",
+   "title": "07 · Sûreté / 6 regles de representation — garde-fous verifiables",
+   "type": "element",
+   "nodes": 6,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "worldStates",
+   "title": "07 · Sûreté / 10 etats d'apparence — le rendu represente des ETATS",
+   "type": "element",
+   "nodes": 10,
+   "edges": 0,
+   "hasDescription": true
+  },
+  {
+   "id": "decisionsMaterielles",
+   "title": "01 · Gouvernance / Decisions materielles : DE-05..10 et le composant conditionne",
+   "type": "element",
+   "nodes": 13,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "hzipProtocol",
+   "title": "06 · Protocole / H-Zip v2.2 — protocole, couches et trames",
+   "type": "element",
+   "nodes": 15,
+   "edges": 15,
+   "hasDescription": true
+  },
+  {
+   "id": "hzipLayers",
+   "title": "06 · Protocole / H-Zip v2.2 — les 4 couches et leurs algorithmes",
+   "type": "element",
+   "nodes": 16,
+   "edges": 19,
+   "hasDescription": true
+  },
+  {
+   "id": "hzipFrames",
+   "title": "06 · Protocole / H-Zip v2.2 — les 4 trames et leurs canaux",
+   "type": "element",
+   "nodes": 13,
+   "edges": 23,
+   "hasDescription": true
+  },
+  {
+   "id": "hzipEvidence",
+   "title": "06 · Protocole / H-Zip v2.2 — sources academiques (DOI verifies)",
+   "type": "element",
+   "nodes": 14,
+   "edges": 9,
+   "hasDescription": true
+  },
+  {
+   "id": "hzipTests",
+   "title": "06 · Protocole / H-Zip v2.2 — criteres d acceptation (non executes)",
+   "type": "element",
+   "nodes": 8,
+   "edges": 7,
+   "hasDescription": true
+  },
+  {
+   "id": "softwareArchitecture",
+   "title": "03 · Architecture / Architecture logicielle — composants et dependances",
+   "type": "element",
+   "nodes": 28,
+   "edges": 43,
+   "hasDescription": true
+  },
+  {
+   "id": "applicationArchitecture",
+   "title": "03 · Architecture / Architecture applicative — applications et interfaces",
+   "type": "element",
+   "nodes": 17,
+   "edges": 15,
+   "hasDescription": true
+  },
+  {
+   "id": "applicationVsEmbedded",
+   "title": "03 · Architecture / Applications de service vs composants embarques",
+   "type": "element",
+   "nodes": 28,
+   "edges": 43,
+   "hasDescription": true
+  },
+  {
+   "id": "functionalArchitecture",
+   "title": "03 · Architecture / Architecture fonctionnelle — capacites, fonctions, composants",
+   "type": "element",
+   "nodes": 47,
+   "edges": 67,
+   "hasDescription": true
+  },
+  {
+   "id": "hardwareArchitectureOverview",
+   "title": "03 · Architecture / Architecture materielle — drone de reference (synthese)",
+   "type": "element",
+   "nodes": 21,
+   "edges": 23,
    "hasDescription": true
   }
  ],
@@ -1752,7 +9852,17 @@
   "noDescription": [],
   "noMetadata": [
    "radios",
-   "operator"
+   "operator",
+   "providesSemantics",
+   "providesTopology",
+   "providesContracts",
+   "leftToConsumer",
+   "leftToConsumer2",
+   "leftToConsumer3",
+   "degLinkLoss",
+   "degGNSS",
+   "degSpectrum",
+   "degPerception"
   ],
   "noTags": [
    "operator",
@@ -1770,13 +9880,6 @@
    "Grafana",
    "PostgreSQLPostGIS",
    "OpenCPN",
-   "AlgorithmsPerceptionFusionEKFUKF",
-   "AlgorithmsNavigationGNSSDegradeEKFVIO",
-   "AlgorithmsTaskAllocationCBBA",
-   "AlgorithmsCoordinationCRDTLWW",
-   "AlgorithmsPlanificationWaypointsMPC",
-   "AlgorithmsEvitementCollisionCBF",
-   "AlgorithmsSureteReglesCBF",
    "riskR1",
    "riskR2",
    "riskR3",
@@ -1812,48 +9915,93 @@
    "de2",
    "de3",
    "de4",
-   "onboard.linkRadio"
+   "onboard.linkRadio",
+   "essaim"
   ],
-  "orphan": [],
+  "orphan": [
+   "srcDigitalTwinZEST",
+   "srcExplainableMARL",
+   "srcHMARLCBF"
+  ],
   "noTechnology": [],
   "brokenRef": []
  },
  "metadataKeys": {
-  "niveau_preuve": 5,
+  "category": 15,
+  "purpose": 15,
+  "inputs": 15,
+  "outputs": 15,
+  "parameters": 15,
+  "hypotheses": 15,
+  "contraintes": 15,
+  "state": 15,
+  "executionMode": 15,
+  "implementationStatus": 15,
+  "repository": 15,
+  "sourceDocs": 1,
+  "version": 18,
+  "maturity": 15,
+  "evidence": 53,
+  "metrics": 15,
+  "references": 15,
+  "relatedComponents": 15,
+  "relatedMessages": 15,
+  "variantes": 13,
+  "tbd": 34,
+  "evidenceLevel": 15,
+  "maturityLevel": 15,
+  "algorithme": 55,
+  "versions": 15,
+  "versionCourante": 15,
+  "nature": 130,
+  "statut": 188,
+  "langage": 16,
+  "depot": 16,
+  "depotPrincipal": 16,
+  "integration": 16,
+  "versionsImplementation": 2,
+  "parite": 15,
+  "tests": 15,
+  "performance": 2,
+  "scenariosVerifies": 1,
+  "limites": 14,
+  "licence": 28,
+  "versionAnterieure": 1,
+  "versionRejetee": 1,
+  "notesValidation": 1,
+  "branches": 1,
+  "notesVersions": 1,
+  "validation": 28,
+  "sysml": 13,
+  "specPdf": 13,
+  "niveau_preuve": 82,
   "section": 5,
   "impact_si_faux": 5,
-  "risque": 1,
+  "risque": 4,
   "conflit": 5,
   "alternatives_rejetees": 5,
-  "statut": 25,
-  "type": 1,
-  "sections": 1,
+  "type": 2,
+  "sections": 2,
   "chemin": 1,
-  "source": 28,
-  "licence": 14,
-  "role": 15,
+  "source": 151,
+  "role": 19,
   "zone": 14,
-  "evidence": 21,
-  "fonction": 7,
-  "robustesse_lien": 7,
-  "maturite": 7,
-  "categorie": 15,
+  "categorie": 21,
   "probabilite": 15,
-  "impact": 15,
-  "criticite": 39,
+  "impact": 25,
+  "criticite": 93,
   "mitigation": 15,
   "alerte": 16,
   "gravite": 16,
   "consequence": 16,
-  "nature": 4,
-  "porteur": 4,
+  "porteur": 11,
   "echeance": 4,
-  "angle_mort": 4,
-  "frequence": 11,
-  "principe": 2,
+  "angle_mort": 5,
+  "frequence": 36,
+  "principe": 3,
   "budget_latence": 3,
   "interface": 2,
-  "autonomie": 1,
+  "autonomie": 2,
   "arbitrage": 1,
   "etats": 1,
   "navigateur": 1,
@@ -1864,6 +10012,141 @@
   "sortie": 1,
   "exigence": 1,
   "boucle": 2,
-  "usage": 1
+  "usage": 10,
+  "option_a": 6,
+  "option_b": 6,
+  "critere": 6,
+  "prerequis": 5,
+  "piege": 2,
+  "bloque": 6,
+  "option_c": 5,
+  "bloquant": 2,
+  "recommandation_producteur": 1,
+  "lien": 1,
+  "norme": 1,
+  "noeud_hote": 6,
+  "os": 5,
+  "determinisme": 2,
+  "reseau_requis": 10,
+  "contrainte": 4,
+  "cardinalite_totale": 1,
+  "repartition": 1,
+  "variante_ref": 1,
+  "instance_de": 1,
+  "coordonnees": 1,
+  "echelle": 6,
+  "perte_toleree": 4,
+  "arxiv": 31,
+  "annee": 92,
+  "doi": 59,
+  "n_reel": 4,
+  "verdict": 71,
+  "correction_modele": 71,
+  "priorite": 9,
+  "producteur": 19,
+  "consommateurs": 19,
+  "canal": 19,
+  "schema": 18,
+  "perte": 18,
+  "source2": 1,
+  "source3": 1,
+  "reste_ouvert": 4,
+  "applique_a": 6,
+  "extrapolation": 1,
+  "limite": 6,
+  "requalification": 1,
+  "sans_lien": 8,
+  "capacite": 19,
+  "algo": 21,
+  "propriete": 2,
+  "socle": 1,
+  "io": 1,
+  "alim": 1,
+  "masse": 1,
+  "temp": 1,
+  "ethernet": 1,
+  "redondance": 1,
+  "source_fc": 1,
+  "decision": 2,
+  "vulnerabilite": 2,
+  "delai_action": 1,
+  "unite": 1,
+  "portee": 1,
+  "couches": 1,
+  "trames": 2,
+  "documentNormatif": 1,
+  "latence_cible": 8,
+  "taille": 4,
+  "trame": 5,
+  "borne_erreur": 1,
+  "couche": 4,
+  "latence": 1,
+  "tolerance": 4,
+  "mecanisme": 1,
+  "interdit": 2,
+  "borne": 1,
+  "fondement": 3,
+  "ponderation": 1,
+  "modele": 1,
+  "obligatoire": 1,
+  "hubs": 1,
+  "terminaux": 1,
+  "broadcast": 1,
+  "agregat": 1,
+  "spof": 1,
+  "titre": 1,
+  "date": 1,
+  "format": 16,
+  "tableaux": 1,
+  "figures": 1,
+  "bibliographie": 1,
+  "valeurs": 1,
+  "protocole": 1,
+  "auteurs": 8,
+  "revue": 6,
+  "apport": 8,
+  "conference": 2,
+  "cible": 4,
+  "methode": 4,
+  "disponibilite": 1,
+  "securite": 1,
+  "capacites": 10,
+  "acteurs": 1,
+  "invariants": 10,
+  "critiques": 10,
+  "resultat_attendu": 10,
+  "declencheur": 7,
+  "algorithmes": 7,
+  "messages": 1,
+  "scenario": 26,
+  "acteur": 13,
+  "reseau": 5,
+  "invariant": 4,
+  "resultat": 3,
+  "message": 6,
+  "delai": 1,
+  "corpus": 56,
+  "n": 1,
+  "n_sim": 1,
+  "confiance": 2,
+  "transfere_au_dela_de_30": 1,
+  "transfere_au_dela_de": 3,
+  "compromis": 1,
+  "regle": 1,
+  "verifiable": 11,
+  "test": 11,
+  "consomme": 5,
+  "fournit": 5,
+  "fichier": 15,
+  "entites": 6,
+  "densite": 2,
+  "id_likec4": 7,
+  "population": 7,
+  "categorie_visuelle": 7,
+  "domaine": 7,
+  "role_scene": 7,
+  "note": 1,
+  "consiste_de": 4,
+  "rendu": 10
  }
 }

@@ -102,7 +102,7 @@ model {
     // -----------------------------------------------------------------------
     //  2. CAPTEURS (kind sensor)
     //     Chaque capteur est une source de donnees identifiable. Les
-    //     capteurs feedent `onboard.sensors-hal` par la relation feeds.
+    //     capteurs feedent `onboard.sensorsHAL` par la relation feeds.
     // -----------------------------------------------------------------------
 
     imu = sensor 'HW_IMU — Centrale inertielle' {

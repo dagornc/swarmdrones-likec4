@@ -527,7 +527,7 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
 
 **Autonomie :** Conception : continuité nominale locale sans C2 ni cloud ; vérifier les conditions et limites dans les hypothèses.
 
-**Références :** §4.1 onboard.sensors-hal ; consulter les relations de traçabilité vers les hypothèses et ADR.
+**Références :** §4.1 onboard.sensorsHAL ; consulter les relations de traçabilité vers les hypothèses et ADR.
 
 **Statut :** description de conception, pas une mesure de disponibilité. Les budgets EXTRAP sont à valider.
 
@@ -537,7 +537,7 @@ Abstraction materielle capteurs/actionneurs. Absorbe l'heterogeneite des platefo
         criticite 'best-effort'
         frequence 'selon capteur'
         principe 'abstraction obligatoire (HARDWARE)'
-        source '§4.1 onboard.sensors-hal'
+        source '§4.1 onboard.sensorsHAL'
       }
       style { icon bootstrap:cpu }
     }
@@ -2160,7 +2160,7 @@ deployment {
       18 UAV-R (multirotors), 8 UAV-F (voilure fixe), 4 USV.
       Les 30 instances sont materialisees : chacune execute la MEME pile
       logicielle onboard (instanceOf onboard), seule la plateforme physique
-      differe (absorbee par onboard.sensors-hal). Cf. hypothese H1.
+      differe (absorbee par onboard.sensorsHAL). Cf. hypothese H1.
     '''
     style { color zoneOnboard }
 

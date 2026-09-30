@@ -12,6 +12,8 @@ L'existant est **de bonne qualité architecturale mais inexploitable comme base 
 2. **Le modèle ne couvre que ~30 % du périmètre cible.** Il décrit correctement le déploiement (onboard/edge/C2/cloud) mais **il n'existe aucun objet de première classe** pour : `message`, `event`, `command`, `telemetry`, `topic`, `channel`, `protocol`, `interface`, `sensor`, `actuator`, `computeNode`, `function`, `capability`, `algorithm` (au sens catalogue complet), `scientificPaper`.
 3. **Le modèle est plus riche que ce que le fichier local contient.** `point4/` (validé, exporté, actif) contient 97 éléments et 22 vues ; `architecture.c4` local n'en contenait que 41 éléments et 17 vues. **Régression silencieuse** : un lot complet (produits du marché, algorithmes, risques, angles morts, décisions ouvertes) avait été perdu côté fichier de travail.
 
+> **MISE À JOUR 2026-09-30.** Constat n°3 périmé : la régression a été absorbée, le modèle racine est la tête de version (58 vues, 513 noms qualifiés), et `point4/` est supprimé (commit `72389f7`). Constats n°1 et n°2 : voir les mises à jour de P-01 et P-05.
+
 **Verdict** : ne pas réécrire. **Consolider d'abord** (fait), puis **refonder la spécification** (kinds + relations typées), puis **étendre par lots traçables**. La structure logique existante (zones, composants, hypothèses, ADR) est saine et doit être préservée à l'identique.
 
 **Score de qualité actuel : 31/100** (détail §6). Cible de clôture : ≥ 90/100.
@@ -28,33 +30,35 @@ Le **workspace actif** n'est pas le dossier de travail. Vérifié par `docker in
 - Bind mount : `/docker/likec4/workspace` → `/data` (rw).
 - `likec4 validate /data` → **✓ Valid (2 files)**, projet `swarmdrones`.
 
-**Fait critique** : `/docker/likec4/workspace/*.c4` est **bit-à-bit identique à `point4/*.c4`**, et **diffère de 606 lignes** de `swarmdrones_likec4/architecture.c4`.
+**Fait critique (état 2026-09-30)** : `/docker/likec4/workspace/*.c4` est **bit-à-bit identique à `point4/*.c4`**, et **diffère de 606 lignes** de `swarmdrones_likec4/architecture.c4`.
 
 Interprétation : `point4/` est la **véritable tête de version**. Le fichier racine était une copie régressée.
+
+> **MISE À JOUR 2026-09-30 — cette section est périmée.** La situation décrite ici a été résolue depuis : le fichier racine a été resynchronisé depuis `point4/`, puis enrichi (58 vues contre 22, 513 noms qualifiés). `point4/` a été **supprimé** (commit `72389f7`) : ses 8 `.md` sources ont été déplacés vers `docs/sources/`, ses 5 `.png` vers `export/point4_v1/`, ses `.c4` supprimés après vérification qu'ils étaient absorbés par le modèle racine. Le modèle actif est désormais la racine, et `likec4 validate` porte sur 20 fichiers source.
 
 ### 1.2 Arborescence utile
 
 ```
 swarmdrones_likec4/
-├── architecture.c4        1630 l.  ← modèle (spécification + logique + déploiement)
-├── views.c4                684 l.  ← 22 vues
+├── architecture.c4        2228 l.  ← modèle (spécification + logique + déploiement)
+├── views.c4                        ← 58 vues
+├── algorithms.c4                   ← catalogue des 15 algorithmes canoniques
+├── hardware.c4                     ← architecture matérielle
 ├── likec4.config.json              ← projet "swarmdrones"
 ├── export_likec4.sh                ← procédure d'export (5 leçons capitalisées)
-├── point4/                         ← TÊTE DE VERSION (active)
-│   ├── architecture.c4 / views.c4
-│   └── *.md (décisions, risques, vérifications, mapping)
-├── backup_v1..v6/                  ← historique linéaire (650→1626 l.)
-├── backup_v7_regression/           ← état régressé préservé (ne pas supprimer)
+├── docs/sources/                   ← 8 .md sources (ex-point4/, déplacés le 2026-09-30)
+├── archive/backups/                ← backup_v1..v21 (4,2 Mo, non versionnés)
 ├── drawio/ 16 fichiers              ← exports DrawIO
 ├── png/ 16 fichiers                 ← exports PNG
 └── docs/                           ← LIVRABLES DE CETTE MISSION
 ```
 
-L'historique `backup_v1 → v6 → point4` est **linéaire et non destructif** : chaque lot a son backup. Bonne pratique à conserver.
+L'historique `backup_v1 → v6 → point4` était **linéaire et non destructif** : chaque lot avait son backup. Les backups sont désormais regroupés dans `archive/backups/` (commit `eb59d0a`).
 
 ### 1.3 Conventions déjà en place (à préserver)
 
-- **Identifiants** : `zone.composant` en minuscules, point comme séparateur (`onboard.sensors-hal`, `edge.gateway`). **Stable, lisible, exploitable par machine.** ✔
+- **Identifiants** : `zone.composant` en **camelCase**, point comme séparateur (`onboard.sensorsHAL`, `edge.gateway`). **Stable, lisible, exploitable par machine.** ✔
+  - ⚠️ **Piège** : la forme kebab-case (`onboard.sensors-hal`) est **invalide** comme référence LikeC4 — elle n'existe que dans les documents sources. Le libellé affiché peut être en kebab (`'Interfaces capteurs'`), mais l'identifiant technique reste camelCase. Voir `docs/sources/mapping_ids_annexe_v1.md`.
 - **Organisation des fichiers** : spécification + modèle + déploiement dans `architecture.c4` ; vues dans `views.c4`. Séparation saine.
 - **En-têtes de section** en commentaires ASCII, avec justification et renvoi de section du document source. Rare et précieux.
 - **Traçabilité documentaire** : chaque composant porte `metadata.source = '§4.1 onboard.x'`, et il existe une **entité `docSource`** matérialisant le document dans le graphe. C'est un mécanisme de traçabilité réel, pas déclaratif.
@@ -91,10 +95,10 @@ Mesuré sur le **modèle compilé** (`docker exec likec4 likec4 export json`), p
 
 | Zone | Composants | Contenu |
 |---|---|---|
-| `onboard` (x30) | 13 | sensors-hal, perception, autopilot, safety, mission, task-auction, health, energy, telemetry, link |
+| `onboard` (x30) | 13 | sensorsHAL, perception, autopilot, safety, mission, taskAuction, health, energy, telemetry, linkRadio |
 | `edge` (1..N) | 5 | relay, fusion, coordinator, cache, gateway |
-| `c2` | 6 | gcs, planner, auth, mission-store, alerting (+1) |
-| `cloud` | 4 | twin, analytics, model-registry, replay-store |
+| `c2` | 6 | gcs, planner, auth, missionStore, alerting (+1) |
+| `cloud` | 4 | twin, analytics, modelRegistry, replayStore |
 | Hors zone | 69 | hypothèses, décisions, produits, algorithmes, risques, angles morts |
 
 ### 2.4 Vues existantes (22)
@@ -152,7 +156,7 @@ Le métamodèle actuel (13 kinds) **ne peut pas représenter** les objets exigé
 
 ### P-03 — Régression silencieuse du fichier de travail · CRITICITÉ HAUTE (corrigée)
 
-**Fait mesuré.** `diff point4/architecture.c4 architecture.c4` → 606 lignes de différence. 56 éléments présents dans `point4` **absents** du fichier racine : 14 produits du marché, 7 algorithmes, 16 angles morts, 15 risques, 4 décisions ouvertes. Idem pour `views.c4` (5 vues, dont `decisionsOuvertes`, `techAutopilot`, `techComms`, `techData`, `riskMatrix`, `blindspotBySeverity`).
+**Fait mesuré (état d'origine).** `diff point4/architecture.c4 architecture.c4` → 606 lignes de différence. 56 éléments présents dans `point4` **absents** du fichier racine : 14 produits du marché, 7 algorithmes, 16 angles morts, 15 risques, 4 décisions ouvertes. Idem pour `views.c4` (5 vues, dont `decisionsOuvertes`, `techAutopilot`, `techComms`, `techData`, `riskMatrix`, `blindspotBySeverity`).
 
 **Cause probable** : un profil a patché le fichier racine depuis un état antérieur (backup_v3, 1029 lignes) sans resynchroniser depuis le workspace actif. `architecture.c4.bak` (261 octets) et `architecture.c4.bak_point4` (47 ko) témoignent de manipulations manuelles.
 
@@ -161,6 +165,8 @@ Le métamodèle actuel (13 kinds) **ne peut pas représenter** les objets exigé
 **Action prise** : état régressé préservé dans `backup_v7_regression/`, puis `architecture.c4` et `views.c4` restaurés depuis `point4/`. **Vérifié identique au workspace actif.**
 
 **Règle à inscrire au mode opératoire** : *toujours comparer le fichier de travail au mount Docker avant de patcher ; toujours valider puis prouver l'identité (`diff`) après écriture.*
+
+> **MISE À JOUR 2026-09-30 — résolu et clos.** La régression a été absorbée : le modèle racine compte désormais **58 vues** (contre 22) et **513 noms qualifiés**, et couvre les 56 éléments autrefois manquants. Les 7 familles algorithmiques de `point4/` ont été remplacées par les objets de catalogue `algXxx` de `algorithms.c4` (correspondance 1:1, métadonnées plus riches : DOI, repository, `executionMode`, `evidenceLevel`). `point4/` est supprimé (commit `72389f7`). La règle de comparaison au mount Docker reste valable.
 
 ### P-04 — Aucune source scientifique dans le modèle · CRITICITÉ HAUTE
 
@@ -180,7 +186,9 @@ Pourtant le modèle s'appuie sur des affirmations scientifiques fortes, présent
 
 **Fait mesuré.** Le kind `platform` est une **frontière de zone** (`onboard = platform 'Plateformes onboard (x30)'`), pas un objet matériel. Il n'existe **aucun** `sensor`, `actuator`, `computeNode`, `flightController`, `companionComputer`.
 
-Les capteurs et actionneurs sont des **phrases** dans `radios` (`external 'Radios / GNSS / Capteurs'`) et dans la description de `onboard.sensors-hal`.
+Les capteurs et actionneurs sont des **phrases** dans `radios` (`external 'Radios / GNSS / Capteurs'`) et dans la description de `onboard.sensorsHAL`.
+
+> **MISE À JOUR 2026-09-30 — traité.** `hardware.c4` existe désormais : il déclare les capteurs (`imu`, `gnss`, `odometry`, `perceptionRel`, `saeSensor`, `healthSensor`), les actionneurs (`propulsion`, `servos`), les nœuds de calcul (`companion`, `flightCtrl`) et les relations matérielles (`hardware.c4:243-254`).
 
 **Conséquence** : l'étape 8 (« modéliser le drone de référence » avec Flight Controller, Companion Computer, Navigation, Perception, Safety Manager, Sensors, Actuators) est **irréalisable** sur le métamodèle actuel. Or c'est la base des 30 instances et des assets Blender.
 

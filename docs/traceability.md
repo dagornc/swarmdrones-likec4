@@ -75,5 +75,7 @@ python3 tools/qa/integrity_check.py         # 7/7 controles OK
 
 ## Sauvegardes
 
-`backup_v1`..`backup_v20` + `point4` — chaque epic a son point de restauration.
+`archive/backups/backup_v1`..`backup_v21` — chaque epic a son point de restauration
+(regroupés le 2026-09-30). `point4/` a été supprimé (commit `72389f7`) : ses `.md`
+sources sont dans `docs/sources/`, ses `.png` dans `export/point4_v1/`.
 **Aucune information utile n'a été supprimée** : tout a été ajouté par surcouche.

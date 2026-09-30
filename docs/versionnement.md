@@ -8,15 +8,15 @@ Le **savoir** : sources du modèle, code de vérification, documentation, script
 - `tools/` — pipeline d'export, contrats exécutables, générateur d'assets
 - `viewer/` — le consommateur 3D et son test de logique
 - `docs/` — spécifications et documentation
+- `docs/sources/` — 8 documents sources (ex-`point4/`, déplacés le 2026-09-30)
 - `export_likec4.sh` — script d'export, porteur des leçons apprises
-- `point4/` — analyses (le markdown porte le raisonnement)
 
 ## Ce qui n'est PAS versionné
 
 Le **produit régénérable** : tout ce qu'un script peut recalculer.
 
-- `backup_v*/` — 22 sauvegardes manuelles antérieures à git (4,2 Mo de doublons)
-- `png/*.png`, `point4/*.png`, `*.drawio` — exports d'images LikeC4 (~25 Mo)
+- `archive/backups/` — 22 sauvegardes manuelles antérieures à git (4,2 Mo de doublons), regroupées le 2026-09-30
+- `png/*.png`, `export/point4_v1/*.png`, `*.drawio` — exports d'images LikeC4 (~25 Mo)
 - `export/scene.json`, `viewer/scene.json` + empreintes
 - `assets/glb/*.glb`, `assets/assets.json`, `assets/preview.png`
 
@@ -50,5 +50,5 @@ Le dépôt contenait initialement 27 Mo d'objets git : des fichiers lourds
   perte accidentelle de fichiers, **pas** contre la perte de la machine.
   Un `git remote add` vers un hébergement est une décision à prendre
   séparément (implique de publier — attention si le contenu devient sensible).
-- Un seul commit : l'historique commence maintenant. Il ne raconte pas les
-  versions antérieures, qui sont figées dans `backup_v*/`.
+- Un seul commit initial : l'historique commence à la mise sous versionnement. Il ne raconte pas les
+  versions antérieures, qui sont figées dans `archive/backups/`.
