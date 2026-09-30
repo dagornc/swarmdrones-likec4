@@ -697,6 +697,68 @@ model {
   }
 
   // ===========================================================================
+  //  1quater. SOURCES AJOUTEES — carte t_658c0e12 LOT pending01 (2026-09-29)
+  // ===========================================================================
+
+// =============================================================================
+//  PENDING LOT 01 (2026-09-29, carte t_658c0e12) — 5 rattachees / 1 specdoc_only (completion SCI-29) / 3 deja rattachees / 36 ecartees — SOURCES RATTACHEES (statut CONSULTEE)
+// =============================================================================
+
+  srcHETCEnergyAware = specDoc 'Energy-Aware Hybrid Event-Triggered Control for Micro-Drones (IMAV 2025)' {
+    #science
+    link https://www.imavs.org/papers/2025/15.pdf "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones"
+    description '''
+      Controle hybride declenche par evenement (HETC) pour micro-drones en reseau : un timer de surete fixe (borne Zeno) combine a un seuil ajustable reagissant a l etat du drone, pour equilibrer communication, performance et energie. Valide en simulation 6-DOF quadrotor sur 4 trajectoires (suivi rectiligne/courbe, vol stationnaire) : reduction de la frequence de communication ET de l energie totale.
+    '''
+    metadata { annee '2025'; nature 'acte de conference (IMAV 2025)'; corpus '168'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcJumpPointSwarm = specDoc 'Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm (2025)' {
+    #science
+    link https://thesai.org/Downloads/Volume16No4/Paper_26-Path_Planning_Technology_for_Unmanned_Aerial_Vehicle_Swarm.pdf "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm"
+    description '''
+      Planification de trajectoire multi-UAV par algorithme Jump Point Search ameliore : detection geometrique de collision pour optimiser la recherche, fenetre dynamique (DWA) pour contraindre le domaine de vol, et champs de collision pour la planification collaborative. Resultats : erreur de controle minimale en X/Y/Z, 1002 ms et 17.85 m en planification statique multi-obstacles, evitement et re-planification valides sur grille 29x29 m.
+    '''
+    metadata { annee '2025'; nature 'article (IJACSA vol.16 n4)'; corpus '172'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcBioEventCollision = specDoc 'Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments (2025)' {
+    #science
+    link https://doi.org/10.1049/csy2.70006 "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments"
+    description '''
+      Detection d obstacles dynamiques par camera evenementielle (neuromorphique) inspiree du paradigme temporel de la vision biologique : le mecanisme de reponse biologique aux objets en approche permet la perception et l identification de menaces de collision. Valide simulation + reel, 97 % de taux de succes en detection d obstacles en exterieur.
+    '''
+    metadata { doi '10.1049/csy2.70006'; annee '2025'; nature 'article (IET Cyber-Systems and Robotics)'; corpus '183'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcIC3BF = specDoc 'Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs (2025)' {
+    #science
+    link https://doi.org/10.1109/YAC66630.2025.11150122 "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs"
+    description '''
+      C3BF ameliore (IC3BF) pour l evitement de collision d UAV sous obstacles dynamiques sans violer les limites d actionneurs : rayon de relaxation temps-variant qui relache partiellement les contraintes de surete du C3BF, formule comme CBF avec dynamique auxiliaire stabilisee par CLF. Reduit le conservatisme du C3BF, trajectoires plus lisses, commande plus faible.
+    '''
+    metadata { doi '10.1109/YAC66630.2025.11150122'; annee '2025'; nature 'article de conference (IEEE YAC 2025)'; corpus '194'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcDelayStability = specDoc 'Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law (2025)' {
+    #science
+    link https://doi.org/10.3390/axioms14070519 "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law"
+    description '''
+      Critere de stabilite dependant du retard pour le suivi de trajectoire d essaims d UAV a voilure fixe sous retour de commande retarde : combinaison Routh-Hurwitz + equation caracteristique transcendante, identification d un seuil de retard critique au-dela duquel le suivi devient instable. Simulations numeriques confirmant la perte de stabilite quand le retard augmente.
+    '''
+    metadata { doi '10.3390/axioms14070519'; annee '2025'; nature 'article (Axioms 14(7):519)'; corpus '198'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  srcDMPCFormationEval = specDoc 'Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swarm (2025)' {
+    #science
+    link https://doi.org/10.3390/drones9050366 "Distributed Model Predictive Formation Control for UAVs and Cooperative Capability Evaluation of Swarm"
+    description '''
+      DMPC pour la formation d UAV en environnement obstrue : fonction de cout de formation ajustant positions et vitesses relatives, fonction d evitement d obstacles pour une formation sure, et metriques d evaluation de la capacite cooperative de l essaim en plusieurs dimensions.
+    '''
+    metadata { doi '10.3390/drones9050366'; annee '2025'; nature 'article (Drones 9(5):366)'; corpus '193'; statut 'CONSULTEE (abstract lu, 2026-09-29)' }
+  }
+
+  // ===========================================================================
   //  2. VERDICTS — une affirmation, un verdict, une raison
   //     C est le coeur d E08 : le verdict est un OBJET, pas un commentaire.
   // ===========================================================================
@@ -1533,6 +1595,55 @@ sciAgileTargetCapture = finding 'SCI-55 — Capture de cible par formation circu
   }
 
   // ===========================================================================
+  //  2bis. VERDICTS AJOUTES — carte t_658c0e12 LOT pending01 (2026-09-29)
+  // ===========================================================================
+
+  sciHETCEnergyAware = finding 'SCI-56 — Controle hybride event-triggered energy-aware pour micro-drones' {
+    #science
+    link https://www.imavs.org/papers/2025/15.pdf "Energy-Aware Hybrid Event-Triggered Control for Micro-Drones"
+    description '''
+      srcHETCEnergyAware documente le couplage algEventTriggeredComm x algEnergyAware : le declenchement hybride (timer de surete + seuil adaptatif) reduit a la fois le trafic de communication et la consommation d energie, sans sacrifier la surete. Complement de SCI-6 (event-triggered generique) : ici l angle energie ET la borne Zeno par timer fixe. VERDICT : SUPPORTED pour le mecanisme (HETC energy-aware) ; CONDITIONAL — simulation 6-DOF, echelle a confronter a N=30.
+    '''
+    metadata { verdict 'SUPPORTED (HETC energy-aware) / CONDITIONAL (simulation)'; niveau_preuve 'MEDIUM'; source 'srcHETCEnergyAware'; correction_modele 'algEventTriggeredComm + algEnergyAware : declenchement hybride (timer de surete + seuil adaptatif) reduisant trafic et energie' }
+  }
+
+  sciJumpPointSwarm = finding 'SCI-57 — Planification de trajectoire multi-UAV par Jump Point Search ameliore' {
+    #science
+    link https://thesai.org/Downloads/Volume16No4/Paper_26-Path_Planning_Technology_for_Unmanned_Aerial_Vehicle_Swarm.pdf "Path Planning Technology for Unmanned Aerial Vehicle Swarm Based on Improved Jump Point Algorithm"
+    description '''
+      srcJumpPointSwarm documente algPathPlanning par JPS ameliore + fenetre dynamique + champs de collision pour la planification collaborative d essaim, avec evitement d obstacles et re-planification face aux minima locaux. Complement de la famille path planning (A*/RRT/RHCR) : ici JPS ameliore a cout borne. VERDICT : SUPPORTED pour le mecanisme (JPS + DWA + champs de collision) ; CONDITIONAL — simulation sur grille 29x29 m, echelle a confronter.
+    '''
+    metadata { verdict 'SUPPORTED (JPS ameliore + DWA) / CONDITIONAL (simulation)'; niveau_preuve 'MEDIUM'; source 'srcJumpPointSwarm'; correction_modele 'algPathPlanning : JPS ameliore + fenetre dynamique + champs de collision (collaboratif)' }
+  }
+
+  sciBioEventCollision = finding 'SCI-58 — Detection de collision neuromorphique par camera evenementielle' {
+    #science
+    link https://doi.org/10.1049/csy2.70006 "Bioinspired framework for real-time collision detection with dynamic obstacles in cluttered outdoor environments"
+    description '''
+      srcBioEventCollision documente le front-end de PERCEPTION d algCollisionAvoidance : detection temps-reel d obstacles dynamiques par camera evenementielle bioinspiree (97 % en reel), alimentant l evitement. Complement de la famille collision avoidance (CBF/collision cone) : ici le capteur et la detection, pas la loi d evitement. VERDICT : SUPPORTED pour le mecanisme (detection neuromorphique de menace de collision) ; CONDITIONAL — mono-capteur, integration a la boucle d evitement a valider.
+    '''
+    metadata { verdict 'SUPPORTED (detection neuromorphique) / CONDITIONAL (mono-capteur)'; niveau_preuve 'MEDIUM'; source 'srcBioEventCollision'; correction_modele 'algCollisionAvoidance : front-end de detection de collision par camera evenementielle (97 % reel)' }
+  }
+
+  sciIC3BF = finding 'SCI-59 — Collision cone CBF ameliore avec rayon de relaxation temps-variant' {
+    #science
+    link https://doi.org/10.1109/YAC66630.2025.11150122 "Improved Collision Cone Control Barrier Functions for Dynamic Obstacle Avoidance of UAVs"
+    description '''
+      srcIC3BF documente algCollisionAvoidance + algSafetyRules : le rayon de relaxation temps-variant resout le conflit contraintes de surete / limites d actionneurs (optimisation insoluble), en relachant partiellement le C3BF sous stabilisation CLF. Complement de la famille CBF (SCI-28/SCI-31) : ici la gestion des limites d actionneurs. VERDICT : SUPPORTED pour le mecanisme (IC3BF temps-variant) ; CONDITIONAL — simulation, validation en vol a confirmer.
+    '''
+    metadata { verdict 'SUPPORTED (IC3BF temps-variant) / CONDITIONAL (simulation)'; niveau_preuve 'MEDIUM'; source 'srcIC3BF'; correction_modele 'algCollisionAvoidance + algSafetyRules : relaxation temps-variante du C3BF sous limites d actionneurs' }
+  }
+
+  sciDelayStability = finding 'SCI-60 — Critere de stabilite sous retard pour la formation d essaim a voilure fixe' {
+    #science
+    link https://doi.org/10.3390/axioms14070519 "Stability Analysis of Fixed-Wing UAV Swarms Under Time-Delayed Tracking Control Law"
+    description '''
+      srcDelayStability documente algFormationControl sous l angle de la STABILITE : critere dependant du retard (Routh-Hurwitz + equation transcendante) avec seuil de retard critique pour le maintien de formation. Complement de la famille formation sous retard (srcMultiLeaderDelay) : ici la preuve de stabilite formelle, pas le declenchement. VERDICT : SUPPORTED pour le mecanisme (critere de stabilite sous retard) ; CONDITIONAL — analyse theorique, transposition au controleur embarque a valider.
+    '''
+    metadata { verdict 'SUPPORTED (critere de stabilite sous retard) / CONDITIONAL (theorique)'; niveau_preuve 'MEDIUM-HAUTE'; source 'srcDelayStability'; correction_modele 'algFormationControl : seuil de retard critique pour la stabilite du suivi de formation' }
+  }
+
+  // ===========================================================================
   //  3. TROUS DE BENCHMARK — ce qu il faudrait pour lever les doutes
   //     Declares comme objets : ce sont des cibles de recherche futures.
   // ===========================================================================
@@ -1772,4 +1883,21 @@ sciAgileTargetCapture = finding 'SCI-55 — Capture de cible par formation circu
   sciAgileTargetCapture -[evidences]-> algFormationControl 'formations de capture circulaires non uniformes'
   sciAgileTargetCapture -[evidences]-> algCollisionAvoidance 'evitement d obstacles en environnement dense'
   sciAgileTargetCapture -[uses]-> srcAgileTargetCapture 'source primaire'
+
+  // --- Rattachements carte t_658c0e12 LOT pending01 (2026-09-29) ---
+// --- Relations du lot ---
+  sciHETCEnergyAware -[evidences]-> algEventTriggeredComm 'declenchement hybride (timer fixe + seuil adaptatif)'
+  sciHETCEnergyAware -[evidences]-> algEnergyAware 'reduction conjointe de la frequence de communication et de l energie'
+  sciHETCEnergyAware -[uses]-> srcHETCEnergyAware 'source primaire'
+  sciJumpPointSwarm -[evidences]-> algPathPlanning 'Jump Point Search ameliore + fenetre dynamique + champs de collision'
+  sciJumpPointSwarm -[uses]-> srcJumpPointSwarm 'source primaire'
+  sciBioEventCollision -[evidences]-> algCollisionAvoidance 'detection bioinspiree de menaces de collision (camera evenementielle)'
+  sciBioEventCollision -[uses]-> srcBioEventCollision 'source primaire'
+  sciIC3BF -[evidences]-> algCollisionAvoidance 'collision cone CBF ameliore (IC3BF)'
+  sciIC3BF -[evidences]-> algSafetyRules 'relaxation sure des contraintes sous limites d actionneurs (CLF)'
+  sciIC3BF -[uses]-> srcIC3BF 'source primaire'
+  sciDelayStability -[evidences]-> algFormationControl 'critere de stabilite dependant du retard (Routh-Hurwitz + equation transcendante)'
+  sciDelayStability -[uses]-> srcDelayStability 'source primaire'
+  sciDMPCSafetyZones -[uses]-> srcDMPCFormationEval 'complete SCI-29 (DMPC formation + evitement) — apport : metriques d evaluation de capacite cooperative'
+
 }
