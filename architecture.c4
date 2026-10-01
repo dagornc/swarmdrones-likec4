@@ -2052,6 +2052,185 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   c2.alerting -[exposed-to]-> blindspotAM16 'escalades en rafale non mesurees'
   c2.planner -[exposed-to]-> blindspotAM16 'replanification sous incertitude a charge humaine'
 
+  // ===========================================================================
+  //  SPECIFICATION DETAILLEE — onboard.sensorsHAL (COMP_SENSORS_HAL v1)
+  //  Generee par la methode loop engineering (2026-10-01).
+  //  Moule : swarm_spec_template_v3 (spec d algorithme) + H-Zip v2.2 (spec systeme).
+  //  Sources : 14 articles academiques 2021-2026, identifiants arXiv verifies.
+  // ===========================================================================
+
+  specSensorsHAL = specDoc 'Specification detaillee — COMP_SENSORS_HAL (v1)' {
+    #source-doc
+    link https://likec4.breizh.ai/specification/Spec_COMP_SENSORS_HAL_v1.pdf "Specification detaillee HAL capteurs v1 (PDF) — depot public dagornc/swarmdrones-likec4 (specification/)"
+    description 'Document de specification detaillee du composant HAL capteurs onboard.sensorsHAL (Interfaces capteurs), version v1, dans le depot public dagornc/swarmdrones-likec4 (specification/). Genere par la methode loop engineering (6 passes : diverger, converger, attaquer, corriger, industrialiser, verifier). Moule premium : swarm_spec_template_v3 (7 blocs : Identite, Interface, Etats, Protocole, Comportement, Metriques, Verification) + H-Zip v2.2 (controle du document, annexes). Contenu : 18 pages, 20 tableaux, 14 sources academiques primaires (arXiv 2021-2026) toutes resolues et concordantes. Constat d attaque (passe 3) : le corpus scientifique local SwarmDrone (2338 entrees) ne contient AUCUN article sur les couches d abstraction materielle (recherche hardware abstraction layer : 0 resultat) — la specification s appuie donc sur une recherche arXiv directe. Traçabilite : composant onboard.sensorsHAL, fonction fnSensorAcquisition (FN_SENSOR_ACQUISITION, capacite CAP_PERCEIVE), angle mort blindspotAM11 (ontologie commune non specifiee), implementations MicroXRCEDDS (primaire) et MAVLinkMAVSDK (secondaire). Niveau de confiance : MEDIUM — CONDITIONNEL (architecture et besoin documentes ; performances non mesurees, redondance non declaree, ontologie commune a specifier).'
+    metadata {
+      composant 'COMP_SENSORS_HAL'
+      elementLikeC4 'onboard.sensorsHAL'
+      versions '1 (v1)'
+      versionCourante 'v1 (2026-10-01)'
+      nature 'specification genie logiciel interne'
+      statut 'PUBLIE'
+      methode 'loop engineering (6 passes)'
+      moule 'swarm_spec_template_v3 + H-Zip v2.2'
+      pages '18'
+      tableaux '20'
+      sources '14 (arXiv 2021-2026, identifiants verifies)'
+      criticite 'safety-critical'
+      fonction 'FN_SENSOR_ACQUISITION'
+      capacite 'CAP_PERCEIVE'
+      angleMort 'blindspotAM11'
+      confiance 'MEDIUM — CONDITIONNEL'
+    }
+  }
+
+  // -- Sources academiques de la specification (14) ---------------------------
+  //  Chaque source est un specDoc #science rattache a specSensorsHAL par `uses`.
+  //  Identifiants arXiv verifies le 2026-10-01 (14/14 resolus, titres concordants).
+
+  srcHALSwarmNxt = specDoc 'SwarmNxt: Open-source Software-Hardware Platform for Fast and Agile Aerial Swarms (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.11382 "SwarmNxt: Open-source Software-Hardware Platform for Fast and Agile Aerial Swarms"
+    description '''
+      Plateforme ouverte materiel+logiciel pour essaims aeriens rapides et agiles. Confirme le besoin d une couche d abstraction pour la portabilite entre plateformes heterogenes.
+    '''
+    metadata { arxiv '2609.11382'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'portabilite materielle' }
+  }
+
+  srcHALMira = specDoc 'MIRA: A Modular Open-Source Micro-UAV for Indoor Research (2026)' {
+    #science
+    link https://arxiv.org/abs/2607.11785 "MIRA: A Modular Open-Source Micro-UAV for Indoor Research"
+    description '''
+      Micro-UAV modulaire open-source. Pont companion-autopilote conteneurise : architecture directement comparable a la HAL (frontiere logicielle entre calculateur de bord et controleur de vol).
+    '''
+    metadata { arxiv '2607.11785'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'architecture companion-autopilote' }
+  }
+
+  srcHALPerceptionMiddleware = specDoc 'Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.24964 "Perception-Aware Communication Middleware for Distributed Visual Perception in UAV Swarms"
+    description '''
+      Middleware de communication sensible a la perception pour la perception visuelle distribuee en essaim. Distingue la QoS de perception de la QoS paquet : justifie une frontiere contractuelle au niveau des donnees completes plutot que du transport.
+    '''
+    metadata { arxiv '2609.24964'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'frontiere contractuelle perception' }
+  }
+
+  srcHALContextPlane = specDoc 'Fleets Need a Context Plane: Rethinking Cooperative Perception for Autonomous Drones (2026)' {
+    #science
+    link https://arxiv.org/abs/2609.00659 "Fleets Need a Context Plane: Rethinking Cooperative Perception for Autonomous Drones"
+    description '''
+      Le partage contextuel reduit le volume echange de 90-95 pourcent : argument quantitatif pour la normalisation en amont (une representation commune evite de transporter le brut).
+    '''
+    metadata { arxiv '2609.00659'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'normalisation en amont' }
+  }
+
+  srcHALRos2Survey = specDoc 'A Survey of Real-Time Support, Analysis, and Advancements in ROS 2 (2025)' {
+    #science
+    link https://arxiv.org/abs/2601.10722 "A Survey of Real-Time Support, Analysis, and Advancements in ROS 2"
+    description '''
+      Revue du support temps reel dans ROS 2 : architecture en couches et ordonnancement. Reference pour les exigences de determinisme de la couche d acquisition.
+    '''
+    metadata { arxiv '2601.10722'; annee '2025'; nature 'preprint (revue)'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'determinisme temps reel' }
+  }
+
+  srcHALMicroRosExecutor = specDoc 'Budget-based real-time Executor for Micro-ROS (2021)' {
+    #science
+    link https://arxiv.org/abs/2105.05590 "Budget-based real-time Executor for Micro-ROS"
+    description '''
+      Executif temps reel a budget sur microcontroleur : modele pour le bornage temporel de l acquisition cote MCU.
+    '''
+    metadata { arxiv '2105.05590'; annee '2021'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'bornage temporel MCU' }
+  }
+
+  srcHALHyperDog = specDoc 'HyperDog: An Open-Source Quadruped Robot Platform Based on ROS2 and micro-ROS (2022)' {
+    #science
+    link https://arxiv.org/abs/2209.09171 "HyperDog: An Open-Source Quadruped Robot Platform Based on ROS2 and micro-ROS"
+    description '''
+      Deploiement micro-ROS sur plateforme robotique reelle : validation du choix d implementation MicroXRCEDDS pour le pont MCU-DDS.
+    '''
+    metadata { arxiv '2209.09171'; annee '2022'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'validation micro-ROS' }
+  }
+
+  srcHALSyncline = specDoc 'The Syncline Model — Analyzing the Impact of Time Synchronization in Sensor Fusion (2022)' {
+    #science
+    link https://arxiv.org/abs/2209.01136 "The Syncline Model — Analyzing the Impact of Time Synchronization in Sensor Fusion"
+    description '''
+      Modele quantitatif de l impact de la synchronisation temporelle sur la precision de fusion. Resultat decisif : la qualite de la synchronisation borne la precision de fusion independamment du bruit intrinseque des capteurs. Justifie que l horodatage soit une exigence contractuelle de la HAL.
+    '''
+    metadata { arxiv '2209.01136'; annee '2022'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'synchronisation temporelle — source decisive' }
+  }
+
+  srcHALTemporalCalib = specDoc 'EKF-Based Radar-Inertial Odometry with Online Temporal Calibration (2025)' {
+    #science
+    link https://arxiv.org/abs/2502.00661 "EKF-Based Radar-Inertial Odometry with Online Temporal Calibration"
+    description '''
+      Estimation en ligne du decalage temporel entre capteurs dans un EKF : methode applicable a la normalisation temporelle de la HAL.
+    '''
+    metadata { arxiv '2502.00661'; annee '2025'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'calibration temporelle en ligne' }
+  }
+
+  srcHALTemporalDelay = specDoc 'Impact of Temporal Delay on Radar-Inertial Odometry (2025)' {
+    #science
+    link https://arxiv.org/abs/2503.02509 "Impact of Temporal Delay on Radar-Inertial Odometry"
+    description '''
+      Quantifie l effet du retard temporel sur l odometrie radar-inertielle : justifie une exigence bornee sur l horodatage des mesures.
+    '''
+    metadata { arxiv '2503.02509'; annee '2025'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'impact du retard' }
+  }
+
+  srcHALI2Nav = specDoc 'i2Nav-Robot: A Large-Scale Indoor-Outdoor Robot Dataset for Multi-Sensor Fusion Navigation (2025)' {
+    #science
+    link https://arxiv.org/abs/2508.11485 "i2Nav-Robot: A Large-Scale Indoor-Outdoor Robot Dataset for Multi-Sensor Fusion Navigation"
+    description '''
+      Jeu de donnees multi-capteurs indoor-outdoor avec configuration et synchronisation documentees : reference de conception pour le banc de test de la HAL.
+    '''
+    metadata { arxiv '2508.11485'; annee '2025'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'banc multi-capteurs' }
+  }
+
+  srcHALExtrinsicCalib = specDoc 'Ground Plane-Aided Extrinsic Calibration of Inertial and RGB-D Sensors for Uncrewed Aerial Vehicles (2026)' {
+    #science
+    link https://arxiv.org/abs/2606.31019 "Ground Plane-Aided Extrinsic Calibration of Inertial and RGB-D Sensors for Uncrewed Aerial Vehicles"
+    description '''
+      Calibration extrinseque inertiel + RGB-D assistee par plan de sol, sans cible dediee : methode pour l etalonnage des reperes capteurs, source du risque d erreur systematique de position.
+    '''
+    metadata { arxiv '2606.31019'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'calibration extrinseque' }
+  }
+
+  srcHALMarsDragonfly = specDoc 'MARS-Dragonfly: Agile and Robust Flight Control of Modular Aerial Robot Systems (2026)' {
+    #science
+    link https://arxiv.org/abs/2604.05499 "MARS-Dragonfly: Agile and Robust Flight Control of Modular Aerial Robot Systems"
+    description '''
+      Controle de vol agile et robuste pour systemes aeriens modulaires reconfigurables : contrainte de robustesse pour une HAL devant absorber des configurations materielles variables.
+    '''
+    metadata { arxiv '2604.05499'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'robustesse modulaire' }
+  }
+
+  srcHALRtShcua = specDoc 'RT-SHCUA: Real-Time Self-Hosted Computer-Use Agent for UAV Control (2026)' {
+    #science
+    link https://arxiv.org/abs/2607.17951 "RT-SHCUA: Real-Time Self-Hosted Computer-Use Agent for UAV Control"
+    description '''
+      Agent temps reel auto-heberge pour le controle de drone : exigences temps reel et de tracabilite pour l integration d agents, contrainte de securite pour la couche d acquisition.
+    '''
+    metadata { arxiv '2607.17951'; annee '2026'; nature 'preprint'; statut 'CONSULTEE (identifiant verifie, 2026-10-01)'; apport 'exigences temps reel agent' }
+  }
+
+  // -- Rattachement : composant -> specification -> sources -------------------
+
+  onboard.sensorsHAL -[documentedBy]-> specSensorsHAL 'specification detaillee v1 (PDF, loop engineering)'
+  specSensorsHAL -[uses]-> srcHALSwarmNxt 'portabilite materielle'
+  specSensorsHAL -[uses]-> srcHALMira 'architecture companion-autopilote'
+  specSensorsHAL -[uses]-> srcHALPerceptionMiddleware 'frontiere contractuelle perception'
+  specSensorsHAL -[uses]-> srcHALContextPlane 'normalisation en amont'
+  specSensorsHAL -[uses]-> srcHALRos2Survey 'determinisme temps reel'
+  specSensorsHAL -[uses]-> srcHALMicroRosExecutor 'bornage temporel MCU'
+  specSensorsHAL -[uses]-> srcHALHyperDog 'validation micro-ROS'
+  specSensorsHAL -[uses]-> srcHALSyncline 'synchronisation temporelle — source decisive'
+  specSensorsHAL -[uses]-> srcHALTemporalCalib 'calibration temporelle en ligne'
+  specSensorsHAL -[uses]-> srcHALTemporalDelay 'impact du retard'
+  specSensorsHAL -[uses]-> srcHALI2Nav 'banc multi-capteurs'
+  specSensorsHAL -[uses]-> srcHALExtrinsicCalib 'calibration extrinseque'
+  specSensorsHAL -[uses]-> srcHALMarsDragonfly 'robustesse modulaire'
+  specSensorsHAL -[uses]-> srcHALRtShcua 'exigences temps reel agent'
+
   // -- element_vers_reference (14)
   riskR1 -[depend-on]-> h2 'contention aggravee par le lien intermittent'
   riskR2 -[justifie]-> adr3 'canaux surete et securite separes a tenir'
