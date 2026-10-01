@@ -1852,7 +1852,7 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   }
 
   blindspotAM11 = blindspot 'AM-11 Ontologie commune non specifiee' {
-    metadata { gravite 'mineur'; statut 'surveiller'; consequence 'Integrations ad hoc; dette technique; jumeau numerique divergent.' }
+    metadata { gravite 'majeur'; statut 'couvrir'; consequence 'Integrations ad hoc; dette technique; jumeau numerique divergent. Frames et unites non normalisees : erreurs silencieuses de facteur d echelle ou de repere.' }
   }
 
   blindspotAM12 = blindspot 'AM-12 Comportement en cas d agent defaillant non traite' {
@@ -2033,7 +2033,7 @@ Stockage des journaux pour rejouabilite et tests de non-regression.
   onboard.health -[exposed-to]-> blindspotAM9 'marge d energie non exposee globalement'
   edge.gateway -[exposed-to]-> blindspotAM10 'frontiere de confiance inter domaines'
   onboard.taskAuction -[exposed-to]-> blindspotAM10 'transfert de tache sans regle d autorite'
-  onboard.sensorsHAL -[exposed-to]-> blindspotAM10 'frames et unites heterogenes a normaliser'
+  onboard.sensorsHAL -[exposed-to]-> blindspotAM11 'frames et unites heterogenes a normaliser'
   cloud.twin -[exposed-to]-> blindspotAM11 'schema commun non fixe pour le jumeau'
   edge.fusion -[exposed-to]-> blindspotAM11 'vocabulaire de pistes non normalise'
   cloud.modelRegistry -[exposed-to]-> blindspotAM11 'versionnement de schema non defini'
