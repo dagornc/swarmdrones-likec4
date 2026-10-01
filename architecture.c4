@@ -502,7 +502,7 @@ model {
     metadata { source '§3 zones / §4.1 onboard' }
 
     sensorsHAL = component 'Interfaces capteurs' {
-      #best-effort
+      #safety-critical
       link https://www.kongsberg.com/what-we-do/defence-and-security/remote-weapon-systems/ "PROTECTOR Remote Weapon Systems - Kongsberg"
       link https://maritimerobotics.ams3.digitaloceanspaces.com/statamic/files/mr-mariner-usv-brochure-a3-digital.pdf "Mariner USV Technical Brochure"
       link https://www.exail.com/fr/media-file/7642/exail-datasheet-iguana-e.pdf "Exail Iguana E Datasheet"
