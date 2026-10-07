@@ -64,6 +64,11 @@ confiance de chaque entrée et signale ce qui reste à vérifier. Les dates
 revendiquées ne sont pas des preuves — la métadonnée décisive est résolue
 contre la source primaire.
 
+**Version publiable** : les métadonnées bibliographiques des 2 609 entrées
+(titres, sources, DOI, arXiv, confiance, périmètre) sont publiées dans
+[`corpus-public/`](corpus-public/) — sans les PDF ni le contenu des articles,
+qui restent soumis au droit d'auteur de leurs éditeurs.
+
 ### 2. Modèle d'architecture sémantique (LikeC4)
 
 Le modèle est la **source de vérité sémantique** : il décrit *ce qui existe, ce

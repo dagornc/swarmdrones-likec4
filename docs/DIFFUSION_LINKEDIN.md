@@ -56,7 +56,11 @@ Chaque chiffre cité est vérifié et reproductible.
 > L'honnêteté épistémique n'est pas une posture ici : c'est un contrôle
 > automatisé. Le dépôt refuse d'affirmer une valeur chiffrée non sourcée.
 >
-> https://github.com/dagornc/swarmdrones-likec4
+> Les métadonnées des 2 609 entrées sont publiques (titres, sources, DOI,
+> arXiv, niveau de confiance) — sans les PDF, qui restent soumis au droit
+> d'auteur de leurs éditeurs.
+>
+> https://github.com/dagornc/swarmdrones-likec4/tree/master/corpus-public
 >
 > #Recherche #VeilleScientifique #IA #Drones
 
