@@ -2,7 +2,7 @@
 
 **3676 entrées** de veille scientifique sur les essaims de drones.
 
-**Dernière mise à jour : 2026-10-07 19:56 UTC**
+**Dernière mise à jour : 2026-10-07 19:57 UTC**
 
 ## Niveau de confiance
 

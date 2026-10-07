@@ -6,7 +6,7 @@ Métadonnées bibliographiques d'un corpus de veille scientifique sur les
 **3676 entrées** — titres, sources, DOI, identifiants arXiv, niveau de
 confiance, périmètre, description courte et date de publication.
 
-**Dernière mise à jour : 2026-10-07 19:56 UTC**
+**Dernière mise à jour : 2026-10-07 19:57 UTC**
 
 > **Ce qui est publié ici** : uniquement des **faits bibliographiques publics**
 > (titre, URL source, DOI, arXiv, hôte, classification, description courte).
