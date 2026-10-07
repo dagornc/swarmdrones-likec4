@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christophe Dagorn — De l'article scientifique au code vérifié</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#30363d;
+    --fg:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --accent2:#3fb950;
+    --warn:#d29922; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:48px 24px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:32px;margin-bottom:40px}
+  h1{font-size:2rem;line-height:1.25;margin:0 0 12px;letter-spacing:-.02em}
+  h2{font-size:1.3rem;margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:1.05rem;margin:28px 0 10px;color:var(--accent)}
+  p{margin:0 0 14px}
+  .lead{font-size:1.1rem;color:var(--muted);max-width:70ch}
+  .tag{display:inline-block;font-size:.75rem;font-family:var(--mono);
+    background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+    padding:3px 10px;margin:0 6px 6px 0;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .card .n{font-size:1.7rem;font-weight:700;color:var(--accent);font-family:var(--mono);line-height:1.1}
+  .card .l{font-size:.85rem;color:var(--muted);margin-top:6px}
+  .chain{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:24px 0}
+  .step{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:14px;position:relative}
+  .step .k{font-family:var(--mono);font-size:.72rem;color:var(--accent2);letter-spacing:.08em}
+  .step .t{font-weight:600;margin:6px 0 4px;font-size:.95rem}
+  .step .d{font-size:.82rem;color:var(--muted)}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:16px;overflow-x:auto;font-family:var(--mono);font-size:.85rem;line-height:1.5}
+  code{font-family:var(--mono);font-size:.88em;background:var(--panel2);
+    padding:2px 6px;border-radius:5px}
+  pre code{background:none;padding:0}
+  .ok{color:var(--accent2)}
+  .warn{color:var(--warn)}
+  ul{margin:0 0 14px;padding-left:22px}
+  li{margin:6px 0}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:20px 0}
+  .link{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;display:block}
+  .link .lt{font-weight:600;font-size:.95rem}
+  .link .lu{font-family:var(--mono);font-size:.78rem;color:var(--muted);word-break:break-all}
+  .note{background:var(--panel2);border-left:3px solid var(--warn);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:.92rem}
+  .note strong{color:var(--warn)}
+  footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.85rem}
+  @media print{body{background:#fff;color:#111}.card,.step,.link,pre{background:#f6f8fa;border-color:#d0d7de}
+    h2{border-color:#d0d7de}.lead,.card .l,.step .d,.link .lu{color:#57606a}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>De l'article scientifique au code vérifié</h1>
+  <p class="lead">
+    Une chaîne d'ingénierie système complète et falsifiable sur un essaim de
+    30 plateformes autonomes : veille scientifique → modèle d'architecture
+    sémantique → spécifications SysML v2 → implémentations Rust → parité
+    bit-à-bit mesurée.
+  </p>
+  <div>
+    <span class="tag">Ingénierie système</span>
+    <span class="tag">MBSE</span>
+    <span class="tag">LikeC4</span>
+    <span class="tag">SysML v2</span>
+    <span class="tag">Rust</span>
+    <span class="tag">Essaims de drones</span>
+  </div>
+</header>
+
+<h2>Le problème</h2>
+<p>
+  Concevoir un essaim de plateformes autonomes qui maintient une
+  <strong>décision d'état partagée sans coordinateur central</strong> exige de
+  tenir ensemble quatre choses que l'industrie traite habituellement séparément :
+  la littérature scientifique, l'architecture, les spécifications formelles et
+  le code. La plupart des projets perdent la traçabilité entre ces couches.
+  Ici, elle est <strong>mécanisée</strong>.
+</p>
+
+<h2>La chaîne, en cinq étapes</h2>
+<div class="chain">
+  <div class="step"><div class="k">01 — VEILLE</div><div class="t">Corpus scientifique</div>
+    <div class="d">2 609 entrées, 805 PDF, niveau de confiance tracé</div></div>
+  <div class="step"><div class="k">02 — MODÈLE</div><div class="t">LikeC4</div>
+    <div class="d">521 éléments, 942 relations, 0 référence pendante</div></div>
+  <div class="step"><div class="k">03 — SPEC</div><div class="t">SysML v2</div>
+    <div class="d">15 fichiers générés depuis le modèle</div></div>
+  <div class="step"><div class="k">04 — CODE</div><div class="t">Rust</div>
+    <div class="d">15 dépôts publics, tests verts</div></div>
+  <div class="step"><div class="k">05 — PREUVE</div><div class="t">Parité</div>
+    <div class="d">4 100 comparaisons, 0 écart</div></div>
+</div>
+
+<h2>Les chiffres, vérifiés de première main</h2>
+<div class="grid">
+  <div class="card"><div class="n">2 609</div><div class="l">entrées de veille scientifique</div></div>
+  <div class="card"><div class="n">521</div><div class="l">éléments d'architecture</div></div>
+  <div class="card"><div class="n">942</div><div class="l">relations, 0 pendante</div></div>
+  <div class="card"><div class="n">15</div><div class="l">spécifications SysML v2</div></div>
+  <div class="card"><div class="n">15</div><div class="l">implémentations Rust</div></div>
+  <div class="card"><div class="n">209</div><div class="l">tests passés, 0 échec</div></div>
+  <div class="card"><div class="n">4 100</div><div class="l">comparaisons de parité, 0 écart</div></div>
+  <div class="card"><div class="n">99<span style="font-size:1rem;color:var(--muted)">/100</span></div><div class="l">quality gate du modèle</div></div>
+</div>
+
+<h2>Vérifier soi-même</h2>
+<p>Une commande clone, compile, teste et vérifie la parité :</p>
+<pre><code>git clone https://github.com/dagornc/SwarmDrones.git
+cd SwarmDrones &amp;&amp; ./demo.sh</code></pre>
+<p>Résultat attendu sur les 15 algorithmes :</p>
+<pre><code><span class="ok">✓</span> build OK
+<span class="ok">✓</span> 209 tests passés, 0 échec
+<span class="ok">✓</span> parité bit-à-bit vérifiée, 0 écart</code></pre>
+
+<h2>Explorer</h2>
+<div class="links">
+  <a class="link" href="https://likec4.breizh.ai">
+    <div class="lt">Modèle d'architecture (servi)</div>
+    <div class="lu">likec4.breizh.ai</div></a>
+  <a class="link" href="https://github.com/dagornc/swarmdrones-likec4">
+    <div class="lt">Dépôt du modèle + corpus public</div>
+    <div class="lu">github.com/dagornc/swarmdrones-likec4</div></a>
+  <a class="link" href="https://github.com/dagornc/SwarmDrones">
+    <div class="lt">Orchestrateur (submodules épinglés)</div>
+    <div class="lu">github.com/dagornc/SwarmDrones</div></a>
+  <a class="link" href="https://github.com/dagornc/alg-formation-control">
+    <div class="lt">Un algorithme, de bout en bout</div>
+    <div class="lu">github.com/dagornc/alg-formation-control</div></a>
+</div>
+
+<h2>Ce que la chaîne refuse d'affirmer</h2>
+<p>L'honnêteté épistémique est une propriété du système, pas une posture :</p>
+<ul>
+  <li>Aucune <strong>valeur chiffrée non sourcée</strong> (contrôle automatisé).</li>
+  <li>Aucune <strong>coordonnée 3D</strong> dans le modèle sémantique.</li>
+  <li>Aucun algorithme marqué « validé » tant qu'il reste <code>idea</code> /
+      <code>conceptual</code> dans le modèle.</li>
+  <li>Les <strong>DOI morts</strong> sont signalés, pas remplacés par une source inventée.</li>
+  <li>Les <strong>sources orphelines</strong> sont listées comme telles.</li>
+</ul>
+
+<div class="note">
+  <strong>Ce que la parité prouve</strong> : les deux simulateurs (Rust et
+  Python) calculent exactement la même chose.<br>
+  <strong>Ce qu'elle ne prouve pas</strong> : la validité scientifique de la loi
+  de commande, sa stabilité formelle, ou son aptitude au vol réel. Les
+  simulateurs sont cinématiques en 2D — aucune dynamique de vol, aucun essai
+  matériel.
+</div>
+
+<h2>Reproductibilité</h2>
+<p>
+  L'orchestrateur agrège les 15 algorithmes et les protocoles en
+  <strong>git submodules épinglés à des commits précis</strong> — pas des
+  branches flottantes. Cloner le dépôt à une date donnée redonne exactement les
+  mêmes versions de chaque composant.
+</p>
+
+<footer>
+  <strong>Christophe Dagorn</strong> — ingénieur informatique (INSA Rennes).<br>
+  Licence MIT · Page autonome, sans dépendance externe · 2026-10-07
+</footer>
+
+</div>
+</body>
+</html>
