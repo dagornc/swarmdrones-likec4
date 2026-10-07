@@ -1,245 +1,207 @@
-# SWARM-3D — Modèle LikeC4 comme source de vérité sémantique
+# SWARM-3D — De l'article scientifique au code vérifié
 
-Ce dépôt contient le **modèle sémantique** d'un essaim de 30 plateformes
-autonomes (26 aériens + 4 de surface), destiné à alimenter un
-**environnement pédagogique** et un **simulateur Web 3D** (Blender + moteur 3D).
+**Une chaîne d'ingénierie système complète et falsifiable** : veille scientifique
+automatisée → modèle d'architecture sémantique → spécifications SysML v2 →
+implémentations Rust → parité bit-à-bit mesurée.
 
-> **Principe fondateur** — LikeC4 est la **source de vérité sémantique**.
-> Blender et le moteur 3D en sont des **consommateurs**. Le modèle ne contient
-> **aucune coordonnée 3D** : il décrit *ce qui existe, ce que ça fait, et ce
-> qui est prouvé*. La spatialisation appartient au consommateur.
+> Ce dépôt n'est pas une maquette. Chaque affirmation qu'il porte est adossée à
+> un artefact exécutable, et chaque artefact à un test qui **échoue** quand la
+> promesse est violée.
 
-> **Propriété distinctive de ce dépôt** — la chaîne de consommation n'est pas
-> *décrite* : elle est **exécutable et falsifiable**. Un modèle qui se contente
-> d'exporter du JSON est une promesse ; ici, chaque promesse porte un test qui
-> **échoue** quand elle est violée.
+---
 
-## Démarrage rapide
+## Le problème
+
+Concevoir un essaim de plateformes autonomes (26 aériennes + 4 de surface) qui
+maintient une **décision d'état partagée sans coordinateur central** exige de
+tenir ensemble quatre choses que l'industrie traite habituellement séparément :
+
+- la **littérature scientifique** qui fonde chaque choix algorithmique ;
+- l'**architecture** du système et ses dépendances ;
+- les **spécifications formelles** exigibles en certification ;
+- le **code** qui implémente réellement, et la preuve qu'il fait ce qu'il dit.
+
+La plupart des projets perdent la traçabilité entre ces quatre couches. Ici,
+elle est **mécanisée**.
+
+---
+
+## La chaîne, en cinq étapes
+
+```
+  ┌─────────────────┐   ┌──────────────────┐   ┌─────────────────┐
+  │  1. VEILLE      │   │  2. MODÈLE       │   │  3. SPÉCIFICATION│
+  │  SCIENTIFIQUE   │──▶│  SÉMANTIQUE      │──▶│  FORMELLE        │
+  │  2 609 entrées  │   │  LikeC4          │   │  SysML v2        │
+  │  805 PDF        │   │  521 éléments    │   │  15 fichiers     │
+  │  confiance      │   │  942 relations   │   │  traçables       │
+  │  tracée         │   │  0 référence     │   │                  │
+  │                 │   │  pendante        │   │                  │
+  └─────────────────┘   └──────────────────┘   └─────────────────┘
+                                                       │
+                                                       ▼
+  ┌─────────────────┐   ┌──────────────────┐   ┌─────────────────┐
+  │  5. PREUVE      │   │  4. IMPLÉMENTATION│  │                 │
+  │  Parité         │◀──│  Rust            │◀─┘                 │
+  │  bit-à-bit      │   │  15 dépôts       │                    │
+  │  200/200        │   │  publics         │                    │
+  │  identiques     │   │  tests verts     │                    │
+  └─────────────────┘   └──────────────────┘
+```
+
+### 1. Veille scientifique traçable
+
+Un corpus de **2 609 entrées** (805 PDF) collecté et maintenu par un pipeline
+automatisé, avec un **inventaire de confiance explicite** :
+
+- 1 308 candidats primaires (A-primary-candidate)
+- 797 documents d'artefacts (B-artifact-documentation)
+- 34 sources officielles (B-official)
+- 420 non vérifiées, 48 découvertes, 2 signalées suspectes
+
+Le corpus **ne prétend pas** que tout est fiable : il **trace** le niveau de
+confiance de chaque entrée et signale ce qui reste à vérifier. Les dates
+revendiquées ne sont pas des preuves — la métadonnée décisive est résolue
+contre la source primaire.
+
+### 2. Modèle d'architecture sémantique (LikeC4)
+
+Le modèle est la **source de vérité sémantique** : il décrit *ce qui existe, ce
+que ça fait, et ce qui est prouvé*. Il ne contient **aucune coordonnée 3D** —
+la spatialisation appartient aux consommateurs (Blender, moteur Web).
+
+- **20 fichiers** `.c4`, **521 éléments**, **942 relations**, **70 vues**
+- **0 référence pendante** (aucune cible fantôme)
+- `likec4 validate` → **✓ Valid (20 files)**
+- Quality gate : **99/100** (11 critères calculés)
+- Contrôle d'intégrité : **7/7** (contrôles que la syntaxe ne voit pas)
+
+### 3. Spécifications SysML v2
+
+**15 fichiers** `.sysml`, un par algorithme canonique, générés depuis le modèle
+avec traçabilité vers le composant d'accueil (`perform` / `satisfy`).
+
+Réserve assumée : la syntaxe n'est pas validée par un outil OMG (aucun
+disponible dans l'environnement). Le contrôle structurel maison passe 15/15.
+**La réserve est documentée, pas dissimulée.**
+
+### 4. Implémentations Rust
+
+**15 dépôts publics** `alg-*`, un par algorithme, chacun avec son code, ses
+tests, sa référence Python normative et son harnais de parité.
+
+Exemple vérifié de première main (`alg-formation-control`) :
+
+```
+cargo build --release   →  succès
+cargo test              →  5/5 tests passés, 0 échec
+verify_parite_rust.py   →  200/200 comparaisons identiques, 0 écart
+                           PARITÉ BIT-À-BIT VÉRIFIÉE
+```
+
+### 5. Preuve de parité
+
+La parité Rust ↔ Python est mesurée sur 50 graines × 4 scénarios (nominal,
+perte de liens, perturbation, formation à 12 agents), après conversion des
+flottants en représentation IEEE 754 binaire.
+
+**Ce que la parité prouve** : les deux simulateurs calculent exactement la même
+chose.
+**Ce qu'elle ne prouve pas** : la validité scientifique de la loi de commande,
+sa stabilité formelle, ou son aptitude au vol réel. Cette distinction est
+maintenue partout dans le dépôt.
+
+---
+
+## Reproductibilité
+
+L'orchestrateur [`SwarmDrones`](https://github.com/dagornc/SwarmDrones) agrège
+les 15 algorithmes et les protocoles en **git submodules épinglés à des commits
+précis** — pas des branches flottantes. Cloner le dépôt à une date donnée
+redonne exactement les mêmes versions.
 
 ```bash
-# Validation (obligatoire avant toute livraison)
-docker exec likec4 likec4 validate /data          # attendu : ✓ Valid (20 files)
+git clone --recurse-submodules https://github.com/dagornc/SwarmDrones.git
+```
 
-# Qualité : 11 critères calculés, score /100 (cible ≥ 90)
-python3 tools/qa/quality_gate.py                  # attendu : 99/100 — GATE: PASS
+---
+
+## Vérifier soi-même
+
+```bash
+# Modèle : validation outil réel
+docker exec likec4 likec4 validate /data        # attendu : ✓ Valid (20 files)
+
+# Qualité : 11 critères, score /100
+python3 tools/qa/quality_gate.py                # attendu : 99/100 — GATE: PASS
 
 # Intégrité : 7 contrôles que la syntaxe ne voit pas
-python3 tools/qa/integrity_check.py               # attendu : 7/7 OK
+python3 tools/qa/integrity_check.py             # attendu : 7/7 OK
 
-# Cohérence modèle <-> code : le modèle dit-il la vérité sur les dépôts ?
-python3 tools/qa/check_model_code_consistency.py  # attendu : 15/15, FAIL=0 WARN=0
+# Cohérence modèle <-> code
+python3 tools/qa/check_model_code_consistency.py  # attendu : 15/15, FAIL=0
 
-# Artefact pour le moteur 3D
-python3 tools/export/export_scene.py          # écrit export/scene.json + viewer/scene.json
-python3 tools/export/export_scene.py --check  # vérifie l'artefact (INV-4, 30+1, cohérence des copies)
+# Un algorithme, de bout en bout
+git clone https://github.com/dagornc/alg-formation-control.git
+cd alg-formation-control && cargo test && python3 verify_parite_rust.py
 ```
 
-## Publication du modèle (serveur LikeC4)
+---
 
-> ⚠ **Piège opérationnel** — le viewer LikeC4 sert `public/` depuis un
-> **instantané pris au démarrage du conteneur**. Ajouter un fichier après le
-> démarrage (→ fallback HTML SPA) ou modifier un fichier déjà publié (→ ancienne
-> version) ne change **rien** côté servi. Le **HMR est inopérant** sur le modèle
-> compilé (`/@id/likec4:plugin/swarmdrones/model.js`) : après toute modification
-> d'un fichier `.c4`, **seul `docker restart likec4` publie la nouvelle version**.
-> Détection d'écart disque ↔ servi : `./sync_likec4.sh --drift` (sort en code 1
-> si divergence). Cloudflare ajoute par ailleurs un cache transitoire
-> (`max-age=14400`).
+## Explorer le modèle
 
-## Synchronisation dépôt → copie servie (garde-fous)
+Le modèle est servi publiquement : **[likec4.breizh.ai](https://likec4.breizh.ai)**
 
-Le conteneur `likec4` monte `/docker/likec4/workspace` → `/data` (bind mount).
-Ce répertoire est une **copie**, pas un lien vers ce dépôt : toute édition du
-dépôt est invisible sur `likec4.breizh.ai` tant qu'elle n'est pas copiée.
-Trois mécanismes se complètent. **Aucun ne redémarre le conteneur** : le
-redémarrage reste un acte manuel soumis à l'autorisation explicite de
-Christophe.
+Les 15 spécifications détaillées (PDF) et les 15 fichiers SysML y sont
+également accessibles.
 
-1. **`sync_likec4.sh`** — synchronise le dépôt vers la copie servie.
-   `--check` compare et **nomme** les fichiers divergents (`DIVERGENT x.c4` /
-   `MANQUANT x.c4`) ; `--drift` compare disque ↔ servi. À n'invoquer **sans**
-   `--no-restart` que si l'on dispose de l'autorisation de redémarrer.
+---
 
-2. **Hook `post-commit` versionné** — après chaque commit touchant un `.c4`
-   ou `public/`, il synchronise (toujours avec `--no-restart`).
-   ```bash
-   ./tools/hooks/install.sh   # à lancer sur chaque clone neuf (idempotent)
-   ```
-   Le hook ne s'exécute qu'**après un commit réussi**. Un worker qui écrit des
-   `.c4` puis **crashe sans committer** ne le déclenche jamais : la copie
-   servie reste périmée. C'est l'incident du 2026-09-29 (12 blocs insérés dans
-   `science.c4` sans commit, copie servie en retard de 43 minutes).
+## Ce que ce dépôt refuse d'affirmer
 
-3. **Contrôle périodique `tools/hooks/check_likec4_sync.sh`** — le filet de
-   sécurité : il compare dépôt ↔ copie servie **indépendamment de tout commit**.
-   Silencieux quand tout est synchronisé (exit 0) ; sinon il alerte en
-   **nommant chaque fichier divergent** (exit 1). Appelé par le watchdog du
-   profil swarmdrone (`watchdog_derive_profil.sh`, cron 7 h). Il ne synchronise
-   rien et ne redémarre rien.
-   ```bash
-   ./tools/hooks/check_likec4_sync.sh   # silencieux si OK ; alerte + exit 1 sinon
-   ```
+L'honnêteté épistémique est une propriété du système, pas une posture :
 
-## La chaîne consommateur (exécutable et falsifiable)
+- Aucune **valeur chiffrée non sourcée** (contrôle automatisé I-6).
+- Aucune **coordonnée 3D** dans le modèle sémantique.
+- Aucun algorithme marqué `validé` tant qu'il reste `idea` / `conceptual` /
+  `evidenceLevel NONE` dans le modèle.
+- Les **2 DOI morts** identifiés sont signalés, pas remplacés par une source
+  inventée.
+- Les **11 sources orphelines** sont listées comme telles, pas rattachées
+  d'autorité.
 
-Le modèle est consommé par un **viewer 3D** et par des **assets Blender**.
-Ces trois maillons sont vérifiables indépendamment :
+---
 
-```bash
-# 1. Contrat consommateur — 6 obligations + 6 garde-fous REG-1..REG-6
-python3 tools/export/test_consumer_contract.py
-#   attendu : 8/8 contrôles, 7/7 mutations DÉTECTÉES (le test échoue si on viole le contrat)
+## Limites assumées
 
-# 2. Logique du viewer (sans navigateur, sous Node)
-node viewer/test_viewer_logic.js
-#   attendu : 8/8 contrôles + 6/6 mutations
+Ce dépôt est un **démonstrateur d'ingénierie**, pas un outil opérationnel :
 
-# 3. Rendu 3D réellement mesuré (navigateur headless, readPixels)
-#    Prérequis : le viewer doit être servi en HTTP, et la commande s'exécute
-#    DANS le conteneur (le script référence le Chromium du conteneur).
-python3 -m http.server 8931 --bind 0.0.0.0 &        # sert viewer/
-docker cp tools/export/verify_final.js mcp-playwright:/tmp/vf.js
-docker exec mcp-playwright node /tmp/vf.js
-#   attendu : 74% de pixels non-fond (nonBlackPixels=532443), 93 couleurs,
-#             8/8 contrôles (fail=0), 0 erreur JS
+- Les simulateurs sont **cinématiques en 2D** — aucune dynamique de vol,
+  aucun modèle aérodynamique, aucun délai continu, aucune saturation
+  d'actionneur.
+- La parité prouve la **cohérence d'implémentation**, pas la validité
+  scientifique.
+- Aucun essai matériel n'est inclus.
 
-# 4. Assets glTF alignés sur le modèle, traçabilité embarquée
-blender --background --python tools/assets/build_assets.py -- --check
-#   attendu : 7 assets, catégories alignées, aucune dimension physique revendiquée
+Ces limites sont écrites dans le dépôt, pas cachées dans une annexe.
 
-# 5. Rendu des assets — échoue si l'image est vide
-python3 tools/assets/test_preview.py assets/preview.png
-```
-
-**Ce que « falsifiable » veut dire ici** : chaque test a été validé *contre une
-mutation*. Quand on retire une obligation du contrat, quand on injecte une
-classe inexistante, quand on falsifie une copie de `scene.json`, le test
-**échoue avec un code non nul**. Un test qui ne peut pas échouer ne prouve rien.
-
-## Ce que la chaîne garantit
-
-- **Le modèle ne ment pas sur l'espace** — INV-4 tenu : `transform: null`
-  partout, `coords=0` vérifié à l'export.
-- **Le consommateur ne peut pas inventer** — un `class_id` absent du modèle est
-  détecté (REG-1) ; une valeur interdite (énergie, portée radio) est détectée
-  (REG-2/REG-3) ; la mention « N=30 NON PROUVÉ » est exigée (REG-4).
-- **Les assets sont traçables** — chaque GLB porte `source_category` et
-  `source_class` **dans son binaire**. Aucune dimension physique n'y est
-  revendiquée : l'échelle est une convention de scène.
-- **La sortie ne diverge pas du code** — `export_scene.py --check` échoue si
-  `export/scene.json` et `viewer/scene.json` diffèrent.
-
-## État actuel — **16 epics sur 16 livrés**
-
-| Mesure | Départ (E00) | Maintenant |
-|---|---|---|
-| Score qualité | 31/100 | **99/100** |
-| Éléments | 97 | **405** |
-| Relations typées | 239 (0 typée) | **777 (31 kinds)** |
-| Vues | 22 (5 mortes) | **70 (0 morte)** |
-| Fichiers `.c4` | 2 | **20** |
-
-## Carte des fichiers du modèle
-
-- **`architecture.c4`** (~1630 l.) — architecture fonctionnelle et logique d'origine. Le socle. **Non réécrit.**
-- **`metamodel.c4`** — le métamétamodèle : 55 kinds d'éléments, 31 kinds de relations utilisés, tags et couleurs. **Le contrat de forme du modèle.**
-- **`hardware.c4`** — drone de référence : capteurs, actionneurs, nœuds de calcul, radios.
-- **`messages.c4`** — 13 messages objets, canaux, protocoles, criticité (18 au total dans le modèle, avec `hzip.c4` et `e20`).
-- **`algorithms.c4`** — 15 algorithmes canoniques, 15+ champs chacun (entrées, sorties, hypothèses, verdict).
-- **`facts.c4`** — 6 fiches factuelles sourcées (`factSheet`), matérielles.
-- **`decisions_hw.c4`** — décisions matérielles DE-05..DE-10, **ancrées sur les éléments qu'elles bloquent**.
-- **`functional.c4`** — 8 capacités, 19 fonctions, traçabilité `realizes`.
-- **`deployment.c4`** — chaîne complète Algorithme→Composant→Runtime→Nœud.
-- **`scenarios.c4`** — 10 scénarios dérivés des événements réels, 16 étapes.
-- **`simulation.c4`** — le **contrat de simulation** : ce que le modèle promet, et 5 invariants.
-- **`science.c4`** — 7 sources primaires, 4 constats-verdicts, **4 gaps nommés**.
-- **`worldmodel.c4`** — World Model : 6 zones, 7 entités, 10 états, **6 règles de représentation**.
-- **`views.c4`** — 48 vues, 12 `navigateTo`, aucune vue morte.
-
-## Ce que ce modèle refuse d'affirmer
-
-Le modèle est **honnête sur ses trous** — c'est une propriété, pas une faiblesse :
-
-- **4 GAP-* nommés** « AUCUN ARTICLE TROUVÉ » (CBBA sous partition persistante,
-  CBF hétérogène >30, CRDT en vol sous brouillage RF, fusion EKF ≥100)
-- **CBF à 30 agents = UNSUPPORTED** en conditions réelles : la source primaire
-  donne **5 robots réels**, 30 en simulation. L'affirmation d'origine a été
-  **dégradée**, pas maquillée.
-- **DE-07 énergie NON DÉTERMINÉE** → la règle **REG-2** interdit au
-  consommateur 3D d'afficher une valeur d'énergie
-- **Validation réelle plafonne à 26 plateformes** → **REG-4** exige la mention
-  « N=30 NON PROUVÉ »
-- **Portées radio = annonces commerciales non vérifiées** → **REG-3** interdit
-  d'afficher une portée chiffrée
-
-## Pour le consommateur 3D (Blender / moteur Web)
-
-1. Lire **`export/scene.json`** — l'artefact machine-lisible (34 instances nommées)
-2. Ne **jamais inventer d'identifiant** : tout `id_likec4` vient de la table
-3. Respecter les **6 règles de représentation** (`REG-1`..`REG-6`) — chacune
-   porte un test vérifiable
-4. Population : **UAV-R ×18 + UAV-F ×8 + USV ×4 = 30** + 1 maquette de
-   référence **visuellement distincte**
-
-Détail complet : [`docs/world-model-spec.md`](docs/world-model-spec.md) et
-[`docs/simulation-contract.md`](docs/simulation-contract.md).
+---
 
 ## Documentation
 
-- [`docs/audit-likec4.md`](docs/audit-likec4.md) — audit initial (31/100)
-- [`docs/qa-report.md`](docs/qa-report.md) — validation globale (99/100)
-- [`docs/metamodel.md`](docs/metamodel.md) — contrat de forme
-- [`docs/relations-typing.md`](docs/relations-typing.md) — typage des 239 arcs
-- [`docs/functional.md`](docs/functional.md) — capacités et fonctions
-- [`docs/algorithms.md`](docs/algorithms.md) — catalogue algorithmique
-- [`docs/communications.md`](docs/communications.md) — messages et canaux
-- [`docs/deployment.md`](docs/deployment.md) — déploiement
-- [`docs/scenarios.md`](docs/scenarios.md) — scénarios dynamiques
-- [`docs/simulation-contract.md`](docs/simulation-contract.md) — contrat de simulation
-- [`docs/science.md`](docs/science.md) — référentiel scientifique
-- [`docs/world-model-spec.md`](docs/world-model-spec.md) — spécification World Model
-- [`docs/viewer-3d.md`](docs/viewer-3d.md) — viewer 3D : contrat vérifié et rendu mesuré
-- [`docs/assets-3d.md`](docs/assets-3d.md) — assets Blender : génération traçable
-- [`docs/versionnement.md`](docs/versionnement.md) — ce qui est versionné, et pourquoi
+- [`docs/README_TECHNIQUE.md`](docs/README_TECHNIQUE.md) — documentation
+  technique complète (garde-fous, synchronisation, invariants, outils)
+- [`GOUVERNANCE.md`](GOUVERNANCE.md) — protection contre les régressions
+  silencieuses
+- [`RAPPORT_AUDIT_FINAL_LIKEC4.md`](RAPPORT_AUDIT_FINAL_LIKEC4.md) — audit de
+  cohérence et d'intégrité des liens
+- [`sysml/VALIDATION_REPORT.md`](sysml/VALIDATION_REPORT.md) — validation SysML
+- [`docs/traceability.md`](docs/traceability.md) — traçabilité
 
-## Outils
+---
 
-- `tools/audit_inventory.py` — inventaire initial
-- `tools/arc_classify.py` / `tools/arc_apply.py` — typage des relations
-- `tools/qa/quality_gate.py` — score qualité /100 (11 critères calculés)
-- `tools/qa/integrity_check.py` — 7 contrôles d'intégrité structurelle
-- `tools/export/export_scene.py` — génère l'artefact `scene.json` (+ `--check`)
-- `tools/export/test_consumer_contract.py` — contrat consommateur + mutations
-- `tools/export/verify_final.js` — preuve de rendu (navigateur headless)
-- `tools/assets/build_assets.py` — génère les 7 assets glTF (+ `--check`)
-- `tools/assets/render_preview.py` + `test_preview.py` — rendu et test falsifiable
-- `viewer/index.html` — viewer 3D (three.js) avec moteur de vérification intégré
-- `viewer/test_viewer_logic.js` — test de la logique viewer sous Node
+## Auteur
 
-## Limites assumées (démonstrateur, pas outil opérationnel)
+**Christophe Dagorn** — ingénieur informatique (INSA Rennes).
 
-Ce dépôt **démontre une méthode** : comment un modèle sémantique devient une
-chaîne de consommation vérifiable. Il n'est **pas** un simulateur opérationnel.
-
-- **Les formations sont illustratives** — anneaux déterministes montrant la
-  population, pas une dynamique de vol. Aucun modèle aérodynamique.
-- **Aucune temporalité** — pas d'horloge de simulation, pas d'état qui évolue.
-- **Les assets 3D ne sont pas chargés par le viewer** — la chaîne actuelle
-  (formes procédurales) et la chaîne Blender (7 GLB traçables) existent
-  séparément. Leur intégration est une étape distincte, non faite.
-- **La 2D de repli n'a été exercée qu'en test** — jamais sur une machine
-  réellement dépourvue de WebGL.
-- **Le rendu validé est logiciel** (SwiftShader) — un GPU réel n'a pas été
-  testé.
-
-Ces limites sont **nommées**, pas dissimulées : c'est la même discipline que le
-modèle applique à ses propres `GAP-*`.
-
-## Invariants à ne jamais violer
-
-1. **INV-1** — La mission nominale ne dépend pas du cloud
-2. **INV-2** — La sûreté reste locale : perte de C2 ≠ perte de sûreté
-3. **INV-3** — La validation à 30 plateformes reste **non prouvée**
-4. **INV-4** — **Aucune 3D dans le modèle sémantique**
-5. **INV-5** — Toute affirmation scientifique est reliée à une source, ou
-   déclarée non prouvée
+Licence MIT.

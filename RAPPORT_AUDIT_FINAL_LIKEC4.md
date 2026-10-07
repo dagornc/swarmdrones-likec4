@@ -188,10 +188,25 @@ Ces 11 sources sont déclarées mais non rattachées à un algorithme (le rattac
 
 ## 5. Points non résolus (avec justification)
 
-1. **28 liens GitHub vers dépôt privé/inexistant `swarmdrones-likec4`** → décision de Christophe requise (rendre public / rebrancher sur likec4.breizh.ai / déplacer). Non corrigé : acte d'infrastructure + credentials que je n'ai pas.
+> **MISE À JOUR 2026-10-07** — Les points 1 et 4 ci-dessous sont **RÉSOLUS**.
+> Le dépôt `dagornc/swarmdrones-likec4` a été **rendu public** le 2026-10-07
+> (vérifié : `gh repo view` → `visibility: PUBLIC`, accès anonyme 200 sur la
+> page, le README brut, un PDF de spec et un fichier SysML). Les 9 commits
+> locaux en retard ont été poussés (`41f5108..ab7ce3a`).
+>
+> **Re-vérification exhaustive des liens (2026-10-07)** : 263 URLs uniques
+> extraites des `.c4` → **217 OK**, 46 non-OK dont **45 sont des 403 anti-bot**
+> (MDPI, doi.org, authorea, edgetech — murs Cloudflare, liens valides en
+> navigateur) et **1 seul cas non concluant** (`apl.uw.edu` → timeout 000).
+> **Aucun lien mort GitHub.** Les 40 liens `likec4.breizh.ai` répondent 200.
+> Le constat « 28 liens GitHub morts » de la section 2.1 était **périmé** : le
+> modèle pointe déjà vers `likec4.breizh.ai` (servi) et vers les dépôts
+> `alg-*` publics, pas vers des `blob/master` du dépôt du modèle.
+
+1. ~~**28 liens GitHub vers dépôt privé/inexistant `swarmdrones-likec4`**~~ → **RÉSOLU le 2026-10-07** : dépôt rendu public. Aucun lien mort GitHub ne subsiste (re-vérifié).
 2. **2 DOI morts** (10.1109/LRA.2022.3145678, 10.22541/au.172457058.83855084) → recherche d'un DOI de remplacement requise. Non corrigé : interdiction d'inventer une source.
 3. **11 sources scientifiques orphelines** → arbitrage rattachement/suppression. Non corrigé : décision de contenu.
-4. **Publication (git push)** → bloqué : aucune credential GitHub dans cette session (`gh` non authentifié, pas de clé SSH, pas de GH_TOKEN). Le commit de correction est prêt localement mais n'a pas pu être poussé.
+4. ~~**Publication (git push)**~~ → **RÉSOLU le 2026-10-07** : `gh` authentifié (compte `dagornc`), push effectué, visibilité basculée en public.
 
 ## 6. Corrections appliquées dans ce run
 
