@@ -2,7 +2,7 @@
 
 3567 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
 
-**Dernière mise à jour : 2026-10-07 16:23 UTC**
+**Dernière mise à jour : 2026-10-07 16:27 UTC**
 
 | # | Date | Description | Titre (lien direct) | Confiance |
 |---:|---|---|---|---|
