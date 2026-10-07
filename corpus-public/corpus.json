@@ -69585,5 +69585,1800 @@
    "2026-10-06"
   ],
   "description": "Video world models can produce visually convincing yet physically inconsistent sequences, raising concerns about their…"
+ },
+ {
+  "n": 3679,
+  "title": "User Association and Transmit Beamforming for Rotatable Antenna-Enabled LAE Networks - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.35010",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.35010"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-28"
+  ],
+  "description": "This paper investigates rotatable antenna (RA)-enabled low-altitude economy (LAE) networks, where multiple base stations (BSs)…"
+ },
+ {
+  "n": 3680,
+  "title": "A Probabilistic Trajectory and Dispersion Study of Martian Tumbleweed Rover Swarms in Global Dust Storm Conditions - DOI",
+  "source_url": "https://doi.org/10.3390/aerospace13100888",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.3390/aerospace13100888"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-29"
+  ],
+  "description": "Global Dust Storms (GDSs) dominate the Martian climate, yet the mechanisms of dust lifting, transport…"
+ },
+ {
+  "n": 3681,
+  "title": "Rotatable Antenna-Enabled Space-Air-Ground Integrated Networks- Opportunities and Challenges - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.37338",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.37338"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-29"
+  ],
+  "description": "Space-air-ground integrated networks (SAGINs) are expected to support ubiquitous three-dimensional (3D) communication and sensing services…"
+ },
+ {
+  "n": 3682,
+  "title": "Dealing with the unknown- Open-set deep learning enables realistic tree species mapping in a Brazilian Woodland Savanna formation - DOI",
+  "source_url": "https://doi.org/10.1016/j.ecoinf.2026.104060",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [
+   "10.1016/j.ecoinf.2026.104060"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "Accurately mapping tree species in highly diverse tropical ecosystems remains challenging because supervised classification models…"
+ },
+ {
+  "n": 3683,
+  "title": "Optimized Multi-Component Attention Graph Convolutional Neural Network for Detecting Invasive Mangrove Plant Derris Trifoliate from UAV Imagery - DOI",
+  "source_url": "https://doi.org/10.1142/s0218126626502026",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1142/s0218126626502026"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "The invasive mangrove species Derris trifoliate (DT) poses a serious threat to coastal ecosystems by…"
+ },
+ {
+  "n": 3684,
+  "title": "Review of Applications, Technologies and Future Trends of Maritime UAV Systems for Smart Ocean Operations - DOI",
+  "source_url": "https://doi.org/10.3390/drones10100737",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "digital-twin",
+   "software-architecture",
+   "models-datasets",
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.3390/drones10100737"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "Maritime unmanned aerial vehicles (UAVs) are increasingly transforming ocean, coastal, port, and offshore operations through…"
+ },
+ {
+  "n": 3685,
+  "title": "Communication-Free Distributed Multi-Robot Task Allocation under Partial Observations Using Labeled Multi-Bernoulli Filtering - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.39416",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "algorithms",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.39416"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "This paper proposes a communication-free multi-robot task allocation framework based solely on local observations. In…"
+ },
+ {
+  "n": 3686,
+  "title": "A PyTorch Library for Hyperspectral Image Models- Technical Report - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.39871",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.39871"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "Rationale: Domain and technical mechanism in title/abstract; applicability still requires review."
+ },
+ {
+  "n": 3687,
+  "title": "Resource allocation in Distributed ISAC Systems- A Location Sensitive Mode Selection and Task Assignment Framework - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.39956",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.39956"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "In this work we propose a region of interest (ROI)-aware mode selection and task assignment…"
+ },
+ {
+  "n": 3688,
+  "title": "Centralized Multi-UAV Exploration and 3D Reconstruction Using Single-UAV Planners - DOI",
+  "source_url": "https://doi.org/10.48550/arxiv.2609.40208",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.48550/arxiv.2609.40208"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "Extending single Unmanned Aerial Vehicles (UAVs) exploration methods to multi-UAV teams can improve coverage speed…"
+ },
+ {
+  "n": 3689,
+  "title": "Stable and Efficient Vision Model for AUV Perception via Multi-Task Learning with Gradient Normalization and Knowledge Distillation - DOI",
+  "source_url": "https://doi.org/10.62527/joiv.10.5.4736",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.62527/joiv.10.5.4736"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "Computer vision in underwater environments faces significant challenges due to severe visual degradation caused by…"
+ },
+ {
+  "n": 3690,
+  "title": "6G-Enabled Intelligent IoT- Emerging Architectures, AI-Native Networking, Digital Twins, and Security Challenges - DOI",
+  "source_url": "https://doi.org/10.71143/sn89wx46",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "digital-twin",
+   "models-datasets",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.71143/sn89wx46"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-09-30"
+  ],
+  "description": "The convergence of sixth-generation (6G) wireless communication, artificial intelligence (AI), edge intelligence, and the Internet…"
+ },
+ {
+  "n": 3691,
+  "title": "HorizonGPTNav- An LLM-based Intelligent Obstacle Avoidance Navigation Framework - DOI",
+  "source_url": "https://doi.org/10.1016/j.mfglet.2026.08.040",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "digital-twin",
+   "software-architecture",
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1016/j.mfglet.2026.08.040"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": "In intelligent manufacturing, robots and humans frequently share the same workspace, which increases the risk…"
+ },
+ {
+  "n": 3692,
+  "title": "An oceanographic physical-feature-consistency-based AUV localization method for long-range mesopelagic missions - DOI",
+  "source_url": "https://doi.org/10.1016/j.oceaneng.2026.127654",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1016/j.oceaneng.2026.127654"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3693,
+  "title": "Fault-tolerant trajectory tracking of a wave-adaptive USV via reconfigurable control allocation - DOI",
+  "source_url": "https://doi.org/10.1016/j.oceaneng.2026.127763",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1016/j.oceaneng.2026.127763"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3694,
+  "title": "Scene-aware robust fusion of side-ranging and forward-looking sonars for AUV perception in water-conveyance tunnels - DOI",
+  "source_url": "https://doi.org/10.1016/j.oceaneng.2026.128031",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1016/j.oceaneng.2026.128031"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3695,
+  "title": "Large Language Model-Based QoS-Aware Resource Allocation for Multi-UAV Cooperative Edge Computing Networks - DOI",
+  "source_url": "https://doi.org/10.1109/tmc.2026.3683128",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "software-architecture"
+  ],
+  "dois": [
+   "10.1109/tmc.2026.3683128"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3696,
+  "title": "AGI-inspired UAV Cluster Communication Self-Organization Framework- Multi-Agent Learning and Network Optimization - DOI",
+  "source_url": "https://doi.org/10.33166/aetic.2026.04.002",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "software-architecture",
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.33166/aetic.2026.04.002"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": "Unmanned Aerial Vehicle (UAV) cluster communication networks play a vital role in Space-Air-Ground Integrated Networks…"
+ },
+ {
+  "n": 3697,
+  "title": "UNMANNED AERIAL VEHICLES AND THE INTERNET OF THINGS IN AGRICULTURE- A SYSTEMATIC REVIEW OF TECHNOLOGICAL DIRECTIONS AND DEVELOPMENT PROSPECTS - DOI",
+  "source_url": "https://doi.org/10.20998/2522-9052.2026.4.06",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "software-architecture",
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.20998/2522-9052.2026.4.06"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "Relevance. Modern agriculture is undergoing a profound cyber-physical transformation driven by the need to shift…"
+ },
+ {
+  "n": 3698,
+  "title": "METHODOLOGY OF RESOURCE-EFFICIENT INTELLIGENT VISUAL NAVIGATION AND POSITIONING OF AUTONOMOUS AERIAL PLATFORMS - DOI",
+  "source_url": "https://doi.org/10.20998/2522-9052.2026.4.08",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.20998/2522-9052.2026.4.08"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "Subject of research: Intelligent visual navigation and positioning processes for autonomous aerial platforms under conditions…"
+ },
+ {
+  "n": 3699,
+  "title": "A GROUND-BASED ROBOTIC SURVEILLANCE ARCHITECTURE FOR EARLY THREAT DETECTION AND REAL-TIME ALERTING IN BORDERLESS MINING ZONES - DOI",
+  "source_url": "https://doi.org/10.30574/gjeta.2026.29.1.0266",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.30574/gjeta.2026.29.1.0266"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "Artisanal, small-scale, and remote mineral extraction sites frequently operate without fixed, legally demarcated perimeters, which…"
+ },
+ {
+  "n": 3700,
+  "title": "Artificial Intelligence Applications for Enhancing Security and Threat Detection in Northeast Nigeria - DOI",
+  "source_url": "https://doi.org/10.64388/irev10i4-1723634",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [
+   "10.64388/irev10i4-1723634"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "The security landscape of Northeast Nigeria has, for over a decade and a half, been…"
+ },
+ {
+  "n": 3701,
+  "title": "AQ-OLSR- ADAPTIVE ROUTING PROTOCOL FOR UAV AD HOC NETWORK Merged with DEEP Q-NETWORK (DQN) ALGORITHM - DOI",
+  "source_url": "https://doi.org/10.66977/xsci.2610.0009",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.66977/xsci.2610.0009"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "Unmanned Aerial Vehicles (UAVs) have emerged recently due to rapid improvements in wireless technology and…"
+ },
+ {
+  "n": 3702,
+  "title": "t-SDBO- A Heterogeneous Multi-Robot Task Allocation Method Based on Chaotic Adaptive Dung Beetle Optimization Algorithm - DOI",
+  "source_url": "https://doi.org/10.3390/a19100848",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "algorithms",
+   "digital-twin",
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.3390/a19100848"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-03"
+  ],
+  "description": "Heterogeneous multi-robot task allocation (MRTA) requires the efficient coordination of robots with different capabilities while…"
+ },
+ {
+  "n": 3703,
+  "title": "LOCDNet- A Lightweight Multi-Target Ship Detection Network for USV Visual Environmental Perception in Dense Occlusion Scenarios - DOI",
+  "source_url": "https://doi.org/10.3390/jmse14191847",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.3390/jmse14191847"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-03"
+  ],
+  "description": "Reliable visual perception of surrounding vessels is essential for situational awareness and safe navigation of…"
+ },
+ {
+  "n": 3704,
+  "title": "SWARM MANUFACTURING & ROBOTIC MATTER AT THE LIMIT Local Agency, Stigmergic Coordination, Distributed Assembly, and the Rise of Factory-Less Production - DOI",
+  "source_url": "https://doi.org/10.5281/zenodo.23145266",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "digital-twin",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.5281/zenodo.23145266"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-04"
+  ],
+  "description": "SWARM MANUFACTURING & ROBOTIC MATTER AT THE LIMIT Local Agency, Stigmergic Coordination, Distributed Assembly, and…"
+ },
+ {
+  "n": 3705,
+  "title": "Multi‐AUV Cooperative SLAM With Depth and Intensity Dual‐Channel Joint Registration - DOI",
+  "source_url": "https://doi.org/10.1002/rob.70354",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1002/rob.70354"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "The leader‐follower multi‐autonomous underwater vehicle (AUV) fleet equipped with multi‐beam echo sounders (MBES) has become…"
+ },
+ {
+  "n": 3706,
+  "title": "ZaB–Zentrum am Berg- Research for New Underground Solutions - DOI",
+  "source_url": "https://doi.org/10.1007/s41781-026-00188-1",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "digital-twin",
+   "models-datasets",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1007/s41781-026-00188-1"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "Zentrum am Berg (ZaB) is a full-scale underground research infrastructure of the Technical University of…"
+ },
+ {
+  "n": 3707,
+  "title": "Green cloud computing architectures and technologies for smart and sustainable agriculture- A systematic literature review, taxonomy, and research age - DOI",
+  "source_url": "https://doi.org/10.1016/j.ssaho.2026.103772",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "digital-twin"
+  ],
+  "dois": [
+   "10.1016/j.ssaho.2026.103772"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "Cloud computing provides scalable computing resources, flexible data storage, and data-analysis capabilities for processing heterogeneous…"
+ },
+ {
+  "n": 3708,
+  "title": "Design, modeling, and nonlinear model predictive control of a novel fully actuated uav for safe transport of hazardous liquids - DOI",
+  "source_url": "https://doi.org/10.1038/s41598-026-73651-z",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms"
+  ],
+  "dois": [
+   "10.1038/s41598-026-73651-z"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "Transporting hazardous liquids with unmanned aerial vehicles (UAVs) demands exceptionally high precision and stability in…"
+ },
+ {
+  "n": 3709,
+  "title": "Fast Algorithm for Centralized Multi-Agent Maze Exploration - DOI",
+  "source_url": "https://doi.org/10.3390/math14193613",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "algorithms"
+  ],
+  "dois": [
+   "10.3390/math14193613"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "Recent advances in robotics have paved the way for robots to replace humans in perilous…"
+ },
+ {
+  "n": 3710,
+  "title": "METHODS AND MEANS OF PRECISE ATTRIBUTION OF UAV PHOTO-VIDEO DATA AT THE LINE OF CONTACT FOR TRAINING NEURAL NETWORKS BASED ON A DUAL-LOOP ARCHITECTURE - DOI",
+  "source_url": "https://doi.org/10.36994/2788-5518-2026-01-11-01",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.36994/2788-5518-2026-01-11-01"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "The article develops methods and software-hardware tools for the precise attribution of photo-video data obtained…"
+ },
+ {
+  "n": 3711,
+  "title": "Active multi-view selection for UAV-satellite remote sensing image matching using Multi-Agent Reinforcement Learning - DOI",
+  "source_url": "https://doi.org/10.1080/01431161.2026.2739606",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1080/01431161.2026.2739606"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-06"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3712,
+  "title": "Vision-Based UAV Interception Using Dynamic Image-Based Visual Servoing, Multi-Objective Predictive Guidance, and Robust Soft Control Barrier Function - DOI",
+  "source_url": "https://doi.org/10.21203/rs.3.rs-11259764/v1",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms"
+  ],
+  "dois": [
+   "10.21203/rs.3.rs-11259764/v1"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-06"
+  ],
+  "description": "This paper investigates vision-based interception of a maneuvering target by a camera-equipped unmanned aerial vehicle…"
+ },
+ {
+  "n": 3713,
+  "title": "A computationally efficient and communication-aware hierarchical task allocation algorithm for large-scale heterogeneous UUV swarms - DOI",
+  "source_url": "https://doi.org/10.1007/s11227-026-08905-8",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1007/s11227-026-08905-8"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-07"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3714,
+  "title": "Hugging Face datasets AhsanBB-MUOT_3M-A_3_Million_Frame_Underwater_Object_Tracking_Dataset",
+  "source_url": "https://huggingface.co/datasets/AhsanBB/MUOT_3M-A_3_Million_Frame_Underwater_Object_Tracking_Dataset",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "MUOT-3M is currently the largest underwater object tracking dataset, containing over 3 million annotated frames…"
+ },
+ {
+  "n": 3715,
+  "title": "Hugging Face datasets Dongkkka-cyclo_intelligence_eef_test_lerobot_v21_eef_rotation_6d",
+  "source_url": "https://huggingface.co/datasets/Dongkkka/cyclo_intelligence_eef_test_lerobot_v21_eef_rotation_6d",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Dongkkka (cyclo_intelligence)"
+ },
+ {
+  "n": 3716,
+  "title": "Hugging Face datasets Gege4526-lerobot_datasets",
+  "source_url": "https://huggingface.co/datasets/Gege4526/lerobot_datasets",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Gege4526"
+ },
+ {
+  "n": 3717,
+  "title": "Hugging Face datasets Project-AgML-UAV_SaSeg_spartina_segmentation",
+  "source_url": "https://huggingface.co/datasets/Project-AgML/UAV_SaSeg_spartina_segmentation",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.5281/ZENODO.18697416"
+  ],
+  "arxiv": [],
+  "dates": [],
+  "description": "UAV-SaSeg is a high-resolution UAV dataset for mapping the invasive salt-marsh grass Spartina alterniflora (smooth…"
+ },
+ {
+  "n": 3718,
+  "title": "Hugging Face datasets Project-AgML-sorghum_uav_nitrogen_regression",
+  "source_url": "https://huggingface.co/datasets/Project-AgML/sorghum_uav_nitrogen_regression",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [
+   "10.5281/ZENODO.13733947"
+  ],
+  "arxiv": [],
+  "dates": [],
+  "description": "UAV RGB plot images of sorghum (Sorghum bicolor) paired with laboratory-measured canopy nitrogen content (N%)…"
+ },
+ {
+  "n": 3719,
+  "title": "Hugging Face datasets Salonip123-drone-bird-detection-dataset",
+  "source_url": "https://huggingface.co/datasets/Salonip123/drone-bird-detection-dataset",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Salonip123"
+ },
+ {
+  "n": 3720,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_173506",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_173506",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3721,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_183459",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_183459",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3722,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_184916",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_184916",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3723,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_192120",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_192120",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3724,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_195143",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_195143",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3725,
+  "title": "Hugging Face datasets Uranus0301-lerobot_so101_battery_sort_20261007_202803",
+  "source_url": "https://huggingface.co/datasets/Uranus0301/lerobot_so101_battery_sort_20261007_202803",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Uranus0301"
+ },
+ {
+  "n": 3726,
+  "title": "Hugging Face datasets cupnb-isaacsim-step-0-0.0.2_test",
+  "source_url": "https://huggingface.co/datasets/cupnb/isaacsim-step-0-0.0.2_test",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de cupnb"
+ },
+ {
+  "n": 3727,
+  "title": "Hugging Face datasets ducido-libero_10_no_noops_1.0.0_lerobot_fewshot5demo",
+  "source_url": "https://huggingface.co/datasets/ducido/libero_10_no_noops_1.0.0_lerobot_fewshot5demo",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "50 human demonstrations of the 10 LIBERO-10 (LIBERO-Long) tasks, 5 per task. They are a…"
+ },
+ {
+  "n": 3728,
+  "title": "Hugging Face datasets gberseth-maniskill_panda_lerobot",
+  "source_url": "https://huggingface.co/datasets/gberseth/maniskill_panda_lerobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de gberseth"
+ },
+ {
+  "n": 3729,
+  "title": "Hugging Face datasets gberseth-maniskill_panda_stick_lerobot",
+  "source_url": "https://huggingface.co/datasets/gberseth/maniskill_panda_stick_lerobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de gberseth (panda_stick)"
+ },
+ {
+  "n": 3730,
+  "title": "Hugging Face datasets harpreetsahota-lerobot-curation-metrics-figures",
+  "source_url": "https://huggingface.co/datasets/harpreetsahota/lerobot-curation-metrics-figures",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Please keep the \"Synthetic, illustrative signals\" footnote that appears on the figures, so the values…"
+ },
+ {
+  "n": 3731,
+  "title": "Hugging Face datasets hedgehog678-lerobot_dataset",
+  "source_url": "https://huggingface.co/datasets/hedgehog678/lerobot_dataset",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de hedgehog678"
+ },
+ {
+  "n": 3732,
+  "title": "Hugging Face datasets lerobot-unitree-g1-hardware-modifications",
+  "source_url": "https://huggingface.co/datasets/lerobot/unitree-g1-hardware-modifications",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "STLs/unitree-g1-openarm-adapter.stl sits between them. The white printed bracket carries the"
+ },
+ {
+  "n": 3733,
+  "title": "Hugging Face datasets lyl472324464-2026-09-28_insert_01-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-09-28_insert_01-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T06:36:09.000Z"
+ },
+ {
+  "n": 3734,
+  "title": "Hugging Face datasets lyl472324464-2026-09-28_insert_02-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-09-28_insert_02-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T06:56:02.000Z"
+ },
+ {
+  "n": 3735,
+  "title": "Hugging Face datasets lyl472324464-2026-10-05_insert_01-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-10-05_insert_01-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T07:11:05.000Z"
+ },
+ {
+  "n": 3736,
+  "title": "Hugging Face datasets lyl472324464-2026-10-05_insert_03-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-10-05_insert_03-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T07:20:08.000Z"
+ },
+ {
+  "n": 3737,
+  "title": "Hugging Face datasets lyl472324464-2026-10-07_insert_01-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-10-07_insert_01-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T07:52:43.000Z"
+ },
+ {
+  "n": 3738,
+  "title": "Hugging Face datasets lyl472324464-2026-10-07_insert_02-lerobot-with-rinse",
+  "source_url": "https://huggingface.co/datasets/lyl472324464/2026-10-07_insert_02-lerobot-with-rinse",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Created: 2026-10-07T08:07:10.000Z"
+ },
+ {
+  "n": 3739,
+  "title": "Hugging Face datasets mangocloud-robotwin-lerobot",
+  "source_url": "https://huggingface.co/datasets/mangocloud/robotwin-lerobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de mangocloud"
+ },
+ {
+  "n": 3740,
+  "title": "Hugging Face datasets nautilus-compass-lerobot-independent-qc",
+  "source_url": "https://huggingface.co/datasets/nautilus-compass/lerobot-independent-qc",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Low native resolution is common, not rare. 4 of the first 14 datasets ship at…"
+ },
+ {
+  "n": 3741,
+  "title": "Hugging Face datasets nobodyiam-lerobot_dataset_20261006_172352",
+  "source_url": "https://huggingface.co/datasets/nobodyiam/lerobot_dataset_20261006_172352",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de nobodyiam"
+ },
+ {
+  "n": 3742,
+  "title": "Hugging Face datasets philippeapra-so100_lerobot",
+  "source_url": "https://huggingface.co/datasets/philippeapra/so100_lerobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de philippeapra"
+ },
+ {
+  "n": 3743,
+  "title": "Hugging Face datasets rob089-lerobot_SO101_mirrors_ball_in_cup",
+  "source_url": "https://huggingface.co/datasets/rob089/lerobot_SO101_mirrors_ball_in_cup",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de rob089 (so101, pi05)"
+ },
+ {
+  "n": 3744,
+  "title": "Hugging Face datasets rob089-lerobot_SO101_mirrors_red_ball_in_blue_cup_20261007_103825",
+  "source_url": "https://huggingface.co/datasets/rob089/lerobot_SO101_mirrors_red_ball_in_blue_cup_20261007_103825",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de rob089"
+ },
+ {
+  "n": 3745,
+  "title": "Hugging Face datasets rob089-lerobot_SO101_mirrors_red_ball_in_white_cup_20261007_113353",
+  "source_url": "https://huggingface.co/datasets/rob089/lerobot_SO101_mirrors_red_ball_in_white_cup_20261007_113353",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de rob089"
+ },
+ {
+  "n": 3746,
+  "title": "Hugging Face datasets rob089-lerobot_SO101_mirrors_yellow_ball_in_blue_cup_20261007_112821",
+  "source_url": "https://huggingface.co/datasets/rob089/lerobot_SO101_mirrors_yellow_ball_in_blue_cup_20261007_112821",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de rob089"
+ },
+ {
+  "n": 3747,
+  "title": "Hugging Face datasets rob089-lerobot_SO101_mirrors_yellow_ball_in_white_cup_20261007_095253",
+  "source_url": "https://huggingface.co/datasets/rob089/lerobot_SO101_mirrors_yellow_ball_in_white_cup_20261007_095253",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de rob089"
+ },
+ {
+  "n": 3748,
+  "title": "Hugging Face datasets theconstruct-ai-data-augmentation-drone",
+  "source_url": "https://huggingface.co/datasets/theconstruct-ai/data-augmentation-drone",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de theconstruct-ai"
+ },
+ {
+  "n": 3749,
+  "title": "Hugging Face datasets ulugbek2013-armpi_fpv_lerobot_v1",
+  "source_url": "https://huggingface.co/datasets/ulugbek2013/armpi_fpv_lerobot_v1",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de ulugbek2013"
+ },
+ {
+  "n": 3750,
+  "title": "Hugging Face models Alsace-wave-lerobot_datasets",
+  "source_url": "https://huggingface.co/Alsace-wave/lerobot_datasets",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Jeu de données Hugging Face de Alsace-wave"
+ },
+ {
+  "n": 3751,
+  "title": "Hugging Face models Gabriel8495839-Multi-Agent",
+  "source_url": "https://huggingface.co/Gabriel8495839/Multi-Agent",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "transfer-candidate",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de Gabriel8495839"
+ },
+ {
+  "n": 3752,
+  "title": "Hugging Face models Umranz-drone-detector-tinyml-v2c1",
+  "source_url": "https://huggingface.co/Umranz/drone-detector-tinyml-v2c1",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "See [FINAL_V2C1_READINESS.md](FINAL_V2C1_READINESS.md) and [AUDIT_V2C1_BINARY.md](AUDIT_V2C1_BINARY.md) for the measured evidence and its limits."
+ },
+ {
+  "n": 3753,
+  "title": "Hugging Face models asaoka-lerobot_pi05_libero",
+  "source_url": "https://huggingface.co/asaoka/lerobot_pi05_libero",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de asaoka"
+ },
+ {
+  "n": 3754,
+  "title": "Hugging Face models dronefreak-uavdt-yolov9e",
+  "source_url": "https://huggingface.co/dronefreak/uavdt-yolov9e",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Evaluated on the UAVDT test split, using DetectionBench's standard evaluation pipeline (detectionbench-evaluate)."
+ },
+ {
+  "n": 3755,
+  "title": "Hugging Face models dronefreak-visdrone-yolov9m",
+  "source_url": "https://huggingface.co/dronefreak/visdrone-yolov9m",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Evaluated on the VisDrone-DET test split, using DetectionBench's standard evaluation pipeline (detectionbench-evaluate)."
+ },
+ {
+  "n": 3756,
+  "title": "Hugging Face models jepa-world-models-h-jepa",
+  "source_url": "https://huggingface.co/jepa-world-models/h-jepa",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Trained models of H-JEPA: End-to-End Learning of Hierarchical World Models for Visual Planning"
+ },
+ {
+  "n": 3757,
+  "title": "Hugging Face models lerobot-MolmoAct2-BimanualYAM-LeRobot",
+  "source_url": "https://huggingface.co/lerobot/MolmoAct2-BimanualYAM-LeRobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de lerobot"
+ },
+ {
+  "n": 3758,
+  "title": "Hugging Face models lerobot-MolmoAct2-DROID-LeRobot",
+  "source_url": "https://huggingface.co/lerobot/MolmoAct2-DROID-LeRobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de lerobot"
+ },
+ {
+  "n": 3759,
+  "title": "Hugging Face models lerobot-MolmoAct2-LIBERO-LeRobot",
+  "source_url": "https://huggingface.co/lerobot/MolmoAct2-LIBERO-LeRobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de lerobot"
+ },
+ {
+  "n": 3760,
+  "title": "Hugging Face models lerobot-MolmoAct2-SO100_101-LeRobot",
+  "source_url": "https://huggingface.co/lerobot/MolmoAct2-SO100_101-LeRobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de lerobot"
+ },
+ {
+  "n": 3761,
+  "title": "Hugging Face models lerobot-MolmoAct2-Think-LIBERO-LeRobot",
+  "source_url": "https://huggingface.co/lerobot/MolmoAct2-Think-LIBERO-LeRobot",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Modèle Hugging Face de lerobot"
+ },
+ {
+  "n": 3762,
+  "title": "Hugging Face models lerobot-Robometer-4B",
+  "source_url": "https://huggingface.co/lerobot/Robometer-4B",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Robometer is a zero-shot general-purpose robotic reward model built on a fine-tuned Qwen3-VL backbone with…"
+ },
+ {
+  "n": 3763,
+  "title": "Hugging Face models lerobot-fastwam_base",
+  "source_url": "https://huggingface.co/lerobot/fastwam_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "If you use this policy, please cite the method linked in the description above, along…"
+ },
+ {
+  "n": 3764,
+  "title": "Hugging Face models lerobot-folding_latest",
+  "source_url": "https://huggingface.co/lerobot/folding_latest",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "π₀.₅ is a Vision-Language-Action model with open-world generalization, from Physical Intelligence. The LeRobot implementation is…"
+ },
+ {
+  "n": 3765,
+  "title": "Hugging Face models lerobot-hy_vla_robotwin",
+  "source_url": "https://huggingface.co/lerobot/hy_vla_robotwin",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Full author-vs-LeRobot forward parity passed for batch sizes 1 and 2."
+ },
+ {
+  "n": 3766,
+  "title": "Hugging Face models lerobot-hy_vla_umi",
+  "source_url": "https://huggingface.co/lerobot/hy_vla_umi",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Full author-vs-LeRobot forward parity passed for batch sizes 1 and 2."
+ },
+ {
+  "n": 3767,
+  "title": "Hugging Face models lerobot-lingbot_va_base",
+  "source_url": "https://huggingface.co/lerobot/lingbot_va_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "If you use this policy, please cite the method linked in the description above, along…"
+ },
+ {
+  "n": 3768,
+  "title": "Hugging Face models lerobot-lingbot_va_libero_long",
+  "source_url": "https://huggingface.co/lerobot/lingbot_va_libero_long",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "If you use this policy, please cite the method linked in the description above, along…"
+ },
+ {
+  "n": 3769,
+  "title": "Hugging Face models lerobot-lingbot_va_robotwin",
+  "source_url": "https://huggingface.co/lerobot/lingbot_va_robotwin",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "If you use this policy, please cite the method linked in the description above, along…"
+ },
+ {
+  "n": 3770,
+  "title": "Hugging Face models lerobot-pi052_robocasa",
+  "source_url": "https://huggingface.co/lerobot/pi052_robocasa",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "If you use this policy, please cite the method linked in the description above, along…"
+ },
+ {
+  "n": 3771,
+  "title": "Hugging Face models lerobot-pi05_base",
+  "source_url": "https://huggingface.co/lerobot/pi05_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Other components from the original work (e.g., subtask prediction, action tokenization, or RL) were not…"
+ },
+ {
+  "n": 3772,
+  "title": "Hugging Face models lerobot-pi05_libero_base",
+  "source_url": "https://huggingface.co/lerobot/pi05_libero_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Other components from the original work (e.g., subtask prediction, action tokenization, or RL) were not…"
+ },
+ {
+  "n": 3773,
+  "title": "Hugging Face models lerobot-pi05_libero_finetuned_quantiles_v044",
+  "source_url": "https://huggingface.co/lerobot/pi05_libero_finetuned_quantiles_v044",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Checkpoint trained and evaluated on LIBERO tasks with Quantiles normalization."
+ },
+ {
+  "n": 3774,
+  "title": "Hugging Face models lerobot-pi05_libero_finetuned_v044",
+  "source_url": "https://huggingface.co/lerobot/pi05_libero_finetuned_v044",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Other components from the original work (e.g., subtask prediction, action tokenization, or RL) were not…"
+ },
+ {
+  "n": 3775,
+  "title": "Hugging Face models lerobot-pi0_base",
+  "source_url": "https://huggingface.co/lerobot/pi0_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "LeRobot implementation: Follows the original reference code for compatibility."
+ },
+ {
+  "n": 3776,
+  "title": "Hugging Face models lerobot-pi0_libero_base",
+  "source_url": "https://huggingface.co/lerobot/pi0_libero_base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "LeRobot implementation: Follows the original reference code for compatibility."
+ },
+ {
+  "n": 3777,
+  "title": "Hugging Face models lerobot-pi0fast-base",
+  "source_url": "https://huggingface.co/lerobot/pi0fast-base",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "enabling",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "PI0Fast is a Vision-Language-Action (VLA) policy that predicts continuous robot actions via autoregressive next-token prediction…"
+ },
+ {
+  "n": 3778,
+  "title": "Hugging Face spaces saswatt21-multi-agent-treasure-hunt",
+  "source_url": "https://huggingface.co/spaces/saswatt21/multi-agent-treasure-hunt",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "transfer-candidate",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Application Hugging Face de saswatt21"
+ },
+ {
+  "n": 3779,
+  "title": "Hugging Face spaces towardsinnovationlab-Multi_Agent_Car_Damage_and_Fraud_Evaluation",
+  "source_url": "https://huggingface.co/spaces/towardsinnovationlab/Multi_Agent_Car_Damage_and_Fraud_Evaluation",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "transfer-candidate",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Application Hugging Face de towardsinnovationlab"
  }
 ]

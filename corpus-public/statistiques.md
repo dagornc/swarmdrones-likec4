@@ -1,13 +1,13 @@
 # Corpus SwarmDrone — statistiques
 
-**3567 entrées** de veille scientifique sur les essaims de drones.
+**3668 entrées** de veille scientifique sur les essaims de drones.
 
-**Dernière mise à jour : 2026-10-07 16:27 UTC**
+**Dernière mise à jour : 2026-10-07 17:02 UTC**
 
 ## Niveau de confiance
 
-- `A-primary-candidate` : 2264
-- `B-artifact-documentation` : 797
+- `A-primary-candidate` : 2299
+- `B-artifact-documentation` : 863
 - `unverified` : 420
 - `D-discovery` : 48
 - `B-official` : 34
@@ -15,28 +15,28 @@
 
 ## Type de ressource
 
-- `document` : 2770
-- `hub-artifact` : 797
+- `document` : 2805
+- `hub-artifact` : 863
 
 ## Périmètre
 
-- `enabling` : 1985
-- `direct` : 1286
-- `transfer-candidate` : 202
+- `enabling` : 2046
+- `direct` : 1323
+- `transfer-candidate` : 205
 - `out-of-scope` : 94
 
 ## Identifiants
 
-- entrées avec DOI : 716
+- entrées avec DOI : 753
 - entrées avec identifiant arXiv : 1845
-- entrées avec date de publication revendiquée : 2180
-- entrées avec description : 3492
+- entrées avec date de publication revendiquée : 2215
+- entrées avec description : 3587
 
 ## Sources les plus fréquentes
 
 - `arxiv.org` : 1880
-- `huggingface.co` : 797
-- `doi.org` : 351
+- `huggingface.co` : 863
+- `doi.org` : 386
 - `www.kongsberg.com` : 38
 - `www.mdpi.com` : 36
 - `www.youtube.com` : 27
