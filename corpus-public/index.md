@@ -1,8 +1,8 @@
 # Corpus SwarmDrone — index
 
-3668 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
+3676 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
 
-**Dernière mise à jour : 2026-10-07 18:14 UTC**
+**Dernière mise à jour : 2026-10-07 19:56 UTC**
 
 | # | Date | Type | Source | Périmètre | Description | Titre (lien direct) | Confiance |
 |---:|---|---|---|---|---|---|---|
@@ -3674,3 +3674,11 @@
 | 3777 | — | hub-artifact | huggingface.co | enabling | PI0Fast is a Vision-Language-Action (VLA) policy that predicts continuous robot actions via autoregressive next-token prediction… | [Hugging Face models lerobot-pi0fast-base](https://huggingface.co/lerobot/pi0fast-base) | B-artifact-documentation |
 | 3778 | — | hub-artifact | huggingface.co | transfer-candidate | Application Hugging Face de saswatt21 | [Hugging Face spaces saswatt21-multi-agent-treasure-hunt](https://huggingface.co/spaces/saswatt21/multi-agent-treasure-hunt) | B-artifact-documentation |
 | 3779 | — | hub-artifact | huggingface.co | transfer-candidate | Application Hugging Face de towardsinnovationlab | [Hugging Face spaces towardsinnovationlab-Multi_Agent_Car_Damage_and_Fraud_Evaluation](https://huggingface.co/spaces/towardsinnovationlab/Multi_Agent_Car_Damage_and_Fraud_Evaluation) | B-artifact-documentation |
+| 3780 | 2026-10-01 | document | doi.org | enabling | To address the coupled problem of insufficient global path geometric smoothness and slow local dynamic… | [Robot movement path planning integrating A- algorithm and dynamic window - DOI](https://doi.org/10.1007/s44163-026-02379-6) | A-primary-candidate |
+| 3781 | 2026-10-01 | document | doi.org | direct | Rationale: Domain and technical mechanism in title/abstract; applicability still requires review. | [Prescribed-time resilient attitude control of multi-UAVs under unknown FDI attacks via dynamic memory event-tr](https://doi.org/10.1016/j.jfranklin.2026.109055) | A-primary-candidate |
+| 3782 | 2026-10-01 | document | doi.org | direct | — | [A knowledge-based approach to UAV path planning for bridge maintenance in a digital twin environment - DOI](https://doi.org/10.1016/j.knosys.2026.116950) | A-primary-candidate |
+| 3783 | 2026-10-01 | document | doi.org | direct | — | [Navigation scene complexity multi-classification system (NSC-MCS)- an interpretable integrated learning model ](https://doi.org/10.1016/j.measurement.2026.122602) | A-primary-candidate |
+| 3784 | 2026-10-01 | document | doi.org | direct | — | [A Gaussian–Cauchy mixture maximum correntropy cubature Kalman filter with Variational Bayesian and sliding-win](https://doi.org/10.1016/j.oceaneng.2026.127839) | A-primary-candidate |
+| 3785 | 2026-10-01 | document | doi.org | direct | — | [Task-Oriented Semantic Communication for AUV Collaborative Sensing With Confidence-Prioritized Triplet Compres](https://doi.org/10.1109/tmc.2026.3688750) | A-primary-candidate |
+| 3786 | 2026-10-02 | document | doi.org | direct | Low-altitude wind fields significantly increase the complexity of multi-UAV cooperative path planning (MUAVCP) by affecting… | [IHRSO- An Improved Hybrid Rime–Snow Ablation Optimizer for Multi-UAV Cooperative Path Planning Under Low-Altit](https://doi.org/10.3390/drones10100742) | A-primary-candidate |
+| 3787 | — | hub-artifact | huggingface.co | direct | Larch casebearer damage detection: 835 drone images (1500 x 1500 pixels) of larch forest in… | [Hugging Face datasets Project-AgML-larch_casebearer_uav_detection](https://huggingface.co/datasets/Project-AgML/larch_casebearer_uav_detection) | B-artifact-documentation |

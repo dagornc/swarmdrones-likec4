@@ -71432,5 +71432,162 @@
   "arxiv": [],
   "dates": [],
   "description": "Application Hugging Face de towardsinnovationlab"
+ },
+ {
+  "n": 3780,
+  "title": "Robot movement path planning integrating A- algorithm and dynamic window - DOI",
+  "source_url": "https://doi.org/10.1007/s44163-026-02379-6",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "enabling",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1007/s44163-026-02379-6"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": "To address the coupled problem of insufficient global path geometric smoothness and slow local dynamic…"
+ },
+ {
+  "n": 3781,
+  "title": "Prescribed-time resilient attitude control of multi-UAVs under unknown FDI attacks via dynamic memory event-triggered mechanism - DOI",
+  "source_url": "https://doi.org/10.1016/j.jfranklin.2026.109055",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1016/j.jfranklin.2026.109055"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": "Rationale: Domain and technical mechanism in title/abstract; applicability still requires review."
+ },
+ {
+  "n": 3782,
+  "title": "A knowledge-based approach to UAV path planning for bridge maintenance in a digital twin environment - DOI",
+  "source_url": "https://doi.org/10.1016/j.knosys.2026.116950",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "digital-twin"
+  ],
+  "dois": [
+   "10.1016/j.knosys.2026.116950"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3783,
+  "title": "Navigation scene complexity multi-classification system (NSC-MCS)- an interpretable integrated learning model for intelligent maritime perception - DOI",
+  "source_url": "https://doi.org/10.1016/j.measurement.2026.122602",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "navigation-perception"
+  ],
+  "dois": [
+   "10.1016/j.measurement.2026.122602"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3784,
+  "title": "A Gaussian–Cauchy mixture maximum correntropy cubature Kalman filter with Variational Bayesian and sliding-window kurtosis adaptation for AUV integrat - DOI",
+  "source_url": "https://doi.org/10.1016/j.oceaneng.2026.127839",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms"
+  ],
+  "dois": [
+   "10.1016/j.oceaneng.2026.127839"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3785,
+  "title": "Task-Oriented Semantic Communication for AUV Collaborative Sensing With Confidence-Prioritized Triplet Compression - DOI",
+  "source_url": "https://doi.org/10.1109/tmc.2026.3688750",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "networking-hardware"
+  ],
+  "dois": [
+   "10.1109/tmc.2026.3688750"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-01"
+  ],
+  "description": ""
+ },
+ {
+  "n": 3786,
+  "title": "IHRSO- An Improved Hybrid Rime–Snow Ablation Optimizer for Multi-UAV Cooperative Path Planning Under Low-Altitude Wind Conditions - DOI",
+  "source_url": "https://doi.org/10.3390/drones10100742",
+  "host": "doi.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "models-datasets"
+  ],
+  "dois": [
+   "10.3390/drones10100742"
+  ],
+  "arxiv": [],
+  "dates": [
+   "2026-10-02"
+  ],
+  "description": "Low-altitude wind fields significantly increase the complexity of multi-UAV cooperative path planning (MUAVCP) by affecting…"
+ },
+ {
+  "n": 3787,
+  "title": "Hugging Face datasets Project-AgML-larch_casebearer_uav_detection",
+  "source_url": "https://huggingface.co/datasets/Project-AgML/larch_casebearer_uav_detection",
+  "host": "huggingface.co",
+  "type": "hub-artifact",
+  "trust": "B-artifact-documentation",
+  "scope": "direct",
+  "themes": [
+   "models-datasets",
+   "navigation-perception"
+  ],
+  "dois": [],
+  "arxiv": [],
+  "dates": [],
+  "description": "Larch casebearer damage detection: 835 drone images (1500 x 1500 pixels) of larch forest in…"
  }
 ]
