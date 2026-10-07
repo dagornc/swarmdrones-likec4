@@ -128,6 +128,18 @@ git clone --recurse-submodules https://github.com/dagornc/SwarmDrones.git
 
 ## Vérifier soi-même
 
+**Le plus rapide** — une commande, tout est vérifié :
+
+```bash
+git clone https://github.com/dagornc/SwarmDrones.git && cd SwarmDrones && ./demo.sh
+```
+
+Le script clone la solution complète, compile et teste les 15 algorithmes Rust,
+vérifie la parité bit-à-bit et affiche les points d'entrée publics.
+(`./demo.sh --quick` pour un seul algorithme.)
+
+**Étape par étape** :
+
 ```bash
 # Modèle : validation outil réel
 docker exec likec4 likec4 validate /data        # attendu : ✓ Valid (20 files)
@@ -145,6 +157,11 @@ python3 tools/qa/check_model_code_consistency.py  # attendu : 15/15, FAIL=0
 git clone https://github.com/dagornc/alg-formation-control.git
 cd alg-formation-control && cargo test && python3 verify_parite_rust.py
 ```
+
+**Audit d'exécution complet** (2026-10-07) : les 15 dépôts Rust clonés depuis
+GitHub compilent, passent **209 tests (0 échec)** et vérifient **4 100
+comparaisons de parité (0 écart)**. Détail :
+[`docs/RAPPORT_AUDIT_EXECUTION_RUST.md`](docs/RAPPORT_AUDIT_EXECUTION_RUST.md).
 
 ---
 
