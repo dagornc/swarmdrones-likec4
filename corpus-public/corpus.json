@@ -71755,5 +71755,26 @@
   "arxiv": [],
   "dates": [],
   "description": "Larch casebearer damage detection: 835 drone images (1500 x 1500 pixels) of larch forest in…"
+ },
+ {
+  "n": 3788,
+  "title": "GAMBIT: Learning to Plan Continuous Multi-Robot Trajectories",
+  "source_url": "https://arxiv.org/abs/2610.06290",
+  "host": "arxiv.org",
+  "type": "document",
+  "trust": "A-primary-candidate",
+  "scope": "direct",
+  "themes": [
+   "algorithms",
+   "models-datasets"
+  ],
+  "dois": [],
+  "arxiv": [
+   "2610.06290"
+  ],
+  "dates": [
+   "2026-10-05"
+  ],
+  "description": "Apprentissage par imitation puis RL d'heuristiques coordonnees de selection de primitives de mouvement multi-robot."
  }
 ]

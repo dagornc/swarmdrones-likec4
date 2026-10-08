@@ -1,8 +1,8 @@
 # Corpus SwarmDrone — index
 
-3676 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
+3677 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
 
-**Dernière mise à jour : 2026-10-08 06:12 UTC**
+**Dernière mise à jour : 2026-10-08 08:38 UTC**
 
 | # | Date | Type | Source | Périmètre | Description | Titre (lien direct) | Confiance |
 |---:|---|---|---|---|---|---|---|
@@ -3682,3 +3682,4 @@
 | 3785 | 2026-10-01 | document | doi.org | direct | — | [Task-Oriented Semantic Communication for AUV Collaborative Sensing With Confidence-Prioritized Triplet Compres](https://doi.org/10.1109/tmc.2026.3688750) | A-primary-candidate |
 | 3786 | 2026-10-02 | document | doi.org | direct | Low-altitude wind fields significantly increase the complexity of multi-UAV cooperative path planning (MUAVCP) by affecting… | [IHRSO- An Improved Hybrid Rime–Snow Ablation Optimizer for Multi-UAV Cooperative Path Planning Under Low-Altit](https://doi.org/10.3390/drones10100742) | A-primary-candidate |
 | 3787 | — | hub-artifact | huggingface.co | direct | Larch casebearer damage detection: 835 drone images (1500 x 1500 pixels) of larch forest in… | [Hugging Face datasets Project-AgML-larch_casebearer_uav_detection](https://huggingface.co/datasets/Project-AgML/larch_casebearer_uav_detection) | B-artifact-documentation |
+| 3788 | 2026-10-05 | document | arxiv.org | direct | Apprentissage par imitation puis RL d'heuristiques coordonnees de selection de primitives de mouvement multi-robot. | [GAMBIT: Learning to Plan Continuous Multi-Robot Trajectories](https://arxiv.org/abs/2610.06290) | A-primary-candidate |
