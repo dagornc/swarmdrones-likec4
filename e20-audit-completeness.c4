@@ -242,6 +242,7 @@ model {
 
   algEventTriggeredComm = algorithm 'ALG_EVENT_TRIGGERED_COMM — Communication declenchee par evenement' {
     #algorithm
+    link https://pesjournal.net/views.php?id=1186 "optimizing drone swarm-based wireless network using stochastic model and controller approach"
     link https://www.mdpi.com/1424-8220/24/2/339 "Adaptive Event-Triggered Consensus of Multi-Agent Systems in Sense of Asymptotic Convergence"
     link https://doi.org/10.14445/22315381/ijett-v74i8p125 "A QoS-Constrained and Utility-Driven Routing Framework with Mobility-Predictive Stability for Flying AD-HOC Networks (QAR)"
     link https://doi.org/10.3390/drones10090684 "An Event-Triggered Path-Based Bid Assignment Method for Energy-Aware Dynamic Multi-UAV Task Allocation"

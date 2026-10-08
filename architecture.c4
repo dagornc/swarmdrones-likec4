@@ -589,6 +589,7 @@ requis pour les USV/AUV : renforce le besoin de calcul local de perception.
 
     autopilot = component 'Pilotage automatique' {
       #safety-critical
+      link https://coogan.ece.gatech.edu/papers/pdf/llanes2026marl.pdf "Learning Cooperative Strategies for Drone Swarms ... - Sam Coogan"
       link https://pmc.ncbi.nlm.nih.gov/articles/PMC10893262/ "Artificial Potential Field Based Trajectory Tracking for Quadcopter UAV Moving Targets"
       link https://doi.org/10.1016/j.arcontrol.2021.10.001 "Contraction Theory for Robust Learning-based Control: Toward Aerospace and Robotic Autonomy"
       link https://doi.org/10.1007/978-981-19-6613-2_660 "Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles with Feedforward Components"
@@ -676,6 +677,7 @@ ABORT declenche localement selon regles pre-approuvees.
 
     mission = component 'Exécution de mission' {
       #mission-critical
+      link https://arxiv.org/html/2511.13103v2 "Transformer-Based Multi-Agent Reinforcement Learning for Networked Systems with Long-Range Interacti"
       link https://www.scitepress.org/Papers/2024/126860/126860.pdf "Swarm Intelligence Path-Planning Pipeline and Algorithms for UAVs"
       technology 'Executeur de plan embarque (machine a etats)'
       description '''

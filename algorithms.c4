@@ -32,6 +32,10 @@ model {
 
   algTaskAllocation = algorithm 'ALG_TASK_ALLOCATION — Allocation de taches distribuee (CBBA v3)' {
     #algorithm
+    link https://www.mdpi.com/2313-7673/11/1/69 "Large-Scale Multi-UAV Task Allocation via a Centrality-Driven Load-Aware Adaptive Consensus Bundle A"
+    link https://arxiv.org/html/2601.14437v1 "Agentic AI Meets Edge Computing in Autonomous UAV Swarms - arXiv"
+    link https://arxiv.org/pdf/2606.31073 "MultiUAV-Plat- An LLM-Oriented Platform, Benchmark and Framework for Multi-UAV Collaborative Task Pl"
+    link https://www.mdpi.com/1424-8220/25/21/6738 "A Two-Level Clustered Consensus-Based Bundle Algorithm for Dynamic Heterogeneous Multi-UAV Multi-Tas"
     link https://doi.org/10.1109/tro.2009.2022423 "Consensus-Based Decentralized Auctions for Robust Task Allocation"
     link https://arxiv.org/abs/2609.06273 "Bundle Length Tradeoffs in Decentralized Multi-Robot Task Allocation Under Degraded Communications"
     link https://doi.org/10.1007/s12065-026-01257-5 "Survival probability-weighted clustering for UAV-based multi-robot task allocation in disaster response"
@@ -75,6 +79,8 @@ model {
 
   algConsensus = algorithm 'ALG_CONSENSUS — Consensus distribue' {
     #algorithm
+    link https://doi.org/10.3390/automation6040065 "Survey on Graph-Based Reinforcement Learning for Networked Coordination and Control"
+    link https://doi.org/10.1117/12.3106795 "Research on cooperative navigation for UAV swarms integrating enhanced YOLOv5"
     link https://arxiv.org/abs/2508.00622 "SwarmRaft: Leveraging Consensus for Robust Drone Swarm Coordination in GNSS-Degraded Environments"
     link https://arxiv.org/abs/2609.01870 "ArcticSwarm: Deferring Early Consensus in Long-Horizon Multi-Agent Research"
     link https://doi.org/10.1016/j.asoc.2026.116398 "Hierarchical optimal consensus for economically efficient path planning in multi-UAV"
@@ -113,6 +119,7 @@ model {
 
   algFormationControl = algorithm 'ALG_FORMATION_CONTROL — Controle de formation' {
     #algorithm
+    link https://arxiv.org/html/2601.13657v1 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Lear"
     link https://doi.org/10.3390/app16178852 "Formation-Preserving Control for Multi-Robot Systems: Experimental Validation"
     link https://arxiv.org/abs/2410.18495 "Multi-UAV Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning"
     link https://doi.org/10.1038/s41598-026-67888-x "UAV formation control for multi-target tracking based on an improved multi-agent double soft actor–critic"
@@ -189,6 +196,9 @@ model {
 
   algPerceptionFusion = algorithm 'ALG_PERCEPTION_FUSION — Fusion multi-capteurs (EKF/UKF)' {
     #algorithm
+    link https://www.mdpi.com/2504-446X/10/1/49 "DTVIRM-Swarm- A Distributed and Tightly Integrated Visual-Inertial ..."
+    link https://www.mdpi.com/2504-446X/10/1/11 "A Comprehensive Review of Path-Planning Algorithms for Multi-UAV Swarms - MDPI"
+    link https://www.mdpi.com/2504-446X/10/1/5 "Scalable Pursuit–Evasion Game for Multi-Fixed-Wing UAV Based on Dynamic Target Assignment and Hierar"
     link https://doi.org/10.3390/drones9110752 "Enabling Cooperative Autonomy in UUV Clusters: A Survey of Robust State Estimation and Information Fusion Techniques"
     link https://arxiv.org/abs/2603.08379 "Perception-Aware Communication-Free Multi-UAV Coordination in the Wild"
     link https://doi.org/10.1007/s00773-026-01144-9 "Active sonar-based perception and wall following for AUV operations"
@@ -227,6 +237,7 @@ model {
 
   algNavigationGNSSDegrade = algorithm 'ALG_NAV_GNSS_DEGRADE — Navigation sous GNSS degrade' {
     #algorithm
+    link https://arxiv.org/html/2601.13252v1 "Autonomous Navigation at the Nano-Scale- Algorithms, Architectures, and Constraints"
     link https://doi.org/10.3390/drones10010049 "DTVIRM-Swarm: A Distributed and Tightly Integrated Visual-Inertial-UWB-Magnetic System for Anchor Free Swarm Cooperative Localization"
     link https://arxiv.org/abs/2601.13657 "Communication-Free Collective Navigation for a Swarm of UAVs via LiDAR-Based Deep Reinforcement Learning"
     link https://arxiv.org/abs/2309.03678 "Fully Onboard SLAM for Distributed Mapping with a Swarm of Nano-Drones"
@@ -264,6 +275,8 @@ model {
 
   algCollisionAvoidance = algorithm 'ALG_COLLISION_AVOIDANCE — Evitement de collision (CBF)' {
     #algorithm
+    link https://arxiv.org/html/2601.14783v1 "Integrated Sensing, Communication and Control enabled Agile UAV Swarm - arXiv"
+    link https://carlosrubiomedrano.com/publications/pofmader-trajectory-planner-ieeeaccess2025.pdf "POF+MADER- Trajectory Planner in Dynamic Environments With Improved Collision Avoidance - Carlos Rub"
     link https://arxiv.org/abs/2603.13103 "A Feasibility-Enhanced Control Barrier Function Method for Multi-UAV Collision Avoidance"
     link https://arxiv.org/abs/2309.13285 "Collision Avoidance and Navigation for a Quadrotor Swarm Using End-to-end Deep Reinforcement Learning"
     link https://arxiv.org/abs/2401.14554 "GCBF+: A Neural Graph Control Barrier Function Framework for Distributed Safe Multi-Agent Control"
@@ -338,6 +351,7 @@ model {
 
   algPathPlanning = algorithm 'ALG_PATH_PLANNING — Planification de trajectoire (waypoints + MPC)' {
     #algorithm
+    link https://pmc.ncbi.nlm.nih.gov/articles/PMC12845569/ "AoI-Aware Data Collection in Heterogeneous UAV-Assisted WSNs- Strong-Agent Coordinated Coverage and"
     link https://doi.org/10.3390/drones10030177 "Safe Swarm Navigation in Constrained Environments: A Dynamic Tube-Based Distributed MPC Approach"
     link https://arxiv.org/abs/2603.09031 "ImpedanceDiffusion: Diffusion-Based Global Path Planning for UAV Swarm Navigation with Generative Impedance Control"
     link https://arxiv.org/abs/2606.31197 "Diffusion-based 4D Trajectory Prediction and Distributed Control for UAV Swarms"
@@ -382,6 +396,7 @@ model {
 
   algHealthMonitoring = algorithm 'ALG_HEALTH_MONITORING — Surveillance d etat et detection de faute' {
     #algorithm
+    link https://www.mdpi.com/1424-8220/26/2/655 "Dynamic Event-Triggered Control for Unmanned Aerial Vehicle Swarm Adaptive Target Enclosing Mission"
     link https://doi.org/10.1016/j.oceaneng.2026.127355 "Adaptive NN finite-time inverse optimized formation fault-tolerant control for multi-USV systems with actuator faults"
     link https://arxiv.org/abs/2609.06257 "SeaCausal-FL: Federated Fuzzy Causal Learning for Maritime IoT Fault Detection"
     description '''
