@@ -1,229 +1,130 @@
-# SWARM-3D — De l'article scientifique au code vérifié
+# SWARM-3D — Modèle LikeC4 comme source de vérité sémantique
 
-**Une chaîne d'ingénierie système complète et falsifiable** : veille scientifique
-automatisée → modèle d'architecture sémantique → spécifications SysML v2 →
-implémentations Rust → parité bit-à-bit mesurée.
+Ce dépôt contient le **modèle sémantique** d'un essaim de 30 plateformes
+autonomes (26 aériens + 4 de surface), destiné à alimenter un
+**environnement pédagogique** et un **simulateur Web 3D** (Blender + moteur 3D).
 
-> Ce dépôt n'est pas une maquette. Chaque affirmation qu'il porte est adossée à
-> un artefact exécutable, et chaque artefact à un test qui **échoue** quand la
-> promesse est violée.
+> **Principe fondateur** — LikeC4 est la **source de vérité sémantique**.
+> Blender et le moteur 3D en sont des **consommateurs**. Le modèle ne contient
+> **aucune coordonnée 3D** : il décrit *ce qui existe, ce que ça fait, et ce
+> qui est prouvé*. La spatialisation appartient au consommateur.
 
----
-
-## Le problème
-
-Concevoir un essaim de plateformes autonomes (26 aériennes + 4 de surface) qui
-maintient une **décision d'état partagée sans coordinateur central** exige de
-tenir ensemble quatre choses que l'industrie traite habituellement séparément :
-
-- la **littérature scientifique** qui fonde chaque choix algorithmique ;
-- l'**architecture** du système et ses dépendances ;
-- les **spécifications formelles** exigibles en certification ;
-- le **code** qui implémente réellement, et la preuve qu'il fait ce qu'il dit.
-
-La plupart des projets perdent la traçabilité entre ces quatre couches. Ici,
-elle est **mécanisée**.
-
----
-
-## La chaîne, en cinq étapes
-
-```
-  ┌─────────────────┐   ┌──────────────────┐   ┌─────────────────┐
-  │  1. VEILLE      │   │  2. MODÈLE       │   │  3. SPÉCIFICATION│
-  │  SCIENTIFIQUE   │──▶│  SÉMANTIQUE      │──▶│  FORMELLE        │
-  │  2 609 entrées  │   │  LikeC4          │   │  SysML v2        │
-  │  805 PDF        │   │  521 éléments    │   │  15 fichiers     │
-  │  confiance      │   │  942 relations   │   │  traçables       │
-  │  tracée         │   │  0 référence     │   │                  │
-  │                 │   │  pendante        │   │                  │
-  └─────────────────┘   └──────────────────┘   └─────────────────┘
-                                                       │
-                                                       ▼
-  ┌─────────────────┐   ┌──────────────────┐   ┌─────────────────┐
-  │  5. PREUVE      │   │  4. IMPLÉMENTATION│  │                 │
-  │  Parité         │◀──│  Rust            │◀─┘                 │
-  │  bit-à-bit      │   │  15 dépôts       │                    │
-  │  200/200        │   │  publics         │                    │
-  │  identiques     │   │  tests verts     │                    │
-  └─────────────────┘   └──────────────────┘
-```
-
-### 1. Veille scientifique traçable
-
-Un corpus de **2 609 entrées** (805 PDF) collecté et maintenu par un pipeline
-automatisé, avec un **inventaire de confiance explicite** :
-
-- 1 308 candidats primaires (A-primary-candidate)
-- 797 documents d'artefacts (B-artifact-documentation)
-- 34 sources officielles (B-official)
-- 420 non vérifiées, 48 découvertes, 2 signalées suspectes
-
-Le corpus **ne prétend pas** que tout est fiable : il **trace** le niveau de
-confiance de chaque entrée et signale ce qui reste à vérifier. Les dates
-revendiquées ne sont pas des preuves — la métadonnée décisive est résolue
-contre la source primaire.
-
-**Version publiable** : les métadonnées bibliographiques des 2 609 entrées
-(titres, sources, DOI, arXiv, confiance, périmètre) sont publiées dans
-[`corpus-public/`](corpus-public/) — sans les PDF ni le contenu des articles,
-qui restent soumis au droit d'auteur de leurs éditeurs.
-
-### 2. Modèle d'architecture sémantique (LikeC4)
-
-Le modèle est la **source de vérité sémantique** : il décrit *ce qui existe, ce
-que ça fait, et ce qui est prouvé*. Il ne contient **aucune coordonnée 3D** —
-la spatialisation appartient aux consommateurs (Blender, moteur Web).
-
-- **20 fichiers** `.c4`, **521 éléments**, **942 relations**, **70 vues**
-- **0 référence pendante** (aucune cible fantôme)
-- `likec4 validate` → **✓ Valid (20 files)**
-- Quality gate : **99/100** (11 critères calculés)
-- Contrôle d'intégrité : **7/7** (contrôles que la syntaxe ne voit pas)
-
-### 3. Spécifications SysML v2
-
-**15 fichiers** `.sysml`, un par algorithme canonique, générés depuis le modèle
-avec traçabilité vers le composant d'accueil (`perform` / `satisfy`).
-
-Réserve assumée : la syntaxe n'est pas validée par un outil OMG (aucun
-disponible dans l'environnement). Le contrôle structurel maison passe 15/15.
-**La réserve est documentée, pas dissimulée.**
-
-### 4. Implémentations Rust
-
-**15 dépôts publics** `alg-*`, un par algorithme, chacun avec son code, ses
-tests, sa référence Python normative et son harnais de parité.
-
-Exemple vérifié de première main (`alg-formation-control`) :
-
-```
-cargo build --release   →  succès
-cargo test              →  5/5 tests passés, 0 échec
-verify_parite_rust.py   →  200/200 comparaisons identiques, 0 écart
-                           PARITÉ BIT-À-BIT VÉRIFIÉE
-```
-
-### 5. Preuve de parité
-
-La parité Rust ↔ Python est mesurée sur 50 graines × 4 scénarios (nominal,
-perte de liens, perturbation, formation à 12 agents), après conversion des
-flottants en représentation IEEE 754 binaire.
-
-**Ce que la parité prouve** : les deux simulateurs calculent exactement la même
-chose.
-**Ce qu'elle ne prouve pas** : la validité scientifique de la loi de commande,
-sa stabilité formelle, ou son aptitude au vol réel. Cette distinction est
-maintenue partout dans le dépôt.
-
----
-
-## Reproductibilité
-
-L'orchestrateur [`SwarmDrones`](https://github.com/dagornc/SwarmDrones) agrège
-les 15 algorithmes et les protocoles en **git submodules épinglés à des commits
-précis** — pas des branches flottantes. Cloner le dépôt à une date donnée
-redonne exactement les mêmes versions.
+## Démarrage rapide
 
 ```bash
-git clone --recurse-submodules https://github.com/dagornc/SwarmDrones.git
-```
+# Validation (obligatoire avant toute livraison)
+docker exec likec4 likec4 validate /data          # attendu : ✓ Valid (14 files)
 
----
-
-## Vérifier soi-même
-
-**Le plus rapide** — une commande, tout est vérifié :
-
-```bash
-git clone https://github.com/dagornc/SwarmDrones.git && cd SwarmDrones && ./demo.sh
-```
-
-Le script clone la solution complète, compile et teste les 15 algorithmes Rust,
-vérifie la parité bit-à-bit et affiche les points d'entrée publics.
-(`./demo.sh --quick` pour un seul algorithme.)
-
-**Étape par étape** :
-
-```bash
-# Modèle : validation outil réel
-docker exec likec4 likec4 validate /data        # attendu : ✓ Valid (20 files)
-
-# Qualité : 11 critères, score /100
-python3 tools/qa/quality_gate.py                # attendu : 99/100 — GATE: PASS
+# Qualité : 11 critères calculés, score /100 (cible ≥ 90)
+python3 tools/qa/quality_gate.py                  # attendu : 97/100 — GATE: PASS
 
 # Intégrité : 7 contrôles que la syntaxe ne voit pas
-python3 tools/qa/integrity_check.py             # attendu : 7/7 OK
+python3 tools/qa/integrity_check.py               # attendu : 7/7 OK
 
-# Cohérence modèle <-> code
-python3 tools/qa/check_model_code_consistency.py  # attendu : 15/15, FAIL=0
-
-# Un algorithme, de bout en bout
-git clone https://github.com/dagornc/alg-formation-control.git
-cd alg-formation-control && cargo test && python3 verify_parite_rust.py
+# Artefact pour le moteur 3D
+python3 tools/export/export_scene.py          # écrit export/scene.json
+python3 tools/export/export_scene.py --check  # vérifie l'artefact (INV-4, 30+1)
 ```
 
-**Audit d'exécution complet** (2026-10-07) : les 15 dépôts Rust clonés depuis
-GitHub compilent, passent **209 tests (0 échec)** et vérifient **4 100
-comparaisons de parité (0 écart)**. Détail :
-[`docs/RAPPORT_AUDIT_EXECUTION_RUST.md`](docs/RAPPORT_AUDIT_EXECUTION_RUST.md).
+## État actuel — **16 epics sur 16 livrés**
 
----
+| Mesure | Départ (E00) | Maintenant |
+|---|---|---|
+| Score qualité | 31/100 | **97/100** |
+| Éléments | 97 | **285** |
+| Relations typées | 239 (0 typée) | **544 (27 kinds)** |
+| Vues | 22 (5 mortes) | **48 (0 morte)** |
+| Fichiers `.c4` | 2 | **14** |
 
-## Explorer le modèle
+## Carte des fichiers du modèle
 
-Le modèle est servi publiquement : **[likec4.breizh.ai](https://likec4.breizh.ai)**
+- **`architecture.c4`** (~1630 l.) — architecture fonctionnelle et logique d'origine. Le socle. **Non réécrit.**
+- **`metamodel.c4`** — le métamodèle : 38 kinds d'éléments, 27+ kinds de relations, tags et couleurs. **Le contrat de forme du modèle.**
+- **`hardware.c4`** — drone de référence : capteurs, actionneurs, nœuds de calcul, radios.
+- **`messages.c4`** — 13 messages objets, canaux, protocoles, criticité.
+- **`algorithms.c4`** — 18 algorithmes, 15+ champs chacun (entrées, sorties, hypothèses, verdict).
+- **`facts.c4`** — 7 faits sourcés (fiches matérielles).
+- **`decisions_hw.c4`** — décisions matérielles DE-05..DE-10, **ancrées sur les éléments qu'elles bloquent**.
+- **`functional.c4`** — 8 capacités, 19 fonctions, traçabilité `realizes`.
+- **`deployment.c4`** — chaîne complète Algorithme→Composant→Runtime→Nœud.
+- **`scenarios.c4`** — 10 scénarios dérivés des événements réels, 16 étapes.
+- **`simulation.c4`** — le **contrat de simulation** : ce que le modèle promet, et 5 invariants.
+- **`science.c4`** — 7 sources primaires, 4 constats-verdicts, **4 gaps nommés**.
+- **`worldmodel.c4`** — World Model : 6 zones, 7 entités, 10 états, **6 règles de représentation**.
+- **`views.c4`** — 48 vues, 12 `navigateTo`, aucune vue morte.
 
-Les 15 spécifications détaillées (PDF) et les 15 fichiers SysML y sont
-également accessibles.
+## Ce que ce modèle refuse d'affirmer
 
----
+Le modèle est **honnête sur ses trous** — c'est une propriété, pas une faiblesse :
 
-## Ce que ce dépôt refuse d'affirmer
+- **4 GAP-* nommés** « AUCUN ARTICLE TROUVÉ » (CBBA sous partition persistante,
+  CBF hétérogène >30, CRDT en vol sous brouillage RF, fusion EKF ≥100)
+- **CBF à 30 agents = UNSUPPORTED** en conditions réelles : la source primaire
+  donne **5 robots réels**, 30 en simulation. L'affirmation d'origine a été
+  **dégradée**, pas maquillée.
+- **DE-07 énergie NON DÉTERMINÉE** → la règle **REG-2** interdit au
+  consommateur 3D d'afficher une valeur d'énergie
+- **Validation réelle plafonne à 26 plateformes** → **REG-4** exige la mention
+  « N=30 NON PROUVÉ »
+- **Portées radio = annonces commerciales non vérifiées** → **REG-3** interdit
+  d'afficher une portée chiffrée
 
-L'honnêteté épistémique est une propriété du système, pas une posture :
+## Pour le consommateur 3D (Blender / moteur Web)
 
-- Aucune **valeur chiffrée non sourcée** (contrôle automatisé I-6).
-- Aucune **coordonnée 3D** dans le modèle sémantique.
-- Aucun algorithme marqué `validé` tant qu'il reste `idea` / `conceptual` /
-  `evidenceLevel NONE` dans le modèle.
-- Les **2 DOI morts** identifiés sont signalés, pas remplacés par une source
-  inventée.
-- Les **11 sources orphelines** sont listées comme telles, pas rattachées
-  d'autorité.
+1. Lire **`export/scene.json`** — l'artefact machine-lisible (34 instances nommées)
+2. Ne **jamais inventer d'identifiant** : tout `id_likec4` vient de la table
+3. Respecter les **6 règles de représentation** (`REG-1`..`REG-6`) — chacune
+   porte un test vérifiable
+4. Population : **UAV-R ×18 + UAV-F ×8 + USV ×4 = 30** + 1 maquette de
+   référence **visuellement distincte**
 
----
-
-## Limites assumées
-
-Ce dépôt est un **démonstrateur d'ingénierie**, pas un outil opérationnel :
-
-- Les simulateurs sont **cinématiques en 2D** — aucune dynamique de vol,
-  aucun modèle aérodynamique, aucun délai continu, aucune saturation
-  d'actionneur.
-- La parité prouve la **cohérence d'implémentation**, pas la validité
-  scientifique.
-- Aucun essai matériel n'est inclus.
-
-Ces limites sont écrites dans le dépôt, pas cachées dans une annexe.
-
----
+Détail complet : [`docs/world-model-spec.md`](docs/world-model-spec.md) et
+[`docs/simulation-contract.md`](docs/simulation-contract.md).
 
 ## Documentation
 
-- [`docs/README_TECHNIQUE.md`](docs/README_TECHNIQUE.md) — documentation
-  technique complète (garde-fous, synchronisation, invariants, outils)
-- [`GOUVERNANCE.md`](GOUVERNANCE.md) — protection contre les régressions
-  silencieuses
-- [`RAPPORT_AUDIT_FINAL_LIKEC4.md`](RAPPORT_AUDIT_FINAL_LIKEC4.md) — audit de
-  cohérence et d'intégrité des liens
-- [`sysml/VALIDATION_REPORT.md`](sysml/VALIDATION_REPORT.md) — validation SysML
-- [`docs/traceability.md`](docs/traceability.md) — traçabilité
+- [`docs/audit-likec4.md`](docs/audit-likec4.md) — audit initial (31/100)
+- [`docs/qa-report.md`](docs/qa-report.md) — validation globale (97/100)
+- [`docs/metamodel.md`](docs/metamodel.md) — contrat de forme
+- [`docs/relations-typing.md`](docs/relations-typing.md) — typage des 239 arcs
+- [`docs/functional.md`](docs/functional.md) — capacités et fonctions
+- [`docs/algorithms.md`](docs/algorithms.md) — catalogue algorithmique
+- [`docs/communications.md`](docs/communications.md) — messages et canaux
+- [`docs/deployment.md`](docs/deployment.md) — déploiement
+- [`docs/scenarios.md`](docs/scenarios.md) — scénarios dynamiques
+- [`docs/simulation-contract.md`](docs/simulation-contract.md) — contrat de simulation
+- [`docs/science.md`](docs/science.md) — référentiel scientifique
+- [`docs/world-model-spec.md`](docs/world-model-spec.md) — spécification World Model
 
----
+## Page d'accueil du site
 
-## Auteur
+`likec4.config.json` porte `"landingPage": { "redirect": true }` : la racine
+de <https://likec4.breizh.ai/> redirige vers la vue **`index`**
+(`/view/index/`), l'URL affichée restant `/`. La vue `index` est la carte
+d'entrée du modèle — paysage des zones de déploiement, avec navigation vers
+les vues de zone.
 
-**Christophe Dagorn** — ingénieur informatique (INSA Rennes).
+Le comportement est implémenté côté frontend LikeC4 : la route `/` redirige
+vers `/view/index/` **uniquement** si le projet est unique et que
+`landingPage.redirect` est présent. En multi-projets, la racine mène à la
+liste des projets.
 
-Licence MIT.
+Pour revenir à la grille de toutes les vues, retirer la clé `landingPage`
+(ou la remplacer par `{"include": [...]}` / `{"exclude": [...]}` pour
+filtrer la grille).
+
+## Outils
+
+- `tools/audit_inventory.py` — inventaire initial
+- `tools/arc_classify.py` / `tools/arc_apply.py` — typage des relations
+- `tools/qa/quality_gate.py` — score qualité /100 (11 critères calculés)
+- `tools/qa/integrity_check.py` — 7 contrôles d'intégrité structurelle
+
+## Invariants à ne jamais violer
+
+1. **INV-1** — La mission nominale ne dépend pas du cloud
+2. **INV-2** — La sûreté reste locale : perte de C2 ≠ perte de sûreté
+3. **INV-3** — La validation à 30 plateformes reste **non prouvée**
+4. **INV-4** — **Aucune 3D dans le modèle sémantique**
+5. **INV-5** — Toute affirmation scientifique est reliée à une source, ou
+   déclarée non prouvée
