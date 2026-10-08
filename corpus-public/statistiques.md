@@ -2,7 +2,7 @@
 
 **3647 entrées** de veille scientifique sur les essaims de drones.
 
-**Dernière mise à jour : 2026-10-08 12:06 UTC**
+**Dernière mise à jour : 2026-10-08 12:18 UTC**
 
 > **30 sources inaccessibles** : détectées par la veille mais
 > non récupérées (page de blocage, captcha, navigation). Elles sont
@@ -24,10 +24,10 @@
 
 ## Périmètre
 
-- `enabling` : 2044
-- `direct` : 1319
-- `transfer-candidate` : 204
-- `out-of-scope` : 80
+- `out-of-scope` : 1965
+- `direct` : 1160
+- `enabling` : 414
+- `transfer-candidate` : 108
 
 ## Identifiants
 

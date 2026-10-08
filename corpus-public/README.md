@@ -11,7 +11,7 @@ confiance, périmètre, description courte et date de publication.
 > être récupéré (blocage, captcha, navigation). Elles ne sont pas
 > comptées comme articles du corpus.
 
-**Dernière mise à jour : 2026-10-08 12:06 UTC**
+**Dernière mise à jour : 2026-10-08 12:18 UTC**
 
 > **Ce qui est publié ici** : uniquement des **faits bibliographiques publics**
 > (titre, URL source, DOI, arXiv, hôte, classification, description courte).
