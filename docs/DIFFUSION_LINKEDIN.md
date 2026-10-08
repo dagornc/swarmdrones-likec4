@@ -19,7 +19,7 @@ Chaque chiffre cité est vérifié et reproductible.
 >
 > J'ai construit et outillé cette chaîne de bout en bout :
 >
-> → 2 609 entrées de veille scientifique, avec niveau de confiance tracé
+> → 3 647 entrées de veille scientifique, avec niveau de confiance tracé
 > → un modèle d'architecture LikeC4 : 521 éléments, 942 relations, 0 référence pendante
 > → 15 spécifications SysML v2 générées depuis le modèle
 > → 15 implémentations Rust, parité bit-à-bit vérifiée
@@ -43,11 +43,11 @@ Chaque chiffre cité est vérifié et reproductible.
 > J'ai construit un pipeline qui ne prétend pas que tout est fiable : il **trace**
 > le niveau de confiance de chaque entrée et signale ce qui reste à vérifier.
 >
-> 2 609 entrées, 805 PDF :
-> → 1 308 candidats primaires
-> → 797 documents d'artefacts
-> → 420 non vérifiées
-> → 2 signalées suspectes
+> 3 647 entrées exploitables (3 677 collectées, 30 sources inaccessibles listées à part) :
+> → 2 307 candidats primaires
+> → 864 documents d'artefacts
+> → 410 non vérifiées
+> → 4 signalées suspectes
 >
 > Chaque algorithme canonique est rattaché à ses sources fondatrices. Les dates
 > revendiquées ne sont pas des preuves — la métadonnée décisive est résolue
@@ -56,7 +56,7 @@ Chaque chiffre cité est vérifié et reproductible.
 > L'honnêteté épistémique n'est pas une posture ici : c'est un contrôle
 > automatisé. Le dépôt refuse d'affirmer une valeur chiffrée non sourcée.
 >
-> Les métadonnées des 2 609 entrées sont publiques (titres, sources, DOI,
+> Les métadonnées des 3 647 entrées sont publiques (titres, sources, DOI,
 > arXiv, niveau de confiance) — sans les PDF, qui restent soumis au droit
 > d'auteur de leurs éditeurs.
 >
@@ -74,7 +74,7 @@ Chaque chiffre cité est vérifié et reproductible.
 >
 > → 15/15 compilent
 > → 209 tests passés, 0 échec
-> → 4 100 comparaisons de parité Rust ↔ Python, 0 écart
+> → 4 900 comparaisons de parité Rust ↔ Python, 0 écart
 >
 > La parité est mesurée après conversion des flottants en IEEE 754 binaire.
 > Elle prouve que les deux simulateurs calculent exactement la même chose.

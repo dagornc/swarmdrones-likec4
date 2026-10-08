@@ -9,7 +9,7 @@ Méthode : clone `--depth 1` de chaque dépôt public, `cargo build --release`,
 **15/15 dépôts compilent. 0 échec de test. Parité bit-à-bit vérifiée partout.**
 
 - **209 tests passés**, 0 échec.
-- **4 100 comparaisons de parité**, 0 écart.
+- **4 900 comparaisons de parité**, 0 écart.
 
 ## Résultats détaillés
 

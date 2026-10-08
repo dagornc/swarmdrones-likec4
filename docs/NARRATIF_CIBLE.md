@@ -61,15 +61,15 @@ détectent les régressions silencieuses.
 états de l'art vieillissent vite et personne ne sait quelle source fonde quel
 choix d'implémentation.
 
-**Ce que tu apportes** : un **corpus de veille outillé** de 2 609 entrées avec
-inventaire de confiance explicite (1 308 candidats primaires, 420 non
-vérifiées, 2 signalées suspectes), et un **rattachement mécanisé** entre chaque
-algorithme canonique et ses sources fondatrices.
+**Ce que tu apportes** : un **corpus de veille outillé** de 3 647 entrées
+exploitables avec inventaire de confiance explicite (2 307 candidats primaires,
+410 non vérifiées, 4 signalées suspectes), et un **rattachement mécanisé** entre
+chaque algorithme canonique et ses sources fondatrices.
 
 **Message clé** :
 > « J'ai construit un pipeline de veille qui ne prétend pas que tout est
 > fiable : il trace le niveau de confiance de chaque source et signale ce qui
-> reste à vérifier. 2 609 entrées, 805 PDF, rattachées aux 15 algorithmes
+> reste à vérifier. 3 647 entrées exploitables, rattachées aux 15 algorithmes
 > canoniques d'un essaim. »
 
 **Preuves à montrer** :
@@ -116,7 +116,7 @@ veut la reproductibilité et la maintenabilité, pas la dérivation mathématiqu
 | Critère | Angle A (industriel) | Angle B (labo) | Angle C (intégrateur) |
 |---|---|---|---|
 | Accroche | Traçabilité certification | Veille traçable | Reproductibilité |
-| Preuve n°1 | Modèle LikeC4 servi | Corpus 2 609 entrées | Submodules épinglés |
+| Preuve n°1 | Modèle LikeC4 servi | Corpus 3 647 entrées | Submodules épinglés |
 | Preuve n°2 | Rust + tests verts | Rattachement sources | Parité bit-à-bit |
 | Ton | Ingénierie système | Rigueur épistémique | Fiabilité opérationnelle |
 | Risque | Sur-promesse produit | Sur-promesse scientifique | Sur-promesse maturité |
