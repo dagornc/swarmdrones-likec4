@@ -2,7 +2,7 @@
 
 3676 entrées. Métadonnées bibliographiques uniquement (aucun PDF, aucun contenu d'article).
 
-**Dernière mise à jour : 2026-10-07 19:57 UTC**
+**Dernière mise à jour : 2026-10-08 05:12 UTC**
 
 | # | Date | Type | Source | Périmètre | Description | Titre (lien direct) | Confiance |
 |---:|---|---|---|---|---|---|---|
@@ -92,7 +92,7 @@
 | 84 | — | document | www.kongsberg.com | direct | Kongsberg Discovery has started an extensive programme of sea trials with its new and revolutionary… | [Kongsberg Discovery sets new AUV milestone with successful sea trials of HUGIN Endurance](https://www.kongsberg.com/news/news-archive/2023/hugin-endurance/) | unverified |
 | 85 | — | document | rsaqua.co.uk | direct | The Mariner Unmanned Surface Vehicle (USV) is a multipurpose unmanned vehicle for offshore and coastal… | [Mariner Unmanned Surface Vehicle [USV] - RS Aqua —](https://rsaqua.co.uk/wp-content/uploads/2023/05/MARINER-Brochure-A4.pdf) | unverified |
 | 86 | — | document | — | direct | 1, 2, · · · , L of the delayed feedback controller(22)are solvable, andKi | Delay-Based Feedback Formation Control for Unmanned Aerial Vehicles with Feedforward Components - NI | unverified |
-| 87 | — | document | uav.studentorg.berkeley.edu | direct | Open-source firmware for autonomous vehicle control and navigation | [GPS-Denied Navigation - UAVs@Berkeley](https://uav.studentorg.berkeley.edu/106a-fa24-gps/) | B-official |
+| 87 | — | document | web.archive.org | direct | Open-source firmware for autonomous vehicle control and navigation | [GPS-Denied Navigation - UAVs@Berkeley](https://web.archive.org/web/20250122131756/https://uav.studentorg.berkeley.edu/106a-fa24-gps/) | unverified |
 | 88 | — | document | whoenig.github.io | direct | Bojan Derajić, Mohamed-Khalil Bouzidi, Sebastian Bernhard, Wolfgang Hönig | [Wolfgang Hönig](https://whoenig.github.io/) | unverified |
 | 89 | — | document | www.mdpi.com | direct | Analyse protocole routage FANET pour mobilité multi-UAV. | [FANET Routing Protocol Analysis for Multi-UAV-Based Reconnaissance Mobility Models](https://www.mdpi.com/2504-446X/7/3/161) | A-primary-candidate |
 | 90 | 2023-03-16 | document | arxiv.org | enabling | Number of partitions is set to 1 for throughput and 2 for latency. | [A Performance Study on the Throughput and Latency of Zenoh, MQTT, Kafka, and DDS - arXiv](https://arxiv.org/pdf/2303.09419) | A-primary-candidate |

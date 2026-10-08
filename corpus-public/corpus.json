@@ -1611,10 +1611,10 @@
  {
   "n": 87,
   "title": "GPS-Denied Navigation - UAVs@Berkeley",
-  "source_url": "https://uav.studentorg.berkeley.edu/106a-fa24-gps/",
-  "host": "uav.studentorg.berkeley.edu",
+  "source_url": "https://web.archive.org/web/20250122131756/https://uav.studentorg.berkeley.edu/106a-fa24-gps/",
+  "host": "web.archive.org",
   "type": "document",
-  "trust": "B-official",
+  "trust": "unverified",
   "scope": "direct",
   "themes": [
    "software-architecture",
