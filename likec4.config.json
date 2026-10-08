@@ -10,6 +10,9 @@
     "source": "swarm30_arch.md (13 sections) \u2014 profil swarmdrone",
     "generated": "2026-09-14"
   },
+  "landingPage": {
+    "redirect": true
+  },
   "exclude": [
     "archive/**",
     "tools/**",
