@@ -1,0 +1,40 @@
+# Déploiement statique SwarmDrones — likec4.breizh.ai
+#
+# Remplace le dev server LikeC4 (conteneur `likec4`, `likec4 start`) par un
+# service nginx servant un build statique (`likec4 build`).
+#
+# Avantages :
+#   - plus de restart manuel du conteneur à chaque changement de .c4
+#   - plus de snapshot de public/ au démarrage (fichiers ajoutés visibles)
+#   - service robuste : fichiers statiques servis par nginx
+#
+# Bascule : arrêter `likec4`, démarrer `likec4-static`.
+# Rollback : arrêter `likec4-static`, démarrer `likec4`.
+#
+# Le build est produit par build_static.sh dans ./site/ (bind mount ro).
+
+services:
+  likec4-static:
+    image: nginx:alpine
+    container_name: likec4-static
+    restart: unless-stopped
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - gateway
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=gateway
+      - traefik.http.routers.likec4-static-cloudflare.rule=Host(`likec4.breizh.ai`)
+      - traefik.http.routers.likec4-static-cloudflare.entrypoints=web
+      - traefik.http.routers.likec4-static-cloudflare.service=likec4-static
+      - traefik.http.routers.likec4-static.rule=Host(`likec4.breizh.ai`)
+      - traefik.http.routers.likec4-static.entrypoints=websecure
+      - traefik.http.routers.likec4-static.tls=true
+      - traefik.http.routers.likec4-static.tls.certresolver=letsencrypt
+      - traefik.http.services.likec4-static.loadbalancer.server.port=80
+
+networks:
+  gateway:
+    external: true

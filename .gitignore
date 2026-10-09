@@ -41,3 +41,10 @@ __pycache__/
 *.bak
 *.bak-*
 likec4_sync_backups/
+
+# --- Build statique de deploiement (deploy/) ---
+# deploy/site/ est la sortie de `likec4 build` (~21 Mo), produite par
+# deploy/build_static.sh. Meme doctrine que ci-dessus : le SCRIPT et la
+# configuration sont versionnes (ils portent la connaissance : labels Traefik,
+# gzip, cache, pieges memoire du build), la sortie binaire ne l'est pas.
+deploy/site/
