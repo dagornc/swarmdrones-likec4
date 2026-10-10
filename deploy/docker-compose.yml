@@ -26,13 +26,26 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=gateway
+      # --- En-tetes de securite (modele : breizh-ai-web) ---------------------
+      # Appliques sur les DEUX routeurs (web et websecure) : Cloudflare termine
+      # le TLS et peut servir l'un ou l'autre.
+      - traefik.http.middlewares.likec4-secure-headers.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.likec4-secure-headers.headers.frameDeny=true
+      - traefik.http.middlewares.likec4-secure-headers.headers.forceSTSHeader=true
+      - traefik.http.middlewares.likec4-secure-headers.headers.stsSeconds=31536000
+      - traefik.http.middlewares.likec4-secure-headers.headers.stsIncludeSubdomains=true
+      - traefik.http.middlewares.likec4-secure-headers.headers.referrerPolicy=strict-origin-when-cross-origin
+      - "traefik.http.middlewares.likec4-secure-headers.headers.customResponseHeaders.Content-Security-Policy=default-src 'self'; script-src 'self' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+      # --- Routeurs ----------------------------------------------------------
       - traefik.http.routers.likec4-static-cloudflare.rule=Host(`likec4.breizh.ai`)
       - traefik.http.routers.likec4-static-cloudflare.entrypoints=web
       - traefik.http.routers.likec4-static-cloudflare.service=likec4-static
+      - traefik.http.routers.likec4-static-cloudflare.middlewares=likec4-secure-headers
       - traefik.http.routers.likec4-static.rule=Host(`likec4.breizh.ai`)
       - traefik.http.routers.likec4-static.entrypoints=websecure
       - traefik.http.routers.likec4-static.tls=true
       - traefik.http.routers.likec4-static.tls.certresolver=letsencrypt
+      - traefik.http.routers.likec4-static.middlewares=likec4-secure-headers
       - traefik.http.services.likec4-static.loadbalancer.server.port=80
 
 networks:

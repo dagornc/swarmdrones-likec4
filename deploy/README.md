@@ -105,6 +105,19 @@ redémarrage.
 - **Cache Cloudflare** : le site est derrière Cloudflare. Après un changement
   de `robots.txt` ou d'un fichier non fingerprinté, l'ancienne version peut
   rester servie jusqu'à 4 h (`max-age=14400`). Purger le cache si besoin.
+- **En-têtes de sécurité** (Traefik, modèle `breizh-ai-web`) : HSTS 1 an,
+  `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
+  `Referrer-Policy: strict-origin-when-cross-origin`, et une CSP stricte.
+- **CSP** : `script-src 'self' blob:` (pas de `'unsafe-inline'`). Le site est
+  entièrement statique (aucune entrée utilisateur, aucune API) : le risque XSS
+  est négligeable et la CSP protège contre une compromission de dépendance.
+  Cloudflare injecte un script anti-bot inline qui est donc bloqué ; c'est
+  sans effet sur le fonctionnement (62/62 vues rendues, 0 erreur JS). Ne pas
+  ajouter `'unsafe-inline'` pour le faire taire : le bénéfice est nul et la
+  protection perdue.
+- **HTTP → HTTPS** : non géré par nginx/Traefik (Cloudflare termine le TLS en
+  mode Full/Strict ; une redirection locale créerait une boucle). À activer
+  côté Cloudflare (« Always Use HTTPS ») — vaut pour tout `breizh.ai`.
 
 ## Pièges de publication (rencontrés le 2026-10-10)
 
