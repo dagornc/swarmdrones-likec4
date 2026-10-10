@@ -3,15 +3,18 @@
 Service statique pour le modèle d'architecture SwarmDrones, en remplacement du
 dev server LikeC4 (`likec4 start`).
 
-## État actuel (2026-10-08)
+## État actuel (2026-10-10)
 
 **Bascule effectuée.** `likec4.breizh.ai` est servi par `likec4-static`
-(nginx:alpine, build statique de 21 Mo). Le dev server `likec4` est arrêté
+(nginx:alpine, build statique de 23 Mo). Le dev server `likec4` est arrêté
 (`Exited (143)`), son conteneur et son image sont conservés pour rollback.
 
 Vérifié en production : HTTP 200, titre « SwarmDrones — Architecture »,
 bundle `likec4-views.js` 5,1 Mo servi gzip (1,28 Mo transférés), assets
 fingerprintés en `immutable` 1 an, `index.html` en `no-cache`.
+
+**Rendu vérifié au navigateur (Playwright, 2026-10-10)** : 62 vues sur 62
+rendues correctement, 0 erreur JS, 0 requête réseau échouée.
 
 ## Pourquoi
 
@@ -33,7 +36,7 @@ build est reproductible, et la publication est atomique.
 repo git (swarmdrones_likec4)
         │  likec4 build
         ▼
-swarmdrones-deploy/site/   ← build statique (31 Mo)
+swarmdrones_likec4/deploy/site/   ← build statique (23 Mo, non versionné)
         │  bind mount ro
         ▼
 conteneur likec4-static (nginx:alpine)
@@ -47,7 +50,7 @@ Traefik ──► likec4.breizh.ai
 - `build_static.sh` — compile le modèle et publie dans `site/` (atomique)
 - `switch.sh` — bascule / rollback / état
 - `docker-compose.yml` — service nginx + labels Traefik
-- `nginx.conf` — config nginx (gzip, cache, SPA fallback)
+- `nginx.conf` — config nginx (gzip, cache, 404 réel)
 - `site/` — build publié (généré, non versionné)
 
 ## Utilisation
@@ -77,7 +80,7 @@ Après une modification du modèle :
 ```bash
 cd /home/hermesagent/workspace/swarmdrones_likec4
 git pull   # ou édition locale
-cd /home/hermesagent/workspace/swarmdrones-deploy
+cd deploy
 ./build_static.sh
 ```
 
@@ -94,6 +97,29 @@ redémarrage.
   (7,8 Go), `unflatten` peut être tué par SIGTERM si la machine est chargée.
   `build_static.sh` borne le conteneur à `--memory=3g` et il faut lancer le
   build quand la mémoire disponible est suffisante (vérifier `free -h`).
+- **`robots.txt`** : LikeC4 génère `Disallow: /` (site entier interdit aux
+  moteurs) et écrase celui de `public/`. `build_static.sh` le remplace après
+  build par `Allow: /`.
+- **404** : pas de fallback SPA (inutile en hash-history). Un chemin inexistant
+  renvoie un vrai HTTP 404.
+- **Cache Cloudflare** : le site est derrière Cloudflare. Après un changement
+  de `robots.txt` ou d'un fichier non fingerprinté, l'ancienne version peut
+  rester servie jusqu'à 4 h (`max-age=14400`). Purger le cache si besoin.
+
+## Pièges de publication (rencontrés le 2026-10-10)
+
+`build_static.sh` publie **en place, depuis un conteneur root**. Deux pièges
+rendent le site inaccessible (403/404 sur tout) si on publie naïvement :
+
+1. **Remplacer le répertoire monté** (`mv`/`rm -rf` puis recréation) invalide
+   le bind mount Docker : le conteneur pointe vers l'inode supprimé. Publier
+   en place (vider le contenu, pas le répertoire).
+2. **Permissions** : les fichiers produits par le conteneur appartiennent à
+   `root`. Un `cp`/`rm` depuis l'hôte échoue, et le répertoire `site/` doit
+   rester traversable (`755`) sinon nginx (autre UID) renvoie 403.
+
+La publication passe donc par un conteneur `alpine` qui vide, copie et
+normalise les permissions (`chmod 755` + `chmod -R a+rX`).
 
 ## Incident du 2026-10-08 (à connaître)
 
