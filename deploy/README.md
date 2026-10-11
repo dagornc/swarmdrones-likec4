@@ -105,6 +105,11 @@ redémarrage.
 - **Cache Cloudflare** : le site est derrière Cloudflare. Après un changement
   de `robots.txt` ou d'un fichier non fingerprinté, l'ancienne version peut
   rester servie jusqu'à 4 h (`max-age=14400`). Purger le cache si besoin.
+- **`likec4-views.js`** : nom fixe, contenu régénéré à chaque build. nginx
+  envoie `Cache-Control: no-cache` **et** `CDN-Cache-Control: no-store`.
+  Le second est indispensable : Cloudflare ignore le `no-cache` et impose son
+  TTL par défaut (4 h) sur les extensions statiques, mais respecte
+  `CDN-Cache-Control` (vérifié : `cf-cache-status: BYPASS`).
 - **En-têtes de sécurité** (Traefik, modèle `breizh-ai-web`) : HSTS 1 an,
   `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
   `Referrer-Policy: strict-origin-when-cross-origin`, et une CSP stricte.
