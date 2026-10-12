@@ -44,11 +44,32 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 # CONFIGURATION
 # ---------------------------------------------------------------------------
-CONTAINER = "likec4"
+def _resolve_container():
+    """Resout dynamiquement le conteneur LikeC4 servi.
+
+    Le nom a change (likec4 -> likec4-static) et l'ID est recree a chaque
+    redeploiement : un nom en dur casse silencieusement la gouvernance.
+    On cherche par prefixe de nom, avec repli sur l'ancien nom.
+    """
+    for pattern in ("likec4-static", "likec4"):
+        code, out, _ = run(
+            ["docker", "ps", "--filter", f"name={pattern}",
+             "--format", "{{.Names}}"]
+        )
+        names = [n.strip() for n in out.splitlines() if n.strip()]
+        if names:
+            return names[0]
+    return "likec4-static"  # repli : echouera explicitement si absent
+
+
 DATA_DIR = "/data"                      # chemin DANS le conteneur
 ACTIVE_DIR = Path("/docker/likec4/workspace")   # copie active (montee)
 GIT_DIR = Path("/home/hermesagent/workspace/swarmdrones_likec4")  # copie git
-OUT_DIR = ACTIVE_DIR / "out"
+# Les exports sont ecrits dans un repertoire temporaire possede par
+# l'utilisateur courant : /docker/likec4/workspace appartient a root (ecrit
+# par l'ancien conteneur), et le CLI hote tourne en hermesagent -> EACCES.
+# On evite tout chown (modification de permissions) en exportant ailleurs.
+OUT_DIR = Path(os.environ.get("GOV_OUT_DIR", "/tmp/gov_likec4"))
 BASELINE_FILE = ACTIVE_DIR / "gov_baseline.json"
 MODEL_EXPORT = OUT_DIR / "gov_model.json"
 
@@ -65,30 +86,47 @@ def docker_exec(args, **kw):
     return run(["docker", "exec", CONTAINER] + args, **kw)
 
 
+CONTAINER = _resolve_container()
+
+
+def likec4_cli(args, **kw):
+    """Execute le CLI LikeC4 sur l'HOTE via npx.
+
+    Historique : jusqu'au 2026-10-10, un conteneur `likec4` faisait tourner le
+    dev server (Vite) et embarquait le CLI. Le deploiement statique l'a
+    remplace par `likec4-static` (nginx pur, SANS CLI). Le CLI est desormais
+    fourni par npx sur l'hote (likec4 1.59.4). Toute invocation `docker exec
+    likec4 ...` est donc structurellement obsolete.
+    """
+    return run(["npx", "--yes", "likec4"] + args, cwd=str(ACTIVE_DIR), **kw)
+
+
 def export_model():
-    """Exporte le modele compile en JSON depuis le conteneur."""
+    """Exporte le modele compile en JSON (CLI hote)."""
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    code, out, err = docker_exec(
-        ["likec4", "export", "json", DATA_DIR, "-o", f"{DATA_DIR}/out/gov_model.json"]
+    code, out, err = likec4_cli(
+        ["export", "json", ".", "-o", str(MODEL_EXPORT)]
     )
     if code != 0:
-        print(f"[ERREUR] export json a echoue : {err.strip()}")
+        print(f"[ERREUR] export json a echoue : {(err or out).strip()[-300:]}")
         return False
     return True
 
 
 def export_likec4_json():
-    """Regenere le likec4.json a la racine du workspace (modele compile).
+    """Regenere le likec4.json (modele compile) dans OUT_DIR.
 
     Ce fichier est un export manuel qui peut se perimer si on ne le regenere
     pas. Le regenere a chaque gouvernance garantit qu'il reflete toujours le
-    modele courant (liens, elements, vues).
+    modele courant (liens, elements, vues). Ecrit dans OUT_DIR (tmp) car
+    ACTIVE_DIR appartient a root.
     """
-    code, out, err = docker_exec(
-        ["likec4", "export", "json", DATA_DIR, "-o", f"{DATA_DIR}/likec4.json"]
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    code, out, err = likec4_cli(
+        ["export", "json", ".", "-o", str(OUT_DIR / "likec4.json")]
     )
     if code != 0:
-        print(f"[ERREUR] regeneration likec4.json a echoue : {err.strip()}")
+        print(f"[ERREUR] regeneration likec4.json a echoue : {(err or out).strip()[-300:]}")
         return False
     print("  likec4.json regenere (modele compile a jour).")
     return True
@@ -140,9 +178,12 @@ def compute_metrics(proj):
 # ---------------------------------------------------------------------------
 def check_validate():
     print("=== [1/5] VALIDATION (likec4 validate) ===")
-    code, out, err = docker_exec(["likec4", "validate", DATA_DIR])
-    ok = "Valid" in out
-    print(("  OK  " if ok else "  ECHEC ") + out.strip().splitlines()[-1] if out.strip() else err.strip())
+    code, out, err = likec4_cli(["validate", "."])
+    # Le CLI LikeC4 ecrit son rapport sur stderr (logger), pas stdout.
+    combined = (out or "") + (err or "")
+    ok = code == 0 and "Valid" in combined
+    last = [l for l in combined.strip().splitlines() if l.strip()]
+    print(("  OK  " if ok else "  ECHEC ") + (last[-1] if last else "aucune sortie"))
     return ok
 
 
@@ -244,54 +285,44 @@ def check_divergence():
 # CONTROLE 4 — DRIFT DU MODELE SERVI (instantane du conteneur vs disque)
 # ---------------------------------------------------------------------------
 def check_served_drift():
-    """Le modele SERVI par le conteneur reflete-t-il le disque ?
+    """Le modele SERVI par le site statique reflete-t-il le disque ?
 
-    ANGLE MORT COMBLE (2026-09-29) : le dev server LikeC4 (Vite) compile le
-    modele au DEMARRAGE. Un .c4 modifie apres le demarrage n'est PAS servi
-    tant que le conteneur n'a pas redemarre. Les controles 1-3 ne voient pas
-    cet ecart : ils comparent disque vs git, jamais disque vs SERVI.
+    ANGLE MORT COMBLE (2026-09-29), REECRIT (2026-10-12) : jusqu'au 2026-10-10,
+    un dev server LikeC4 (Vite) compilait le modele au DEMARRAGE, et un .c4
+    modifie apres le demarrage n'etait pas servi. Le deploiement statique
+    (nginx + `likec4 build`) a supprime ce risque : le site sert un bundle
+    fige, produit par build_static.sh.
 
-    Ce controle interroge le conteneur sur une valeur sentinelle du modele
-    (versionCourante de specConsensus) et la compare au disque.
+    Nouveau controle : le bundle servi (`deploy/site/likec4-views.js`) est-il
+    plus recent que les sources .c4 ? Si une source est plus recente que le
+    bundle, le site sert un modele perime.
     """
-    print("=== [4/5] DRIFT MODELE SERVI (conteneur vs disque) ===")
+    print("=== [4/5] DRIFT MODELE SERVI (bundle statique vs disque) ===")
 
-    # Valeur sentinelle : la version courante du consensus, mise a jour a
-    # chaque revision de spec. Si le conteneur sert une valeur differente,
-    # il sert un instantane perime.
-    sentinel = "versionCourante"
-    try:
-        disk_src = (GIT_DIR / "algorithms.c4").read_text(encoding="utf-8")
-    except OSError as e:
-        print(f"  [info] algorithms.c4 illisible : {e} (controle ignore)")
+    site_dir = ACTIVE_DIR.parent / "deploy" / "site"
+    # Repli : emplacement du bind mount du conteneur likec4-static.
+    if not site_dir.exists():
+        site_dir = Path("/home/hermesagent/workspace/swarmdrones_likec4/deploy/site")
+    bundle = site_dir / "likec4-views.js"
+
+    if not bundle.exists():
+        print(f"  [info] bundle servi introuvable : {bundle} (controle ignore)")
         return True
 
-    import re
-    disk_vals = re.findall(r"versionCourante\s+'([^']+)'", disk_src)
-    if not disk_vals:
-        print("  [info] aucune valeur sentinelle sur le disque (controle ignore)")
-        return True
+    bundle_mtime = bundle.stat().st_mtime
+    stale = []
+    for src in sorted(ACTIVE_DIR.glob("*.c4")):
+        if src.stat().st_mtime > bundle_mtime:
+            stale.append(src.name)
 
-    # Interroger le modele SERVI (exporte par le conteneur).
-    code, out, err = docker_exec(["likec4", "export", "json", DATA_DIR,
-                                  "-o", f"{DATA_DIR}/out/gov_served.json"])
-    if code != 0:
-        print(f"  [info] export du modele servi impossible (controle ignore)")
-        return True
-    code, served_raw, err = docker_exec(["cat", f"{DATA_DIR}/out/gov_served.json"])
-    if code != 0:
-        print("  [info] lecture du modele servi impossible (controle ignore)")
-        return True
-
-    missing = [v for v in disk_vals if v not in served_raw]
-    if missing:
-        print(f"  [DRIFT] {len(missing)} valeur(s) du disque absente(s) du modele servi :")
-        for v in missing[:3]:
-            print(f"    - {v[:70]}")
-        print("  [ACTION] docker restart likec4 requis (autorisation Christophe).")
+    if stale:
+        print(f"  [DRIFT] {len(stale)} source(s) .c4 plus recente(s) que le bundle servi :")
+        for name in stale[:5]:
+            print(f"    - {name}")
+        print("  [ACTION] relancer build_static.sh puis redeployer (autorisation Christophe).")
         return False
 
-    print(f"  OK  le modele servi reflete le disque ({len(disk_vals)} valeur(s) verifiee(s)).")
+    print(f"  OK  le bundle servi est a jour (posterieur aux {len(list(ACTIVE_DIR.glob('*.c4')))} sources).")
     return True
 
 
