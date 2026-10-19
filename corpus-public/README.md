@@ -3,10 +3,10 @@
 Métadonnées bibliographiques d'un corpus de veille scientifique sur les
 **essaims de drones** et les systèmes autonomes multi-agents.
 
-**4032 entrées** — titres, sources, DOI, identifiants arXiv, niveau de
+**4604 entrées** — titres, sources, DOI, identifiants arXiv, niveau de
 confiance, périmètre, description courte et date de publication.
 
-**Dernière mise à jour : 2026-10-12 09:03 UTC**
+**Dernière mise à jour : 2026-10-19 08:18 UTC**
 
 > **Ce qui est publié ici** : uniquement des **faits bibliographiques publics**
 > (titre, URL source, DOI, arXiv, hôte, classification, description courte).
